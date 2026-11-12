@@ -1,0 +1,6362 @@
+\chapter{一元积分学}
+积分是为求图形的面积而发明的。这当然是一个古老的问题，而解决它的基本策略也同样古老：把图形分割成矩形，再把它们的面积加起来。
+
+对这一清晰而直观的想法作出数学上令人满意的实现，其微妙程度令人惊叹。我们特别注意到，一个给定图形可以用矩形的并集来逼近的方式是极其众多的。它们全都导致同一结果，这一点绝非不证自明。出于这一原因，严格的测度理论要到第 III 卷才发展。
+
+在本章中，我们只考虑较为简单的情形：确定一个充分正则的一元函数的图像与其轴之间的面积。通过为用并置的一列矩形来逼近函数奠定基础，我们将看到，这归结为用一列阶梯函数来逼近该函数，即分段常值的函数。我们将说明，这一关于逼近的想法极其灵活，并且不依赖于它最初的几何动机，从而我们得到一个积分概念，它适用于很大一类实变量的向量值函数。
+
+为了精确确定能够赋予积分的函数类，我们必须考察哪些函数能被阶梯函数逼近。通过研究在上确界范数下的收敛性，即通过追问一个给定函数能否在整个区间上被阶梯函数一致逼近，我们便引出了跳跃连续函数这一函数类。第 1 节专门研究这个函数类。
+
+在那里，我们将看到，积分是阶梯函数向量空间上的一个线性映射。于是便产生了把积分延拓到跳跃连续函数空间的问题；这一延拓应保持该映射的基本性质，特别是线性性。这项任务其实是唯一延拓连续映射这一一般问题的特例。由于延拓问题至关重要，并且出现在数学的许多领域中，我们将在第 2 节详细讨论它。由一致连续映射的基本延拓定理，我们将推出连续线性映射的连续延拓定理。这将给我们一个机会来引入有界线性算子与算子范数这两个重要概念，它们在现代分析中起着根本性的作用。
+
+在这一铺垫之后，我们将在第 3 节引入跳跃连续函数的积分。这个积分，即柯西–黎曼积分，延拓了阶梯函数的初等积分。在随后的几节中，我们将推导它的基本性质。极为重要的（从名称即可看出）是微积分基本定理，粗略地说，它断言积分是微分的逆运算。借助这个定理，我们将能够显式地计算出大量积分，并发展出灵活的积分技巧。这将在第 5 节进行。
+
+在其余各节中——除第 8 节外——我们将探索迄今已发展的微分学与积分学的应用。由于它们对分析的整体结构并非必不可少，初读时可以跳过或只略加涉猎。然而，它们确实包含古典数学中许多优美的结果，这些结果不仅是一个人一般数学素养所需要的，而且对于数学内部与外部的众多应用也是需要的。
+
+第 6 节将探讨积分与和之间的联系。我们推导欧拉–麦克劳林求和公式，并指出它的若干推论。特别要提到的是对棣莫弗公式与斯特林公式的证明，它们刻画了阶乘函数的渐近行为，此外还要提到对著名的黎曼 $ \zeta $ 函数若干基本性质的推导。后者与素数分布的渐近行为相联系，十分重要，而对此我们当然只能非常简短地涉及。
+
+在第 7 节，我们将重拾在第 V 章末尾提到的问题——用三角级数表示周期函数。借助积分学，我们可以为很大一类函数给出这个问题的完整解答。我们把相应的傅里叶级数理论置于正交性与内积空间理论的一般框架之中。由此我们不仅获得了清晰与简洁，而且为若干具体应用奠定了基础，其中许多应用你可以在别处预期见到。自然地，我们还将显式地计算一些经典傅里叶级数，从而得出一些令人惊讶的结果。其中一个是欧拉公式，它给出 $ \zeta $ 函数在偶数自变量处取值的显式表达式；另一个是正弦函数作为无穷乘积的一个有趣的表达式。
+
+到此为止，我们集中讨论了紧致区间上跳跃连续函数的积分。在第 8 节，我们将进一步扩展积分的区域，使之涵盖在无穷区间上定义（并积分）的函数或是无界的函数。这里我们满足于一些简单但重要的结果，这些结果将是本卷其他应用所需要的，因为在第 III 卷中，我们将发展一种更为广泛、更为灵活的积分类型，即勒贝格积分。
+
+第 9 节专门讨论伽马函数的理论。这是最重要的非初等函数之一，出现在数学的许多领域中。因此，我们力图汇集所有基本结果，并希望你在日后会发现它们的价值。这一节将以一种格外优美的方式展示迄今所发展方法的力量。
+
+\section{跳跃连续函数}
+
+在许多具体情形中，尤其是在积分学里，连续性的约束被证明是过于严格的。不连续函数在许多应用中自然出现，尽管这种不连续性通常并不十分病态。在本节中，我们将学习一类简单的映射，它包含连续函数，并且在一元积分学中特别有用。不过，我们稍后将会看到，跳跃连续函数空间对于一种灵活的积分理论来说仍然过于严格，而且在多维积分的情形下，我们将不得不把理论推广到一个包含连续函数的更广的类中。
+
+在下文中，设
+
+• $ E := (E, \|\cdot\|) $ 是一个巴拿赫空间；
+  $ I := [\alpha, \beta] $ 是一个紧致完全区间。
+
+\needspace{3\baselineskip}\subsection*{阶梯函数与跳跃连续函数}
+
+我们称 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 为 $ I $ 的一个\textbf{划分}，如果 $ n \in \mathbb{N}^\times $ 且
+
+\[
+\alpha = \alpha_0 < \alpha_1 < \cdots < \alpha_n = \beta.
+\]
+
+如果 $ \{\alpha_0, \ldots, \alpha_n\} $ 是划分 $ \mathfrak{Z}' := (\beta_0, \ldots, \beta_k) $ 的一个子集，则称 $ \mathfrak{Z}' $ 为 $ \mathfrak{Z} $ 的一个\textbf{加细}，并记 $ \mathfrak{Z} \le \mathfrak{Z}' $。
+
+函数 $ f : I \to E $ 称为 $ I $ 上的\textbf{阶梯函数}，如果 $ I $ 存在一个划分 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $，使得 $ f $ 在每个（开）区间 $ (\alpha_{j-1}, \alpha_j) $ 上为常数。此时我们说 $ \mathfrak{Z} $ 是 $ f $ 的一个划分，或者说 $ f $ 是划分 $ \mathfrak{Z} $ 上的一个阶梯函数。
+
+\bookfigure[0.57]{figures/c9a67695a73a5927.png}
+
+阶梯函数
+
+如果 $ f : I \to E $ 满足极限 $ f(\alpha + 0) $、$ f(\beta - 0) $ 以及
+
+\begin{equation*}
+\begin{aligned}
+f(x \pm 0) := \lim_{\substack{y \to x \pm 0 \\ y \ne x}} f(y)
+\end{aligned}
+\end{equation*}
+
+对所有 $ x \in \mathring{I} $ 都存在，则称 $ f $ 为\textbf{跳跃连续}的。\footnote{注意到，一般地，$ f(x + 0) $ 与 $ f(x - 0) $ 可能不同于 $ f(x) $。} 一个跳跃连续函数如果只有有限多个不连续点（“跳跃”），则称它是\textbf{分段连续}的。最后，
+
+我们用
+
+\[
+\mathcal{T}(I, E), \qquad \mathcal{S}(I, E), \qquad \mathcal{SC}(I, E)
+\]
+
+分别记所有阶梯的、跳跃连续的以及分段连续的函数 $ f : I \to E $ 所成的集合。\footnote{如果上下文明确我们所讨论的是域 $ \mathbb{R} $ 还是 $ \mathbb{C} $，我们通常缩写为 $ \mathcal{T}(I) := \mathcal{T}(I, \mathbb{K}) $ 等等。}
+
+\bookfigure[0.35]{figures/ce8b5cadd43a992f.png}
+
+分段连续函数
+
+\bookfigure[0.35]{figures/b8da3a5a25b440bb.png}
+
+非跳跃连续函数
+
+\begin{remark}
+
+\begin{items}
+\item
+
+给定 $ I $ 的划分 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 与 $ \mathfrak{Z}' := (\beta_0, \ldots, \beta_m) $，并集 $ \{\alpha_0, \ldots, \alpha_n\} \cup \{\beta_0, \ldots, \beta_m\} $ 自然定义了 $ I $ 的另一个划分 $ \mathfrak{Z} \vee \mathfrak{Z}' $。显然，$ \mathfrak{Z} \le \mathfrak{Z} \vee \mathfrak{Z}' $ 且 $ \mathfrak{Z}' \le \mathfrak{Z} \vee \mathfrak{Z}' $。事实上，$ \le $ 是 $ I $ 的划分集上的一个序，且 $ \mathfrak{Z} \vee \mathfrak{Z}' $ 是 $ \{\mathfrak{Z}, \mathfrak{Z}'\} $ 中最大的一个。
+
+\item
+
+如果 $ f $ 是划分 $ \mathfrak{Z} $ 上的阶梯函数，则 $ \mathfrak{Z} $ 的每个加细也都是 $ f $ 的划分。
+
+\item
+
+如果 $ f : I \to E $ 是跳跃连续的，则对 $ x \in I $，$ f(x + 0) $ 与 $ f(x - 0) $ 都不必等于 $ f(x) $。
+
+\item
+
+$ \mathcal{S}(I, E) $ 是 $ B(I, E) $ 的一个向量子空间。
+
+\proofhead
+单侧极限的线性性立即蕴含 $ \mathcal{S}(I, E) $ 是一个向量空间。若 $ f \in \mathcal{S}(I, E) \backslash B(I, E) $，我们可在 $ I $ 中找到一个序列 $ (x_n) $，使得
+\begin{equation}
+\|f(x_n)\| \ge n \quad \text{对 } n \in \mathbb{N}.\tag{1.1}
+\end{equation}
+
+因为 $ I $ 是紧致的，故存在 $ (x_n) $ 的子序列 $ (x_{n_k}) $ 以及 $ x \in I $，使得当 $ k \to \infty $ 时有 $ x_{n_k} \to x $。通过选取 $ (x_{n_k}) $ 的合适子序列，我们可找到一个单调收敛到 $ x $ 的序列 $ (y_n) $。\footnote{试比较习题 II.6.3。} 如果 $ f $ 是跳跃连续的，则存在 $ v \in E $，使得 $ \lim f(y_n) = v $，从而 $ \lim \|f(y_n)\| = \|v\| $（试比较例 III.1.3(j)）。因为每个收敛序列都有界，这与 (1.1) 矛盾。因此 $ \mathcal{S}(I, E) \subset B(I, E) $。\nobreak\hspace{0.35em}■
+
+\item
+
+我们有向量子空间的序列
+
+\[
+\mathcal{T}(I, E) \subset \mathcal{SC}(I, E) \subset \mathcal{S}(I, E) \qquad \text{且} \qquad C(I, E) \subset \mathcal{SC}(I, E).
+\]
+\item
+
+每个单调函数 $ f : I \to \mathbb{R} $ 都是跳跃连续的。
+
+\proofhead
+这可由命题 III.5.3 得到。\nobreak\hspace{0.35em}■
+\item
+
+如果 $ f $ 属于 $ \mathcal{T}(I, E) $、$ \mathcal{S}(I, E) $ 或 $ \mathcal{SC}(I, E) $，且 $ J $ 是 $ I $ 的紧致完全子区间，则 $ f|J $ 属于 $ \mathcal{T}(J, E) $、$ \mathcal{S}(J, E) $ 或 $ \mathcal{SC}(J, E) $。
+
+\item
+
+如果 $ f $ 属于 $ \mathcal{T}(I, E) $、$ \mathcal{S}(I, E) $ 或 $ \mathcal{SC}(I, E) $，则 $ \|f\| $ 属于 $ \mathcal{T}(I, \mathbb{R}) $、$ \mathcal{S}(I, \mathbb{R}) $、$ \mathcal{SC}(I, \mathbb{R}) $。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{跳跃连续函数的刻画}
+
+\begin{theorem}
+
+函数 $ f : I \to E $ 是跳跃连续的，当且仅当存在一个一致收敛到它的阶梯函数序列。
+
+\proofhead
+“$ \Longrightarrow $” 设 $ f \in \mathcal{S}(I, E) $ 且 $ n \in \mathbb{N}^\times $。则对每个 $ x \in I $，存在数 $ \alpha(x) $ 与 $ \beta(x) $，使得 $ \alpha(x) < x < \beta(x) $ 且
+\[
+\|f(s) - f(t)\| < 1/n \quad \text{对 } s, t \in (\alpha(x), x) \cap I \quad \text{或} \quad s, t \in (x, \beta(x)) \cap I.
+\]
+
+因为 $ \{(\alpha(x), \beta(x)) \;;\; x \in I\} $ 是紧致区间 $ I $ 的一个开覆盖，故我们可在 $ I $ 中找到元素 $ x_0 < x_1 < \cdots < x_m $，使得 $ I \subset \bigcup_{j=0}^{m} (\alpha(x_j), \beta(x_j)) $。令 $ \eta_0 := \alpha $，对 $ j = 0, \ldots, m $ 令 $ \eta_{j+1} := x_j $，并令 $ \eta_{m+2} := \beta $，于是 $ \mathfrak{Z}_0 = (\eta_0, \ldots, \eta_{m+2}) $ 是 $ I $ 的一个划分。现在选取 $ \mathfrak{Z}_0 $ 的一个加细 $ \mathfrak{Z}_1 = (\xi_0, \ldots, \xi_k) $，使得
+
+\[
+\|f(s) - f(t)\| < 1/n \quad \text{对 } s, t \in (\xi_{j-1}, \xi_j) \text{ 且 } j = 1, \ldots, k,
+\]
+
+并令
+
+\begin{equation*}
+f_n(x) := \begin{cases} f(x), & x \in \{\xi_0, \ldots, \xi_k\}, \\ f((\xi_{j-1} + \xi_j)/2), & x \in (\xi_{j-1}, \xi_j), \quad j = 1, \ldots, k. \end{cases}
+\end{equation*}
+\bookfigure[0.74]{figures/4995ab2ef2450ecc.png}
+
+于是 $ f_n $ 是一个阶梯函数，并且由构造可知
+
+\[
+\|f(x) - f_n(x)\| < 1/n \quad \text{对 } x \in I.
+\]
+
+因此 $ \|f - f_n\|_\infty < 1/n $。
+
+“$ \Longleftarrow $” 设 $ \mathcal{T}(I, E) $ 中存在一个一致收敛到 $ f $ 的序列 $ (f_n) $。该序列在 $ B(I, E) $ 中也收敛到 $ f $。设 $ \varepsilon > 0 $。则存在 $ n \in \mathbb{N} $，使得对所有 $ x \in I $ 有 $ \|f(x) - f_n(x)\| < \varepsilon/2 $。此外，对每个 $ x \in (\alpha, \beta] $，存在 $ \alpha' \in [\alpha, x) $，使得对 $ s, t \in (\alpha', x) $ 有 $ f_n(s) = f_n(t) $。因此，
+
+\begin{equation}
+\|f(s) - f(t)\| \le \|f(s) - f_n(s)\| + \|f_n(s) - f_n(t)\| + \|f_n(t) - f(t)\| < \varepsilon\tag{1.2}
+\end{equation}
+
+对 $ s, t \in (\alpha', x) $ 成立。
+
+现在设 $ (s_j) $ 是 $ I $ 中从左方收敛到 $ x $ 的序列。则存在 $ N \in \mathbb{N} $，使得对 $ j \ge N $ 有 $ s_j \in (\alpha', x) $，且 (1.2) 蕴含
+
+\[
+\|f(s_j) - f(s_k)\| < \varepsilon \quad \text{对 } j, k \ge N.
+\]
+
+因此 $ (f(s_j))_{j \in \mathbb{N}} $ 是巴拿赫空间 $ E $ 中的柯西序列，且存在 $ e \in E $，使得 $ \lim_j f(s_j) = e $。若 $ (t_k) $ 是 $ I $ 中另一个从左方收敛到 $ x $ 的序列，则我们可以重复上述论证，说明存在 $ e' \in E $，使得 $ \lim_k f(t_k) = e' $。此外，存在 $ M \ge N $，使得对 $ k \ge M $ 有 $ t_k \in (\alpha', x) $。因此，由 (1.2) 可得
+
+\[
+\|f(s_j) - f(t_k)\| < \varepsilon \quad \text{对 } j, k \ge M.
+\]
+
+取极限 $ j \to \infty $ 与 $ k \to \infty $ 之后，我们得到 $ \|e - e'\| \le \varepsilon $。由于 $ \varepsilon > 0 $ 是任意的，故 $ e $ 与 $ e' $ 相等。因此我们证明了 $ \lim_{y \to x-0} f(y) $ 存在。交换左右，我们证明对 $ x \in [\alpha, \beta) $，右极限 $ \lim_{y \to x+0} f(y) $ 也存在。于是 $ f $ 是跳跃连续的。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\begin{remark}
+
+如果函数 $ f \in \mathcal{S}(I, \mathbb{R}) $ 是非负的，则上述证明的第一部分说明存在一个一致收敛到 $ f $ 的非负阶梯函数序列。\nobreak\hspace{0.35em}■
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{跳跃连续函数的巴拿赫空间}
+
+\begin{theorem}
+
+跳跃连续函数集 $ \mathcal{S}(I, E) $ 是 $ B(I, E) $ 的一个闭向量子空间，且它本身是一个巴拿赫空间；$ \mathcal{T}(I, E) $ 在 $ \mathcal{S}(I, E) $ 中稠密。
+
+\proofhead
+由注 1.1(d) 与 (e)，我们有包含关系
+\[
+\mathcal{T}(I, E) \subset \mathcal{S}(I, E) \subset B(I, E).
+\]
+
+根据定理 1.2，我们有
+
+\begin{equation}
+\overline{\mathcal{T}(I, E)} = \mathcal{S}(I, E),\tag{1.3}
+\end{equation}
+
+其中闭包在 $ B(I, E) $ 中形成。因此由命题 III.2.12，$ \mathcal{S}(I, E) $ 在 $ B(I, E) $ 中是闭的。定理的最后一部分由 (1.3) 得到。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\begin{corollary}
+
+\begin{subitems}
+\item
+
+每个（分段）连续函数都是一个阶梯函数序列的一致极限。
+
+\item
+
+跳跃连续函数序列的一致极限是跳跃连续的。
+
+\item
+
+每个单调函数都是一个阶梯函数序列的一致极限。
+
+\proofhead
+断言 (i) 直接由定理 1.2 得到；(ii) 由定理 1.4 得到，而断言 (iii) 由注 1.1(f) 得到。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\end{corollary}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+验证：关于逐点乘法，$ \mathcal{S}(I, \mathbb{K}) $ 是一个具有单位元的巴拿赫代数。
+
+\item
+
+由下式定义 $ f : [-1, 1] \to \mathbb{R} $：
+
+\begin{equation*}
+f(x) := \begin{cases} \frac{1}{n+2}, & x \in \left[ -\frac{1}{n}, -\frac{1}{n+1} \right) \cup \left( \frac{1}{n+1}, \frac{1}{n} \right], \\ 0, & x = 0. \end{cases}
+\end{equation*}
+
+证明或否定：
+
+\begin{items}
+\item
+
+$ f \in \mathcal{T}([-1, 1], \mathbb{R}) $；
+
+\item
+
+$ f \in \mathcal{S}([-1, 1], \mathbb{R}) $。
+
+\end{items}
+
+\item
+
+证明或否定：$ \mathcal{SC}(I, E) $ 是 $ \mathcal{S}(I, E) $ 的一个闭向量子空间。
+
+\item
+
+证明：对 $ f : I \to E $，下列陈述等价：
+
+\begin{subitems}
+\item
+
+$ f \in \mathcal{S}(I, E) $；
+
+\item
+
+$ \exists\, (f_n) $ 在 $ \mathcal{T}(I, E) $ 中，使得 $ \sum_n \|f_n\|_\infty < \infty $ 且 $ f = \sum_{n=0}^\infty f_n $。
+
+\end{subitems}
+
+\item
+
+证明：每个跳跃连续函数至多只有可数个不连续点。
+
+\item
+
+用 $ f : [0, 1] \to \mathbb{R} $ 表示 $ [0, 1] $ 上的狄利克雷函数。$ f $ 是否属于 $ \mathcal{S}([0, 1], \mathbb{R}) $？
+
+\item
+
+由下式定义 $ f : [0, 1] \to \mathbb{R} $：
+
+\begin{equation*}
+f(x) := \begin{cases} 1/n, & x \in \mathbb{Q} \text{ 且 } x \text{ 写成既约分数 } m/n, \\ 0, & \text{其他情形}. \end{cases}
+\end{equation*}
+
+证明或否定：$ f \in \mathcal{S}([0, 1], \mathbb{R}) $。
+
+\item
+
+由下式定义 $ f : [0, 1] \to \mathbb{R} $：
+
+\begin{equation*}
+f(x) := \begin{cases} \sin(1/x), & x \in (0, 1], \\ 0, & x = 0. \end{cases}
+\end{equation*}
+
+$ f $ 是否跳跃连续？
+
+\item
+
+设 $ E_j $，$ j = 0, \ldots, n $ 是赋范向量空间，且
+
+\[
+f = (f_0, \ldots, f_n) : I \to E := E_0 \times \cdots \times E_n.
+\]
+
+证明：
+
+\[
+f \in \mathcal{S}(I, E) \Longleftrightarrow f_j \in \mathcal{S}(I, E_j), \quad j = 0, \ldots, n.
+\]
+\item
+
+设 $ E $ 与 $ F $ 是赋范向量空间，且 $ f \in \mathcal{S}(I, E) $ 与 $ \varphi : E \to F $ 都是一致连续的。证明：$ \varphi \circ f \in \mathcal{S}(I, F) $。
+
+\item
+
+设 $ f, g \in \mathcal{S}(I, \mathbb{R}) $ 且 $ \operatorname{im}(g) \subset I $。证明或否定：$ f \circ g \in \mathcal{S}(I, \mathbb{R}) $。
+
+\end{exercises}
+
+\section{连续延拓}
+
+本节研究把一个一致连续映射连续延拓到其定义域的一个适当超集上的问题。这里我们仅限于定义域在该超集中稠密的情形。在这一情形下，连续延拓是唯一确定的，并且可以由原函数以任意精度逼近。在此过程中，我们将学到一种在整个分析中反复出现的逼近技巧。
+
+本节的前几部分对整个连续数学具有根本的重要性，并有众多应用，因此很好地理解这些结果是重要的。
+
+\needspace{3\baselineskip}\subsection*{一致连续函数的延拓}
+
+\qyxffntextdef{1}{照例，我们给 $ X $ 赋予由 $ Y $ 诱导的度量。}
+\begin{theorem}
+
+（延拓定理）设 $ Y $ 与 $ Z $ 是度量空间，且 $ Z $ 是完备的。又设 $ X $ 是 $ Y $ 的稠密子集，$ f : X \to Z $ 一致连续。\qyxffnmark{1}则 $ f $ 有唯一确定的延拓 $ \bar{f} : Y \to Z $，由下式给出
+
+\begin{equation*}
+\begin{aligned}
+\bar{f}(y) = \lim_{\substack{x \to y \\ x \in X}} f(x) \quad \text{对 } y \in Y,
+\end{aligned}
+\end{equation*}
+
+且 $ \bar{f} $ 也一致连续。
+
+证明
+
+\begin{subitems}
+\item
+
+我们先验证唯一性。设 $ g, h \in C(Y, Z) $ 是 $ f $ 的延拓。由于 $ X $ 在 $ Y $ 中稠密，对每个 $ y \in Y $，存在 $ X $ 中的序列 $ (x_n) $，使得在 $ Y $ 中 $ x_n \to y $。$ g $ 与 $ h $ 的连续性给出
+
+\[
+g(y) = \lim_n g(x_n) = \lim_n f(x_n) = \lim_n h(x_n) = h(y).
+\]
+
+因此 $ g = h $。
+
+\item
+
+若 $ f $ 一致连续，则对每个 $ \varepsilon > 0 $，存在 $ \delta = \delta(\varepsilon) > 0 $，使得
+
+\begin{equation}
+d(f(x), f(x')) < \varepsilon \quad \text{对 } x, x' \in X \text{ 且 } d(x, x') < \delta.\tag{2.1}
+\end{equation}
+
+设 $ y \in Y $，$ (x_n) $ 是 $ X $ 中的序列，使得在 $ Y $ 中 $ x_n \to y $。则存在 $ N \in \mathbb{N} $，使得
+
+\begin{equation}
+d(x_j, y) < \delta/2 \quad \text{对 } j \ge N,\tag{2.2}
+\end{equation}
+
+并且由此可得
+
+\[
+d(x_j, x_k) \le d(x_j, y) + d(y, x_k) < \delta \quad \text{对 } j, k \ge N.
+\]
+
+由 (2.1)，我们有
+
+\[
+d(f(x_j), f(x_k)) < \varepsilon \quad \text{对 } j, k \ge N.
+\]
+
+因此 $ (f(x_j)) $ 是 $ Z $ 中的柯西序列。由于 $ Z $ 完备，我们可以找到 $ z \in Z $，使得 $ f(x_j) \to z $。若 $ (x'_k) $ 是 $ X $ 中另一个使得 $ x'_k \to y $ 的序列，我们如上推理可得存在 $ z' \in Z $，使得 $ f(x'_k) \to z' $。此外，我们可以找到 $ M \ge N $，使得对 $ k \ge M $ 有 $ d(x'_k, y) < \delta/2 $。这连同 (2.2) 给出
+
+\[
+d(x_j, x'_k) \le d(x_j, y) + d(y, x'_k) < \delta \quad \text{对 } j, k \ge M,
+\]
+
+又由 (2.1)，我们有
+
+\begin{equation}
+d(f(x_j), f(x'_k)) < \varepsilon \quad \text{对 } j, k \ge M.\tag{2.3}
+\end{equation}
+
+在 (2.3) 中对 $ j \to \infty $ 与 $ k \to \infty $ 取极限，得到 $ d(z, z') \le \varepsilon $。这对每个正的 $ \varepsilon $ 都成立，故 $ z = z' $。这些考虑表明映射
+
+\begin{equation*}
+\begin{aligned}
+\bar{f} : Y \to Z, \quad y \mapsto \lim_{\substack{x \to y \\ x \in X}} f(x)
+\end{aligned}
+\end{equation*}
+
+是良定义的，也就是说，它不依赖于所选取的序列。
+对 $ x \in X $，对 $ j \in \mathbb{N} $ 令 $ x_j := x $，于是得到 $ \bar{f}(x) = \lim_j f(x_j) = f(x) $。因此 $ \bar{f} $ 是 $ f $ 的延拓。
+
+\item
+
+剩下要证明 $ \bar{f} $ 一致连续。设 $ \varepsilon > 0 $，并选取满足 (2.1) 的 $ \delta > 0 $。再取 $ y, z \in Y $，使得 $ d(y, z) < \delta/3 $。则存在 $ X $ 中的序列 $ (y_n) $ 与 $ (z_n) $，使得 $ y_n \to y $ 且 $ z_n \to z $。因此存在 $ N \in \mathbb{N} $，使得对 $ n \ge N $ 有 $ d(y_n, y) < \delta/3 $ 且 $ d(z_n, z) < \delta/3 $。特别地，我们得到
+
+\[
+d(y_N, z_N) \le d(y_N, y) + d(y, z) + d(z, z_N) < \delta
+\]
+
+以及
+
+\begin{equation*}
+\begin{aligned}
+d(y_n, y_N) &\le d(y_n, y) + d(y, y_N) < \delta, \\ d(z_n, z_N) &\le d(z_n, z) + d(z, z_N) < \delta
+\end{aligned}
+\end{equation*}
+
+对 $ n \ge N $ 成立。由 $ \bar{f} $ 的定义、例 III.1.3(l) 以及 (2.1)，我们有
+
+\begin{equation*}
+\begin{aligned}
+d(\bar{f}(y), \bar{f}(z)) &\le d(\bar{f}(y), f(y_N)) + d(f(y_N), f(z_N)) + d(f(z_N), \bar{f}(z)) \\ &= \lim_n d(f(y_n), f(y_N)) + d(f(y_N), f(z_N)) + \lim_n d(f(z_N), f(z_n)) \\ &< 3\varepsilon.
+\end{aligned}
+\end{equation*}
+
+因此 $ \bar{f} $ 一致连续。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{application}
+
+设 $ X $ 是 $ \mathbb{K}^n $ 的有界子集。则限制\footnote{$ BUC(X) $ 表示 $ X $ 上有界且一致连续的函数所构成的巴拿赫空间，以上确界范数给出。试与习题 V.2.1 比较。}
+
+\begin{equation}
+T : C(\bar{X}) \to BUC(X), \quad u \mapsto u|X\tag{2.4}
+\end{equation}
+
+是等距同构。
+
+证明
+
+\begin{subitems}
+\item
+
+设 $ u \in C(\bar{X}) $。由于 $ \bar{X} $ 由海涅–博雷尔定理是紧致的，故推论 III.3.7 与定理 III.3.13 给出 $ u $——从而 $ Tu = u|X $——有界且一致连续。因此 $ T $ 是良定义的。显然 $ T $ 是线性的。
+
+\item
+
+设 $ v \in BUC(X) $。由于 $ X $ 在 $ \bar{X} $ 中稠密，由定理 2.1 存在唯一确定的 $ u \in C(\bar{X}) $，使得 $ u|X = v $。因此 $ T : C(\bar{X}) \to BUC(X) $ 是向量空间同构。
+
+\item
+
+对 $ u \in C(\bar{X}) $，我们有
+
+\[
+\|Tu\|_\infty = \sup_{x \in X} |Tu(x)| = \sup_{x \in X} |u(x)| \le \sup_{x \in \bar{X}} |u(x)| = \|u\|_\infty.
+\]
+
+另一方面，由推论 III.3.8，存在 $ y \in \bar{X} $，使得 $ \|u\|_\infty = |u(y)| $。我们选取 $ X $ 中的序列 $ (x_n) $，使得 $ x_n \to y $，于是得到
+
+\[
+\|u\|_\infty = |u(y)| = |\lim u(x_n)| = |\lim Tu(x_n)| \le \sup_{x \in X} |Tu(x)| = \|Tu\|_\infty.
+\]
+
+这表明 $ T $ 是等距。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+约定 若 $ X $ 是 $ \mathbb{K}^n $ 的有界开子集，我们总是通过同构 (2.4) 把 $ BUC(X) $ 与 $ C(\bar{X}) $ 等同起来。
+
+\end{application}
+
+\needspace{3\baselineskip}\subsection*{有界线性算子}
+
+定理 2.1 对线性映射尤为重要。因此我们先汇集线性算子的若干性质。
+
+设 $ E $ 与 $ F $ 是赋范向量空间，$ A : E \to F $ 是线性的。我们称 $ A $ \textbf{有界}\footnote{由于历史原因，我们在这里接受术语上的某种不一致：若 $ F $ 不是零向量空间，则（除零算子外）不存在按第 II.3 节意义为有界映射的有界线性算子（试与习题 II.3.15 比较）。这里，有界线性算子把有界集映成有界集（试与结论 2.4(c) 比较）。}，若存在 $ \alpha \ge 0 $，使得
+
+\begin{equation}
+\|Ax\| \le \alpha \|x\| \quad \text{对 } x \in E.\tag{2.5}
+\end{equation}
+
+我们定义
+
+\[
+\mathcal{L}(E, F) := \{\, A \in \operatorname{Hom}(E, F) \;;\; A \text{ 有界} \,\}.
+\]
+
+对每个 $ A \in \mathcal{L}(E, F) $，存在 $ \alpha \ge 0 $，使 (2.5) 成立。因此
+
+\[
+\|A\| := \inf\{\, \alpha \ge 0 \;;\; \|Ax\| \le \alpha \|x\|, \; x \in E \,\}
+\]
+
+是良定义的。我们称 $ \|A\|_{\mathcal{L}(E, F)} := \|A\| $ 为 $ A $ 的\textbf{算子范数}。
+
+\qyxffntextdef{1}{此处以及类似情形，我们默认 $ E \ne \{0\} $。}
+\begin{proposition}
+
+对 $ A \in \mathcal{L}(E, F) $，我们有\qyxffnmark{1}
+
+\[
+\|A\| = \sup_{x \ne 0} \frac{\|Ax\|}{\|x\|} = \sup_{\|x\| = 1} \|Ax\| = \sup_{\|x\| \le 1} \|Ax\| = \sup_{x \in \mathbb{B}_E} \|Ax\|.
+\]
+
+\proofhead
+该结论由下式得出
+\begin{equation*}
+\begin{aligned}
+\|A\| &= \inf\{\, \alpha \ge 0 \;;\; \|Ax\| \le \alpha \|x\|, \; x \in E \,\} \\ &= \inf\left\{ \alpha \ge 0 \;;\; \frac{\|Ax\|}{\|x\|} \le \alpha, \; x \in E \backslash \{0\} \right\} \\ &= \sup\left\{ \frac{\|Ax\|}{\|x\|} \;;\; x \in E \backslash \{0\} \right\} \\ &= \sup\left\{ \left\| A\left( \frac{x}{\|x\|} \right) \right\| \;;\; x \in E \backslash \{0\} \right\} \\ &= \sup_{\|y\| = 1} \|Ay\| \le \sup_{\|x\| \le 1} \|Ax\|.
+\end{aligned}
+\end{equation*}
+
+对每个满足 $ 0 < \|x\| \le 1 $ 的 $ x \in E $，我们有估计式
+
+\[
+\|Ax\| \le \frac{1}{\|x\|} \|Ax\| = \left\| A\left( \frac{x}{\|x\|} \right) \right\|,
+\]
+
+因此我们得到
+
+\[
+\sup_{\|x\| \le 1} \|Ax\| \le \sup_{\|y\| = 1} \|Ay\|.
+\]
+
+这样我们就证明了该定理的前三个等式。
+
+对于最后一个等式，令 $ a := \sup_{x \in \mathbb{B}_E} \|Ax\| $，且 $ y \in \overline{\mathbb{B}} := \overline{\mathbb{B}}_E $。则 $ 0 < \lambda < 1 $ 意味着 $ \lambda y $ 属于 $ \mathbb{B} $。于是估计式 $ \|Ay\| = \|A(\lambda y)\|/\lambda \le a/\lambda $ 对 $ 0 < \lambda < 1 $ 成立，正如 $ \|Ay\| \le a $ 所示。因此
+
+\[
+\sup_{\|x\| \le 1} \|Ax\| \le \sup_{x \in \mathbb{B}_E} \|Ax\| \le \sup_{\|x\| \le 1} \|Ax\|.\quad\blacksquare
+\]
+\end{proposition}
+
+\begin{conclusion}
+
+\begin{items}
+\item
+
+若 $ A \in \mathcal{L}(E, F) $，则
+
+\[
+\|Ax\| \le \|A\| \|x\| \quad \text{对 } x \in E.
+\]
+\item
+
+每个 $ A \in \mathcal{L}(E, F) $ 是利普希茨连续的，因此也一致连续。
+
+\proofhead
+若 $ x, y \in E $，则 $ \|Ax - Ay\| = \|A(x - y)\| \le \|A\| \|x - y\| $。因此 $ A $ 以 $ \|A\| $ 为利普希茨常数，是利普希茨连续的。\nobreak\hspace{0.35em}■
+\item
+
+设 $ A \in \operatorname{Hom}(E, F) $。则 $ A $ 属于 $ \mathcal{L}(E, F) $ 当且仅当 $ A $ 把有界集映成有界集。
+
+\proofhead
+“$ \Longrightarrow $” 设 $ A \in \mathcal{L}(E, F) $，且 $ B $ 在 $ E $ 中有界。则存在 $ \beta > 0 $，使得对所有 $ x \in B $ 有 $ \|x\| \le \beta $。由此可得
+\[
+\|Ax\| \le \|A\| \|x\| \le \|A\| \beta \quad \text{对 } x \in B.
+\]
+
+因此 $ B $ 在 $ A $ 下的像在 $ F $ 中有界。
+“$ \Longleftarrow $” 由于闭单位球 $ \mathbb{B}_E $ 在 $ E $ 中闭，由假设存在 $ \alpha > 0 $，使得对 $ x \in \overline{\mathbb{B}}_E $ 有 $ \|Ax\| \le \alpha $。因为对所有 $ y \in E \backslash \{0\} $ 有 $ y/\|y\| \in \overline{\mathbb{B}}_E $，由此可得对所有 $ y \in E $ 有 $ \|Ay\| \le \alpha \|y\| $。\nobreak\hspace{0.35em}■
+
+\item
+
+$ \mathcal{L}(E, F) $ 是 $ \operatorname{Hom}(E, F) $ 的向量子空间。
+
+\proofhead
+设 $ A, B \in \mathcal{L}(E, F) $，$ \lambda \in \mathbb{K} $。对每个 $ x \in E $，我们有估计式
+\begin{equation}
+\|(A + B)x\| = \|Ax + Bx\| \le \|Ax\| + \|Bx\| \le (\|A\| + \|B\|) \|x\|\tag{2.6}
+\end{equation}
+
+与
+
+\begin{equation}
+\|\lambda Ax\| = |\lambda| \|Ax\| \le |\lambda| \|A\| \|x\|.\tag{2.7}
+\end{equation}
+
+因此 $ A + B $ 与 $ \lambda A $ 也属于 $ \mathcal{L}(E, F) $。\nobreak\hspace{0.35em}■
+
+\item
+
+映射
+
+\[
+\mathcal{L}(E, F) \to \mathbb{R}^+, \quad A \mapsto \|A\|
+\]
+
+是 $ \mathcal{L}(E, F) $ 上的范数。
+
+\proofhead
+由于 (d)，只需按范数的定义直接验证。首先，由于 $ \|A\| = 0 $，由命题 2.3 可得 $ A = 0 $。其次选取 $ x \in E $，使得 $ \|x\| \le 1 $。则由 (2.6) 与 (2.7) 可得
+\[
+\|(A + B)x\| \le \|A\| + \|B\| \quad \text{且} \quad \|\lambda Ax\| = |\lambda| \|Ax\|,
+\]
+
+而对 $ x $ 取上确界便验证了定义的其余部分。\nobreak\hspace{0.35em}■
+
+\item
+
+设 $ G $ 是赋范向量空间，$ B \in \mathcal{L}(E, F) $，且 $ A \in \mathcal{L}(F, G) $。则我们有
+
+\[
+AB \in \mathcal{L}(E, G) \quad \text{且} \quad \|AB\| \le \|A\| \|B\|.
+\]
+
+\proofhead
+这由下式
+\[
+\|ABx\| \le \|A\| \|Bx\| \le \|A\| \|B\| \|x\| \quad \text{对 } x \in E,
+\]
+
+以及算子范数的定义得出。\nobreak\hspace{0.35em}■
+
+\item
+
+$ \mathcal{L}(E) := \mathcal{L}(E, E) $ 是带单位的\textbf{赋范代数}\footnote{试与第 V.4 节中巴拿赫代数的定义比较。}，也就是说，$ \mathcal{L}(E) $ 是一个代数，且 $ \|\mathbf{1}_E\| = 1 $，并且还有
+
+\[
+\|AB\| \le \|A\| \|B\| \quad \text{对 } A, B \in \mathcal{L}(E).
+\]
+
+\proofhead
+该断言由例 I.12.11(c) 与 (f) 立即可得。\nobreak\hspace{0.35em}■
+\end{items}
+
+约定 在下文中，我们总是给 $ \mathcal{L}(E, F) $ 赋以算子范数。因此
+
+\[
+\mathcal{L}(E, F) := (\mathcal{L}(E, F), \|\cdot\|)
+\]
+
+是具有 $ \|\cdot\| := \|\cdot\|_{\mathcal{L}(E, F)} $ 的赋范向量空间。
+
+下一个定理表明，线性映射有界当且仅当它连续。
+
+\end{conclusion}
+
+\begin{theorem}
+
+设 $ A \in \operatorname{Hom}(E, F) $。下列陈述等价：
+
+\begin{subitems}
+\item
+
+$ A $ 连续。
+
+\item
+
+$ A $ 在 0 处连续。
+
+\item
+
+$ A \in \mathcal{L}(E, F) $。
+
+\proofhead
+“$ (i) \Longrightarrow (ii) $” 是显然的，而 “$ (iii) \Longrightarrow (i) $” 已在结论 2.4(b) 中证明。
+“$ (ii) \Longrightarrow (iii) $” 由假设，存在 $ \delta > 0 $，使得对所有 $ y \in \overline{\mathbb{B}}(0, \delta) $ 有 $ \|Ay\| = \|Ay - A0\| < 1 $。由此可得
+\[
+\sup_{\|x\| \le 1} \|Ax\| = \frac{1}{\delta} \sup_{\|x\| \le 1} \|A(\delta x)\| = \frac{1}{\delta} \sup_{\|y\| \le \delta} \|Ay\| \le \frac{1}{\delta},
+\]
+
+因此 $ A $ 是闭的。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{有界线性算子的连续延拓}
+
+\begin{theorem}
+
+设 $ E $ 是赋范向量空间，$ X $ 是 $ E $ 中的稠密向量子空间，$ F $ 是巴拿赫空间。则对每个 $ A \in \mathcal{L}(X, F) $，存在唯一确定的延拓 $ \bar{A} \in \mathcal{L}(E, F) $，由下式定义
+
+\begin{equation}
+\bar{A}e = \lim_{\substack{x \to e \\ x \in X}} Ax \quad \text{对 } e \in E,\tag{2.8}
+\end{equation}
+
+且 $ \|\bar{A}\|_{\mathcal{L}(E, F)} = \|A\|_{\mathcal{L}(X, F)} $。
+
+证明
+
+\begin{subitems}
+\item
+
+根据结论 2.4(b)，$ A $ 一致连续。令 $ f := A $，$ Y := E $，$ Z := F $，则由定理 2.1 可得 $ A $ 在 $ C(E, F) $ 中有唯一确定的延拓 $ \bar{A} $，它由 (2.8) 给出。
+
+\item
+
+我们现在证明 $ \bar{A} $ 是线性的。为此设 $ e, e' \in E $，$ \lambda \in \mathbb{K} $，$ (x_n) $ 与 $ (x'_n) $ 是 $ X $ 中的序列，使得在 $ E $ 中 $ x_n \to e $ 且 $ x'_n \to e' $。由 $ A $ 的线性性以及极限的线性性，我们有
+
+\[
+\bar{A}(e + \lambda e') = \lim_n A(x_n + \lambda x'_n) = \lim_n Ax_n + \lambda \lim_n Ax'_n = \bar{A}e + \lambda \bar{A}e'.
+\]
+
+因此 $ \bar{A} : E \to F $ 是线性的。$ \bar{A} $ 连续可由定理 2.5 得出，因为 $ \bar{A} $ 属于 $ \mathcal{L}(E, F) $。
+
+\item
+
+最后我们证明 $ \bar{A} $ 与 $ A $ 有相同的算子范数。由范数的连续性（见例 III.1.3(j)）以及结论 2.4(a)，可得
+
+\[
+\|\bar{A}e\| = \|\lim Ax_n\| = \lim \|Ax_n\| \le \lim \|A\| \|x_n\| = \|A\| \|\lim x_n\| = \|A\| \|e\|
+\]
+
+对每个 $ e \in E $ 以及 $ X $ 中每个使得在 $ E $ 中 $ x_n \to e $ 的序列 $ (x_n) $ 成立。因此 $ \|\bar{A}\| \le \|A\| $。由于 $ \bar{A} $ 延拓了 $ A $，命题 2.3 给出
+
+\begin{equation*}
+\begin{aligned}
+\|\bar{A}\| = \sup_{\|y\| < 1} \|\bar{A}y\| \ge \sup_{\substack{\|x\| < 1 \\ x \in X}} \|\bar{A}x\| = \sup_{\substack{\|x\| < 1 \\ x \in X}} \|Ax\| = \|A\|,
+\end{aligned}
+\end{equation*}
+
+于是得到 $ \|\bar{A}\|_{\mathcal{L}(E, F)} = \|A\|_{\mathcal{L}(X, F)} $。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\exerciseshead
+
+在下列习题中，$ E $、$ E_j $、$ F $ 与 $ F_j $ 都是赋范向量空间。
+
+\begin{exercises}
+\item
+
+设 $ A \in \operatorname{Hom}(E, F) $ 是满射。证明
+
+\[
+A^{-1} \in \mathcal{L}(F, E) \Longleftrightarrow \exists\, \alpha > 0 : \alpha \|x\| \le \|Ax\|, \quad x \in E.
+\]
+
+若 $ A $ 还属于 $ \mathcal{L}(E, F) $，证明 $ \|A^{-1}\| \ge \|A\|^{-1} $。
+
+\item
+
+设 $ E $ 与 $ F $ 是有限维的，$ A \in \mathcal{L}(E, F) $ 是双射，且其逆\footnote{若 $ E $ 是有限维赋范向量空间，则 $ \operatorname{Hom}(E, F) = \mathcal{L}(E, F) $（见定理 VII.1.6）。因此我们无需假设 $ A $、$ A^{-1} $ 与 $ B $ 连续。} $ A^{-1} \in \mathcal{L}(F, E) $ 连续。证明：若 $ B \in \mathcal{L}(E, F) $ 满足
+
+\[
+\|A - B\|_{\mathcal{L}(E, F)} < \|A^{-1}\|_{\mathcal{L}(F, E)}^{-1}
+\]
+
+则 $ B $ 可逆。
+
+\item
+
+$ A \in \operatorname{End}(\mathbb{K}^n) $ 在标准基下有矩阵元 $ [a_{jk}] $。对 $ E_j := (\mathbb{K}^n, |\cdot|_j) $（其中 $ j = 1, 2, \infty $），验证：对 $ A \in \mathcal{L}(E_j) $，有
+
+\begin{subitems}
+\item
+
+$ \|A\|_{\mathcal{L}(E_1)} = \max_k \sum_j |a_{jk}| $；
+
+\item
+
+$ \|A\|_{\mathcal{L}(E_2)} \le \left( \sum_{j,k} |a_{jk}|^2 \right)^{1/2} $；
+
+\item
+
+$ \|A\|_{\mathcal{L}(E_\infty)} = \max_j \sum_k |a_{jk}| $。
+
+\end{subitems}
+
+\item
+
+证明 $ \delta : B(\mathbb{R}^n) \to \mathbb{R} $，$ f \mapsto f(0) $ 属于 $ \mathcal{L}(B(\mathbb{R}^n), \mathbb{R}) $，并求 $ \|\delta\| $。
+
+\item
+
+设 $ A_j \in \operatorname{Hom}(E_j, F_j) $（$ j = 0, 1 $），且
+
+\[
+A_0 \otimes A_1 : E_0 \times E_1 \to F_0 \times F_1, \quad (e_0, e_1) \mapsto (A_0 e_0, A_1 e_1).
+\]
+
+验证：
+
+\[
+A_0 \otimes A_1 \in \mathcal{L}(E_0 \times E_1, F_0 \times F_1) \Longleftrightarrow A_j \in \mathcal{L}(E_j, F_j), \quad j = 0, 1.
+\]
+\item
+
+设 $ (A_n) $ 是 $ \mathcal{L}(E, F) $ 中收敛到 $ A $ 的序列，$ (x_n) $ 是 $ E $ 中极限为 $ x $ 的序列。证明 $ F $ 中的序列 $ (A_n x_n) $ 收敛到 $ Ax $。
+
+\item
+
+证明 $ A \in \mathcal{L}(E, F) $ 的核 $ \ker(A) $ 是 $ E $ 的闭向量子空间。
+
+\end{exercises}
+
+\section{柯西–黎曼积分}
+
+确定平面几何图形的面积是数学中最古老、最突出的课题之一。为了计算实函数图像下方的面积，有必要把问题加以简化和形式化。这将有助于获得对积分的直观认识。为此，我们将首先尽可能简单地说明如何对阶梯函数积分；随后再把这一想法推广到跳跃连续函数。这些构造本质上基于本章前两节的结果。它们表达了如下想法：一个图像的面积由若干矩形面积之和构成，而这些矩形本身又是通过选取该图像对阶梯函数的最佳逼近来确定的。通过对矩形宽度的“无限加细”，我们预期这些矩形的面积之和将收敛到该图形的面积。
+
+\bookfigure[0.45]{figures/0bba7c6a8d4392a0.png}
+
+下文我们记
+
+• $ E := (E, \left| \cdot \right|) $，一个巴拿赫空间；
+  $ I := [\alpha, \beta] $，一个紧致完全区间。
+
+\needspace{3\baselineskip}\subsection*{阶梯函数的积分}
+
+设 $ f : I \to E $ 是阶梯函数，且 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 是 $ I $ 的一个关于 $ f $ 的划分。由
+
+\[
+f(x) = e_j \quad \text{对 } x \in (\alpha_{j-1}, \alpha_j) \text{ 且 } j = 1, \ldots, n ,
+\]
+
+定义 $ e_j $，即 $ e_j $ 是 $ f $ 在区间 $ (\alpha_{j-1}, \alpha_j) $ 上的值。我们称
+
+\[
+\int_{(\mathfrak{Z})} f := \sum_{j=1}^{n} e_j(\alpha_j - \alpha_{j-1})
+\]
+
+为 $ f $ 关于划分 $ \mathfrak{Z} $ 的积分。显然 $ \int_{(\mathfrak{Z})} f $ 是 $ E $ 的一个元素。我们注意到该积分不依赖于 $ f $ 在其跳跃不连续点处的值。当 $ E = \mathbb{R} $ 时，我们可以把 $ \left| e_j \right| (\alpha_j - \alpha_{j-1}) $ 解释为边长分别为 $ \left| e_j \right| $ 与 $ (\alpha_j - \alpha_{j-1}) $ 的矩形的面积。于是 $ \int_{(\mathfrak{Z})} f $ 表示矩形面积的加权和，其中面积 $ \left| e_j \right| (\alpha_j - \alpha_{j-1}) $ 以 $ e_j $ 的符号为权重。换言之，那些上升到 $ x $ 轴上方的矩形以 1 加权，而那些位于下方的矩形则赋以 $ -1 $。
+
+\bookfigure[0.71]{figures/1ce845567bd6ae1a.png}
+
+下面的引理表明 $ \int_{(\mathfrak{Z})} f $ 只依赖于 $ f $，而不依赖于划分 $ \mathfrak{Z} $ 的选择。
+
+\begin{lemma}
+
+若 $ f \in \mathcal{T}(I, E) $，且 $ \mathfrak{Z} $ 与 $ \mathfrak{Z}' $ 都是 $ f $ 的划分，则 $ \int_{(\mathfrak{Z})} f = \int_{(\mathfrak{Z}')} f $。
+
+证明
+
+\begin{subitems}
+\item
+
+首先处理 $ \mathfrak{Z}' := (\alpha_0, \ldots, \alpha_k, \gamma, \alpha_{k+1}, \ldots, \alpha_n) $ 恰比 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 多一个划分点的情形。此时我们计算
+
+\begin{equation*}
+\begin{aligned}
+\int_{(\mathfrak{Z})} f &= \sum_{j=1}^{n} e_j(\alpha_j - \alpha_{j-1}) \\ &= \sum_{j=1}^{k} e_j(\alpha_j - \alpha_{j-1}) + e_{k+1}(\alpha_{k+1} - \alpha_k) + \sum_{j=k+2}^{n} e_j(\alpha_j - \alpha_{j-1}) \\ &= \sum_{j=1}^{k} e_j(\alpha_j - \alpha_{j-1}) + e_{k+1}(\alpha_{k+1} - \gamma) + e_{k+1}(\gamma - \alpha_k) + \sum_{j=k+2}^{n} e_j(\alpha_j - \alpha_{j-1}) \\ &= \int_{(\mathfrak{Z}')} f .
+\end{aligned}
+\end{equation*}
+\item
+
+若 $ \mathfrak{Z}' $ 是 $ \mathfrak{Z} $ 的任意加细，则由反复应用 (i) 中的论证可得该结论。
+
+\item
+
+最后，若 $ \mathfrak{Z} $ 与 $ \mathfrak{Z}' $ 是 $ f $ 的任意划分，则根据注 1.1(a) 与 (b)，$ \mathfrak{Z} \vee \mathfrak{Z}' $ 既是 $ \mathfrak{Z} $ 的加细又是 $ \mathfrak{Z}' $ 的加细，从而也是 $ f $ 的一个划分。于是由 (ii) 可得
+
+\[
+\int_{(\mathfrak{Z})} f = \int_{(\mathfrak{Z} \vee \mathfrak{Z}')} f = \int_{(\mathfrak{Z}')} f .\quad\blacksquare
+\]
+\end{subitems}
+
+\end{lemma}
+
+利用引理 3.1，对 $ f \in \mathcal{T}(I, E) $，我们可以用 $ f $ 的任意划分 $ \mathfrak{Z} $ 通过
+
+\[
+\int_{I} f := \int_{\alpha}^{\beta} f := \int_{(\mathfrak{Z})} f
+\]
+
+来定义 $ f $ 在 $ I $ 上的积分。显然，该积分给出一个从 $ \mathcal{T}(I, E) $ 到 $ E $ 的映射，即
+
+\[
+\int_{\alpha}^{\beta} : \mathcal{T}(I, E) \to E, \quad f \mapsto \int_{\alpha}^{\beta} f ,
+\]
+
+我们自然也称它为积分。接下来我们说明该映射最初的几个简单性质。
+
+\begin{lemma}
+
+若 $ f \in \mathcal{T}(I, E) $，则 $ |f| \in \mathcal{T}(I, \mathbb{R}) $，且
+
+\[
+\left| \int_{\alpha}^{\beta} f \right| \le \int_{\alpha}^{\beta} |f| \le \|f\|_{\infty} (\beta - \alpha) .
+\]
+
+此外 $ \int_{\alpha}^{\beta} $ 属于 $ \mathcal{L}(\mathcal{T}(I, E), E) $，且 $ \left\| \int_{\alpha}^{\beta} \right\| = \beta - \alpha $。
+
+\proofhead
+第一个断言是显然的。为证明该不等式，设 $ f \in \mathcal{T}(I, E) $，$ (\alpha_0, \ldots, \alpha_n) $ 是 $ f $ 的一个划分。于是
+\begin{equation*}
+\begin{aligned}
+\left| \int_{\alpha}^{\beta} f \right| &= \left| \sum_{j=1}^{n} e_j(\alpha_j - \alpha_{j-1}) \right| \le \sum_{j=1}^{n} |e_j| (\alpha_j - \alpha_{j-1}) = \int_{\alpha}^{\beta} |f| \\ &\le \max_{1 \le j \le n} |e_j| \sum_{j=1}^{n} (\alpha_j - \alpha_{j-1}) \le \sup_{x \in I} |f(x)| (\beta - \alpha) = (\beta - \alpha) \|f\|_{\infty} .
+\end{aligned}
+\end{equation*}
+
+$ \int_{\alpha}^{\beta} $ 的线性性由注 1.1.(e) 与 $ \int_{\alpha}^{\beta} $ 的定义可得。因此 $ \int_{\alpha}^{\beta} $ 属于 $ \mathcal{L}(\mathcal{T}(I, E), E) $，且 $ \left\| \int_{\alpha}^{\beta} \right\| \le \beta - \alpha $。对于值恒为 1 的常值函数 $ \mathbf{1} \in \mathcal{T}(I, \mathbb{R}) $，有 $ \int_{\alpha}^{\beta} \mathbf{1} = \beta - \alpha $，于是最后一个断言成立。\nobreak\hspace{0.35em}■
+
+\end{lemma}
+
+\needspace{3\baselineskip}\subsection*{跳跃连续函数的积分}
+
+由定理 1.4 我们知道，当跳跃连续函数空间 $ \mathcal{S}(I, E) $ 赋以上确界范数时它是一个巴拿赫空间，且 $ \mathcal{T}(I, E) $ 是 $ \mathcal{S}(I, E) $ 的一个稠密向量子空间（见注 1.1(e)）。由引理 3.2 可得，积分 $ \int_{\alpha}^{\beta} $ 是从 $ \mathcal{T}(I, E) $ 到 $ E $ 的连续线性映射。我们可以应用延拓定理 2.6，得到 $ \int_{\alpha}^{\beta} $ 到巴拿赫空间 $ \mathcal{S}(I, E) $ 的唯一的连续线性延拓。我们用同一记号表示这个延拓，于是
+
+\[
+\int_{\alpha}^{\beta} \in \mathcal{L}(\mathcal{S}(I, E), E) .
+\]
+
+由定理 2.6 可得
+
+\[
+\int_{\alpha}^{\beta} f = \lim_{n} \int_{\alpha}^{\beta} f_n \ \text{在}\ E\ \text{中} \qquad \text{对 } f \in \mathcal{S}(I, E) ,
+\]
+
+其中 $ (f_n) $ 是任意一个一致收敛到 $ f $ 的阶梯函数序列。$ E $ 的元素 $ \int_{\alpha}^{\beta} f $ 称为 $ f $ 的（\textbf{柯西–黎曼}）积分，或 $ f $ 在 $ I $ 上的积分，或 $ f $ 从 $ \alpha $ 到 $ \beta $ 的积分。我们称 $ f $ 为\textbf{被积函数}。
+
+\begin{remark}
+
+设 $ f \in \mathcal{S}(I, E) $。
+
+\begin{items}
+\item
+
+根据定理 2.6，$ \int_{\alpha}^{\beta} f $ 是良定义的，也就是说，$ E $ 的这个元素不依赖于逼近的阶梯函数序列。在特殊情形 $ E = \mathbb{R} $ 下，我们把 $ \int_{\alpha}^{\beta} f_n $ 解释为 $ f_n $ 的图像在区间 $ I $ 上的加权（或“有向”）面积。
+
+\end{items}
+
+\bookfigure[0.71]{figures/ce38950f5ad53f99.png}
+
+由于 $ f_n $ 的图像逼近 $ f $，我们可以把 $ \int_{\alpha}^{\beta} f_n $ 视为 $ f $ 的图像在区间 $ I $ 上“有向”面积的一个近似，因而可以把 $ \int_{\alpha}^{\beta} f $ 等同于这个有向面积。
+
+\begin{items}
+\item[（b）]
+
+对 $ \int_{\alpha}^{\beta} f $ 还有一些其他的记号，即
+
+\[
+\int f , \quad \int_{I} f , \quad \int_{\alpha}^{\beta} f(x) \, dx , \quad \int_{I} f(x) \, dx , \quad \int f(x) \, dx , \quad \int_{I} f \, dx .
+\]
+\item[（c）]
+
+我们有 $ \int_{\alpha}^{\beta} f \in E $，且 $ \left| \int_{\alpha}^{\beta} f \, dx \right| \le (\beta - \alpha) \|f\|_{\infty} $。
+
+\proofhead
+这可由引理 3.2 与定理 2.6 得到。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{黎曼和}
+
+若 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 是 $ I $ 的一个划分，我们称
+
+\[
+\Delta_{\mathfrak{Z}} := \max_{1 \le j \le n} (\alpha_j - \alpha_{j-1})
+\]
+
+为 $ \mathfrak{Z} $ 的\textbf{细度}，并称任一元素 $ \xi_j \in [\alpha_{j-1}, \alpha_j] $ 为一个\textbf{介点}。利用这套术语，我们现在证明关于 $ \int_{\alpha}^{\beta} f $ 的一个逼近结果。
+
+\begin{theorem}
+
+设 $ f \in \mathcal{S}(I, E) $。则对每个 $ \varepsilon > 0 $，存在 $ \delta > 0 $，使得
+
+\[
+\left| \int_{\alpha}^{\beta} f \, dx - \sum_{j=1}^{n} f(\xi_j)(\alpha_j - \alpha_{j-1}) \right| < \varepsilon
+\]
+
+对 $ I $ 的每个满足 $ \Delta_{\mathfrak{Z}} < \delta $ 的划分 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 以及对介点 $ \xi_j $ 的每个取值都成立。
+
+证明
+
+\begin{subitems}
+\item
+
+我们首先处理阶梯函数。设 $ f \in \mathcal{T}(I, E) $，$ \varepsilon > 0 $。又设 $ \widehat{\mathfrak{Z}} := (\widehat{\alpha}_0, \ldots, \widehat{\alpha}_{\hat{n}}) $ 是 $ f $ 的一个划分，并令 $ e_j = f|(\widehat{\alpha}_{j-1}, \widehat{\alpha}_j) $，其中 $ 1 \le j \le \hat{n} $。取 $ \delta := \varepsilon/4\hat{n}\|f\|_{\infty} $，并选取 $ I $ 的一个划分 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $，使得 $ \Delta_{\mathfrak{Z}} < \delta $。再取介点 $ \xi_j \in [\alpha_{j-1}, \alpha_j] $，其中 $ 1 \le j \le n $。对 $ (\beta_0, \ldots, \beta_m) := \mathfrak{Z} \vee \widehat{\mathfrak{Z}} $，有
+
+\begin{equation}
+\begin{aligned}
+\int_{\alpha}^{\beta} f \, dx - \sum_{j=1}^{n} f(\xi_j)(\alpha_j - \alpha_{j-1}) &= \sum_{i=1}^{\hat{n}} e_i(\widehat{\alpha}_i - \widehat{\alpha}_{i-1}) - \sum_{j=1}^{n} f(\xi_j)(\alpha_j - \alpha_{j-1}) \\ &= \sum_{k=1}^{m} e_k'(\beta_k - \beta_{k-1}) - \sum_{k=1}^{m} e_k''(\beta_k - \beta_{k-1}) \\ &= \sum_{k=1}^{m} (e_k' - e_k'')(\beta_k - \beta_{k-1}) ,
+\end{aligned}\tag{3.1}
+\end{equation}
+
+并且我们把 $ e_k' $ 与 $ e_k'' $ 具体规定为
+
+\begin{equation*}
+\begin{aligned}
+e_k' &:= f(\xi), \quad \xi \in (\beta_{k-1}, \beta_k) , \\ e_k'' &:= f(\xi_j), \quad \text{若 } [\beta_{k-1}, \beta_k] \subset [\alpha_{j-1}, \alpha_j] .
+\end{aligned}
+\end{equation*}
+
+显然，$ e_k' \ne e_k'' $ 只可能在划分点 $ \{\widehat{\alpha}_0, \ldots, \widehat{\alpha}_{\hat{n}}\} $ 处成立。因此 (3.1) 中最后的和至多有 $ 2\hat{n} $ 个非零项。对其中每一项，有
+
+\[
+|(e_k' - e_k'')(\beta_k - \beta_{k-1})| \le 2\|f\|_{\infty}\Delta_{\mathfrak{Z}} < 2\|f\|_{\infty}\delta .
+\]
+
+于是由 (3.1) 以及 $ \delta $ 的取值，我们得到
+
+\[
+\left| \int_{\alpha}^{\beta} f - \sum_{j=1}^{n} f(\xi_j)(\alpha_j - \alpha_{j-1}) \right| < 2\hat{n} \cdot 2\|f\|_{\infty}\delta = \varepsilon .
+\]
+\item
+
+现设 $ f \in \mathcal{S}(I, E) $，$ \varepsilon > 0 $。则由定理 1.4，存在 $ g \in \mathcal{T}(I, E) $，使得
+
+\begin{equation}
+\|f - g\|_{\infty} < \frac{\varepsilon}{3(\beta - \alpha)} .\tag{3.2}
+\end{equation}
+
+由注 3.3(c)，有
+
+\begin{equation}
+\left| \int_{\alpha}^{\beta} (f - g) \right| \le \|f - g\|_{\infty}(\beta - \alpha) < \varepsilon/3 .\tag{3.3}
+\end{equation}
+
+由 (i)，存在 $ \delta > 0 $，使得对 $ I $ 的每个满足 $ \Delta_{\mathfrak{Z}} < \delta $ 的划分 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 以及每个取值 $ \xi_j \in [\alpha_{j-1}, \alpha_j] $，都有
+
+\begin{equation}
+\left| \int_{\alpha}^{\beta} g \, dx - \sum_{j=1}^{n} g(\xi_j)(\alpha_j - \alpha_{j-1}) \right| < \varepsilon/3 .\tag{3.4}
+\end{equation}
+
+估计式
+
+\begin{equation}
+\left| \sum_{j=1}^{n} (g(\xi_j) - f(\xi_j))(\alpha_j - \alpha_{j-1}) \right| \le \|f - g\|_{\infty}(\beta - \alpha) < \varepsilon/3\tag{3.5}
+\end{equation}
+
+是显然的。综合 (3.3)–(3.5)，我们得到
+
+\begin{equation*}
+\begin{aligned}
+\left| \int_{\alpha}^{\beta} f \, dx - \sum_{j=1}^{n} f(\xi_j)(\alpha_j - \alpha_{j-1}) \right| & \\ &\le \left| \int_{\alpha}^{\beta} (f - g) \, dx \right| + \left| \int_{\alpha}^{\beta} g \, dx - \sum_{j=1}^{n} g(\xi_j)(\alpha_j - \alpha_{j-1}) \right| \\ &\quad + \left| \sum_{j=1}^{n} (g(\xi_j) - f(\xi_j))(\alpha_j - \alpha_{j-1}) \right| < \varepsilon ,
+\end{aligned}
+\end{equation*}
+
+于是结论得证。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+函数 $ f : I \to E $ 称为\textbf{黎曼可积}的，如果存在 $ e \in E $ 具有这样的性质：对每个 $ \varepsilon > 0 $ 存在 $ \delta > 0 $，使得
+
+\[
+\left| e - \sum_{j=1}^{n} f(\xi_j)(\alpha_j - \alpha_{j-1}) \right| < \varepsilon
+\]
+
+对 $ I $ 的每个满足 $ \Delta_{\mathfrak{Z}} < \delta $ 的划分 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 以及对每组介点 $ \xi_j \in [\alpha_{j-1}, \alpha_j] $ 都成立。
+若 $ f $ 黎曼可积，则值 $ e $ 称为 $ f $ 在 $ I $ 上的\textbf{黎曼积分}，我们仍用记号 $ \int_{\alpha}^{\beta} f \, dx $ 表示它。因此，定理 3.4 可以表述为：\emph{每个跳跃连续函数都黎曼可积，且柯西–黎曼积分与黎曼积分一致。}
+
+\item
+
+可以证明 $ \mathcal{S}(I, E) $ 是黎曼可积函数集的真子集。\footnote{例如这可由如下事实得出：有界函数黎曼可积当且仅当其不连续点集的勒贝格测度为零（见第三卷定理 X.5.6）。} 因此，黎曼积分是柯西–黎曼积分的推广。
+这里我们满足于柯西–黎曼积分，不打算扩大可积函数集，因为眼下并无此必要。不过，在第三卷中我们将引入一个更一般的积分——勒贝格积分，它满足严格分析的一切需求。
+
+\item
+
+设 $ f : I \to E $，且 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 是 $ I $ 的一个带有介点 $ \xi_j \in [\alpha_{j-1}, \alpha_j] $ 的划分。我们称
+
+\[
+\sum_{j=1}^{n} f(\xi_j)(\alpha_j - \alpha_{j-1}) \in E
+\]
+
+为\textbf{黎曼和}。若 $ f $ 黎曼可积，则
+
+\[
+\int_{\alpha}^{\beta} f \, dx = \lim_{\Delta_{\mathfrak{Z}} \to 0} \sum_{j=1}^{n} f(\xi_j)(\alpha_j - \alpha_{j-1}) ,
+\]
+
+以符号方式表示它的积分。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $ [\cdot] $ 为下取整函数。对 $ n \in \mathbb{N}^{\times} $，计算下列积分
+
+\[
+\text{(i)} \int_{0}^{1} \frac{[nx]}{n} \, dx , \quad \text{(ii)} \int_{0}^{1} \frac{[nx^2]}{n^2} \, dx , \quad \text{(iii)} \int_{0}^{1} \frac{[nx^2]}{n} \, dx , \quad \text{(iv)} \int_{\alpha}^{\beta} \operatorname{sign} x \, dx .
+\]
+\item
+
+对习题 1.2 中的函数 $ f $ 计算 $ \int_{-1}^{1} f $，并对习题 1.7 中的 $ f $ 计算 $ \int_{0}^{1} f $。
+
+\item
+
+设 $ F $ 是巴拿赫空间，$ A \in \mathcal{L}(E, F) $。证明：对 $ f \in \mathcal{S}(I, E) $，有
+
+\[
+Af := (x \mapsto A(f(x))) \in \mathcal{S}(I, F)
+\]
+
+且 $ A\int_{\alpha}^{\beta} f = \int_{\alpha}^{\beta} Af $。
+
+\item
+
+对 $ f \in \mathcal{S}(I, E) $，根据习题 1.4，存在一个跳跃连续函数序列 $ (f_n) $，使得 $ \sum_{n} \|f_n\|_{\infty} < \infty $ 且 $ f = \sum_{n} f_n $。证明 $ \int_{I} f = \sum_{n} \int_{I} f_n $。
+
+\item
+
+证明：对每个 $ f \in \mathcal{S}(I, \mathbb{R}) $，$ f^{+} $ 与 $ f^{-} $ 也属于 $ \mathcal{S}(I, \mathbb{R}) $，且
+
+\[
+\int_{I} f \le \int_{I} f^{+} , \quad -\int_{I} f \le \int_{I} f^{-} .
+\]
+\item
+
+证明：若 $ f : I \to E $ 黎曼可积，则 $ f \in B(I, E) $，即\emph{每个黎曼可积函数都是有界的}。
+
+\item
+
+设 $ f \in B(I, \mathbb{R}) $，$ \mathfrak{Z} = (\alpha_0, \ldots, \alpha_n) $ 是 $ I $ 的一个划分。定义
+
+\[
+\overline{S}(f, I, \mathfrak{Z}) := \sum_{j=1}^{n} \sup\{f(\xi) ; \xi \in [\alpha_{j-1}, \alpha_j]\}(\alpha_j - \alpha_{j-1})
+\]
+
+与
+
+\[
+\underline{S}(f, I, \mathfrak{Z}) := \sum_{j=1}^{n} \inf\{f(\xi) ; \xi \in [\alpha_{j-1}, \alpha_j]\}(\alpha_j - \alpha_{j-1})
+\]
+
+并称它们为 $ f $ 在 $ I $ 上关于划分 $ \mathfrak{Z} $ 的上和与下和。证明：
+
+\begin{subitems}
+\item
+
+若 $ \mathfrak{Z}' $ 是 $ \mathfrak{Z} $ 的加细，则
+
+\[
+\overline{S}(f, I, \mathfrak{Z}') \le \overline{S}(f, I, \mathfrak{Z}) , \quad \underline{S}(f, I, \mathfrak{Z}) \le \underline{S}(f, I, \mathfrak{Z}') ;
+\]
+\item
+
+若 $ \mathfrak{Z} $ 与 $ \mathfrak{Z}' $ 是 $ I $ 的划分，则
+
+\[
+\underline{S}(f, I, \mathfrak{Z}) \le \overline{S}(f, I, \mathfrak{Z}') .
+\]
+\end{subitems}
+
+\item
+
+设 $ f \in B(I, \mathbb{R}) $，且 $ \mathfrak{Z}' := (\beta_0, \ldots, \beta_m) $ 是 $ \mathfrak{Z} := (\alpha_0, \ldots, \alpha_n) $ 的加细。证明：
+
+\begin{equation*}
+\begin{aligned}
+\overline{S}(f, I, \mathfrak{Z}) - \overline{S}(f, I, \mathfrak{Z}') &\le 2(m - n)\|f\|_{\infty}\Delta_{\mathfrak{Z}} , \\ \underline{S}(f, I, \mathfrak{Z}') - \underline{S}(f, I, \mathfrak{Z}) &\le 2(m - n)\|f\|_{\infty}\Delta_{\mathfrak{Z}} .
+\end{aligned}
+\end{equation*}
+\item
+
+设 $ f \in B(I, \mathbb{R}) $。由习题 7(ii)，我们知道下列各量在 $ \mathbb{R} $ 中存在：
+
+\[
+\overline{\int_{I}} f := \inf\{\overline{S}(f, I, \mathfrak{Z}) ; \mathfrak{Z} \text{ 是 } I \text{ 的划分}\}
+\]
+
+与
+
+\[
+\underline{\int_{I}} f := \sup\{\underline{S}(f, I, \mathfrak{Z}) ; \mathfrak{Z} \text{ 是 } I \text{ 的划分}\} .
+\]
+
+我们称 $ \overline{\int_{I}} f $ 为 $ f $ 在 $ I $ 上的\textbf{上黎曼（–达布）积分}；同样地，我们称 $ \underline{\int_{I}} f $ 为\textbf{下黎曼积分}。
+
+证明：
+
+\begin{subitems}
+\item
+
+$ \underline{\int_{I}} f \le \overline{\int_{I}} f $；
+
+\item
+
+对每个 $ \varepsilon > 0 $，存在 $ \delta > 0 $，使得对 $ I $ 的每个满足 $ \Delta_{\mathfrak{Z}} < \delta $ 的划分 $ \mathfrak{Z} $，有不等式
+
+\[
+0 \le \overline{S}(f, I, \mathfrak{Z}) - \overline{\int_{I}} f < \varepsilon \quad \text{且} \quad 0 \le \underline{\int_{I}} f - \underline{S}(f, I, \mathfrak{Z}) < \varepsilon .
+\]
+
+（提示：存在 $ I $ 的一个划分 $ \mathfrak{Z}' $，使得 $ \overline{S}(f, I, \mathfrak{Z}') < \overline{\int_{I}} f + \varepsilon/2 $。设 $ \mathfrak{Z} $ 是 $ I $ 的任意划分。由习题 8 可得
+
+\[
+\overline{S}(f, I, \mathfrak{Z}) \le \overline{S}(f, I, \mathfrak{Z} \vee \mathfrak{Z}') + 2m\|f\|_{\infty}\Delta_{\mathfrak{Z}} .
+\]
+
+此外，习题 7(i) 给出 $ \overline{S}(f, I, \mathfrak{Z} \vee \mathfrak{Z}') \le \overline{S}(f, I, \mathfrak{Z}') $。）
+
+\end{subitems}
+
+\item
+
+证明：对 $ f \in B(I, \mathbb{R}) $，下列各断言等价：
+
+\begin{subitems}
+\item
+
+$ f $ 黎曼可积。
+
+\item
+
+$ \overline{\int_{I}} f = \underline{\int_{I}} f $。
+
+\item
+
+对每个 $ \varepsilon > 0 $，存在 $ I $ 的一个划分 $ \mathfrak{Z} $，使得 $ \overline{S}(f, I, \mathfrak{Z}) - \underline{S}(f, I, \mathfrak{Z}) < \varepsilon $。
+
+\proofhead
+$ \overline{\int_{I}} f = \underline{\int_{I}} f = \int_{I} f $。
+（提示：“(ii)$\Leftrightarrow$(iii)”由习题 9 得出。
+“(i)$\Rightarrow$(iii)” 设 $ \varepsilon > 0 $，$ e := \int_{I} f $。则存在 $ \delta > 0 $，使得
+\[
+e - \frac{\varepsilon}{2} < \sum_{j=1}^{n} f(\xi_j)(\alpha_j - \alpha_{j-1}) < e + \frac{\varepsilon}{2}
+\]
+
+对 $ I $ 的每个满足 $ \Delta_{\mathfrak{Z}} < \delta $ 的划分 $ \mathfrak{Z} = (\alpha_0, \ldots, \alpha_n) $ 都成立。因此 $ \overline{S}(f, I, \mathfrak{Z}) \le e + \varepsilon/2 $ 且 $ \underline{S}(f, I, \mathfrak{Z}) \ge e - \varepsilon/2 $。）
+
+\end{subitems}
+
+\end{exercises}
+
+\section{积分的性质}
+
+在本节中，我们深入研究积分最重要的性质，并特别证明微积分基本定理。该定理说的是：区间上的每个连续函数都有一个原函数，它给出了其积分的另一种形式。这一原函数在许多情形下是已知的，并且在已知时能够方便地、显式地计算该积分。
+
+与前几节一样，我们设
+
+• $ E = (E, \left| \cdot \right|) $ 是巴拿赫空间；$ I = [\alpha, \beta] $ 是紧致完全区间。
+
+\needspace{3\baselineskip}\subsection*{函数序列的积分}
+
+积分的定义很容易导出下述收敛定理，其理论与实际意义将会变得清晰。
+
+\begin{proposition}
+
+（函数序列与函数和的积分）设 $ (f_n) $ 是跳跃连续函数序列。
+
+\begin{subitems}
+\item
+
+若 $ (f_n) $ 一致收敛于 $ f $，则 $ f $ 跳跃连续，且
+
+\[
+\lim_{n} \int_{\alpha}^{\beta} f_n = \int_{\alpha}^{\beta} \lim_{n} f_n = \int_{\alpha}^{\beta} f .
+\]
+\item
+
+若 $ \sum f_n $ 一致收敛，则 $ \sum_{n=0}^{\infty} f_n $ 跳跃连续，且
+
+\[
+\int_{\alpha}^{\beta} \left( \sum_{n=0}^{\infty} f_n \right) = \sum_{n=0}^{\infty} \int_{\alpha}^{\beta} f_n .
+\]
+
+\proofhead
+由定理 1.4 我们知道，空间 $ \mathcal{S}(I, E) $ 赋予上确界范数后是完备的。于是定理的两个部分都由以下事实得出：$ \int_{\alpha}^{\beta} $ 是从 $ \mathcal{S}(I, E) $ 到 $ E $ 的线性映射，且一致收敛与 $ \mathcal{S}(I, E) $ 中的收敛一致。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\end{proposition}
+
+\begin{remark}
+
+当序列 $ (f_n) $ 仅逐点收敛时，命题 4.1 的断言不成立。
+
+\proofhead
+令 $ I = [0, 1] $，$ E := \mathbb{R} $，且
+\begin{equation*}
+f_n(x) := \begin{cases} 0, & x = 0, \\ n, & x \in (0, 1/n), \\ 0, & x \in [1/n, 1], \end{cases}
+\end{equation*}
+\bookfigure[0.29]{figures/6f64bd3297a2559d.png}
+
+其中 $ n \in \mathbb{N}^{\times} $。则 $ f_n \in \mathcal{T}(I, \mathbb{R}) $，且 $ (f_n) $ 逐点收敛于 0，但不一致收敛于 0。由于对 $ n \in \mathbb{N}^{\times} $ 有 $ \int_{I} f_n = 1 $，而 $ \int_{I} 0 = 0 $，断言得证。\nobreak\hspace{0.35em}■
+
+作为命题 4.1 的第一个应用，我们证明引理 3.2 的重要断言——关于范数与积分的交换——对跳跃连续函数也成立。
+
+\end{remark}
+
+\begin{proposition}
+
+对 $ f \in \mathcal{S}(I, E) $，有 $ |f| \in \mathcal{S}(I, \mathbb{R}) $，且
+
+\[
+\left| \int_{\alpha}^{\beta} f \, dx \right| \le \int_{\alpha}^{\beta} |f| \, dx \le (\beta - \alpha)\|f\|_{\infty} .
+\]
+
+\proofhead
+根据定理 1.4，存在 $ \mathcal{T}(I, E) $ 中的序列 $ (f_n) $ 一致收敛于 $ f $。此外，由\textbf{逆三角不等式}可得
+\[
+\left| |f_n(x)|_{E} - |f(x)|_{E} \right| \le |f_n(x) - f(x)|_{E} \le \|f_n - f\|_{\infty} \quad \text{对 } x \in I .
+\]
+
+因此 $ |f_n| $ 一致收敛于 $ |f| $。因为每个 $ |f_n| $ 都属于 $ \mathcal{T}(I, \mathbb{R}) $，再次由定理 1.4 得 $ |f| \in \mathcal{S}(I, \mathbb{R}) $。
+
+由引理 3.2，我们得到
+
+\begin{equation}
+\left| \int_{\alpha}^{\beta} f_n \, dx \right| \le \int_{\alpha}^{\beta} |f_n| \, dx \le (\beta - \alpha)\|f_n\|_{\infty} .\tag{4.1}
+\end{equation}
+
+因为 $ (f_n) $ 一致收敛于 $ f $ 且 $ (|f_n|) $ 同样收敛于 $ |f| $，我们可以借助命题 4.1 在 (4.1) 中令 $ n \to \infty $。所证的不等式随之得出。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{定向积分}
+
+若 $ f \in \mathcal{S}(I, E) $ 且 $ \gamma, \delta \in I $，我们定义\footnote{此处及此后，若 $ J $ 是 $ I $ 的紧致完全子区间，我们就把 $ \int_{J} f|J $ 简写为 $ \int_{J} f $。}
+
+\begin{equation}
+\int_{\gamma}^{\delta} f := \int_{\gamma}^{\delta} f(x) \, dx := \begin{cases} \int_{[\gamma, \delta]} f , & \gamma < \delta , \\ 0, & \gamma = \delta , \\ -\int_{[\delta, \gamma]} f , & \delta < \gamma , \end{cases}\tag{4.2}
+\end{equation}
+
+并称 $ \int_{\gamma}^{\delta} f $ 为“$ f $ 从 $ \gamma $ 到 $ \delta $ 的积分”。我们把 $ \gamma $ 称为 $ f $ 的积分的\textbf{下限}，把 $ \delta $ 称为\textbf{上限}，即使当 $ \gamma > \delta $ 时也是如此。根据注 1.1(g)，$ f $ 从 $ \gamma $ 到 $ \delta $ 的积分由 (4.2) 良定义，且
+
+\begin{equation}
+\int_{\gamma}^{\delta} f = -\int_{\delta}^{\gamma} f .\tag{4.3}
+\end{equation}
+
+\begin{proposition}
+
+（积分的可加性）对 $ f \in \mathcal{S}(I, E) $ 和 $ a, b, c \in I $，有
+
+\[
+\int_{a}^{b} f = \int_{a}^{c} f + \int_{c}^{b} f .
+\]
+
+\proofhead
+只需对 $ a \le b \le c $ 验证这一点。若 $ (f_n) $ 是一致收敛于 $ f $ 的阶梯函数序列，且 $ J $ 是 $ I $ 的紧致完全子区间，则
+\begin{equation}
+f_n|J \in \mathcal{T}(J, E) \quad \text{且} \quad f_n|J \xrightarrow[\text{一致}]{} f|J .\tag{4.4}
+\end{equation}
+
+阶梯函数积分的定义立即给出
+
+\begin{equation}
+\int_{a}^{c} f_n = \int_{a}^{b} f_n + \int_{b}^{c} f_n .\tag{4.5}
+\end{equation}
+
+利用 (4.4) 和命题 4.1，令 $ n \to \infty $ 便得到
+
+\[
+\int_{a}^{c} f = \int_{a}^{b} f + \int_{b}^{c} f .
+\]
+
+于是有
+
+\[
+\int_{a}^{b} f = \int_{a}^{c} f - \int_{b}^{c} f = \int_{a}^{c} f + \int_{c}^{b} f .\quad\blacksquare
+\]
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{积分的正性与单调性}
+
+到目前为止，我们考虑的跳跃连续函数的积分取值于任意巴拿赫空间。对于下述定理及其推论，我们将局限于实值情形，此时实数的序蕴含积分的一些附加性质。
+
+\begin{theorem}
+
+对 $ f \in \mathcal{S}(I, \mathbb{R}) $，若对所有 $ x \in I $ 有 $ f(x) \ge 0 $，则 $ \int_{\alpha}^{\beta} f \ge 0 $。
+
+\proofhead
+根据注 1.3，存在非负阶梯函数序列 $ (f_n) $ 一致收敛于 $ f $。此时显然 $ \int f_n \ge 0 $，于是 $ \int f = \lim_{n} \int f_n \ge 0 $。\nobreak\hspace{0.35em}■
+\end{theorem}
+
+\begin{corollary}
+
+设 $ f, g \in \mathcal{S}(I, \mathbb{R}) $ 满足对所有 $ x \in I $ 有 $ f(x) \le g(x) $。则 $ \int_{\alpha}^{\beta} f \le \int_{\alpha}^{\beta} g $，也就是说，积分在实值函数上是单调的。
+
+\proofhead
+这由积分的线性性与命题 4.5 得出。\nobreak\hspace{0.35em}■
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $ V $ 是向量空间。我们把从 $ V $ 到其域的任意线性映射称为\textbf{线性形式}或\textbf{线性泛函}。
+因此在标量情形，即 $ E = \mathbb{K} $ 时，积分 $ \int_{\alpha}^{\beta} $ 是 $ \mathcal{S}(I) $ 上的连续线性形式。
+
+\item
+
+设 $ V $ 是实向量空间，$ P $ 是非空集合，满足
+
+\begin{subitems}
+\item
+
+$ x, y \in P \Rightarrow x + y \in P $，
+
+\item
+
+$ (x \in P, \lambda \in \mathbb{R}^{+}) \Rightarrow \lambda x \in P $，
+
+\item
+
+$ x, -x \in P \Rightarrow x = 0 $。
+换句话说，$ P $ 满足 $ P + P \subset P $，$ \mathbb{R}^{+}P \subset P $ 与 $ P \cap (-P) = \{0\} $。此时我们称 $ P $ 为 $ V $ 中（事实上是凸的）\textbf{锥}（顶点在 0 处）。这一称呼是合理的，因为 $ P $ 是凸的，且对每个 $ x $，它都包含“半射线” $ \mathbb{R}^{+}x $。此外，$ P $ 仅当 $ x \ne 0 $ 时才包含“直线” $ \mathbb{R}x $。
+接下来我们通过
+
+\begin{equation}
+x \le y :\Leftrightarrow y - x \in P ,\tag{4.6}
+\end{equation}
+
+定义 $ \le $，从而在 $ V $ 上得到一个序，它在 $ V $ 上是线性的（或与 $ V $ 的向量空间结构相容），也就是说，对 $ x, y, z \in V $，
+
+\[
+x \le y \Rightarrow x + z \le y + z
+\]
+
+且
+
+\[
+(x \le y, \lambda \in \mathbb{R}^{+}) \Rightarrow \lambda x \le \lambda y .
+\]
+
+进一步，我们称 $ (V, \le) $ 为\textbf{有序向量空间}，$ \le $ 是由 $ P $ 诱导的序。显然有
+
+\begin{equation}
+P = \{x \in V ; x \ge 0\} .\tag{4.7}
+\end{equation}
+
+因此我们称 $ P $ 为 $ (V, \le) $ 的\textbf{正锥}。
+反之，若在 $ V $ 上给定一个线性序 $ \le $，则 (4.7) 在 $ V $ 中定义凸锥，且此锥诱导所给的序。因此，$ V $ 上的凸锥之集与 $ V $ 上的线性序之集之间存在双射。于是，当 $ P $ 是 $ V $ 中的正锥时，我们既可写 $ (V, \le) $，也可写 $ (V, P) $。
+
+\end{subitems}
+
+\item
+
+当 $ (V, P) $ 是有序向量空间且 $ \ell $ 是 $ V $ 上的线性形式时，若对所有 $ x \in P $ 有 $ \ell(x) \ge 0 $，则称 $ \ell $ 是\textbf{正的}。\footnote{注意，在此定义下零形式是正的。} 于是 $ V $ 上的线性形式是正的当且仅当它是递增的\footnote{我们也可称递增形式为单调线性形式。}。
+
+\proofhead
+设 $ \ell : V \to \mathbb{R} $ 是线性的。因为 $ \ell(x - y) = \ell(x) - \ell(y) $，结论是显然的。\nobreak\hspace{0.35em}■
+\item
+
+设 $ E $ 是赋范向量空间（或巴拿赫空间），$ \le $ 是 $ E $ 上的线性序。若 $ E $ 的正锥是闭的，则称 $ E := (E, \le) $ 是\textbf{有序赋范向量空间}（或\textbf{有序巴拿赫空间}）。
+设 $ E $ 是有序赋范向量空间，且 $ (x_j) $ 与 $ (y_j) $ 是 $ E $ 中的序列，满足 $ x_j \to x $ 与 $ y_j \to y $。则对几乎所有的 $ j \in \mathbb{N} $ 有 $ x_j \le y_j $，由此可得 $ x \le y $。
+
+\proofhead
+若 $ P $ 是 $ E $ 中的正锥，则对几乎所有的 $ j \in \mathbb{N} $ 有 $ y_j - x_j \in P $。于是由命题 II.2.2 与注 II.3.1(b) 可得
+\[
+y - x = \lim y_j - \lim x_j = \lim(y_j - x_j) \in P ,
+\]
+
+从而 $ P $ 是闭的。\nobreak\hspace{0.35em}■
+
+\item
+
+设 $ X $ 是非空集合。例 I.4.4(c) 的逐点序，即
+
+\[
+f \le g :\Leftrightarrow f(x) \le g(x) \quad \text{对 } x \in X
+\]
+
+且 $ f, g \in \mathbb{R}^{X} $，使 $ \mathbb{R}^{X} $ 成为有序向量空间。我们称此序为 $ \mathbb{R}^{X} $ 上的\textbf{自然序}。反过来，它在 $ \mathbb{R}^{X} $ 的每个子集 $ M $ 上诱导出 $ M $ 上的\textbf{自然序}（见例 I.4.4(a)）。除非另有说明，此后我们始终给 $ \mathbb{R}^{X} $ 及其任意向量子空间配备自然序。特别地，$ B(X, \mathbb{R}) $ 是有序巴拿赫空间，其正锥为
+
+\[
+B^{+}(X) := B(X, \mathbb{R}^{+}) := B(X, \mathbb{R}) \cap (\mathbb{R}^{+})^{X} .
+\]
+
+因此 $ B(X, \mathbb{R}) $ 的每个闭向量子空间 $ \mathfrak{F}(X, \mathbb{R}) $ 都是有序巴拿赫空间，其正锥由下式给出：
+
+\[
+\mathfrak{F}^{+}(X) := \mathfrak{F}(X, \mathbb{R}) \cap B^{+}(X) = \mathfrak{F}(X, \mathbb{R}) \cap (\mathbb{R}^{+})^{X} .
+\]
+
+\proofhead
+$ B^{+}(X) $ 在 $ B(X, \mathbb{R}) $ 中是闭的，这是显然的。\nobreak\hspace{0.35em}■
+\item
+
+由 (e) 可得，$ \mathcal{S}(I, \mathbb{R}) $ 是以 $ \mathcal{S}^{+}(I) $ 为正锥的有序巴拿赫空间，且命题 4.5 说的是积分 $ \int_{\alpha}^{\beta} $ 是 $ \mathcal{S}(I, \mathbb{R}) $ 上的连续正（\textbf{因此单调}）线性形式。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+由
+
+\begin{equation*}
+f(x) := \begin{cases} 1, & x = 1, \\ 0, & \text{其他情形} \end{cases}
+\end{equation*}
+
+定义的阶梯函数 $ f : [0, 2] \to \mathbb{R} $ 显然满足 $ \int f = 0 $。因此存在一个不恒为零但其积分为零的非负函数。下一个定理给出非负函数积分严格为正的判别准则。
+
+\end{remark}
+
+\begin{proposition}
+
+设 $ f \in \mathcal{S}^{+}(I) $ 且 $ a \in I $。若 $ f $ 在 $ a $ 处连续且 $ f(a) > 0 $，则
+
+\[
+\int_{\alpha}^{\beta} f > 0 .
+\]
+
+证明
+
+\begin{subitems}
+\item
+
+设 $ a $ 属于 $ \mathring{I} $。则 $ f $ 在 $ a $ 处连续且 $ f(a) > 0 $ 蕴含存在 $ \delta > 0 $，使得 $ [a - \delta, a + \delta] \subset I $ 且
+
+\[
+|f(x) - f(a)| \le \frac{1}{2}f(a) \quad \text{对 } x \in [a - \delta, a + \delta] .
+\]
+
+因此有
+
+\[
+f(x) \ge \frac{1}{2}f(a) \quad \text{对 } x \in [a - \delta, a + \delta] .
+\]
+
+由 $ f \ge 0 $ 与命题 4.5，得 $ \int_{\alpha}^{a-\delta} f \ge 0 $ 与 $ \int_{a+\delta}^{\beta} f \ge 0 $。现在由命题 4.4 与推论 4.6 得
+
+\[
+\int_{\alpha}^{\beta} f = \int_{\alpha}^{a-\delta} f + \int_{a-\delta}^{a+\delta} f + \int_{a+\delta}^{\beta} f \ge \int_{a-\delta}^{a+\delta} f \ge \frac{1}{2}f(a)\int_{a-\delta}^{a+\delta} \mathbf{1} = \delta f(a) > 0 .
+\]
+\item
+
+当 $ a \in \partial I $ 时，同样的结论由类似的论证得出。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{逐分量积分}
+
+\begin{proposition}
+
+映射 $ f = (f^{1}, \ldots, f^{n}) : I \to \mathbb{K}^{n} $ 跳跃连续当且仅当它的每个分量函数 $ f^{j} $ 都跳跃连续。此外，
+
+\[
+\int_{\alpha}^{\beta} f = \left( \int_{\alpha}^{\beta} f^{1}, \ldots, \int_{\alpha}^{\beta} f^{n} \right) .
+\]
+
+\proofhead
+由定理 1.2，$ f $ 跳跃连续当且仅当存在一致收敛于它的阶梯函数序列 $ (f_k) $。容易看出，后者成立当且仅当对每个 $ j \in \{1, \ldots, n\} $，序列 $ (f_k^{j})_{k \in \mathbb{N}} $ 一致收敛于 $ f^{j} $。因为对每个 $ j $ 有 $ f^{j} \in \mathcal{S}(I, \mathbb{K}) $，定理 1.2 蕴含第一个断言。第二个断言对阶梯函数是显然的，并且在此处成立，因为命题 4.1 对 $ f \in \mathcal{S}(I, \mathbb{K}^{n}) $ 取极限时也成立。\nobreak\hspace{0.35em}■
+\end{proposition}
+
+\begin{corollary}
+
+设 $ g, h \in \mathbb{R}^{I} $ 且 $ f := g + ih $。则 $ f $ 跳跃连续当且仅当 $ g $ 与 $ h $ 都跳跃连续。此时，
+
+\[
+\int_{\alpha}^{\beta} f = \int_{\alpha}^{\beta} g + i\int_{\alpha}^{\beta} h .
+\]
+\end{corollary}
+
+\needspace{3\baselineskip}\subsection*{微积分第一基本定理}
+
+对 $ f \in \mathcal{S}(I, E) $，我们用积分定义映射
+
+\begin{equation}
+F : I \to E , \quad x \mapsto \int_{\alpha}^{x} f(\xi) \, d\xi ,\tag{4.8}
+\end{equation}
+
+其性质现在我们来考察。
+
+\begin{theorem}
+
+对 $ f \in \mathcal{S}(I, E) $，有
+
+\[
+|F(x) - F(y)| \le \|f\|_{\infty}|x - y| \quad \text{对 } x, y \in I .
+\]
+
+因此积分在整个区间上是利普希茨连续函数。
+
+\proofhead
+由命题 4.4，有
+\[
+F(x) - F(y) = \int_{\alpha}^{x} f(\xi) \, d\xi - \int_{\alpha}^{y} f(\xi) \, d\xi = \int_{y}^{x} f(\xi) \, d\xi \quad \text{对 } x, y \in I .
+\]
+
+于是结论立即由命题 4.3 得出。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+我们的下一个定理说的是：$ F $ 在 $ f $ 连续处可微。
+
+\begin{theorem}
+
+（在整个区间上的可微性）设 $ f \in \mathcal{S}(I, E) $ 在所有 $ a \in I $ 处连续。则 $ F $ 在 $ a $ 处可微，且 $ F'(a) = f(a) $。
+
+\proofhead
+对满足 $ a + h \in I $ 的 $ h \in \mathbb{R}^{\times} $，有
+\[
+\frac{F(a + h) - F(a)}{h} = \frac{1}{h}\left( \int_{\alpha}^{a+h} f(\xi) \, d\xi - \int_{\alpha}^{a} f(\xi) \, d\xi \right) = \frac{1}{h}\int_{a}^{a+h} f(\xi) \, d\xi .
+\]
+
+我们注意到 $ hf(a) = \int_{a}^{a+h} f(a) \, d\xi $，于是
+
+\[
+\frac{F(a + h) - F(a) - f(a)h}{h} = \frac{1}{h}\int_{a}^{a+h} (f(\xi) - f(a)) \, d\xi .
+\]
+
+因为 $ f $ 在 $ a $ 处连续，对每个 $ \varepsilon > 0 $ 存在 $ \delta > 0 $，使得
+
+\[
+|f(\xi) - f(a)|_{E} < \varepsilon \quad \text{对 } \xi \in I \cap (a - \delta, a + \delta) .
+\]
+
+利用命题 4.3，我们有估计
+
+\[
+\left| \frac{F(a + h) - F(a) - f(a)h}{h} \right|_{E} \le \frac{1}{|h|}\left| \int_{a}^{a+h} |f(\xi) - f(a)|_{E} \, d\xi \right| < \varepsilon
+\]
+
+对满足 $ 0 < |h| < \delta $ 与 $ a + h \in I $ 的 $ h $ 成立，因此 $ F $ 在 $ a $ 处可微，且 $ F'(a) = f(a) $。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+由最后的结果，我们得到一个更简单但也重要的结论。
+
+\begin{theorem}
+
+（微积分第二基本定理）每个 $ f \in C(I, E) $ 都有原函数，且若 $ F $ 是这样一个原函数，则
+
+\[
+F(x) = F(\alpha) + \int_{\alpha}^{x} f(\xi) \, d\xi \quad \text{对 } x \in I .
+\]
+
+\proofhead
+对 $ x \in I $，令 $ G(x) := \int_{\alpha}^{x} f(\xi) \, d\xi $。根据定理 4.12，$ G $ 可微且 $ G' = f $。因此 $ G $ 是 $ f $ 的原函数。
+
+设 $ F $ 是 $ f $ 的原函数。由注 V.3.7(a)，存在 $ c \in E $ 使得 $ F = G + c $。因为 $ G(\alpha) = 0 $，有 $ c = F(\alpha) $。\nobreak\hspace{0.35em}■
+\end{theorem}
+
+\begin{corollary}
+
+对 $ f \in C(I, E) $ 的每个原函数 $ F $，有
+
+\[
+\int_{\alpha}^{\beta} f(x) \, dx = F(\beta) - F(\alpha) =: \left. F \right|_{\alpha}^{\beta} .
+\]
+
+我们称 $ \left. F \right|_{\alpha}^{\beta} $ 为“$ F $ 在 $ \alpha $ 与 $ \beta $ 之间的取值”。
+
+\end{corollary}
+
+\needspace{3\baselineskip}\subsection*{不定积分}
+
+若 $ f $ 的原函数已知，推论 4.14 就把计算积分 $ \int_{\alpha}^{\beta} f $ 的问题化为平凡之差 $ F(\beta) - F(\alpha) $。该推论还表明，在某种意义下，积分是微分的逆运算。
+
+虽然微积分基本定理保证了每个 $ f \in C(I, E) $ 都有原函数，但在一般情形下并不可能把它显式地求出来。
+
+要根据推论 4.14 计算积分，我们必须以某种方法给出其原函数。显然，我们可以通过对已知可微函数求导来得到一批基本的原函数。利用第 IV 章与第 V 章的结果，我们将列出一批重要的原函数，并把它们放在例 4.15 之后给出。在后面的几节中，我们将看到如何利用一些简单的法则与变换得到更大一类原函数。还应当指出，存在列出成千上万原函数的详尽表格（例如见 [Ape96]、[GR81] 或 [BBM86]）。
+
+与其费力地在纸上算出积分，不如使用 Maple 或 Mathematica 之类的软件包，它们能做“符号”积分。这些程序“认识”许多原函数，并能通过一组初等法则对其被积函数进行运算来求解许多积分。
+
+对 $ f \in C(I, E) $，我们把 $ f $ 的原函数区间中的
+
+\[
+\int f \, dx + c,
+\]
+
+称为 $ f $ 的\textbf{不定积分}。这是一种符号记法，它省略了区间 $ I $（尽管上下文应当使它清楚），并且暗示原函数只确定到差一个加法常数 $ c \in E $。换句话说：$ \int f \, dx + c $ 是 $ f $ 的原函数的等价类，其中两个原函数等价当且仅当它们只相差一个常数。下面，当我们只想谈论这个等价类时，就略去常数，只写 $ \int f \, dx $。
+
+\begin{example}
+
+\begin{items}
+\item
+
+在下面这张基本不定积分表中，$ a $ 与 $ c $ 是复数，$ x $ 是 $ I $ 中的实变量。此处 $ I $ 必须位于 $ f $ 的定义域内，但除此之外是任意的。
+
+\end{items}
+
+\begin{center}
+\begin{tabular}{llll}
+\toprule
+$ f $ & $ \int f \, dx $ & $ f $ & $ \int f \, dx $ \\
+\midrule
+$ x^{a} , \quad a \ne -1 , $ & $ x^{a+1}/(a+1) $ & $ \sin x $ & $ -\cos x $ \\
+$ 1/x $ & $ \log|x| $ & $ 1/\cos^{2} x $ & $ \tan x $ \\
+$ a^{x} , \quad a > 0 , \quad a \ne 1 , $ & $ a^{x}/\log a $ & $ -1/\sin^{2} x $ & $ \cot x $ \\
+$ e^{ax} , \quad a \in \mathbb{C}^{\times} , $ & $ e^{ax}/a $ & $ 1/\sqrt{1-x^{2}} $ & $ \arcsin x $ \\
+$ \cos x $ & $ \sin x $ & $ 1/(1+x^{2}) $ & $ \arctan x $ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\proofhead
+这张表的正确性由例 IV.1.13 以及 IV.2.10 的运用得出。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（b）]
+
+设 $ a = \sum a_k X^k \in \mathbb{K}[[X]] $，其收敛半径为 $ \rho > 0 $。则有
+
+\[
+\int \left( \sum_{k=0}^{\infty} a_k x^k \right) dx = \sum_{k=0}^{\infty} \frac{a_k}{k+1} x^{k+1} \quad \text{对 } -\rho < x < \rho .
+\]
+
+\proofhead
+这由注 V.3.7(b) 得出。\nobreak\hspace{0.35em}■
+\item[（c）]
+
+设 $ f \in C^{1}(I, \mathbb{R}) $，且对所有 $ x \in I $ 有 $ f(x) \ne 0 $。则有
+
+\[
+\int \frac{f'}{f} \, dx = \log|f| .
+\]
+
+\proofhead
+设对所有 $ x \in I $ 有 $ f(x) > 0 $。由链式法则可得\footnote{我们称 $ f'/f $ 为 $ f $ 的对数导数。}
+\[
+(\log|f|)' = (\log f)' = f'/f .
+\]
+
+若对 $ x \in I $ 有 $ f(x) < 0 $，我们以类似方式得
+
+\[
+(\log|f|)' = [\log(-f)]' = (-f)'/(-f) = f'/f .
+\]
+
+因此 $ \log|f| $ 是 $ f'/f $ 的原函数。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{积分中值定理}
+
+这里，我们对实值连续函数的积分给出一个中值定理。
+
+\begin{proposition}
+
+设 $ f, \varphi \in C(I, \mathbb{R}) $ 且 $ \varphi \ge 0 $。则存在 $ \xi \in I $，使得
+
+\begin{equation}
+\int_{\alpha}^{\beta} f(x)\varphi(x) \, dx = f(\xi)\int_{\alpha}^{\beta} \varphi(x) \, dx .\tag{4.9}
+\end{equation}
+
+\proofhead
+若对所有 $ x \in I $ 有 $ \varphi(x) = 0 $，则 (4.9) 显然对每个 $ \xi \in I $ 成立。因此我们可以假设对某个 $ x \in I $ 有 $ \varphi(x) > 0 $。于是命题 4.8 蕴含不等式 $ \int_{\alpha}^{\beta} \varphi(x) \, dx > 0 $。
+
+令 $ m := \min_{I} f $ 与 $ M := \max_{I} f $，因为 $ \varphi \ge 0 $，有 $ m\varphi \le f\varphi \le M\varphi $。于是积分的线性性与单调性蕴含不等式
+\[
+m\int_{\alpha}^{\beta} \varphi \, dx \le \int_{\alpha}^{\beta} f\varphi \, dx \le M\int_{\alpha}^{\beta} \varphi \, dx .
+\]
+
+因此有
+
+\[
+m \le \frac{\int_{\alpha}^{\beta} f\varphi}{\int_{\alpha}^{\beta} \varphi} \le M .
+\]
+
+$ m $ 与 $ M $ 的选取以及介值定理（定理 III.5.1）立即证明了该定理。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\begin{corollary}
+
+对 $ f \in C(I, \mathbb{R}) $，存在 $ \xi \in I $，使得 $ \int_{\alpha}^{\beta} f \, dx = f(\xi)(\beta - \alpha) $。
+
+\proofhead
+在命题 4.16 中令 $ \varphi := \mathbf{1} $。\nobreak\hspace{0.35em}■
+\end{corollary}
+
+我们注意到——与导数中值定理（定理 IV.2.4）相反——点 $ \xi $ 不必位于区间的内部。
+
+我们用下面的图来说明推论 4.17：
+
+\bookfigure[0.45]{figures/04cd287f7df1a112.png}
+\bookfigure[0.43]{figures/79f60298d6a2b942.png}
+
+选取点 $ \xi $，使函数在区间 $ I $ 上的有向面积等于以 $ \left| f(\xi) \right| $ 与 $ (\beta - \alpha) $ 为边的矩形的有向面积 $ f(\xi)(\beta - \alpha) $。
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+证明注 4.7(b) 中的结论。
+
+\item
+
+对 $ f \in S(I) $，证明 $ \overline{\int_{\alpha}^{\beta} f} = \int_{\alpha}^{\beta} \overline{f} $。
+
+\item
+
+两个分段连续函数 $ f_1, f_2 : I \to E $ 仅在其间断点处不同。证明 $ \int_{\alpha}^{\beta} f_1 = \int_{\alpha}^{\beta} f_2 $。
+
+\item
+
+对 $ f \in S(I, \mathbb{K}) $ 与 $ p \in [1, \infty) $，设
+
+\[
+\|f\|_p := \left( \int_{\alpha}^{\beta} |f(x)|^p \, dx \right)^{1/p} ,
+\]
+
+并令 $ p' := p/(p - 1) $ 表示 $ p $ 的\textbf{对偶指数}（其中 $ 1/0 = \infty $）。
+证明下列结论：
+
+\begin{subitems}
+\item
+
+对 $ f, g \in S(I, \mathbb{K}) $，\textbf{赫尔德不等式}成立，即
+
+\[
+\left| \int_{\alpha}^{\beta} f g \, dx \right| \le \int_{\alpha}^{\beta} |f g| \, dx \le \|f\|_p \|g\|_{p'} .
+\]
+\item
+
+对 $ f, g \in S(I, \mathbb{K}) $，\textbf{闵可夫斯基不等式}成立，即
+
+\[
+\|f + g\|_p \le \|f\|_p + \|g\|_p .
+\]
+\item
+
+$ (C(I, \mathbb{K}), \|\cdot\|_p) $ 是赋范向量空间。
+
+\item
+
+$ (C(I, \mathbb{K}), \|\cdot\|_2) $ 是内积空间。
+
+\item
+
+对 $ f \in C(I, \mathbb{K}) $ 与 $ 1 \le p \le q \le \infty $，有
+
+\[
+\|f\|_p \le (\beta - \alpha)^{1/p - 1/q} \|f\|_q .
+\]
+
+（提示：(i) 与 (ii) 参看应用 IV.2.16(b) 与 (c) 的证明。(v) 利用 (i)。）
+
+\end{subitems}
+
+\item
+
+证明若 $ q \ge p $，则 $ C(I, \mathbb{K}) $ 上的范数 $ \|\cdot\|_q $ 比 $ \|\cdot\|_p $ \textbf{强}\footnote{若 $ \|\cdot\|_1 $ 与 $ \|\cdot\|_2 $ 是向量空间 $ E $ 上的范数，若存在常数 $ K \ge 1 $ 使得对所有 $ x \in E $ 有 $ \|x\|_2 \le K \|x\|_1 $，则称 $ \|\cdot\|_1 $ 比 $ \|\cdot\|_2 $ 强。在相反的情形下称其为弱。}。当 $ p \ne q $ 时这些范数不等价
+
+\item
+
+证明对 $ 1 \le p < \infty $，$ (C(I, \mathbb{K}), \|\cdot\|_p) $ 不完备。因此对 $ 1 \le p < \infty $，$ (C(I, \mathbb{K}), \|\cdot\|_p) $ 不是巴拿赫空间，且 $ (C(I, \mathbb{K}), \|\cdot\|_2) $ 不是希尔伯特空间。
+
+\item
+
+设 $ f \in C^1(I, \mathbb{R}) $ 满足 $ f(\alpha) = f(\beta) = 0 $。证明
+
+\begin{equation}
+\|f\|_\infty^2 \le \frac{1}{2} \int_{\alpha}^{\beta} (f^2 + (f')^2) \, dx .\tag{4.10}
+\end{equation}
+
+当 $ f \in C^1(I, \mathbb{R}) $ 但仅有 $ f(\alpha) = 0 $ 时，(4.10) 应如何修改？
+（提示：设 $ x_0 \in I $ 满足 $ f^2(x_0) = \|f\|_\infty^2 $。证明 $ f^2(x_0) = \int_{\alpha}^{x_0} f f' \, dx - \int_{x_0}^{\beta} f f' \, dx $。然后应用习题 I.10.10。）
+
+\item
+
+设 $ f \in C^1(I, \mathbb{K}) $ 满足 $ f(\alpha) = 0 $。证明
+
+\[
+\int_{\alpha}^{\beta} |f f'| \, dx \le \frac{\beta - \alpha}{2} \int_{\alpha}^{\beta} |f'|^2 \, dx .
+\]
+
+（提示：若 $ F(x) := \int_{\alpha}^{x} |f'(\xi)| \, d\xi $，则 $ |f(x)| \le F(x) $ 且 $ \int_{\alpha}^{\beta} 2 F F' \, dx = F^2(\beta) $。）
+
+\item
+
+设函数 $ f \in C^2(I, \mathbb{R}) $ 满足 $ f \le f'' $ 且 $ f(\alpha) = f(\beta) = 0 $。证明
+
+\[
+0 \le \max_{x \in I} f'(x) \le \frac{1}{\sqrt{2}} \int_{\alpha}^{\beta} (f^2 + (f')^2) \, dx .
+\]
+
+（提示：令 $ x_0 \in I $ 使得 $ f'(x_0) = \|f'\|_\infty $。然后证明 $ f'(x_0) \le 0 $，从而 $ f = 0 $。若 $ f'(x_0) > 0 $，则存在 $ \xi \in (x_0, \beta) $ 使得对 $ x \in [x_0, \xi) $ 有 $ f'(x) > 0 $ 且 $ f'(\xi) = 0 $（见定理 IV.2.3）。然后考虑 $ \int_{x_0}^{\xi} (f f' - f' f'') \, dx $ 并应用习题 7。）
+
+\item
+
+证明\textbf{积分第二中值定理}：设 $ f \in C(I, \mathbb{R}) $ 且 $ g \in C^1(I, \mathbb{R}) $ 单调。\footnote{可以证明，当 $ g $ 仅假定为单调、因而一般不是正则的时候，积分第二中值定理仍然成立。}则存在 $ \xi \in I $ 使得
+
+\[
+\int_{\alpha}^{\beta} f(x) g(x) \, dx = g(\alpha) \int_{\alpha}^{\xi} f(x) \, dx + g(\beta) \int_{\xi}^{\beta} f(x) \, dx .
+\]
+
+（提示：令 $ F(x) := \int_{\alpha}^{x} f(s) \, ds $，证明
+
+\[
+\int_{\alpha}^{\beta} f(x) g(x) \, dx = F g \big|_{\alpha}^{\beta} - \int_{\alpha}^{\beta} F(x) g'(x) \, dx .
+\]
+
+命题 4.16 可用于右侧的积分。）
+
+\item
+
+设 $ a > 0 $ 且 $ f \in C([-a, a], E) $。证明
+
+\begin{subitems}
+\item
+
+若 $ f $ 为奇，则 $ \int_{-a}^{a} f(x) \, dx = 0 $；
+
+\item
+
+若 $ f $ 为偶，则 $ \int_{-a}^{a} f(x) \, dx = 2 \int_{0}^{a} f(x) \, dx $。
+
+\end{subitems}
+
+\item
+
+通过下式定义 $ F : [0, 1] \to \mathbb{R} $：
+
+\begin{equation*}
+F(x) := \begin{cases} x^2 \sin(1/x^2) , & x \in (0, 1] , \\ 0 , & x = 0 . \end{cases}
+\end{equation*}
+
+验证：
+
+\begin{subitems}
+\item
+
+$ F $ 可微；
+
+\item
+
+$ F' \notin S(I, \mathbb{R}) $。
+也就是说，存在既非跳跃连续、却仍有原函数的函数。（(ii) 的提示：注 1.1(d)。）
+
+\end{subitems}
+
+\item
+
+设 $ f \in C([a, b], \mathbb{R}) $ 且 $ g, h \in C^1([\alpha, \beta], [a, b]) $。进一步设
+
+\[
+F : [\alpha, \beta] \to \mathbb{R} , \quad x \mapsto \int_{g(x)}^{h(x)} f(\xi) \, d\xi .
+\]
+
+证明 $ F \in C^1([\alpha, \beta], \mathbb{R}) $。$ F' $ 又如何？
+
+\item
+
+设 $ n \in \mathbb{N}^\times $ 且 $ a_1, \ldots, a_n \in \mathbb{R} $。证明存在 $ \alpha \in (0, \pi) $ 使得
+
+\[
+\sum_{k=1}^{n} a_k \cos(k\alpha) = 0 .
+\]
+
+（提示：利用推论 4.17，其中 $ f(x) := \sum_{k=1}^{n} a_k \cos(kx) $ 且 $ I := [0, \pi] $。）
+
+\item
+
+证明
+
+\[
+\mathrm{(i)}\quad \lim_{n \to \infty} n \left( \frac{1}{n^2} + \frac{1}{(n+1)^2} + \cdots + \frac{1}{(2n-1)^2} \right) = \frac{1}{2} ,
+\]
+\[
+\mathrm{(ii)}\quad \lim_{n \to \infty} \sum_{k=nq}^{np-1} \frac{1}{k} = \log \frac{p}{q} \quad \text{对 } p, q \in \mathbb{N} \text{ 且 } q < p .
+\]
+
+（提示：考虑 $ f(x) := 1/(1+x)^2 $ 在 $ [0, 1] $ 上的适当黎曼和，或对 (ii)，考虑 $ f(x) := 1/x $ 在 $ [q, p] $ 上的黎曼和。）
+
+\item
+
+设 $ f \in C(I \times I, E) $ 且
+
+\[
+g : I \to E , \quad x \mapsto \int_I f(x, y) \, dy .
+\]
+
+证明 $ g \in C(I, E) $。
+
+\end{exercises}
+
+\section{积分技巧}
+
+借助微积分基本定理，求导法则变成相应的积分法则。在本节中，我们将对链式法则和乘积法则完成这一转化，从而得到重要的换元法则和分部积分法。
+
+在本节中，我们记
+• $ I = [\alpha, \beta] $，一个紧致完全区间。
+
+\needspace{3\baselineskip}\subsection*{变量代换}
+
+\begin{theorem}
+
+（换元法则）设 $ E $ 是巴拿赫空间，$ f \in C(I, E) $，又设 $ \varphi \in C^1([a, b], \mathbb{R}) $ 满足 $ -\infty < a < b < \infty $ 且 $ \varphi([a, b]) \subset I $。则
+
+\[
+\int_{a}^{b} f(\varphi(x)) \varphi'(x) \, dx = \int_{\varphi(a)}^{\varphi(b)} f(y) \, dy .
+\]
+
+\proofhead
+微积分基本定理表明 $ f $ 有原函数 $ F \in C^1(I, E) $。由链式法则（定理 IV.1.7），于是存在函数 $ F \circ \varphi \in C^1([a, b], E) $ 使得
+\[
+(F \circ \varphi)'(x) = F'(\varphi(x)) \varphi'(x) = f(\varphi(x)) \varphi'(x) \quad \text{对 } x \in [a, b] .
+\]
+
+于是推论 4.14 给出
+
+\begin{equation*}
+\begin{aligned}
+\int_{a}^{b} f(\varphi(x)) \varphi'(x) \, dx &= F \circ \varphi \big|_{a}^{b} = F(\varphi(b)) - F(\varphi(a)) \\ &= F \big|_{\varphi(a)}^{\varphi(b)} = \int_{\varphi(a)}^{\varphi(b)} f(y) \, dy .
+\quad\blacksquare
+\end{aligned}
+\end{equation*}
+\end{theorem}
+
+在这一点上，我们应当解释符号“$ dx $”的含义，它虽然出现在记号中并且显然标明了积分变量，但除此之外尚未得到澄清。在 VIII.3 节中，我们将给出更形式的定义，随后再对其进行论证并使之精确化。这里我们满足于一种启发式的观察。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $ \varphi : I \to \mathbb{R} $ 可微。我们称\footnote{记号 $ d\varphi = \varphi' \, dx $ 这里只是一种形式表达式，其中函数被理解为可微的。特别地，$ \varphi' \, dx $ 不是独立对象的乘积。} $ d\varphi := \varphi' \, dx $ 为 $ \varphi $ 的\textbf{微分}。若取 $ \varphi $ 为恒等函数 $ \mathrm{id}_I $，则 $ d\varphi = \mathbf{1} \, dx $。
+显然，符号 $ \mathbf{1} \, dx $ 也可以写成 $ dx $。因此 $ dx $ 是恒等映射 $ x \mapsto x $ 的微分。
+
+\item
+
+在实际中，换元法则写成紧凑形式
+
+\[
+\int_{a}^{b} f \circ \varphi \, d\varphi = \int_{\varphi(a)}^{\varphi(b)} f \, dy .
+\]
+\item
+
+设 $ \varphi : I \to \mathbb{R} $ 可微且 $ x_0 \in I $。在下面的启发式做法中，我们将在 $ x_0 $ 的一个“无穷小”邻域中考察 $ \varphi $。于是我们把 $ dx $ 视为 $ x_0 $ 与 $ x $ 之间的增量，因而把它本身看作一个实变量。
+
+\end{items}
+
+\bookfigure[0.55]{figures/0329f2692f1e48f1.png}
+
+设 $ t_{x_0} $ 在点 $ (x_0, \varphi(x_0)) $ 处与 $ \varphi $ 相切：
+
+\[
+t_{x_0} : \mathbb{R} \to \mathbb{R} , \quad x \mapsto \varphi(x_0) + \varphi'(x_0)(x - x_0) .
+\]
+
+此外，定义 $ \Delta\varphi(x_0) := \varphi(x_0 + dx) - \varphi(x_0) $ 为 $ \varphi $ 的增量，并定义 $ d\varphi(x_0) := \varphi'(x_0) \, dx $ 为沿切线 $ t_{x_0} $ 的增量。由 $ \varphi $ 的可微性，我们有
+
+\[
+\Delta\varphi(x_0) = d\varphi(x_0) + o(dx) \quad \text{当 } dx \to 0 .
+\]
+
+对小的增量 $ dx $，$ \Delta\varphi(x_0) $ 可以通过“线性近似” $ d\varphi(x_0) = \varphi'(x_0) \, dx $ 来逼近。\nobreak\hspace{0.35em}■
+
+\end{remark}
+
+\begin{example}
+
+\begin{items}
+\item
+
+对 $ a \in \mathbb{R}^\times $ 与 $ b \in \mathbb{R} $，我们有
+
+\[
+\int_{\alpha}^{\beta} \cos(ax + b) \, dx = \frac{1}{a} ( \sin(a\beta + b) - \sin(a\alpha + b) ) .
+\]
+
+\proofhead
+变量代换 $ y(x) := ax + b $（$ x \in \mathbb{R} $）给出 $ dy = a \, dx $。因此，由例 4.15(a) 可得
+\[
+\int_{\alpha}^{\beta} \cos(ax + b) \, dx = \frac{1}{a} \int_{a\alpha+b}^{a\beta+b} \cos y \, dy = \frac{1}{a} \sin \big|_{a\alpha+b}^{a\beta+b} .\quad\blacksquare
+\]
+\item
+
+对 $ n \in \mathbb{N}^\times $，我们有
+
+\[
+\int_{0}^{1} x^{n-1} \sin(x^n) \, dx = \frac{1}{n} (1 - \cos 1) .
+\]
+
+\proofhead
+这里令 $ y(x) := x^n $。则 $ dy = n x^{n-1} \, dx $，从而
+\[
+\int_{0}^{1} x^{n-1} \sin(x^n) \, dx = \frac{1}{n} \int_{0}^{1} \sin y \, dy = -\frac{\cos y}{n} \big|_{0}^{1} .\quad\blacksquare
+\]
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{分部积分}
+
+第二种基本的积分技巧，即分部积分，来自乘积法则。
+
+\begin{proposition}
+
+对 $ u, v \in C^1(I, \mathbb{K}) $，我们有
+
+\begin{equation}
+\int_{\alpha}^{\beta} u v' \, dx = u v \big|_{\alpha}^{\beta} - \int_{\alpha}^{\beta} u' v \, dx .\tag{5.1}
+\end{equation}
+
+\proofhead
+该断言直接由乘积法则 $ (uv)' = u'v + v'u $ 与推论 4.14 得到。\nobreak\hspace{0.35em}■
+\end{proposition}
+
+用微分表示，(5.1) 取实用形式
+
+\begin{equation}
+\int_{\alpha}^{\beta} u \, dv = u v \big|_{\alpha}^{\beta} - \int_{\alpha}^{\beta} v \, du .\tag{5.2}
+\end{equation}
+
+\begin{example}
+
+\begin{items}
+\item
+
+$ \int_{\alpha}^{\beta} x \sin x \, dx = \sin \beta - \sin \alpha - \beta \cos \beta + \alpha \cos \alpha $。
+
+\proofhead
+令 $ u(x) := x $ 且 $ v' := \sin $。则 $ u' = \mathbf{1} $ 且 $ v = -\cos $。因此
+\[
+\int_{\alpha}^{\beta} x \sin x \, dx = -x \cos x \big|_{\alpha}^{\beta} + \int_{\alpha}^{\beta} \cos x \, dx = (\sin x - x \cos x) \big|_{\alpha}^{\beta} .\quad\blacksquare
+\]
+\item
+
+（圆的面积）半径为 $ R $ 的圆面积为 $ \pi R^2 $。
+
+\proofhead
+我们可以把直角坐标系的原点放在圆心处。半径至多为 $ R $ 的点可以表示为闭集
+\[
+K_R = \left\{ (x, y) \in \mathbb{R}^2 \; ; \; |(x, y)| \le R \right\} = \left\{ (x, y) \in \mathbb{R}^2 \; ; \; x^2 + y^2 \le R^2 \right\} .
+\]
+
+我们也可以把 $ K_R $ 表示为（上）半圆盘
+
+\[
+H_R := \left\{ (x, y) \in \mathbb{R}^2 \; ; \; x^2 + y^2 \le R^2 , \; y \ge 0 \right\}
+\]
+
+与相应的下半盘 $ -H_R $ 的并。它们交于
+
+\[
+H_R \cap (-H_R) = [-R, R] \times \{0\} = \left\{ (x, 0) \in \mathbb{R}^2 \; ; \; -R \le x \le R \right\} .
+\]
+
+我们可以把 $ H_R $ 的上边界写成函数
+
+\[
+[-R, R] \to \mathbb{R} , \quad x \mapsto \sqrt{R^2 - x^2} ,
+\]
+
+的图像，并把 $ H_R $ 的面积，按照我们之前的解释，写成
+
+\[
+\int_{-R}^{R} \sqrt{R^2 - x^2} \, dx .
+\]
+\end{items}
+
+\bookfigure[0.48]{figures/bba14ca81c0eee2f.png}
+
+这里，“下边界” $ [-R, R] \times \{0\} $ 是否包含在 $ H_R $ 中是无关紧要的，因为宽度为 0 的矩形的面积按定义为 0。由对称性\footnote{在这个例子中，我们考虑的是绝对面积而非有向面积，并且我们放弃面积的精确定义，而改用启发式显然的论证。在第三卷中，我们将深入这个概念及相关问题，并为这些启发式论证提供依据。}，圆盘 $ K_R $ 的面积 $ A_R $ 就是半圆盘 $ H_R $ 面积的两倍。因此
+
+\[
+A_R = 2 \int_{-R}^{R} \sqrt{R^2 - x^2} \, dx .
+\]
+
+为计算这个积分，采用极坐标是方便的。因此我们令 $ x(\alpha) := R \cos \alpha $（$ \alpha \in [0, \pi] $）。于是 $ dx = -R \sin \alpha \, d\alpha $，换元法则给出
+
+\begin{equation*}
+\begin{aligned}
+A_R &= -2R \int_{\pi}^{0} \sqrt{R^2 - R^2 \cos^2 \alpha} \sin \alpha \, d\alpha \\ &= 2R^2 \int_{0}^{\pi} \sqrt{1 - \cos^2 \alpha} \sin \alpha \, d\alpha = 2R^2 \int_{0}^{\pi} \sin^2 \alpha \, d\alpha .
+\end{aligned}
+\end{equation*}
+
+我们对 $ \int_{0}^{\pi} \sin^2 \alpha \, d\alpha $ 进行分部积分。令 $ u := \sin $ 且 $ v' := \sin $，则 $ u' = \cos $ 且 $ v = -\cos $。因此
+
+\begin{equation*}
+\begin{aligned}
+\int_{0}^{\pi} \sin^2 \alpha \, d\alpha &= -\sin \alpha \cos \alpha \big|_{0}^{\pi} + \int_{0}^{\pi} \cos^2 \alpha \, d\alpha \\ &= \int_{0}^{\pi} (1 - \sin^2 \alpha) \, d\alpha = \pi - \int_{0}^{\pi} \sin^2 \alpha \, d\alpha ,
+\end{aligned}
+\end{equation*}
+
+于是得到 $ \int_{0}^{\pi} \sin^2 \alpha \, d\alpha = \pi/2 $。总之 $ A_R = R^2 \pi $。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（c）]
+
+对 $ n \in \mathbb{N} $，设 $ I_n := \int \sin^n x \, dx $。我们于是得到\textbf{递推公式}\footnote{注意与例 4.15 的一致。}
+
+\begin{equation}
+n I_n = (n-1) I_{n-2} - \cos x \sin^{n-1} x \quad \text{对 } n \ge 2 ,\tag{5.3}
+\end{equation}
+
+其中 $ I_0 = X $ 且 $ I_1 = -\cos $。
+
+\proofhead
+显然 $ I_0 = X + c $ 且 $ I_1 = -\cos + c $。若 $ n \ge 2 $，则
+\[
+I_n = \int \sin^{n-2} x (1 - \cos^2 x) \, dx = I_{n-2} - \int \sin^{n-2} x \cos x \cos x \, dx .
+\]
+
+令 $ u(x) := \cos x $ 与 $ v'(x) := \sin^{n-2} x \cos x $，我们容易求得 $ u' = -\sin $ 且 $ v = \sin^{n-1}/(n-1) $。分部积分于是完成证明。\nobreak\hspace{0.35em}■
+
+\item[（d）]
+
+（沃利斯乘积）它说的是\footnote{设 $ (a_k) $ 是 $ \mathbb{K} $ 中的序列，且 $ p_n := \prod_{k=0}^{n} a_k $（$ n \in \mathbb{N} $）。若序列 $ (p_n) $ 收敛，我们称其极限为 $ a_k $ 的无穷乘积，并记 $ \prod_{k=0}^{\infty} a_k := \lim_{n} \prod_{k=0}^{n} a_k $。}
+
+\begin{equation*}
+\begin{aligned}
+\frac{\pi}{2} &= \prod_{k=1}^{\infty} \frac{4k^2}{4k^2 - 1} = \lim_{n \to \infty} \prod_{k=1}^{n} \frac{4k^2}{4k^2 - 1} \\ &= \frac{2}{1} \cdot \frac{2}{3} \cdot \frac{4}{3} \cdot \frac{4}{5} \cdot \frac{6}{5} \cdot \frac{6}{7} \cdots \frac{2k}{2k-1} \cdot \frac{2k}{2k+1} \cdots .
+\end{aligned}
+\end{equation*}
+
+\proofhead
+通过在区间 $ [0, \pi/2] $ 上计算 (5.3)，我们得到所断言的乘积。令
+\[
+A_n := \int_{0}^{\pi/2} \sin^n x \, dx \quad \text{对 } n \in \mathbb{N} .
+\]
+
+由 (5.3) 可得
+
+\[
+A_0 = \pi/2 , \quad A_1 = 1 , \quad A_n = \frac{n-1}{n} A_{n-2} \quad \text{对 } n \ge 2 .
+\]
+
+简单的归纳论证给出
+
+\[
+A_{2n} = \frac{(2n-1)(2n-3) \cdots 3 \cdot 1}{2n(2n-2) \cdots 4 \cdot 2} \cdot \frac{\pi}{2} , \quad A_{2n+1} = \frac{2n(2n-2) \cdots 4 \cdot 2}{(2n+1)(2n-1) \cdots 5 \cdot 3} .
+\]
+
+由此可得关系式
+
+\begin{equation}
+\begin{aligned}
+\frac{A_{2n+1}}{A_{2n}} &= \frac{2n \cdot 2n (2n-2)(2n-2) \cdots 4 \cdot 4 \cdot 2 \cdot 2}{[(2n+1)(2n-1)][(2n-1)(2n-3)] \cdots [5 \cdot 3][3 \cdot 1]} \cdot \frac{2}{\pi} \\ &= \frac{2}{\pi} \prod_{k=1}^{n} \frac{(2k)^2}{(2k)^2 - 1}
+\end{aligned}\tag{5.4}
+\end{equation}
+
+与
+
+\begin{equation}
+\lim_{n \to \infty} \frac{A_{2n+2}}{A_{2n}} = \lim_{n \to \infty} \frac{2n+1}{2n+2} = 1 .\tag{5.5}
+\end{equation}
+
+因为对 $ x \in [0, \pi/2] $ 有 $ \sin^2 x \le \sin x \le 1 $，故 $ A_{2n+2} \le A_{2n+1} \le A_{2n} $。因此
+
+\[
+\frac{A_{2n+2}}{A_{2n}} \le \frac{A_{2n+1}}{A_{2n}} \le 1 \quad \text{对 } n \in \mathbb{N} ,
+\]
+
+而该断言是 (5.4) 与 (5.5) 的推论。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{有理函数的积分}
+
+所谓\textbf{初等函数}，是指通过取多项式、指数函数、正弦和余弦，并对它们施加加、减、乘、除四种基本运算，以及函数复合与取逆而生成的所有映射。总之，这些运算生成了一族庞大的函数。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+初等函数类“对微分封闭”，也就是说，初等函数的导数仍是初等函数。
+
+\proofhead
+这由定理 IV.1.6–8 以及例 IV.1.13、应用 IV.2.10 与习题 IV.2.5 得到。\nobreak\hspace{0.35em}■
+\item
+
+遗憾的是，初等函数的原函数一般不再是初等函数。换言之，初等函数类对积分不封闭。
+
+\proofhead
+对每个 $ a \in (0, 1) $，函数
+\[
+f : [0, a] \to \mathbb{R} , \quad x \mapsto 1/\sqrt{1 - x^4}
+\]
+
+连续。因此
+
+\[
+F(x) := \int_{0}^{x} \frac{dy}{\sqrt{1 - y^4}} \quad \text{对 } 0 \le x < 1 ,
+\]
+
+是 $ f $ 的一个良定义的原函数。因为对 $ x \in (0, 1) $ 有 $ f(x) > 0 $，$ F $ 严格递增。于是按照定理 III.5.7，$ F $ 有良定义的反函数 $ G $。已知\footnote{证明这一点以及关于 $ \widetilde{G} $ 的周期性的下述断言，大大超出了本书的范围（例如见 [FB95] 第 V 章）。} 存在 $ \mathbb{C} $ 的可数且无极限点的子集 $ M $，使得 $ G $ 在 $ \mathbb{C} \setminus M $ 上有唯一确定的解析延拓 $ \widetilde{G} $。还已知 $ \widetilde{G} $ 是\textbf{双周期的}，即存在两个 $ \mathbb{R} $-线性无关的周期 $ \omega_1, \omega_2 \in \mathbb{C} $，使得
+
+\[
+\widetilde{G}(z + \omega_1) = \widetilde{G}(z + \omega_2) = \widetilde{G}(z) \quad \text{对 } z \in \mathbb{C} \setminus M .
+\]
+
+因为初等函数至多是“单周期的”，$ \widetilde{G} $ 不可能是初等函数。因此 $ F $ 也不是初等函数。于是初等函数 $ f $ 没有初等原函数。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+下面我们将证明有理函数有初等原函数。我们从简单的例子开始，这些例子随后可以推广到一般情形。
+
+\end{remark}
+
+\begin{example}
+
+\begin{items}
+\item
+
+对 $ a \in \mathbb{C} \setminus I $，我们有
+
+\begin{equation*}
+\int \frac{dx}{X - a} = \begin{cases} \log |X - a| + c , & a \in \mathbb{R} , \\ \log(X - a) + c , & a \in \mathbb{C} \setminus \mathbb{R} . \end{cases}
+\end{equation*}
+
+\proofhead
+这由例 4.15(c) 与 IV.1.13(e) 得到。\nobreak\hspace{0.35em}■
+\item
+
+设 $ a \in \mathbb{C} \setminus I $ 且 $ k \in \mathbb{N} $ 满足 $ k \ge 2 $。则
+
+\[
+\int \frac{dx}{(X - a)^k} = \frac{-1}{(k-1)(X - a)^{k-1}} + c .
+\]
+\item
+
+设 $ a, b \in \mathbb{R} $ 满足 $ D := a^2 - b < 0 $。则
+
+\[
+\int \frac{dx}{X^2 + 2aX + b} = \frac{1}{\sqrt{-D}} \arctan\left( \frac{X + a}{\sqrt{-D}} \right) + c .
+\]
+
+\proofhead
+首先，
+\[
+q(X) := X^2 + 2aX + b = (X + a)^2 - D = |D| \left( 1 + \left( \frac{X + a}{\sqrt{|D|}} \right)^2 \right) .
+\]
+
+然后，通过定义 $ y := |D|^{-1/2}(x + a) $，换元法则给出
+
+\[
+\int_{\alpha}^{\beta} \frac{dx}{q} = \frac{1}{\sqrt{-D}} \int_{y(\alpha)}^{y(\beta)} \frac{dy}{1 + y^2} = \frac{1}{\sqrt{-D}} \arctan \big|_{y(\alpha)}^{y(\beta)} .\quad\blacksquare
+\]
+\item
+
+对满足 $ D := a^2 - b < 0 $ 的 $ a, b \in \mathbb{R} $，我们有
+
+\[
+\int \frac{X \, dX}{X^2 + 2aX + b} = \frac{1}{2} \log(X^2 + 2aX + b) - \frac{a}{\sqrt{-D}} \arctan\left( \frac{X + a}{\sqrt{-D}} \right) + c .
+\]
+
+\proofhead
+用 (c) 的证明中的记号，我们求得
+\[
+\frac{X}{q} = \frac{1}{2} \frac{2X + 2a}{q} - \frac{a}{q} = \frac{1}{2} \frac{q'}{q} - \frac{a}{q} ,
+\]
+
+而该断言很快由例 4.15(c) 与 (c) 得到。\nobreak\hspace{0.35em}■
+
+\item
+
+对满足 $ D := a^2 - b = 0 $ 且 $ -a \notin I $ 的 $ a, b \in \mathbb{R} $，我们有
+
+\[
+\int \frac{dx}{X^2 + 2aX + b} = \frac{-1}{X + a} + c .
+\]
+
+\proofhead
+因为 $ q = (X + a)^2 $，该断言由 (b) 得到。\nobreak\hspace{0.35em}■
+\item
+
+设 $ a, b \in \mathbb{R} $ 且 $ D := a^2 - b > 0 $。对 $ -a \pm \sqrt{D} \notin I $，我们有
+
+\[
+\int \frac{dx}{X^2 + 2aX + b} = \frac{1}{2\sqrt{D}} \log \left| \frac{X + a - \sqrt{D}}{X + a + \sqrt{D}} \right| + c .
+\]
+
+\proofhead
+二次多项式 $ q $ 有实零点 $ z_1 := -a + \sqrt{D} $ 与 $ z_2 := -a - \sqrt{D} $。因此 $ q = (X - z_1)(X - z_2) $。这提示我们作试设
+\begin{equation}
+\frac{1}{q} = \frac{a_1}{X - z_1} + \frac{a_2}{X - z_2} .\tag{5.6}
+\end{equation}
+
+将此方程乘以 $ q $，我们求得
+
+\[
+1 = (a_1 + a_2)X - (a_1 z_2 + a_2 z_1) .
+\]
+
+因此，由多项式的唯一性定理（见注 I.8.19(c)）并比较系数，我们有 $ a_1 = -a_2 = 1/2\sqrt{D} $。该断言于是由 (a) 得到。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+在最后几个例子中，我们利用分解 (5.6) 积分了有理函数 $ 1/(X^2 + 2aX + b) $，从而把它化归为两个更简单的有理函数 $ 1/(X - z_1) $ 与 $ 1/(X - z_2) $。正如我们现在将证明的，这样的“部分分式分解”对每个有理函数都是可能的。
+
+若一个多项式的首项系数为 1，则称它是\textbf{首一的}。由代数基本定理，每个正次数的首一多项式 $ q $ 有因式分解
+
+\begin{equation}
+q = \prod_{j=1}^{n} (X - z_j)^{m_j} ,\tag{5.7}
+\end{equation}
+
+其中 $ z_1, \ldots, z_n $ 是 $ q $ 在 $ \mathbb{C} $ 中的零点，$ m_1, \ldots, m_n $ 是相应的重数。因此
+
+\[
+\sum_{j=1}^{n} m_j = \deg(q)
+\]
+
+（见例 III.3.9(b) 与注 I.8.19(b)）。
+
+现在设 $ p, q \in \mathbb{C}[X] $ 满足 $ q \ne 0 $。则按照命题 I.8.15，由多项式除法可得，存在唯一确定的 $ s, t \in \mathbb{C}[X] $ 使得
+
+\begin{equation}
+\frac{p}{q} = s + \frac{t}{q} , \quad \text{其中 } \deg(t) < \deg(q) .\tag{5.8}
+\end{equation}
+
+于是，鉴于例 4.15(b)，我们可以把证明限制于有理函数 $ r := p/q $（$ \deg(p) < \deg(q) $）的初等可积性，并且我们还可以假设 $ q $ 是首一的。证明的基础是下面关于\textbf{部分分式展开}的定理。
+
+\end{example}
+
+\qyxffnnumdef{1}
+\afterpage{\qyxffntextof{1}{照例，$ n = 1 $ 时的“空乘积”取值为 1。}}
+\begin{proposition}
+
+设 $ p, q \in \mathbb{C}[X] $ 满足 $ \deg(p) < \deg(q) $，且 $ q $ 首一。则用 (5.7) 的记号，我们有
+
+\begin{equation}
+\frac{p}{q} = \sum_{j=1}^{n} \sum_{k=1}^{m_j} \frac{a_{jk}}{(X - z_j)^k}\tag{5.9}
+\end{equation}
+
+其中 $ a_{jk} \in \mathbb{C} $ 唯一确定。
+
+\proofhead
+我们作试设
+\begin{equation}
+\frac{p}{q} = \frac{a}{(X - z_1)^{m_1}} + \frac{p_1}{q_1} ,\tag{5.10}
+\end{equation}
+
+其中 $ a \in \mathbb{C} $，$ p_1 \in \mathbb{C}[X] $，且
+
+\[
+q_1 := \frac{q}{X - z_1} \in \mathbb{C}[X] .
+\]
+
+将 (5.10) 乘以 $ q $，我们得到
+
+\begin{equation}
+p = a \prod_{j=2}^{n} (X - z_j)^{m_j} + (X - z_1) p_1 ,\tag{5.11}
+\end{equation}
+
+由此读出\qyxffnmark{1}
+
+\begin{equation}
+a = p(z_1) / \prod_{j=2}^{n} (z_1 - z_j)^{m_j} .\tag{5.12}
+\end{equation}
+
+因此 $ a_{1 m_1} := a $ 唯一确定。由 (5.11) 可得
+
+\[
+\deg(p_1) < \left( \sum_{j=2}^{n} m_j \right) \vee \deg(p) \le \deg(q) - 1 = \deg(q_1) .
+\]
+
+接下来我们可以把上述论证应用于 $ p_1/q_1 $，从而经过有限步得到该断言。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\begin{corollary}
+
+每个有理函数都有初等积分。
+
+\proofhead
+这立即由 (5.8)、(5.9) 以及例 5.7(a)、(b) 得到。\nobreak\hspace{0.35em}■
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+若分母的所有零点都是单重的，则部分分式展开 (5.9) 变成
+
+\begin{equation}
+\frac{p}{q} = \sum_{j=1}^{n} \frac{p(z_j)}{q'(z_j)} \frac{1}{X - z_j} .\tag{5.13}
+\end{equation}
+
+在一般情形，我们作 (5.9) 形式的试设，其系数 $ a_{jk} $ 待定，然后在通乘 $ q $ 之后确定这些系数（见例 5.7(f) 的证明）。
+
+\proofhead
+断言 (5.13) 容易由 (5.12) 得到。\nobreak\hspace{0.35em}■
+\item
+
+设 $ s \in \mathbb{R}[X] $。$ s $ 的每个零点 $ z \in \mathbb{C} $ 都有一个具有相同重数的复共轭零点 $ \overline{z} $。
+
+\proofhead
+由命题 I.11.3，$ \overline{s(z)} = s(\overline{z}) $。\nobreak\hspace{0.35em}■
+\item
+
+设 $ p, q \in \mathbb{R}[X] $，且 $ z \in \mathbb{C} \setminus \mathbb{R} $ 是 $ q $ 的重数为 $ m $ 的零点。进一步设 $ a_k $ 与 $ b_k $（$ 1 \le k \le m $）分别是展开式 (5.9) 中 $ (X - z)^{-k} $ 与 $ (X - \overline{z})^{-k} $ 的系数。则 $ b_k = \overline{a_k} $。
+
+\proofhead
+由 (b) 我们知道 $ \overline{z} $ 也是 $ q $ 的重数为 $ m $ 的零点。因此 $ b_k $ 唯一确定。对 $ x \in \mathbb{C} \setminus \{z_1, \ldots, z_n\} $，由 (5.9) 可得
+\[
+\sum_{j=1}^{n} \sum_{k=1}^{m_j} \frac{a_{jk}}{(\overline{x} - z_j)^k} = \frac{p(\overline{x})}{q(\overline{x})} = \overline{\frac{p}{q}(x)} = \sum_{j=1}^{n} \sum_{k=1}^{m_j} \frac{\overline{a_{jk}}}{(\overline{x} - \overline{z_j})^k} .
+\]
+
+现在该断言由命题 5.8 的唯一性结果得到。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+现在设 $ r := p/q $（$ p, q \in \mathbb{R}[X] $ 且 $ \deg(p) < \deg(q) $）是实有理函数。若 $ z \in \mathbb{C} \setminus \mathbb{R} $ 是 $ q $ 的重数为 $ m $ 的零点，则利用部分分式展开 (5.9)，按照注 5.10(c)，我们得到加项
+
+\[
+\frac{a}{X - z} + \frac{\overline{a}}{X - \overline{z}} = \frac{(a + \overline{a})X - (z\overline{a} + \overline{z}a)}{(X - z)(X - \overline{z})} = 2 \frac{\operatorname{Re}(a)X - \operatorname{Re}(\overline{z}a)}{X^2 - 2\operatorname{Re}(z)X + |z|^2} ,
+\]
+
+并且有 $ D := (\operatorname{Re} z)^2 - |z|^2 < 0 $。于是例 5.7(c) 与 (d) 表明
+
+\begin{equation}
+\begin{aligned}
+&\int \left( \frac{a}{X - z} + \frac{\overline{a}}{X - \overline{z}} \right) dx \\ &= A \log(x^2 - 2\operatorname{Re}(z)x + |z|^2) + B \arctan\left( \frac{x - \operatorname{Re} z}{\sqrt{-D}} \right) + c
+\end{aligned}\tag{5.14}
+\end{equation}
+
+对 $ x \in I $，其中系数 $ A $ 与 $ B $ 由 $ \operatorname{Re} a $、$ \operatorname{Re} z $、$ \operatorname{Re}(\overline{z}a) $ 与 $ \sqrt{-D} $ 唯一确定。
+
+对 $ 2 \le k \le m $，由注 5.10(c) 与例 5.7(b) 可得
+
+\begin{equation}
+\begin{aligned}
+\int \left( \frac{b}{(x - z)^k} + \frac{\overline{b}}{(x - \overline{z})^k} \right) dx &= \frac{-1}{k-1} \left( \frac{b}{(x - z)^{k-1}} + \frac{\overline{b}}{(x - \overline{z})^{k-1}} \right) + c \\ &= \frac{-2 \operatorname{Re}(b (x - \overline{z})^{k-1})}{(k-1)(x^2 - 2\operatorname{Re}(z)x + |z|^2)^{k-1}} + c
+\end{aligned}\tag{5.15}
+\end{equation}
+
+对 $ x \in I $。因此由命题 5.8 以及 (5.14)、(5.15)，我们得到实形式的原函数。
+
+习题给出了利用部分分式展开进行积分的具体例子。
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+计算下列不定积分
+
+\[
+\mathrm{(i)}\quad \int \frac{dx}{a^2x^2 + bx + c} , \qquad \mathrm{(ii)}\quad \int \frac{x \, dx}{x^2 - 2x + 3} , \qquad \mathrm{(iii)}\quad \int \frac{x^5 \, dx}{x^2 + x + 1} ,
+\]
+\[
+\mathrm{(iv)}\quad \int \frac{dx}{x^4 + 1} , \qquad \mathrm{(v)}\quad \int \frac{x^2 \, dx}{x^4 + 1} , \qquad \mathrm{(vi)}\quad \int \frac{dx}{(ax^2 + bx + c)^2} .
+\]
+\item
+
+通过巧妙的代换，将下列积分
+
+\[
+\mathrm{(i)}\quad \int \frac{e^x - 1}{e^x + 1} \, dx , \qquad \mathrm{(ii)}\quad \int \frac{dx}{1 + \sqrt{1 + x}} , \qquad \mathrm{(iii)}\quad \int \frac{dx}{\sqrt{x} (1 + \sqrt[3]{x})}
+\]
+
+化为有理函数的积分。相应的原函数是什么？
+
+\item
+
+设 $ f \in C^1(I, \mathbb{R}) $。证明\footnote{见注 7.17(b)。} $ \lim_{\lambda \to \infty} \int_I f(x) \sin(\lambda x) \, dx = 0 $。
+
+\item
+
+设 $ f \in C([0, 1], \mathbb{R}) $。验证
+
+\[
+\mathrm{(i)}\quad \int_{0}^{\pi} x f(\sin x) \, dx = \frac{\pi}{2} \int_{0}^{\pi} f(\sin x) \, dx ,
+\]
+\[
+\mathrm{(ii)}\quad \int_{0}^{\pi/2} f(\sin 2x) \cos x \, dx = \int_{0}^{\pi/2} f(\cos^2 x) \cos x \, dx .
+\]
+
+（提示：(i) 作代换 $ t = \pi - x $。(ii) 注意到 $ \int_{\pi/4}^{\pi} f(\sin 2x) \cos x \, dx = \int_{0}^{\pi/4} f(\sin 2x) \sin x \, dx $，然后使用代换 $ \sin 2x = \cos^2 t $。）
+
+\item
+
+\textbf{勒让德多项式} $ P_n $ 由\footnote{见习题 IV.1.12。}下式定义：
+
+\[
+P_n(X) := \frac{1}{2^n n!} \partial^n [(X^2 - 1)^n] \quad \text{对 } n \in \mathbb{N} ,
+\]
+
+证明
+
+\begin{equation*}
+\int_{-1}^{1} P_n P_m = \begin{cases} 0 , & n \ne m , \\ \frac{2}{2n+1} , & n = m . \end{cases}
+\end{equation*}
+\item
+
+利用代换 $ y = \tan x $，证明
+
+\[
+\int_{0}^{1} \frac{\log(1 + x)}{1 + x^2} \, dx = \frac{\pi}{8} \log 2 .
+\]
+
+（提示：$ 1 + \tan x = (\sqrt{2} \sin(x + \pi/4))/\cos x $。）
+
+\item
+
+证明
+
+\[
+\int_{0}^{1/\sqrt{2}} \frac{4\sqrt{2} - 8x^3 - 4\sqrt{2}x^4 - 8x^5}{1 - x^8} \, dx = \pi .
+\]
+
+（提示：作代换 $ x = y/\sqrt{2} $，且 $ (y - 1)(y^8 - 16) = (y^2 - 2)(y^2 - 2y + 2)(y^5 + y^4 + 2y^3 - 4) $。）
+
+\item
+
+设 $ k, m \in \mathbb{N}^\times $，$ c \in (0, 1) $。证明
+
+\[
+\int_{0}^{c} \frac{x^{k-1}}{1 - x^m} \, dx = \sum_{n=0}^{\infty} \frac{c^{nm+k}}{nm + k} .
+\]
+
+（提示：$ \sum_{n=0}^{\infty} x^{nm} = 1/(1 - x^m) $。）
+
+\item
+
+在习题 8 中，令 $ c = 1/\sqrt{2} $，$ m = 8 $，$ k = 1, 4, 5, 6 $。利用习题 7 构造 $ \pi $ 的如下形式：
+
+\[
+\pi = \sum_{n=0}^{\infty} \frac{1}{16^n} \left( \frac{4}{8n + 1} - \frac{2}{8n + 4} - \frac{1}{8n + 5} - \frac{1}{8n + 6} \right) .
+\]
+\item
+
+给出下列积分的递推公式
+
+\[
+\mathrm{(i)}\quad I_n = \int x^n e^x \, dx , \qquad \mathrm{(ii)}\quad I_n = \int x (\log x)^n \, dx ,
+\]
+\[
+\mathrm{(iii)}\quad I_n = \int \cos^n x \, dx , \qquad \mathrm{(iv)}\quad I_n = \int \frac{dx}{(x^2 + 1)^n} .
+\]
+\end{exercises}
+
+\section{求和与积分}
+
+设 $ m, n \in \mathbb{Z} $ 且 $ m < n $，$ f : [m, n] \to E $ 连续。则
+
+\[
+\sum_{k=m+1}^{n} f(k)
+\]
+
+可以解释为逼近
+
+\begin{equation}
+\int_{m}^{n} f \, dx .\tag{6.1}
+\end{equation}
+
+的黎曼和。
+
+在前两节中，我们学会了计算积分的有效方法，它们都源自微积分基本定理。事实上，在许多情形下，计算积分 (6.1) 比计算它对应的和更简单。这引出一个有趣的想法：反过来利用已知的积分去逼近这个和。这种逼近和的技巧将被证明相当有用。
+
+自然，这一想法的有效性将取决于误差
+
+\begin{equation}
+\left| \int_{m}^{n} f \, dx - \sum_{k=m+1}^{n} f(k) \right|\tag{6.2}
+\end{equation}
+
+能够被控制到什么程度。在这一背景下，伯努利数与伯努利多项式是有趣的，我们先转向它们。
+
+\needspace{3\baselineskip}\subsection*{伯努利数}
+
+我们首先证明函数\footnote{关于下文，另见习题 V.3.2–4。}
+
+\begin{equation*}
+h : \mathbb{C} \to \mathbb{C} , \quad h(z) := \begin{cases} (e^z - 1)/z , & z \in \mathbb{C}^\times , \\ 1 , & z = 0 , \end{cases}
+\end{equation*}
+
+是解析的，并且有一个以 0 为心的圆盘，$ h $ 在其上不取零。\footnote{当然，存在 $ \eta > 0 $ 使得对 $ z \in \mathbb{B}(0, \eta) $ 有 $ h(z) \ne 0 $，这由 $ h(0) = 1 $ 与 $ h $ 的连续性得出。}
+
+\qyxffntextdef{1}{另见习题 V.3.3。}
+\begin{lemma}
+
+设 $ h \in C^{\omega}(\mathbb{C}, \mathbb{C}) $ 使得对 $ z \in 2\pi\mathbb{B} $ 有 $ h(z) \ne 0 $。
+
+证明\qyxffnmark{1}
+
+\begin{subitems}
+\item
+
+由命题 II.9.4，幂级数 $ g(X) = \sum (1/(k+1)!)X^k $ 有无限收敛半径；由命题 V.3.5，它是解析的。现在我们来验证 $ g $ 与 $ h $ 相等。显然 $ g(0) = h(0) $，且因此 $ z \in \mathbb{C}^\times $。于是 $ g(z) = h(z) $ 由 $ z \cdot g(z) = e^z - 1 $ 得到。
+
+\item
+
+对 $ z \in \mathbb{C} \setminus 2\pi i\mathbb{Z} $，我们有
+
+\begin{equation}
+\frac{z}{e^z - 1} + \frac{z}{2} = \frac{z}{2}\frac{e^z + 1}{e^z - 1} = \frac{z}{2}\coth\frac{z}{2} .\tag{6.3}
+\end{equation}
+
+因此，因为 $ h(0) = 1 $，该断言成立。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{lemma}
+
+由最后一个证明，特别地得到
+
+\[
+f : 2\pi\mathbb{B} \to \mathbb{C} , \quad z \mapsto \frac{z}{e^z - 1}
+\]
+
+是良定义的。\footnote{这意味着我们可以把 $ z/(e^z - 1) $ 在 $ z = 0 $ 处解释为等于 1。} 此外，如下一定理所示，函数 $ f $ 在 0 的一个邻域内是解析的。
+
+\begin{proposition}
+
+存在 $ \rho \in (0, 2\pi) $ 使得 $ f \in C^{\omega}(\rho\mathbb{B}, \mathbb{C}) $。
+
+\proofhead
+习题 II.9.9 的递归算法保证了存在幂级数 $ \sum b_k X^k $，它有正的收敛半径 $ \rho_0 $ 且满足性质
+\[
+\left( \sum \frac{1}{(k+1)!}X^k \right)\left( \sum b_k X^k \right) = 1 \in \mathbb{C}[[X]] .
+\]
+
+令 $ \rho := \rho_0 \wedge 2\pi $，我们设
+
+\[
+\tilde{f} : \rho\mathbb{B} \to \mathbb{C} , \quad z \mapsto \sum_{k=0}^{\infty} b_k z^k .
+\]
+
+则
+
+\[
+\frac{e^z - 1}{z}\tilde{f}(z) = \left( \sum_{k=0}^{\infty} \frac{z^k}{(k+1)!} \right)\left( \sum_{k=0}^{\infty} b_k z^k \right) = 1 \quad \text{对 } z \in \rho\mathbb{B} .
+\]
+
+因此，引理 6.1 与 $ \rho $ 的选取给出
+
+\[
+\tilde{f}(z) = f(z) = \frac{z}{e^z - 1} \quad \text{对 } z \in \rho\mathbb{B} ,
+\]
+
+于是 $ f $ 的解析性由命题 V.3.5 得出。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+在注 VIII.5.13(c) 中，我们将不用幂级数的递归除法（习题 II.9.9）来证明 $ f $ 是解析的。
+
+\textbf{伯努利数} $ B_k $ 对 $ k \in \mathbb{N} $ 由
+
+\begin{equation}
+\frac{z}{e^z - 1} = \sum_{k=0}^{\infty}\frac{B_k}{k!}z^k \quad \text{对 } z \in \rho\mathbb{B} ,\tag{6.4}
+\end{equation}
+
+定义，其中 $ \rho > 0 $ 是适当选取的。由命题 6.2 并由于幂级数的唯一性定理（推论 II.9.9），$ B_k $ 由 (6.4) 唯一确定。以 $ f(z) = z/(e^z - 1) $ 给出的映射 $ f $ 称为 $ B_k $ 的\textbf{生成函数}。
+
+\needspace{3\baselineskip}\subsection*{递推公式}
+
+由 (6.4)，我们可以利用幂级数的柯西乘积容易地导出伯努利数的递推公式。
+
+\begin{proposition}
+
+伯努利数 $ B_k $ 满足
+
+\begin{subitems}
+\item
+
+$ \sum_{k=0}^{n}\binom{n+1}{k}B_k = \begin{cases} 1 , & n = 0 , \\ 0 , & n \in \mathbb{N}^\times ; \end{cases} $
+
+\item
+
+$ B_{2k+1} = 0 $ 对 $ k \in \mathbb{N}^\times $。
+
+\proofhead
+由命题 II.9.7，对 $ z \in \rho\mathbb{B} $ 我们有
+\begin{equation*}
+\begin{aligned}
+z = (e^z - 1)f(z) &= z\left( \sum_{k=0}^{\infty} \frac{z^k}{(k+1)!} \right)\left( \sum_{j=0}^{\infty} \frac{B_j}{j!}z^j \right) \\ &= z\sum_{n=0}^{\infty}\left( \sum_{k=0}^{n} \frac{B_k}{k!}\frac{1}{(n+1-k)!} \right)z^n .
+\end{aligned}
+\end{equation*}
+
+幂级数的唯一性定理于是蕴含
+
+\begin{equation*}
+\sum_{k=0}^{n}\frac{B_k}{k!}\frac{1}{(n+1-k)!} = \begin{cases} 1 , & n = 0 , \\ 0 , & n \in \mathbb{N}^\times . \end{cases}
+\end{equation*}
+
+该命题于是由把这个恒等式乘以 $ (n+1)! $ 得到。
+
+\end{subitems}
+
+(ii) 一方面，我们求得
+
+\[
+f(z) - f(-z) = z\left( \frac{1}{e^z - 1} + \frac{1}{e^{-z} - 1} \right) = z\frac{e^{-z} - 1 + e^z - 1}{1 - e^z - e^{-z} + 1} = -z .
+\]
+
+另一方面，我们有幂级数展开
+
+\[
+f(z) - f(-z) = \sum_{k=0}^{\infty}\left( \frac{B_k}{k!}z^k - \frac{B_k}{k!}(-z)^k \right) = 2\sum_{k=0}^{\infty}\frac{B_{2k+1}}{(2k+1)!}z^{2k+1} .
+\]
+
+因此，由幂级数的唯一性定理，我们得到 $ B_{2k+1} = 0 $ 对 $ k \in \mathbb{N}^\times $。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\begin{corollary}
+
+对伯努利数，我们有
+
+\[
+B_0 = 1 , \quad B_1 = -1/2 , \quad B_2 = 1/6 , \quad B_4 = -1/30 , \quad B_6 = 1/42 , \quad \ldots
+\]
+\end{corollary}
+
+利用伯努利数，我们可以得到余切函数的级数展开，它在下一节会很有用。
+
+\begin{application}
+
+对充分小的\footnote{由应用 7.23(a) 的证明可得，这对 $ |z| < 1 $ 成立。} $ z \in \mathbb{C} $，我们有
+
+\[
+z\cot z = 1 + \sum_{n=1}^{\infty}(-1)^n\frac{4^n}{(2n)!}B_{2n}z^{2n} .
+\]
+
+\proofhead
+利用 (6.3)、(6.4) 与命题 6.3(ii)，由 $ B_1 = -1/2 $ 我们得到
+\[
+\frac{z}{2}\coth\frac{z}{2} = \sum_{n=0}^{\infty} B_{2n}\frac{z^{2n}}{(2n)!} \quad \text{对 } z \in \rho\mathbb{B} .
+\]
+
+把 $ z $ 换成 $ 2iz $，该断言成立。\nobreak\hspace{0.35em}■
+
+\end{application}
+
+\needspace{3\baselineskip}\subsection*{伯努利多项式}
+
+对每个 $ x \in \mathbb{C} $，函数
+
+\[
+F_x : \rho\mathbb{B} \to \mathbb{C} , \quad z \mapsto \frac{ze^{xz}}{e^z - 1}
+\]
+
+是解析的。与伯努利数类似，我们通过
+
+\begin{equation}
+\frac{ze^{xz}}{e^z - 1} = \sum_{k=0}^{\infty}\frac{B_k(x)}{k!}z^k \quad \text{对 } z \in \rho\mathbb{B} \text{ 且 } x \in \mathbb{C} .\tag{6.5}
+\end{equation}
+
+来定义\textbf{伯努利多项式} $ B_k(X) $。
+
+由幂级数的唯一性定理，$ \mathbb{C} $ 上的函数 $ B_k(X) $ 由 (6.5) 唯一确定，且下一定理表明它们确实是多项式。
+
+\begin{proposition}
+
+对 $ n \in \mathbb{N} $，我们有
+
+\begin{subitems}
+\item
+
+$ B_n(X) = \sum_{k=0}^{n}\binom{n}{k}B_k X^{n-k} , $
+
+\item
+
+$ B_n(0) = B_n , $
+
+\item
+
+$ B'_{n+1}(X) = (n+1)B_n(X) , $
+
+\item
+
+$ B_n(X + 1) - B_n(X) = nX^{n-1} , $
+
+\item
+
+$ B_n(1 - X) = (-1)^n B_n(X) $。
+
+\proofhead
+第一个断言与命题 6.3 的证明一样，由利用幂级数的柯西乘积并比较系数得到。一方面，我们有
+\begin{equation*}
+\begin{aligned}
+F_x(z) = e^{xz}f(z) &= \left( \sum_{k=0}^{\infty}\frac{x^k z^k}{k!} \right)\left( \sum_{j=0}^{\infty}\frac{B_j}{j!}z^j \right) = \sum_{n=0}^{\infty}\left( \sum_{k=0}^{n}\frac{x^{n-k}}{(n-k)!}\frac{B_k}{k!} \right)z^n \\ &= \sum_{n=0}^{\infty}\left( \sum_{k=0}^{n}\binom{n}{k}B_k x^{n-k} \right)\frac{z^n}{n!}
+\end{aligned}
+\end{equation*}
+
+并且，另一种写法是 $ F_x(z) = \sum_n B_n(x)z^n/n! $。
+断言 (ii) 立即由 (i) 得到。同样由 (i) 我们得到 (iii)，因为
+
+\begin{equation*}
+\begin{aligned}
+B'_{n+1}(X) &= \sum_{k=0}^{n}\binom{n+1}{k}B_k X^{n-k}(n+1-k) \\ &= (n+1)\sum_{k=0}^{n}\binom{n}{k}B_k X^{n-k} = (n+1)B_n(X) .
+\end{aligned}
+\end{equation*}
+
+最后，(iv) 与 (v) 由 $ F_{x+1}(z) - F_x(z) = ze^{xz} $ 与 $ F_{1-x}(z) = F_x(-z) $ 通过比较系数得到。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+\begin{corollary}
+
+前四个伯努利多项式为
+
+\[
+B_0(X) = 1 , \quad B_1(X) = X - 1/2 ,
+\]
+\[
+B_2(X) = X^2 - X + 1/6 , \quad B_3(X) = X^3 - 3X^2/2 + X/2 .
+\]
+\end{corollary}
+
+\needspace{3\baselineskip}\subsection*{欧拉–麦克劳林求和公式}
+
+伯努利多项式将有助于估计 (6.2) 中的误差。但首先，让我们证明一个有用的结果。
+
+\begin{lemma}
+
+设 $ m \in \mathbb{N}^\times $ 且 $ f \in C^{2m+1}[0, 1] $。则我们有
+
+\begin{equation*}
+\begin{aligned}
+\int_0^1 f(x)\,dx &= \frac{1}{2}[f(0) + f(1)] - \sum_{k=1}^{m}\frac{B_{2k}}{(2k)!}f^{(2k-1)}(x)\Big|_0^1 \\ &\quad - \frac{1}{(2m+1)!}\int_0^1 B_{2m+1}(x)f^{(2m+1)}(x)\,dx .
+\end{aligned}
+\end{equation*}
+
+\proofhead
+我们应用函数方程 $ B'_{n+1}(X) = (n+1)B_n(X) $ 并继续分部积分。于是设 $ u := f $ 与 $ v' := \mathbf{1} $。则 $ u' = f' $ 且 $ v = B_1(X) = X - 1/2 $。因此，
+\begin{equation}
+\begin{aligned}
+\int_0^1 f(x)\,dx &= B_1(x)f(x)\big|_0^1 - \int_0^1 B_1(x)f'(x)\,dx \\ &= \frac{1}{2}[f(0) + f(1)] - \int_0^1 B_1(x)f'(x)\,dx .
+\end{aligned}\tag{6.6}
+\end{equation}
+
+接下来我们设 $ u := f' $ 与 $ v' := B_1(X) $。因为 $ u' = f'' $ 且 $ v = B_2(X)/2 $，我们求得
+
+\[
+\int_0^1 B_1(x)f'(x)\,dx = \frac{1}{2}B_2(x)f'(x)\Big|_0^1 - \frac{1}{2}\int_0^1 B_2(x)f''(x)\,dx .
+\]
+
+由此，设 $ u := f'' $ 与 $ v' := B_2(X)/2 $（因此 $ u' = f''' $ 且 $ v = B_3(X)/3! $），得到方程
+
+\[
+\int_0^1 B_1(x)f'(x)\,dx = \left[ \frac{1}{2}B_2(x)f'(x) - \frac{1}{3!}B_3(x)f''(x) \right]\Big|_0^1 + \frac{1}{3!}\int_0^1 B_3(x)f'''(x)\,dx .
+\]
+
+一个简单的归纳现在给出
+
+\begin{equation*}
+\begin{aligned}
+\int_0^1 B_1(x)f'(x)\,dx &= \sum_{j=2}^{2m+1}\frac{(-1)^j}{j!}B_j(x)f^{(j-1)}(x)\Big|_0^1 \\ &\quad + \frac{1}{(2m+1)!}\int_0^1 B_{2m+1}(x)f^{(2m+1)}(x)\,dx .
+\end{aligned}
+\end{equation*}
+
+由命题 6.6，我们有 $ B_n(0) = B_n $、$ B_n(1) = (-1)^n B_n $ 以及对 $ n \in \mathbb{N}^\times $ 有 $ B_{2n+1} = 0 $，该断言成立。\nobreak\hspace{0.35em}■
+
+\end{lemma}
+
+下面，我们用 $ \widetilde{B}_n $ 表示函数 $ B_n(X)|[0, 1) $ 在 $ \mathbb{R} $ 上的 1-周期延拓，即
+
+\[
+\widetilde{B}_n(x) := B_n(x - [x]) \quad \text{对 } x \in \mathbb{R} .
+\]
+
+显然，$ \widetilde{B}_n $ 在 $ \mathbb{R} $ 上（即在每个紧致区间上）是跳跃连续的。对 $ n \ge 2 $，$ \widetilde{B}_n $ 实际上是连续的（见习题 4）。
+
+\begin{theorem}
+
+（欧拉–麦克劳林求和公式）设 $ a, b \in \mathbb{Z} $ 且 $ a < b $，$ f $ 对某个 $ m \in \mathbb{N}^\times $ 属于 $ C^{2m+1}[a, b] $。则
+
+\begin{equation*}
+\begin{aligned}
+\sum_{k=a}^{b} f(k) &= \int_a^b f(x)\,dx + \frac{1}{2}[f(a) + f(b)] + \sum_{k=1}^{m}\frac{B_{2k}}{(2k)!}f^{(2k-1)}(x)\Big|_a^b \\ &\quad + \frac{1}{(2m+1)!}\int_a^b \widetilde{B}_{2m+1}(x)f^{(2m+1)}(x)\,dx .
+\end{aligned}
+\end{equation*}
+
+\proofhead
+我们把积分 $ \int_a^b f \,dx $ 分解成项 $ \int_{a+k}^{a+k+1} f \,dx $ 的和，并对它们应用引理 6.8。因此
+\[
+\int_a^b f(x)\,dx = \sum_{k=0}^{b-a-1}\int_{a+k}^{a+k+1} f(x)\,dx = \sum_{k=0}^{b-a-1}\int_0^1 f_k(y)\,dy
+\]
+
+其中 $ f_k(y) := f(a + k + y) $ 对 $ y \in [0, 1] $。则
+
+\begin{equation*}
+\begin{aligned}
+\frac{1}{2}\sum_{k=0}^{b-a-1}[f_k(0) + f_k(1)] &= \frac{1}{2}\sum_{k=0}^{b-a-1}[f(a + k) + f(a + k + 1)] \\ &= \sum_{k=a}^{b} f(k) - \frac{1}{2}[f(a) + f(b)]
+\end{aligned}
+\end{equation*}
+
+且
+
+\begin{equation*}
+\begin{aligned}
+\int_0^1 B_{2m+1}(y)f_k^{(2m+1)}(y)\,dy &= \int_0^1 \widetilde{B}_{2m+1}(a + k + y)f^{(2m+1)}(a + k + y)\,dy \\ &= \int_{a+k}^{a+k+1}\widetilde{B}_{2m+1}(x)f^{(2m+1)}(x)\,dx .
+\end{aligned}
+\end{equation*}
+
+该定理于是由引理 6.8 得到。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{幂和}
+
+在欧拉–麦克劳林求和公式的第一个应用中，我们取 $ f $ 为单项式 $ X^m $。该公式于是容易求出幂和 $ \sum_{k=1}^{n} k^m $，对于 $ m = 1, 2 $ 与 3，我们已在注 I.12.14(c) 中确定过它们。
+
+\begin{example}
+
+对 $ m \in \mathbb{N} $ 且 $ m \ge 2 $，我们有
+
+\[
+\sum_{k=1}^{n} k^m = \frac{n^{m+1}}{m+1} + \frac{n^m}{2} + \sum_{2j < m+1}\binom{m}{2j-1}\frac{B_{2j}}{2j}n^{m-2j+1} .
+\]
+
+特别地，
+
+\[
+\sum_{k=1}^{n} k^2 = \frac{n^3}{3} + \frac{n^2}{2} + nB_2 = \frac{n(n+1)(2n+1)}{6} ,
+\]
+\[
+\sum_{k=1}^{n} k^3 = \frac{n^4}{4} + \frac{n^3}{2} + \frac{3}{2}n^2 B_2 = \frac{n^2(n+1)^2}{4} .
+\]
+
+\proofhead
+对 $ f := X^m $，我们有
+\begin{equation*}
+f^{(\ell)} = \begin{cases} \binom{m}{\ell}\ell!\,X^{m-\ell} , & \ell \le m , \\ 0 , & \ell > m , \end{cases}
+\end{equation*}
+
+并且，对 $ 2j - 1 < m $，
+
+\[
+\frac{B_{2j}}{(2j)!}f^{(2j-1)}(n) = \frac{B_{2j}}{(2j)!}\binom{m}{2j-1}(2j-1)!\,n^{m-2j+1} = \frac{B_{2j}}{2j}\binom{m}{2j-1}n^{m-2j+1} .
+\]
+
+因为 $ f^{(m)}(x)\big|_0^n = 0 $，这些公式由定理 6.9 取 $ a = 0 $ 与 $ b = n $ 得到。\nobreak\hspace{0.35em}■
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{渐近等价}
+
+$ \mathbb{C}^\times $ 中的序列 $ (a_k) $ 与 $ (b_k) $ 称为\textbf{渐近等价}的，如果
+
+\[
+\lim_{k}(a_k/b_k) = 1 .
+\]
+
+在这种情形下，我们记 $ a_k \sim b_k $（$ k \to \infty $）或 $ (a_k) \sim (b_k) $。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+不难验证 $ \sim $ 是 $ (\mathbb{C}^\times)^{\mathbb{N}} $ 上的一个等价关系。
+
+\item
+
+$ (a_k) $ 与 $ (b_k) $ 渐近等价并不蕴含 $ (a_k) $ 或 $ (b_k) $ 收敛，也不蕴含 $ (a_k - b_k) $ 是零序列。
+
+\proofhead
+考虑 $ a_k := k^2 + k $ 与 $ b_k := k^2 $。\nobreak\hspace{0.35em}■
+\item
+
+若 $ (a_k) \sim (b_k) $ 且 $ b_k \to c $，则 $ a_k \to c $。
+
+\proofhead
+这立即由 $ a_k = (a_k/b_k)\cdot b_k $ 得到。\nobreak\hspace{0.35em}■
+\item
+
+设 $ (a_k) $ 与 $ (b_k) $ 是 $ \mathbb{C}^\times $ 中的序列且 $ (a_k - b_k) $ 有界。若 $ |b_k| \to \infty $，则 $ (a_k) \sim (b_k) $。
+
+\proofhead
+当 $ k \to \infty $ 时，我们有 $ |(a_k/b_k) - 1| = |(a_k - b_k)/b_k| \to 0 $。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+借助欧拉–麦克劳林求和公式，我们可以构造渐近等价序列的重要例子。为此，我们需要如下结果。
+
+\begin{lemma}
+
+设 $ z \in \mathbb{C} $ 满足 $ \operatorname{Re} z > 1 $。则极限
+
+\[
+\int_1^\infty \frac{\widetilde{B}_k(x)}{x^z}\,dx := \lim_{n}\int_1^n \frac{\widetilde{B}_k(x)}{x^z}\,dx
+\]
+
+在 $ \mathbb{C} $ 中存在，且
+
+\[
+\left| \int_1^\infty \frac{\widetilde{B}_k(x)}{x^z}\,dx \right| \le \frac{\|\widetilde{B}_k\|_\infty}{\operatorname{Re} z - 1} \quad \text{对 } k \in \mathbb{N} .
+\]
+
+\proofhead
+设 $ 1 \le m \le n $。则我们有
+\begin{equation*}
+\begin{aligned}
+\left| \int_1^n \frac{\widetilde{B}_k(x)}{x^z}\,dx - \int_1^m \frac{\widetilde{B}_k(x)}{x^z}\,dx \right| &= \left| \int_m^n \frac{\widetilde{B}_k(x)}{x^z}\,dx \right| \le \|\widetilde{B}_k\|_\infty\int_m^n x^{-\operatorname{Re} z}\,dx \\ &= \frac{\|\widetilde{B}_k\|_\infty}{\operatorname{Re} z - 1}\left( \frac{1}{m^{\operatorname{Re} z - 1}} - \frac{1}{n^{\operatorname{Re} z - 1}} \right) .
+\end{aligned}
+\end{equation*}
+
+这个估计表明 $ \left( \int_1^n (\widetilde{B}_k(x)/x^z)\,dx \right)_{n\in\mathbb{N}^\times} $ 是 $ \mathbb{C} $ 中的柯西序列，且所述极限存在。在上面的估计中，我们取 $ m = 1 $ 并令 $ n \to \infty $，从而证明了引理的第二部分。\nobreak\hspace{0.35em}■
+
+\end{lemma}
+
+\begin{example}
+
+\begin{items}
+\item
+
+（棣莫弗公式与斯特林公式）对 $ n \to \infty $，我们有
+
+\[
+n! \sim \sqrt{2\pi n}\,n^n e^{-n} .
+\]
+
+\begin{subitems}
+\item
+
+\proofhead
+(i) 我们设 $ a := 1 $，$ b := n $，$ m := 1 $ 且 $ f(x) := \log x $。于是，由欧拉–麦克劳林求和公式，我们有
+\[
+\sum_{k=1}^{n}\log k - \int_1^n \log x\,dx = \frac{1}{2}\log n + \frac{B_2}{2}\frac{1}{x}\Big|_1^n + \frac{1}{3}\int_1^n \frac{\widetilde{B}_3(x)}{x^3}\,dx .
+\]
+
+我们注意到 $ \log x = [x(\log x - 1)]' $ 与 $ B_2 = 1/6 $，它们给出
+
+\begin{equation*}
+\begin{aligned}
+\log n! - n\log n - \frac{1}{2}\log n + n &= \log(n!\,n^{-n-1/2}e^n) \\ &= 1 + \frac{1}{12}\left( \frac{1}{n} - 1 \right) + \frac{1}{3}\int_1^n \frac{\widetilde{B}_3(x)}{x^3}\,dx .
+\end{aligned}
+\end{equation*}
+
+现在引理 6.12 蕴含序列 $ (\log(n!\,n^{-n-1/2}e^n))_{n\in\mathbb{N}} $ 收敛。于是存在 $ A > 0 $ 使得当 $ n \to \infty $ 时 $ (n!\,n^{-n-1/2}e^n) \to A $。从而
+
+\begin{equation}
+n! \sim A n^{n+1/2}e^{-n} \quad (n \to \infty) .\tag{6.7}
+\end{equation}
+\item
+
+为确定 $ A $ 的值，应用 $ \pi/2 $ 的沃利斯乘积表示：
+
+\[
+\prod_{k=1}^{\infty}\frac{(2k)^2}{(2k-1)(2k+1)} = \frac{\pi}{2}
+\]
+
+（见例 5.5(d)）。因此我们也有
+
+\begin{equation}
+\lim_{n}\left( \prod_{k=1}^{n}\frac{(2k)^2}{(2k-1)(2k+1)} \cdot \frac{\prod_{k=1}^{n}(2k)^2}{\prod_{k=1}^{n}(2k)^2} \right) = \lim_{n}\frac{2^{4n}(n!)^4}{(2n)!(2n+1)!} = \pi/2 .\tag{6.8}
+\end{equation}
+
+另一方面，由 (6.7)，我们有
+
+\[
+\frac{(n!)^2}{(2n)!} \sim \frac{A^2 n^{2n+1}e^{-2n}}{A(2n)^{2n+1/2}e^{-2n}} = 2^{-2n-1}A\sqrt{2n} ,
+\]
+
+由此得到渐近等价
+
+\begin{equation}
+\frac{2^{4n}(n!)^4}{2n[(2n)!]^2} \sim \frac{A^2}{4}\tag{6.9}
+\end{equation}
+
+最后我们注意到 $ 2n[(2n)!]^2 \sim (2n)!(2n+1)! $ 与 $ A > 0 $，于是由 (6.8)、(6.9) 与注 6.11(c) 得到 $ A = \sqrt{2\pi} $。把它代入 (6.7)，我们就完成了证明。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\item
+
+（欧拉常数）极限
+
+\[
+C := \lim_{n\to\infty}\left[ \sum_{k=1}^{n}\frac{1}{k} - \log n \right]
+\]
+
+在 $ \mathbb{R} $ 中存在，称为\textbf{欧拉常数}或\textbf{欧拉–马歇罗尼常数}。\footnote{$ C $ 的初始十进制数字是 0.577 215 664 901 \ldots} 此外，
+
+\[
+\sum_{k=1}^{n}\frac{1}{k} \sim \log n \quad (n \to \infty) .
+\]
+
+\proofhead
+对 $ a := 1 $，$ b := n $，$ m := 0 $ 与 $ f(x) := 1/x $，由欧拉–麦克劳林求和公式得到
+\[
+\sum_{k=1}^{n}\frac{1}{k} = \int_1^n \frac{dx}{x} + \frac{1}{2}\left( 1 + \frac{1}{n} \right) - \int_1^n \frac{\widetilde{B}_1(x)}{x^2}\,dx .
+\]
+
+由引理 6.12，$ C $ 在 $ \mathbb{R} $ 中。所需的渐近等价由注 6.11(d) 得到。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{黎曼 $ \zeta $ 函数}
+
+我们现在把欧拉–麦克劳林求和公式应用于在素数分布理论中重要的例子。
+
+设 $ s \in \mathbb{C} $ 满足 $ \operatorname{Re} s > 1 $，并对 $ x \in [1, \infty) $ 定义 $ f(x) := 1/x^s $。则对 $ k \in \mathbb{N}^\times $，
+
+\[
+f^{(k)}(x) = (-1)^k s(s+1)\cdot\ldots\cdot(s+k-1)x^{-s-k} = (-1)^k\binom{s+k-1}{k}k!\,x^{-s-k}
+\]
+
+由欧拉–麦克劳林求和公式（取 $ a = 1 $ 与 $ b = n $），对 $ m \in \mathbb{N} $ 得到
+
+\begin{equation}
+\begin{aligned}
+\sum_{k=1}^{n}\frac{1}{k^s} &= \int_1^n \frac{dx}{x^s} + \frac{1}{2}\left( 1 + \frac{1}{n^s} \right) - \sum_{j=1}^{m}\frac{B_{2j}}{2j}\binom{s+2j-2}{2j-1}x^{-s-2j+1}\Big|_1^n \\ &\quad - \binom{s+2m}{2m+1}\int_1^n \widetilde{B}_{2m+1}(x)\,x^{-(s+2m+1)}\,dx .
+\end{aligned}\tag{6.10}
+\end{equation}
+
+因为当 $ n \to \infty $ 时 $ |n^{-s}| = n^{-\operatorname{Re} s} \to 0 $ 且 $ \operatorname{Re} s > 0 $，我们得到
+
+\[
+\int_1^n \frac{dx}{x^s} = \frac{1}{s-1}\left( 1 - \frac{1}{n^{s-1}} \right) \to \frac{1}{s-1}
+\]
+
+以及
+
+\[
+|n^{-s-2j+1}| \to 0 \quad \text{对 } j = 1, \ldots, m ,
+\]
+
+当 $ n \to \infty $ 时。我们再注意到引理 6.12，于是在极限 $ n \to \infty $ 下，(6.10) 变成
+
+\begin{equation}
+\begin{aligned}
+\sum_{n=1}^{\infty}\frac{1}{n^s} &= \frac{1}{2} + \frac{1}{s-1} + \sum_{j=1}^{m}\frac{B_{2j}}{2j}\binom{s+2j-2}{2j-1} \\ &\quad - \binom{s+2m}{2m+1}\int_1^\infty \widetilde{B}_{2m+1}(x)\,x^{-(s+2m+1)}\,dx .
+\end{aligned}\tag{6.11}
+\end{equation}
+
+由此特别得到，级数 $ \sum 1/n^s $ 对每个满足 $ \operatorname{Re} s > 1 $ 的 $ s \in \mathbb{C} $ 收敛。\footnote{另见注 6.16(a)。}
+
+公式 (6.11) 还允许另一个结论。为此，我们设
+
+\[
+F_m(s) := \int_1^\infty \widetilde{B}_{2m+1}(x)\,x^{-(s+2m+1)}\,dx \quad \text{对 } m \in \mathbb{N} ,
+\]
+
+以及 $ H_m := \{ z \in \mathbb{C} ; \operatorname{Re} z > -2m \} $。按照引理 6.12，$ F_m : H_m \to \mathbb{C} $ 是良定义的，并且不难看出 $ F_m $ 也是解析的（见习题 4）。
+
+我们现在考虑映射
+
+\[
+G_m : H_m \to \mathbb{C} , \quad s \mapsto \sum_{j=1}^{m}\frac{B_{2j}}{2j}\binom{s+2j-2}{2j-1} - \binom{s+2m}{2m+1}F_m(s) \quad \text{对 } m \in \mathbb{N} ,
+\]
+
+并得到如下性质：
+
+\begin{lemma}
+
+对 $ n > m $，$ G_n $ 是 $ G_m $ 的延拓。
+
+\proofhead
+令 $ H := \{ z \in \mathbb{C} ; \operatorname{Re} z > 1 \} $，由 (6.11) 得到
+\[
+G_m(s) = G_n(s) = \sum_{k=1}^{\infty}\frac{1}{k^s} - \frac{1}{2} - \frac{1}{s-1} \quad \text{对 } s \in H .
+\]
+
+对每个 $ k \in \mathbb{N} $，$ F_k $ 与 $ G_k $ 都在 $ H_k $ 上解析。因此该断言由解析函数的唯一性定理（定理 V.3.13）得到。\nobreak\hspace{0.35em}■
+
+\end{lemma}
+
+\begin{theorem}
+
+函数
+
+\[
+\{ z \in \mathbb{C} ; \operatorname{Re} z > 1 \} \to \mathbb{C} , \quad s \mapsto \sum_{n=1}^{\infty}\frac{1}{n^s}
+\]
+
+在 $ \mathbb{C} \setminus \{1\} $ 上有唯一的解析延拓 $ \zeta $，称为\textbf{黎曼 $ \zeta $ 函数}。对 $ m \in \mathbb{N} $ 与满足 $ \operatorname{Re} s > -2m $ 且 $ s \ne 1 $ 的 $ s \in \mathbb{C} $，我们有
+
+\[
+\zeta(s) = \frac{1}{2} + \frac{1}{s-1} + \sum_{j=1}^{m}\frac{B_{2j}}{2j}\binom{s+2j-2}{2j-1} - \binom{s+2m}{2m+1}F_m(s) .
+\]
+
+\proofhead
+这立即由 (6.11) 与引理 6.14 得到。\nobreak\hspace{0.35em}■
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+级数 $ \sum 1/n^s $ 对每个满足 $ \operatorname{Re} s > 1 $ 的 $ s \in \mathbb{C} $ 绝对收敛。
+
+\proofhead
+对满足 $ \operatorname{Re} s > 1 $ 的 $ s \in \mathbb{C} $，我们有
+\[
+\left|\zeta(s)\right| = \left|\sum_{n=1}^{\infty}\frac{1}{n^s}\right| \le \sum_{n=1}^{\infty}\left|\frac{1}{n^s}\right| = \sum_{n=1}^{\infty}\frac{1}{n^{\operatorname{Re} s}} = \zeta(\operatorname{Re} s) ,
+\]
+
+该断言由优级数判别法得到。\nobreak\hspace{0.35em}■
+
+\item
+
+（$ \zeta $ 函数的乘积表示）我们用 $ (p_k) $ 表示素数序列，其中 $ p_1 < p_2 < p_3 < \cdots $。则
+
+\[
+\zeta(s) = \prod_{k=1}^{\infty}\frac{1}{1 - p_k^{-s}} \quad \text{对 } \operatorname{Re} s > 1 .
+\]
+
+\proofhead
+因为 $ \left|1/p_k^s\right| = 1/p_k^{\operatorname{Re} s} < 1 $，我们有（几何级数）
+\[
+\frac{1}{1 - p_k^{-s}} = \sum_{j=0}^{\infty}\frac{1}{p_k^{js}} \quad \text{对 } k \in \mathbb{N}^\times .
+\]
+
+因此对每个 $ m \in \mathbb{N} $ 得到
+
+\[
+\prod_{k=1}^{m}\frac{1}{1 - p_k^{-s}} = \prod_{k=1}^{m}\sum_{j=0}^{\infty}\frac{1}{p_k^{js}} = {\sum}'\frac{1}{n^s} ,
+\]
+
+其中，在“乘开”之后，级数 $ {\sum}' $ 包含所有形如 $ 1/n^s $ 的数，其素因子分解 $ n = q_1^{\nu_1}\cdot\ldots\cdot q_\ell^{\nu_\ell} $ 不含 $ p_1, \ldots, p_m $ 之外的素数。因此 $ {\sum}'(1/n^s) $ 确实包含所有满足 $ n \le p_m $ 的 $ n \in \mathbb{N} $。级数 $ \sum_n (1/n^s) $ 的绝对收敛于是蕴含
+
+\[
+\left|\zeta(s) - \prod_{k=1}^{m}\frac{1}{1 - p_k^{-s}}\right| = \left|\sum_{n=1}^{\infty}\frac{1}{n^s} - {\sum}'\frac{1}{n^s}\right| \le \sum_{n > p_m}\frac{1}{n^{\operatorname{Re} s}} .
+\]
+
+由习题 I.5.8(b)（欧几里得的一个定理）得到，当 $ m \to \infty $ 时 $ p_m \to \infty $。因此，由 (a)，剩余的级数 $ \left(\sum_{n > p_m}(1/n^{\operatorname{Re} s})\right) $ 是零序列。\nobreak\hspace{0.35em}■
+
+\item
+
+黎曼 $ \zeta $ 函数在 $ \{ z \in \mathbb{C} ; \operatorname{Re} z > 1 \} $ 中没有零点。
+
+\proofhead
+设 $ s \in \mathbb{C} $ 满足 $ \operatorname{Re} s > 1 $ 且 $ \zeta(s) = 0 $。因为 $ \operatorname{Re} s > 1 $，我们有 $ \lim_k(1 - p_k^{-s}) = 1 $。因此存在 $ m_0 \in \mathbb{N} $ 使得 $ \log(1 - p_k^{-s}) $ 对 $ k \ge m_0 $ 是良定义的，并且我们求得
+\begin{equation}
+\log\left( \prod_{k=m_0}^{N}\frac{1}{1 - p_k^{-s}} \right) = -\sum_{k=m_0}^{N}\log(1 - p_k^{-s}) \quad \text{对 } N \ge m_0 .\tag{6.12}
+\end{equation}
+
+$ \left(\prod_{k=m_0}^{N}(1 - p_k^{-s})^{-1}\right)_{N\in\mathbb{N}} $ 的收敛性、对数的连续性以及 (6.12) 蕴含级数 $ \sum_{k\ge m_0}\log(1 - p_k^{-s}) $ 收敛。特别地，剩余项 $ \left(\sum_{k=m}^{\infty}\log(1 - p_k^{-s})\right)_{m\ge m_0} $ 构成零序列。于是由 (6.12) 得到
+
+\[
+\lim_{m\to\infty}\prod_{k=m}^{\infty}(1 - p_k^{-s})^{-1} = 1 .
+\]
+
+因此存在 $ m_1 \ge m_0 $ 使得 $ \prod_{k=m_1+1}^{\infty}(1 - p_k^{-s})^{-1} \ne 0 $。现在因为 $ \prod_{k=1}^{m_1}(1 - p_k^{-s})^{-1} $ 不为零，得到
+
+\[
+0 = \zeta(s) = \prod_{k=1}^{m_1}\frac{1}{1 - p_k^{-s}}\prod_{k=m_1+1}^{\infty}\frac{1}{1 - p_k^{-s}} \ne 0 ,
+\]
+
+这是不可能的。\nobreak\hspace{0.35em}■
+
+\item
+
+级数 $ \sum 1/p_k $ 发散。
+
+\proofhead
+由 (b) 的证明中的考虑，我们有估计
+\[
+\prod_{p\le m}\left( 1 - \frac{1}{p} \right)^{-1} \ge \sum_{n=1}^{m}\frac{1}{n} \quad \text{对 } n \in \mathbb{N}^\times ,
+\]
+
+其中乘积取遍所有 $ \le m $ 的素数。现在我们把和看作黎曼和，并发现函数 $ x \mapsto 1/x $ 是递减的：
+
+\end{items}
+
+\bookfigure[0.36]{figures/9a19cfb34c693874.png}
+\[
+\sum_{n=1}^{m}\frac{1}{n} > \int_1^m \frac{dx}{x} = \log m .
+\]
+
+因为对数是单调的，得到
+
+\begin{equation}
+\sum_{p\le m}\log\left( 1 - \frac{1}{p} \right)^{-1} > \log\log m \quad \text{对 } m \ge 2 .\tag{6.13}
+\end{equation}
+
+当 $ |z| < 1 $ 时，我们可以利用对数的级数展开（定理 V.3.9）
+
+\[
+\log(1 - z)^{-1} = -\log(1 - z) = \sum_{k=1}^{\infty}\frac{z^k}{k}
+\]
+
+得到
+
+\begin{equation}
+\sum_{p\le m}\log\left( 1 - \frac{1}{p} \right)^{-1} = \sum_{p\le m}\sum_{k=1}^{\infty}\frac{1}{kp^k} \le \sum_{p\le m}\frac{1}{p} + R ,\tag{6.14}
+\end{equation}
+
+其中
+
+\[
+R := \sum_{p\le m}\sum_{k=2}^{\infty}\frac{1}{kp^k} \le \frac{1}{2}\sum_{p\le m}\sum_{k=2}^{\infty}\frac{1}{p^k} = \frac{1}{2}\sum_{p\le m}\frac{1}{p(p - 1)} < \frac{1}{2}\sum_{j=2}^{\infty}\frac{1}{j(j - 1)} = \frac{1}{2} .
+\]
+
+现在由 (6.13) 与 (6.14) 得到
+
+\begin{equation}
+\sum_{p\le m}\frac{1}{p} \ge \log\log m - \frac{1}{2} \quad \text{对 } m \ge 2 ,\tag{6.15}
+\end{equation}
+
+由于和取遍所有 $ \le m $ 的素数，这就证明了该断言。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（e）]
+
+前面的陈述包含关于素数\textbf{密度}的信息。因为 $ \sum 1/p_k $ 发散（按照 (6.15)，至少与 $ \log\log m $ 一样快），序列 $ (p_k) $ 不能太快地趋于 $ \infty $。在素数分布的研究中，对 $ x \in \mathbb{R}^\times $，$ \pi(x) $ 表示 $ \le x $ 的素数个数。著名的\textbf{素数定理}说
+
+\[
+\pi(n) \sim n/\log n \quad (n \to \infty) .
+\]
+
+为得到更多信息，我们可以研究相对误差
+
+\[
+r(n) := \frac{\pi(n) - n/\log n}{n/\log n} = \frac{\pi(n)}{n/\log n} - 1
+\]
+
+当 $ n \to \infty $ 时的渐近行为。可以证明
+
+\[
+r(n) = O\left( \frac{1}{\log n} \right) \quad (n \to \infty) .
+\]
+
+然而，对于每个 $ \varepsilon > 0 $ 存在一个明显更好的误差估计这件事只是\emph{猜想的}：
+
+\[
+r(n) = O\left( \frac{1}{n^{1/2-\varepsilon}} \right) \quad (n \to \infty) .
+\]
+
+这个猜想等价于著名的\textbf{黎曼猜想}：
+$ \zeta $ 函数没有满足 $ \operatorname{Re} s > 1/2 $ 的零点 $ s $。
+由 (c) 我们知道 $ \zeta $ 在 $ \{ z \in \mathbb{C} ; \operatorname{Re} z > 1 \} $ 中没有零点。还知道 $ \zeta $ 的实部 $ \le 0 $ 的零点集对应 $ -2\mathbb{N}^\times $。把这些零点称为平凡的，由 $ \zeta $ 函数的性质可以得出结论：黎曼猜想等价于如下陈述：
+黎曼 $ \zeta $ 函数的所有非平凡零点都位于直线 $ \operatorname{Re} z = 1/2 $ 上。
+已知 $ \zeta $ 在这条直线上有无穷多个零点，并且对某个大的 $ K $ 值，不存在满足 $ |\operatorname{Im} s| < K $ 且 $ \operatorname{Re} s \ne 1/2 $ 的非平凡零点 $ s $。证明黎曼猜想至今仍是数学中最重大的努力之一。
+关于素数定理的证明、所述的渐近误差估计以及进一步的研究，请查阅解析数论的文献，例如 [Brü95]、[Pra78]、[Sch69]。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{梯形法则}
+
+在大多数实际应用中，由于没有已知的原函数，给定的积分必须数值地近似。由积分 $ \int_\alpha^\beta f\,dx $ 的定义，每个跳跃连续函数 $ f $ 都可以近似地积分为矩形上的黎曼和，这些矩形的（比方说）左上角与 $ f $ 的图像相接。这样的近似倾向于在矩形与函数之间留下空隙，而这会随着网格的减小而减慢其收敛。如果函数足够光滑，可以预期（在实值情形下）$ f $ 的图像下方的面积能被梯形更好地估计。
+
+\bookfigure[0.75]{figures/33b8879c77fcbbf6.png}
+
+这里 $ h[f(x + h) + f(x)]/2 $ 是梯形 $ T $ 的（有向）面积。
+
+下一定理表明，如果 $ f $ 是光滑的，则对小步长 $ h $ 的“梯形法则”给出 $ \int f $ 的良好近似。照例，我们取 $ -\infty < \alpha < \beta < \infty $ 且 $ E $ 为巴拿赫空间。
+
+\qyxffnnumdef{1}
+\afterpage{\qyxffntextof{1}{注意，公式 (6.6) 完全是初等的，这一推导不需要伯努利多项式的理论。}}
+\begin{theorem}
+
+设 $ f \in C^2([\alpha, \beta], E) $，$ n \in \mathbb{N}^\times $，且 $ h := (\beta - \alpha)/n $。则
+
+\[
+\int_\alpha^\beta f(x)\,dx = \left[ \frac{1}{2}f(\alpha) + \sum_{k=1}^{n-1} f(\alpha + kh) + \frac{1}{2}f(\beta) \right]h + R(f, h) ,
+\]
+
+其中
+
+\[
+\left|R(f, h)\right| \le \frac{\beta - \alpha}{12}h^2\left\|f''\right\|_\infty .
+\]
+
+\proofhead
+由积分的可加性与换元法则，在定义 $ x(t) := \alpha + kh + th $ 与 $ g_k(t) := f(\alpha + kh + th) $（$ t \in [0, 1] $）之后，得到
+\[
+\int_\alpha^\beta f(x)\,dx = \sum_{k=0}^{n-1}\int_{\alpha+kh}^{\alpha+(k+1)h} f(x)\,dx = h\sum_{k=0}^{n-1}\int_0^1 g_k(t)\,dt .
+\]
+
+公式 (6.6) 蕴含\qyxffnmark{1}
+
+\[
+\int_0^1 g_k(t)\,dt = \frac{1}{2}[g_k(0) + g_k(1)] - \int_0^1 B_1(t)g_k'(t)\,dt .
+\]
+
+我们设 $ u := g_k' $ 与 $ v' := B_1(X) $，于是 $ u' = g_k'' $ 且 $ v = -X(1 - X)/2 $，以及 $ v(0) = v(1) = 0 $。分部积分，我们因此得到
+
+\[
+-\int_0^1 B_1(t)g_k'(t)\,dt = \int_0^1 v(t)g_k''(t)\,dt .
+\]
+
+定义
+
+\[
+R(f, h) := h\sum_{k=0}^{n-1}\int_0^1 v(t)g_k''(t)\,dt ,
+\]
+
+我们得到表示
+
+\[
+\int_\alpha^\beta f(x)\,dx = h\left[ \frac{1}{2}f(\alpha) + \sum_{k=1}^{n-1} f(\alpha + kh) + \frac{1}{2}f(\beta) \right] + R(f, h) .
+\]
+
+为估计余项 $ R(f, h) $，我们首先注意到
+
+\[
+\left|\int_0^1 v(t)g_k''(t)\,dt\right| \le \left\|g_k''\right\|_\infty\int_0^1\frac{t(1 - t)}{2}\,dt = \frac{1}{12}\left\|g_k''\right\|_\infty .
+\]
+
+链式法则蕴含
+
+\[
+\left\|g_k''\right\|_\infty = \max_{t\in[0,1]}\left|g_k''(t)\right| = h^2\max_{\alpha+kh\le x\le\alpha+(k+1)h}\left|f''(x)\right| \le h^2\left\|f''\right\|_\infty .
+\]
+
+因此，
+
+\[
+\left|R(f, h)\right| \le h\sum_{k=0}^{n-1}\left|\int_0^1 v(t)g_k''(t)\,dt\right| \le \frac{h^3}{12}\left\|f''\right\|_\infty\sum_{k=0}^{n-1}1 = \frac{\beta - \alpha}{12}h^2\left\|f''\right\|_\infty ,
+\]
+
+这表明了它对 $ h $ 的依赖性。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+梯形法则构成数值近似积分的最简单“求积公式”。关于进一步的探索与更有效的方法，请参见关于数值方法的讲义与书籍（另见习题 8）。
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+证明命题 6.6 中的陈述 (iv) 与 (v)。
+
+\item
+
+计算 $ B_8 $、$ B_{10} $、$ B_{12} $，以及 $ B_4(X) $、$ B_5(X) $、$ B_6(X) $ 与 $ B_7(X) $。
+
+\item
+
+证明：对 $ n \in \mathbb{N}^\times $，
+
+\begin{subitems}
+\item
+
+$ B_{2n+1}(X) $ 在 $ [0, 1] $ 中只有零点 $ 0 $、$ 1/2 $ 与 $ 1 $；
+
+\item
+
+$ B_{2n}(X) $ 在 $ [0, 1] $ 中只有两个零点 $ x_{2m} $ 与 $ x'_{2m} $，且 $ x_{2m} + x'_{2m} = 1 $。
+
+\end{subitems}
+
+\item
+
+用 $ \widetilde{B}_n $ 表示 $ B_n(X)|[0, 1) $ 到 $ \mathbb{R} $ 上的 1-周期延拓。然后证明下列各条：
+
+\begin{subitems}
+\item
+
+对 $ n \ge 2 $，$ \widetilde{B}_n \in C^{n-2}(\mathbb{R}) $。
+
+\item
+
+对 $ k \in \mathbb{Z} $ 与 $ n \in \mathbb{N} $，$ \int_k^{k+1} \widetilde{B}_n(x) \, dx = 0 $。
+
+\item
+
+对每个 $ n \in \mathbb{N} $，映射
+
+\[
+F_n : \{ z \in \mathbb{C} ; \ \operatorname{Re} z > -2n \} \to \mathbb{C} , \quad s \mapsto \int_{1}^{\infty} \widetilde{B}_{2n+1}(x) x^{-(s+2n+1)} \, dx
+\]
+
+是解析的。
+
+\end{subitems}
+
+\item
+
+证明注 6.11(a)。
+
+\item
+
+对 $ \zeta $ 函数证明 $ \lim_{n \to \infty} \zeta(n) = 1 $。
+
+\item
+
+设 $ h > 0 $ 且 $ f \in C^4([-h, h], \mathbb{R}) $。证明
+
+\[
+\left| \int_{-h}^{h} f(x) \, dx - \frac{h}{3} \left( f(-h) + 4f(0) + f(h) \right) \right| \le \frac{h^5}{90} \|f^{(4)}\|_\infty .
+\]
+
+（提示：分部积分，并利用积分中值定理。）
+
+\item
+
+设 $ f \in C^4([\alpha, \beta], \mathbb{R}) $，并令 $ \alpha_j := \alpha + jh $，其中 $ 0 \le j \le 2n $，$ h := (\beta - \alpha)/2n $，且 $ n \in \mathbb{N}^\times $。进而令\footnote{照例，我们把“空和” $ \sum_{j=1}^{0} \cdots $ 的值规定为 0。}
+
+\[
+S(f, [\alpha, \beta], h) := \frac{h}{3} \left( f(\alpha) + f(\beta) + 2 \sum_{j=1}^{n-1} f(\alpha_{2j}) + 4 \sum_{j=1}^{n} f(\alpha_{2j-1}) \right) .
+\]
+
+这是\textbf{辛普森法则}，它是近似积分的又一种法则。证明它满足误差估计
+
+\[
+\left| \int_{\alpha}^{\beta} f(x) \, dx - S(f, [\alpha, \beta], h) \right| \le (\beta - \alpha) \frac{h^4}{180} \|f^{(4)}\|_\infty .
+\]
+
+（提示：习题 7。）
+
+\item
+
+计算下列等式在分别使用梯形法则（$ n = 2, 3, 4 $）与辛普森法则（$ n = 1, 2 $）时的误差：
+
+\[
+\int_{0}^{1} \frac{dx}{1 + x^2} = \frac{\pi}{4} \quad \text{且} \quad \int_{1}^{2} \frac{dx}{x} = \log 2
+\]
+\item
+
+证明：对于次数至多为三的任何多项式 $ p \in \mathbb{R}[X] $，带单个内部网格点的辛普森法则给出 $ \int_{\alpha}^{\beta} p $ 的正确值。
+
+\end{exercises}
+
+\section{傅里叶级数}
+
+在 V.4 节的末尾，我们提出了三角级数与连续周期函数之间的联系问题。借助现已具备的积分理论，我们可以更精确地研究这一联系。在此过程中，我们将首次领略广博的\emph{傅里叶级数理论}，其中我们只能集中于最重要的定理与技巧。为简单起见，我们只处理分段连续的 $ 2\pi $-周期函数，因为研究更一般的函数类需要用到勒贝格积分理论，而这要到第三卷才会涉及。
+
+傅里叶级数理论与内积空间理论密切相关，特别是与 $ L_{2} $ 空间密切相关。基于这些理由，我们首先考察分段连续函数空间的 $ L_{2} $ 结构，以及内积空间的标准正交基。这些结果对于确定傅里叶级数如何收敛将具有根本的重要性。
+
+\needspace{3\baselineskip}\subsection*{$ L_{2} $ 内积}
+
+设 $ I := [\alpha, \beta] $ 是紧致完全区间。由习题 4.3 可知，对 $ f \in \mathcal{SC}(I) $，积分 $ \int_{\alpha}^{\beta} f \, dx $ 与 $ f $ 在其间断点处的取值无关。因此，为研究积分之目的，我们可以任意固定这些值。基于这些理由，我们只考虑如下所述的“规范化”函数。当
+
+\begin{equation}
+f(x) = (f(x + 0) + f(x - 0))/2 \quad \text{对 } x \in \mathring{I} ,\tag{7.1}
+\end{equation}
+
+且
+
+\begin{equation}
+f(\alpha) = f(\beta) = (f(\alpha + 0) + f(\beta - 0))/2 .\tag{7.2}
+\end{equation}
+
+时，称 $ f : I \to \mathbb{C} $ 是\textbf{规范化}的。用 $ \mathcal{SC}(I) $ 表示规范化的、分段连续的函数 $ f : I \to \mathbb{C} $ 的集合。\footnote{我们自然地把 $ \mathcal{SC}([\alpha, \beta]) $ 写成 $ \mathcal{SC}[\alpha, \beta] $，把 $ C([\alpha, \beta]) $ 写成 $ C[\alpha, \beta] $，等等。}
+
+\bookfigure[0.58]{figures/a72886d40115245f.png}
+
+赋值 (7.2) 的含义将在周期函数的语境中得到澄清。
+
+\begin{proposition}
+
+$ \mathcal{SC}(I) $ 是 $ \mathcal{S}(I) $ 的向量子空间，并且
+
+\[
+(f|g)_{2} := \int_{\alpha}^{\beta} f\bar{g} \, dx \quad \text{对 } f, g \in \mathcal{SC}(I) ,
+\]
+
+在 $ \mathcal{SC}(I) $ 上定义了一个内积 $ (\cdot|\cdot)_{2} $。
+
+\proofhead
+第一个断言是显然的。积分的线性性蕴含 $ (\cdot|\cdot)_{2} $ 是 $ \mathcal{SC}(I) $ 上的半双线性型。推论 4.10 蕴含对 $ f, g \in \mathcal{SC}(I) $ 有 $ \overline{(f|g)_{2}} = (g|f)_{2} $。由积分的正性，我们有
+\[
+(f|f)_{2} = \int_{\alpha}^{\beta} |f|^{2} \, dx \ge 0 \quad \text{对 } f \in \mathcal{SC}(I) .
+\]
+
+若 $ f \in \mathcal{SC}(I) $ 不是零函数，则由规范化性，存在点 $ a $，使得 $ f $，从而 $ |f|^{2} $，在该点连续，并且 $ |f(a)|^{2} > 0 $。于是由命题 4.8 可得 $ (f|f) > 0 $。因此 $ (\cdot|\cdot)_{2} $ 是 $ \mathcal{SC}(I) $ 上的内积。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+由 $ (\cdot|\cdot)_{2} $ 诱导的范数
+
+\[
+f \mapsto \|f\|_{2} := \sqrt{(f|f)_{2}} = \Big(\int_{\alpha}^{\beta}|f|^{2} \, dx\Big)^{1/2}
+\]
+
+称为 \textbf{$ L_{2} $ 范数}，我们称 $ (\cdot|\cdot)_{2} $ 本身为 $ \mathcal{SC}(I) $ 上的 \textbf{$ L_{2} $ 内积}。在下文中，除非另有明确说明，我们总给 $ \mathcal{SC}(I) $ 配备这个内积，并理解为
+
+\[
+\mathcal{SC}(I) := (\mathcal{SC}(I), (\cdot|\cdot)_{2}) .
+\]
+
+于是 $ \mathcal{SC}(I) $ 是一个内积空间。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+$ \mathcal{SC}(I) $ 上的 $ L_{2} $ 范数弱于\footnote{见习题 4.5。}上确界范数。精确地说，我们有
+
+\[
+\|f\|_{2} \le \sqrt{\beta - \alpha}\,\|f\|_{\infty} \quad \text{对 } f \in \mathcal{SC}(I) .
+\]
+\item
+
+对 $ f \in \mathcal{SC}(I) $，不等式 $ \|f\|_{\infty} < \varepsilon $ 成立，因此 $ f $ 的整个图像都落在区间 $ I $ 上的一个“$ \varepsilon $ 带”内。另一方面，即使 $ \|f\|_{2} < \varepsilon $，$ f $ 本身也可以取到非常大的值，也就是说，该不等式只要求 $ |f|^{2} $ 的图像在 $ I $ 中的（有向）面积小于 $ \varepsilon^{2} $。我们说函数 $ f $ 在其\textbf{均方}意义上小于 $ \varepsilon $。按 $ L_{2} $ 范数的收敛也称为\textbf{均方收敛}。
+
+\end{items}
+
+\bookfigure[0.83]{figures/14bb94bd81fde46e.png}
+
+\begin{items}
+\item[（c）]
+
+虽然序列 $ (f_{n}) $ 可以在 $ \mathcal{SC}(I) $ 中——从而也在其均方意义下——收敛到零，但对 $ x \in I $，值 $ (f_{n}(x)) $ 却未必收敛到零。
+
+\proofhead
+对 $ n \in \mathbb{N}^{\times} $，设 $ j, k \in \mathbb{N} $ 是满足 $ n = 2^{k} + j $ 且 $ j < 2^{k} $ 的唯一的一对数。于是我们通过 $ f_{0} := \mathbf{1} $ 和
+\begin{equation*}
+f_{n}(x) := \begin{cases} 1 , & x \in (j2^{-k}, (j+1)2^{-k}) , \\ 0 & \text{其他情形} . \end{cases}
+\end{equation*}
+
+定义 $ f_{n} \in \mathcal{SC}[0, 1] $。
+
+\end{items}
+
+\bookfigure[0.95]{figures/40c1d2a6294e0a1a.png}
+
+因为 $ \|f_{n}\|_{2}^{2} = 2^{-k} $，$ (f_{n}) $ 在 $ \mathcal{SC}[0, 1] $ 中收敛到 $ 0 $；然而，因为 $ f $ 中的“尖峰”每次变窄时都从左到右扫过整个区间，所以对任何 $ x \in [0, 1] $，$ (f_{n}(x)) $ 都不收敛。\nobreak\hspace{0.35em}■
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{在均方意义下逼近}
+
+显然，$ C(I) $ 在上确界范数下在 $ \mathcal{SC}(I) $ 中不稠密。然而，在 $ L_{2} $ 范数下，情形就不同了，如下面关于均方逼近的定理所示。这里我们置
+
+\[
+C_{0}(I) := \{ u \in C(I) \;;\; u(\alpha) = u(\beta) = 0 \} .
+\]
+
+$ C_{0}(I) $ 显然是 $ C(I) $（在最大值范数下）的闭向量子空间，因此它是一个巴拿赫空间。
+
+\qyxffntextdef{1}{当然，$ \|u\|_{2} $ 对每个 $ u \in \mathcal{S}(I) $ 都有定义。}
+\begin{proposition}
+
+$ C_{0}(I) $ 在 $ \mathcal{SC}(I) $ 中稠密。
+
+\proofhead
+设 $ f \in \mathcal{SC}(I) $ 且 $ \varepsilon > 0 $。由定理 1.2，存在 $ g \in \mathcal{T}(I) $ 使得 $ \|f - g\|_{\infty} < \varepsilon/2\sqrt{\beta - \alpha} $。因此\qyxffnmark{1} $ \|f - g\|_{2} < \varepsilon/2 $。于是只需找到 $ h \in C_{0}(I) $ 使得 $ \|g - h\|_{2} < \varepsilon/2 $。
+
+因此设 $ f \in \mathcal{T}(I) $ 且 $ \varepsilon > 0 $。于是存在 $ f $ 的一个划分 $ (\alpha_{0}, \ldots, \alpha_{n}) $ 以及函数 $ g_{j} $，使得
+\begin{equation*}
+g_{j}(x) = \begin{cases} f(x) , & x \in (\alpha_{j}, \alpha_{j+1}) , \\ 0 , & x \in I \setminus(\alpha_{j}, \alpha_{j+1}) , \end{cases} \quad \text{对 } 0 \le j \le n-1 ,
+\end{equation*}
+
+且对 $ x \ne \alpha_{j} $ 有 $ f(x) = \sum_{j=0}^{n-1} g_{j}(x) $。另一方面，由三角不等式，只需找到 $ h_{0}, \ldots, h_{n-1} \in C_{0}(I) $ 使得 $ \|g_{j} - h_{j}\|_{2} < \varepsilon/n $。
+
+于是我们可以假定 $ f $ 是“只有一个台阶”的非平凡阶梯函数。换句话说，存在数 $ \bar{\alpha}, \bar{\beta} \in I $ 与 $ y \in \mathbb{C}^{\times} $，其中 $ \bar{\alpha} < \bar{\beta} $，它们可以选取为使得
+
+\begin{equation*}
+f(x) = \begin{cases} y , & x \in (\bar{\alpha}, \bar{\beta}) , \\ 0 , & x \in I \setminus[\bar{\alpha}, \bar{\beta}] , \end{cases}
+\end{equation*}
+
+设 $ \varepsilon > 0 $。于是我们选取 $ \delta > 0 $ 使得 $ \delta < (\bar{\beta} - \bar{\alpha})/2 \wedge \varepsilon^{2}/|y|^{2} $，并定义
+
+\begin{equation*}
+g(x) := \begin{cases} 0 , & x \in I \setminus(\bar{\alpha}, \bar{\beta}) , \\ y , & x \in (\bar{\alpha} + \delta, \bar{\beta} - \delta) , \\ \frac{x - \bar{\alpha}}{\delta} y , & x \in [\bar{\alpha}, \bar{\alpha} + \delta] , \\ \frac{\bar{\beta} - x}{\delta} y , & x \in [\bar{\beta} - \delta, \bar{\beta}] . \end{cases}
+\end{equation*}
+\bookfigure[0.37]{figures/6a4e99a2dbc08e3c.png}
+
+于是 $ g $ 属于 $ C_{0}(I) $，并且我们有
+
+\[
+\|f - g\|_{2}^{2} = \int_{\alpha}^{\beta} |f - g|^{2} \, dx \le \delta|y|^{2} < \varepsilon^{2} .\quad\blacksquare
+\]
+\end{proposition}
+
+\begin{corollary}
+
+\begin{subitems}
+\item
+
+$ (C(I), (\cdot|\cdot)_{2}) $ 不是希尔伯特空间。
+
+\item
+
+$ C(I) $ 上的最大值范数严格强于 $ L_{2} $ 范数。
+
+\proofhead
+(i) 设 $ f \in \mathcal{SC}(I) \setminus C(I) $。于是由命题 7.3，存在 $ C(I) $ 中的序列 $ (f_{j}) $，它在 $ L_{2} $ 范数下收敛到 $ f $。因此，根据命题 II.6.1，$ (f_{j}) $ 是 $ \mathcal{SC}(I) $ 中的柯西序列，从而也是
+$ E := (C(I), \|\cdot\|_{2}) $ 中的柯西序列。若 $ E $ 是希尔伯特空间，因而是完备的，则存在 $ g \in E $ 使得在 $ E $ 中 $ f_{j} \to g $。于是 $ (f_{j}) $ 在 $ \mathcal{SC}(I) $ 中同时收敛到 $ f $ 与 $ g $，而我们又有 $ f \ne g $，这是不可能的。因此 $ E $ 不完备。
+\end{subitems}
+
+(ii) 这由 (i) 以及注 7.2(a) 与 II.6.7(a) 得到。\nobreak\hspace{0.35em}■
+
+\end{corollary}
+
+\needspace{3\baselineskip}\subsection*{标准正交系}
+
+我们现在回顾内积空间理论中的一些概念（见习题 II.3.10）。设 $ E := (E, (\cdot|\cdot)) $ 是内积空间。若 $ (u|v) = 0 $，则称 $ u, v \in E $ \textbf{正交}，我们也记作 $ u \perp v $。若 $ E $ 的子集 $ M $ 中任意两个不同的元素都正交，则称 $ M $ 是\textbf{正交系}。若此外对 $ u \in M $ 还有 $ \|u\| = 1 $，则称 $ M $ 是\textbf{标准正交系}（ONS）。
+
+\begin{example}
+
+\begin{items}
+\item
+
+对 $ k \in \mathbb{Z} $，令
+
+\[
+\mathrm{e}_{k}(t) := \frac{1}{\sqrt{2\pi}}\mathrm{e}^{ikt} \quad \text{对 } t \in \mathbb{R} .
+\]
+
+则 $ \{ \mathrm{e}_{k} \;;\; k \in \mathbb{Z} \} $ 是内积空间 $ \mathcal{SC}[0, 2\pi] $ 中的一个 ONS。
+
+\proofhead
+因为指数函数是 $ 2\pi i $-周期的，我们求得
+\begin{equation*}
+(\mathrm{e}_{j}|\mathrm{e}_{k})_{2} = \int_{0}^{2\pi} \mathrm{e}_{j}\overline{\mathrm{e}_{k}} \, dt = \frac{1}{2\pi}\int_{0}^{2\pi}\mathrm{e}^{i(j-k)t} \, dt = \begin{cases} 1 , & j = k , \\ \frac{-i}{2\pi(j-k)}\mathrm{e}^{i(j-k)t}\big|_{0}^{2\pi} = 0 , & j \ne k , \end{cases}
+\end{equation*}
+
+这正是所要求的。\nobreak\hspace{0.35em}■
+
+\item
+
+设
+
+\[
+\mathrm{c}_{0}(t) := \frac{1}{\sqrt{2\pi}} , \quad \mathrm{c}_{k}(t) := \frac{1}{\sqrt{\pi}}\cos(kt)
+\]
+
+且
+
+\[
+\mathrm{s}_{k}(t) := \frac{1}{\sqrt{\pi}}\sin(kt)
+\]
+
+对 $ t \in \mathbb{R} $ 与 $ k \in \mathbb{N}^{\times} $。则 $ \{ \mathrm{c}_{0}, \mathrm{c}_{k}, \mathrm{s}_{k} \;;\; k \in \mathbb{N}^{\times} \} $ 是内积空间 $ \mathcal{SC}([0, 2\pi], \mathbb{R}) $ 中的标准正交系。
+
+\proofhead
+欧拉公式 (III.6.1) 蕴含对 $ k \in \mathbb{N}^{\times} $ 有 $ \mathrm{e}_{k} = (\mathrm{c}_{k} + i\mathrm{s}_{k})/\sqrt{2} $。于是
+\begin{equation}
+2(\mathrm{e}_{j}|\mathrm{e}_{k})_{2} = (\mathrm{c}_{j}|\mathrm{c}_{k})_{2} + (\mathrm{s}_{j}|\mathrm{s}_{k})_{2} + i[(\mathrm{s}_{j}|\mathrm{c}_{k})_{2} - (\mathrm{c}_{j}|\mathrm{s}_{k})_{2}]\tag{7.3}
+\end{equation}
+
+对 $ j, k \in \mathbb{N}^{\times} $。因为 $ (\mathrm{e}_{j}|\mathrm{e}_{k})_{2} $ 是实的，我们求得
+
+\begin{equation}
+(\mathrm{s}_{j}|\mathrm{c}_{k})_{2} = (\mathrm{c}_{j}|\mathrm{s}_{k})_{2} \quad \text{对 } j, k \in \mathbb{N}^{\times} .\tag{7.4}
+\end{equation}
+
+分部积分给出
+
+\[
+(\mathrm{s}_{j}|\mathrm{c}_{k})_{2} = \frac{1}{\pi}\int_{0}^{2\pi} \sin(jt)\cos(kt) \, dt = -\frac{j}{k}(\mathrm{c}_{j}|\mathrm{s}_{k})_{2}
+\]
+
+对 $ j, k \in \mathbb{N}^{\times} $。因此结合 (7.4) 我们得到
+
+\[
+(1 + j/k)(\mathrm{s}_{j}|\mathrm{c}_{k})_{2} = 0 \quad \text{对 } j, k \in \mathbb{N}^{\times} .
+\]
+
+于是我们可以断言
+
+\[
+(\mathrm{s}_{j}|\mathrm{c}_{k})_{2} = 0 \quad \text{对 } j, k \in \mathbb{N} ,
+\]
+
+因为对剩下的情形 $ j = 0 $ 或 $ k = 0 $，这个关系式是平凡成立的。
+利用克罗内克符号，我们由 (7.3) 和 (a) 得到
+
+\begin{equation}
+(\mathrm{c}_{j}|\mathrm{c}_{k})_{2} + (\mathrm{s}_{j}|\mathrm{s}_{k})_{2} = 2\delta_{jk} \quad \text{对 } j, k \in \mathbb{N}^{\times} .\tag{7.5}
+\end{equation}
+
+分部积分给出
+
+\begin{equation}
+(\mathrm{s}_{j}|\mathrm{s}_{k})_{2} = \frac{j}{k}(\mathrm{c}_{j}|\mathrm{c}_{k})_{2} \quad \text{对 } j, k \in \mathbb{N}^{\times} .\tag{7.6}
+\end{equation}
+
+因此
+
+\[
+(1 + j/k)(\mathrm{c}_{j}|\mathrm{c}_{k})_{2} = 2\delta_{jk} \quad \text{对 } j, k \in \mathbb{N}^{\times} .
+\]
+
+由此以及 (7.6)，可得
+
+\[
+(\mathrm{c}_{j}|\mathrm{c}_{k})_{2} = (\mathrm{s}_{j}|\mathrm{s}_{k})_{2} = 0 \quad \text{对 } j \ne k ,
+\]
+
+以及
+
+\[
+\|\mathrm{c}_{k}\|_{2}^{2} = \|\mathrm{s}_{k}\|_{2}^{2} = 1 \quad \text{对 } k \in \mathbb{N}^{\times} .
+\]
+
+最后，对 $ j \in \mathbb{N}^{\times} $，$ (\mathrm{c}_{0}|\mathrm{c}_{j})_{2} = (\mathrm{c}_{0}|\mathrm{s}_{j})_{2} = 0 $ 是显然的，且 $ \|\mathrm{c}_{0}\|_{2}^{2} = 1 $。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{周期函数的积分}
+
+我们现在汇集周期函数的一些初等但有用的性质。
+
+\begin{remark}
+
+设 $ f : \mathbb{R} \to \mathbb{C} $ 对某个 $ p > 0 $ 是 $ p $-周期的。
+
+\begin{items}
+\item
+
+若 $ f|[0, p] $ 跳跃连续，则 $ f $ 在 $ \mathbb{R} $ 的每个紧致子区间 $ I $ 上跳跃连续。类似地，若 $ f|[0, p] $ 属于 $ \mathcal{SC}[0, p] $，则 $ f|I $ 属于 $ \mathcal{SC}(I) $。
+
+\item
+
+若 $ f|[0, p] $ 跳跃连续，则我们有
+
+\[
+\int_{0}^{p} f \, dx = \int_{\alpha}^{\alpha+p} f \, dx \quad \text{对 } \alpha \in \mathbb{R} .
+\]
+
+\proofhead
+由积分的可加性，我们有
+\[
+\int_{\alpha}^{\alpha+p} f \, dx = \int_{0}^{p} f \, dx + \int_{p}^{\alpha+p} f \, dx - \int_{0}^{\alpha} f \, dx .
+\]
+
+对右端第二个积分使用代换 $ y(x) := x - p $，并利用 $ f $ 的 $ p $-周期性，我们得到
+
+\[
+\int_{p}^{\alpha+p} f \, dx = \int_{0}^{\alpha} f(y + p) \, dy = \int_{0}^{\alpha} f \, dy .\quad\blacksquare
+\]
+
+由注 V.4.12(b)，我们可以把周期函数的研究限制到情形 $ p = 2\pi $。于是我们现在取 $ I := [0, 2\pi] $，并在这个区间上定义 $ L_{2} $ 内积。
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{傅里叶系数}
+
+考虑三角多项式
+
+\begin{equation}
+T_{n} : \mathbb{R} \to \mathbb{C} , \quad t \mapsto \frac{a_{0}}{2} + \sum_{k=1}^{n}[a_{k}\cos(kt) + b_{k}\sin(kt)] ,\tag{7.7}
+\end{equation}
+
+对 $ 1 \le k \le n $ 利用
+
+\begin{equation}
+c_{0} := a_{0}/2 , \quad c_{k} := (a_{k} - ib_{k})/2 , \quad c_{-k} := (a_{k} + ib_{k})/2\tag{7.8}
+\end{equation}
+
+我们可以把 $ T_{n} $ 写成
+
+\begin{equation}
+T_{n}(t) = \sum_{k=-n}^{n} c_{k}\mathrm{e}^{ikt} \quad \text{对 } t \in \mathbb{R} ,\tag{7.9}
+\end{equation}
+
+（见 (V.4.5) 与 (V.4.6)）。
+
+\begin{lemma}
+
+系数 $ c_{k} $ 可以如下求得：
+
+\[
+c_{k} = \frac{1}{2\pi}\int_{0}^{2\pi} T_{n}(t)\mathrm{e}^{-ikt} \, dt = \frac{1}{\sqrt{2\pi}}(T_{n}|\mathrm{e}_{k})_{2} \quad \text{对 } -n \le k \le n .
+\]
+
+\proofhead
+我们在 $ \mathcal{SC}(I) $ 中对 $ T_{n} \in C(I) $ 与 $ \mathrm{e}_{j} $ 作内积。于是由 (7.9) 和例 7.5(a) 可得
+\[
+(T_{n}|\mathrm{e}_{j})_{2} = \sqrt{2\pi}\sum_{k=-n}^{n} c_{k}(\mathrm{e}_{k}|\mathrm{e}_{j})_{2} = \sqrt{2\pi}c_{j} \quad \text{对 } -n \le j \le n .\quad\blacksquare
+\]
+\end{lemma}
+
+现在设 $ (a_{k}) $ 与 $ (b_{k}) $ 是 $ \mathbb{C} $ 中的级数，且对 $ k \in \mathbb{Z} $ 通过 (7.8) 定义 $ c_{k} $。于是我们可以把三角级数
+
+\[
+\frac{a_{0}}{2} + \sum_{k \ge 1}[a_{k}\cos(k\cdot) + b_{k}\sin(k\cdot)] = \frac{a_{0}}{2} + \sqrt{\pi}\sum_{k \ge 1}(a_{k}\mathrm{c}_{k} + b_{k}\mathrm{s}_{k})
+\]
+
+写成
+
+\begin{equation}
+\sum_{k \in \mathbb{Z}} c_{k}\mathrm{e}^{ik\cdot} = \sqrt{2\pi}\sum_{k \in \mathbb{Z}} c_{k}\mathrm{e}_{k} .\tag{7.10}
+\end{equation}
+
+\textbf{约定}  在本节余下部分，我们把 $ \sum_{k \in \mathbb{Z}} g_{k} $ 理解为部分和序列 $ \big(\sum_{k=-n}^{n} g_{k}\big)_{n \in \mathbb{N}} $，而不是两个单级数 $ \sum_{k \ge 0} g_{k} $ 与 $ \sum_{k > 1} g_{-k} $ 之和的序列。
+
+下一个定理表明，何时可以从三角级数 (7.1) 所收敛到的函数中提取出该级数的系数。
+
+\begin{proposition}
+
+若三角级数 (7.10) 在 $ \mathbb{R} $ 上一致收敛，则它收敛到一个连续的 $ 2\pi $-周期函数 $ f $，并且
+
+\[
+c_{k} = \frac{1}{2\pi}\int_{0}^{2\pi} f(t)\mathrm{e}^{-ikt} \, dt = \frac{1}{\sqrt{2\pi}}(f|\mathrm{e}_{k})_{2} \quad \text{对 } k \in \mathbb{Z} .
+\]
+
+\proofhead
+因为部分和 $ T_{n} $ 连续且 $ 2\pi $-周期，第一个断言立即由定理 V.2.1 得到。因此定义
+\[
+f(t) := \sum_{n=-\infty}^{\infty} c_{n}\mathrm{e}^{int} := \lim_{n \to \infty} T_{n}(t) \quad \text{对 } t \in \mathbb{R} .
+\]
+
+级数 $ (T_{n}\overline{\mathrm{e}_{k}})_{n \in \mathbb{N}} $ 对每个 $ k \in \mathbb{Z} $ 一致收敛，因此在 $ C(I) $ 中收敛到 $ f\overline{\mathrm{e}_{k}} $。于是我们由命题 4.1 和引理 7.7 得到
+
+\[
+(f|\mathrm{e}_{k})_{2} = \int_{0}^{2\pi} f\overline{\mathrm{e}_{k}} \, dt = \lim_{n \to \infty}\int_{0}^{2\pi} T_{n}\overline{\mathrm{e}_{k}} \, dt = \sqrt{2\pi}c_{k} \quad \text{对 } k \in \mathbb{Z} .\quad\blacksquare
+\]
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{经典傅里叶级数}
+
+我们用 $ \mathcal{SC}_{2\pi} $ 表示 $ B(\mathbb{R}) $ 的向量子空间，它包含所有满足 $ f|I \in \mathcal{SC}(I) $ 的 $ 2\pi $-周期函数 $ f : \mathbb{R} \to \mathbb{C} $，并且配备内积
+
+\[
+(f|g)_{2} := \int_{0}^{2\pi} f\bar{g} \, dx \quad \text{对 } f, g \in \mathcal{SC}_{2\pi} .
+\]
+
+于是
+
+\begin{equation}
+\hat{f}_{k} := \frac{1}{2\pi}\int_{0}^{2\pi} f(t)\mathrm{e}^{-ikt} \, dt = \frac{1}{\sqrt{2\pi}}(f|\mathrm{e}_{k})_{2}\tag{7.11}
+\end{equation}
+
+对 $ f \in \mathcal{SC}_{2\pi} $ 与 $ k \in \mathbb{Z} $ 有良定义，并称为 $ f $ 的第 $ k $ 个\textbf{（经典）傅里叶系数}。三角级数
+
+\begin{equation}
+Sf := \sum_{k \in \mathbb{Z}} \hat{f}_{k}\mathrm{e}^{ik\cdot} = \sum_{k \in \mathbb{Z}} (f|\mathrm{e}_{k})\mathrm{e}_{k}\tag{7.12}
+\end{equation}
+
+是 $ f $ 的\textbf{（经典）傅里叶级数}。它的第 $ n $ 个部分和
+
+\[
+S_{n}f := \sum_{k=-n}^{n} \hat{f}_{k}\mathrm{e}^{ik\cdot}
+\]
+
+是它的第 $ n $ 个\textbf{傅里叶多项式}。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+$ \mathcal{SC}_{2\pi} $ 是内积空间，且 $ C_{2\pi} $，即连续的 $ 2\pi $-周期函数\footnote{见 V.4 节。} $ f : \mathbb{R} \to \mathbb{C} $ 的空间，在 $ \mathcal{SC}_{2\pi} $ 中稠密。
+
+\proofhead
+周期函数由其在一个周期区间上的值所确定，这可由定理 7.1 和 7.3 的证明得到。这里我们注意到 $ g \in C_{0}(I) $ 的 $ 2\pi $-周期延拓属于 $ C_{2\pi} $。\nobreak\hspace{0.35em}■
+\item
+
+傅里叶级数 $ Sf $ 可以表示成
+
+\[
+Sf = \frac{a_{0}}{2} + \sum_{k \ge 1}(a_{k}\cos(k\cdot) + b_{k}\sin(k\cdot)) = \frac{a_{0}}{2} + \sqrt{\pi}\sum_{k \ge 1}(a_{k}\mathrm{c}_{k} + b_{k}\mathrm{s}_{k}) ,
+\]
+
+其中
+
+\[
+a_{k} := a_{k}(f) := \frac{1}{\pi}\int_{0}^{2\pi} f(t)\cos(kt) \, dt = \frac{1}{\sqrt{\pi}}(f|\mathrm{c}_{k})
+\]
+
+且
+
+\[
+b_{k} := b_{k}(f) := \frac{1}{\pi}\int_{0}^{2\pi} f(t)\sin(kt) \, dt = \frac{1}{\sqrt{\pi}}(f|\mathrm{s}_{k})
+\]
+
+对 $ k \in \mathbb{N}^{\times} $。此外
+
+\[
+a_{0} := a_{0}(f) := \frac{1}{\pi}\int_{0}^{2\pi} f(t) \, dt = \sqrt{\frac{2}{\pi}}(f|\mathrm{c}_{0}) .
+\]
+
+\proofhead
+这由 (7.8) 和欧拉公式 $ \sqrt{2}\mathrm{e}_{k} = \mathrm{c}_{k} + i\mathrm{s}_{k} $ 得到。\nobreak\hspace{0.35em}■
+\item
+
+若 $ f $ 是偶函数，则 $ Sf $ 是纯粹的\textbf{余弦级数}：
+
+\[
+Sf = \frac{a_{0}}{2} + \sum_{k \ge 1} a_{k}\cos(k\cdot) = \frac{a_{0}}{2} + \sqrt{\pi}\sum_{k \ge 1} a_{k}\mathrm{c}_{k}
+\]
+
+其中
+
+\[
+a_{k} = a_{k}(f) = \frac{2}{\pi}\int_{0}^{\pi} f(t)\cos(kt) \, dt \quad \text{对 } k \in \mathbb{N} .
+\]
+
+若 $ f $ 是奇函数，则 $ Sf $ 是纯粹的\textbf{正弦级数}：
+
+\[
+Sf = \sum_{k \ge 1} b_{k}\sin(k\cdot) = \sqrt{\pi}\sum_{k \ge 1} b_{k}\mathrm{s}_{k}
+\]
+
+其中
+
+\begin{equation}
+b_{k} = b_{k}(f) = \frac{2}{\pi}\int_{0}^{\pi} f(t)\sin(kt) \, dt \quad \text{对 } k \in \mathbb{N} .\tag{7.13}
+\end{equation}
+
+\proofhead
+余弦是偶函数，正弦是奇函数。于是若 $ f $ 是偶函数，则 $ f\mathrm{c}_{k} $ 是偶函数，$ f\mathrm{s}_{k} $ 是奇函数。若 $ f $ 是奇函数，则 $ f\mathrm{c}_{k} $ 是奇函数，$ f\mathrm{s}_{k} $ 是偶函数。因此，由注 7.6(b) 和习题 4.11，
+\[
+a_{k} = \frac{1}{\pi}\int_{-\pi}^{\pi} f(t)\cos(kt) \, dt = \frac{2}{\pi}\int_{0}^{\pi} f(t)\cos(kt) \, dt
+\]
+
+且
+
+\[
+b_{k} = \frac{1}{\pi}\int_{-\pi}^{\pi} f(t)\sin(kt) \, dt = 0
+\]
+
+若 $ f $ 是偶函数。若 $ f $ 是奇函数，则 $ a_{k} = 0 $，且 (7.13) 给出 $ b_{k} $。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\begin{example}
+
+\begin{items}
+\item
+
+通过 $ f(t) = \mathrm{sign}(t) $（$ t \in (-\pi, \pi) $）定义 $ f \in \mathcal{SC}_{2\pi} $。
+
+\end{items}
+
+\bookfigure[0.92]{figures/e77d9432650342df.png}
+
+于是
+
+\[
+Sf = \frac{4}{\pi}\sum_{k \ge 0}\frac{\sin((2k+1)\cdot)}{2k+1} .
+\]
+
+该图在 $ [-\pi, \pi] $ 中画出了一列傅里叶多项式：
+
+\bookfigure[0.95]{figures/7ac25e70bf8dd3b4.png}
+
+（基于这些图像，我们可能会认为 $ Sf $ 逐点收敛到 $ f $。）
+
+\proofhead
+因为 $ f $ 是奇函数，且因为
+\begin{equation*}
+\frac{2}{\pi}\int_{0}^{\pi} f(t)\sin(kt) \, dt = \frac{2}{\pi}\int_{0}^{\pi}\sin(kt) \, dt = -\frac{2}{k\pi}\cos(kt)\big|_{0}^{\pi} = \begin{cases} \frac{4}{k\pi} , & k \in 2\mathbb{N} + 1 , \\ 0 , & k \in 2\mathbb{N} , \end{cases}
+\end{equation*}
+
+该断言由注 7.9(c) 得到。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（b）]
+
+设 $ f \in C_{2\pi} $ 使得对 $ |t| \le \pi $ 有 $ f(t) = |t| $。换句话说，
+
+\[
+f(t) = 2\pi\,\mathrm{zigzag}(t/2\pi) \quad \text{对 } t \in \mathbb{R} ,
+\]
+
+（见习题 III.1.1）。
+
+\end{items}
+
+\bookfigure[0.94]{figures/e42c331215c4a915.png}
+
+于是
+
+\[
+Sf = \frac{\pi}{2} - \frac{4}{\pi}\sum_{k \ge 0}\frac{\cos((2k+1)\cdot)}{(2k+1)^{2}} .
+\]
+
+这个级数在 $ \mathbb{R} $ 上正规收敛（即它是依范数收敛的）。
+
+\proofhead
+因为 $ f $ 是偶函数，且因为分部积分给出
+\[
+a_{k} = \frac{2}{\pi}\int_{0}^{\pi} t\cos(kt) \, dt = -\frac{2}{\pi k}\int_{0}^{\pi}\sin(kt) \, dt = \frac{2}{\pi k^{2}}((-1)^{k} - 1) ,
+\]
+
+对 $ k \ge 1 $，第一个断言由注 7.9(c) 得到。现在，由例 II.7.1(b)，$ \sum (2k+1)^{-2} $ 是 $ \sum \mathrm{c}_{2k+1}/(2k+1)^{2} $ 的一个收敛优级数。于是第二个断言由魏尔斯特拉斯优级数判别法（定理 V.1.6）得到。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（c）]
+
+设 $ z \in \mathbb{C} \setminus \mathbb{Z} $，且 $ f_{z} \in C_{2\pi} $ 通过对 $ |t| \le \pi $ 定义 $ f_{z}(t) := \cos(zt) $ 而给出。于是
+
+\[
+Sf_{z} = \frac{\sin(\pi z)}{\pi}\Big(\frac{1}{z} + \sum_{n \ge 1}(-1)^{n}\Big(\frac{1}{z+n} + \frac{1}{z-n}\Big)\cos(n\cdot)\Big) .
+\]
+
+这个级数在 $ \mathbb{R} $ 上正规收敛。
+
+\proofhead
+因为 $ f $ 是偶函数，$ Sf_{z} $ 是余弦级数。利用命题 III.6.3(i) 中的第一个加法定理，我们求得
+\begin{equation*}
+\begin{aligned}
+a_{n} &= \frac{2}{\pi}\int_{0}^{\pi}\cos(zt)\cos(nt) \, dt = \frac{1}{\pi}\int_{0}^{\pi}\big(\cos((z+n)t) + \cos((z-n)t)\big) \, dt \\ &= (-1)^{n}\frac{\sin(\pi z)}{\pi}\Big(\frac{1}{z+n} + \frac{1}{z-n}\Big)
+\end{aligned}
+\end{equation*}
+
+对 $ n \in \mathbb{N} $。因此 $ Sf_{z} $ 具有所述形式。
+对 $ n > 2|z| $，我们有 $ |a_{n}| < |\sin(\pi z)||z|/|z^{2} - n^{2}| < 2|\sin(\pi z)||z|/n^{2} $。正规收敛再次由魏尔斯特拉斯优级数判别法得到。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{贝塞尔不等式}
+
+设 $ (E, (\cdot|\cdot)) $ 是内积空间，且 $ \{ \varphi_{k} \;;\; k \in \mathbb{N} \} $ 是\footnote{注意，这蕴含 $ E $ 是无限维的（见习题 II.3.10(a)）。} $ E $ 中的一个 ONS。作为经典傅里叶级数的推广，我们把 $ E $ 中的级数
+
+\[
+\sum_{k}(u|\varphi_{k})\varphi_{k}
+\]
+
+称为 $ u \in E $ 关于 ONS $ \{ \varphi_{k} \;;\; k \in \mathbb{N} \} $ 的\textbf{傅里叶级数}，而 $ (u|\varphi_{k}) $ 是 $ u $ 关于 $ \{ \varphi_{k} \;;\; k \in \mathbb{N} \} $ 的第 $ k $ 个\textbf{傅里叶系数}。
+
+对 $ n \in \mathbb{N} $，令 $ E_{n} := \mathrm{span}\{\varphi_{0}, \ldots, \varphi_{n}\} $，并定义
+
+\[
+P_{n} : E \to E_{n} , \quad u \mapsto \sum_{k=0}^{n}(u|\varphi_{k})\varphi_{k} .
+\]
+
+下一个定理表明，对每个 $ u \in E $，$ P_{n}u $ 给出 $ E_{n} $ 中与 $ u $ 距离最近的唯一元素，并且 $ u - P_{n}u $ 垂直于 $ E_{n} $。\footnote{见习题 II.3.12。}
+
+\bookfigure[0.36]{figures/6ac766d233dd197d.png}
+
+\begin{proposition}
+
+对 $ u \in E $ 与 $ n \in \mathbb{N} $，我们有
+
+\begin{subitems}
+\item
+
+$ u - P_{n}u \in E_{n}^{\perp} $；
+
+\item
+
+$ \|u - P_{n}u\| = \min_{v \in E_{n}}\|u - v\| = \mathrm{dist}(u, E_{n}) $，并且
+
+\[
+\|u - P_{n}u\| < \|u - v\| \quad \text{对 } v \in E_{n} \text{ 且 } v \ne P_{n}u ;
+\]
+\item
+
+$ \|u - P_{n}u\|^{2} = \|u\|^{2} - \sum_{k=0}^{n}|(u|\varphi_{k})|^{2} $。
+
+\proofhead
+(i) 对 $ 0 \le j \le n $，我们求得
+\[
+(u - P_{n}u|\varphi_{j}) = (u|\varphi_{j}) - \sum_{k=0}^{n}(u|\varphi_{k})(\varphi_{k}|\varphi_{j}) = (u|\varphi_{j}) - (u|\varphi_{j}) = 0 ,
+\]
+
+因为 $ (\varphi_{k}|\varphi_{j}) = \delta_{kj} $。
+
+\end{subitems}
+
+\begin{subitems}
+\item[（ii）]
+
+设 $ v \in E_{n} $。因为 $ P_{n}u - v \in E_{n} $，于是由 (i)（见 (II.3.7)）可得
+
+\[
+\|u - v\|^{2} = \|(u - P_{n}u) + (P_{n}u - v)\|^{2} = \|(u - P_{n}u)\|^{2} + \|(P_{n}u - v)\|^{2} .
+\]
+
+因此对每个满足 $ v \ne P_{n}u $ 的 $ v \in E_{n} $，有 $ \|u - v\| > \|u - P_{n}u\| $。
+
+\item[（iii）]
+
+因为
+
+\[
+\|u - P_{n}u\|^{2} = \|u\|^{2} - 2\mathop{\mathrm{Re}}(u|P_{n}u) + \|P_{n}u\|^{2} ,
+\]
+
+该断言由 $ (\varphi_{j}|\varphi_{k}) = \delta_{jk} $ 得到。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+\begin{corollary}
+
+（贝塞尔不等式）  对每个 $ u \in E $，傅里叶系数的平方级数收敛，并且
+
+\[
+\sum_{k=0}^{\infty}|(u|\varphi_{k})|^{2} \le \|u\|^{2} .
+\]
+
+\proofhead
+由命题 7.11(iii)，我们得到
+\[
+\sum_{k=0}^{n}|(u|\varphi_{k})|^{2} \le \|u\|^{2} \quad \text{对 } n \in \mathbb{N} .
+\]
+
+于是该断言由定理 II.7.7 推出。\nobreak\hspace{0.35em}■
+
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+根据 (7.11)，对 $ f \in \mathcal{SC}_{2\pi} $，在 $ f $ 关于 ONS $ \{ \mathrm{e}_{k} \;;\; k \in \mathbb{Z} \} $ 的第 $ k $ 个傅里叶系数与经典的第 $ k $ 个傅里叶系数 $ \hat{f}_{k} $ 之间，关系式 $ (f|\mathrm{e}_{k})_{2} = \sqrt{2\pi}\hat{f}_{k} $ 成立。这种规范化上的差异是历史遗留的。（当然，在经典情形中，ONS 以 $ k \in \mathbb{Z} $ 而不是 $ k \in \mathbb{N} $ 为指标，这一点无关紧要。）
+
+\item
+
+对 $ n \in \mathbb{N} $，我们有
+
+\begin{equation}
+P_{n} \in \mathcal{L}(E) , \quad P_{n}^{2} = P_{n} , \quad \mathrm{im}(P_{n}) = E_{n} .\tag{7.14}
+\end{equation}
+
+满足 $ A^{2} = A $ 的线性向量空间映射 $ A $ 称为\textbf{投影}。因此 $ P_{n} $ 是从 $ E $ 到 $ E_{n} $ 上的连续线性投影，而因为对每个 $ u \in E $，$ u - P_{n}u $ 都正交于 $ E_{n} $，所以 $ P_{n} $ 是\textbf{正交投影}。于是命题 7.11 说，每个 $ u $ 在 $ E_{n} $ 中有唯一确定的最近元素；该元素通过把 $ u $ 正交投影到 $ E_{n} $ 上而得到。
+
+\proofhead
+我们把 (7.14) 的简单证明留给你。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{完备标准正交系}
+
+若对每个 $ u \in E $，贝塞尔不等式都成为等式
+
+\begin{equation}
+\|u\|^{2} = \sum_{k=0}^{\infty}|(u|\varphi_{k})|^{2} \quad \text{对 } u \in E .\tag{7.15}
+\end{equation}
+
+则称 $ E $ 中的 ONS $ \{ \varphi_{k} \;;\; k \in \mathbb{N} \} $ 是\textbf{完备的}，或 $ E $ 的\textbf{标准正交基}（ONB）。这个等式称为\textbf{完备性关系}或\textbf{帕塞瓦尔定理}。
+
+下面的定理阐明了完备标准正交系的含义。
+
+\begin{theorem}
+
+$ E $ 中的 ONS $ \{ \varphi_{k} \;;\; k \in \mathbb{N} \} $ 是完备的，当且仅当对每个 $ u \in E $，傅里叶级数 $ \sum (u_{k}|\varphi_{k})\varphi_{k} $ 都收敛到 $ u $，也就是说，若
+
+\[
+u = \sum_{k=0}^{\infty}(u|\varphi_{k})\varphi_{k} \quad \text{对 } u \in E .
+\]
+
+\proofhead
+根据命题 7.11(iii)，$ P_{n}u \to u $，因而
+\[
+u = \lim_{n \to \infty} P_{n}u = \sum_{k=0}^{\infty}(u|\varphi_{k})\varphi_{k}
+\]
+
+当且仅当帕塞瓦尔定理成立。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+在作了这些一般性的讨论之后——它们除了赋予该主题以几何解释之外，也具有理论与实际意义——我们可以回到经典的傅里叶级数理论了。
+
+\begin{theorem}
+
+函数 $ \{ \mathrm{e}_{k} \;;\; k \in \mathbb{Z} \} $ 构成 $ \mathcal{SC}_{2\pi} $ 上的一个 ONB。
+
+\proofhead
+设 $ f \in \mathcal{SC}_{2\pi} $ 且 $ \varepsilon > 0 $。于是注 7.9(a) 提供一个 $ g \in C_{2\pi} $ 使得 $ \|f - g\|_{2} < \varepsilon/2 $。利用魏尔斯特拉斯逼近定理（推论 V.4.17），我们找到 $ n := n(\varepsilon) $ 和一个三角多项式 $ T_{n} $ 使得
+\[
+\|g - T_{n}\|_{\infty} < \varepsilon/2\sqrt{2\pi} .
+\]
+
+由注 7.2(a) 和命题 7.11(ii)，我们于是有
+
+\[
+\|g - S_{n}g\|_{2} \le \|g - T_{n}\|_{2} < \varepsilon/2 ,
+\]
+
+因此
+
+\[
+\|f - S_{n}f\|_{2} \le \|f - S_{n}g\|_{2} \le \|f - g\|_{2} + \|g - S_{n}g\|_{2} < \varepsilon ,
+\]
+
+其中，在第二行的第一步，我们用了最小值性质，即命题 7.11(ii)。最后，命题 7.11(iii) 给出
+
+\[
+0 \le \|f\|_{2}^{2} - \sum_{k=0}^{m}|(f|\mathrm{e}_{k})_{2}|^{2} \le \|f\|_{2}^{2} - \sum_{k=0}^{n}|(f|\mathrm{e}_{k})_{2}|^{2} = \|f - S_{n}f\|_{2}^{2} < \varepsilon
+\]
+
+对 $ m \ge n $。这蕴含完备性关系对每个 $ f \in \mathcal{SC}_{2\pi} $ 成立。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\begin{corollary}
+
+对每个 $ f \in \mathcal{SC}_{2\pi} $，傅里叶级数 $ Sf $ 在均方意义下收敛到 $ f $，且帕塞瓦尔定理读作
+
+\[
+\frac{1}{2\pi}\int_{0}^{2\pi}|f|^{2} \, dt = \sum_{k=-\infty}^{\infty}|\hat{f}_{k}|^{2} .
+\]
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+实 ONS $ \{ \mathrm{c}_{0}, \mathrm{c}_{k}, \mathrm{s}_{k} \;;\; k \in \mathbb{N}^{\times} \} $ 是空间 $ \mathcal{SC}_{2\pi} $ 中的 ONB。用 $ a_{k} := a_{k}(f) $ 与 $ b_{k} := b_{k}(f) $ 定义傅里叶系数，则对实值的 $ f \in \mathcal{SC}_{2\pi} $，我们有
+
+\[
+\frac{1}{\pi}\int_{0}^{2\pi}|f|^{2} \, dt = \frac{a_{0}^{2}}{2} + \sum_{k=1}^{\infty}(a_{k}^{2} + b_{k}^{2})
+\]
+
+\proofhead
+例 7.5(b)、注 7.9(b) 和欧拉公式
+\[
+\sqrt{2}(f|\mathrm{e}_{k}) = (f|\mathrm{c}_{k}) - i(f|\mathrm{s}_{k}) ,
+\]
+
+蕴含
+
+\[
+2|(f|\mathrm{e}_{k})|^{2} = (f|\mathrm{c}_{k})^{2} + (f|\mathrm{s}_{k})^{2} = \pi(a_{k}^{2} + b_{k}^{2}) \quad \text{对 } k \in \mathbb{Z}^{\times} ,
+\]
+
+其中我们还用到了 $ a_{-k} = a_{k} $ 与 $ b_{-k} = -b_{k} $。\nobreak\hspace{0.35em}■
+
+\item
+
+（黎曼引理）  对 $ f \in \mathcal{SC}[0, 2\pi] $，我们有
+
+\[
+\int_{0}^{2\pi} f(t)\sin(kt) \, dt \to 0 \quad \text{且} \quad \int_{0}^{2\pi} f(t)\cos(kt) \, dt \to 0 \quad (k \to \infty) .
+\]
+
+\proofhead
+这立即由 (a) 中级数的收敛性得到。\nobreak\hspace{0.35em}■
+\item
+
+设 $ \ell_{2}(\mathbb{Z}) $ 是所有满足
+
+\[
+|\boldsymbol{x}|_{2}^{2} := \sum_{k=-\infty}^{\infty}|x_{k}|^{2} < \infty .
+\]
+
+的级数 $ \boldsymbol{x} := (x_{k})_{k \in \mathbb{Z}} \in \mathbb{C}^{\mathbb{Z}} $ 的集合。于是 $ \ell_{2}(\mathbb{Z}) $ 是 $ \mathbb{C}^{\mathbb{Z}} $ 的向量子空间，并在内积 $ (\boldsymbol{x}, \boldsymbol{y}) \mapsto (\boldsymbol{x}|\boldsymbol{y})_{2} := \sum_{k=-\infty}^{\infty} x_{k}\overline{y_{k}} $ 下是希尔伯特空间。于是帕塞瓦尔定理蕴含映射
+
+\[
+\mathcal{SC}_{2\pi} \to \ell_{2}(\mathbb{Z}) , \quad f \mapsto (\sqrt{2\pi}\hat{f}_{k})_{k \in \mathbb{Z}}
+\]
+
+是线性等距。然而，这个等距不是满射，因而不是等距同构，这一点我们将在第三卷勒贝格积分理论的语境中看到。因此存在一个正交级数 $ \sum_{k \in \mathbb{Z}} c_{k}\mathrm{e}_{k} $，它满足 $ \sum_{k=-\infty}^{\infty}|c_{k}|^{2} < \infty $，却不收敛到 $ \mathcal{SC}_{2\pi} $ 中的任何函数 $ f $。由此也得到 $ \mathcal{SC}_{2\pi} $——从而 $ \mathcal{SC}[0, 2\pi] $——不完备，因而也不是希尔伯特空间。在第三卷中，我们将通过学会把 $ \mathcal{SC}[0, 2\pi] $ 扩张成一个完备的希尔伯特空间（称为 $ L_{2}(0, 2\pi) $）来弥补这一缺陷。
+
+\proofhead
+我们把其中一些断言的证明留作习题 10。\nobreak\hspace{0.35em}■
+\end{items}
+
+帕塞瓦尔定理可以用来计算各种级数的极限，如下面的例子所示。\footnote{另见应用 7.23(a)。}
+
+\end{remark}
+
+\begin{example}
+
+\begin{items}
+\item
+\[
+\frac{\pi^{2}}{8} = \sum_{k=0}^{\infty}\frac{1}{(2k+1)^{2}} = 1 + \frac{1}{3^{2}} + \frac{1}{5^{2}} + \frac{1}{7^{2}} + \cdots
+\]
+
+\proofhead
+这由例 7.10(a) 和注 7.17(a) 得到。\nobreak\hspace{0.35em}■
+\item
+
+级数 $ \sum_{k \ge 0} 1/(2k+1)^{4} $ 的值为 $ \pi^{4}/96 $。
+
+\proofhead
+这是例 7.10(b) 和注 7.17(a) 的推论。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{分段连续可微函数}
+
+我们现在转而讨论傅里叶级数的一致收敛问题。为了得到一个简单的充分判别法，我们必须对所考虑的函数要求更多的正则性。
+
+设 $ J := [\alpha, \beta] $ 是紧致完全区间。若存在 $ J $ 的一个划分 $ (\alpha_{0}, \alpha_{1}, \ldots, \alpha_{n}) $，使得对 $ 0 \le j \le n-1 $，$ f_{j} := f|(\alpha_{j}, \alpha_{j+1}) $ 有一致连续的导数，则称 $ f \in \mathcal{SC}(J) $ 是\textbf{分段连续可微的}（或有分段连续的导数）。
+
+\begin{lemma}
+
+函数 $ f \in \mathcal{SC}(J) $ 分段连续可微，当且仅当存在 $ J $ 的一个划分 $ (\alpha_{0}, \ldots, \alpha_{n}) $，具有以下性质：
+
+\begin{subitems}
+\item
+
+对 $ 0 \le j \le n-1 $，$ f|(\alpha_{j}, \alpha_{j+1}) \in C^{1}(\alpha_{j}, \alpha_{j+1}) $。
+
+\item
+
+对 $ 0 \le j \le n-1 $ 与 $ 1 \le k \le n $，极限 $ f'(\alpha_{j} + 0) $ 与 $ f'(\alpha_{k} - 0) $ 存在。
+
+\proofhead
+“$ \Longrightarrow $” 因为 $ f $ 分段连续可微，(i) 由定义得到，而 (ii) 是定理 2.1 的推论。
+“$ \Longleftarrow $” 根据命题 III.2.24，若划分满足性质 (i) 与 (ii)，则 $ f'_{j} \in C(\alpha_{j}, \alpha_{j+1}) $ 在 $ [\alpha_{j}, \alpha_{j+1}] $ 上有连续延拓。因此定理 III.3.13 蕴含 $ f'_{j} $ 一致连续。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\end{lemma}
+
+\bookfigure[0.92]{figures/1ce50509da04f8b7.png}
+
+若 $ f \in \mathcal{SC}(J) $ 分段连续可微，引理 7.19 保证存在 $ J $ 的划分 $ (\alpha_{0}, \ldots, \alpha_{n}) $ 以及唯一的规范化分段连续函数 $ f' $（我们称之为\textbf{规范化导数}），使得
+
+\[
+f'|(\alpha_{j-1}, \alpha_{j}) = [f|(\alpha_{j-1}, \alpha_{j})]' \quad \text{对 } 0 \le j \le n-1 .
+\]
+
+最后，若 $ f|[0, 2\pi] $ 具有这些性质，则称 $ f \in \mathcal{SC}_{2\pi} $ \textbf{分段连续可微}。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+若 $ f \in \mathcal{SC}_{2\pi} $ 分段连续可微，则 $ f' $ 属于 $ \mathcal{SC}_{2\pi} $。
+
+\proofhead
+这是区间边界上规范化定义的一个直接推论。\nobreak\hspace{0.35em}■
+\item
+
+（导数规则）  若 $ f \in C_{2\pi} $ 分段连续可微，则
+
+\[
+\hat{f}'_{k} = ik\hat{f}_{k} \quad \text{对 } k \in \mathbb{Z} ,
+\]
+
+其中 $ \hat{f}'_{k} := \widehat{(f')_{k}} $。
+
+\proofhead
+设 $ 0 < \alpha_{1} < \cdots < \alpha_{n-1} < 2\pi $ 是 $ f' $ 在 $ (0, 2\pi) $ 中的所有间断点。于是由积分的可加性与分部积分（取 $ \alpha_{0} := 0 $ 与 $ \alpha_{n} := 2\pi $）可得
+\begin{equation*}
+\begin{aligned}
+2\pi\hat{f}'_{k} &= \int_{0}^{2\pi} f'(t)\mathrm{e}^{-ikt} \, dt = \sum_{j=0}^{n-1}\int_{\alpha_{j}}^{\alpha_{j+1}} f'(t)\mathrm{e}^{-ikt} \, dt \\ &= \sum_{j=0}^{n-1} f(t)\mathrm{e}^{-ikt}\big|_{\alpha_{j}}^{\alpha_{j+1}} + ik\sum_{j=0}^{n-1}\int_{\alpha_{j}}^{\alpha_{j+1}} f(t)\mathrm{e}^{-ikt} \, dt \\ &= ik\int_{0}^{2\pi} f(t)\mathrm{e}^{-ikt} \, dt = 2\pi ik\hat{f}_{k}
+\end{aligned}
+\end{equation*}
+
+对 $ k \in \mathbb{Z} $，其中第三个等式中的第一个和由 $ f $ 的连续性及其 $ 2\pi $-周期性而消失。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{一致收敛}
+
+我们现在可以证明傅里叶级数一致收敛与绝对收敛的如下简单判别法。
+
+\qyxffntextdef{1}{即 $ p = 2 $ 时的赫尔德不等式。}
+\begin{theorem}
+
+设 $ f : \mathbb{R} \to \mathbb{C} $ 是 $ 2\pi $-周期、连续且分段连续可微的。则傅里叶级数 $ Sf $ 在 $ \mathbb{R} $ 上正规收敛到 $ f $。
+
+\proofhead
+注 7.20(a) 与 (b)、级数形式的柯西-施瓦茨不等式\qyxffnmark{1}（来自习题 IV.2.18）以及完备性关系蕴含
+\begin{equation*}
+\begin{aligned}
+\sum_{\substack{k=-\infty \\ k \ne 0}}^{\infty}|\hat{f}_{k}| = \sum_{\substack{k=-\infty \\ k \ne 0}}^{\infty}\frac{1}{k}|\hat{f}'_{k}| \le \Big(2\sum_{k=1}^{\infty}\frac{1}{k^{2}}\Big)^{1/2}\Big(\sum_{k=-\infty}^{\infty}|\hat{f}'_{k}|^{2}\Big)^{1/2} \le \sqrt{\frac{1}{\pi}\sum_{k=1}^{\infty}\frac{1}{k^{2}}}\,\|f'\|_{2} .
+\end{aligned}
+\end{equation*}
+
+因此，因为 $ \|\hat{f}_{k}\mathrm{e}^{ik\cdot}\|_{\infty} = |\hat{f}_{k}| $，$ Sf $ 有收敛优级数 $ \sum_{k \in \mathbb{Z}}|\hat{f}_{k}| $。于是定理 V.1.6 的魏尔斯特拉斯优级数判别法蕴含 $ f $ 的傅里叶级数正规收敛。我们用 $ g $ 表示 $ Sf $ 的值。于是 $ g $ 连续且 $ 2\pi $-周期，并且对 $ n \to \infty $ 有 $ \|S_{n}f - g\|_{\infty} \to 0 $。因为最大值范数强于 $ L_{2} $ 范数，我们也有 $ \lim\|S_{n}f - g\|_{2} = 0 $，即 $ Sf $ 在 $ \mathcal{SC}_{2\pi} $ 中收敛到 $ g $。根据推论 7.16，$ Sf $ 在 $ \mathcal{SC}_{2\pi} $ 中收敛到 $ f $。于是由其极限的唯一性可得 $ Sf $ 正规收敛到 $ f $。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\begin{example}
+
+\begin{items}
+\item
+
+对 $ |t| \le \pi $，我们有
+
+\[
+|t| = \frac{\pi}{2} - \frac{4}{\pi}\sum_{k=0}^{\infty}\frac{\cos((2k+1)t)}{(2k+1)^{2}} ,
+\]
+
+并且该级数在 $ \mathbb{R} $ 上正规收敛。
+
+\proofhead
+由上一个定理和例 7.10(b) 可得，满足对 $ |t| \le \pi $ 有 $ f(t) = |t| $ 的函数 $ f \in C_{2\pi} $ 的（规范化）导数 $ f' $ 由例 7.10(a) 的映射给出。\nobreak\hspace{0.35em}■
+\item
+
+（余切的部分分式分解）  对 $ z \in \mathbb{C} \setminus \mathbb{Z} $，我们有
+
+\begin{equation}
+\pi\cot(\pi z) = \frac{1}{z} + \sum_{n=1}^{\infty}\Big(\frac{1}{z+n} + \frac{1}{z-n}\Big) .\tag{7.16}
+\end{equation}
+
+\proofhead
+由定理 7.21 和例 7.10(c) 我们得到
+\[
+\cos(zt) = \frac{\sin(\pi z)}{\pi}\Big(\frac{1}{z} + \sum_{n=1}^{\infty}(-1)^{n}\Big(\frac{1}{z+n} + \frac{1}{z-n}\Big)\cos(nt)\Big)
+\]
+
+对 $ |t| \le \pi $。最后，取 $ t = \pi $。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+余切的部分分式分解有下面两个有趣而优美的推论，它们与部分分式分解本身一样，都可追溯到欧拉。
+
+\end{example}
+
+\begin{application}
+
+\begin{items}
+\item
+
+（$ \zeta(2k) $ 的欧拉公式）  对 $ k \in \mathbb{N}^{\times} $，我们有
+
+\[
+\zeta(2k) = \sum_{n=1}^{\infty}\frac{1}{n^{2k}} = \frac{(-1)^{k+1}(2\pi)^{2k}}{2(2k)!}B_{2k} .
+\]
+
+特别地，我们求得
+
+\[
+\zeta(2) = \pi^{2}/6 , \quad \zeta(4) = \pi^{4}/90 , \quad \zeta(6) = \pi^{6}/945 .
+\]
+
+\proofhead
+由 (7.16)，我们得到
+\begin{equation}
+\pi z\cot(\pi z) = 1 + 2z^{2}\sum_{n=1}^{\infty}\frac{1}{z^{2} - n^{2}} \quad \text{对 } z \in \mathbb{C} \setminus \mathbb{Z} .\tag{7.17}
+\end{equation}
+
+若 $ |z| \le r < 1 $，则对 $ n \in \mathbb{N}^{\times} $ 有 $ |n^{2} - z^{2}| \ge n^{2} - r^{2} > 0 $。这蕴含 (7.17) 中的级数在 $ r\mathbb{B} $ 上正规收敛。几何级数给出
+
+\[
+\frac{1}{z^{2} - n^{2}} = -\frac{1}{n^{2}}\sum_{k=0}^{\infty}\Big(\frac{z^{2}}{n^{2}}\Big)^{k} \quad \text{对 } z \in \mathbb{B} \text{ 且 } n \in \mathbb{N}^{\times} .
+\]
+
+于是我们由 (7.17) 得到
+
+\begin{equation}
+\pi z\cot(\pi z) = 1 - 2z^{2}\sum_{n=1}^{\infty}\frac{1}{n^{2}}\sum_{k=0}^{\infty}\Big(\frac{z^{2}}{n^{2}}\Big)^{k} = 1 - 2\sum_{k=1}^{\infty}\Big(\sum_{n=1}^{\infty}\frac{1}{n^{2k}}\Big)z^{2k} \quad \text{对 } z \in \mathbb{B} ,\tag{7.18}
+\end{equation}
+
+其中，在最后一步，我们交换了求和次序，这是允许的，因为二重级数定理允许这样做（你可以自行验证）。
+现在由应用 6.5 并利用幂级数的唯一性定理，我们得到所述的关系式。\footnote{这验证了应用 6.5 中对 $ |z| < 1 $ 的幂级数展开。} \nobreak\hspace{0.35em}■
+
+\item
+
+（正弦的乘积表示）  对 $ z \in \mathbb{C} $，我们有
+
+\[
+\sin(\pi z) = \pi z\prod_{n=1}^{\infty}\Big(1 - \frac{z^{2}}{n^{2}}\Big) .
+\]
+
+在这里取 $ z = 1/2 $ 给出沃利斯乘积（见例 5.5(d)）。
+
+\proofhead
+我们置
+\[
+f(z) := \frac{\sin(\pi z)}{\pi z} \quad \text{对 } z \in \mathbb{C}^{\times} ,
+\]
+
+且 $ f(0) := 0 $。于是由正弦的幂级数展开可得
+
+\begin{equation}
+f(z) = \sum_{k=0}^{\infty}(-1)^{k}\frac{\pi^{2k}z^{2k}}{(2k+1)!} .\tag{7.19}
+\end{equation}
+
+这个幂级数的收敛半径是 $ \infty $。于是，根据命题 V.3.5，$ f $ 在 $ \mathbb{C} $ 上解析。
+对于下一步，我们置
+
+\[
+g(z) := \prod_{n=1}^{\infty}\Big(1 - \frac{z^{2}}{n^{2}}\Big) \quad \text{对 } z \in \mathbb{C} .
+\]
+
+我们要证明 $ g $ 在 $ \mathbb{C} $ 上也是解析的。于是我们固定 $ N \in \mathbb{N}^{\times} $ 与 $ z \in N\mathbb{B} $，然后考虑
+
+\begin{equation}
+\sum_{n=2N}^{m}\log\Big(1 - \frac{z^{2}}{n^{2}}\Big) = \log\prod_{n=2N}^{m}\Big(1 - \frac{z^{2}}{n^{2}}\Big) .\tag{7.20}
+\end{equation}
+
+由对数的幂级数展开（见定理 V.3.9），我们得到
+
+\[
+\Big|\log\Big(1 - \frac{z^{2}}{n^{2}}\Big)\Big| \le \sum_{k=1}^{\infty}\frac{|z|^{2k}}{kn^{2k}} \le \frac{|z|^{2}}{n^{2}}\frac{1}{1 - (z/n)^{2}} \le \frac{4}{3}\frac{N^{2}}{n^{2}}
+\]
+
+对 $ z \in N\mathbb{B} $ 与 $ n \ge 2N $。因此，由魏尔斯特拉斯优级数判别法，级数
+
+\[
+\sum_{n \ge 2N}\log\Big(1 - \frac{z^{2}}{n^{2}}\Big)
+\]
+
+在 $ N\mathbb{B} $ 上绝对且一致收敛。
+由 (7.20) 和指数函数的连续性，我们可以断定
+
+\begin{equation}
+\begin{aligned}
+\prod_{n=2N}^{\infty}\Big(1 - \frac{z^{2}}{n^{2}}\Big) &= \lim_{m \to \infty}\prod_{n=2N}^{m}\Big(1 - \frac{z^{2}}{n^{2}}\Big) \\ &= \lim_{m \to \infty}\exp\sum_{n=2N}^{m}\log\Big(1 - \frac{z^{2}}{n^{2}}\Big) = \exp\sum_{n=2N}^{\infty}\log\Big(1 - \frac{z^{2}}{n^{2}}\Big) ,
+\end{aligned}\tag{7.21}
+\end{equation}
+
+并且该收敛在 $ N\mathbb{B} $ 上是一致的。因此，乘积
+
+\begin{equation}
+\prod_{n=1}^{\infty}\Big(1 - \frac{z^{2}}{n^{2}}\Big) = \prod_{n=1}^{2N-1}\Big(1 - \frac{z^{2}}{n^{2}}\Big)\prod_{n=2N}^{\infty}\Big(1 - \frac{z^{2}}{n^{2}}\Big)\tag{7.22}
+\end{equation}
+
+在 $ N\mathbb{B} $ 上也一致收敛。注意到这对每个 $ N \in \mathbb{N}^{\times} $ 都成立，我们看到 $ g $ 在 $ \mathbb{C} $ 上有良定义，并且利用
+
+\[
+g_{m}(z) := \prod_{n=1}^{m}\Big(1 - \frac{z^{2}}{n^{2}}\Big) \quad \text{对 } z \in \mathbb{C} \text{ 且 } m \in \mathbb{N}^{\times} ,
+\]
+
+我们求得 $ g_{m} \to g $ 在 $ \mathbb{C} $ 上局部一致收敛。因为“部分乘积” $ g_{m} $ 在 $ \mathbb{C} $ 上解析，于是由解析函数的魏尔斯特拉斯收敛定理\footnote{自然，定理 VIII.5.27 的证明不依赖于正弦的乘积表示，所以我们可以提前使用这一步。}（定理 VIII.5.27）可知 $ g $ 在 $ \mathbb{C} $ 上也是解析的。
+由于解析函数的唯一性定理，若能证明对 $ x \in J := (-1/\pi, 1/\pi) $ 有 $ f(x) = g(x) $，则证明就完成了。
+由 (7.19) 以及交错级数莱布尼茨判别法的推论 II.7.9，我们得到
+
+\[
+|f(x) - 1| \le \pi^{2}x^{2}/6 < 1 \quad \text{对 } x \in J .
+\]
+
+因此，由定理 V.3.9，$ \log f $ 在 $ J $ 上解析，并且我们求得
+
+\[
+(\log f)'(x) = \pi\cot(\pi x) - 1/x \quad \text{对 } x \in J \setminus\{0\} .
+\]
+
+由 (7.17) 我们可以读出
+
+\begin{equation}
+(\log f)'(x) = \sum_{n=1}^{\infty}\frac{2x}{x^{2} - n^{2}} \quad \text{对 } x \in J \setminus\{0\} ,\tag{7.23}
+\end{equation}
+
+其中右边的级数对每个 $ r \in (0, 1) $ 在 $ [-r, r] $ 上正规收敛。特别地，可得 (7.23) 对一切 $ x \in J $ 有效。
+由公式 (7.21) 与 (7.22)，我们得知关系式
+
+\[
+\log g(x) = \sum_{n=1}^{\infty}\log\Big(1 - \frac{x^{2}}{n^{2}}\Big) \quad \text{对 } x \in J .
+\]
+
+现在由推论 V.2.9（函数级数极限的可微性）可得 $ \log g $ 在 $ J $ 上可微，并且
+
+\[
+(\log g)'(x) = \sum_{n=1}^{\infty}\frac{2x}{x^{2} - n^{2}} \quad \text{对 } x \in J .
+\]
+
+因此，在 $ J $ 上 $ (\log f)' = (\log g)' $。最后，因为 $ \log f(0) = 0 = \log g(0) $，且由原函数的唯一性定理（注 V.3.7(a)），我们得到在整个 $ J $ 上 $ \log f = \log g $。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+我们已经研究了傅里叶级数是否一致收敛或均方收敛的判别法。探究它们的逐点收敛也是很自然的。关于这一课题，经典分析中有大量结果和简单而充分的判别法。其中一些最简单的判别法在常见教材中都有介绍（例如见 [BF87]、[Bla91]、[Kön92]、[Wal92]）。例如，容易验证例 7.10(a) 的傅里叶级数收敛到所给的“方波”函数。
+
+这里我们不再展开，因为我们已把注意力局限于单变量经典傅里叶级数的本质结果。也许更有意义的是傅里叶级数的 $ L_{2} $ 理论，如上所述，它非常一般。它在数学与物理的许多问题中都有应用——例如在单变量与多变量的微分方程理论中——并在现代分析及其应用中起着极其重要的作用。你在进一步学习分析及其应用时，很可能会遇到正交性的希尔伯特空间理论，我们也会偶尔对这一理论作进一步的考察。
+
+\end{application}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $ f \in SC_{2\pi} $ 满足 $ \int_{0}^{2\pi} f = 0 $。证明存在 $ \xi \in [0, 2\pi] $ 使得 $ f(\xi) = 0 $。
+
+\item
+
+验证：对由 $ f(t) := |\sin(t)| $（$ t \in [0, 2\pi] $）定义的 $ f \in C_{2\pi} $，有
+
+\[
+Sf = \frac{2}{\pi} - \frac{4}{\pi}\sum_{k=1}^{\infty}\frac{\cos(k\cdot)}{4k^{2} - 1} .
+\]
+\item
+
+对 $ n \in \mathbb{N} $，
+
+\[
+D_{n} := \sqrt{2\pi}\sum_{k=-n}^{n}\mathrm{e}_{k} = 1 + 2\cos + 2\cos(2\cdot) + \cdots + 2\cos(n\cdot)
+\]
+
+称为 $ n $ 次 \textbf{狄利克雷核}。证明
+
+\[
+D_{n}(t) = \frac{\sin((n + 1/2)t)}{\sin(t/2)} \quad \text{对 } t \in \mathbb{R} \qquad \text{且} \qquad \int_{0}^{2\pi} D_{n}(t)\, dt = 1 \quad \text{对 } n \in \mathbb{N} .
+\]
+\item
+
+定义 $ f \in SC_{2\pi} $ 为
+
+\begin{equation*}
+f(t) := \begin{cases} \frac{\pi - t}{2} , & 0 < t < 2\pi , \\ 0 , & t = 0 . \end{cases}
+\end{equation*}
+
+证明
+
+\[
+Sf = \sum_{k=1}^{\infty}\frac{\sin(k\cdot)}{k} .
+\]
+
+（提示：$ I_{n}(t) := \int_{\pi}^{t} D_{n}(s)\, ds = (t - \pi) + 2(\sin t + \cdots + \sin(nt)/n) $，其中 $ t \in (0, 2\pi) $。习题 3 与分部积分给出 $ |I_{n}(t)| \le 2[(n + 1/2)\sin(t/2)]^{-1} $，其中 $ t \in (0, 2\pi) $。）
+
+\item
+
+证明 $ B_{n}(X)|[0, 1) $ 到 $ \mathbb{R} $ 的 1-周期延拓 $ \widetilde{B}_{n} $ 有如下傅里叶展开：
+
+\begin{equation}
+\widetilde{B}_{2n} = 2\frac{(-1)^{n-1}(2n)!}{(2\pi)^{2n}}\sum_{k=1}^{\infty}\frac{\cos(2\pi k\cdot)}{k^{2n}} \qquad \text{对 } n \in \mathbb{N}^{\times} ,\tag{7.24}
+\end{equation}
+\begin{equation}
+\widetilde{B}_{2n+1} = 2\frac{(-1)^{n-1}(2n+1)!}{(2\pi)^{2n+1}}\sum_{k=1}^{\infty}\frac{\sin(2\pi k\cdot)}{k^{2n+1}} \qquad \text{对 } n \in \mathbb{N} .\tag{7.25}
+\end{equation}
+
+（提示：只需在 $ [0, 1] $ 上证明 (7.24) 与 (7.25)。设 $ U_{2n} $ 与 $ U_{2n+1} $ 分别是 (7.24) 与 (7.25) 中级数在 $ [0, 1] $ 上的限制，证明对 $ m \in \mathbb{N}^{\times} $ 有 $ U'_{m+1} = (m + 1)U_{m} $。由习题 4 可得 $ U_{1}(t) = B_{1}(t) $。于是命题 6.6(iii) 表明，对 $ m \ge 2 $ 存在常数 $ c_{m} $，使得 $ U_{m}(t) = B_{m}(t) + c_{m} $ 对 $ t \in [0, 1] $ 成立。最后验证 $ \int_{0}^{1} U_{m}(t)\, dt = 0 $（命题 4.1(ii)）与 $ \int_{0}^{1} B_{m}(t)\, dt = 0 $（习题 6.4(iii)）。由此可得对 $ m \ge 2 $ 有 $ c_{m} = 0 $。）
+
+\item
+
+验证渐近等价
+
+\[
+|B_{2n}| \sim 2\frac{(2n)!}{(2\pi)^{2n}} \sim 4\sqrt{\pi n}\left(\frac{n}{\pi e}\right)^{2n} .
+\]
+
+（提示：习题 5 表明
+
+\[
+B_{2n} = \widetilde{B}_{2n}(0) = (-1)^{n-1}2\frac{(2n)!}{(2\pi)^{2n}}\sum_{k=1}^{\infty}\frac{1}{k^{2n}} .
+\]
+
+再注意习题 6.6、应用 7.23(a) 与习题 6.3(a)。）
+
+\item
+
+证明 \textbf{维尔廷格不等式}：对任意 $ -\infty < a < b < \infty $ 及满足 $ f(a) = f(b) = 0 $ 的 $ f \in C^{1}([a, b]) $，有
+
+\[
+\int_{a}^{b}|f|^{2} \le [(b - a)^{2}/\pi^{2}]\int_{a}^{b}|f'|^{2} .
+\]
+
+常数 $ (b - a)^{2}/\pi^{2} $ 不能再减小。
+
+（提示：作代换 $ x \mapsto \pi(x - a)/(b - a) $，只需考虑 $ a = 0 $ 与 $ b = \pi $。对满足 $ g(x) := f(x) $（$ x \in [0, \pi] $）与 $ g(x) := -f(-x) $（$ x \in [-\pi, 0] $）的 $ g : [-\pi, \pi] \to \mathbb{K} $，证明 $ g \in C^{1}([-\pi, \pi]) $ 且 $ g $ 为奇函数。于是由帕塞瓦尔定理与注 7.20(b) 可得
+
+\[
+\frac{1}{2\pi}\int_{-\pi}^{\pi}|g'|^{2} = \sum_{k \in \mathbb{Z}}|\widehat{g}'_{k}|^{2} \ge \sum_{k \ne 0}|\widehat{g}'_{k}|^{2} = \sum_{k \ne 0}|ik\widehat{g}_{k}|^{2} \ge \sum_{k \ne 0}|\widehat{g}_{k}|^{2} = \frac{1}{2\pi}\int_{-\pi}^{\pi}|g|^{2}
+\]
+
+因为 $ \widehat{g}(0) = 0 $。结论由 $ g $ 的构造可得。）
+
+\item
+
+对 $ f, g \in SC_{2\pi} $，
+
+\[
+f * g : \mathbb{R} \to \mathbb{K} , \quad x \mapsto \frac{1}{2\pi}\int_{0}^{2\pi} f(x - y)g(y)\, dy
+\]
+
+称为 $ f $ 与 $ g $ 的 \textbf{卷积}。证明
+
+\begin{subitems}
+\item
+
+$ f * g = g * f $；
+
+\item
+
+若 $ f, g \in C_{2\pi} $，则 $ f * g \in C_{2\pi} $；
+
+\item
+
+$ \mathrm{e}_{n} * \mathrm{e}_{m} = \delta_{nm}\mathrm{e}_{n} $，其中 $ m, n \in \mathbb{Z} $。
+
+\end{subitems}
+
+\item
+
+记 $ D_{n} $ 为 $ n $ 次狄利克雷核。证明若 $ f \in SC_{2\pi} $，则 $ S_{n}f = D_{n} * f $。
+
+\item
+
+验证注 7.17(c) 的陈述：
+
+\begin{subitems}
+\item
+
+$ \ell_{2}(\mathbb{Z}) $ 是希尔伯特空间；
+
+\item
+
+$ SC_{2\pi} \to \ell_{2}(\mathbb{Z}) $，$ f \mapsto (\sqrt{2\pi}\,\widehat{f}_{k})_{k \in \mathbb{Z}} $ 是线性等距。
+
+\end{subitems}
+
+\item
+
+证明 \textbf{广义帕塞瓦尔定理}：
+
+\[
+\frac{1}{2\pi}\int_{0}^{2\pi} f\overline{g}\, dt = \sum_{k=-\infty}^{\infty}\widehat{f}_{k}\overline{\widehat{g}_{k}} \quad \text{对 } f, g \in SC_{2\pi} .
+\]
+
+（提示：注意
+
+\[
+z\overline{w} = \frac{1}{4}(|z + w|^{2} - |z - w|^{2} + i|z + iw|^{2} - i|z - iw|^{2}) \quad \text{对 } z, w \in \mathbb{C} ,
+\]
+
+并应用推论 7.16。）
+
+\end{exercises}
+
+\section{反常积分}
+
+到目前为止，我们只能对紧致区间上的跳跃连续函数进行积分。然而，我们已在引理 6.12 中看到，把积分的概念推广到定义在非紧致区间上的连续函数的情形是有意义的。考虑位于连续函数 $ f : \mathbb{R}^{+} \to \mathbb{R}^{+} $ 的图像与正半轴之间的集合 $ F $ 的面积，我们将证明：若当 $ x \to \infty $ 时 $ f $ 足够快地趋于零，则该面积是有限的。
+
+为计算 $ F $，我们首先计算 $ F $ 在区间 $ [0, n] $ 上的面积，也就是说，我们在 $ x = n $ 处把面积截断，然后令 $ n $ 趋于 $ \infty $。下面的展开将精确化这一想法，并把积分的范围推广到定义在任意区间上的函数。\footnote{我们在本节中把论述局限于积分的一个相对初等的推广，而把完整的积分理论留到第三卷。}
+
+\bookfigure[0.35]{figures/9d381236ac27238a.png}
+
+本节中，我们设
+
+• $ J $ 是一个区间，且 $ \inf J = a $，$ \sup J = b $；
+  $ E := (E, \left| \cdot \right|) $ 是一个巴拿赫空间。
+
+\needspace{3\baselineskip}\subsection*{可容许函数}
+
+映射 $ f : J \to E $ 称为\textbf{可容许}的，如果它在每一个紧致区间 $ J $ 上的限制是跳跃连续的。
+
+\begin{example}
+
+\begin{items}
+\item
+
+每个 $ f \in C(J, E) $ 都是可容许的。
+
+\item
+
+若 $ a $ 与 $ b $ 有限，则每个 $ f \in \mathcal{S}([a, b], E) $ 都是可容许的。
+
+\item
+
+若 $ f : J \to E $ 是可容许的，则 $ \left| f \right| : J \to \mathbb{R} $ 也是可容许的。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{反常积分}
+
+可容许函数 $ f : J \to E $ 称为\textbf{（反常）可积}的，如果存在 $ c \in (a, b) $，使得极限
+
+\[
+\lim_{\alpha \to a+0} \int_{\alpha}^{c} f \quad \text{且} \quad \lim_{\beta \to b-0} \int_{c}^{\beta} f
+\]
+
+在 $ E $ 中存在。
+
+\begin{lemma}
+
+若 $ f : J \to E $ 反常可积，则对每个 $ c \in (a, b) $，极限
+
+\[
+\lim_{\alpha \to a+0} \int_{\alpha}^{c} f \quad \text{且} \quad \lim_{\beta \to b-0} \int_{c}^{\beta} f
+\]
+
+都存在。此外，对 $ c, c' \in (a, b) $ 的任意选取，有
+
+\[
+\lim_{\alpha \to a+0} \int_{\alpha}^{c} f + \lim_{\beta \to b-0} \int_{c}^{\beta} f = \lim_{\alpha \to a+0} \int_{\alpha}^{c'} f + \lim_{\beta \to b-0} \int_{c'}^{\beta} f
+\]
+
+\proofhead
+由假设，存在 $ c \in (a, b) $，使得
+\[
+e_{a,c} := \lim_{\alpha \to a+0} \int_{\alpha}^{c} f \quad \text{且} \quad e_{c,b} := \lim_{\beta \to b-0} \int_{c}^{\beta} f
+\]
+
+在 $ E $ 中存在。现设 $ c' \in (a, b) $。由定理 4.4，对每个 $ \alpha \in (a, b) $ 有 $ \int_{\alpha}^{c'} f = \int_{\alpha}^{c} f + \int_{c}^{c'} f $。于是极限 $ e_{a,c'} := \lim_{\alpha \to a+0} \int_{\alpha}^{c'} f $ 在 $ E $ 中存在，且由 $ e_{a,c'} = e_{a,c} + \int_{c}^{c'} f $ 给出。同理可得
+
+\[
+e_{c',b} := \lim_{\beta \to b-0} \int_{c'}^{\beta} f
+\]
+
+在 $ E $ 中存在，且 $ e_{c',b} = e_{c,b} + \int_{c'}^{c} f $。因此我们求得
+
+\[
+e_{a,c'} + e_{c',b} = e_{a,c} + \int_{c}^{c'} f + e_{c,b} + \int_{c'}^{c} f = e_{a,c} + e_{c,b} .\quad\blacksquare
+\]
+\end{lemma}
+
+设 $ f : J \to E $ 反常可积，且 $ c \in (a, b) $。则我们称
+
+\[
+\int_{a}^{b} f\,dx := \int_{a}^{b} f(x)\,dx := \lim_{\alpha \to a+0} \int_{\alpha}^{c} f + \lim_{\beta \to b-0} \int_{c}^{\beta} f
+\]
+
+为 $ f $ 在 $ J $ 上的\textbf{（反常）积分}。我们也可以用记号
+
+\begin{equation*}
+\begin{aligned}
+\int_{a}^{b} f \quad \text{且} \quad \lim_{\substack{\alpha \to a+0 \\ \beta \to b-0}} \int_{\alpha}^{\beta} f\,dx .
+\end{aligned}
+\end{equation*}
+
+除了说“$ f $ 反常可积”之外，我们也可以说，“积分 $ \int_{a}^{b} f\,dx $ \textbf{存在}或\textbf{收敛}”。引理 8.2 表明反常积分是良定义的，也就是说，它与 $ c \in (a, b) $ 的选取无关。
+
+\begin{proposition}
+
+对 $ -\infty < a < b < \infty $ 与 $ f \in \mathcal{S}([a, b], E) $，反常积分与柯西–黎曼积分一致。
+
+\proofhead
+这由注 8.1(b)、积分作为其上下限的函数的连续性以及命题 4.4 得出。\nobreak\hspace{0.35em}■
+\end{proposition}
+
+\begin{example}
+
+\begin{items}
+\item
+
+设 $ a > 0 $ 且 $ s \in \mathbb{C} $。则
+
+\[
+\int_{a}^{\infty} \frac{dx}{x^{s}} \text{ 存在} \Longleftrightarrow \operatorname{Re} s > 1 ,
+\]
+
+且
+
+\[
+\int_{a}^{\infty} \frac{dx}{x^{s}} = \frac{a^{1-s}}{s - 1} \quad \text{对 } \operatorname{Re} s > 1 .
+\]
+
+\proofhead
+根据注 8.1(a)，函数 $ (a, \infty) \to \mathbb{C} $，$ x \mapsto 1/x^{s} $ 对每个 $ s \in \mathbb{C} $ 都是可容许的。
+
+\begin{subitems}
+\item
+
+我们首先考虑 $ s \ne 1 $ 的情形。此时
+
+\[
+\int_{a}^{\beta} \frac{dx}{x^{s}} = \frac{1}{1 - s} x^{1-s} \Big|_{a}^{\beta} = \frac{1}{1 - s} \left( \frac{1}{\beta^{s-1}} - \frac{1}{a^{s-1}} \right) .
+\]
+
+由 $ \left| \beta^{1-s} \right| = \beta^{1 - \operatorname{Re} s} $ 可得
+
+\[
+\frac{1}{\beta^{s-1}} \to 0 \; (\beta \to \infty) \Longleftrightarrow \operatorname{Re} s > 1
+\]
+
+且当 $ \operatorname{Re} s < 1 $ 时 $ \lim_{\beta \to \infty} 1/\beta^{s-1} $ 不存在。最后，若 $ \operatorname{Re} s = 1 $，则该极限不存在，因为 $ s = 1 + i\tau $（$ \tau \in \mathbb{R}^{\times} $）蕴含 $ \beta^{s-1} = \beta^{i\tau} = e^{i\tau\log\beta} $，又因为指数函数以 $ 2\pi i $ 为周期。
+
+\item
+
+若 $ s = 1 $，则
+
+\[
+\lim_{\beta \to \infty} \int_{a}^{\beta} \frac{dx}{x} = \lim_{\beta \to \infty} (\log\beta - \log a) = \infty .
+\]
+
+因此函数 $ x \mapsto 1/x $ 在 $ (a, \infty) $ 上不可积。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\item
+
+设 $ b > 0 $ 且 $ s \in \mathbb{C} $。则
+
+\[
+\int_{0}^{b} \frac{dx}{x^{s}} \text{ 存在} \Longleftrightarrow \operatorname{Re} s < 1 ,
+\]
+
+且对 $ \operatorname{Re} s < 1 $ 有 $ \int_{0}^{b} x^{-s}\,dx = b^{1-s}/(1 - s) $。
+
+\proofhead
+证明与 (a) 的证明完全类似。\nobreak\hspace{0.35em}■
+\item
+
+对任意 $ s \in \mathbb{C} $，积分 $ \int_{0}^{\infty} x^{s}\,dx $ 都不存在。
+
+\item
+
+积分
+
+\begin{equation*}
+\begin{aligned}
+\int_{-\infty}^{\infty} x\,dx = \lim_{\substack{\alpha \to -\infty \\ \beta \to \infty}} \int_{\alpha}^{\beta} x\,dx = \lim_{\substack{\alpha \to -\infty \\ \beta \to \infty}} \frac{x^{2}}{2} \Big|_{\alpha}^{\beta}
+\end{aligned}
+\end{equation*}
+
+不存在。\footnote{注意到 $ \int_{-\infty}^{\infty} x\,dx $ 不存在，尽管 $ \lim_{\gamma \to \infty} \int_{-\gamma}^{\gamma} x\,dx = 0 $！验证一个积分的收敛性时，重要的是检查上、下限能够独立地取极限。}
+
+\item
+
+我们有
+
+\[
+\int_{0}^{\infty} \frac{dx}{1 + x^{2}} = \frac{\pi}{2} \quad \text{且} \quad \int_{-1}^{1} \frac{dx}{\sqrt{1 - x^{2}}} = \pi .
+\]
+
+\proofhead
+这是因为
+\begin{equation*}
+\begin{aligned}
+\lim_{\beta \to \infty} \arctan \Big|_{0}^{\beta} = \frac{\pi}{2} \quad \text{且} \quad \lim_{\substack{\alpha \to -1+0 \\ \beta \to 1-0}} \arcsin \Big|_{\alpha}^{\beta} = \pi ,
+\end{aligned}
+\end{equation*}
+
+其中我们用了例 4.15(a)。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{级数的积分比较判别法}
+
+鉴于第 6 节，我们预期无穷级数与反常积分之间存在联系。\footnote{另见注 6.16(d) 的证明。} 下面的定理在一个重要情形下给出了这样一种联系。
+
+\begin{proposition}
+
+设 $ f : [1, \infty) \to \mathbb{R}^{+} $ 可容许且递减。则
+
+\[
+\sum_{n \ge 1} f(n) < \infty \Longleftrightarrow \int_{1}^{\infty} f(x)\,dx \text{ 存在} .
+\]
+
+\proofhead
+(i) 由假设可得
+\[
+f(n) \le f(x) \le f(n - 1)
+\]
+
+对 $ x \in [n - 1, n] $ 以及 $ n \in \mathbb{N} $ 且 $ n \ge 2 $ 成立。因此我们有
+
+\[
+f(n) \le \int_{n-1}^{n} f(x)\,dx \le f(n - 1) ,
+\]
+\bookfigure[0.47]{figures/4dd9e35d99d3e93b.png}
+
+并且在对 $ n $ 求和之后，我们得到
+
+\begin{equation}
+\sum_{n=2}^{N} f(n) \le \int_{1}^{N} f(x)\,dx \le \sum_{n=1}^{N-1} f(n) \quad \text{对 } N \ge 2 .\tag{8.1}
+\end{equation}
+
+\begin{subitems}
+\item[（ii）]
+
+级数 $ \sum f(n) $ 收敛。则界
+
+\[
+\int_{1}^{N} f\,dx \le \sum_{n=1}^{\infty} f(n) \quad \text{对 } N \ge 2 .
+\]
+
+由 (8.1) 与 $ f \ge 0 $ 得出。因此函数 $ \beta \mapsto \int_{1}^{\beta} f(x)\,dx $ 递增且有界。从而由命题 III.5.3，$ \int_{1}^{\infty} f\,dx $ 存在。
+
+\item[（iii）]
+
+积分 $ \int_{1}^{\infty} f\,dx $ 收敛。则由 (8.1) 可得
+
+\[
+\sum_{n=2}^{N} f(n) \le \int_{1}^{\infty} f(x)\,dx \quad \text{对 } N \ge 2 .
+\]
+
+因此定理 II.7.7 蕴含 $ \sum_{n \ge 1} f(n) $ 也存在。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+\begin{example}
+
+对 $ s \in \mathbb{R} $，级数
+
+\[
+\sum_{n \ge 2} \frac{1}{n(\log n)^{s}}
+\]
+
+收敛当且仅当 $ s > 1 $。
+
+\proofhead
+若 $ s \le 0 $，则 $ \sum 1/n $ 是一个发散的劣级数。因此只需考虑 $ s > 0 $ 的情形。因为
+\begin{equation*}
+\int_{2}^{\beta} \frac{dx}{x(\log x)^{s}} = \begin{cases} \left[ (\log\beta)^{1-s} - (\log 2)^{1-s} \right]/(1 - s) , & s \ne 1 , \\ \log(\log\beta) - \log(\log 2) , & s = 1 , \end{cases}
+\end{equation*}
+
+$ \int_{2}^{\infty} dx/x(\log x)^{s} $ 存在当且仅当 $ s > 1 $。于是命题 8.5 完成证明。\nobreak\hspace{0.35em}■
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{绝对收敛的积分}
+
+设 $ f : J \to E $ 可容许。如果积分 $ \int_{a}^{b} \left| f(x) \right|\,dx $ 在 $ \mathbb{R} $ 中存在，则称 $ f $（在 $ J $ 上）\textbf{绝对可积}。此时，我们又称 $ \int_{a}^{b} f $ \textbf{绝对收敛}。
+
+下一个定理表明每个绝对可积函数都是（反常）可积的。
+
+\begin{proposition}
+
+若 $ f $ 绝对可积，则积分 $ \int_{a}^{b} f\,dx $ 在 $ E $ 中存在。
+
+\proofhead
+设 $ c \in (a, b) $。因为 $ \int_{a}^{b} \left| f \right|\,dx $ 在 $ \mathbb{R} $ 中存在，故对每个 $ \varepsilon > 0 $，存在 $ \delta > 0 $，使得
+\[
+\left| \int_{\alpha_{1}}^{\alpha_{2}} \left| f \right| \right| = \left| \int_{\alpha_{1}}^{c} \left| f \right| - \int_{\alpha_{2}}^{c} \left| f \right| \right| < \varepsilon \quad \text{对 } \alpha_{1}, \alpha_{2} \in (a, a + \delta) .
+\]
+
+于是命题 4.3 蕴含
+
+\begin{equation}
+\left| \int_{\alpha_{1}}^{c} f - \int_{\alpha_{2}}^{c} f \right| = \left| \int_{\alpha_{1}}^{\alpha_{2}} f \right| \le \left| \int_{\alpha_{1}}^{\alpha_{2}} \left| f \right| \right| < \varepsilon \quad \text{对 } \alpha_{1}, \alpha_{2} \in (a, a + \delta) .\tag{8.2}
+\end{equation}
+
+现设 $ (\alpha_{j}') $ 是 $ (a, c) $ 中的序列，使得 $ \lim \alpha_{j}' = a $。由 (8.2)，$ (\int_{\alpha_{j}'}^{c} f\,dx) $ 是 $ E $ 中的柯西序列。因此存在 $ e' \in E $，使得当 $ j \to \infty $ 时 $ \int_{\alpha_{j}'}^{c} f\,dx \to e' $。若 $ (\alpha_{j}'') $ 是 $ (a, c) $ 中的另一个序列，使得 $ \lim \alpha_{j}'' = a $，则类似地存在 $ e'' \in E $，使得在 $ E $ 中 $ \lim_{j} \int_{\alpha_{j}''}^{c} f\,dx = e'' $。
+
+现在我们选取 $ N \in \mathbb{N} $，使得对 $ j \ge N $ 有 $ \alpha_{j}', \alpha_{j}'' \in (a, a + \delta) $。由 (8.2)，我们便得到对 $ j \ge N $ 有 $ \left| \int_{\alpha_{j}'}^{c} f - \int_{\alpha_{j}''}^{c} f \right| < \varepsilon $，之后令 $ j \to \infty $ 取极限便给出不等式 $ \left| e' - e'' \right| \le \varepsilon $。因为这对每个 $ \varepsilon > 0 $ 都成立，故 $ e' = e'' $，于是我们证明了 $ \lim_{\alpha \to a+0} \int_{\alpha}^{c} f\,dx $ 在 $ E $ 中存在。类似地，可证明 $ \lim_{\beta \to b-0} \int_{c}^{b} f\,dx $ 在 $ E $ 中存在。因此反常积分 $ \int_{a}^{b} f\,dx $ 在 $ E $ 中存在。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{优函数判别法}
+
+与级数的情形类似，$ f $ 的可积优函数的存在保证了 $ \int_{a}^{b} f\,dx $ 的绝对收敛性。
+
+\begin{theorem}
+
+设 $ f : J \to E $ 与 $ g : J \to \mathbb{R}^{+} $ 可容许，且
+
+\[
+\left| f(x) \right| \le g(x) \quad \text{对 } x \in (a, b) .
+\]
+
+若 $ g $ 可积，则 $ f $ 绝对可积。
+
+\proofhead
+设 $ c \in (a, b) $ 且 $ \alpha_{1}, \alpha_{2} \in (a, c) $。则由推论 4.6 可得
+\[
+\left| \int_{\alpha_{1}}^{c} \left| f \right| - \int_{\alpha_{2}}^{c} \left| f \right| \right| = \left| \int_{\alpha_{1}}^{\alpha_{2}} \left| f \right| \right| \le \left| \int_{\alpha_{1}}^{\alpha_{2}} g \right| = \left| \int_{\alpha_{1}}^{c} g - \int_{\alpha_{2}}^{c} g \right| .
+\]
+
+若 $ \int_{a}^{b} g\,dx $ 在 $ \mathbb{R} $ 中存在，则对每个 $ \varepsilon > 0 $，存在 $ \delta > 0 $，使得对 $ \alpha_{1}, \alpha_{2} \in (a, a + \delta) $ 有 $ \left| \int_{\alpha_{1}}^{c} g - \int_{\alpha_{2}}^{c} g \right| < \varepsilon $，于是我们得到
+
+\[
+\left| \int_{\alpha_{1}}^{c} \left| f \right| - \int_{\alpha_{2}}^{c} \left| f \right| \right| < \varepsilon \quad \text{对 } \alpha_{1}, \alpha_{2} \in (a, a + \delta) .
+\]
+
+这一陈述使我们能够相应地重述定理 8.7 的证明，由此得出 $ \int_{a}^{b} f\,dx $ 的绝对收敛性。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\begin{example}
+
+设 $ f : (a, b) \to E $ 可容许。
+
+\begin{items}
+\item
+
+若 $ f $ 是实值的且 $ f \ge 0 $，则 $ f $ 绝对可积当且仅当 $ f $ 可积。
+
+\item
+
+\begin{subitems}
+\item
+
+设 $ a > 0 $ 且 $ b = \infty $。若存在数 $ \varepsilon > 0 $，$ M > 0 $ 与 $ c > a $，使得
+
+\[
+\left| f(x) \right| \le \frac{M}{x^{1+\varepsilon}} \quad \text{对 } x \ge c ,
+\]
+
+则 $ \int_{c}^{\infty} f $ 绝对收敛。
+
+\item
+
+设 $ a = 0 $ 且 $ b > 0 $。若存在数 $ \varepsilon > 0 $，$ M > 0 $ 与 $ c \in (0, b) $，使得
+
+\[
+\left| f(x) \right| \le \frac{M}{x^{1-\varepsilon}} \quad \text{对 } x \in (0, c) ,
+\]
+
+则 $ \int_{0}^{c} f $ 绝对收敛。
+
+\proofhead
+这由定理 8.8 与例 8.4(a)、(b) 得出。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\item
+
+积分 $ \int_{0}^{\infty} \left( \sin(x)/(1 + x^{2}) \right) dx $ 绝对收敛。
+
+\proofhead
+显然，$ x \mapsto 1/(1 + x^{2}) $ 是 $ x \mapsto \sin(x)/(1 + x^{2}) $ 的一个优函数。此外，例 8.4(e) 蕴含积分 $ \int_{0}^{\infty} dx/(1 + x^{2}) $ 存在。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{example}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $ f_{n}, f \in \mathcal{S}([a, b], E) $ 且 $ (f_{n}) $ 一致收敛于 $ f $。则我们已在定理 4.1 中证明 $ (\int_{a}^{b} f_{n})_{n \in \mathbb{N}} $ 在 $ E $ 中收敛于 $ \int_{a}^{b} f $。对反常积分，类似的陈述不成立。
+
+\proofhead
+我们考虑函数序列
+\[
+f_{n}(x) := \frac{1}{n} e^{-x/n} \quad \text{对 } x \in \mathbb{R}^{+} \text{ 且 } n \in \mathbb{N}^{\times} .
+\]
+
+则每个 $ f_{n} $ 都属于 $ C(\mathbb{R}^{+}, \mathbb{R}) $。此外，序列 $ (f_{n}) $ 一致收敛于 0，因为 $ \left\| f_{n} \right\|_{\infty} = 1/n $。
+另一方面，我们有
+
+\begin{equation*}
+\begin{aligned}
+\int_{0}^{\infty} f_{n}(x)\,dx = \int_{0}^{\infty} \frac{1}{n} e^{-x/n}\,dx = \lim_{\substack{\alpha \to 0+ \\ \beta \to \infty}} \left( -e^{-x/n} \right) \Big|_{\alpha}^{\beta} = 1 .
+\end{aligned}
+\end{equation*}
+
+总之，可得 $ \lim_{n} \int_{0}^{\infty} f_{n}\,dx = 1 $，但 $ \int_{0}^{\infty} \lim_{n} f_{n}\,dx = 0 $。\nobreak\hspace{0.35em}■
+
+\item
+
+当一个函数序列同时也是反常积分中的被积函数时，人们可以追问交换相应极限的次序是否合法。我们现在不讨论这一点，而是把相应的结果留到第三卷，作为更一般的勒贝格积分理论的一部分，因为对这种分析而言，勒贝格积分理论比（更简单的）柯西–黎曼积分理论更为合适。在勒贝格理论的框架下，我们将找到关于何时可以交换取极限与积分的非常一般且灵活的判别法。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+证明下列反常积分收敛：
+
+\[
+\mathrm{(i)}\quad \int_{1}^{\infty} \frac{\sin x}{x^2} \, dx , \qquad \mathrm{(ii)}\quad \int_{0}^{\infty} \frac{\sin x}{x} \, dx , \qquad \mathrm{(iii)}\quad \int_{1}^{\infty} \frac{\sin(1/x)}{x} \, dx .
+\]
+
+在哪些情形下这些积分绝对收敛？
+
+\item
+
+下列哪些反常积分有值？
+
+\[
+\mathrm{(i)}\quad \int_{0}^{1} \frac{\arcsin x}{\sqrt{1 - x^2}} \, dx , \qquad \mathrm{(ii)}\quad \int_{1}^{\infty} \frac{\log x}{x^2} \, dx ,
+\]
+\[
+\mathrm{(iii)}\quad \int_{0}^{\infty} \frac{\log x}{1 + x^2} \, dx , \qquad \mathrm{(iv)}\quad \int_{0}^{\infty} x^n e^{-x} \, dx .
+\]
+
+（(iii) 的提示：考虑 $ \int_{1}^{\infty} $ 与 $ \int_{0}^{1} $。）
+
+\item
+
+证明 $ \int_{0}^{\pi} \log \sin x \, dx = -\pi \log 2 $。（提示：$ \sin 2x = 2 \sin x \cos x $。）
+
+\item
+
+设 $ -\infty < a < b \le \infty $，且 $ f : [a, b) \to E $ 可容许。证明：$ \int_{a}^{b} f $ 存在当且仅当对每个 $ \varepsilon > 0 $，存在 $ c \in [a, b) $，使得对 $ \alpha, \beta \in [c, b) $ 有 $ \left| \int_{\alpha}^{\beta} f \right| < \varepsilon $。
+
+\item
+
+证明积分 $ \int_{0}^{\infty} \sqrt{t} \cos(t^2) \, dt $ 收敛。\footnote{本题特别表明：$ \int_{0}^{\infty} f $ 的收敛并不能推出当 $ x \to \infty $ 时有 $ f(x) \to 0 $。请将此结果与定理 II.7.2 比较。}
+
+\item
+
+设 $ -\infty < a < b \le \infty $，且 $ f : [a, b) \to \mathbb{R} $ 可容许。
+
+\begin{subitems}
+\item
+
+若 $ f \ge 0 $，证明 $ \int_{a}^{b} f(x) \, dx $ 当且仅当 $ K := \sup_{c \in [a, b)} \left| \int_{a}^{c} f \right| < \infty $。
+
+\item
+
+设 $ f \in C([a, b), \mathbb{R}) $，$ g \in C^1([a, b), \mathbb{R}) $。证明：若 $ K < \infty $ 且 $ g(x) $ 当 $ x \to b - 0 $ 时单调趋于 $ 0 $，则 $ \int_{a}^{b} fg $ 收敛。
+
+\end{subitems}
+
+\item
+
+设 $ f \in C^1([a, \infty), \mathbb{R}) $，其中 $ a \in \mathbb{R} $，且 $ f' $ 递增，$ \lim_{x \to \infty} f'(x) = \infty $。证明 $ \int_{a}^{\infty} \sin(f(x)) \, dx $ 收敛。
+（提示：作代换 $ y = f(x) $，并回顾定理 III.5.7。）
+
+\item
+
+函数 $ f \in C([0, \infty), \mathbb{R}) $ 满足 $ \sup_{0 < a < b < \infty} \left| \int_{a}^{b} f \right| < \infty $。试证明
+
+\[
+\int_{0}^{\infty} \frac{f(ax) - f(bx)}{x} \, dx = f(0) \log\left( \frac{a}{b} \right) \quad \text{对 } 0 < a < b .
+\]
+
+（提示：令 $ c > 0 $。由定理 4.16 可知：
+
+\[
+\int_{c}^{\infty} \frac{f(ax) - f(bx)}{x} \, dx = \int_{ac}^{bc} \frac{f(x)}{x} \, dx = f(\xi(c)) \log\left( \frac{a}{b} \right)
+\]
+
+其中 $ \xi(c) \in [ac, bc] $。）
+
+\item
+
+设 $ -\infty < a < 0 < b < \infty $，且 $ f : [a, 0) \cup (0, b] \to \mathbb{R} $ 可容许。若
+
+\[
+\lim_{\varepsilon \to 0} \left( \int_{a}^{-\varepsilon} f(x) \, dx + \int_{\varepsilon}^{b} f(x) \, dx \right)
+\]
+
+在 $ \mathbb{R} $ 中存在，则称此极限为 $ \int_{a}^{b} f $ 的\textbf{柯西主值}，并记作\footnote{$ PV $ 表示“主值”。} $ PV \int_{a}^{b} f $。计算
+
+\[
+PV \int_{-1}^{1} \frac{dx}{x} , \qquad PV \int_{-\pi/2}^{\pi/2} \frac{dx}{\sin x} , \qquad PV \int_{-1}^{1} \frac{dx}{x(6 + x - x^2)} .
+\]
+\end{exercises}
+
+\section{伽马函数}
+
+在本节中，我们将暂时结束积分理论，并研究数学中最重要的非初等函数之一，即伽马函数。我们将导出它的基本性质，特别地，证明它插值阶乘 $ n \mapsto n! $，也就是说，它使这个函数能够取非整数的自变量。此外，我们将证明 $ n! $ 的棣莫弗–斯特林渐近形式的一个改进，并且——作为一般理论的副产品——计算一个重要反常积分的值，即高斯误差积分。
+
+\needspace{3\baselineskip}\subsection*{欧拉积分表示}
+
+我们通过考虑一个依赖参数的反常积分，对满足 $ \operatorname{Re} z > 0 $ 的 $ z \in \mathbb{C} $ 引入伽马函数。
+
+\begin{lemma}
+
+对满足 $ \operatorname{Re} z > 0 $ 的 $ z \in \mathbb{C} $，积分
+
+\[
+\int_{0}^{\infty} t^{z-1} e^{-t} \, dt
+\]
+
+绝对收敛。
+
+\proofhead
+首先，我们指出 $ (0, \infty) $ 上的函数 $ t \mapsto t^{z-1} e^{-t} $ 是可容许的。
+
+\begin{subitems}
+\item
+
+我们考察积分在其下限处的情形。对 $ t \in (0, 1] $，我们有
+
+\[
+\left| t^{z-1} e^{-t} \right| = t^{\operatorname{Re} z-1} e^{-t} \le t^{\operatorname{Re} z-1} .
+\]
+
+于是由例 8.9(b) 可得，$ \int_{0}^{1} t^{z-1} e^{-t} \, dt $ 绝对收敛。
+
+\item
+
+对 $ m \in \mathbb{N}^{\times} $，我们有估计
+
+\[
+\frac{t^{m}}{m!} \le \sum_{k=0}^{\infty} \frac{t^{k}}{k!} = e^{t} \quad \text{对 } t \ge 0 .
+\]
+
+乘以 $ t^{\operatorname{Re} z-1} $ 之后，我们求得
+
+\[
+\left| t^{z-1} e^{-t} \right| = t^{\operatorname{Re} z-1} e^{-t} \le \frac{m!}{t^{m-\operatorname{Re} z+1}} .
+\]
+
+我们选取 $ m \in \mathbb{N}^{\times} $ 使得 $ m > \operatorname{Re} z $，并由例 8.9(b) 得到 $ \int_{1}^{\infty} t^{z-1} e^{-t} \, dt $ 的绝对收敛。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{lemma}
+
+对满足 $ \operatorname{Re} z > 0 $ 的 $ z \in \mathbb{C} $，积分
+
+\begin{equation}
+\Gamma(z) := \int_{0}^{\infty} t^{z-1} e^{-t} \, dt\tag{9.1}
+\end{equation}
+
+称为\textbf{第二欧拉积分}或\textbf{欧拉伽马积分}，并且 (9.1) 在 $ [\operatorname{Re} z > 0] := \{\, z \in \mathbb{C} ; \ \operatorname{Re} z > 0 \,\} $ 上定义了\textbf{伽马函数}。
+
+\qyxffnnumdef{1}
+\begin{theorem}
+
+伽马函数满足\textbf{函数方程}
+
+\[
+\Gamma(z+1) = z\Gamma(z) \quad \text{对 } \operatorname{Re} z > 0 .
+\]
+
+特别地，
+
+\[
+\Gamma(n+1) = n! \quad \text{对 } n \in \mathbb{N} .
+\]
+
+\proofhead
+令 $ u(t) := t^{z} $ 与 $ v'(t) := e^{-t} $ 作分部积分，得
+\[
+\int_{\alpha}^{\beta} t^{z} e^{-t} \, dt = -t^{z} e^{-t} \big|_{\alpha}^{\beta} + z \int_{\alpha}^{\beta} t^{z-1} e^{-t} \, dt \quad \text{对 } 0 < \alpha < \beta < \infty .
+\]
+
+由命题 III.6.5(iii) 以及幂函数在 $ [0, \infty) $ 上的连续性，我们得到当 $ t \to 0 $ 以及当 $ t \to \infty $ 时 $ t^{z} e^{-t} \to 0 $。因此，我们有
+
+\begin{equation*}
+\begin{aligned}
+\Gamma(z+1) = \lim_{\substack{\alpha \to 0+ \\ \beta \to \infty}} \int_{\alpha}^{\beta} t^{z} e^{-t} \, dt = z \int_{0}^{\infty} t^{z-1} e^{-t} \, dt = z\Gamma(z)
+\end{aligned}
+\end{equation*}
+
+从而得到所述函数方程。
+
+最后，完成归纳，我们有
+
+\[
+\Gamma(n+1) = n\Gamma(n) = n(n-1) \cdots 1 \cdot \Gamma(1) = n! \, \Gamma(1) \quad \text{对 } n \in \mathbb{N} .
+\]
+
+因为 $ \Gamma(1) = \int_{0}^{\infty} e^{-t} \, dt = -e^{-t} \big|_{0}^{\infty} = 1 $，我们便完成了证明。\qyxffnmark{1} \nobreak\hspace{0.35em}■
+
+\end{theorem}
+\qyxffntextof{1}{自然，$ f\big|_{a}^{\infty} $ 是 $ \lim_{b \to \infty} f\big|_{a}^{b} $ 的简写。}
+
+\needspace{3\baselineskip}\subsection*{在 $ \mathbb{C}\setminus(-\mathbb{N}) $ 上的伽马函数}
+
+对 $ \operatorname{Re} z > 0 $ 与 $ n \in \mathbb{N}^{\times} $，由定理 9.2 可得
+
+\[
+\Gamma(z+n) = (z+n-1)(z+n-2) \cdots (z+1)z\Gamma(z) ,
+\]
+
+即
+
+\begin{equation}
+\Gamma(z) = \frac{\Gamma(z+n)}{z(z+1) \cdots (z+n-1)} .\tag{9.2}
+\end{equation}
+
+(9.2) 的右端对每个满足 $ \operatorname{Re} z > -n $ 的 $ z \in \mathbb{C}\setminus(-\mathbb{N}) $ 都有定义。这个公式提示我们把函数 $ z \mapsto \Gamma(z) $ 延拓到 $ \mathbb{C}\setminus(-\mathbb{N}) $ 上。
+
+\begin{theorem}
+
+（兼定义）对 $ z \in \mathbb{C}\setminus(-\mathbb{N}) $，
+
+\[
+\Gamma_n(z) := \frac{\Gamma(z+n)}{z(z+1) \cdots (z+n-1)}
+\]
+
+当 $ n > -\operatorname{Re} z $ 时与 $ n \in \mathbb{N}^{\times} $ 无关。因此我们可以通过
+
+\[
+\Gamma(z) := \Gamma_n(z) \quad \text{对 } z \in \mathbb{C}\setminus(-\mathbb{N}) \text{ 且 } n > -\operatorname{Re} z
+\]
+
+定义 (9.1) 中给出的函数在 $ \mathbb{C}\setminus(-\mathbb{N}) $ 上的一个延拓。这个延拓称为\textbf{伽马函数}。它满足函数方程
+
+\[
+\Gamma(z+1) = z\Gamma(z) \quad \text{对 } z \in \mathbb{C}\setminus(-\mathbb{N}) .
+\]
+
+\proofhead
+由 (9.2)，$ \Gamma_n $ 在 $ [\operatorname{Re} z > 0] $ 上与 (9.1) 中定义的函数一致。此外，对满足 $ n > m > -\operatorname{Re} z $ 的 $ m, n \in \mathbb{N} $，我们有
+\[
+\Gamma(z+n) = (z+n-1) \cdots (z+m)\Gamma(z+m) .
+\]
+
+因此
+
+\begin{equation*}
+\begin{aligned}
+\Gamma_n(z) &= \frac{\Gamma(z+n)}{z(z+1) \cdots (z+n-1)} \\ &= \frac{(z+n-1) \cdots (z+m)\Gamma(z+m)}{z(z+1) \cdots (z+m-1)(z+m) \cdots (z+n-1)} \\ &= \frac{\Gamma(z+m)}{z(z+1) \cdots (z+m-1)} = \Gamma_m(z) .
+\end{aligned}
+\end{equation*}
+
+于是函数 $ \Gamma_n $ 与 $ \Gamma_m $ 在它们共同有定义的地方一致。这表明伽马函数是良定义的，并且当 $ [\operatorname{Re} z > 0] $ 时与欧拉伽马积分一致。
+
+对 $ z \in \mathbb{C}\setminus(-\mathbb{N}) $ 与满足 $ \operatorname{Re} z > -n $ 的 $ n \in \mathbb{N}^{\times} $，我们有
+
+\[
+\Gamma(z+1) = \frac{\Gamma(z+n+1)}{(z+1) \cdots (z+n)} = \frac{z(z+n)\Gamma(z+n)}{z(z+1) \cdots (z+n)} = z\Gamma(z)
+\]
+
+因为 $ (z+n)\Gamma(z+n) = \Gamma(z+n+1) $。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{高斯的表示公式}
+
+伽马函数还有另一种表示，它由高斯给出，并有重要的应用。
+
+\begin{theorem}
+
+对 $ z \in \mathbb{C}\setminus(-\mathbb{N}) $，我们有
+
+\[
+\Gamma(z) = \lim_{n \to \infty} \frac{n^{z} n!}{z(z+1) \cdots (z+n)} .
+\]
+
+证明
+
+\begin{subitems}
+\item
+
+我们首先考虑 $ \operatorname{Re} z > 0 $ 的情形。因为
+
+\[
+\Gamma(z) = \lim_{n \to \infty} \int_{0}^{n} t^{z-1} e^{-t} \, dt
+\]
+
+并且根据定理 III.6.23，
+
+\begin{equation}
+e^{-t} = \lim_{n \to \infty} \left( 1 - \frac{t}{n} \right)^{n} \quad \text{对 } t \ge 0 ,\tag{9.3}
+\end{equation}
+
+我们可以猜想公式
+
+\begin{equation}
+\Gamma(z) = \lim_{n \to \infty} \int_{0}^{n} t^{z-1} \left( 1 - \frac{t}{n} \right)^{n} \, dt \quad \text{对 } \operatorname{Re} z > 0 .\tag{9.4}
+\end{equation}
+
+我们将在下面证明它。
+
+\item
+
+设 $ \operatorname{Re} z > 0 $。我们用 $ u(t) := (1 - t/n)^{n} $ 与 $ v'(t) := t^{z-1} $ 对 (9.4) 作分部积分：
+
+\[
+\int_{0}^{n} t^{z-1} \left( 1 - \frac{t}{n} \right)^{n} dt = \frac{1}{z} \int_{0}^{n} t^{z} \left( 1 - \frac{t}{n} \right)^{n-1} dt .
+\]
+
+再作一次分部积分给出
+
+\[
+\int_{0}^{n} t^{z-1} \left( 1 - \frac{t}{n} \right)^{n} dt = \frac{1}{z} \cdot \frac{n-1}{n(z+1)} \int_{0}^{n} t^{z+1} \left( 1 - \frac{t}{n} \right)^{n-2} dt ,
+\]
+
+并且，完成归纳，我们求得
+
+\begin{equation*}
+\begin{aligned}
+\int_{0}^{n} t^{z-1} \left( 1 - \frac{t}{n} \right)^{n} dt &= \frac{1}{z} \cdot \frac{n-1}{n(z+1)} \cdot \frac{n-2}{n(z+2)} \cdot \cdots \cdot \frac{1}{n(z+n-1)} \int_{0}^{n} t^{z+n-1} dt \\ &= \frac{1}{z} \cdot \frac{n-1}{n(z+1)} \cdot \frac{n-2}{n(z+2)} \cdot \cdots \cdot \frac{1}{n(z+n-1)} \cdot \frac{n^{z+n}}{z+n} \\ &= \frac{n! \, n^{z}}{z(z+1) \cdots (z+n)} .
+\end{aligned}
+\end{equation*}
+
+于是该断言在这种情形下由 (9.4) 得到。
+
+\item
+
+我们令
+
+\begin{equation}
+\gamma_n(z) := \frac{n! \, n^{z}}{z(z+1) \cdots (z+n)} \quad \text{对 } z \in \mathbb{C}\setminus(-\mathbb{N}) .\tag{9.5}
+\end{equation}
+
+于是我们有
+
+\begin{equation*}
+\begin{aligned}
+\gamma_n(z) &= \frac{1}{z(z+1) \cdots (z+k-1)} \left( 1 + \frac{z+1}{n} \right) \left( 1 + \frac{z+2}{n} \right) \cdots \\ &\quad \cdot \left( 1 + \frac{z+k}{n} \right) \gamma_n(z+k)
+\end{aligned}
+\end{equation*}
+
+对每个 $ k \in \mathbb{N}^{\times} $。现在我们选取 $ k > -\operatorname{Re} z $，于是由 (ii) 与定理 9.3 得到
+
+\[
+\lim_{n} \gamma_n(z) = \frac{\Gamma(z+k)}{z(z+1) \cdots (z+k-1)} = \Gamma(z) .
+\]
+
+于是只剩下证明 (9.4)。
+
+\item
+
+为对固定的 $ z $ 证明 (9.4)，我们可以令 $ f(t) := t^{z-1} e^{-t} $ 以及
+
+\begin{equation*}
+f_n(t) := \begin{cases} t^{z-1} (1 - t/n)^{n} , & 0 < t \le n , \\ 0 , & t > n . \end{cases}
+\end{equation*}
+
+于是由 (9.3) 可得
+
+\begin{equation}
+\lim_{n \to \infty} f_n(t) = f(t) \quad \text{对 } t > 0 .\tag{9.6}
+\end{equation}
+
+因为序列 $ \left( (1 - t/n)^{n} \right)_{n \in \mathbb{N}} $ 对 $ t > 0 $ 单调收敛到 $ e^{-t} $（见 (v)），我们还有
+
+\begin{equation}
+\left| f_n(t) \right| \le g(t) \quad \text{对 } t > 0 \text{ 且 } n \in \mathbb{N} ,\tag{9.7}
+\end{equation}
+
+其中我们在 $ (0, \infty) $ 上定义可积函数 $ t \mapsto g(t) := t^{\operatorname{Re} z-1} e^{-t} $。现在由 (9.6)、(9.7) 以及勒贝格收敛定理（将在第三卷中证明）可得
+
+\[
+\lim_{n \to \infty} \int_{0}^{n} t^{z-1} (1 - t/n)^{n} dt = \lim_{n \to \infty} \int_{0}^{\infty} f_n(t) \, dt = \int_{0}^{\infty} f(t) \, dt = \Gamma(z) ,
+\]
+
+从而得到 (9.4)。
+为了避免援引勒贝格定理，我们将直接验证 (9.4)。但首先，我们必须证明 (9.3) 中的收敛是单调的且是局部一致的。
+
+\item
+
+由对数的泰勒展开（应用 IV.3.9(d) 或定理 V.3.9），我们有
+
+\[
+\frac{\log(1-s)}{s} = -\frac{1}{s} \sum_{k=1}^{\infty} \frac{s^{k}}{k} = -1 - \sum_{k=1}^{\infty} \frac{s^{k}}{k+1} \quad \text{对 } s \in (0, 1) ,
+\]
+
+并且我们求得
+
+\begin{equation}
+\frac{\log(1-s)}{s} \uparrow -1 \quad (s \to 0+) .\tag{9.8}
+\end{equation}
+
+我们现在在 (9.8) 中令 $ s := t/n $ 使得 $ t > 0 $，于是
+
+\[
+n \log\left( 1 - \frac{t}{n} \right) = t \left[ \frac{n}{t} \log\left( 1 - \frac{t}{n} \right) \right] \uparrow -t \quad (n \to \infty) .
+\]
+
+指数函数的单调性与连续性于是表明，序列 $ \left( [1 - t/n]^{n} \right)_{n \in \mathbb{N}} $ 对每个 $ t \ge 0 $ 都收敛到 $ e^{-t} $。
+该序列在 $ \mathbb{R}^{+} $ 的紧致子区间上的一致收敛，由映射 $ s \mapsto [\log(1-s)]/s $ 在这些区间上的一致连续性得出（见习题 III.3.11）。也就是说，设 $ T > 0 $ 且 $ \varepsilon > 0 $。则存在 $ \delta > 0 $ 使得
+
+\begin{equation}
+\left| \frac{\log(1-s)}{s} + 1 \right| < \varepsilon \quad \text{对 } 0 < s < \delta .\tag{9.9}
+\end{equation}
+
+现在，当 $ n > T/\delta $ 且 $ t \in [0, T] $ 时，我们确实有 $ t/n < \delta $。令 $ s := t/n $，于是由 (9.9) 可得
+
+\[
+\left| n \log\left( 1 - \frac{t}{n} \right) + t \right| \le T \left| \frac{n}{t} \log\left( 1 - \frac{t}{n} \right) + 1 \right| < T\varepsilon \quad \text{对 } 0 \le t \le T .
+\]
+
+于是序列 $ \left( n \log(1 - t/n) \right)_{n \in \mathbb{N}} $ 在 $ [0, T] $ 上一致收敛到 $ -t $。因为指数函数在 $ [0, T] $ 上一致连续，序列 $ \left( (1 - t/n)^{n} \right)_{n \in \mathbb{N}} $ 在 $ t \in [0, T] $ 中一致收敛到 $ e^{-t} $。
+
+\item
+
+最后，我们证明 (9.4)。于是设 $ \varepsilon > 0 $。引理 9.1 的证明表明存在 $ N_0 \in \mathbb{N} $ 使得
+
+\[
+\int_{N_0}^{\infty} t^{\operatorname{Re} z-1} e^{-t} \, dt < \varepsilon/3 .
+\]
+
+因此，由 (v)，我们有
+
+\[
+\int_{N_0}^{n} t^{\operatorname{Re} z-1} \left( 1 - \frac{t}{n} \right)^{n} dt \le \int_{N_0}^{n} t^{\operatorname{Re} z-1} e^{-t} \, dt \le \int_{N_0}^{\infty} t^{\operatorname{Re} z-1} e^{-t} \, dt < \frac{\varepsilon}{3}
+\]
+
+对 $ n \ge N_0 $。最后，基于与 (v) 相同的理由，存在 $ N \in \mathbb{N} $ 使得
+
+\[
+\int_{0}^{N_0} t^{\operatorname{Re} z-1} \left( e^{-t} - \left( 1 - \frac{t}{n} \right)^{n} \right) dt \le \frac{\varepsilon}{3} \quad \text{对 } n \ge N .
+\]
+
+对 $ n \ge N_0 \lor N $，我们现在得到
+
+\begin{equation*}
+\begin{aligned}
+\left| \Gamma(z) - \int_{0}^{n} t^{z-1} \left( 1 - \frac{t}{n} \right)^{n} dt \right| &\le \left| \Gamma(z) - \int_{0}^{N_0} t^{z-1} e^{-t} \, dt \right| \\
+&\quad + \left| \int_{0}^{N_0} t^{z-1} e^{-t} \, dt - \int_{0}^{n} t^{z-1} \left( 1 - \frac{t}{n} \right)^{n} dt \right| \\ &\le \int_{N_0}^{\infty} t^{\operatorname{Re} z-1} e^{-t} \, dt + \int_{0}^{N_0} t^{\operatorname{Re} z-1} \left( e^{-t} - \left( 1 - \frac{t}{n} \right)^{n} \right) dt \\ &\quad + \int_{N_0}^{n} t^{\operatorname{Re} z-1} \left( 1 - \frac{t}{n} \right)^{n} dt \le \varepsilon ,
+\end{aligned}
+\end{equation*}
+
+这表明 (9.4) 成立。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{反射公式}
+
+作为高斯乘积表示的一个应用，我们将导出伽马函数与正弦之间的一个重要关系。为此，我们首先证明 $ 1/\Gamma $ 的一个乘积形式，它由魏尔斯特拉斯给出。
+
+\begin{proposition}
+
+对 $ z \in \mathbb{C}\setminus(-\mathbb{N}) $，我们有
+
+\begin{equation}
+\frac{1}{\Gamma(z)} = z e^{Cz} \prod_{k=1}^{\infty} \left( 1 + \frac{z}{k} \right) e^{-z/k} ,\tag{9.10}
+\end{equation}
+
+其中 $ C $ 是欧拉–马歇罗尼常数。该无穷乘积绝对且局部一致收敛。特别地，伽马函数没有零点。
+
+\proofhead
+显然
+\[
+\frac{1}{\gamma_n(z)} = z\exp\left[ z \left( \sum_{k=1}^{n} \frac{1}{k} - \log n \right) \right] \prod_{k=1}^{n} \left( \frac{z+k}{k} e^{-z/k} \right)
+\]
+
+对 $ z \in \mathbb{C}\setminus(-\mathbb{N}) $。定义 $ a_k(z) := (1 + z/k)e^{-z/k} $，对 $ |z| \le R $ 我们有
+
+\begin{equation}
+\left| a_k(z) - 1 \right| = \left| (1 + z/k) \left[ 1 - z/k + \sum_{j=2}^{\infty} \frac{(-1)^{j}}{j!} \left( \frac{z}{k} \right)^{j} \right] - 1 \right| \le c/k^{2} ,\tag{9.11}
+\end{equation}
+
+其中 $ c := c(R) $ 是适当的常数。因此存在常数 $ K \in \mathbb{N}^{\times} $ 使得对 $ k \ge K $ 与 $ |z| \le R $ 有 $ |a_k(z) - 1| \le 1/2 $。由此可得
+
+\begin{equation}
+\prod_{k=1}^{n} \frac{z+k}{k} e^{-z/k} = \left( \prod_{k=1}^{K} a_k(z) \right) \exp\left( \sum_{k=K+1}^{n} \log a_k(z) \right)\tag{9.12}
+\end{equation}
+
+对 $ n > K $ 与 $ |z| \le R $。由对数的幂级数表示，我们得到存在常数 $ M \ge 1 $ 使得对 $ |\zeta| \le 1/2 $ 有 $ |\log(1+\zeta)| \le M|\zeta| $。于是利用 (9.11)（它改变一切），我们求得估计
+
+\[
+\sum_{k>K} \left| \log a_k(z) \right| \le M \sum_{k>K} \left| a_k(z) - 1 \right| \le cM \sum_{k} k^{-2}
+\]
+
+对 $ |z| \le R $。于是级数 $ \sum_{k>K} \log a_k(z) $ 对 $ |z| \le R $ 绝对且一致收敛，这是由魏尔斯特拉斯优级数判别法得到的。由 (9.12) 与指数函数的性质，这对出现在 (9.10) 中的无穷乘积也成立。该断言现在由定理 9.4 与例 6.13(b) 得到。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+我们可以利用这个乘积表示来得到前面提到的正弦与伽马函数之间的关系。
+
+\qyxffntextdef{1}{之所以如此称呼，是因为其左端关于 $ z = -1/2 $ 为偶函数。}
+\begin{theorem}
+
+（$\Gamma$ 函数的反射公式\qyxffnmark{1}）对 $ z \in \mathbb{C}\setminus\mathbb{Z} $，我们有
+
+\[
+\Gamma(z)\Gamma(1-z) = \frac{\pi}{\sin(\pi z)} .
+\]
+
+\proofhead
+表示 (9.10) 蕴含（见命题 II.2.4(ii)）
+\[
+\frac{1}{\Gamma(z)} \frac{1}{\Gamma(1-z)} = \frac{1}{-z\Gamma(z)\Gamma(-z)} = z \prod_{k=1}^{\infty} \left( 1 - \frac{z^{2}}{k^{2}} \right)
+\]
+
+对 $ z \in \mathbb{C}\setminus\mathbb{Z} $。该断言现在由应用 7.23(b) 得到。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+利用反射公式，我们可以计算一些重要反常积分的值。
+
+\begin{application}
+
+（高斯误差积分\footnote{“误差积分”这个名称来自概率论，在概率论中函数 $ x \mapsto e^{-x^{2}} $ 起着基本的作用。}）该恒等式说的是
+
+\[
+\int_{-\infty}^{\infty} e^{-x^{2}} dx = \Gamma(1/2) = \sqrt{\pi} .
+\]
+
+\proofhead
+利用代换 $ x = \sqrt{t} $，我们求得\footnote{该代换在正常积分 $ \int_{\alpha}^{\beta} $ 中进行，然后取极限 $ \alpha \to 0+ $ 与 $ \beta \to \infty $。}
+\[
+\Gamma(1/2) = \int_{0}^{\infty} e^{-t} \frac{dt}{\sqrt{t}} = 2 \int_{0}^{\infty} e^{-x^{2}} dx = \int_{-\infty}^{\infty} e^{-x^{2}} dx ,
+\]
+
+因为 $ x \mapsto e^{-x^{2}} $ 是偶函数。该断言于是由反射公式得到。\nobreak\hspace{0.35em}■
+
+\end{application}
+
+在第三卷中，我们将学习一种计算高斯误差积分的更简便方法，它使用多元积分。
+
+\needspace{3\baselineskip}\subsection*{伽马函数的对数凸性}
+
+利用
+
+\[
+\varphi_n(z) := z \log n - \sum_{k=0}^{n} \log(z+k) + \log(n!) \quad \text{对 } n \in \mathbb{N}^{\times} , \ z \in \mathbb{C}\setminus(-\mathbb{N}) ,
+\]
+
+我们由 (9.5) 得到表示 $ \gamma_n = e^{\varphi_n} $。然后，通过取 $ \gamma_n $ 的对数导数 $ \gamma_n'/\gamma_n $，我们求得简单形式
+
+\begin{equation}
+\psi_n(z) := \frac{\gamma_n'(z)}{\gamma_n(z)} = \log n - \sum_{k=0}^{n} \frac{1}{z+k} ,\tag{9.13}
+\end{equation}
+
+并且，进一步地，
+
+\begin{equation}
+\psi_n'(z) = \sum_{k=0}^{n} \frac{1}{(z+k)^{2}}\tag{9.14}
+\end{equation}
+
+对 $ n \in \mathbb{N}^{\times} $ 与 $ z \in \mathbb{C}\setminus(-\mathbb{N}) $。
+
+我们现在可以证明伽马函数的前两个对数导数的如下形式。
+
+\begin{proposition}
+
+$ \Gamma \in C^{2}(\mathbb{C}\setminus(-\mathbb{N})) $。于是我们有
+
+\begin{equation}
+\frac{\Gamma'(z)}{\Gamma(z)} = -C - \frac{1}{z} - \sum_{k=1}^{\infty} \left( \frac{1}{z+k} - \frac{1}{k} \right)\tag{9.15}
+\end{equation}
+
+以及
+
+\begin{equation}
+\left( \frac{\Gamma'}{\Gamma} \right)'(z) = \sum_{k=0}^{\infty} \frac{1}{(z+k)^{2}}\tag{9.16}
+\end{equation}
+
+对 $ z \in \mathbb{C}\setminus(-\mathbb{N}) $，其中 $ C $ 是欧拉–马歇罗尼常数。
+
+\proofhead
+我们首先必须证明 $ \mathbb{C}\setminus(-\mathbb{N}) $ 上的序列 $ (\psi_n) $ 与 $ (\psi_n') $ 局部一致收敛。于是我们考察
+\[
+\psi_n(z) = \left( \log n - \sum_{k=1}^{n} \frac{1}{k} \right) - \frac{1}{z} - \sum_{k=1}^{n} \left( \frac{1}{z+k} - \frac{1}{k} \right) .
+\]
+
+于是，我们必须证明级数
+
+\begin{equation}
+\sum_{k} \left( \frac{1}{z+k} - \frac{1}{k} \right) = \sum_{k} \frac{-z}{k(z+k)} \quad \text{且} \quad \sum_{k} (z+k)^{-2}\tag{9.17}
+\end{equation}
+
+在 $ \mathbb{C}\setminus(-\mathbb{N}) $ 上局部一致收敛。
+
+设 $ z_0 \in \mathbb{C}\setminus(-\mathbb{N}) $ 且 $ 0 < r < \operatorname{dist}(z_0, -\mathbb{N}) $。则对 $ z \in \mathbb{B}(z_0, r) $，我们有估计
+
+\[
+|z+k| \ge |z_0+k| - |z - z_0| \ge k - |z_0| - r \ge k/2
+\]
+
+对满足 $ k \ge k_0 := 2(|z_0| + r) $ 的 $ k \in \mathbb{N}^{\times} $。因此，我们求得
+
+\[
+\left| \frac{z}{k(z+k)} \right| \le \frac{k_0}{k^{2}} , \quad \frac{1}{|z+k|^{2}} \le \frac{4}{k^{2}}
+\]
+
+对 $ z \in \mathbb{B}(z_0, r) $ 与 $ k \ge k_0 $。于是由魏尔斯特拉斯优级数判别法（定理 V.1.6）可得级数 (9.17) 在 $ \mathbb{B}(z_0, r) $ 上的一致收敛——从而在 $ \mathbb{C}\setminus(-\mathbb{N}) $ 上的局部一致收敛。因此我们有
+
+\begin{equation}
+\psi(z) := \lim_{n \to \infty} \psi_n(z) = -C - \frac{1}{z} - \sum_{k=1}^{\infty} \left( \frac{1}{z+k} - \frac{1}{z} \right) \quad \text{对 } z \in \mathbb{C}\setminus(-\mathbb{N}) .\tag{9.18}
+\end{equation}
+
+由函数级数极限的可微性定理（定理 V.2.8），进一步可得 $ \psi $ 在 $ \mathbb{C}\setminus(-\mathbb{N}) $ 上连续可微，且
+
+\begin{equation}
+\psi'(z) = \lim_{n \to \infty} \psi_n'(z) = \sum_{k=0}^{\infty} \frac{1}{(z+k)^{2}} \quad \text{对 } z \in \mathbb{C}\setminus(-\mathbb{N}) .\tag{9.19}
+\end{equation}
+
+对 $ z \in \mathbb{C}\setminus(-\mathbb{N}) $，我们也可以把 $ \varphi_n(z) $ 写成如下形式
+
+\[
+\varphi_n(z) = -\log z + z \left( \log n - \sum_{k=1}^{n} \frac{1}{k} \right) + \sum_{k=1}^{n} \left( \frac{z}{k} - \log\left( 1 + \frac{z}{k} \right) \right) .
+\]
+
+于是
+
+\[
+\log(1 + z/k) = z/k + O\left( (z/k)^{2} \right) \quad (k \to \infty)
+\]
+
+与例 6.13(b) 蕴含 $ \varphi_n(z) $ 收敛到
+
+\[
+\varphi(z) := -\log z - Cz + \sum_{k=1}^{\infty} \left( \frac{z}{k} - \log\left( 1 + \frac{z}{k} \right) \right)
+\]
+
+当 $ n \to \infty $ 时。于是我们由 $ \gamma_n = e^{\varphi_n} $ 与定理 9.4 得到
+
+\begin{equation}
+\Gamma(z) = e^{\varphi(z)} \quad \text{对 } z \in \mathbb{C}\setminus(-\mathbb{N}) .\tag{9.20}
+\end{equation}
+
+因为 $ \varphi_n' = \psi_n $ 且序列 $ (\psi_n) $ 局部一致收敛，定理 V.2.8 于是保证 $ \varphi $ 连续可微且 $ \varphi' = \psi $。现在由 (9.20) 可得 $ \Gamma $ 也连续可微，且
+
+\begin{equation}
+\Gamma' = \varphi' e^{\varphi} = \psi\Gamma .\tag{9.21}
+\end{equation}
+
+于是 (9.15) 由 (9.18) 得到，而 (9.16) 是 (9.19) 的推论。最后，$ \Gamma \in C^{2}(\mathbb{C}\setminus(-\mathbb{N})) $ 由 (9.21) 与 $ \psi $ 的连续可微性得到。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+上述定理与定理 VIII.5.11 蕴含 $ \Gamma $ 在 $ \mathbb{C}\setminus(-\mathbb{N}) $ 上解析。
+
+\item
+
+因为 $ (\Gamma'/\Gamma)' = (\Gamma''\Gamma - (\Gamma')^{2})/\Gamma^{2} $，我们由 (9.16) 得到
+
+\[
+\Gamma''(x)\Gamma(x) > \left( \Gamma'(x) \right)^{2} \ge 0 \quad \text{对 } x \in \mathbb{R}\setminus(-\mathbb{N}) .
+\]
+
+因此对 $ x \in \mathbb{R}\setminus(-\mathbb{N}) $ 有 $ \operatorname{sign}(\Gamma''(x)) = \operatorname{sign}(\Gamma(x)) $。由定理 9.4 的高斯公式，我们读出
+
+\begin{equation*}
+\operatorname{sign}(\Gamma(x)) = \begin{cases} 1 , & x > 0 , \\ (-1)^{k} , & -k < x < -k+1 , \ k \in \mathbb{N} . \end{cases}
+\end{equation*}
+
+因此 $ \Gamma $ 在 $ (0, \infty) $ 以及区间 $ (-2k, -2k+1) $ 上是凸的，而在区间 $ (-2k-1, -2k) $ 上是凹的，其中 $ k \in \mathbb{N} $。
+
+\end{items}
+
+\bookfigure[0.86]{figures/d1d2432f754b556a.png}
+
+\begin{items}
+\item[（c）]
+
+若在一个完全区间上处处严格正的函数 $ f $ 满足 $ \log f $ 是凸的，则称 $ f $ 是\textbf{对数凸}的。若 $ f $ 二次可微，则按照推论 IV.2.13，$ f $ 是对数凸的当且仅当 $ f''f - (f')^{2} \ge 0 $。因此伽马函数在 $ (0, \infty) $ 上是对数凸的。可以证明 $ \Gamma|(0, \infty) $ 是满足下列条件的唯一函数 $ f : (0, \infty) \to (0, \infty) $：
+
+\end{items}
+
+\begin{subitems}
+\item
+
+$ f $ 是对数凸的，
+
+\item
+
+$ f(x+1) = xf(x) $，且对 $ x > 0 $ 成立，并且
+
+\item
+
+$ f(1) = 1 $。
+关于基于这些性质的伽马函数理论的证明与构造，我们参考 [Art31]（另见 [Kön92] 与习题 6）。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{斯特林公式}
+
+棣莫弗–斯特林公式描述了阶乘 $ n \mapsto n! $ 当 $ n \to \infty $ 时的渐近行为。例 6.13(a) 说
+
+\begin{equation}
+\Gamma(n) = (n-1)! \sim \sqrt{2\pi} \, n^{n-\frac{1}{2}} e^{-n} .\tag{9.22}
+\end{equation}
+
+下面的定理改进并强化了这个陈述。
+
+\begin{theorem}
+
+（斯特林公式）对每个 $ x > 0 $，存在 $ \theta(x) \in (0, 1) $ 使得
+
+\[
+\Gamma(x) = \sqrt{2\pi} \, x^{x-1/2} e^{-x} e^{\theta(x)/12x} .
+\]
+
+\proofhead
+对 $ \gamma_n $，我们由 (9.5) 得到
+\[
+\log \gamma_n(x) = \log n! + x \log n - \sum_{k=0}^{n} \log(x+k) \quad \text{对 } x > 0 .
+\]
+
+对这个和，我们以 $ a := 0 $、$ b := n $ 与 $ m := 0 $ 应用欧拉–麦克劳林求和公式（定理 6.9），并求得
+
+\[
+\sum_{k=0}^{n} \log(x+k) = \int_{0}^{n} \log(x+t) \, dt + \frac{1}{2} \left[ \log x + \log(x+n) \right] + R_n(x) ,
+\]
+
+其中
+
+\[
+R_n(x) := \int_{0}^{n} \frac{\widetilde{B}_1(t)}{x+t} \, dt .
+\]
+
+于是令 $ u(t) := \log(x+t) $ 与 $ v' = \mathbf{1} $ 作分部积分，得
+
+\[
+\int_{0}^{n} \log(x+t) \, dt = (x+t)\left[ \log(x+t) - 1 \right] \big|_{0}^{n} = (x+n)\log(x+n) - n - x\log x ,
+\]
+
+从而
+
+\[
+\log \gamma_n(x) = \left( x - \frac{1}{2} \right) \log x + \log n! + n + x\log n - \left( x + n + \frac{1}{2} \right) \log(x+n) - R_n(x) .
+\]
+
+因为 $ \log(x+n) = \log n + \log(1 + x/n) $，可得
+
+\begin{equation*}
+\begin{aligned}
+\left( x + n + \frac{1}{2} \right) \log(x+n) &= x \log n + \log\left( n^{(n+\frac{1}{2})} \right) + \left( x + \frac{1}{2} \right) \log\left( 1 + \frac{x}{n} \right) \\ &\quad + \log\left( \left( 1 + \frac{x}{n} \right)^{n} \right) ,
+\end{aligned}
+\end{equation*}
+
+并且我们得到
+
+\begin{equation}
+\begin{aligned}
+\log \gamma_n(x) &= \left( x - \frac{1}{2} \right) \log x - \log\left( \left( 1 + \frac{x}{n} \right)^{n} \right) - \left( x + \frac{1}{2} \right) \log\left( 1 + \frac{x}{n} \right) \\ &\quad + \log\left[ \frac{n!}{n^{n+1/2} e^{-n}} \right] - R_n(x) .
+\end{aligned}\tag{9.23}
+\end{equation}
+
+为估计 $ R_n(x) $，我们考察
+
+\[
+-R_n(x) = -\sum_{k=0}^{n-1} \int_{k}^{k+1} \frac{\widetilde{B}_1(t)}{x+t} \, dt = -\sum_{k=0}^{n-1} \int_{0}^{1} \frac{B_1(t)}{x+t+k} \, dt = \sum_{k=0}^{n-1} g(x+k)
+\]
+
+其中
+
+\[
+g(x) := -\int_{0}^{1} \frac{t - 1/2}{x+t} \, dt = \left( x + \frac{1}{2} \right) \log\left( \frac{x+1}{x} \right) - 1 = \frac{1}{2y} \log\frac{1+y}{1-y} - 1 ,
+\]
+
+其中我们已令 $ y := 1/(2x+1) $。对 $ x > 0 $ 我们有 $ 0 < y < 1 $。因此，由
+
+\[
+\log\left( (1+y)/(1-y) \right) = \log(1+y) - \log(1-y)
+\]
+
+与对数的幂级数展开
+
+\[
+\frac{1}{2} \log\frac{1+y}{1-y} = \sum_{k=0}^{\infty} \frac{y^{2k+1}}{2k+1} ,
+\]
+
+我们有
+
+\begin{equation*}
+\begin{aligned}
+0 < g(x) &= \sum_{k=1}^{\infty} \frac{y^{2k}}{2k+1} < \frac{1}{3} \sum_{k=1}^{\infty} y^{2k} = \frac{1}{3} \frac{y^{2}}{1 - y^{2}} \\ &= \frac{1}{12x(x+1)} = \frac{1}{12x} - \frac{1}{12(x+1)} =: h(x) \quad \text{对 } x > 0 .
+\end{aligned}
+\end{equation*}
+
+于是 $ \sum_{k} h(x+k) $ 是级数 $ \sum_{k} g(x+k) $ 的一个收敛优级数。因此
+
+\[
+R(x) := \lim_{n \to \infty} R_n(x) = -\sum_{k=0}^{\infty} g(x+k) ,
+\]
+
+存在，并且我们有
+
+\[
+0 < -R(x) < \frac{1}{12x} \quad \text{对 } x > 0 ,
+\]
+
+因为 $ 1/12x $ 是级数 $ \sum_{k} h(x+k) $ 的值，且对 $ x > 0 $ 有 $ g(x) < h(x) $。
+
+现在我们在 (9.23) 中取极限 $ n \to \infty $，并由定理 9.4 求得
+
+\[
+\log \Gamma(x) = \left( x - \frac{1}{2} \right) \log x - x + \log\sqrt{2\pi} - R(x) ,
+\]
+
+其中我们再次利用了棣莫弗–斯特林公式 (9.22)。于是该定理以 $ \theta(x) := -12xR(x) $ 得到。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+斯特林公式允许对伽马函数作近似计算，特别地，它近似阶乘 $ n! $ 的大自变量值。若把 $ \Gamma(x) $ 近似为 $ \sqrt{2\pi} \, x^{x-1/2} e^{-x} $，则相对误差小于 $ e^{1/12x} - 1 $。当 $ x $ 变大时，这个误差迅速减小。
+
+\needspace{3\baselineskip}\subsection*{欧拉贝塔积分}
+
+积分
+
+\begin{equation}
+\int_{0}^{1} t^{p-1} (1-t)^{q-1} dt ,\tag{9.24}
+\end{equation}
+
+称为\textbf{第一欧拉积分}，在伽马函数的背景下起着重要作用。
+
+\qyxffnnumdef{1}
+\begin{proposition}
+
+对 $ p, q \in [\operatorname{Re} z > 0] $，积分 (9.24) 绝对收敛。
+
+\proofhead
+因为
+\[
+\int_{0}^{1} \left| t^{p-1} (1-t)^{q-1} \right| dt = \int_{0}^{1} t^{\operatorname{Re} p-1} (1-t)^{\operatorname{Re} q-1} dt ,
+\]
+
+只需考虑 $ p, q \in \mathbb{R} $ 的情形。
+
+\begin{subitems}
+\item
+
+设 $ q \in \mathbb{R} $。则存在数 $ 0 < m < M $ 使得
+
+\[
+m \le (1-t)^{q-1} \le M \quad \text{对 } 0 \le t \le 1/2 .
+\]
+
+因此，由例 8.9(b) 可得
+
+\[
+\int_{0}^{1/2} t^{p-1} (1-t)^{q-1} dt \ \text{存在} \Longleftrightarrow p > 0 .
+\]
+\item
+
+现在设 $ p > 0 $。则存在数 $ 0 < m' < M' $ 使得
+
+\[
+m' \le t^{p-1} \le M' \quad \text{对 } 1/2 \le t \le 1 .
+\]
+
+因此 $ \int_{1/2}^{1} t^{p-1} (1-t)^{q-1} dt $ 存在当且仅当 $ \int_{1/2}^{1} (1-t)^{q-1} dt $ 存在。利用代换 $ s := 1-t $，由例 8.9(b) 可得\qyxffnmark{1}
+
+\[
+\int_{1/2}^{1} (1-t)^{q-1} dt = \int_{0}^{1/2} s^{q-1} ds \ \text{存在} \Longleftrightarrow q > 0 ,
+\]
+
+这正是所断言的。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+\qyxffntextof{1}{正如对反常积分已经指出的那样，我们在取任何趋向无穷的极限之前进行这些代换。}
+
+利用这些定理，\textbf{欧拉贝塔函数} $ \mathbf{B} $ 通过下式被良定义
+
+\[
+\mathbf{B} : [\operatorname{Re} z > 0] \times [\operatorname{Re} z > 0] \to \mathbb{C} , \quad (p, q) \mapsto \int_{0}^{1} t^{p-1} (1-t)^{q-1} dt .
+\]
+
+\begin{remark}
+
+\begin{items}
+\item
+
+伽马函数与贝塔函数由函数方程
+
+\begin{equation}
+\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)} = \mathbf{B}(p, q) \quad \text{对 } p, q \in [\operatorname{Re} z > 0] .\tag{9.25}
+\end{equation}
+
+这个陈述对 $ p, q \in (0, \infty) $ 的证明在习题 12 与 13 中给出了提纲。一般情形我们将在第三卷中处理。
+
+\item
+
+对 $ p, q \in [\operatorname{Re} z > 0] $，我们有
+
+\[
+\mathbf{B}(p, q) = \mathbf{B}(q, p) \quad \text{且} \quad \mathbf{B}(p+1, q) = \frac{p}{q} \mathbf{B}(p, q+1) .
+\]
+
+\proofhead
+第一个断言由 (9.25) 立即推出。同样，(9.25) 与定理 9.2 蕴含
+\[
+\mathbf{B}(p+1, q) = \frac{p\Gamma(p)\Gamma(q)}{(p+q)\Gamma(p+q)} = \frac{p}{p+q} \mathbf{B}(p, q) ,
+\]
+
+然后，由对称性，还有 $ \mathbf{B}(p, q+1) = (q/(p+q))\mathbf{B}(p, q) $。\nobreak\hspace{0.35em}■
+
+\item
+
+利用函数方程 (9.25) 与伽马函数的性质，贝塔函数可以对所有满足 $ p, q, (p+q) \notin -\mathbb{N} $ 的 $ p, q \in \mathbb{C} $ 定义。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+证明
+
+\[
+\Gamma\left(n + \frac{1}{2}\right) = \sqrt{\pi}\prod_{k=1}^{n}\frac{2k-1}{2} = 1 \cdot 3 \cdot \cdot \cdot \cdot \cdot (2n-1)\frac{\sqrt{\pi}}{2^{n}} \qquad \text{对 } n \in \mathbb{N}^{\times} .
+\]
+\item
+
+证明 $ \Gamma $ 属于 $ C^{\infty}(\mathbb{C}\setminus(-\mathbb{N}),\mathbb{C}) $，且
+
+\[
+\Gamma^{(n)}(z) = \int_{0}^{\infty} t^{z-1}(\log t)^{n}e^{-t} \, dt \qquad \text{对 } n \in \mathbb{N} \text{ 且 } \operatorname{Re} z > 0 .
+\]
+
+（提示：考虑 (9.4)。）
+
+\item
+
+设 $ C $ 为欧拉–马歇罗尼常数。验证下列陈述：
+
+\begin{subitems}
+\item
+
+$ \int_{0}^{\infty} e^{-t}\log t \, dt = -C $。
+
+\item
+
+$ \int_{0}^{\infty} e^{-t}t\log t \, dt = 1 - C $。
+
+\item
+
+$ \int_{0}^{\infty} e^{-t}t^{n-1}\log t \, dt = (n-1)!\sum_{k=1}^{n-1}(1/k - C) $ 对 $ n \in \mathbb{N} $ 且 $ n \ge 2 $。
+
+\item
+
+$ \int_{0}^{\infty}(\log t)^{2}e^{-t} \, dt = C^{2} + \pi^{2}/6 $。
+（提示：为计算 (iv) 中的积分，考虑应用 7.23(a)。）
+
+\end{subitems}
+
+\item
+
+证明伽马函数具有如下表示
+
+\[
+\Gamma(z) = \int_{0}^{1}(-\log t)^{z-1} \, dt
+\]
+
+对满足 $ \operatorname{Re} z > 0 $ 的 $ z \in \mathbb{C} $。
+
+\item
+
+设 $ f $ 与 $ g $ 是对数凸的。证明 $ fg $ 也是对数凸的。
+
+\item
+
+设函数 $ f : (0,\infty) \to (0,\infty) $ 可微\footnote{可以不需要 $ f $ 的可微性（见 [Art31]、[Kön92]）。}且满足
+
+\begin{subitems}
+\item
+
+$ f $ 是对数凸的；
+
+\item
+
+$ f(x+1) = xf(x) $ 对 $ x > 0 $；
+
+\item
+
+$ f(1) = 1 $。
+然后证明 $ f = \Gamma|(0,\infty) $。
+（提示：$ (\alpha) $ 定义 $ h := \log(\Gamma/f) $。利用 (iii)，只需验证 $ h' = 0 $。
+$ (\beta) $ 由 (ii) 与定理 9.2 可得，$ h $ 是 1-周期的。
+$ (\gamma) $ 由 (i) 可得 $ (\log f)' $ 递增（见定理 IV.2.12）。这意味着
+
+\[
+0 \le (\log f)'(x+y) - (\log f)'(x) \le (\log f)'(x+1) - (\log f)'(x) = 1/x
+\]
+
+对 $ 0 < y \le 1 $，其中最后一步来自再次利用 (ii)。对 $ (\log \Gamma)' $ 也有类似的估计。因此
+
+\[
+-1/x \le h'(x+y) - h'(x) \le 1/x \qquad \text{对 } y \in (0,1] \text{ 且 } x \in (0,\infty) .
+\]
+
+于是，$ h $、$ h' $ 与 $ h'(\cdot + y) $ 都是 1-周期的，这意味着
+
+\[
+-1/(x+n) \le h'(x+y) - h'(x) \le 1/(x+n) \qquad \text{对 } x, y \in (0,1] \text{ 且 } n \in \mathbb{N}^{\times} .
+\]
+
+令 $ n \to \infty $，由此可得 $ h' = 0 $。）
+
+\end{subitems}
+
+\item
+
+证明\textbf{勒让德倍元公式}
+
+\[
+\Gamma\left(\frac{x}{2}\right)\Gamma\left(\frac{x+1}{2}\right) = \frac{\sqrt{\pi}}{2^{x-1}}\Gamma(x) \qquad \text{对 } x \in (0,\infty) .
+\]
+
+（提示：考虑 $ h(x) := 2^{x}\Gamma(x/2)\Gamma((x+1)/2) $，并应用习题 6。）
+
+\item
+
+对 $ x \in (-1,1) $，验证幂级数展开
+
+\[
+(\log\Gamma)(1+x) = -Cx + \sum_{k=2}^{\infty}(-1)^{k}\frac{\zeta(k)}{k}x^{k} .
+\]
+
+（提示：将 $ \log(1+x/n) $ 展开为幂级数，其中 $ n \in \mathbb{N}^{\times} $，并参见命题 9.5。）
+
+\item
+
+证明 $ \int_{0}^{1}\log\Gamma(x) \, dx = \log\sqrt{2\pi} $。（提示：习题 8.4 与定理 9.6。）
+
+\item
+
+验证，对 $ 0 < a < b $，有
+
+\[
+\int_{a}^{b}\frac{dx}{\sqrt{(x-a)(b-x)}} = \pi .
+\]
+\item
+
+对固定的 $ q \in (0,\infty) $，证明函数 $ (0,\infty) \to (0,\infty) $，$ p \mapsto \mathrm{B}(p,q) $ 可微且对数凸。（提示：证明 $ \partial_{p}^{2}(\log(t^{p-1}(1-t)^{q-1})) = 0 $ 对 $ p, q \in (0,\infty) $ 与 $ t \in (0,1) $。）
+
+\item
+
+证明（不用 (9.25)），对 $ p, q \in (0,\infty) $，有
+
+\[
+\mathrm{B}(p+1,q) = p\mathrm{B}(p,q)/(p+q) .
+\]
+\item
+
+对 $ p, q \in (0,\infty) $，证明
+
+\[
+\frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)} = \mathrm{B}(p,q) .
+\]
+
+（提示：固定 $ q \in (0,\infty) $，令
+
+\[
+f : (0,\infty) \to (0,\infty) , \qquad p \mapsto \mathrm{B}(p,q)\Gamma(p+q)/\Gamma(q) .
+\]
+
+由习题 11 与命题 9.8，$ f $ 可微，且习题 5 与 11 表明 $ f $ 是对数凸的。进一步，由习题 12 可得 $ f $ 满足函数方程 $ f(p+1) = pf(p) $。于是 $ f(1) = 1 $，再由习题 6 可得结论。）
+
+\end{exercises}

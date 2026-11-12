@@ -1,0 +1,3424 @@
+\chapter{测度论基础}
+本章我们讨论线段、面积、体积乃至更高维空间中集合的测度的一般理论。这一理论以初等几何事实为指导。特别地，我们将把长度测度赋予区间，把面积测度（长乘宽）赋予矩形，把体积测度（长乘宽乘高）赋予长方体。
+
+自然，我们不仅想对这些初等区域，即区间的笛卡儿积，赋予测度，而且还想度量远为一般的集合。为此，自然的方法是把给定的集合分解成由这类初等区域构成的不交集族；于是它们的测度之和就确定了该集合的测度。这里具有根本意义的是，这一过程不仅允许对原集合作有限划分，而且允许作可数无限划分。这样一来，我们将看到，可以为 $ \mathbb{R}^n $ 的每个开子集赋予测度，并且这个测度具有人们所期待的自然性质，例如不依赖于集合在其空间中的位置。此外，我们不仅能度量开集，而且还能度量例如闭集，或任何可以由开集适当逼近的集合。然而将会发现，用这种方式并不能“度量” $ \mathbb{R}^n $ 的每个子集。
+
+然而，为了在实际中引入测度，我们将走另一条道路，它实质上更为一般，而且在技术上更简单。只有在这条道路的终点，我们才会遇到 $ \mathbb{R}^n $ 中可测集的一个刻画。我们的一般方法把我们带入抽象测度论的领域；除了相对简单之外，它还有一个优点：能提供与最初的几何观念毫无关系的其他测度。这种更一般的理论将在本卷的最后一章用到。它在概率论、物理学以及许多数学应用中也很重要。
+
+第 1 节专门讨论 $ \sigma $-代数。$ \sigma $-代数是一个集族，它构成一个测度的定义域。若底层的集合具有拓扑，则由开集确定的博雷尔 $ \sigma $-代数就具有突出的意义。除其他事实外，我们还将证明，拓扑积的博雷尔 $ \sigma $-代数在所有实际相关的情形下都由开集之积确定。
+
+第 2 节着重讨论一般测度的基本性质。此外，我们证明每个测度空间都有一个完备化，即某种自然的最小扩张。
+
+在第 3 节和第 4 节中，我们构造应用中最重要的测度，即由勒贝格、斯蒂尔杰斯和豪斯多夫发展出来的那些测度。这里我们采用卡拉泰奥多里建议的方法，它以外测度的思想作为其上层结构。
+
+本章的最后一节详细研究勒贝格测度。首先，我们把勒贝格可测集构成的 $ \sigma $-代数刻画为博雷尔 $ \sigma $-代数的完备化。此后，我们研究勒贝格测度在映射下的行为，由此得到它在刚体运动、特别是平移下的不变性。最后，我们看到勒贝格测度如何在所有局部有限的博雷尔测度中显得突出，并且在构造非勒贝格可测集时具有根本意义。
+
+\section{可测空间}
+
+在第 VI 章中，我们利用柯西–黎曼的积分概念，为一个充分正则的函数的图像与其横轴之间的区域指定了面积。现在的目标是确定 $ \mathbb{R}^{n} $ 中尽可能大的一类区域，使它们可以有意义地被赋予“广义面积”，即\textbf{容度}。也就是说，我们要找出 $ \mathfrak{P}(\mathbb{R}^{n}) $ 的一个子集 $ \mathcal{A} $ 以及一个映射 $ \mu: \mathcal{A} \to [0, \infty) $，使得对 $ A \in \mathcal{A} $，数 $ \mu(A) $ 可以解释为 $ A $ 的容度。这个函数 $ \mu $ 当然必须满足某些规则——根据平面区域面积的情形可以预料到的那些规则。例如，两个不交区域的并的容度应当等于它们各自容度之和。此外，一个区域的容度应当与它在空间中的整体位置无关。容度的概念将逐步明确；我们将在第 5 节证明，不可能（非平凡地）为 $ \mathbb{R}^{n} $ 的所有子集赋予容度，即“测度”：$ \mathcal{A} = \mathfrak{P}(\mathbb{R}^{n}) $ 不可能成立。
+
+本节中
+
+• $ X $、$ X_{1} $ 与 $ X_{2} $ 是非空集合。
+
+\needspace{3\baselineskip}\subsection*{σ-代数}
+
+我们首先以公理方式引入那些集合族，后面将在它们之上定义“测度”：$ \mathfrak{P}(X) $ 的子集 $ \mathcal{A} $ 称为 \textbf{$ X $ 上的 $ \sigma $-代数}，若它满足以下性质
+
+\begin{subitems}
+\item
+
+$ X \in \mathcal{A} $；
+
+\item
+
+$ A \in \mathcal{A} \implies A^{c} \in \mathcal{A} $；
+
+\item
+
+$ (A_{j}) \in \mathcal{A}^{\mathbb{N}} \implies \bigcup_{j \in \mathbb{N}} A_{j} \in \mathcal{A} $。
+
+\end{subitems}
+
+若 $ \mathcal{A} $ 是 $ X $ 上的 $ \sigma $-代数，则称 $ (X, \mathcal{A}) $ 为一个\textbf{可测空间}，并称每个 $ A \in \mathcal{A} $ 是 \textbf{$ \mathcal{A} $-可测的}。
+
+\begin{remark}
+
+设 $ \mathcal{A} $ 是一个 $ \sigma $-代数，$ (A_{j}) \in \mathcal{A}^{\mathbb{N}} $，且 $ m \in \mathbb{N} $。则下列每个集合
+
+\[
+\varnothing , \quad A_{0} \setminus A_{1} , \quad \bigcup_{j=0}^{m} A_{j} , \quad \bigcap_{j=0}^{m} A_{j} , \quad \bigcap_{j \in \mathbb{N}} A_{j}
+\]
+
+也都属于 $ \mathcal{A} $。
+
+\proofhead
+令
+\begin{equation*}
+B_{k} := \begin{cases} A_{k} , & k \le m , \\ A_{m} , & k > m , \end{cases}
+\end{equation*}
+
+于是 $ (B_{k}) \in \mathcal{A}^{\mathbb{N}} $，从而
+
+\[
+\bigcup_{k \in \mathbb{N}} B_{k} = \bigcup_{j=0}^{m} A_{j} \in \mathcal{A} .
+\]
+
+其余结论由德摩根律推出——参见命题 I.2.7(iii)。\nobreak\hspace{0.35em}■
+
+我们称集合族 $ \mathcal{S} \subset \mathfrak{P}(X) $ 对\textbf{有限集合运算封闭}，若
+
+\begin{equation}
+A \in \mathcal{S} \implies A^{c} \in \mathcal{S}\tag{1.1}
+\end{equation}
+
+并且若对每个有限族 $ A_{0}, \ldots, A_{m} $，其并 $ \bigcup_{j=0}^{m} A_{j} $ 也属于 $ \mathcal{S} $。若 $ \mathcal{S} $ 满足 (1.1)，且对 $ \mathcal{S} $ 中的每个序列 $ (A_{j}) $，$ \bigcup_{j=0}^{\infty} A_{j} $ 都属于 $ \mathcal{S} $，则称 $ \mathcal{S} $ 对\textbf{可数集合运算封闭}。这些定义是合理的，因为由德摩根律，$ \mathcal{S} $ 也包含 $ \bigcap_{j=0}^{m} A_{j} $（有限情形）与 $ \bigcap_{j=0}^{\infty} A_{j} $（可数情形）。
+
+我们称 $ \mathcal{S} $ 是 \textbf{$ X $ 上的代数}，若它满足以下性质：
+
+\begin{subitems}
+\item
+
+$ X \in \mathcal{S} $；
+
+\item
+
+$ A \in \mathcal{S} \implies A^{c} \in \mathcal{S} $；
+
+\item
+
+$ A, B \in \mathcal{S} \implies A \cup B \in \mathcal{S} $。
+
+\end{subitems}
+
+\end{remark}
+
+\begin{remark}
+
+设 $ \mathcal{S} \subset \mathfrak{P}(X) $ 包含 $ X $。
+
+\begin{items}
+\item
+
+$ \mathcal{S} $ 是代数当且仅当 $ \mathcal{S} $ 对有限集合运算封闭。
+
+\item
+
+$ \mathcal{S} $ 是 $ \sigma $-代数当且仅当 $ \mathcal{S} $ 对可数集合运算封闭。此时 $ \mathcal{S} $ 也是代数。
+
+\item
+
+设 $ \mathcal{S} $ 是代数，并且对每个不交序列\footnote{我们约定如下简化说法。序列 $ (A_{j}) \in \mathcal{S}^{\mathbb{N}} $ 称为不交的，若对所有满足 $ j \ne k $ 的 $ j, k \in \mathbb{N} $ 都有 $ A_{j} \cap A_{k} = \varnothing $。} $ (B_{j}) \in \mathcal{S}^{\mathbb{N}} $ 都有 $ \bigcup_{j \in \mathbb{N}} B_{j} \in \mathcal{S} $。则 $ \mathcal{S} $ 是 $ \sigma $-代数。
+
+\proofhead
+设 $ (A_{k}) \in \mathcal{S}^{\mathbb{N}} $。我们递归地令
+\[
+B_{0} := A_{0} \quad \text{且} \quad B_{j+1} := A_{j+1} \setminus \bigcup_{k=0}^{j} A_{k} \text{ 对 } j \in \mathbb{N} .
+\]
+
+则 $ (B_{j}) $ 是不交序列，且 $ \bigcup_{k} A_{k} = \bigcup_{j} B_{j} $。按假设，并集 $ \bigcup_{j} B_{j} $ 属于 $ \mathcal{S} $，结论得证。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\begin{example}
+
+\begin{items}
+\item
+
+$ \{\varnothing, X\} $ 与 $ \mathfrak{P}(X) $ 都是 $ \sigma $-代数。
+
+\item
+
+$ \{\, A \subset X ;\ A \text{ 或 } A^{c} \text{ 是可数的} \,\} $ 是 $ \sigma $-代数。
+
+\item
+
+$ \{\, A \subset X ;\ A \text{ 或 } A^{c} \text{ 是有限的} \,\} $ 是代数，并且它是 $ \sigma $-代数当且仅当 $ X $ 是有限的。
+
+\item
+
+设 $ \mathsf{A} $ 是非空集合，且对每个 $ \alpha \in \mathsf{A} $，$ \mathcal{A}_{\alpha} $ 都是 $ X $ 上的 $ \sigma $-代数。则 $ \bigcap_{\alpha \in \mathsf{A}} \mathcal{A}_{\alpha} $ 是 $ X $ 上的 $ \sigma $-代数。
+
+\item
+
+设 $ Y $ 是非空集合，$ f \in Y^{X} $。又设 $ \mathcal{A} $ 与 $ \mathcal{B} $ 分别是 $ X $ 与 $ Y $ 上的 $ \sigma $-代数。则
+
+\[
+f^{-1}(\mathcal{B}) := \{\, f^{-1}(B) ;\ B \in \mathcal{B} \,\} \quad \text{与} \quad f_{*}(\mathcal{A}) := \{\, B \subset Y ;\ f^{-1}(B) \in \mathcal{A} \,\}
+\]
+
+分别是 $ X $ 与 $ Y $ 上的 $ \sigma $-代数。称 $ f^{-1}(\mathcal{B}) $ 为 $ \mathcal{B} $ 在 $ f $ 下的\textbf{原像}，称 $ f_{*}(\mathcal{A}) $ 为 $ \mathcal{A} $ 在 $ f $ 下的\textbf{像}（或\textbf{前推}）。
+
+\proofhead
+我们只验证 (e) 部分，其余留给读者。
+显然 $ Y $ 属于 $ f_{*}(\mathcal{A}) $。对 $ B \in f_{*}(\mathcal{A}) $，集合 $ f^{-1}(B) $ 属于 $ \mathcal{A} $。由命题 I.3.8 (ii′) 与 (iv′)，有
+\[
+f^{-1}(B^{c}) = [f^{-1}(B)]^{c} \quad \text{与} \quad f^{-1}\left(\bigcup_{j} B_{j}\right) = \bigcup_{j} f^{-1}(B_{j}) .
+\]
+
+因此，若 $ B $ 属于 $ f_{*}(\mathcal{A}) $，则 $ B^{c} $ 亦然；同样地，若对 $ j \in \mathbb{N} $ 有 $ B_{j} \in f_{*}(\mathcal{A}) $，则 $ \bigcup_{j \in \mathbb{N}} B_{j} \in f_{*}(\mathcal{A}) $。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{博雷尔 σ-代数}
+
+设 $ \mathcal{S} $ 是 $ \mathfrak{P}(X) $ 的非空子集。则
+
+\[
+\mathcal{A}_{\sigma}(\mathcal{S}) := \bigcap \{\, \mathcal{A} \subset \mathfrak{P}(X) ;\ \mathcal{A} \supset \mathcal{S},\ \mathcal{A} \text{ 是 } X \text{ 上的 } \sigma\text{-代数} \,\}
+\]
+
+是\textbf{由 $ \mathcal{S} $ 生成的 $ \sigma $-代数}，而 $ \mathcal{S} $ 是 $ \mathcal{A}_{\sigma}(\mathcal{S}) $ 的一个\textbf{生成集}。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+$ \mathcal{A}_{\sigma}(\mathcal{S}) $ 是良定义的，并且是包含 $ \mathcal{S} $ 的最小 $ \sigma $-代数。
+
+\proofhead
+这由例 1.3(a) 与 (d) 推出。\nobreak\hspace{0.35em}■
+\end{items}
+
+\begin{items}
+\item[（b）]
+
+若 $ \mathcal{S} $ 是 $ \sigma $-代数，则 $ \mathcal{A}_{\sigma}(\mathcal{S}) = \mathcal{S} $。
+
+\item[（c）]
+
+由 $ \mathcal{S} \subset \mathcal{T} $ 可得 $ \mathcal{A}(\mathcal{S}) \subset \mathcal{A}(\mathcal{T}) $。
+
+\item[（d）]
+
+对 $ \mathcal{S} = \{A\} $，有 $ \mathcal{A}_{\sigma}(\mathcal{S}) = \{\varnothing, A, A^{c}, X\} $。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+设 $ X := (X, \mathcal{T}) $ 是拓扑空间。由于 $ \mathcal{T} $ 非空，它生成一个良定义的 $ \sigma $-代数，称为 $ X $ 的\textbf{博雷尔 $ \sigma $-代数}，记作 $ \mathcal{B}(X) $。$ \mathcal{B}(X) $ 的元素称为 $ X $ 的\textbf{博雷尔子集}。作为简写，我们记 $ \mathcal{B}^{n} := \mathcal{B}(\mathbb{R}^{n}) $。
+
+$ X $ 的子集 $ A $ 称为一个 $ G_{\delta} $（或 $ G_{\delta} $ 集），若存在开集 $ O_{j} $ 使得 $ A = \bigcap_{j \in \mathbb{N}} O_{j} $，也就是说，若 $ A $ 是 $ X $ 中可数多个开集的交。集合 $ A $ 称为一个 $ F_{\sigma} $（或 $ F_{\sigma} $ 集），若它是 $ X $ 的闭子集的可数并。因此 $ A $ 是 $ F_{\sigma} $ 集当且仅当 $ A^{c} $ 是 $ G_{\delta} $ 集。\footnote{符号 $ F_{\sigma} $ 与 $ G_{\delta} $ 的解释如下：$ F $ 代表 fermé（法语，意为闭），$ \sigma $ 代表 somme（集合的和，是集合的并的另一种说法）；$ G $ 代表 Gebiet（德语，意为区域，是对开集的一种旧称），$ \delta $ 代表 Durchschnitt（交）。}
+
+\end{remark}
+
+\begin{example}
+
+\begin{items}
+\item
+
+对 $ \mathcal{F} := \{\, A \subset X ;\ A \text{ 是闭的} \,\} $，有 $ \mathcal{B}(X) = \mathcal{A}_{\sigma}(\mathcal{F}) $。
+
+\item
+
+每个 $ G_{\delta} $ 集与每个 $ F_{\sigma} $ 集都是博雷尔集。
+
+\item
+
+每个闭区间 $ I $ 既是 $ F_{\sigma} $ 集又是 $ G_{\delta} $ 集。
+
+\proofhead
+设 $ I = [a, b] $，其中 $ -\infty < a \le b < \infty $。显然 $ I $ 是 $ F_{\sigma} $ 集。由于 $ [a, b] = \bigcap_{k \in \mathbb{N}^{\times}} (a - 1/k, b + 1/k) $，可见 $ I $ 也是 $ G_{\delta} $ 集。$ I = [a, \infty) $ 与 $ I = (-\infty, a] $（其中 $ a \in \mathbb{R} $）的情形可类似处理。$ I = \mathbb{R} $ 的情形是显然的。\nobreak\hspace{0.35em}■
+\item
+
+设 $ Y \subset X $，$ Y \ne \varnothing $ 且 $ Y \ne X $。又设 $ \mathcal{T} := \{\varnothing, X\} $ 是 $ X $ 上的\textbf{平凡拓扑}。则 $ Y $ 在 $ (X, \mathcal{T}) $ 中既不是 $ F_{\sigma} $ 集也不是 $ G_{\delta} $ 集。
+
+\item
+
+$ \mathbb{Q} $ 在 $ \mathbb{R} $ 中是 $ F_{\sigma} $ 集，但不是 $ G_{\delta} $ 集。
+
+\proofhead
+由于 $ \mathbb{Q} $ 可数，它显然是 $ F_{\sigma} $ 集（见推论 III.2.18）。为证第二个断言，假设 $ \mathbb{Q} $ 是 $ G_{\delta} $ 集，并选取开集 $ Q_{j} $（$ j \in \mathbb{N} $），使得 $ \mathbb{Q} = \bigcap_{j} Q_{j} $。由于对 $ j \in \mathbb{N} $ 有 $ \mathbb{Q} \subset Q_{j} $，并考虑到命题 I.10.8，每个 $ Q_{j} $ 在 $ \mathbb{R} $ 中都是开集且稠密。于是由习题 V.4.4 推出 $ \mathbb{Q} $ 不可数，而这是错误的。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{第二可数公理}
+
+设 $ (X, \mathcal{T}) $ 是拓扑空间。我们称 $ \mathcal{M} \subset \mathcal{T} $ 是 $ \mathcal{T} $ 的一个\textbf{基}，若对每个 $ O \in \mathcal{T} $ 都存在 $ \mathcal{M}' \subset \mathcal{M} $，使得 $ O = \bigcup \{ M \subset X ;\ M \in \mathcal{M}' \} $，也就是说，若每个开集都能表示成 $ \mathcal{M} $ 中集合的并。拓扑空间 $ (X, \mathcal{T}) $ 称为\textbf{第二可数的}（或称满足\textbf{第二可数公理}），若 $ \mathcal{T} $ 有可数基。最后，若 $ X $ 的每个开覆盖都有可数子覆盖，则称 $ (X, \mathcal{T}) $ 为\textbf{林德勒夫空间}。显然每个紧致空间都是林德勒夫空间。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+$ \mathcal{M} \subset \mathcal{T} $ 是 $ \mathcal{T} $ 的基当且仅当对每个点 $ x \in X $ 及 $ x $ 的每个邻域 $ U $，都存在 $ M \in \mathcal{M} $，使得 $ x \in M \subset U $。
+
+\proofhead
+先证“$ \implies $”。设 $ \mathcal{M} $ 是 $ \mathcal{T} $ 的基，取 $ x \in X $ 与 $ U \in \mathcal{U}(x) $。按假设，存在 $ O \in \mathcal{T} $，使得 $ x \in O \subset U $。此外，存在 $ \mathcal{M}' \subset \mathcal{M} $，使得 $ O = \bigcup \{ M \subset X ;\ M \in \mathcal{M}' \} $。于是我们找到 $ M \in \mathcal{M}' \subset \mathcal{M} $，使得 $ x \in M \subset O \subset U $。
+反之，证“$ \impliedby $”。设 $ O \in \mathcal{T} $。对每个 $ x \in O $，$ O $ 是 $ x $ 的邻域。因此按假设，存在 $ M_{x} \in \mathcal{M} $，使得 $ x \in M_{x} \subset O $，并且我们发现
+\[
+O = \bigcup_{x \in O} \{x\} \subset \bigcup_{x \in O} M_{x} \subset O ,
+\]
+
+即 $ O = \bigcup_{x \in O} M_{x} $。\nobreak\hspace{0.35em}■
+
+\item
+
+任何满足第二可数公理的拓扑空间也满足第一可数公理（见注 III.2.29(c)）。
+
+\proofhead
+这由 (a) 立即推出。\nobreak\hspace{0.35em}■
+\item
+
+(b) 的逆命题不成立。
+
+\proofhead
+设 $ X $ 不可数。则 $ (X, \mathfrak{P}(X)) $ 满足第一可数公理，因为任何 $ x \in X $ 都以 $ \{\{x\}\} $ 作为邻域基。但 $ (X, \mathfrak{P}(X)) $ 不可能是第二可数的，因为 $ \mathfrak{P}(X) $ 的任何基都必须包含集合 $ \{\, \{x\} ;\ x \in X \,\} $，从而是不可数的。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+\begin{lemma}
+
+设 $ X $ 是度量空间，$ A \subset X $ 在 $ X $ 中稠密。又设 $ \mathcal{M} := \{\, \mathbb{B}(a, r) ;\ a \in A,\ r \in \mathbb{Q}^{+} \,\} $。则 $ X $ 中每个开集都能写成 $ \mathcal{M} $ 中集合的并。
+
+\proofhead
+设 $ O $ 是 $ X $ 中的开集，$ x \in O $。则存在 $ \varepsilon > 0 $，使得 $ \mathbb{B}(x, \varepsilon_{x}) \subset O $。由于 $ A $ 在 $ X $ 中稠密且 $ \mathbb{Q} $ 在 $ \mathbb{R} $ 中稠密，存在 $ a_{x} \in A $，使得 $ d(x, a_{x}) < \varepsilon_{x}/4 $，还存在 $ r_{x} \in \mathbb{Q}^{+} $，使得 $ r_{x} \in (\varepsilon_{x}/4, \varepsilon_{x}/2) $。于是由三角不等式得到
+\[
+x \in \mathbb{B}(a_{x}, r_{x}) \subset \mathbb{B}(x, \varepsilon_{x}) \subset O ,
+\]
+
+由此可得 $ O = \bigcup_{x \in O} \mathbb{B}(a_{x}, r_{x}) $。\nobreak\hspace{0.35em}■
+
+\end{lemma}
+
+\begin{proposition}
+
+设 $ X $ 是度量空间。以下陈述等价：
+
+\begin{subitems}
+\item
+
+$ X $ 满足第二可数公理。
+
+\item
+
+$ X $ 是林德勒夫空间。
+
+\item
+
+$ X $ 是可分的。
+
+\proofhead
+“(i)$ \implies $(ii)” 设 $ \mathcal{M} $ 是可数基，且 $ \{\, O_{\alpha} ;\ \alpha \in \mathsf{A} \,\} $ 是 $ X $ 的开覆盖。按假设，对每个 $ \alpha \in \mathsf{A} $，存在 $ \mathcal{M} $ 中的序列 $ (U_{\alpha,j})_{j \in \mathbb{N}} $，使得 $ O_{\alpha} = \bigcup_{j \in \mathbb{N}} U_{\alpha,j} $。现在，族 $ \mathcal{M}' := \{\, U_{\alpha,j} ;\ \alpha \in \mathsf{A},\ j \in \mathbb{N} \,\} $ 覆盖 $ X $，而且可数（由于 $ \mathcal{M}' \subset \mathcal{M} $），所以我们可以把它排成 $ \mathcal{M}' = \{\, M_{j} ;\ j \in \mathbb{N} \,\} $ 的形式。按构造，对每个 $ j \in \mathbb{N} $ 都存在 $ \alpha_{j} \in \mathsf{A} $，使得 $ M_{j} \subset O_{\alpha_{j}} $。因此 $ \{\, O_{\alpha_{j}} ;\ j \in \mathbb{N} \,\} $ 是 $ \{\, O_{\alpha} ;\ \alpha \in \mathsf{A} \,\} $ 的可数子覆盖。
+“(ii)$ \implies $(iii)” 对每个 $ n \in \mathbb{N}^{\times} $，我们知道 $ \mathcal{U}_{n} := \{\, \mathbb{B}(x, 1/n) ;\ x \in X \,\} $ 是 $ X $ 的开覆盖。按假设，对每个 $ n \in \mathbb{N}^{\times} $，存在点 $ x_{n,k} \in X $（$ k \in \mathbb{N} $），使得 $ \mathcal{V}_{n} := \{\, \mathbb{B}(x_{n,k}, 1/n) ;\ k \in \mathbb{N} \,\} $ 是 $ \mathcal{U}_{n} $ 的子覆盖。根据命题 I.6.8，$ D := \{\, x_{n,k} ;\ n \in \mathbb{N}^{\times},\ k \in \mathbb{N} \,\} $ 是可数的。现在取 $ x \in X $、$ \varepsilon > 0 $、$ n > 1/\varepsilon $。由于 $ \mathcal{V}_{n} $ 覆盖 $ X $，存在 $ x_{n,k} \in D $，使得 $ x \in \mathbb{B}(x_{n,k}, 1/n) $。因此 $ D $ 在 $ X $ 中稠密。
+“(iii)$ \implies $(i)” 由引理 1.7，可分集合是第二可数的。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\end{proposition}
+
+\begin{corollary}
+
+\begin{subitems}
+\item
+
+设 $ X $ 是可分度量空间，$ A $ 在 $ X $ 中可数且稠密。则
+
+\[
+\mathcal{B}(X) = \mathcal{A}_{\sigma}\left(\{\, \mathbb{B}(a, r) ;\ a \in A,\ r \in \mathbb{Q}^{+} \,\}\right) .
+\]
+\item
+
+设 $ X \subset \mathbb{R}^{n} $ 非空。则度量空间 $ X $ 有可数基。
+
+\proofhead
+(i) 令 $ \mathcal{S} := \{\, \mathbb{B}(a, r) ;\ a \in A,\ r \in \mathbb{Q}^{+} \,\} $，并记 $ \mathcal{T} $ 为 $ X $ 的拓扑。引理 1.7 蕴含 $ \mathcal{T} \subset \mathcal{A}_{\sigma}(\mathcal{S}) $，于是由注 1.4(b) 与 (c) 得到
+\[
+\mathcal{B}(X) = \mathcal{A}_{\sigma}(\mathcal{T}) \subset \mathcal{A}_{\sigma}(\mathcal{A}_{\sigma}(\mathcal{S})) = \mathcal{A}_{\sigma}(\mathcal{S}) .
+\]
+
+包含关系 $ \mathcal{A}_{\sigma}(\mathcal{S}) \subset \mathcal{B}(X) $ 由 $ \mathcal{S} \subset \mathcal{T} $ 与注 1.4(a) 推出。
+
+\end{subitems}
+
+(ii) 这由习题 V.4.13 与命题 1.8 推出。\nobreak\hspace{0.35em}■
+
+\end{corollary}
+
+对一般的拓扑空间，我们有如下结果。
+
+\begin{corollary}
+
+设 $ X $ 是具有可数基的拓扑空间。则 $ X $ 是可分的且是林德勒夫的。
+
+证明
+
+\begin{subitems}
+\item
+
+设 $ \{\, B_{j} ;\ j \in \mathbb{N} \,\} $ 是 $ X $ 的基。对每个 $ j \in \mathbb{N} $，我们选取 $ b_{j} \in B_{j} $，并令 $ D := \{\, b_{j} ;\ j \in \mathbb{N} \,\} $。显然 $ D $ 可数。现在设 $ x \in X $，$ U $ 是 $ x $ 的开邻域。则存在 $ I \subset \mathbb{N} $，使得 $ U = \bigcup_{i \in I} B_{i} $。因此 $ U \cap D \ne \varnothing $，即 $ D $ 在 $ X $ 中稠密。
+
+\item
+
+命题 1.8 中证明 “(i)$ \implies $(ii)” 的论证蕴含 $ X $ 是林德勒夫的。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{corollary}
+
+\needspace{3\baselineskip}\subsection*{用区间生成博雷尔 σ-代数}
+
+我们给 $ \mathbb{R}^{n} $ 赋予\textbf{自然（乘积）序}，也就是说，对 $ a, b \in \mathbb{R}^{n} $，关系 $ a \le b $ 成立当且仅当对 $ 1 \le k \le n $ 有 $ a_{k} \le b_{k} $。
+
+$ \mathbb{R}^{n} $ 的子集 $ J $ 称为 $ \mathbb{R}^{n} $ 中的\textbf{区间}，若存在（通常的）区间 $ J_{k} \subset \mathbb{R} $（$ 1 \le k \le n $），使得 $ J = \prod_{k=1}^{n} J_{k} $。对满足 $ a \le b $ 的 $ a, b \in \mathbb{R}^{n} $，我们使用记号
+
+\[
+(a, b) := \prod_{k=1}^{n} (a_{k}, b_{k}) , \quad [a, b] := \prod_{k=1}^{n} [a_{k}, b_{k}] ,
+\]
+\[
+(a, b] := \prod_{k=1}^{n} (a_{k}, b_{k}] , \quad [a, b) := \prod_{k=1}^{n} [a_{k}, b_{k}) .
+\]
+
+若 $ a \le b $ 不成立，则令
+
+\[
+(a, b) := [a, b] := (a, b] := [a, b) := \varnothing .
+\]
+
+与一维情形类似，我们称 $ (a, b) $ 为 $ \mathbb{R}^{n} $ 中的\textbf{开区间}，称 $ [a, b] $ 为 $ \mathbb{R}^{n} $ 中的\textbf{闭区间}。显然 $ \mathbb{R}^{n} $ 中的开区间与闭区间分别是 $ \mathbb{R}^{n} $ 的开子集与闭子集。我们用 $ \mathbb{J}(n) $ 记 $ \mathbb{R}^{n} $ 中开区间之集。
+
+设 $ Y $ 是集合，$ E $ 是对 $ y \in Y $ 或真或假的性质。当上下文清楚表明 $ Y $ 是什么时，我们使用记号
+
+\[
+[E] := [E(y)] := \{\, y \in Y ;\ E(y) \text{ 为真} \,\} .
+\]
+
+例如，集合 $ [x_{k} \ge \alpha] $（其中 $ k \in \{1, \ldots, n\} $，$ \alpha \in \mathbb{R} $）是 $ \mathbb{R}^{n} $ 中的闭半空间：
+
+\[
+H_{k}(\alpha) := \{\, x \in \mathbb{R}^{n} ;\ x_{k} \ge \alpha \,\}
+\]
+
+若 $ f \in Y^{X} $，则令
+
+\[
+[E(f)] := \{\, x \in X ;\ E(f(x)) \text{ 为真} \,\} .
+\]
+
+于是，对 $ f \in \mathbb{R}^{X} $，例如有 $ [f > 0] = \{\, x \in X ;\ f(x) > 0 \,\} $。
+
+下面的定理表明，$ \mathbb{R}^{n} $ 上的博雷尔 $ \sigma $-代数仅仅由坐标取有理数的那些半空间之集生成。
+
+\begin{theorem}
+
+令
+
+\[
+\mathcal{A}_{\mathbb{Q}} := \mathcal{A}_{\sigma}\left(\{\, (a, b) ;\ a, b \in \mathbb{Q}^{n} \,\}\right) ,
+\]
+\[
+\mathcal{A}_{0} := \mathcal{A}_{\sigma}\left(\{\, H_{k}(\alpha) ;\ 1 \le k \le n,\ \alpha \in \mathbb{Q} \,\}\right) ,
+\]
+\[
+\mathcal{A}_{1} := \mathcal{A}_{\sigma}\left(\{\, H_{k}(\alpha) ;\ 1 \le k \le n,\ \alpha \in \mathbb{R} \,\}\right) .
+\]
+
+则
+
+\[
+\mathcal{B}^{n} = \mathcal{A}_{\sigma}(\mathbb{J}(n)) = \mathcal{A}_{\mathbb{Q}} = \mathcal{A}_{0} = \mathcal{A}_{1} .
+\]
+
+\proofhead
+由于每个闭半空间都属于 $ \mathcal{B}^{n} $，可得
+\begin{equation}
+\mathcal{A}_{0} \subset \mathcal{A}_{1} \subset \mathcal{B}^{n} .\tag{1.2}
+\end{equation}
+
+现在取 $ a, b \in \mathbb{R}^{n} $，$ a \le b $。对 $ k \in \{1, \ldots, n\} $，有
+
+\[
+[x_{k} < b_{k}] = [x_{k} \ge b_{k}]^{c} = H_{k}(b_{k})^{c} \in \mathcal{A}_{1}
+\]
+
+以及
+
+\[
+[x_{k} > a_{k}] = \bigcup_{j=1}^{\infty} [x_{k} \ge a_{k} + 1/j] \in \mathcal{A}_{1} ,
+\]
+
+因为 $ \mathcal{A}_{1} $ 是 $ \sigma $-代数。这蕴含
+
+\[
+(a, b) = \prod_{k=1}^{n} (a_{k}, b_{k}) = \bigcap_{k=1}^{n} \left([x_{k} < b_{k}] \cap [x_{k} > a_{k}]\right) \in \mathcal{A}_{1} .
+\]
+
+对 $ a, b \in \mathbb{Q}^{n} $，这表明 $ (a, b) $ 属于 $ \mathcal{A}_{0} $。考虑到 (1.2) 以及包含关系 $ \{\, (a, b) ;\ a, b \in \mathbb{Q}^{n} \,\} \subset \mathbb{J}(n) $，可得
+
+\begin{equation}
+\mathcal{A}_{\mathbb{Q}} \subset \mathcal{A}_{\sigma}(\mathbb{J}(n)) \subset \mathcal{A}_{1} \subset \mathcal{B}^{n} \quad \text{且} \quad \mathcal{A}_{\mathbb{Q}} \subset \mathcal{A}_{0} \subset \mathcal{B}^{n} .\tag{1.3}
+\end{equation}
+
+最后，对每个 $ c \in \mathbb{Q}^{n} $ 与 $ r \in \mathbb{Q}^{+} $，$ \mathbb{B}_{\infty}^{n}(c, r) = \prod_{k=1}^{n} (c_{k} - r, c_{k} + r) $ 都属于 $ \mathcal{A}_{\mathbb{Q}} $。于是由推论 1.9(i) 得到
+
+\[
+\mathcal{B}^{n} = \mathcal{A}_{\sigma}\left(\{\, \mathbb{B}_{\infty}^{n}(c, r) ;\ c \in \mathbb{Q}^{n},\ r \in \mathbb{Q}^{+} \,\}\right) \subset \mathcal{A}_{\mathbb{Q}} ,
+\]
+
+结合 (1.3)，便得到结论。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{拓扑空间的基}
+
+一个集合 $ X $ 的拓扑由指定一个基而唯一确定。容易看出，并非每个非平凡的集合族 $ \mathcal{M} \subset \mathfrak{P}(X) $ 都能成为某个拓扑的基。下一个定理刻画了其中哪些可以。
+
+\begin{theorem}
+
+设集合族 $ \mathcal{M} = \{ M_\alpha \subset X ; \alpha \in \mathsf{A} \} $ 满足 $ \bigcup_{\alpha \in \mathsf{A}} M_\alpha = X $。则 $ \mathcal{M} $ 是 $ X $ 上某个拓扑（称为\textbf{由 $ \mathcal{M} $ 生成的拓扑}）的基，当且仅当对每个 $ (\alpha, \beta) \in \mathsf{A} \times \mathsf{A} $ 与每个 $ x \in M_\alpha \cap M_\beta $，都存在 $ \gamma \in \mathsf{A} $，使得 $ x \in M_\gamma \subset M_\alpha \cap M_\beta $。
+
+\proofhead
+“$ \Rightarrow $” 设 $ \mathcal{T} $ 是 $ X $ 上的拓扑，$ \mathcal{M} = \{ M_\alpha \subset X ; \alpha \in \mathsf{A} \} $ 是 $ \mathcal{T} $ 的基。取 $ \alpha, \beta \in \mathsf{A} $ 与 $ x \in M_\alpha \cap M_\beta $。则 $ M_\alpha \cap M_\beta $ 是 $ x $ 的开邻域。由于 $ \mathcal{M} $ 是 $ \mathcal{T} $ 的基，我们可以把 $ M_\alpha \cap M_\beta $ 表示成 $ \mathcal{M} $ 中集合的并；特别地，存在 $ \gamma \in \mathsf{A} $，使得 $ x \in M_\gamma \subset M_\alpha \cap M_\beta $。
+
+“$ \Leftarrow $” 设 $ \mathcal{M} $ 是具有上述性质的集合族，并令 $ \mathcal{T}(\mathcal{M}) := \{ \bigcup_{\alpha \in \mathsf{A}'} M_\alpha ; \mathsf{A}' \subset \mathsf{A} \} $。显然 $ \varnothing $、$ X $ 以及 $ \mathcal{T}(\mathcal{M}) $ 中集合的任意并都属于 $ \mathcal{T}(\mathcal{M}) $。
+
+设 $ O_1, O_2 \in \mathcal{T}(\mathcal{M}) $，并令 $ O := O_1 \cap O_2 $。我们来验证 $ O $ 属于 $ \mathcal{T}(\mathcal{M}) $，且不妨假设 $ O $ 非空。由 $ \mathcal{T}(\mathcal{M}) $ 的定义，存在 $ \mathsf{A}_j \subset \mathsf{A} $，使得 $ O_j = \bigcup_{\alpha \in \mathsf{A}_j} M_\alpha $（$ j = 1, 2 $）。于是对每个 $ x \in O $ 都能找到 $ \alpha_j(x) \in \mathsf{A} $（$ j = 1, 2 $），使得 $ x \in M_{\alpha_1(x)} \cap M_{\alpha_2(x)} $。此外，按假设存在 $ \alpha(x) \in \mathsf{A} $，使得
+\[
+x \in M_{\alpha(x)} \subset M_{\alpha_1(x)} \cap M_{\alpha_2(x)} \subset O .
+\]
+
+因此 $ O = \bigcup_{x \in O} M_{\alpha(x)} $，即 $ O $ 属于 $ \mathcal{T}(\mathcal{M}) $。
+
+现在一个简单的归纳论证表明，$ \mathcal{T}(\mathcal{M}) $ 中任意有限多个集合的交仍属于 $ \mathcal{T}(\mathcal{M}) $。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{乘积拓扑}
+
+设 $ \mathcal{T}_1 $ 与 $ \mathcal{T}_2 $ 是 $ X $ 上的拓扑。若 $ \mathcal{T}_1 \subset \mathcal{T}_2 $，则称 $ \mathcal{T}_1 $ 比 $ \mathcal{T}_2 $ \textbf{更粗}（且 $ \mathcal{T}_2 $ 比 $ \mathcal{T}_1 $ \textbf{更细}）。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+$ \{\varnothing, X\} $ 是 $ X $ 上最粗的拓扑，$ \mathfrak{P}(X) $ 是最细的拓扑，即对 $ X $ 的每个拓扑 $ \mathcal{T} $，都有 $ \{\varnothing, X\} \subset \mathcal{T} \subset \mathfrak{P}(X) $。
+
+\item
+
+设 $ \mathcal{M} \subset \mathfrak{P}(X) $ 是拓扑 $ \mathcal{T}(\mathcal{M}) $ 的基。则 $ \mathcal{T}(\mathcal{M}) $ 是 $ X $ 上包含 $ \mathcal{M} $ 的最粗的拓扑。换言之，若 $ \mathcal{T} $ 是 $ X $ 的拓扑且 $ \mathcal{M} \subset \mathcal{T} $，则 $ \mathcal{T} \supset \mathcal{T}(\mathcal{M}) $。
+
+\item
+
+若 $ \mathcal{T}_0 $ 是 $ X $ 上的拓扑，则 $ \mathcal{T}_0 $ 是它自身的基：$ \mathcal{T}(\mathcal{T}_0) = \mathcal{T}_0 $。
+
+\item
+
+设 $ \mathcal{M}_j \subset \mathfrak{P}(X) $ 是 $ \mathcal{T}_j $ 的基（$ j = 1, 2 $），且 $ \mathcal{M}_1 \subset \mathcal{M}_2 $。则 $ \mathcal{T}_1 \subset \mathcal{T}_2 $。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+设 $ (X_1, \mathcal{T}_1) $ 与 $ (X_2, \mathcal{T}_2) $ 是拓扑空间，且对 $ j = 1, 2 $ 有 $ (O_j, U_j) \in \mathcal{T}_1 \times \mathcal{T}_2 $。显然，
+
+\[
+(O_1 \times U_1) \cap (O_2 \times U_2) = (O_1 \cap O_2) \times (U_1 \cap U_2) .
+\]
+
+因此定理 1.12 表明，
+
+\[
+\mathcal{T}_1 \boxtimes \mathcal{T}_2 := \{ O_1 \times O_2 \subset X_1 \times X_2 ; (O_1, O_2) \in \mathcal{T}_1 \times \mathcal{T}_2 \}
+\]
+
+是 $ X_1 \times X_2 $ 上某个拓扑 $ \mathcal{T} := \mathcal{T}(\mathcal{T}_1 \boxtimes \mathcal{T}_2) $ 的基，我们称该拓扑为\textbf{$ \mathcal{T}_1 $ 与 $ \mathcal{T}_2 $ 的乘积拓扑}（在 $ X_1 \times X_2 $ 上）。拓扑空间 $ (X_1 \times X_2, \mathcal{T}) $ 称为 $ (X_1, \mathcal{T}_1) $ 与 $ (X_2, \mathcal{T}_2) $ 的\textbf{拓扑积}。除另有明确说明外，我们总给 $ X_1 \times X_2 $ 赋予乘积拓扑。
+
+\end{remark}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+乘积拓扑是 $ X_1 \times X_2 $ 上包含 $ \mathcal{T}_1 \boxtimes \mathcal{T}_2 $ 的最粗的拓扑。
+
+\item
+
+乘积拓扑是 $ X_1 \times X_2 $ 上使投影 $ \operatorname{pr}_j : X_1 \times X_2 \to X_j $（$ j = 1, 2 $）都连续的最粗的拓扑。
+
+\proofhead
+先证 (i)。对 $ O_1 \in \mathcal{T}_1 $ 与 $ O_2 \in \mathcal{T}_2 $，有
+\[
+\operatorname{pr}_1^{-1}(O_1) = O_1 \times X_2 \quad \text{与} \quad \operatorname{pr}_2^{-1}(O_2) = X_1 \times O_2 .
+\]
+
+因此投影 $ \operatorname{pr}_1 $ 与 $ \operatorname{pr}_2 $ 关于 $ \mathcal{T} := \mathcal{T}(\mathcal{T}_1 \boxtimes \mathcal{T}_2) $ 都连续。
+再证 (ii)。用 $ \widetilde{\mathcal{T}} $ 记 $ X_1 \times X_2 $ 上使 $ \operatorname{pr}_1 $ 与 $ \operatorname{pr}_2 $ 都连续的一个拓扑。对每个 $ V \in \mathcal{T} $，存在指标集 $ \mathsf{A} $ 以及元素对 $ (O_\alpha, U_\alpha) \in \mathcal{T}_1 \times \mathcal{T}_2 $（$ \alpha \in \mathsf{A} $），使得 $ V = \bigcup_{\alpha \in \mathsf{A}} O_\alpha \times U_\alpha $。由定理 III.2.20 与注 III.2.29(e)，集合 $ \operatorname{pr}_1^{-1}(O_\alpha) $ 与 $ \operatorname{pr}_2^{-1}(U_\alpha) $ 都属于 $ \widetilde{\mathcal{T}} $。由于 $ O_\alpha \times U_\alpha = \operatorname{pr}_1^{-1}(O_\alpha) \cap \operatorname{pr}_2^{-1}(U_\alpha) $，这表明 $ V \in \widetilde{\mathcal{T}} $，即 $ \mathcal{T} \subset \widetilde{\mathcal{T}} $。\nobreak\hspace{0.35em}■
+
+\item
+
+设 $ \mathcal{M}_j \subset \mathfrak{P}(X_j) $ 是 $ \mathcal{T}_j $ 的基（$ j = 1, 2 $）。则 $ \mathcal{M}_1 \boxtimes \mathcal{M}_2 $ 是 $ X_1 \times X_2 $ 的乘积拓扑的基。
+
+\item
+
+设 $ (X_j, d_j) $ 是度量空间（$ j = 1, 2 $），并用 $ \mathcal{T}_j $ 记 $ d_j $ 在 $ X_j $ 上诱导的拓扑。又设 $ \mathcal{T}(d_1 \vee d_2) $ 是乘积度量 $ d_1 \vee d_2 $ 在 $ X_1 \times X_2 $ 上诱导的拓扑；参见例 II.1.2(e)。则
+
+\[
+\mathcal{T}(\mathcal{T}_1 \boxtimes \mathcal{T}_2) = \mathcal{T}(d_1 \vee d_2) ,
+\]
+
+也就是说，由 $ d_1 $ 与 $ d_2 $ 诱导的乘积拓扑与由乘积度量 $ d_1 \vee d_2 $ 诱导的拓扑一致。
+
+\proofhead
+由习题 III.2.6 与定理 1.12，$ \mathcal{T}(d_1 \vee d_2) $ 是 $ X_1 \times X_2 $ 上的一个拓扑，且满足
+\[
+\mathcal{T}_1 \boxtimes \mathcal{T}_2 \subset \mathcal{T}(d_1 \vee d_2) \subset \mathcal{T}(\mathcal{T}_1 \boxtimes \mathcal{T}_2) ,
+\]
+
+于是结论由 (a) 推出。\nobreak\hspace{0.35em}■
+
+\item
+
+上述定义与结果显然可以推广到有限多个拓扑空间的乘积。表述与证明留给读者。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{乘积博雷尔 σ-代数}
+
+设 $ (X_1, \mathcal{A}_1) $ 与 $ (X_2, \mathcal{A}_2) $ 是可测空间。$ \mathcal{A}_1 \boxtimes \mathcal{A}_2 $ 未必是 $ X_1 \times X_2 $ 上的 $ \sigma $-代数，这一点在简单情形中就能看出（见习题 15）。因此我们定义 $ \mathcal{A}_1 $ 与 $ \mathcal{A}_2 $ 的\textbf{乘积 $ \sigma $-代数 $ \mathcal{A}_1 \otimes \mathcal{A}_2 $} 为 $ X_1 \times X_2 $ 上包含 $ \mathcal{A}_1 \boxtimes \mathcal{A}_2 $ 的最小的 $ \sigma $-代数：
+
+\[
+\mathcal{A}_1 \otimes \mathcal{A}_2 := \mathcal{A}_\sigma(\mathcal{A}_1 \boxtimes \mathcal{A}_2) .
+\]
+
+下一个命题表明如何由 $ \mathcal{A}_1 $ 与 $ \mathcal{A}_2 $ 的生成集得到 $ \mathcal{A}_1 \otimes \mathcal{A}_2 $ 的生成集。
+
+\begin{proposition}
+
+设 $ \mathcal{S}_j \subset \mathfrak{P}(X_j) $ 且 $ X_j \in \mathcal{S}_j $（$ j = 1, 2 $），则有
+
+\[
+\mathcal{A}_\sigma(\mathcal{S}_1) \otimes \mathcal{A}_\sigma(\mathcal{S}_2) = \mathcal{A}_\sigma(\mathcal{S}_1 \boxtimes \mathcal{S}_2) .
+\]
+
+\proofhead
+令 $ \mathcal{A}_j := \mathcal{A}_\sigma(\mathcal{S}_j) $，显然有 $ \mathcal{A}_\sigma(\mathcal{S}_1 \boxtimes \mathcal{S}_2) \subset \mathcal{A}_1 \otimes \mathcal{A}_2 $。为证反向的包含关系，令
+\[
+\widetilde{\mathcal{A}}_j := (\operatorname{pr}_j)_*\left( \mathcal{A}_\sigma(\mathcal{S}_1 \boxtimes \mathcal{S}_2) \right) \quad \text{对 } j = 1, 2 .
+\]
+
+由于 $ X_2 \in \mathcal{S}_2 $，有 $ \mathcal{S}_1 \subset \widetilde{\mathcal{A}}_1 $；同样，$ \mathcal{S}_2 $ 是 $ \widetilde{\mathcal{A}}_2 $ 的子集。现在例 1.3(e) 表明 $ \widetilde{\mathcal{A}}_j \supset \mathcal{A}_j $（$ j = 1, 2 $）。给定 $ A_1 \times A_2 \in \mathcal{A}_1 \boxtimes \mathcal{A}_2 $，我们便可推出
+
+\begin{equation*}
+\begin{aligned}
+A_1 \times X_2 &= (\operatorname{pr}_1)^{-1}(A_1) \in \mathcal{A}_\sigma(\mathcal{S}_1 \boxtimes \mathcal{S}_2) , \\ X_1 \times A_2 &= (\operatorname{pr}_2)^{-1}(A_2) \in \mathcal{A}_\sigma(\mathcal{S}_1 \boxtimes \mathcal{S}_2) ,
+\end{aligned}
+\end{equation*}
+
+所以 $ A_1 \times A_2 = (A_1 \times X_2) \cap (X_1 \times A_2) \in \mathcal{A}_\sigma(\mathcal{S}_1 \boxtimes \mathcal{S}_2) $。这表明 $ \mathcal{A}_1 \otimes \mathcal{A}_2 = \mathcal{A}_\sigma(\mathcal{A}_1 \boxtimes \mathcal{A}_2) $ 包含于 $ \mathcal{A}_\sigma(\mathcal{S}_1 \boxtimes \mathcal{S}_2) $。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+这个定理同样容易推广到有限多个可测空间的情形，此时乘积 $ \sigma $-代数按显然的方式定义。
+
+设 $ (X_1, \mathcal{T}_1) $ 与 $ (X_2, \mathcal{T}_2) $ 是拓扑空间。在 $ X_1 \times X_2 $ 上自然出现两个 $ \sigma $-代数：博雷尔 $ \sigma $-代数 $ \mathcal{B}(X_1) $ 与 $ \mathcal{B}(X_2) $ 的乘积 $ \sigma $-代数 $ \mathcal{B}(X_1) \otimes \mathcal{B}(X_2) $，以及拓扑积 $ X_1 \times X_2 $ 的博雷尔 $ \sigma $-代数 $ \mathcal{B}(X_1 \times X_2) $。现在我们研究这两者之间的关系。
+
+\begin{proposition}
+
+设 $ X_1 $ 与 $ X_2 $ 是拓扑空间。则
+
+\[
+\mathcal{B}(X_1) \otimes \mathcal{B}(X_2) \subset \mathcal{B}(X_1 \times X_2) .
+\]
+
+\proofhead
+设 $ \mathcal{T}_j $ 是 $ X_j $ 的拓扑。$ X_1 \times X_2 $ 上的乘积拓扑 $ \mathcal{T} $ 包含 $ \mathcal{T}_1 \boxtimes \mathcal{T}_2 $。因此
+\[
+\mathcal{A}_\sigma(\mathcal{T}_1 \boxtimes \mathcal{T}_2) \subset \mathcal{A}_\sigma(\mathcal{T}) = \mathcal{B}(X_1 \times X_2) .
+\]
+
+此外，命题 1.15 表明 $ \mathcal{B}(X_1) \otimes \mathcal{B}(X_2) = \mathcal{A}_\sigma(\mathcal{T}_1 \boxtimes \mathcal{T}_2) $，由此得到结论。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+习题 19 用例子表明，与命题 1.16 相反方向的包含关系未必成立：一般地，$ \mathcal{B}(X_1 \times X_2) \neq \mathcal{B}(X_1) \otimes \mathcal{B}(X_2) $。因此下面的结果特别重要。
+
+\begin{theorem}
+
+对满足第二可数公理的拓扑空间 $ X_1 $ 与 $ X_2 $，有
+
+\[
+\mathcal{B}(X_1 \times X_2) = \mathcal{B}(X_1) \otimes \mathcal{B}(X_2) .
+\]
+
+\proofhead
+设 $ \mathcal{M}_j $ 是 $ X_j $ 的拓扑 $ \mathcal{T}_j $ 的可数基。由注 1.14(c) 与命题 I.6.9，$ \mathcal{M}_1 \boxtimes \mathcal{M}_2 $ 是乘积拓扑 $ \mathcal{T} := \mathcal{T}(\mathcal{T}_1 \boxtimes \mathcal{T}_2) $ 的可数基。于是每个 $ O \in \mathcal{T} $ 都能表示成 $ \mathcal{M}_1 \boxtimes \mathcal{M}_2 $ 中集合的可数并。因此 $ \mathcal{T} \subset \mathcal{B}(X_1) \otimes \mathcal{B}(X_2) $，从而 $ \mathcal{B}(X_1 \times X_2) \subset \mathcal{B}(X_1) \otimes \mathcal{B}(X_2) $。结论由命题 1.16 推出。\nobreak\hspace{0.35em}■
+\end{theorem}
+
+\begin{corollary}
+
+对 $ m, n \in \mathbb{N}^\times $，有 $ \mathcal{B}^m \otimes \mathcal{B}^n = \mathcal{B}^{m+n} $ 与 $ \mathcal{B}^m = \underbrace{\mathcal{B}^1 \otimes \cdots \otimes \mathcal{B}^1}_{m} $。
+
+\proofhead
+这由注 1.14(e)、推论 1.9(ii)、定理 1.17 以及向 $ m $ 个因子情形的相应推广推出。\nobreak\hspace{0.35em}■
+\end{corollary}
+
+\needspace{3\baselineskip}\subsection*{截口的可测性}
+
+对 $ C \subset X \times Y $ 与 $ (a, b) \in X \times Y $，集合
+
+\begin{equation*}
+\begin{aligned}
+C_{[a]} &:= \{ y \in Y ; (a, y) \in C \} , \\ C^{[b]} &:= \{ x \in X ; (x, b) \in C \}
+\end{aligned}
+\end{equation*}
+
+称为 $ C $ 的\textbf{截口}（分别在 $ a \in X $ 与 $ b \in Y $ 处）。
+
+\bookfigure[0.50]{figures/751e6bd1c1e5a24f.png}
+
+可测集的截口是可测的：
+
+\begin{proposition}
+
+设 $ (X, \mathcal{A}) $ 与 $ (Y, \mathcal{B}) $ 是可测空间，且 $ C \in \mathcal{A} \otimes \mathcal{B} $。则对任意的 $ x \in X $ 与 $ y \in Y $，有 $ C_{[x]} \in \mathcal{B} $ 与 $ C^{[y]} \in \mathcal{A} $。
+
+证明
+
+\begin{subitems}
+\item
+
+令
+
+\[
+\mathcal{C} := \{ C \in \mathcal{A} \otimes \mathcal{B} ; C_{[x]} \in \mathcal{B}, C^{[y]} \in \mathcal{A}, (x, y) \in X \times Y \}
+\]
+
+并证明 $ \mathcal{C} $ 是 $ X \times Y $ 上的 $ \sigma $-代数。
+显然 $ X \times Y $ 属于 $ \mathcal{C} $。对 $ C \in \mathcal{C} $ 与 $ (x, y) \in X \times Y $，有
+
+\[
+(C^c)_{[x]} = (C_{[x]})^c \in \mathcal{B} \quad \text{与} \quad (C^c)^{[y]} = (C^{[y]})^c \in \mathcal{A} ,
+\]
+
+所以 $ C^c $ 属于 $ \mathcal{C} $。最后，$ \mathcal{C} $ 中的每个序列 $ (C_j) $ 都满足
+
+\[
+\left(\bigcup_j C_j\right)_{[x]} = \bigcup_j (C_j)_{[x]} \quad\text{与}\quad \left(\bigcup_j C_j\right)^{[y]} = \bigcup_j (C_j)^{[y]} ,
+\]
+
+所以 $ \bigcup_j C_j $ 也属于 $ \mathcal{C} $。
+
+\item
+
+对 $ A\times B\in\mathcal{A}\boxtimes\mathcal{B} $ 与 $ (x,y)\in X\times Y $，有
+
+\begin{equation*}
+(A\times B)_{[x]} = \begin{cases} B , & x\in A , \\ \varnothing , & x\in A^{c} , \end{cases} \qquad (A\times B)^{[y]} = \begin{cases} A , & y\in B , \\ \varnothing , & y\in B^{c} . \end{cases}
+\end{equation*}
+
+从而 $ \mathcal{A}\boxtimes\mathcal{B} $ 包含于 $ \mathcal{C} $，因此 $ \mathcal{A}\otimes\mathcal{B} $ 也包含于 $ \mathcal{C} $。但按构造有 $ \mathcal{C}\subset\mathcal{A}\otimes\mathcal{B} $，所以一切都得证。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+证明例 1.3(a)–(d) 中的陈述。
+
+\item
+
+设 $ \mathcal{S},\mathcal{S}'\subset\mathfrak{P}(X) $ 非空。证明或反驳：$ \mathcal{A}_\sigma(\mathcal{S})=\mathcal{A}_\sigma(\mathcal{S}') $ 蕴含 $ \mathcal{S}=\mathcal{S}' $。
+
+\item
+
+设 $ (X_1,\mathcal{A}_1) $ 与 $ (X_2,\mathcal{A}_2) $ 是可测空间。若存在 $ m\in\mathbb{N} $ 以及 $ R_0,\ldots,R_m\in\mathcal{A}_1\boxtimes\mathcal{A}_2 $，使得对 $ j\ne k $ 有 $ R_j\cap R_k=\varnothing $，且 $ F=\bigcup_{j=0}^{m} R_j $，则称子集 $ F\subset X_1\times X_2 $ 是 $ X_1\times X_2 $ 中的一个\textbf{拼块}。
+
+证明：
+
+\begin{items}
+\item
+
+$ \mathcal{F} := \{ F\subset X_1\times X_2 \;;\; F \text{ 是 } X_1\times X_2 \text{ 中的拼块} \} $ 是 $ X_1\times X_2 $ 上的代数。
+
+\item
+
+$ \mathcal{A}_\sigma(\mathcal{F})=\mathcal{A}_1\otimes\mathcal{A}_2 $。
+
+\end{items}
+
+\item
+
+设 $ (A_j) $ 是 $ \mathfrak{P}(X) $ 中的序列，并令
+
+\[
+\overline{\lim}_j A_j := \bigcap_{j=0}^{\infty}\bigcup_{k=j}^{\infty} A_k , \qquad \underline{\lim}_j A_j := \bigcup_{j=0}^{\infty}\bigcap_{k=j}^{\infty} A_k .
+\]
+
+我们称 $ \overline{\lim}_j A_j $ 为 $ (A_j) $ 的\textbf{上极限}（或 limsup），称 $ \underline{\lim}_j A_j $ 为 $ (A_j) $ 的\textbf{下极限}（liminf）。
+
+\begin{items}
+\item
+
+描述集合 $ \overline{\lim}_j A_j $ 与 $ \underline{\lim}_j A_j $。
+
+\item
+
+证明或反驳：$ \underline{\lim}_j A_j\subset\overline{\lim}_j A_j $，$ \overline{\lim}_j A_j\subset\underline{\lim}_j A_j $。
+
+\end{items}
+
+\item
+
+若 $ \underline{\lim}_j A_j=\overline{\lim}_j A_j $，则称序列 $ (A_j)\in\mathfrak{P}(X)^{\mathbb{N}} $ 是\textbf{收敛的}。这个共同值称为 $ (A_j) $ 的\textbf{极限}，记作 $ \lim_j A_j $。
+
+验证：
+
+\begin{items}
+\item
+
+任何递增序列 $ (A_j) $ 都收敛，其极限为 $ \bigcup_j A_j $。任何递减序列 $ (A_j) $ 都收敛，其极限为 $ \bigcap_j A_j $。
+
+\item
+
+$ (A_j) $ 收敛到 $ A $ 当且仅当 $ (\chi_{A_j}) $ 逐点收敛到 $ \chi_A $。
+
+\end{items}
+
+\item
+
+设 $ (X,\mathcal{A}) $ 与 $ (Y,\mathcal{B}) $ 是可测空间。称映射 $ f:X\to Y $ 为 \textbf{$ \mathcal{A} $-$ \mathcal{B} $-可测的}\footnote{若 $ \mathcal{A} $ 与 $ \mathcal{B} $ 已由上下文隐含，我们就简称 $ f $ 是\textbf{可测的}。}，若 $ f^{-1}(\mathcal{B})\subset\mathcal{A} $。若 $ X $ 与 $ Y $ 是拓扑空间，则 $ \mathcal{B}(X) $-$ \mathcal{B}(Y) $-可测函数也称为\textbf{博雷尔可测的}。
+
+\begin{items}
+\item
+
+设 $ \mathcal{S}\subset\mathfrak{P}(Y) $ 满足 $ \mathcal{A}_\sigma(\mathcal{S})=\mathcal{B} $。证明：$ f\in Y^X $ 是 $ \mathcal{A} $-$ \mathcal{B} $-可测的当且仅当 $ f^{-1}(\mathcal{S})\subset\mathcal{A} $。
+
+\item
+
+设 $ X $ 与 $ Y $ 是拓扑空间。证明：从 $ X $ 到 $ Y $ 的每个连续映射都是博雷尔可测的。
+
+\end{items}
+
+\item
+
+设 $ (X,\mathcal{A}) $ 是可测空间，$ Y\subset X $。证明 $ \mathcal{A}\mid Y := \{ A\cap Y \;;\; A\in\mathcal{A} \} $ 是 $ Y $ 上的 $ \sigma $-代数。我们称它为\textbf{由 $ \mathcal{A} $ 在 $ Y $ 上诱导的 $ \sigma $-代数}。
+
+\item
+
+设 $ (X,\mathcal{A}) $、$ (Y,\mathcal{B}) $ 与 $ (Z,\mathcal{C}) $ 是可测空间。验证：
+
+\begin{items}
+\item
+
+若 $ f\in Y^X $ 与 $ g\in Z^Y $ 可测，则 $ g\circ f\in Z^X $ 也可测。
+
+\item
+
+若 $ f\in Y^X $ 可测且 $ A\subset X $，则 $ f\mid A\in Y^A $ 是 $ (\mathcal{A}\mid A) $-$ \mathcal{B} $-可测的。
+
+\end{items}
+
+\item
+
+设 $ Y $ 是拓扑空间，$ X\subset Y $。证明 $ \mathcal{B}(X)=\mathcal{B}(Y)\mid X $。
+
+\item
+
+设 $ d_1 $ 与 $ d_2 $ 是 $ X $ 上的等价度量，并令 $ X_j := (X,d_j) $（$ j=1,2 $）。证明 $ \mathcal{B}(X_1)=\mathcal{B}(X_2) $。
+
+\item
+
+证明：若拓扑空间 $ X $ 有可数基 $ \mathcal{M} $，则 $ \mathcal{B}(X)=\mathcal{A}_\sigma(\mathcal{M}) $。
+
+\item
+
+设 $ (X,\mathcal{T}) $ 是豪斯多夫空间，并且存在紧致集构成的序列 $ (K_j)\in X^{\mathbb{N}} $，使得 $ X=\bigcup_j K_j $。验证 $ \mathcal{B}(X)=\mathcal{A}_\sigma(\mathcal{K}) $，其中 $ \mathcal{K} $ 是 $ X $ 的所有紧致子集之集。
+
+\item
+
+设拓扑空间 $ X $ 与 $ Y $ 满足 $ \mathcal{B}(X\times Y)=\mathcal{B}(X)\otimes\mathcal{B}(Y) $。证明：对每个非空 $ Z\subset Y $，都有 $ \mathcal{B}(X\times Z)=\mathcal{B}(X)\otimes\mathcal{B}(Z) $。（提示：验证 $ \mathcal{A} := \{ M\subset X\times Y \;;\; (X\times Z)\cap M\in\mathcal{B}(X)\otimes\mathcal{B}(Z) \} $ 是 $ X\times Y $ 上包含 $ \mathcal{B}(X)\otimes\mathcal{B}(Y) $ 的 $ \sigma $-代数。再注意注 III.2.29(h)。）
+
+\item
+
+设 $ X_j $ 与 $ Y_j $ 是拓扑空间，且 $ f_j : X_j\to Y_j $ 是博雷尔可测的（$ j=1,2 $）。令
+
+\[
+f_1\times f_2 : X_1\times X_2 \to Y_1\times Y_2 \quad\text{由}\quad (x_1,x_2)\mapsto (f_1(x_1), f_2(x_2)) .
+\]
+
+验证 $ (f_1\times f_2)^{-1}(\mathcal{B}(Y_1)\otimes\mathcal{B}(Y_2))\subset\mathcal{B}(X_1)\otimes\mathcal{B}(X_2) $。
+
+\item
+
+取 $ A\subset X $，并令 $ \mathcal{A} := \{\varnothing, A, A^{c}, X\} $。在 $ A $ 满足什么条件时，$ \mathcal{A}\boxtimes\mathcal{A} $ 是 $ X\times X $ 上的 $ \sigma $-代数？
+
+\item
+
+设 $ \mathcal{S}\subset\mathfrak{P}(X) $。证明
+
+\[
+\mathcal{A}_\sigma(\mathcal{S}) = \bigcup\{ \mathcal{A}_\sigma(\mathcal{C}) \;;\; \mathcal{C}\subset\mathcal{S} \text{ 是可数的} \} .
+\]
+
+（提示：右端的集族是 $ X $ 上的 $ \sigma $-代数，并且包含 $ \mathcal{S} $。）
+
+\item
+
+对 $ A\subset X $，令 $ \mathcal{A}_A := \{ B\subset X \;;\; A\subset B \text{ 或 } A\subset B^{c} \} $。证明：
+
+\begin{subitems}
+\item
+
+$ \mathcal{A}_A $ 是 $ X $ 上的 $ \sigma $-代数。
+
+\item
+
+若 $ \mathcal{S}\subset\mathcal{A}_A $，则 $ \mathcal{A}_\sigma(\mathcal{S})\subset\mathcal{A}_A $。
+
+\end{subitems}
+
+\item
+
+设 $ X=(X,\mathcal{T}) $ 是拓扑空间。证明：若对角线
+
+\[
+\Delta_X = \{ (x,y)\in X\times X \;;\; x=y \}
+\]
+
+属于 $ \mathcal{B}(X)\otimes\mathcal{B}(X) $，则存在 $ X $ 到 $ \mathbb{R} $ 的单射。
+
+（提示：(i) 由习题 16，存在 $ \mathcal{S}_j = \{ A_{k,j} \;;\; k\in\mathbb{N} \}\subset\mathcal{T} $（$ j=1,2 $），使得 $ \Delta_X\in\mathcal{A}_\sigma(\mathcal{S}_1\boxtimes\mathcal{S}_2) $。令 $ \mathcal{A}_j := \mathcal{A}_\sigma(\mathcal{S}_j) $（$ j=1,2 $）。则 $ \mathcal{A}_1\otimes\mathcal{A}_2\supset\mathcal{A}_\sigma(\mathcal{S}_1\boxtimes\mathcal{S}_2) $，再结合 $ \Delta_X\in\mathcal{A}_\sigma(\mathcal{S}_1\boxtimes\mathcal{S}_2) $ 与命题 1.19，便推出对每个 $ x\in X $ 都有 $ \{x\}\in\mathcal{A}_1 $。(ii) 令 $ \varphi := \sum_{k=0}^{\infty} 3^{-k}\chi_{A_{k,1}} \in \mathcal{B}(X,\mathbb{R}) $，并取 $ x,y\in X $ 使得 $ \varphi(x)=\varphi(y) $。由定理 II.7.11，对每个 $ k\in\mathbb{N} $，或者 $ \{x,y\}\subset A_{k,1} $，或者 $ \{x,y\}\subset A_{k,1}^{c} $。于是习题 17 表明，对每个 $ A\in\mathcal{A}_1 $，或者 $ \{x,y\}\subset A $，或者 $ \{x,y\}\subset A^{c} $。由 (i) 可知，这只有在 $ x=y $ 时才可能。）
+
+\item
+
+设 $ X := \mathfrak{P}(\mathbb{R}) $，$ \mathcal{T} $ 是 $ X $ 上的豪斯多夫拓扑。则 $ \mathcal{B}(X)\otimes\mathcal{B}(X)\ne \mathcal{B}(X\times X) $。
+
+（提示：因为 $ \mathcal{T} $ 满足豪斯多夫条件，对角线 $ \Delta_X $ 在 $ X\times X $ 中是闭的。若 $ \mathcal{B}(X)\otimes\mathcal{B}(X)=\mathcal{B}(X\times X) $，则习题 18 表明存在 $ \mathfrak{P}(\mathbb{R}) $ 到 $ \mathbb{R} $ 的单射。这与定理 I.6.5 矛盾。）
+
+\end{exercises}
+
+\section{测度}
+
+现在我们将引入测度的概念，并研究它的一般性质，即那些或多或少直接由定义得出的性质。由此得到的规则为我们更深入地探讨测度与积分理论奠定了基础。
+
+以下
+
+• $ X $ 是非空集合，且 $ [0,\infty] := \mathbb{R}^{+} \cup \{\infty\} $。
+
+还要回顾第 I.10 节与第 II.5 节中关于 $ \overline{\mathbb{R}} $ 的算术与拓扑的诸事实。
+
+\needspace{3\baselineskip}\subsection*{集函数}
+
+设 $ \mathcal{C} $ 是 $ X $ 的子集族，且 $ \varnothing \in \mathcal{C} $。设 $ \varphi $ 是从 $ \mathcal{C} $ 到 $ [0,\infty] $ 的映射（或\textbf{集函数}），且 $ \varphi(\varnothing) = 0 $。我们称 $ \varphi $ 是 \textbf{$ \sigma $-次可加的}，若对 $ \mathcal{C} $ 中的每个序列 $ (A_j) $，只要 $ \bigcup_j A_j \in \mathcal{C} $\footnote{此处及以下，$ \bigcup_j A_j $ 均理解为 $ \bigcup_{j=0}^{\infty} A_j $，等等。}，就有
+
+\begin{equation}
+\varphi\left(\bigcup_j A_j\right) \le \sum_j \varphi(A_j)\,.\tag{2.1}
+\end{equation}
+
+我们称从 $ \mathcal{C} $ 到 $ [0,\infty] $ 或 $ \mathbb{K} $ 且满足 $ \varphi(\varnothing) = 0 $ 的映射 $ \varphi $ 是 \textbf{$ \sigma $-可加的}，若对 $ \mathcal{C} $ 中每个满足 $ \bigcup_j A_j \in \mathcal{C} $ 的\textbf{不交的}序列 $ (A_j) $，有
+
+\begin{equation}
+\varphi\left(\bigcup_j A_j\right) = \sum_j \varphi(A_j)\tag{2.2}
+\end{equation}
+
+若 (2.1) 对由 $ \mathcal{C} $ 的子集构成的每个有限族 $ A_0, \ldots, A_m $（$ \bigcup_j A_j \in \mathcal{C} $）都成立，则称 $ \varphi $ 是\textbf{次可加的}。同样，若 (2.2) 对由 $ \mathcal{C} $ 的子集构成的每个两两不交有限族 $ A_0, \ldots, A_m $（$ \bigcup_j A_j \in \mathcal{C} $）都成立，则称 $ \varphi $ 是\textbf{可加的}。最后，我们称 $ \varphi\colon \mathcal{C} \to [0,\infty] $ 是 \textbf{$ \sigma $-有限的}，若 $ X $ 属于 $ \mathcal{C} $，且存在 $ \mathcal{C} $ 中的序列 $ (A_j) $，使得 $ \bigcup_j A_j = X $，并且对 $ j \in \mathbb{N} $ 有 $ \varphi(A_j) < \infty $。若 $ \varphi(X) < \infty $，则称 $ \varphi $ 是\textbf{有限的}。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+每个 $ \sigma $-可加的集函数都是可加的；每个 $ \sigma $-次可加的集函数都是次可加的。
+
+\item
+
+设 $ \varphi $ 是从 $ \mathcal{C} $ 到 $ [0,\infty] $［或到 $ \mathbb{K} $］的 $ \sigma $-可加映射。若 $ (A_j) \in \mathcal{C}^{\mathbb{N}} $ 不交且 $ \bigcup_j A_j \in \mathcal{C} $，则级数 $ \sum_j \varphi(A_j) $ 在 $ [0,\infty] $［或 $ \mathbb{K} $］中\textbf{绝对}收敛，也就是说，它可以任意重排而不影响其和。
+
+\proofhead
+这由 (2.2) 推出，因为 $ \varphi\left(\bigcup_j A_j\right) $ 不依赖于 $ A_j $ 的排序。\nobreak\hspace{0.35em}■
+\item
+
+映射
+
+\begin{equation*}
+\mathfrak{P}(X) \to [0,\infty]\,,\quad A \mapsto \begin{cases} 1\,, & A \ne \varnothing\,, \\ 0\,, & A = \varnothing\,, \end{cases}
+\end{equation*}
+
+是 $ \sigma $-次可加的；它是 $ \sigma $-可加的当且仅当 $ X $ 只有一个元素。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{测度空间}
+
+设 $ \mathcal{A} $ 是 $ X $ 上的 $ \sigma $-代数，且 $ \mu\colon \mathcal{A} \to [0,\infty] $ 是 $ \sigma $-可加的。我们称 $ \mu $ 是 $ X $ 上（或 $ \mathcal{A} $ 上）的（正）\textbf{测度}\footnote{实际上，指定 $ \mathcal{A} $ 是多余的，因为 $ \mathcal{A} $ 是 $ \mu $ 的定义域。}，并称 $ (X, \mathcal{A}, \mu) $ 为\textbf{测度空间}。若 $ \mu(X) = 1 $，我们还称 $ \mu $ 为\textbf{概率测度}，称 $ (X, \mathcal{A}, \mu) $ 为\textbf{概率空间}。
+
+\begin{example}
+
+\begin{items}
+\item
+
+对固定的 $ a \in X $ 与 $ A \subset X $，定义
+
+\begin{equation*}
+\delta_a(A) := \begin{cases} 1\,, & a \in A\,, \\ 0\,, & a \notin A\,, \end{cases}
+\end{equation*}
+
+则 $ \delta_a\colon \mathfrak{P}(X) \to [0,\infty] $ 是概率测度，即 $ X $ 上在点 $ a $ 处（或以 $ a $ 为支撑）的\textbf{狄拉克测度}。
+
+\item
+
+对 $ A \subset X $ 定义 $ \mathcal{H}^0(A) := \operatorname{Num}(A) $。则 $ \mathcal{H}^0\colon \mathfrak{P}(X) \to [0,\infty] $ 是测度，即 $ X $ 上的\textbf{计数测度}。它是有限的［或 $ \sigma $-有限的］当且仅当 $ X $ 是有限的［或可数的］。
+
+\item
+
+对 $ A \subset X $，令 $ \mu(A) := 0 $（当 $ A = \varnothing $ 时），否则令 $ \mu(A) := \infty $。则 $ (X, \mathfrak{P}(X), \mu) $ 是测度空间。
+
+\item
+
+设 $ (X, \mathcal{A}, \mu) $ 是测度空间，并取 $ A \in \mathcal{A} $。则 $ (A, \mathcal{A} \mid A, \mu \mid A) $ 也是测度空间。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{测度的性质}
+
+我们在此汇集处理测度时最重要的规则。
+
+\qyxffnnumdef{1}
+\afterpage{\qyxffntextof{1}{这指的是由 $ (\mathfrak{P}(X), \subset) $ 在 $ \mathcal{A} $ 上诱导的自然序；参见例 I.44(a) 与 (b)。除“递增的”之外，我们也可以说单调的。}}
+\begin{proposition}
+
+设 $ (X, \mathcal{A}, \mu) $ 是测度空间。对 $ A, B \in \mathcal{A} $ 与 $ (A_j) \in \mathcal{A}^{\mathbb{N}} $，有：
+
+\begin{subitems}
+\item
+
+$ \mu(A \cup B) + \mu(A \cap B) = \mu(A) + \mu(B) $。
+
+\item
+
+若 $ A \subset B $ 且 $ \mu(A) < \infty $，则 $ \mu(B \setminus A) = \mu(B) - \mu(A) $。
+
+\item
+
+$ A \subset B \implies \mu(A) \le \mu(B) $，也就是说，$ \mu $ 是递增的。\qyxffnmark{1}
+
+\item
+
+若 $ A_0 \subset A_1 \subset A_2 \subset \cdots $，则 $ \mu(A_k) \uparrow \mu\left(\bigcup_j A_j\right) $。
+
+\item
+
+若 $ A_0 \supset A_1 \supset A_2 \supset \cdots $ 且 $ \mu(A_0) < \infty $，则 $ \mu(A_k) \downarrow \mu\left(\bigcap_j A_j\right) $。
+
+\item
+
+$ \mu\left(\bigcup_j A_j\right) \le \sum_j \mu(A_j) $，也就是说，$ \mu $ 是 $ \sigma $-次可加的。
+
+\proofhead
+(i) 由 $ A \cup B = A \cup (B \setminus A) $ 与 $ A \cap (B \setminus A) = \varnothing $，根据注 2.1(a) 可得
+\begin{equation}
+\mu(A \cup B) = \mu(A) + \mu(B \setminus A)\,.\tag{2.3}
+\end{equation}
+
+类似地，由 $ B = (A \cap B) \cup (B \setminus A) $ 与 $ (A \cap B) \cap (B \setminus A) = \varnothing $ 可得
+
+\begin{equation}
+\mu(A \cap B) + \mu(B \setminus A) = \mu(B)\,.\tag{2.4}
+\end{equation}
+
+将 (2.3) 与 (2.4) 相加，得到
+
+\[
+\mu(A \cup B) + \mu(A \cap B) + \mu(B \setminus A) = \mu(A) + \mu(B) + \mu(B \setminus A)\,.
+\]
+
+若 $ \mu(B \setminus A) $ 有限，则结论成立。若 $ \mu(B \setminus A) = \infty $，则由 (2.3) 与 (2.4) 得到 $ \mu(A \cup B) = \mu(B) = \infty $，结论同样得证。
+
+\end{subitems}
+
+\begin{subitems}
+\item[（ii）]
+
+由于 $ A \subset B $，有 $ B = A \cup (B \setminus A) $；但 $ A $ 与 $ B \setminus A $ 不交，故 $ \mu(B) = \mu(A) + \mu(B \setminus A) $。按假设 $ \mu(A) < \infty $，于是得到 $ \mu(B) - \mu(A) = \mu(B \setminus A) $。
+
+\item[（iii）]
+
+与 (ii) 一样，有 $ \mu(B) = \mu(A) + \mu(B \setminus A) $，从而 $ \mu(B) \ge \mu(A) $。
+
+\item[（iv）]
+
+令 $ A_{-1} := \varnothing $，并对 $ k \in \mathbb{N} $ 令 $ B_k := A_k \setminus A_{k-1} $。按假设，$ (B_k) $ 是 $ \mathcal{A} $ 中的不交序列，且 $ \bigcup_{k=0}^{\infty} B_k = \bigcup_{j=0}^{\infty} A_j $，$ \bigcup_{k=0}^{m} B_k = A_m $。因此 $ \mu $ 的 $ \sigma $-可加性蕴含
+
+\[
+\mu\left(\bigcup_j A_j\right) = \mu\left(\bigcup_k B_k\right) = \lim_{m \to \infty} \sum_{k=0}^{m} \mu(B_k) = \lim_{m \to \infty} \mu\left(\bigcup_{k=0}^{m} B_k\right) = \lim_{m \to \infty} \mu(A_m)\,.
+\]
+\item[（v）]
+
+若 $ (A_k) $ 是 $ \mathcal{A} $ 中的递减序列，则 $ (A_0 \setminus A_k) $ 递增。此外，
+
+\[
+A_0 \setminus \left(\bigcap_k A_k\right) = A_0 \cap \left(\bigcap_k A_k\right)^c = \bigcup_k \left(A_0 \cap A_k^c\right) = \bigcup_k (A_0 \setminus A_k)\,.
+\]
+
+利用 (ii) 与 (iv)，得到
+
+\[
+\mu(A_0) - \mu\left(\bigcap_k A_k\right) = \mu\left(A_0 \setminus \left(\bigcap_k A_k\right)\right) = \mu\left(\bigcup_k (A_0 \setminus A_k)\right)
+\]
+\[
+= \lim_{m \to \infty} \mu(A_0 \setminus A_m) = \mu(A_0) - \lim_{m \to \infty} \mu(A_m)\,,
+\]
+
+由此得到结论。
+
+\item[（vi）]
+
+令 $ B_0 := A_0 $，并对 $ k \in \mathbb{N}^{\times} $ 令 $ B_k := A_k \setminus \left(\bigcup_{j=0}^{k-1} A_j\right) $。$ \mathcal{A} $ 中的序列 $ (B_k) $ 满足 $ \bigcup_k B_k = \bigcup_k A_k $，且对 $ k \in \mathbb{N} $ 有 $ B_k \subset A_k $。由 (iii) 与 $ \mu $ 的 $ \sigma $-可加性，有
+
+\[
+\mu\left(\bigcup_k A_k\right) = \mu\left(\bigcup_k B_k\right) = \sum_k \mu(B_k) \le \sum_k \mu(A_k)\,.\quad\blacksquare
+\]
+\end{subitems}
+
+\end{proposition}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+命题 2.3 的 (iv) 与 (v) 分别表达了测度的\textbf{下连续性}与\textbf{上连续性}。
+
+\item
+
+当 $ \mathcal{A} $ 是代数且 $ \mu\colon \mathcal{A} \to [0,\infty] $ 可加时，(i)–(iii) 显然仍然成立。
+
+\item
+
+若 $ \mathcal{S} $ 是 $ X $ 上的代数，且 $ \mu\colon \mathcal{S} \to [0,\infty] $ 可加、单调并且 $ \sigma $-有限，则存在 $ \mathcal{S} $ 中的不交序列 $ (B_k) $，使得 $ \bigcup_k B_k = X $，且对 $ k \in \mathbb{N} $ 有 $ \mu(B_k) < \infty $。
+
+\proofhead
+由于 $ \mu $ 的 $ \sigma $-有限性，存在 $ \mathcal{S} $ 中的序列 $ (A_j) $，使 $ \bigcup_j A_j = X $ 且 $ \mu(A_j) < \infty $。令 $ B_0 := A_0 $，并对 $ k \in \mathbb{N}^{\times} $ 令 $ B_k := A_k \setminus \bigcup_{j=0}^{k-1} A_j $，容易验证 $ (B_k) $ 具有所述性质。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{零集}
+
+设 $ (X, \mathcal{A}, \mu) $ 是测度空间。满足 $ \mu(N) = 0 $ 的集合 $ N \in \mathcal{A} $ 称为 \textbf{$ \mu $-零集}。我们用 $ \mathcal{N}_\mu $ 记所有 $ \mu $-零集构成的集合。若 $ \mu $-零集的任何子集都属于 $ \mathcal{A} $，则称测度 $ \mu $ 或测度空间 $ (X, \mathcal{A}, \mu) $ 是\textbf{完备的}。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+对 $ M \in \mathcal{A} $ 与满足 $ M \subset N $ 的 $ N \in \mathcal{N}_\mu $，有 $ M \in \mathcal{N}_\mu $。
+
+\proofhead
+这由 $ \mu $ 的单调性推出。\nobreak\hspace{0.35em}■
+\item
+
+可数多个 $ \mu $-零集的并是 $ \mu $-零集。
+
+\proofhead
+这由 $ \mu $ 的 $ \sigma $-次可加性推出。\nobreak\hspace{0.35em}■
+\item
+
+测度 $ \mu $ 完备当且仅当 $ \mu $-零集的每个子集都是 $ \mu $-零集。
+
+\proofhead
+这是 (a) 的推论。\nobreak\hspace{0.35em}■
+\item
+
+若 $ \mathcal{A} = \mathfrak{P}(X) $，则 $ \mu $ 是完备的。例如，狄拉克测度与计数测度都是完备的。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+我们用
+
+\[
+\mathcal{M}_\mu := \{\, M \subset X \,; \ \exists\, N \in \mathcal{N}_\mu \text{ 使得 } M \subset N \,\}
+\]
+
+记所有 $ \mu $-零集的子集构成的集合。显然，$ \mu $ 完备当且仅当 $ \mathcal{M}_\mu $ 包含于 $ \mathcal{A} $。因此，对不完备的测度空间，\footnote{推论 5.29 将表明存在不完备的测度空间。}
+
+\[
+\overline{\mathcal{A}}_\mu := \{\, A \cup M \,; \ A \in \mathcal{A},\ M \in \mathcal{M}_\mu \,\}
+\]
+
+确实扩充了 $ \mathcal{A} $。下一个命题表明，$ \overline{\mathcal{A}}_\mu $ 是一个 $ \sigma $-代数，它带有一个在 $ \mathcal{A} $ 上与 $ \mu $ 一致的完备测度。
+
+\end{remark}
+
+\begin{proposition}
+
+设 $ (X, \mathcal{A}, \mu) $ 是测度空间。
+
+\begin{items}
+\item
+
+对 $ A \in \mathcal{A} $ 与 $ M \in \mathcal{M}_{\mu} $，定义 $ \overline{\mu}(A \cup M) := \mu(A) $。则 $ \overline{\mu} $ 是 $ \overline{\mathcal{A}}_{\mu} $ 上一个良定义的集函数，并且 $ (X, \overline{\mathcal{A}}_{\mu}, \overline{\mu}) $ 是一个完备测度空间，满足 $ \overline{\mu} \supset \mu $（也就是说，$ \overline{\mu} $ 延拓 $ \mu $）。
+
+\item
+
+若 $ (X, \mathcal{B}, \nu) $ 是完备测度空间且 $ \nu \supset \mu $，则 $ \nu \supset \overline{\mu} $。
+
+\end{items}
+
+证明
+
+\begin{subitems}
+\item
+
+我们首先证明 $ \overline{\mathcal{A}}_{\mu} $ 是 $ \sigma $-代数。显然 $ X $ 属于 $ \overline{\mathcal{A}}_{\mu} $。设 $ A_{0} \in \overline{\mathcal{A}}_{\mu} $。则存在 $ A \in \mathcal{A} $、$ N \in \mathcal{N}_{\mu} $ 与 $ M \subset N $，使得 $ A_{0} = A \cup M $。由 $ M \subset N $ 可得 $ M^{c} = N^{c} \cup (N \cap M^{c}) $，于是有
+
+\[
+A_{0}^{c} = A^{c} \cap M^{c} = (A^{c} \cap N^{c}) \cup (A^{c} \cap N \cap M^{c}) .
+\]
+
+由于 $ A $ 与 $ N $ 都属于 $ \mathcal{A} $，$ A^{c} \cap N^{c} $ 亦然。此外，$ A^{c} \cap N \cap M^{c} $ 属于 $ \mathcal{M}_{\mu} $，因为它包含在 $ \mu $-零集 $ N $ 中。因此 $ A_{0}^{c} \in \overline{\mathcal{A}}_{\mu} $。最后，设 $ (B_{j}) $ 是 $ \overline{\mathcal{A}}_{\mu} $ 中的序列。则存在序列 $ (A_{j}) $（在 $ \mathcal{A} $ 中）、$ (N_{j}) $（在 $ \mathcal{N}_{\mu} $ 中）以及 $ (M_{j}) $（在 $ \mathfrak{P}(X) $ 中），使得 $ M_{j} \subset N_{j} $ 且 $ B_{j} = A_{j} \cup M_{j} $ 对 $ j \in \mathbb{N} $ 成立。由于 $ \bigcup N_{j} $ 是 $ \mu $-零集且包含 $ \bigcup M_{j} $，并且 $ \mathcal{A} $ 是 $ \sigma $-代数，我们有
+
+\[
+\bigcup B_{j} = \left(\bigcup A_{j}\right) \cup \left(\bigcup M_{j}\right) \in \overline{\mathcal{A}}_{\mu} .
+\]
+\item
+
+我们证明集函数 $ \overline{\mu} : \overline{\mathcal{A}}_{\mu} \to [0, \infty] $ 是良定义的。取 $ A_{1}, A_{2} \in \mathcal{A} $ 与 $ M_{1}, M_{2} \in \mathcal{M}_{\mu} $，使得 $ A_{1} \cup M_{1} = A_{2} \cup M_{2} $，并设 $ N $ 是一个 $ \mu $-零集，满足 $ M_{2} \subset N $。则 $ A_{1} \subset A_{1} \cup M_{1} \subset A_{2} \cup N $，于是由命题 2.3 得到
+
+\[
+\mu(A_{1}) \le \mu(A_{2} \cup N) = \mu(A_{2}) + \mu(N) - \mu(A_{2} \cap N) = \mu(A_{2}) .
+\]
+
+类似地，我们证明 $ \mu(A_{2}) \le \mu(A_{1}) $。因此 $ \overline{\mu} $ 是良定义的。
+
+\item
+
+设 $ A_{0} $ 是 $ \overline{\mu} $-零集，取 $ B \subset A_{0} $。存在 $ A, N \in \mathcal{N}_{\mu} $ 与 $ M \subset N $，使得 $ A_{0} = A \cup M $。因此 $ B \subset A_{0} \subset A \cup N $，从而 $ B $ 属于 $ \mathcal{M}_{\mu} \subset \overline{\mathcal{A}}_{\mu} $，也就是说，$ \overline{\mu} $ 是完备的。
+
+\item
+
+按构造，$ \overline{\mu} $ 是 $ \mu $ 的延拓，并且容易看出 $ \overline{\mu} $ 也是 $ \sigma $-可加的。这就证明了 (a)。
+
+\item
+
+设 $ (X, \mathcal{B}, \nu) $ 是测度空间，满足 $ \mathcal{B} \supset \mathcal{A} $ 与 $ \nu|\mathcal{A} = \mu $。则 $ \mathcal{N}_{\mu} \subset \mathcal{N}_{\nu} $，从而也有 $ \mathcal{M}_{\mu} \subset \mathcal{M}_{\nu} $。若 $ \nu $ 是完备的，即 $ \mathcal{M}_{\nu} \subset \mathcal{B} $，我们就得到 $ \mathcal{M}_{\mu} \subset \mathcal{B} $，因此 $ \overline{\mathcal{A}}_{\mu} \subset \mathcal{B} $。这就证明了 (b)。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+命题 2.6 的 (b) 部分说明 $ (X, \overline{\mathcal{A}}_{\mu}, \overline{\mu}) $ 是 $ (X, \mathcal{A}, \mu) $ 的极小完备扩张。我们称 $ (X, \overline{\mathcal{A}}_{\mu}, \overline{\mu}) $ 与 $ \overline{\mu} $ 为 $ (X, \mathcal{A}, \mu) $ 的\textbf{完备化}；我们也说 $ \overline{\mu} $ 是 $ \mu $ 的完备化。这一构造的一个重要例子将出现在定理 5.8 中。
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+对 $ A \subset X $，令 $ \mathcal{A} := \mathcal{A}_{\sigma}(\{A\}) $。令 $ \mu(\varnothing) := 0 $，而对其他情形令 $ \mu(B) := \infty $。证明 $ (X, \mathcal{A}, \mu) $ 是完备测度空间。
+
+\item
+
+设 $ (X, \mathcal{A}, \mu) $ 是测度空间，并取 $ A_{1}, \ldots, A_{n} \in \mathcal{A} $，其中 $ n \in \mathbb{N}^{\times} $。证明
+
+\[
+\mu\left(\bigcup_{j=1}^{n} A_{j}\right) = \sum_{k=1}^{n} (-1)^{k+1} \sum_{1 \le j_{1} < \cdots < j_{k} \le n} \mu\left(\bigcap_{\ell=1}^{k} A_{j_{\ell}}\right) .
+\]
+\item
+
+在测度空间 $ (\mathbb{N}, \mathfrak{P}(\mathbb{N}), \mathcal{H}^{0}) $ 中找出一个递减序列 $ (A_{j}) \in \mathfrak{P}(\mathbb{N})^{\mathbb{N}} $，使得 $ \lim_{j} \mathcal{H}^{0}(A_{j}) $ 存在，但 $ \mathcal{H}^{0}\left(\bigcap_{j} A_{j}\right) \ne \lim_{j} \mathcal{H}^{0}(A_{j}) $。
+
+\item
+
+设 $ (X, \mathcal{A}) $ 是可测空间，且 $ \mu : \mathcal{A} \to [0, \infty] $ 是可加的且下连续的。证明 $ (X, \mathcal{A}, \mu) $ 是测度空间。
+
+\item
+
+设 $ (X, \mathcal{A}, \mu) $ 是测度空间，取 $ B \in \mathcal{A} $。对 $ A \in \mathcal{A} $，令 $ \mu_{B}(A) := \mu(A \cap B) $。证明 $ (X, \mathcal{A}, \mu_{B}) $ 是测度空间。
+
+\item
+
+设 $ (X, \mathcal{A}, \mu) $ 是测度空间，并考虑序列 $ (A_{j}) \in \mathcal{A}^{\mathbb{N}} $。证明以下陈述：
+
+\begin{items}
+\item
+
+$ \mu(\underline{\lim}_{j} A_{j}) \le \underline{\lim}_{j} \mu(A_{j}) $。
+
+\item
+
+若存在 $ k \in \mathbb{N} $，使得 $ \mu\left(\bigcup_{j=k}^{\infty} A_{j}\right) < \infty $，则 $ \mu(\overline{\lim}_{j} A_{j}) \ge \overline{\lim}_{j} \mu(A_{j}) $。
+
+\item
+
+若存在 $ k \in \mathbb{N} $，使得 $ \mu\left(\bigcup_{j=k}^{\infty} A_{j}\right) < \infty $，且序列 $ (A_{j}) $ 收敛，则 $ \mu(\lim_{j} A_{j}) = \lim_{j} \mu(A_{j}) $。
+
+\end{items}
+
+\item
+
+证明：对每个测度空间 $ (X, \mathcal{A}, \mu) $，都有 $ (X, \overline{\mathcal{A}}_{\mu}, \overline{\mu}) = (X, \overline{[\mathcal{A}_{\mu}]_{\overline{\mu}}}, \overline{[\overline{\mu}]}) $。
+
+\item
+
+设 $ (X, \mathcal{A}, \mu) $ 与 $ (X, \mathcal{A}, \nu) $ 是有限测度空间。证明或反驳：
+
+\[
+(X, \overline{\mathcal{A}}, \overline{\mu}) = (X, \overline{\mathcal{A}}, \overline{\nu}) \iff \mathcal{N}_{\mu} = \mathcal{N}_{\nu} .
+\]
+\item
+
+设 $ (X, \mathcal{A}) $ 是可测空间，$ \mathcal{N} \subset \mathcal{A} $ 满足
+
+\begin{subitems}
+\item
+
+$ \varnothing \in \mathcal{N} $；
+
+\item
+
+$ (A_{j}) \in \mathcal{N}^{\mathbb{N}} \Rightarrow \bigcup_{j} A_{j} \in \mathcal{N} $；
+
+\item
+
+$ (A \in \mathcal{A}, B \in \mathcal{N}, A \subset B) \Rightarrow A \in \mathcal{N} $。
+构造 $ (X, \mathcal{A}) $ 上的测度 $ \mu $，使得 $ \mathcal{N}_{\mu} = \mathcal{N} $。
+
+\end{subitems}
+
+\item
+
+设 $ X $ 不可数，且 $ \mathcal{A} := \{ A \subset X ; A \text{ 或 } A^{c} \text{ 是可数的} \} $。对 $ A \in \mathcal{A} $，若 $ A $ 可数则令 $ \mu(A) := 0 $，否则令 $ \mu(A) := \infty $。证明 $ (X, \mathcal{A}, \mu) $ 是完备测度空间。
+
+\item
+
+设 $ (X, \mathcal{A}, \mu) $ 是测度空间。我们称 $ A \in \mathcal{A} $ 为 \textbf{$ \mu $-原子}，若 $ \mu(A) > 0 $，且对每个满足 $ B \subset A $ 的 $ B \in \mathcal{A} $，或者 $ \mu(B) = 0 $，或者 $ \mu(A \setminus B) = 0 $。
+
+\begin{items}
+\item
+
+证明：
+
+\begin{subitems}
+\item
+
+设 $ A $ 是 $ \mu $-原子，取 $ B \in \mathcal{A} $ 且 $ B \subset A $。则或者 $ \mu(B) = \mu(A) $，或者 $ \mu(B) = 0 $。
+
+\item
+
+设 $ A \in \mathcal{A} $ 满足 $ 0 < \mu(A) < \infty $，并且对每个满足 $ B \subset A $ 的 $ B \in \mathcal{A} $，或者 $ \mu(B) = \mu(A) $，或者 $ \mu(B) = 0 $。则 $ A $ 是 $ \mu $-原子。
+
+\item
+
+设 $ \mu $ 是 $ \sigma $-有限的，且 $ A \in \mathcal{A} $ 是 $ \mu $-原子。则 $ \mu(A) < \infty $。
+
+\end{subitems}
+
+\item
+
+确定计数测度 $ \mathcal{H}^{0} $ 的全部原子。对习题 1 与习题 10 中的测度重复此问题。
+
+\end{items}
+
+\item
+
+设 $ (X, \mathcal{A}, \mu) $ 是完备测度空间。设 $ A \in \mathcal{A} $ 是 $ \mu $-原子，并设 $ B \subset A $。$ B $ 可测吗？说明理由。
+
+\item
+
+设 $ (X, \mathcal{A}, \mu) $ 是完备测度空间，取 $ A, N \in \mathcal{A} $，满足 $ \mu(A) > 0 $ 与 $ \mu(N) = 0 $。证明 $ \mu(A \cap N^{c}) > 0 $。
+
+\end{exercises}
+
+\section{外测度}
+
+迄今为止，我们遇到的一切测度都属于平庸的那一类。它们中没有一个能用来度量——比如说——曲面面积，如果我们希望所得结果在最简单的矩形情形下与熟悉的几何值一致的话！
+
+本节中，我们为引入更有趣的测度类奠定基础。我们首先构造称为“外测度”的集函数，它们定义在给定集合的\textbf{所有}子集上，并且具有测度的某些（尽管并非全部）性质。我们将看到它们的重要例子。在后面的各节中，我们再通过适当选取外测度的限制，得到许多真正的测度。
+
+与往常一样，我们假设
+
+• $ X $ 是非空集合。
+
+\needspace{3\baselineskip}\subsection*{外测度的构造}
+
+若映射 $ \mu^*\colon \mathfrak{P}(X) \to [0,\infty] $ 满足 $ \mu^*(\varnothing) = 0 $，并且递增、$ \sigma $-次可加，则称它是 $ X $ 上的\textbf{外测度}。若 $ \mathfrak{P}(X) $ 的子集 $ \mathcal{K} $ 既包含空集，又包含元素 $ K_j $（$ j \in \mathbb{N} $），使得 $ X = \bigcup_j K_j $，则称 $ \mathcal{K} $ 是 $ X $ 的\textbf{合格覆盖}。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+$ X $ 上的任何外测度都已经定义在整个 $ \mathfrak{P}(X) $ 上。
+
+\item
+
+$ \mathfrak{P}(X) $ 上定义的每个测度都是 $ X $ 上的外测度。
+
+\proofhead
+这由命题 2.3(vi) 推出。\nobreak\hspace{0.35em}■
+\item
+
+对 $ A \subset X $，令
+
+\begin{equation*}
+\mu^*(A) := \begin{cases} 0 , & A = \varnothing , \\ 1 , & A \ne \varnothing . \end{cases}
+\end{equation*}
+
+则 $ \mu^* $ 是 $ X $ 上的外测度，并且它是测度当且仅当 $ X $ 只有一个点。
+
+\item
+
+$ \{ \varnothing, X \} $ 是 $ X $ 的合格覆盖。
+
+\item
+
+对每个 $ a, b \in \mathbb{R}^n $，设 $ A(a,b) $ 是 $ \mathbb{R}^n $ 的某个子集，且 $ (a,b) \subset A(a,b) \subset [a,b] $。则 $ \{ A(a,b) \,;\ a, b \in \mathbb{R}^n \} $ 是 $ \mathbb{R}^n $ 的合格覆盖；特别地，$ \mathbb{J}(n) $ 也是。
+
+\item
+
+若 $ (X, \mathcal{T}) $ 是拓扑空间，则 $ \mathcal{T} $ 是 $ X $ 的合格覆盖。
+
+\item
+
+设 $ X $ 是可分度量空间，$ \mathcal{T} $ 是相应的拓扑。则对任意 $ \varepsilon > 0 $，集合 $ \{ O \in \mathcal{T} \,;\ \operatorname{diam}(O) < \varepsilon \} $ 是 $ X $ 的合格覆盖。
+
+\proofhead
+由命题 1.8，$ X $ 是林德勒夫空间，由此推出该结论。\nobreak\hspace{0.35em}■
+\end{items}
+
+下面的定理使外测度的系统构造成为可能。
+
+\end{remark}
+
+\begin{theorem}
+
+设 $ \mathcal{K} $ 是 $ X $ 的合格覆盖，且 $ \nu\colon \mathcal{K} \to [0,\infty] $ 满足 $ \nu(\varnothing) = 0 $。对 $ A \subset X $，令
+
+\[
+\mu^*(A) := \inf\left\{ \sum_{j=0}^{\infty} \nu(K_j) \,;\ (K_j) \in \mathcal{K}^{\mathbb{N}} , A \subset \bigcup_j K_j \right\} .
+\]
+
+则 $ \mu^* $ 是 $ X $ 上的外测度，称为由 $ (\mathcal{K}, \nu) $ \textbf{诱导}的。
+
+\proofhead
+显然 $ \mu^*\colon \mathfrak{P}(X) \to [0,\infty] $ 是递增的，且 $ \mu^*(\varnothing) = 0 $。为验证 $ \sigma $-次可加性，设 $ (A_j) $ 是 $ \mathfrak{P}(X) $ 中的序列。对每个 $ \varepsilon > 0 $ 与每个 $ j \in \mathbb{N} $，存在 $ \mathcal{K} $ 中的序列 $ (K_{j,k})_{k \in \mathbb{N}} $，使得
+\[
+A_j \subset \bigcup_k K_{j,k} \quad \text{ 且 } \quad \sum_k \nu(K_{j,k}) \le \mu^*(A_j) + \varepsilon/2^{j+1} .
+\]
+
+则 $ \bigcup_j A_j \subset \bigcup_j \bigcup_k K_{j,k} $，并且得到
+
+\begin{equation*}
+\begin{aligned}
+\mu^*\left(\bigcup_j A_j\right) &\le \sum_j \sum_k \nu(K_{j,k}) \\ &\le \sum_j \left( \mu^*(A_j) + \varepsilon/2^{j+1} \right) = \left( \sum_j \mu^*(A_j) \right) + \varepsilon .
+\end{aligned}
+\end{equation*}
+
+由于 $ \varepsilon > 0 $ 是任意的，$ \sigma $-次可加性得证。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{勒贝格外测度}
+
+对 $ a, b \in \mathbb{R}^n $，$ \mathbb{R}^n $ 中区间 $ (a, b) $ 的 \textbf{$ n $ 维体积}定义为
+
+\begin{equation*}
+\operatorname{vol}_n(a,b) := \begin{cases} \prod_{j=1}^{n} (b_j - a_j) , & a \le b , \\ 0 & \text{其他情形} . \end{cases}
+\end{equation*}
+
+若 $ (a, b) $ 非空，则它与 $ (a, b) $ 的 $ n $ 条棱长之积一致——更具体地说，当 $ n = 1, 2, \text{ 与 } 3 $ 时，它与区间长度、矩形面积、平行六面体体积这些日常概念分别一致。
+
+\qyxffnnumdef{1}
+\begin{proposition}
+
+对 $ A \subset \mathbb{R}^n $，令
+
+\[
+\lambda_n^*(A) := \inf\left\{ \sum_{j=0}^{\infty} \operatorname{vol}_n(I_j) \,;\ I_j \in \mathbb{J}(n), j \in \mathbb{N}, \bigcup_{j=0}^{\infty} I_j \supset A \right\} .
+\]
+
+则 $ \lambda_n^* $ 是 $ \mathbb{R}^n $ 上的外测度，称为 \textbf{$ n $ 维勒贝格外测度}。对 $ a, b \in \mathbb{R}^n $ 及 $ (a, b) \subset A \subset [a, b] $，有 $ \lambda^*(A) = \operatorname{vol}_n(a,b) $。
+
+证明
+
+\begin{subitems}
+\item
+
+第一个断言由注 3.1(e) 与定理 3.2 推出。
+
+\item
+
+设 $ a, b \in \mathbb{R}^n $，并令 $ I_0 := (a, b) $，对 $ j \in \mathbb{N}^{\times} $ 令 $ I_j := \varnothing $。显然这定义了 $ \mathbb{R}^n $ 中的一个区间序列，使得 $ (a, b) \subset \bigcup_j I_j $。因此
+
+\begin{equation}
+\lambda_n^*((a,b)) \le \sum_j \operatorname{vol}_n(I_j) = \operatorname{vol}_n(a,b) .\tag{3.1}
+\end{equation}
+\item
+
+设 $ \mathcal{A}_0 $ 是 $ [a, b] $ 的全部子集\qyxffnmark{1} $ J $ 之集，这里 $ a, b \in \mathbb{R}^n $，且对某个 $ k \in \{1, \ldots, n\} $ 有 $ a_k = b_k $。显然，对每个 $ J \in \mathcal{A}_0 $ 与 $ \varepsilon > 0 $，存在 $ I_\varepsilon \in \mathbb{J}(n) $，使得 $ J \subset I_\varepsilon $ 且 $ \operatorname{vol}_n(I_\varepsilon) < \varepsilon $。因此对 $ J \in \mathcal{A}_0 $ 有 $ \lambda_n^*(J) = 0 $。现在给定 $ a, b \in \mathbb{R}^n $，存在 $ 2n $ 个“面” $ J_j \in \mathcal{A}_0 $，使得
+
+\[
+[a,b] = (a,b) \cup \bigcup_{j=1}^{2n} J_j .
+\]
+
+由此及注 2.1(a) 可得
+
+\[
+\lambda_n^*([a,b]) \le \lambda_n^*((a,b)) + \sum_{j=1}^{2n} \lambda_n^*(J_j) = \lambda_n^*((a,b)) .
+\]
+
+对 $ (a, b) \subset A \subset [a, b] $，由 $ \lambda_n^* $ 的单调性可得
+
+\begin{equation}
+\lambda_n^*((a,b)) = \lambda_n^*(A) = \lambda_n^*([a,b]) .\tag{3.2}
+\end{equation}
+\item
+
+设 $ (I_j) $ 是 $ \mathbb{J}(n) $ 中的序列，且 $ [a, b] \subset \bigcup_j I_j $。由于 $ [a, b] $ 是紧致的，存在 $ N \in \mathbb{N} $，使得 $ [a, b] \subset \bigcup_{j=0}^{N} I_j $。因此由下面的习题 1 可得
+
+\[
+\operatorname{vol}_n(a,b) \le \sum_{j=0}^{N} \operatorname{vol}_n(I_j) \le \sum_{j=0}^{\infty} \operatorname{vol}_n(I_j) ,
+\]
+
+取下确界便得 $ \operatorname{vol}_n(a,b) \le \lambda_n^*([a,b]) $。结合 (3.1) 与 (3.2)，即得结论。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+\qyxffntextof{1}{$ J $ 本身不必是 $ \mathbb{R}^n $ 中的区间。}
+
+对 $ a, b \in \mathbb{R}^n $，设 $ J(a,b) $ 是 $ \mathbb{R}^n $ 中的区间，且 $ (a, b) \subset J(a,b) \subset [a, b] $。则由命题 3.3 可得
+
+\begin{equation}
+\lambda_n^*(J(a,b)) = \operatorname{vol}_n(a,b) .\tag{3.3}
+\end{equation}
+
+因此，我们令
+
+\[
+\operatorname{vol}_n J(a,b) := \lambda_n^*(J(a,b))
+\]
+
+并且我们再次把 $ \operatorname{vol}_n J(a,b) $ 称为区间 $ J(a,b) $ 的 \textbf{$ n $ 维体积}。公式 (3.3) 粗略地说，边界面对于 $ n $ 维长方体的体积没有贡献。
+
+形如 $ J = [a, b) $ 的区间（其中 $ a, b \in \mathbb{R}^n $）都称为\textbf{左闭的}，形如 $ J = (a, b] $ 的区间称为\textbf{右闭的}。我们用 $ \mathbb{J}_\ell(n) $ 记 $ \mathbb{R}^n $ 中所有左闭区间之集，用 $ \mathbb{J}_r(n) $ 记所有右闭区间之集。用 $ \overline{\mathbb{J}}(n) $ 记 $ \mathbb{R}^n $ 中有界且（两侧都）闭的区间之集。
+
+下面的结果表明，在勒贝格外测度的定义中，我们可以用左闭、右闭或两侧都闭的区间代替开区间。
+
+\begin{proposition}
+
+设 $ A \subset \mathbb{R}^n $，$ \mathbb{J} \in \{ \mathbb{J}_\ell(n), \mathbb{J}_r(n), \overline{\mathbb{J}}(n) \} $。则
+
+\[
+\lambda_n^*(A) = \inf\left\{ \sum_{j=0}^{\infty} \operatorname{vol}_n(J_j) \,;\ J_j \in \mathbb{J}, j \in \mathbb{N}, \bigcup_{j=0}^{\infty} J_j \supset A \right\} .
+\]
+
+\proofhead
+我们考虑 $ \mathbb{J} = \mathbb{J}_\ell(n) $ 的情形。对 $ J = (a, b) \in \mathbb{J}(n) $，令 $ \ell J := [a, b) $。
+
+若序列 $ (J_j) \in \mathbb{J}(n)^{\mathbb{N}} $ 覆盖 $ A $，则序列 $ (\ell J_j) \in \mathbb{J}^{\mathbb{N}} $ 也覆盖 $ A $。因此，$ \mathbb{J} $ 中覆盖 $ A $ 的序列不少于 $ \mathbb{J}(n) $ 中覆盖 $ A $ 的序列。于是 (3.3) 与 $ \lambda_n^*(A) $ 的定义蕴含
+\begin{equation}
+\begin{aligned}
+& \inf\left\{ \sum_{j=0}^{\infty} \operatorname{vol}_n(J_j) \,;\ J_j \in \mathbb{J}, j \in \mathbb{N}, \bigcup_j J_j \supset A \right\} \\ & \le \inf\left\{ \sum_{j=0}^{\infty} \operatorname{vol}_n(\ell J_j) \,;\ J_j \in \mathbb{J}(n), j \in \mathbb{N}, \bigcup_j J_j \supset A \right\} = \lambda_n^*(A) .
+\end{aligned}\tag{3.4}
+\end{equation}
+
+设 $ (J_j) $ 是 $ \mathbb{J} $ 中覆盖 $ A $ 的序列，并取 $ \varepsilon > 0 $。对 $ a_j, b_j \in \mathbb{R}^n $ 及 $ J_j = [a_j, b_j) $，令
+
+\[
+J_j^{\varepsilon} := (a_j - \varepsilon(b_j - a_j), b_j) \quad \text{对 } j \in \mathbb{N} .
+\]
+
+则 $ (J_j^{\varepsilon}) $ 是 $ \mathbb{J}(n) $ 中覆盖 $ A $ 的序列，并且
+
+\[
+\sum_{j=0}^{\infty} \operatorname{vol}_n(J_j^{\varepsilon}) = \sum_{j=0}^{\infty} (1+\varepsilon)^n \operatorname{vol}_n(J_j) = \left( \sum_{j=0}^{\infty} \operatorname{vol}_n(J_j) \right)(1+\varepsilon)^n .
+\]
+
+由此可得
+
+\begin{equation*}
+\begin{aligned}
+\lambda_n^*(A) &= \inf\left\{ \sum_{j=0}^{\infty} \operatorname{vol}_n(I_j) \,;\ I_j \in \mathbb{J}(n), j \in \mathbb{N}, \bigcup_j I_j \supset A \right\} \\ &\le \inf\left\{ \sum_{j=0}^{\infty} \operatorname{vol}_n(J_j^{\varepsilon}) \,;\ J_j \in \mathbb{J}, j \in \mathbb{N}, \bigcup_j J_j \supset A \right\} \\ &= \inf\left\{ \sum_{j=0}^{\infty} \operatorname{vol}_n(J_j) \,;\ J_j \in \mathbb{J}, j \in \mathbb{N}, \bigcup_j J_j \supset A \right\}(1+\varepsilon)^n .
+\end{aligned}
+\end{equation*}
+
+由于 $ \varepsilon > 0 $ 是任意的，我们看出
+
+\[
+\lambda_n^*(A) \le \inf\left\{ \sum_{j=0}^{\infty} \operatorname{vol}_n(J_j) \,;\ J_j \in \mathbb{J}, j \in \mathbb{N}, \bigcup_j J_j \supset A \right\} .
+\]
+
+现在由 (3.4) 即得结论。对 $ \mathbb{J} = \mathbb{J}_r(n) $ 与 $ \mathbb{J} = \overline{\mathbb{J}}(n) $ 的情形，作显然的修改即可完成证明。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{勒贝格–斯蒂尔杰斯外测度}
+
+设 $ F\colon \mathbb{R} \to \mathbb{R} $ 递增且左连续。我们称 $ F $ 为\textbf{测度生成函数}。若 $ \lim_{x \to -\infty} F(x) = 0 $ 且 $ \lim_{x \to \infty} F(x) = 1 $，我们还称 $ F $ 为\textbf{（概率）分布函数}。若 $ F $ 是测度生成函数，我们令
+
+\begin{equation*}
+\nu_F([a,b)) := \begin{cases} F(b) - F(a) , & a < b , \\ 0 , & a \ge b , \end{cases}
+\end{equation*}
+
+其中 $ a, b \in \mathbb{R} $。由于 $ F $ 递增，$ \nu_F $ 是从形如 $ [a, b) $（$ a, b \in \mathbb{R} $）的区间之集到 $ \mathbb{R} $ 的递增映射。
+
+\begin{proposition}
+
+设 $ F $ 是测度生成函数，且对 $ A \subset \mathbb{R} $ 令
+
+\[
+\mu_F^*(A) := \inf\left\{ \sum_{j=0}^{\infty} \nu_F(I_j) \,;\ I_j = [a_j, b_j), a_j, b_j \in \mathbb{R} \text{ 且 } A \subset \bigcup_{j=0}^{\infty} I_j \right\} .
+\]
+
+则 $ \mu_F^* $ 是 $ \mathbb{R} $ 上的外测度，称为\textbf{由 $ F $ 产生的勒贝格–斯蒂尔杰斯外测度}。对 $ -\infty < a < b < \infty $，有 $ \mu_F^*([a,b)) = F(b) - F(a) $。
+
+证明
+
+\begin{subitems}
+\item
+
+$ \mu_F^* $ 是外测度，这由注 3.1(e) 与定理 3.2 推出。
+
+\item
+
+设 $ a, b \in \mathbb{R} $ 且 $ a < b $。令 $ I_0 := [a, b) $，并对 $ j \in \mathbb{N}^{\times} $ 令 $ I_j := \varnothing $。则 $ [a, b) \subset \bigcup_j I_j $，并且
+
+\begin{equation}
+\mu_F^*([a,b)) \le \sum_{j=0}^{\infty} \nu_F(I_j) = \nu_F(I_0) = F(b) - F(a) .\tag{3.5}
+\end{equation}
+\item
+
+现在设 $ I_j := [a_j, b_j) $（$ j \in \mathbb{N} $）满足 $ [a, b) \subset \bigcup_j I_j $，并取 $ \varepsilon > 0 $。由于 $ F $ 左连续，存在正数 $ c $ 与 $ c_j $，使得
+
+\begin{equation}
+F(b) - F(b-c) < \varepsilon/2 , \quad F(a_j) - F(a_j - c_j) < \varepsilon 2^{-(j+2)} \quad \text{对 } j \in \mathbb{N} ,\tag{3.6}
+\end{equation}
+
+并且 $ [a, b-c] \subset \bigcup_j (a_j - c_j, b_j) $。由于 $ [a, b-c] $ 是紧致的，存在 $ N $，使得 $ [a, b-c] \subset \bigcup_{j=0}^{N} (a_j - c_j, b_j) $。现在 $ F $ 的单调性蕴含
+
+\[
+F(b-c) - F(a) \le \sum_{j=0}^{N} \big( F(b_j) - F(a_j - c_j) \big) \le \sum_{j=0}^{\infty} \big( F(b_j) - F(a_j - c_j) \big) .
+\]
+
+结合 (3.6)，这给出
+
+\begin{equation*}
+\begin{aligned}
+F(b) - F(a) &= F(b) - F(b-c) + F(b-c) - F(a) \\ &\le \sum_{j=0}^{\infty} \left[ F(b_j) - F(a_j) + \varepsilon 2^{-(j+2)} \right] + \varepsilon/2 \le \sum_{j=0}^{\infty} \left[ F(b_j) - F(a_j) \right] + \varepsilon .
+\end{aligned}
+\end{equation*}
+
+这对每个 $ \varepsilon > 0 $ 都成立，故 $ F(b) - F(a) \le \sum_{j=0}^{\infty} \nu_F(I_j) $，考虑到 (3.5)，便得到所要的等式。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+在 $ F(x) := x $（$ x \in \mathbb{R} $）的情形，有 $ \mu_F^* = \lambda_1^* $。
+
+\proofhead
+这由命题 3.4 推出。\nobreak\hspace{0.35em}■
+\item
+
+若把测度生成函数定义中的“左连续”换成“右连续”，并把所有左闭区间换成右闭区间，则命题 3.5 仍然成立。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{豪斯多夫外测度}
+
+设 $ X $ 是可分度量空间，$ \mathcal{T} $ 是由度量诱导的拓扑。对 $ s > 0 $、$ \varepsilon > 0 $ 与 $ A \subset X $，我们令
+
+\[
+\mathcal{H}_\varepsilon^s(A) := \inf\left\{ \sum_{j=0}^{\infty} [\operatorname{diam} O_j]^s \,;\ O_j \in \mathcal{T},\, \operatorname{diam}(O_j) < \varepsilon,\, A \subset \bigcup_{j=0}^{\infty} O_j \right\} .
+\]
+
+由注 3.1(g) 与定理 3.2，$ \mathcal{H}_\varepsilon^s $ 是 $ X $ 上的外测度。此外，当 $ \varepsilon_1 > \varepsilon_2 $ 时有 $ \mathcal{H}_{\varepsilon_1}^s \le \mathcal{H}_{\varepsilon_2}^s $，因为相对于 $ \varepsilon_2 $，对 $ \varepsilon_1 $ 可用的覆盖集更多。因此（见命题 II.5.3）
+
+\[
+\mathcal{H}_*^s(A) := \lim_{\varepsilon \to 0+} \mathcal{H}_\varepsilon^s(A) = \sup_{\varepsilon > 0} \mathcal{H}_\varepsilon^s(A)
+\]
+
+对所有 $ s > 0 $ 与 $ A \subset X $ 都存在。我们称 $ \mathcal{H}_*^s $ 为 $ X $ 上的 \textbf{$ s $ 维豪斯多夫外测度}。为完备起见，我们用 $ \mathcal{H}_*^0 := \mathcal{H}^0 $ 定义 0 维豪斯多夫（外）测度，其中 $ \mathcal{H}^0 $ 是 $ X $ 上的计数测度。
+
+\begin{proposition}
+
+对每个 $ s \ge 0 $，$ \mathcal{H}_*^s $ 是 $ X $ 上的外测度。
+
+\proofhead
+$ s = 0 $ 的情形已由注 3.1(b) 涵盖，因为 $ \mathcal{H}^0 $ 是测度——见例 2.2(b)。因此设 $ s > 0 $。显然 $ \mathcal{H}_*^s $ 是从 $ \mathfrak{P}(X) $ 到 $ [0, \infty] $ 的递增映射，且 $ \mathcal{H}_*^s(\varnothing) = 0 $。为证明 $ \sigma $-次可加性，设 $ (A_j) $ 是 $ \mathfrak{P}(X) $ 中的序列。由于对每个 $ \varepsilon > 0 $，$ \mathcal{H}_\varepsilon^s(A) $ 都是 $ X $ 上的外测度，我们有
+\[
+\mathcal{H}_\varepsilon^s\left(\bigcup_j A_j\right) \le \sum_j \mathcal{H}_\varepsilon^s(A_j) \le \sum_j \mathcal{H}_*^s(A_j) .
+\]
+
+取极限 $ \varepsilon \to 0 $，便得到所证结论。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+证明：
+
+\begin{items}
+\item
+
+$ I, J \in \mathbb{J}(n) \Rightarrow I \cap J \in \mathbb{J}(n) $。
+
+\item
+
+设 $ I_0, \ldots, I_k \in \mathbb{J}(n) $，$ I $ 是满足 $ I \subset \bigcup_{j=0}^n I_j $ 的区间。则 $ \operatorname{vol}_n(I) \le \sum_{j=0}^k \operatorname{vol}_n(I_j) $。（证明此结论时不要使用命题 3.3。）
+
+\end{items}
+
+\item
+
+\begin{items}
+\item
+
+设 $ \mu $ 是博雷尔 $ \sigma $-代数 $ \mathcal{B}^1 $ 上的测度，并设对 $ x \in \mathbb{R} $，$ \mu\big((-\infty, x)\big) $ 有限。进而令
+
+\[
+F_\mu(x) := \mu\big((-\infty, x)\big) \quad \text{对 } x \in \mathbb{R} .
+\]
+
+\proofhead
+$ F_\mu $ 是测度生成函数，且 $ \lim_{x \to -\infty} F_\mu(x) = 0 $。
+\item
+
+确定 $ F_{\delta_0} $，其中 $ \delta_0 $ 表示 $ (\mathbb{R}, \mathcal{B}^1) $ 上支撑在 0 处的狄拉克测度。
+
+\end{items}
+
+\item
+
+设 $ f\colon \mathbb{R} \to [0, \infty) $ 是反常可积的，并且
+
+\[
+F_f(x) := \int_{-\infty}^{x} f(\xi)\, d\xi \quad \text{对 } x \in \mathbb{R} .
+\]
+
+验证 $ F_f $ 是测度生成函数，并且当 $ -\infty < a < b < \infty $ 时，$ \mu_{F_f}^*\big([a, b)\big) = \int_a^b f(\xi)\, d\xi $。
+
+\item
+
+设 $ A \subset \mathbb{R}^n $。证明：
+
+\begin{items}
+\item
+
+$ \mathcal{H}_*^s(A) = \lim_{\varepsilon \to 0+} \inf\left\{ \sum_{k=0}^{\infty} [\operatorname{diam}(A_k)]^s \,;\ A_k \subset \mathbb{R}^n,\, \operatorname{diam}(A_k) \le \varepsilon,\, k \in \mathbb{N},\, A \subset \bigcup_k A_k \right\} $。
+
+\item
+
+若 $ f\colon A \to \mathbb{R}^m $ 是利普希茨连续的，且利普希茨常数为 $ \lambda $，则
+
+\[
+\mathcal{H}_*^s(f(A)) \le \lambda^s \mathcal{H}_*^s(A) .
+\]
+\item
+
+对每个等距 $ \varphi\colon \mathbb{R}^n \to \mathbb{R}^n $，都有 $ \mathcal{H}_*^s(\varphi(A)) = \mathcal{H}_*^s(A) $。因此 $ \mathbb{R}^n $ 上的豪斯多夫外测度在等距下不变，也就是说，它是一个运动不变量。\footnote{由习题 VII.9.1 与 VII.9.2，$ \mathbb{R}^n $ 的每个等距 $ \varphi $ 都是\textbf{仿射映射}——也就是说，形如 $ \varphi(x) = T x + a $，其中 $ T \in O(n) $、$ a \in \mathbb{R}^n $——因而可以解释为刚体运动。}
+
+\item
+
+设 $ \overline{n} > n $，$ \overline{\mathcal{H}}_*^s $ 是 $ \mathbb{R}^{\overline{n}} $ 上的豪斯多夫外测度。则 $ \overline{\mathcal{H}}_*^s(A) = \mathcal{H}_*^s(A) $。也就是说，豪斯多夫外测度与所在空间 $ \mathbb{R}^n $ 的维数无关。
+
+\end{items}
+
+\item
+
+设 $ A \subset \mathbb{R}^n $，$ 0 \le s < t < \infty $。证明以下事实：
+
+\begin{items}
+\item
+
+$ \mathcal{H}_*^s(A) < \infty \Rightarrow \mathcal{H}_*^t(A) = 0 $。
+
+\item
+
+$ \mathcal{H}_*^t(A) > 0 \Rightarrow \mathcal{H}_*^s(A) = \infty $。
+
+\item
+
+$ \inf\{ s > 0 \,;\ \mathcal{H}_*^s(A) = 0 \} = \sup\{ s \ge 0 \,;\ \mathcal{H}_*^s(A) = \infty \} $。这个唯一的数
+
+\[
+\dim_H(A) := \inf\{ s > 0 \,;\ \mathcal{H}_*^s(A) = 0 \}
+\]
+
+称为 $ A $ 的\textbf{豪斯多夫维数}。
+
+\end{items}
+
+\item
+
+设 $ A, B $ 与 $ A_j $（$ j \in \mathbb{N} $）都是 $ \mathbb{R}^n $ 的子集。证明：
+
+\begin{items}
+\item
+
+$ 0 \le \dim_H(A) \le n $。
+
+\item
+
+若 $ A $ 是开集且非空，则 $ \dim_H(A) = n $。
+
+\item
+
+$ A \subset B \Rightarrow \dim_H(A) \le \dim_H(B) $。
+
+\item
+
+$ \dim_H\left(\bigcup_j A_j\right) = \sup_j \{ \dim_H(A_j) \} $。
+
+\item
+
+若 $ A $ 是可数的，则它的豪斯多夫维数为 0。
+
+\item
+
+对任何利普希茨连续函数 $ f\colon A \to \mathbb{R}^n $，都有 $ \dim_H(f(A)) \le \dim_H(A) $。
+
+\item
+
+$ A $ 的豪斯多夫维数与所在空间 $ \mathbb{R}^n $ 的维数无关。
+
+\end{items}
+
+\item
+
+设 $ A \subset \mathbb{R}^n $，$ B \subset \mathbb{R}^m $。证明 $ \dim_H(A \times B) = \dim_H(A) + \dim_H(B) $。
+
+\item
+
+设 $ I \subset \mathbb{R} $ 是紧致完全区间，$ \gamma \in C(I, \mathbb{R}^n) $ 是单射可求长道路，其像为 $ \Gamma $。则 $ \dim_H(\Gamma) = 1 $。
+
+\item
+
+验证：对 $ A \subset \mathbb{R}^2 $，令 $ \mu^*(A) := \lambda_1^*(\operatorname{pr}_1(A)) $，由此定义了 $ \mathbb{R}^2 $ 上的一个外测度。
+
+\item
+
+设 $ \{ \mu_j^* \,;\ j \in \mathbb{N} \} $ 是 $ X $ 上的一族外测度。则
+
+\[
+\mu^*\colon \mathfrak{P}(X) \to [0, \infty] \,, \quad A \mapsto \sum_{j=0}^{\infty} \mu_j^*(A)
+\]
+
+是 $ X $ 上的外测度。
+
+\item
+
+证明：对每个 $ A \subset \mathbb{R}^n $，都存在 $ G_\delta $ 集 $ G $，使得 $ A \subset G $ 且 $ \lambda_n^*(A) = \lambda_n^*(G) $。
+
+\end{exercises}
+
+\section{可测集}
+
+本节中，我们完成在集合上构造测度的过程。我们从一个外测度出发，把它限制到一个适当的子集族上。通过巧妙地选取这个子集族，我们最终得到一个完备的测度空间。这一技巧可追溯到卡拉泰奥多里，随后被应用于前面各节的例子，以得出应用中最重要的那些测度——特别是勒贝格测度。
+
+\needspace{3\baselineskip}\subsection*{动机}
+
+卡拉泰奥多里构造的关键在于可测集的定义。对证明主要定理来说，这是一个方便的定义，但它并不是一个能立刻凭直觉把握的定义。因此我们先给出一个启发性的动机。
+
+设 $ A $ 是 $ \mathbb{R}^n $ 的有界子集。若 $ (I_j) $ 是开区间序列，使得 $ \bigcup I_j \supset A $，则 $ \sum_{j=0}^{\infty} \operatorname{vol}_n(I_j) $ 表示 $ \lambda_n^*(A) $ 的一个近似值；$ \bigcup_j I_j $ 对集合 $ A $ 的逼近越好，这个近似值就越接近 $ \lambda_n^*(A) $。由命题 3.4，我们可以用左开区间代替开区间；特别地，可以选取有限多个两两不交的区间，使其并包含 $ A $。集合 $ A $ 被一个\textbf{拼块}从“外部”逼近，拼块是一种边界分段平行于坐标超平面的形状。在这个意义上，我们把
+
+\bookfigure[0.45]{figures/fd9f3b41ba4b216e.png}
+\[
+\lambda_n^*(A) := \inf\left\{ \sum_{j=0}^{\infty} \operatorname{vol}_n(I_j) \; ; \; I_j \in \mathbb{J}(n),\; j \in \mathbb{N},\; A \subset \bigcup_{j=0}^{\infty} I_j \right\}
+\]
+
+视为对 $ A $ 的体积的“从外部逼近”。
+
+现在不考察 $ A $，而考察集合 $ D \setminus A $，其中 $ D $ 是 $ A $ 在 $ \mathbb{R}^n $ 中的有界超集。像上面那样用拼块从外部逼近 $ D \setminus A $，我们就得到 $ A $ 的“从内部”逼近。因此自然地，我们把 $ A $ 的\textbf{内测度}（相对于 $ D $）定义为
+
+\[
+\lambda_{n,*}^{D}(A) := \lambda_n^*(D) - \lambda_n^*(D \setminus A) .
+\]
+\bookfigure[0.44]{figures/03c4af8dc6b9a47f.png}
+
+现在可以合理地期望，$ \mathbb{R}^n $ 的那些外测度与相对于每个有界超集 $ D $ 的内测度都一致的子集 $ A $ 具有特殊的地位，也就是满足
+
+\[
+\lambda_n^*(A) = \lambda_{n,*}^{D}(A) \quad\text{对 } D \subset \mathbb{R}^n \text{ 且 } D \supset A ,
+\]
+
+其中 $ D $ 同样是有界的。这对应于等式
+
+\begin{equation}
+\lambda_n^*(D) = \lambda_n^*(A) + \lambda_n^*(D \setminus A) \quad\text{对 } D \subset \mathbb{R}^n \text{ 且 } D \supset A ,\tag{4.1}
+\end{equation}
+
+由此我们现在可以放弃 $ A $ 与 $ D $ 有界的要求。于是 (4.1) 恰好挑出这样的集合 $ A $：对每个满足 $ D \supset A $ 的 $ D \subset \mathbb{R}^n $，勒贝格外测度关于 $ D $ 的不交分解 $ A \cup (D \setminus A) $ 是可加的。
+
+\needspace{3\baselineskip}\subsection*{μ*-可测集构成的 σ-代数}
+
+设 $ \mu^* $ 是 $ X $ 上的外测度。若把 $ \mathbb{R}^n $ 换成 $ X $、把 $ \lambda_n^* $ 换成 $ \mu^* $，则等式 (4.1) 对每个 $ A \subset X $ 都有意义。由于外测度是次可加的，我们也可以把 (4.1) 中的等号换成 $ \ge $。这样便得到关键的定义：$ X $ 的子集 $ A $ 是\textbf{$ \mu^* $-可测}的，若对每个 $ D \subset X $，
+
+\[
+\mu^*(D) \ge \mu^*(A \cap D) + \mu^*(A^c \cap D) .
+\]
+
+我们用 $ \mathcal{A}(\mu^*) $ 记 $ X $ 的全部 $ \mu^* $-可测子集所成的集。若 $ N \subset X $ 满足 $ \mu^*(N) = 0 $，则称集合 $ N $ 是 \textbf{$ \mu^* $-零}的（或\textbf{$ \mu^* $ 测度为零}的）。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+每个 $ \mu^* $-零集都是 $ \mu^* $-可测的。
+
+\proofhead
+取 设 $ D \subset X $，$ N \subset X $ 满足 $ \mu^*(N) = 0 $。由 $ \mu^* $ 的单调性可得 $ 0 \le \mu^*(N \cap D) \le \mu^*(N) = 0 $。因此 $ N \cap D $ 是 $ \mu^* $-零集，由此可得
+\[
+\mu^*(N \cap D) + \mu^*(N^c \cap D) = \mu^*(N^c \cap D) \le \mu^*(D) .
+\]
+
+因此 $ N $ 是 $ \mu^* $-可测的。\nobreak\hspace{0.35em}■
+
+\item
+
+对 $ A \subset X $，下列陈述等价：
+
+\end{items}
+
+\begin{subitems}
+\item
+
+$ A \in \mathcal{A}(\mu^*) $。
+
+\item
+
+对所有满足 $ \mu^*(D) < \infty $ 的 $ D \subset X $，有 $ \mu^*(D) \ge \mu^*(A \cap D) + \mu^*(A^c \cap D) $。
+
+\item
+
+对所有 $ D \subset X $，有 $ \mu^*(D) = \mu^*(A \cap D) + \mu^*(A^c \cap D) $。
+
+\proofhead
+“(i)$ \Rightarrow $(ii)”与“(iii)$ \Rightarrow $(i)”这两个蕴含关系是显然的。
+“(ii)$ \Rightarrow $(iii)” 设 $ D \subset X $。由 $ \mu^* $ 的次可加性可得
+\begin{equation}
+\mu^*(D) = \mu^*((A \cap D) \cup (A^c \cap D)) \le \mu^*(A \cap D) + \mu^*(A^c \cap D) .\tag{4.2}
+\end{equation}
+
+若 $ \mu^*(D) < \infty $，则由 (4.2) 与 (ii) 推出 (iii)。在 $ \mu^*(D) = \infty $ 的情形，由 (4.2) 同样可知该陈述成立。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+下面的定理表明，全体 $ \mu^* $-可测集构成一个 $ \sigma $-代数，而外测度 $ \mu^* $ 到这个 $ \sigma $-代数上的限制是一个完备测度。这就是重要的\textbf{卡拉泰奥多里延拓定理}，它使非平凡测度的构造成为可能。
+
+\end{remark}
+
+\begin{theorem}
+
+设 $ \mu^* $ 是 $ X $ 上的外测度。则 $ \mathcal{A}(\mu^*) $ 是 $ X $ 上的 $ \sigma $-代数，且 $ \mu := \mu^* \mid \mathcal{A}(\mu^*) $ 是 $ \mathcal{A}(\mu^*) $ 上的完备测度，即由 $ \mu^* $ 诱导的 $ X $ 上的测度。
+
+证明
+
+\begin{subitems}
+\item
+
+显然 $ \varnothing $ 属于 $ \mathcal{A}(\mu^*) $。此外，若 $ A $ 属于 $ \mathcal{A}(\mu^*) $，则 $ A^c $ 也属于 $ \mathcal{A}(\mu^*) $，因为 $ \mu^* $-可测性这个概念关于 $ A $ 与 $ A^c $ 是对称的。
+
+\item
+
+取 $ A, B \in \mathcal{A}(\mu^*) $ 与 $ D \subset X $。则
+
+\begin{equation}
+\mu^*(D) \ge \mu^*(A \cap D) + \mu^*(A^c \cap D) .\tag{4.3}
+\end{equation}
+
+由于 $ B $ 是 $ \mu^* $-可测的，我们有
+
+\[
+\mu^*(A^c \cap D) \ge \mu^*(B \cap A^c \cap D) + \mu^*(B^c \cap A^c \cap D) .
+\]
+
+于是 (4.3) 与 $ \mu^* $ 的次可加性给出
+
+\[
+\mu^*(D) \ge \mu^*((A \cap D) \cup (B \cap A^c \cap D)) + \mu^*(B^c \cap A^c \cap D) .
+\]
+
+注意到
+
+\[
+(A \cap D) \cup (B \cap A^c \cap D) = [A \cup (B \cap A^c)] \cap D = (A \cup B) \cap D
+\]
+
+以及 $ (A \cup B)^c = A^c \cap B^c $，我们看出
+
+\[
+\mu^*(D) \ge \mu^*((A \cup B) \cap D) + \mu^*((A \cup B)^c \cap D) .
+\]
+
+因此 $ A \cup B $ 是 $ \mu^* $-可测的，且 $ \mathcal{A}(\mu^*) $ 是 $ X $ 上的代数。
+
+\item
+
+设 $ (A_j) $ 是 $ \mathcal{A}(\mu^*) $ 中的不交序列。由于 $ A_0 $ 是 $ \mu^* $-可测的，由注 4.1(b) 得到
+
+\[
+\mu^*((A_0 \cup A_1) \cap D) = \mu^*(((A_0 \cup A_1) \cap D) \cap A_0) + \mu^*(((A_0 \cup A_1) \cap D) \cap A_0^c) ,
+\]
+
+又由 $ A_0 \cap A_1 = \varnothing $ 可得
+
+\[
+\mu^*((A_0 \cup A_1) \cap D) = \mu^*(A_0 \cap D) + \mu^*(A_1 \cap D) .
+\]
+
+由完全归纳法可得
+
+\begin{equation}
+\mu^*\left(\left(\bigcup_{j=0}^{m} A_j\right) \cap D\right) = \sum_{j=0}^{m} \mu^*(A_j \cap D) \quad\text{对 } m \in \mathbb{N} .\tag{4.4}
+\end{equation}
+
+为简便起见令 $ A := \bigcup_j A_j $，则 $ \mu^* $ 的单调性表明
+
+\[
+\mu^*(A \cap D) \ge \sum_{j=0}^{m} \mu^*(A_j \cap D) \quad\text{对 } m \in \mathbb{N} .
+\]
+
+令 $ m \to \infty $，得到不等式 $ \mu^*(A \cap D) \ge \sum_{j=0}^{\infty} \mu^*(A_j \cap D) $。结合 $ \mu^* $ 的 $ \sigma $-次可加性，这蕴含
+
+\begin{equation}
+\mu^*(A \cap D) = \sum_{j=0}^{\infty} \mu^*(A_j \cap D) .\tag{4.5}
+\end{equation}
+
+由于 (ii) 表明 $ \mathcal{A}(\mu^*) $ 是 $ X $ 上的代数，故对每个 $ m \in \mathbb{N} $ 都有
+
+\[
+\mu^*(D) = \mu^*\left(\left(\bigcup_{j=0}^{m} A_j\right)^{c} \cap D\right) + \mu^*\left(\left(\bigcup_{j=0}^{m} A_j\right) \cap D\right) .
+\]
+
+于是 $ \mu^* $ 的单调性与 (4.4) 给出
+
+\[
+\mu^*(D) \ge \mu^*(A^c \cap D) + \sum_{j=0}^{m} \mu^*(A_j \cap D) ,
+\]
+
+因此利用 (4.5) 得到
+
+\[
+\mu^*(D) \ge \mu^*(A^c \cap D) + \sum_{j=0}^{\infty} \mu^*(A_j \cap D) = \mu^*(A^c \cap D) + \mu^*(A \cap D)
+\]
+
+令 $ m \to \infty $。因此 $ A $ 是 $ \mu^* $-可测的，且注 1.2(c) 蕴含 $ \mathcal{A}(\mu^*) $ 是 $ \sigma $-代数。
+
+\item
+
+要看出 $ \mu^* \mid \mathcal{A}(\mu^*) $ 是 $ \mathcal{A}(\mu^*) $ 上的测度，只需在 (4.5) 中令 $ D = X $。最后，$ \mu^* $ 的单调性与注 4.1(a) 表明这个测度是完备的。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+若 $ \mu $ 是由 $ \mu^* $ 诱导的 $ X $ 上的测度，则 $ \mathcal{A}(\mu^*) $ 中的集合理所当然地称为 \textbf{$ \mu $-可测}集，而 $ \mu^* $-零集与 \textbf{$ \mu $-零}集则是一致的。
+
+\needspace{3\baselineskip}\subsection*{勒贝格测度与豪斯多夫测度}
+
+现在我们把定理 4.2 应用于命题 3.3、3.5 与 3.7 中讨论的外测度。
+
+• 由 $ \lambda_n^* $ 诱导的 $ \mathbb{R}^n $ 上的测度称为 $ \mathbb{R}^n $ 上的 \textbf{$ n $ 维勒贝格测度}，记作 $ \lambda_n $。我们称 $ \lambda_n $-可测集为\textbf{勒贝格可测}集。
+
+• 若 $ F\colon \mathbb{R} \to \mathbb{R} $ 是测度生成函数，则我们把由 $ \mu_F^* $ 产生的 $ \mathbb{R} $ 上的测度称为 $ \mathbb{R} $ 上由 $ F $ 诱导的\textbf{勒贝格–斯蒂尔杰斯测度}。我们把它记作 $ \mu_F $。
+
+• 设 $ X $ 是可分度量空间，$ s > 0 $。由 $ \mathcal{H}_*^s $ 诱导的 $ X $ 上的测度就是 $ X $ 上的 \textbf{$ s $ 维豪斯多夫测度}；它记作 $ \mathcal{H}^s $。
+
+\needspace{3\baselineskip}\subsection*{度量测度}
+
+尽管定理 4.2 保证了 $ \mu^* $ 到 $ \mathcal{A}(\mu^*) $ 的限制是测度，但它对 $ \mathcal{A}(\mu^*) $ 中集合的多寡未作任何说明。对于度量空间，我们现在给出一个充分条件，使得至少所有博雷尔集都是 $ \mu $-可测的。
+
+设 $ X = (X, d) $ 是度量空间，$ \mu^* $ 是 $ X $ 上的外测度。若
+
+\[
+\mu^*(A \cup B) = \mu^*(A) + \mu^*(B)
+\]
+
+对所有相距正距离的 $ A, B \subset X $ 成立，即对满足\footnote{见例 III.3.9(c)。} $ d(A, B) > 0 $ 者，则称 $ \mu^* $ 以及由 $ \mu^* $ 诱导的 $ \mathcal{A}(\mu^*) $ 上的测度是\textbf{度量的}。
+
+下面的定理表明，由度量外测度诱导的 $ \sigma $-代数包含博雷尔 $ \sigma $-代数。反之，可以证明：若外测度 $ \mu^* $ 的 $ \mu^* $-可测集构成的 $ \sigma $-代数包含博雷尔 $ \sigma $-代数，则 $ \mu^* $ 是度量测度；见习题 1。
+
+\begin{theorem}
+
+设 $ \mu^* $ 是 $ X $ 上的度量外外测度。则 $ \mathcal{A}(\mu^*) \supset \mathcal{B}(X) $。
+
+证明
+
+\begin{subitems}
+\item
+
+由于 $ \mathcal{A}(\mu^*) $ 是 $ \sigma $-代数，且博雷尔 $ \sigma $-代数由开集生成，故只需验证每个开集都是 $ \mu^* $-可测的。
+
+\item
+
+取 $ X $ 中的开集 $ O $ 与满足 $ \mu^*(D) < \infty $ 的 $ D \subset X $。我们将证明
+
+\[
+\mu^*(D) \ge \mu^*(O \cap D) + \mu^*(O^c \cap D) .
+\]
+
+由注 4.1(b) 可得 $ O \in \mathcal{A}(\mu^*) $。
+
+\end{subitems}
+
+\bookfigure[0.35]{figures/d1497158eb814421.png}
+
+我们令
+
+\[
+O_n := \{ x \in X ; d(x, O^c) > 1/n \}
+\]
+
+与
+
+\[
+A_n := \{ x \in X ; 1/(n+1) < d(x, O^c) \le 1/n \}
+\]
+
+其中 $ n \in \mathbb{N}^{\times} $。显然 $ d(O_n, O^c) \ge 1/n > 0 $。对 $ x \in A_k $，有
+
+\[
+1/(k+1) < d(x, O^c) \le d(x, z) \le d(x, y) + d(y, z) \quad\text{对 } z \in O^c \text{ 与 } y \in X .
+\]
+
+由于这对每个 $ z \in O^c $ 都成立，我们有
+
+\[
+1/(k+1) \le d(x, y) + d(y, O^c) \le d(x, y) + 1/(k+2) \quad\text{对 } y \in A_{k+2} ,
+\]
+
+从而
+
+\begin{equation}
+d(A_k, A_{k+2}) \ge \frac{1}{k+1} - \frac{1}{k+2} > 0 \quad\text{对 } k \in \mathbb{N}^{\times} .\tag{4.6}
+\end{equation}
+
+\begin{subitems}
+\item[（iii）]
+
+由于 $ \mu^* $ 是度量外测度，由 (4.6) 与完全归纳法可得
+
+\[
+\sum_{j=1}^{n} \mu^*(A_{2j-i} \cap D) = \mu^*\left(\left(\bigcup_{j=1}^{n} A_{2j-i}\right) \cap D\right) \le \mu^*(D) \quad\text{对 } n \in \mathbb{N}^{\times} \text{ 与 } i = 0, 1 .
+\]
+
+由此得到
+
+\[
+\sum_{k=1}^{\infty} \mu^*(A_k \cap D) \le 2\mu^*(D) < \infty .
+\]
+
+特别地，我们发现级数余项 $ r_n := \sum_{k=n}^{\infty} \mu^*(A_k \cap D) $ 构成零序列。同样显然有 $ O \setminus O_n = \bigcup_{j=n}^{\infty} A_j $。因此 $ \mu^* $ 的 $ \sigma $-次可加性给出
+
+\[
+0 \le \mu^*((O \setminus O_n) \cap D) \le \sum_{j=n}^{\infty} \mu^*(A_j \cap D) = r_n .
+\]
+
+因此 $ \left(\mu^*((O \setminus O_n) \cap D)\right)_{n \in \mathbb{N}^{\times}} $ 也是零序列。
+
+\item[（iv）]
+
+显然
+
+\begin{equation}
+\mu^*(O \cap D) \le \mu^*(O_n \cap D) + \mu^*((O \setminus O_n) \cap D) .\tag{4.7}
+\end{equation}
+
+由于 $ d(O_n \cap D, O^c \cap D) \ge d(O_n, O^c) \ge 1/n $，且 $ \mu^* $ 是外测度，我们有
+
+\[
+\mu^*(O_n \cap D) + \mu^*(O^c \cap D) = \mu^*((O_n \cup O^c) \cap D) \le \mu^*(D) .
+\]
+
+由此及 (4.7) 可得
+
+\[
+\mu^*(O \cap D) + \mu^*(O^c \cap D) \le \mu^*(D) + \mu^*((O \setminus O_n) \cap D) \quad\text{对 } n \in \mathbb{N}^{\times} .
+\]
+
+令 $ n \to \infty $，即得所要的不等式。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{example}
+
+\begin{items}
+\item
+
+$ \lambda_n^* $ 是 $ \mathbb{R}^n $ 上的度量外测度。因此每个博雷尔集都是勒贝格可测的。
+
+\proofhead
+设 $ A, B \subset \mathbb{R}^n $ 且 $ d(A, B) > 0 $，并令 $ \delta := d(A, B)/2 $。根据命题 3.4，给定 $ \varepsilon > 0 $，存在 $ \mathbb{J}_\ell(n) $ 中的序列 $ (I_j) $，使得 $ \bigcup_j I_j \supset A \cup B $ 且 $ \sum_j \operatorname{vol}_n(I_j) \le \lambda_n^*(A \cup B) + \varepsilon $。沿坐标超平面切分，我们可以把每个 $ I_j $ 写成有限多个左闭区间的不交并，且这些区间的直径都小于 $ \delta $。因此，不妨假设对每个 $ j \in \mathbb{N} $ 都有 $ \operatorname{diam}(I_j) < \delta $。由于 $ d(A, B) = 2\delta $，这意味着对每个 $ j \in \mathbb{N} $，或者 $ I_j \cap A = \varnothing $，或者
+$ I_{j} \cap B = \varnothing $；换言之，存在 $ (I_{j}) $ 的子序列 $ (I'_{k}) $ 与 $ (I''_{\ell}) $，它们分别覆盖 $ A $ 与 $ B $，并且使得对 $ k, \ell \in \mathbb{N} $ 有 $ I'_{k} \cap I''_{\ell} = \varnothing $。于是
+\[
+\lambda^{*}_{n}(A) \le \sum_{k} \operatorname{vol}_{n}(I'_{k}) \quad \text{与} \quad \lambda^{*}_{n}(B) \le \sum_{\ell} \operatorname{vol}_{n}(I''_{\ell}) ,
+\]
+
+从而得到
+
+\begin{equation*}
+\begin{aligned}
+\lambda^{*}_{n}(A) + \lambda^{*}_{n}(B) &\le \sum_{k} \operatorname{vol}_{n}(I'_{k}) + \sum_{\ell} \operatorname{vol}_{n}(I''_{\ell}) \le \sum_{j} \operatorname{vol}_{n}(I_{j}) \\ &\le \lambda^{*}_{n}(A \cup B) + \varepsilon .
+\end{aligned}
+\end{equation*}
+
+由于 $ \varepsilon > 0 $ 是任意的，利用 $ \lambda^{*}_{n} $ 的次可加性即得结论。\nobreak\hspace{0.35em}■
+
+\item
+
+对测度生成函数 $ F\colon \mathbb{R} \to \mathbb{R} $，$ \mathbb{R} $ 上相应的勒贝格–斯蒂尔杰斯外测度 $ \mu^{*}_{F} $ 是度量外测度。
+
+\proofhead
+这可由对 (a) 的证明作简单修改得到。\nobreak\hspace{0.35em}■
+\item
+
+$ \mathbb{R}^{n} $ 上的豪斯多夫外测度 $ \mathcal{H}^{s}_{*} $ 对每个 $ s > 0 $ 都是度量外测度。每个 $ A \in \mathcal{B}^{n} $ 都是 $ \mathcal{H}^{n} $-可测的。
+
+\proofhead
+这同样可类比 (a) 的证明得到。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{example}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $ X $ 是度量空间，$ \mu^{*} $ 是 $ X $ 上的外测度。证明：若 $ \mathcal{A}(\mu^{*}) $ 包含所有博雷尔集，则 $ \mu^{*} $ 是度量外测度。
+
+\item
+
+设 $ (X, \mathcal{A}, \nu) $ 是测度空间。用 $ \mu^{*} $ 记由 $ (\mathcal{A}, \nu) $ 在 $ X $ 上诱导的外测度，用 $ \mu $ 记由 $ \mu^{*} $ 在 $ X $ 上诱导的测度。证明 $ \mu $ 是 $ \nu $ 的延拓。它们相等吗？
+
+\item
+
+证明例 4.4(b) 与 (c) 中的陈述。
+
+\item
+
+设 $ \mu^{*} $ 是 $ X $ 上的外测度，并定义\textbf{由 $ \mu^{*} $ 在 $ X $ 上诱导的内测度} $ \mu_{*}\colon \mathfrak{P}(X) \to [0, \infty] $ 为
+
+\[
+\mu_{*}(A) := \sup\{\, \mu^{*}(D) - \mu^{*}(D \setminus A) ;\ D \subset X,\ \mu^{*}(D \setminus A) < \infty \,\} \quad \text{对 } A \subset X .
+\]
+
+证明：对 $ A \in \mathcal{A}(\mu^{*}) $ 有 $ \mu_{*}(A) = \mu^{*}(A) $。
+
+\item
+
+设 $ I \subset \mathbb{R} $ 是紧致完全区间，$ \gamma \in C(I, \mathbb{R}^{n}) $ 是 $ \mathbb{R}^{n} $ 中的单射可求长道路，其像为 $ \Gamma $。证明 $ \mathcal{H}^{1}(\Gamma) = L(\gamma) $。
+
+\item
+
+令 $ A_{0} := [0, 1]^{2} \subset \mathbb{R}^{2} $。把 $ A_{0} $ 划分成由 $ 4 \times 4 $ 个全等正方形组成的阵列，并按下面的草图去掉其中十二个正方形，使得每一行与每一列中都恰好剩下一个闭正方形。这样就得到集合 $ A_{1} $。对每个剩下的正方形重复这一过程，便得到由十六个正方形组成的 $ A_{2} $。一般地，对 $ A_{k} $ 作这种细分，再从 $ A_{k} $ 中去掉一些子正方形，就得到 $ A_{k+1} $。所有 $ A_{k} $ 的交，即 $ A := \bigcap_{k=0}^{\infty} A_{k} $，称为\textbf{康托尔尘埃}。
+
+证明：$ 1 \le \mathcal{H}^{1}(A) \le \sqrt{2} $ 且 $ \dim_H(A) = 1 $。
+
+\bookfigure[0.80]{figures/31873feb901edc6c.png}
+
+（提示：为从上方估计 $ \mathcal{H}^{1}(A) $，可使用由 $ A $ 的构造所提示的覆盖。为得到下界，考虑 $ \operatorname{pr}_{1}\colon A \to \mathbb{R} $，并应用习题 5 与 3.6(f)。）
+
+\item
+
+证明习题 III.3.8 中的康托尔集\footnote{康托尔集与康托尔尘埃是\textbf{分形}的例子（例如参见 [Fal90]）。} $ C $ 满足
+
+\begin{subitems}
+\item
+
+$ \dim_H(C) = \log 2 / \log 3 =: s $ 且 $ 1/2 \le \mathcal{H}^{s}(C) \le 1 $；
+
+\item
+
+$ \lambda_{1}(C) = 0 $。
+（(i) 的提示：$ \mathcal{H}^{s}(C) $ 的上界可用与习题 6 中 $ \mathcal{H}^{1}(A) $ 的上界大致相同的方法得到。为得到下界，紧致性论证表明只需考虑由有限多个开区间构成的覆盖。若 $ \{\, I_{i} ;\ 0 \le i \le N \,\} $ 是这样的覆盖，则对每个 $ i $ 取整数 $ k $ 使得 $ 3^{-(k+1)} \le \operatorname{diam}(I_{i}) < 3^{-k} $。于是 $ I_{i} $ 至多能与 $ C_{k} $ 中的一个区间相交（习题 III.3.8）。对 $ j \ge k $，覆盖 $ I_{i} $ 至多与 $ C_{j} $ 中的 $ 2^{j-k} = 2^{j} 3^{-sk} \le 2^{j} (3 \operatorname{diam}(I_{i}))^{s} $ 个区间相交。现在取 $ j $ 足够大，使得对所有的 $ i $ 都有 $ 3^{-(j+1)} \le \operatorname{diam}(I_{i}) $。然后数一数区间即可。）
+
+\end{subitems}
+
+\item
+
+设 $ F\colon \mathbb{R} \to \mathbb{R} $ 是测度生成函数，$ \mu_{F} $ 是由 $ F $ 诱导的勒贝格–斯蒂尔杰斯测度。对 $ a \in \mathbb{R} $，计算 $ \mu_{F}(\{a\}) $。
+
+\item
+
+设 $ (\mathbb{R}, \mathcal{B}^{1}, \mu) $ 是局部有限的\footnote{若 $ X $ 是拓扑空间，$ \mu\colon \mathcal{A} \to [0, \infty] $ 是满足 $ \mathcal{A} \supset \mathcal{B}(X) $ 的测度，则当每个 $ x \in X $ 都有开邻域 $ U \ni x $ 使得 $ \mu(U) < \infty $ 时，称 $ \mu $ 是\textbf{局部有限的}。}测度空间。证明：
+
+\begin{subitems}
+\item
+
+存在测度生成函数 $ F $，使得 $ \mu = \mu_{F} \mid \mathcal{B}^{1} $，也就是说，$ \mu $ 是由 $ F $ 诱导的\textbf{博雷尔–斯蒂尔杰斯测度}。这个 $ F $ 在相差一个加性常数的意义下唯一。
+
+\item
+
+定义
+
+\[
+\mathcal{F}_{0} := \{\, F\colon \mathbb{R} \to \mathbb{R} ;\ F \text{ 是测度生成函数且 } F(0) = 0 \,\} .
+\]
+
+则 $ F \mapsto \mu_{F} \mid \mathcal{B}^{1} $ 是从 $ \mathcal{F}_{0} $ 到 $ \mathcal{B}^{1} $ 上所有局部有限测度之集的双射。
+（(i) 的提示：对 $ t \ge 0 $ 考虑 $ F(t) := \mu([0, t)) $，对 $ t < 0 $ 考虑 $ F(t) := -\mu([t, 0)) $。）
+
+\end{subitems}
+
+\item
+
+设 $ F\colon \mathbb{R} \to \mathbb{R} $ 是测度生成函数，且具有下列性质：$ F $ 在每个区间 $ (a_{k}, a_{k+1}) $ 上是常数，其中 $ a_{k} $（$ k \in \mathbb{Z} $）满足 $ \lim_{k \to \pm\infty} a_{k} = \pm\infty $；此外，$ F $ 在每个 $ a_{k} $ 处都有跃度为 $ p_{k} \ge 0 $ 的跳跃间断点。证明 $ \mathcal{A}(\mu_{F}) = \mathfrak{P}(\mathbb{R}) $，并对 $ A \subset \mathbb{R} $ 计算 $ \mu_{F}(A) $。
+
+\end{exercises}
+
+\section{勒贝格测度}
+
+迄今为止，我们考察的都是一般测度；现在我们转向最重要的特殊情形——勒贝格测度。这个测度具有如下基本性质：区间的笛卡儿积被赋予其自然的容度，因此它可以用来计算更一般形状的容度。此外，它还构成计算曲面或更一般流形容度的基础，这一点我们将在后面各章中看到。
+
+\needspace{3\baselineskip}\subsection*{勒贝格测度空间}
+
+由 $ n $ 维勒贝格外测度生成的 $ \sigma $-代数 $ \mathcal{A}(\lambda_n^{*}) $ 称为 $ \mathbb{R}^n $ 的\textbf{勒贝格可测子集构成的 $ \sigma $-代数}，记作 $ \mathcal{L}(n) $。相应地，对 $ \mathbb{R}^n $ 的勒贝格零子集（即 $ \lambda_n^{*} $-零集，或等价地 $ \lambda_n $-零集），我们称其\textbf{勒贝格测度为零}（使用这一说法意味着属于 $ \mathcal{L}(n) $）。如有必要，我们也说\textbf{勒贝格 $ n $-测度}。
+
+在下面的定理中，我们列出\textbf{勒贝格测度空间} $ (\mathbb{R}^n, \mathcal{L}(n), \lambda_n) $ 的一些初步性质。
+
+\begin{theorem}
+
+\begin{subitems}
+\item
+
+$ (\mathbb{R}^n, \mathcal{L}(n), \lambda_n) $ 是完备的 $ \sigma $-有限测度空间。
+
+\item
+
+$ \mathcal{B}^n \subset \mathcal{L}(n) $，也就是说，$ \mathbb{R}^n $ 的每个博雷尔子集都是勒贝格可测的。
+
+\item
+
+对 $ a, b \in \mathbb{R}^n $，任何满足 $ (a, b) \subset A \subset [a, b] $ 的集合 $ A $ 都属于 $ \mathcal{L}(n) $，并且
+
+\[
+\lambda_n(A) = \operatorname{vol}_n(a, b) = \prod_{j=1}^{n} (b_j - a_j) .
+\]
+\item
+
+$ \mathbb{R}^n $ 的每个紧致子集都是勒贝格可测的，并且具有有限测度。
+
+\item
+
+集合 $ N \subset \mathbb{R}^n $ 的\textbf{勒贝格测度为零}，当且仅当对每个 $ \varepsilon > 0 $，存在 $ \mathbb{J}(n) $ 中的序列 $ (I_j) $，使得 $ \bigcup_j I_j \supset N $ 且 $ \sum_j \lambda_n(I_j) < \varepsilon $。
+
+\item
+
+$ \mathbb{R}^n $ 的每个可数子集的勒贝格测度都为零。
+
+\proofhead
+(i) 定理 4.2 与命题 3.3 表明 $ (\mathbb{R}^n, \mathcal{L}(n), \lambda_n) $ 是完备测度空间。因为 $ \mathbb{R}^n = \bigcup_{j=1}^{\infty} (j\mathbb{B}_{\infty}) $ 且 $ \lambda_n(j\mathbb{B}_{\infty}) = (2j)^n $，所以它是 $ \sigma $-有限的。
+\end{subitems}
+
+\begin{subitems}
+\item[（ii）]
+
+这由定理 4.3 与例 4.4(a) 推出。
+
+\item[（iii）]
+
+对 $ M := A \setminus (a, b) $，我们有 $ M \subset N := [a, b] \setminus (a, b) \in \mathcal{B}^n $。因此由 (ii) 与命题 2.3 推出 $ N $ 的勒贝格测度为零，因为 $ \lambda_n(N) = \lambda_n([a, b]) - \lambda_n((a, b)) = 0 $。现在 (i) 说明 $ \lambda_n $ 是完备的，所以 $ M $ 的勒贝格测度也为零。因此 $ A = (a, b) \cup M $ 属于 $ \mathcal{L}(n) $；又因 $ (a, b) $ 与 $ M $ 不交，我们得到 $ \lambda_n(A) = \lambda_n((a, b)) = \operatorname{vol}_n(a, b) $。
+
+\item[（iv）]
+
+由 (ii) 与 (iii) 推出。陈述 (v) 是勒贝格外测度定义的直接推论。为看出 (vi)，利用任何单点集的勒贝格测度为零这一显然事实即可。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{example}
+
+含于单个坐标超平面内的 $ \mathbb{R}^n $ 的任何子集，其勒贝格测度都为零。
+
+\proofhead
+由于 $ \lambda_n $ 是完备的，只需验证每个坐标超平面都是 $ \lambda_n $-零集。我们考虑情形 $ H := \mathbb{R}^{n-1} \times \{0\} $（对其他坐标超平面，作此论证的显然变形即可）。
+
+取 $ \varepsilon > 0 $，并对 $ k \in \mathbb{N}^{\times} $ 定义 $ \varepsilon_k := \varepsilon(2k)^{-n+1}2^{-(k+2)} $ 以及
+\[
+J_k(\varepsilon) := (-k, k)^{n-1} \times (-\varepsilon_k, \varepsilon_k) \in \mathbb{J} .
+\]
+
+则 $ \operatorname{vol}_n(J_k(\varepsilon)) = \varepsilon 2^{-(k+1)} $，从而 $ \sum_{k=1}^{\infty} \operatorname{vol}_n(J_k(\varepsilon)) = \varepsilon/2 < \varepsilon $。由于 $ (J_k(\varepsilon)) $ 覆盖 $ H $，等式 $ \lambda_n(H) = 0 $ 由定理 5.1(v) 推出。\nobreak\hspace{0.35em}■
+
+下面的推论 5.23 将表明，含于一个真仿射子空间内的 $ \mathbb{R}^n $ 的每个子集，其勒贝格测度都为零。
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{勒贝格测度的正则性}
+
+我们现在来证明几个基本的逼近结论，但首先收集一些关于拓扑空间上测度的术语。
+
+设 $ X $ 是拓扑空间，$ (X, \mathcal{A}, \mu) $ 是满足 $ \mathcal{B}(X) \subset \mathcal{A} $ 的测度空间。我们称 $ (X, \mathcal{A}, \mu) $ 与 $ \mu $ 是\textbf{正则的}，若对每个 $ A \in \mathcal{A} $ 都有
+
+\begin{equation*}
+\begin{aligned}
+\mu(A) &= \inf \{ \mu(O) ; \ O \subset X \text{ 是开集且 } O \supset A \} \\ &= \sup \{ \mu(K) ; \ K \subset X \text{ 是紧致集且 } K \subset A \} .
+\end{aligned}
+\end{equation*}
+
+若每个 $ x \in X $ 都有一个满足 $ \mu(U) < \infty $ 的开邻域 $ U $，则称 $ (X, \mathcal{A}, \mu) $ 与 $ \mu $ 是\textbf{局部有限的}。最后，若 $ \mathcal{B}(X) = \mathcal{A} $，我们称 $ \mu $ 为 $ X $ 上的\textbf{博雷尔测度}。特别地，$ \beta_n := \lambda_n|\mathcal{B}^n $ 称为 $ \mathbb{R}^n $ 上的\textbf{博雷尔–勒贝格测度}。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+若 $ \mu $ 是局部有限的，则每个紧致集 $ K \subset X $ 都有一个满足 $ \mu(U) < \infty $ 的开邻域 $ U $。
+
+\proofhead
+由于 $ \mu $ 是局部有限的，每个 $ x \in K $ 都有一个满足 $ \mu(U_x) < \infty $ 的开邻域 $ U_x $。因为 $ K $ 是紧致的，存在 $ x_0, \ldots, x_m \in K $ 使得 $ K \subset U := \bigcup_{j=0}^{m} U_{x_j} $，于是我们得到 $ \mu(U) \le \sum_{j=0}^{m} \mu(U_{x_j}) < \infty $。\nobreak\hspace{0.35em}■
+\item
+
+设 $ X $ 是局部紧的。\footnote{若一个拓扑空间是豪斯多夫空间，且每一点都有紧致邻域，则称它是\textbf{局部紧的}。} 于是 $ \mu $ 局部有限当且仅当每个紧致集 $ K \subset X $ 都满足 $ \mu(K) < \infty $。
+
+\proofhead
+这直接由 (a) 推出。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+\begin{theorem}
+
+勒贝格测度是正则的。
+
+\proofhead
+设 $ A \in \mathcal{L}(n) $。
+
+\begin{subitems}
+\item
+
+对每个 $ \varepsilon > 0 $，存在 $ \mathbb{J}(n) $ 中的序列 $ (I_j) $，使得
+
+\[
+A \subset \bigcup_j I_j \quad \text{ 且 } \quad \sum_j \operatorname{vol}_n(I_j) < \lambda_n(A) + \varepsilon .
+\]
+
+因此开集 $ O := \bigcup_j I_j $ 满足
+
+\begin{equation}
+\lambda_n(A) \le \lambda_n(O) \le \sum_j \lambda_n(I_j) = \sum_j \operatorname{vol}_n(I_j) < \lambda_n(A) + \varepsilon .\tag{5.1}
+\end{equation}
+
+由于这对每个 $ \varepsilon > 0 $ 都成立，
+
+\[
+\lambda_n(A) = \inf \{ \lambda_n(O) ; \ O \subset \mathbb{R}^n \text{ 是开集且 } O \supset A \} .
+\]
+\item
+
+为验证
+
+\[
+\lambda_n(A) = \sup \{ \lambda_n(K) ; \ K \subset \mathbb{R}^n \text{ 是紧致集且 } K \subset A \}
+\]
+
+我们首先考虑有界的勒贝格可测集 $ B $ 的情形。这时存在紧致集 $ C \subset \mathbb{R}^n $ 使得 $ B \subset C $。利用 (i)，对每个 $ \varepsilon > 0 $ 我们都能找到包含 $ C \setminus B $ 的开集 $ O \subset \mathbb{R}^n $，并使得 $ \lambda_n(O) < \lambda_n(C \setminus B) + \varepsilon $。由于 $ \lambda_n(B) < \infty $，由命题 2.3(ii) 可得
+
+\begin{equation}
+\lambda_n(O) < \lambda_n(C) - \lambda_n(B) + \varepsilon .\tag{5.2}
+\end{equation}
+
+紧致集 $ K := C \setminus O $ 满足 $ K \subset B $ 且 $ C \subset K \cup O $。因此 (5.2) 表明
+
+\[
+\lambda_n(C) \le \lambda_n(K \cup O) \le \lambda_n(K) + \lambda_n(O) < \lambda_n(K) + \lambda_n(C) - \lambda_n(B) + \varepsilon ,
+\]
+
+由此推出不等式 $ \lambda_n(B) - \varepsilon < \lambda_n(K) $。因此
+
+\[
+\lambda_n(B) = \sup \{ \lambda_n(K) ; \ K \subset \mathbb{R}^n \text{ 是紧致集且 } K \subset B \}
+\]
+
+对每个有界的勒贝格集 $ B $ 成立。
+
+\item
+
+我们可以假设 $ \lambda_n(A) $ 是正的。存在 $ \alpha > 0 $ 使得 $ \alpha < \lambda_n(A) $。令 $ B_j := A \cap \mathbb{B}^n(0, j) $，勒贝格测度的下连续性表明 $ \lambda_n(A) = \lim_j \lambda_n(B_j) $。因此存在 $ k \in \mathbb{N} $ 使得 $ \lambda_n(B_k) > \alpha $。由于 $ B_k $ 有界，由 (ii) 我们得到紧致集 $ K $，使得 $ K \subset B_k \subset A $ 且 $ \lambda_n(K) > \alpha $。因此
+
+\[
+\sup \{ \lambda_n(K) ; \ K \subset \mathbb{R}^n \text{ 是紧致集且 } K \subset A \} > \alpha .
+\]
+
+由于 $ \alpha < \lambda_n(A) $ 是任意的，结论得证。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{corollary}
+
+设 $ A \in \mathcal{L}(n) $。则存在 $ F_\sigma $ 集 $ F $ 与 $ G_\delta $ 集 $ G $，使得 $ F \subset A \subset G $ 且 $ \lambda_n(F) = \lambda_n(A) = \lambda_n(G) $。若 $ A $ 有界，则可选取 $ G $ 有界。
+
+证明
+
+\begin{subitems}
+\item
+
+我们只证第一个断言，第二个是显然的。先考虑 $ \lambda_n(A) < \infty $ 的情形。由定理 5.4，对每个 $ k \in \mathbb{N}^{\times} $ 都存在紧致集 $ K_k $ 与开集 $ O_k $，使得 $ K_k \subset A \subset O_k $ 且
+
+\begin{equation}
+\lambda_n(A) - 1/k \le \lambda_n(K_k) \le \lambda_n(A) \le \lambda_n(O_k) \le \lambda_n(A) + 1/k .\tag{5.3}
+\end{equation}
+
+令 $ F := \bigcup_k K_k $、$ G := \bigcap_k O_k $，我们有包含关系 $ F \subset A \subset G $；把命题 2.3(ii) 用于 (5.3) 便得，对每个 $ k \in \mathbb{N}^{\times} $ 有
+
+\[
+\lambda_n(A \setminus F) \le \lambda_n(A \setminus K_k) \le 1/k , \qquad \lambda_n(G \setminus A) \le \lambda_n(O_k \setminus A) \le 1/k .
+\]
+
+由此 $ \lambda_n(A \setminus F) = \lambda_n(G \setminus A) = 0 $，再由命题 2.3(ii) 即得结论。
+
+\item
+
+反之，若 $ \lambda_n(A) = \infty $，则由定理 5.3，对每个 $ k \in \mathbb{N} $ 都存在紧致集 $ K_k $，使得 $ K_k \subset A $ 且 $ k \le \lambda_n(K_k) $。$ F_\sigma $ 集 $ F := \bigcup_k K_k $ 与 $ G_\delta $ 集 $ G := \mathbb{R}^n $ 满足所要的等式。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{corollary}
+
+定理 5.4 蕴含：我们可以用适当选取的开超集的测度，以任意精度逼近 $ \mathbb{R}^n $ 的勒贝格可测子集的测度。由下一个命题，开集的勒贝格测度本身，就是先把有限多个两两不交的区间 $ [a, b) $ 的体积相加（这些区间选取得使其并逼近该开集），再取所得值之极限。这正是本章引言中所描述的容度计算方法。
+
+\begin{proposition}
+
+$ \mathbb{R}^n $ 中的每个开子集 $ O $ 都可以表示成形如 $ [a, b) $（其中 $ a, b \in \mathbb{Q}^n $）的区间构成的一个不交序列 $ (I_j) $ 的并。此时
+
+\[
+\lambda_n(O) = \sum_{j=0}^{\infty} \operatorname{vol}_n(I_j) .
+\]
+
+\proofhead
+对 $ k \in \mathbb{N} $，定义
+\[
+\mathcal{W}_k := \{ a + [0, 2^{-k}\mathbf{1}_n) ; \ a \in 2^{-k}\mathbb{Z}^n \}
+\]
+\bookfigure[0.50]{figures/6016bca822b8938b.png}
+
+其中 $ \mathbf{1}_n := (1, \ldots, 1) \in \mathbb{R}^n $。换言之，每个 $ W \in \mathcal{W}_k $ 都是一个立方体（与坐标超平面平行），其棱长为 $ 2^{-k} $，其“左下角”落在网格 $ 2^{-k}\mathbb{Z}^n $ 的点上。显然 $ \mathcal{W}_k $ 是 $ \mathbb{R}^n $ 的可数不交覆盖。若 $ O_k $ 是 $ \mathcal{W}_k $ 中完全含于 $ O $ 的那些立方体之并，则应用命题 I.6.8 即完成证明，因为
+
+\[
+O = O_0 \cup (O_1 \setminus O_0) \cup (O_2 \setminus (O_0 \cup O_1)) \cup \cdots\quad\blacksquare
+\]
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{勒贝格可测性的一个刻画}
+
+设 $ X $ 是拓扑空间。若存在紧致子集构成的序列 $ (K_j) $ 使得 $ M = \bigcup_j K_j $，则称 $ X $ 的子集 $ M $ 是 \textbf{$ \sigma $-紧的}。
+
+\begin{theorem}
+
+对 $ A \subset \mathbb{R}^n $，下列陈述等价：
+
+\begin{subitems}
+\item
+
+$ A $ 是勒贝格可测的。
+
+\item
+
+存在 $ \mathbb{R}^n $ 的 $ \sigma $-紧子集 $ S $ 与勒贝格测度为零的集合 $ N $，使得 $ A = S \cup N $。
+
+\proofhead
+“(i)$ \Rightarrow $(ii)” 由于测度空间 $ (\mathbb{R}^n, \mathcal{L}(n), \lambda_n) $ 是 $ \sigma $-有限的，存在 $ \mathcal{L}(n) $ 中的序列 $ (A_j) $，使得 $ A = \bigcup_j A_j $ 且对 $ j \in \mathbb{N} $ 有 $ \lambda_n(A_j) < \infty $。推论 5.5 的证明表明，对每个 $ j \in \mathbb{N} $ 都存在 $ \mathbb{R}^n $ 的 $ \sigma $-紧子集 $ S_j $，使得 $ S_j \subset A_j $ 且 $ \lambda_n(S_j) = \lambda_n(A_j) $。因此 $ N_j := A_j \setminus S_j $ 是勒贝格测度为零的集合，且 $ A_j = S_j \cup N_j $。于是 $ S := \bigcup_j S_j $ 是 $ \sigma $-紧的，$ N := \bigcup_j N_j $ 的勒贝格测度为零，并且 $ A = S \cup N $。
+“(ii)$ \Rightarrow $(i)” $ \mathbb{R}^n $ 的每个 $ \sigma $-紧子集都是勒贝格可测的，因为 $ \mathcal{B}^n \subset \mathcal{L}(n) $。勒贝格测度为零的集合同样是勒贝格可测的。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\end{theorem}
+
+在推论 5.29 中我们将表明，博雷尔–勒贝格测度不是完备的。借助定理 5.7，我们可以立即确定它的完备化。
+
+\begin{theorem}
+
+勒贝格测度 $ \lambda_n $ 是博雷尔–勒贝格测度 $ (\mathbb{R}^n, \mathcal{B}^n, \beta_n) $ 的完备化。
+
+证明
+
+\begin{subitems}
+\item
+
+给定 $ A \in \overline{\mathcal{B}^n_{\beta_n}} $，取 $ B, N \in \mathcal{B}^n $ 与 $ M \subset \mathbb{R}^n $，使得 $ A = B \cup M $、$ M \subset N $ 且 $ \lambda_n(N) = 0 $。$ \lambda_n $ 的完备性表明 $ M $ 的勒贝格测度为零。于是由 $ \mathcal{B}^n \subset \mathcal{L}(n) $ 推出 $ A = B \cup M \in \mathcal{L}(n) $，也就是说，$ \overline{\mathcal{B}^n_{\beta_n}} \subset \mathcal{L}(n) $。
+
+\item
+
+设 $ A \in \mathcal{L}(n) $。由定理 5.7，存在 $ B \in \mathcal{B}^n $ 与勒贝格测度为零的集合 $ M $，使得 $ A = B \cup M $。此外，推论 5.5 保证存在 $ G \in \mathcal{B}^n $，使得 $ M \subset G $ 且 $ \lambda_n(G) = \lambda_n(M) = 0 $。因此 $ A $ 属于 $ \overline{\mathcal{B}^n_{\beta_n}} $。这就证明了包含关系 $ \mathcal{L}(n) \subset \overline{\mathcal{B}^n_{\beta_n}} $。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{勒贝格可测集的像}
+
+我们将在定理 5.28 中看到，并非 $ \mathbb{R}^n $ 的每个子集都是勒贝格可测的。因此不能指望可测集在任意映射下的像都是可测的。\footnote{以下我们几乎只与勒贝格测度打交道，只要不必担心混淆，就省略“勒贝格”这一修饰语。} 然而，对局部利普希茨连续的函数，这些像的可测性可以直接得到保证。为说明这一点，我们先考虑零集。
+
+\begin{theorem}
+
+设 $ N \subset \mathbb{R}^n $ 的勒贝格 $ n $-测度为零，且 $ f $ 是 $ C^{1-}(N, \mathbb{R}^m) $ 中的元素，其中 $ m \ge n $。（也就是说，$ f $ 是局部利普希茨连续的。）则 $ f(N) $ 的勒贝格 $ m $-测度为零。
+
+证明
+
+\begin{subitems}
+\item
+
+我们首先假设 $ f: N \to \mathbb{R}^m $ 是（全局）利普希茨连续的。则存在 $ L > 0 $ 使得
+
+\begin{equation}
+|f(x) - f(y)|_{\infty} \le L|x - y|_{\infty} \quad \text{对 } x, y \in N .\tag{5.4}
+\end{equation}
+
+设 $ 0 < \varepsilon < L^m $。由于 $ N $ 具有测度零，由命题 3.4 我们可以找到 $ \mathbb{J}_{\ell}(n) $ 中覆盖 $ N $ 的序列 $ (I_k) $，且满足 $ \sum_{k=0}^{\infty} \lambda_n(I_k) < \varepsilon/L^m $。我们可以把棱长取为有理数。通过细分，我们还可以不失一般性地假设每个 $ I_k $ 都是立方体，其棱长设为 $ a_k $。于是由 (5.4)，$ f(N \cap I_k) $ 含于一个棱长为 $ La_k $ 的立方体 $ J_k \subset \mathbb{J}(m) $ 中。这些立方体的 $ n $ 维体积为
+
+\[
+\lambda_m(J_k) = (La_k)^m = L^m \lambda_n(I_k)^{m/n} \quad \text{对 } k \in \mathbb{N} .
+\]
+
+于是我们得到
+
+\begin{equation}
+f(N) = \bigcup_k f(N \cap I_k) \subset \bigcup_k J_k\tag{5.5}
+\end{equation}
+
+以及
+
+\begin{equation}
+\sum_{k=0}^{\infty} \lambda_m(J_k) = L^m \sum_{k=0}^{\infty} \lambda_n(I_k)^{m/n} \le L^m \sum_{k=0}^{\infty} \lambda_n(I_k) < \varepsilon ,\tag{5.6}
+\end{equation}
+
+其中 $ \le $ 估计依赖于假设 $ m \ge n $：我们有
+
+\[
+\lambda_n(I_k) \le \sum_{j=0}^{\infty} \lambda_n(I_j) < \varepsilon/L^m < 1 ,
+\]
+
+从而 $ \lambda_n(I_k)^{m/n} \le \lambda_n(I_k) $。由于这一切对每个 $ \varepsilon \in (0, L^m) $ 都成立，由 (5.5) 与 (5.6) 可知 $ f(N) $ 具有 $ m $-测度零。
+
+\item
+
+现在设 $ f $ 只是局部利普希茨连续的。每个 $ x \in N $ 都有一个开邻域 $ U_x $，使得 $ f|(N \cap U_x) $ 是利普希茨连续的。由推论 1.9(ii) 与命题 1.8 可得 $ N $ 是林德勒夫空间。因此 $ N $ 的开覆盖 $ \{ U_x \cap N ; \ x \in N \} $ 有可数子覆盖 $ \{ V_j ; \ j \in \mathbb{N} \} $。由于勒贝格测度是完备的，每个 $ V_j $ 都具有 $ n $-测度零。因此由 (i) 可得 $ f(V_j) $ 具有 $ m $-测度零，再由等式 $ f(N) = \bigcup_j f(V_j) $ 与注 2.5(b) 即得结论。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{corollary}
+
+设 $ U $ 是 $ \mathbb{R}^n $ 中的开集，$ f \in C^1(U, \mathbb{R}^m) $ 且 $ m \ge n $。若 $ N \subset U $ 的勒贝格 $ n $-测度为零，则 $ f(N) $ 的勒贝格 $ m $-测度为零。
+
+\proofhead
+这由定理 5.9 与注 VII.8.12(b) 推出。\nobreak\hspace{0.35em}■
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+在定理 5.9 的情形下，若只要求 $ f: N \to \mathbb{R}^m $ 连续，结论未必成立。对膨胀的控制是必不可少的。
+
+\proofhead
+对 $ N := [0, 1] \times \{0\} \subset \mathbb{R}^2 $，有 $ \lambda_2(N) = 0 $。设 $ \gamma $ 是习题 VIII.1.8 中皮亚诺曲线的参数化，则 $ \gamma \in C(N, \mathbb{R}^2) $ 且 $ \gamma(N) = \overline{\mathbb{B}}^2 $，但 $ \lambda_2(\gamma(N)) > 2 $，因为 $ \overline{\mathbb{B}}^2 $ 含有与坐标轴平行的边长为 $ \sqrt{2} $ 的正方形。\nobreak\hspace{0.35em}■
+\item
+
+仍在定理 5.9 的情形下，若把 $ m \ge n $ 换成 $ m < n $，结论就不成立。
+
+\proofhead
+对 $ N := (0, 1) \times \{0\} \subset \mathbb{R}^2 $ 与 $ f := \operatorname{pr}_1 \in C^{\infty}(N, \mathbb{R}) $，有 $ \lambda_2(N) = 0 $ 且 $ \lambda_1(f(N)) = \lambda_1((0, 1)) = 1 $。\nobreak\hspace{0.35em}■
+\end{items}
+
+由于 $ \sigma $-紧集的连续像是 $ \sigma $-紧的，定理 5.9 与定理 5.7 中勒贝格集的刻画很容易导出勒贝格可测性的一个不变性结论：
+
+\end{remark}
+
+\begin{theorem}
+
+设 $ A \in \mathcal{L}(n) $，且 $ f \in C^{1-}(A, \mathbb{R}^m) $ 是从 $ A $ 到 $ \mathbb{R}^m $ 的局部利普希茨映射，其中 $ m \ge n $。则 $ f(A) $ 属于 $ \mathcal{L}(m) $。
+
+\proofhead
+由定理 5.7，存在 $ \mathbb{R}^n $ 的 $ \sigma $-紧子集 $ S $ 与勒贝格 $ n $-测度为零的集合 $ N $，使得 $ A = S \cup N $。于是 $ f(S) $ 是 $ \mathbb{R}^m $ 的 $ \sigma $-紧子集。根据定理 5.9，$ f(N) $ 具有 $ m $-测度零。因此由定理 5.7，$ f(A) = f(S) \cup f(N) $ 属于 $ \mathcal{L}(m) $。\nobreak\hspace{0.35em}■
+\end{theorem}
+
+\begin{corollary}
+
+设 $ U $ 是 $ \mathbb{R}^n $ 中的开集。假设 $ f \in C^1(U, \mathbb{R}^m) $ 且 $ m \ge n $，$ A \in \mathcal{L}(n) $ 且 $ A \subset U $。则 $ f(A) $ 属于 $ \mathcal{L}(m) $。
+
+\proofhead
+这由定理 5.12 与注 VII.8.12(b) 推出。\nobreak\hspace{0.35em}■
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+在定理 5.12 的情形下，若只要求 $ f: N \to \mathbb{R}^m $ 连续，结论未必成立。
+
+\proofhead
+设 $ C $ 是习题 III.3.8 中的康托尔集。在习题 17 中你将证明存在同胚 $ g: [0, 1] \to [0, 2] $，它把 $ C $ 映成测度为 1 的集合。由定理 5.28，任何正测度集都有不可测子集；因此我们可以取定不可测集 $ B \subset C $。但原像 $ A := g^{-1}(B) $ 是可测的，因为 $ \lambda_1 $ 是完备的、$ A \subset C $，且 $ C $ 的测度为零（习题 4.7）。现在取 $ f := g|A $。\nobreak\hspace{0.35em}■
+\item
+
+仍在定理 5.12 的情形下，若把 $ m \ge n $ 换成 $ m < n $，结论就不成立。
+
+\proofhead
+对 $ V \in \mathbb{R} \setminus \mathcal{L}(1) $，令 $ A := V \times \{0\} $。则由例 5.2 与勒贝格测度的完备性可得 $ A $ 属于 $ \mathcal{L}(2) $。此外 $ f := \operatorname{pr}_1|A $ 是利普希茨连续的，但 $ f(A) = V $ 不是 $ \lambda_1 $-可测的。\nobreak\hspace{0.35em}■
+\item
+
+$ \mathbb{R}^n $ 的子集 $ A $ 是勒贝格可测的，当且仅当每个 $ x \in A $ 都有 $ \mathbb{R}^n $ 中的开邻域 $ U_x $，使得 $ A \cap U_x $ 是勒贝格可测的。也就是说，可测性是局部性质。
+
+\proofhead
+蕴含“$ \Rightarrow $”是显然的。为证逆命题，对每个 $ x \in A $ 选取开邻域 $ U_x \ni x $，使得 $ A \cap U_x \in \mathcal{L}(n) $。则 $ A \subset \bigcup_{x \in A} U_x $，并且由于 $ A $ 是林德勒夫空间（推论 1.9(ii) 与命题 1.8），存在可数集 $ \{ x_j \in A ; \ j \in \mathbb{N} \} $，使得 $ U_{x_j} $ 仍然覆盖 $ A $。因此 $ A = \bigcup_j (A \cap U_{x_j}) $ 属于 $ \mathcal{L}(n) $。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{勒贝格测度的平移不变性}
+
+我们现在转向检验集合的勒贝格测度与其在空间中的位置无关这一任务。作为第一步，我们证明它在平移下不变。给定向量 $ a \in \mathbb{R}^n $，由 $ a $ 给出的\textbf{平移}是映射
+
+\begin{equation}
+\tau_a: \mathbb{R}^n \to \mathbb{R}^n , \quad x \mapsto x + a .\tag{5.7}
+\end{equation}
+
+\begin{remark}
+
+把映射的复合作为乘法，$ \mathcal{T} := \{ \tau_a ; \ a \in \mathbb{R}^n \} $ 成为一个交换群，即 $ \mathbb{R}^n $ 的\textbf{平移群}。映射 $ a \mapsto \tau_a $ 是从加法群 $ (\mathbb{R}^n, +) $ 到平移群 $ \mathcal{T} $ 的同构。\nobreak\hspace{0.35em}■
+
+\end{remark}
+
+\begin{lemma}
+
+$ \mathbb{R}^n $ 上的博雷尔与勒贝格 $ \sigma $-代数都是平移不变的，也就是说，对 $ a \in \mathbb{R}^n $ 有 $ \tau_a(\mathcal{B}^n) = \mathcal{B}^n $ 与 $ \tau_a(\mathcal{L}(n)) = \mathcal{L}(n) $。
+
+证明
+
+\begin{subitems}
+\item
+
+对 $ a \in \mathbb{R}^n $，映射 $ \tau_{-a} $ 是 $ \mathbb{R}^n $ 到自身的连续映射。因此由习题 1.6，$ \tau_{-a} $ 是博雷尔可测的。于是
+
+\begin{equation}
+\tau_a(\mathcal{B}) = (\tau_{-a})^{-1}(\mathcal{B}) \subset \mathcal{B} .\tag{5.8}
+\end{equation}
+
+把 $ a $ 换成 $ -a $，我们还得到 $ \tau_{-a}(\mathcal{B}) \subset \mathcal{B} $。利用 (5.8)，我们推出
+
+\begin{equation}
+\mathcal{B} = \tau_a \circ \tau_{-a}(\mathcal{B}) = \tau_a(\tau_{-a}(\mathcal{B})) \subset \tau_a(\mathcal{B}) \subset \mathcal{B} ,\tag{5.9}
+\end{equation}
+
+这就证明了 $ \tau_a(\mathcal{B}) = \mathcal{B} $。
+
+\item
+
+由于 $ \tau_a $ 是 $ \mathbb{R}^n $ 到自身的光滑满射，由定理 5.12 与群的性质可得，对 $ a \in \mathbb{R}^n $ 有 $ \tau_a(\mathcal{L}(n)) = \mathcal{L}(n) $。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{lemma}
+
+\begin{theorem}
+
+勒贝格测度与博雷尔–勒贝格测度都是平移不变的：对 $ a \in \mathbb{R}^n $，有 $ \lambda_n = \lambda_n \circ \tau_a $ 与 $ \beta_n = \beta_n \circ \tau_a $。
+
+\proofhead
+显然 $ \mathbb{J}(n) $ 与 $ \operatorname{vol}_n: \mathbb{J}(n) \to \mathbb{R} $ 都是平移不变的。因此勒贝格外测度也是平移不变的，再由引理 5.16 以及 $ \lambda_n $ 与 $ \beta_n $ 的定义即得结论。\nobreak\hspace{0.35em}■
+\end{theorem}
+
+设 $ O $ 是 $ \mathbb{R}^n $ 中的非空开集。容易验证 $ O - O $ 是 $ 0 $ 的邻域。下面的定理表明，事实上对每个具有正测度的勒贝格可测集，这一点都成立。直观上这意味着这样的集合绝不会“太薄”。（另请比较习题 12。）
+
+\begin{theorem}
+
+（斯坦豪斯） 对每个满足 $ \lambda_n(A) > 0 $ 的 $ A \in \mathcal{L}(n) $，集合 $ A - A $ 是 $ 0 $ 的邻域。
+
+\proofhead
+设 $ A \in \mathcal{L}(n) $ 且 $ \lambda_n(A) > 0 $。通过取适当的 $ k \in \mathbb{N}^{\times} $ 并用 $ A \cap k\mathbb{B}^n $ 替换 $ A $，我们可以假定 $ \lambda_n(A) < \infty $。
+
+$ \lambda_n $ 的正则性保证存在紧集 $ K $ 与开集 $ O $，使得 $ K \subset A \subset O $，并且
+\begin{equation}
+0 < \lambda_n(K) < \lambda_n(O) < 2\lambda_n(K) .\tag{5.10}
+\end{equation}
+
+由于 $ K \subset O $ 且 $ K $ 是紧致的，我们有 $ \delta := d(K, O^{c}) > 0 $；见例 III.3.9(c)。
+
+我们断言，任何 $ x \in \delta\mathbb{B}^n $ 都属于 $ K - K $（从而也属于 $ A - A $，而这正是我们所需要的）。因为，反设 $ K $ 与 $ x + K $ 不交，其中 $ x \in \delta\mathbb{B}^n $。由于 $ \lambda_n $ 是可加的且平移不变的，这给出
+
+\begin{equation}
+\lambda_n(K \cup (x + K)) = \lambda_n(K) + \lambda_n(x + K) = 2\lambda_n(K) .\tag{5.11}
+\end{equation}
+
+同时，由 $ \delta $ 的定义，$ x + K \subset O $，从而 $ K \cup (x + K) \subset O $。于是 (5.11) 蕴含 $ \lambda_n(O) \ge 2\lambda_n(K) $，这与 (5.10) 矛盾。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{勒贝格测度的一个刻画}
+
+下一个定理特别表明，勒贝格测度在相差一个归一化常数的意义下由平移不变性确定。
+
+\begin{theorem}
+
+设 $ \mu $ 是 $ \mathcal{B}^n $ 或 $ \mathcal{L}(n) $ 上的平移不变的局部有限测度。则分别有 $ \mu = \alpha_n \beta_n $ 或 $ \mu = \alpha_n \lambda_n $，其中 $ \alpha_n := \mu([0, 1)^n) $。
+
+证明
+
+\begin{subitems}
+\item
+
+作为第一步，我们将证明
+
+\[
+\mu([a, b)) = \alpha_n \operatorname{vol}_n([a, b)) \quad \text{对 } a, b \in \mathbb{R}^n .
+\]
+
+首先设 $ n = 1 $，并对 $ s > 0 $ 令 $ g(s) := \mu([0, s)) $。则 $ g: (0, \infty) \to (0, \infty) $ 是递增的，而 $ \mu $ 的平移不变性蕴含：对 $ s, t \in (0, \infty) $，
+
+\begin{equation*}
+\begin{aligned}
+g(s + t) &= \mu([0, s + t)) = \mu([0, s) \cup [s, s + t)) \\ &= \mu([0, s)) + \mu([s, s + t)) = \mu([0, s)) + \mu([0, t)) \\ &= g(s) + g(t) .
+\end{aligned}
+\end{equation*}
+
+习题 5 随后表明，对 $ s > 0 $ 有 $ g(s) = s g(1) $。由于 $ s = \operatorname{vol}_1([0, s)) $ 且 $ \alpha_1 = \mu([0, 1)) $，这蕴含
+
+\[
+\mu([0, s)) = g(s) = s g(1) = \operatorname{vol}_1([0, s)) \alpha_1 \quad \text{对 } s > 0 ,
+\]
+
+并且对 $ \alpha, \beta \in \mathbb{R} $，我们得到
+
+\begin{equation}
+\mu([\alpha, \beta)) = \mu([0, \beta - \alpha)) = \alpha_1 \operatorname{vol}_1([0, \beta - \alpha)) = \alpha_1 \operatorname{vol}_1([\alpha, \beta))\tag{5.12}
+\end{equation}
+
+为处理 $ n \ge 2 $ 的情形，我们固定 $ a', b' \in \mathbb{R}^{n-1} $ 并令
+
+\[
+\mu_1([\alpha, \beta)) := \mu([\alpha, \beta) \times [a', b')) \quad \text{对 } \alpha, \beta \in \mathbb{R} .
+\]
+
+习题 7 与 (5.12) 蕴含
+
+\[
+\mu_1([\alpha, \beta)) = \mu_1([0, 1)) \operatorname{vol}_1([\alpha, \beta)) \quad \text{对 } \alpha, \beta \in \mathbb{R} .
+\]
+
+取 $ a = (a_1, \ldots, a_n) \in \mathbb{R}^n $、$ b = (b_1, \ldots, b_n) \in \mathbb{R}^n $，并令 $ a' = (a_2, \ldots, a_n) $、$ b' = (b_2, \ldots, b_n) $。则
+
+\begin{equation*}
+\begin{aligned}
+\mu([a, b)) &= \mu([a_1, b_1) \times [a', b')) = \mu_1([a_1, b_1)) \\ &= \operatorname{vol}_1([a_1, b_1)) \mu_1([0, 1)) \\ &= \operatorname{vol}_1([a_1, b_1)) \mu([0, 1) \times [a', b')) .
+\end{aligned}
+\end{equation*}
+
+一个简单的归纳论证现在给出
+
+\[
+\mu([a, b)) = \mu([0, 1)^n) \prod_{j=1}^{n} \operatorname{vol}_1([a_j, b_j)) = \alpha_n \operatorname{vol}_n([a, b)) .
+\]
+\item
+
+设 $ A \in \mathcal{B}^n $［或 $ A \in \mathcal{L}(n) $］，并设 $ (I_k) $ 是 $ \mathbb{J}_\ell(n) $ 中覆盖 $ A $ 的序列。由 (i) 推出
+
+\[
+\mu(A) \le \sum_k \mu(I_k) = \alpha_n \sum_k \lambda_n(I_k) .
+\]
+
+因此，由命题 3.4 我们得到
+
+\[
+\mu(A) \le \alpha_n \lambda_n^{*}(A) = \alpha_n \lambda_n(A) .
+\]
+\item
+
+现在设 $ B \in \mathcal{B}^n $［或 $ B \in \mathcal{L}(n) $］有界。存在 $ I \in \mathbb{J}_\ell(n) $，使得 $ B \subset I \subset \overline{I} $。由于 $ I $ 是紧致的且 $ \mu $ 是局部有限的，注 5.3(a) 表明 $ \mu(B) < \infty $。此外由定理 5.1(iv) 有 $ \lambda_n(B) < \infty $，因此命题 2.3(ii) 给出
+
+\[
+\mu(I \setminus B) = \mu(I) - \mu(B) \quad \text{且} \quad \lambda_n(I \setminus B) = \lambda_n(I) - \lambda_n(B) ,
+\]
+
+并结合 (ii) 得到
+
+\[
+\mu(I) - \mu(B) = \mu(I \setminus B) \le \alpha_n \lambda_n(I \setminus B) = \alpha_n \lambda_n(I) - \alpha_n \lambda_n(B) .
+\]
+
+由 (i) 有 $ \mu(I) = \alpha_n \lambda_n(I) $，从而推出不等式 $ \mu(B) \ge \alpha_n \lambda_n(B) $。结合 (ii)，我们便得到：对每个有界的 $ B \in \mathcal{B}^n $［或 $ B \in \mathcal{L}(n) $］，有 $ \mu(B) = \alpha_n \lambda_n(B) $。
+
+\item
+
+最后取任意的 $ A \in \mathcal{B}^n $［或 $ A \in \mathcal{L}(n) $］，并对 $ j \in \mathbb{N} $ 令 $ B_j := A \cap \mathbb{B}^n(0, j) $。序列 $ (B_j) $ 递增且覆盖 $ A $；此外每个 $ B_j $ 都是 $ \mathbb{R}^n $ 中的有界博雷尔［或勒贝格］集。应用 (iii) 与命题 2.3(iv)，我们看到
+
+\[
+\mu(A) = \lim_j \mu(B_j) = \alpha_n \lim_j \lambda_n(B_j) = \alpha_n \lambda_n(A) ,
+\]
+
+这就完成了证明。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{remark}
+
+在刚刚证明的定理中，我们不能放宽 $ \mu $ 局部有限这一假设。
+
+\proofhead
+显然，在博雷尔可测集或勒贝格可测集上的计数测度 $ \mathcal{H}^0 $ 是平移不变的。然而，它不是这两种测度中任何一个的倍数。\nobreak\hspace{0.35em}■
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{勒贝格测度在刚体运动下的不变性}
+
+定理 5.19 使得我们可以比较 $ n $ 维勒贝格测度与豪斯多夫测度。为此我们需要一个引理：
+
+\begin{lemma}
+
+$ \mathbb{R}^n $ 上的 $ n $ 维豪斯多夫测度 $ \mathcal{H}^n $ 是局部有限的，并且满足 $ \mathcal{H}^n([0, 1)^n) > 0 $。
+
+证明
+
+\begin{subitems}
+\item
+
+由定理 4.3 与例 4.4(c)，我们知道每个博雷尔集都是 $ \mathcal{H}^n $-可测的。设 $ K \subset \mathbb{R}^n $ 是紧致的，并取 $ \varepsilon > 0 $。选取 $ a > 0 $ 使得 $ K \subset [-a, a]^n $，并选取 $ m \in \mathbb{N} $ 使得 $ m \ge 2a\sqrt{n}/\varepsilon $。把 $ [-a, a]^n $ 细分为 $ m^n $ 个边长为 $ 2a/m $ 的小立方体 $ W_j $。则 $ \operatorname{diam}(W_j) = 2a\sqrt{n}/m \le \varepsilon $，因此
+
+\[
+\sum_{j=1}^{m^n} \left[ \operatorname{diam}(W_j) \right]^n = (2a)^n n^{n/2} .
+\]
+
+习题 3.4 表明 $ \mathcal{H}^n_*(K) \le \mathcal{H}^n_*([-a, a]^n) \le (2a)^n n^{n/2} $。现在由注 5.3(b) 得到 $ \mathcal{H}^n $ 是局部有限的。
+
+\item
+
+仍需验证 $ \mathcal{H}^n([0, 1)^n) > 0 $。取 $ \varepsilon > 0 $，并设 $ (U_j) $ 是 $ \mathbb{R}^n $ 中覆盖 $ [0, 1)^n $ 的开集序列，且满足 $ \operatorname{diam}(U_j) < \varepsilon $。对每个 $ j \in \mathbb{N} $，存在 $ I_j \in \mathbb{J}(n) $，使得 $ I_j $ 的每条棱长都不超过 $ 2\operatorname{diam}(U_j) $，并且 $ U_j \subset I_j $。由此推出
+
+\[
+1 = \lambda_n([0, 1)^n) \le \sum_j \operatorname{vol}_n(I_j) \le 2^n \sum_j \left[ \operatorname{diam}(U_j) \right]^n ,
+\]
+
+从而 $ 2^{-n} \le \mathcal{H}^n_\varepsilon([0, 1)^n) $。这意味着 $ \mathcal{H}^n([0, 1)^n) \ge 2^{-n} > 0 $。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{lemma}
+
+\begin{corollary}
+
+$ \mathbb{R}^n $ 上的 $ n $ 维豪斯多夫测度 $ \mathcal{H}^n $ 是 $ \alpha_n \lambda_n $ 的延拓，其中 $ \alpha_n := \mathcal{H}^n([0, 1)^n) $；也就是说，每个 $ A \in \mathcal{L}(n) $ 都是 $ \mathcal{H}^n $-可测的，并且 $ \mathcal{H}^n(A) = \alpha_n \lambda_n(A) $。
+
+证明
+
+\begin{subitems}
+\item
+
+引理 5.21、习题 3.4 以及博雷尔集的 $ \mathcal{H}^n $-可测性表明，$ \mathcal{H}^n $ 是 $ \mathcal{B}^n $ 上的平移不变的局部有限测度。于是由定理 5.19，$ \mathcal{H}^n|\mathcal{B}^n = \alpha_n \beta_n $。
+
+\item
+
+设 $ N $ 是勒贝格测度为零的集合，并取 $ \varepsilon > 0 $。则存在 $ \mathbb{J}(n) $ 中的序列 $ (I_j) $，使得 $ \sum_j \operatorname{vol}_n(I_j) < \varepsilon $ 且 $ N \subset \bigcup_j I_j $。由 (i) 推出
+
+\[
+\mathcal{H}^n_*(I_j) = \mathcal{H}^n(I_j) = \alpha_n \lambda_n(I_j) ,
+\]
+
+并且我们得到
+
+\[
+\mathcal{H}^n_*(N) \le \mathcal{H}^n_* \left( \bigcup_j I_j \right) \le \sum_j \mathcal{H}^n_*(I_j) = \alpha_n \sum_j \operatorname{vol}_n(I_j) < \alpha_n \varepsilon .
+\]
+
+因此 $ N $ 是 $ \mathcal{H}^n $-零集。
+
+\item
+
+设 $ A \in \mathcal{L}(n) $。根据定理 5.7，我们可以把 $ A $ 写成 $ A = S \cup N $，其中 $ S \in \mathcal{B}^n $ 且 $ N $ 的勒贝格测度为零。因此 $ A $ 是 $ \mathcal{H}^n $-可测的。并且由 (i) 与 (ii) 推出
+
+\begin{equation*}
+\begin{aligned}
+\mathcal{H}^n(A) &\le \mathcal{H}^n(S) + \mathcal{H}^n(N) = \mathcal{H}^n(S) = \alpha_n \lambda_n(S) \le \alpha_n \lambda_n(A) , \\ \alpha_n \lambda_n(A) &= \alpha_n \lambda_n(S) = \mathcal{H}^n(S) \le \mathcal{H}^n(A) ,
+\end{aligned}
+\end{equation*}
+
+这两式共同表明 $ \mathcal{H}^n(A) = \alpha_n \lambda_n(A) $。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{corollary}
+
+\begin{corollary}
+
+勒贝格测度与博雷尔–勒贝格测度是运动不变量，也就是说，它们在等距下保持不变。用符号表示，$ \mathbb{R}^n $ 的任何等距 $ \varphi $ 都满足 $ \lambda_n = \lambda_n \circ \varphi $ 与 $ \beta_n = \beta_n \circ \varphi $。
+
+\proofhead
+设 $ \varphi $ 是 $ \mathbb{R}^n $ 的等距，并取 $ A \in \mathcal{L}(n) $［或 $ A \in \mathcal{B}^n $］。根据结论 VI.2.4(b)，$ \varphi $ 与 $ \varphi^{-1} $ 都是利普希茨连续的，因此我们从定理 5.12［或习题 1.6(b)］得到 $ \varphi(A) \in \mathcal{L}(n) $［或 $ \varphi(A) \in \mathcal{B}^n $］。其次，由习题 3.4(c)，$ \mathcal{H}^n_* $ 在等距下不变；因此引理 5.21 与推论 5.22 表明
+\[
+\alpha_n \lambda_n(\varphi(A)) = \mathcal{H}^n(\varphi(A)) = \mathcal{H}^n(A) = \alpha_n \lambda_n(A) .\quad\blacksquare
+\]
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+尽管推论 5.22 讲的是延拓，但实际上 $ \mathcal{H}^n $ 与 $ \lambda_n $ 的定义域是重合的。此外，比例常数 $ \alpha_n = \mathcal{H}^n([0, 1)^n) $ 等于 $ 2^n/\omega_n $，其中 $ \omega_n = \pi^{n/2}/\Gamma((n/2) + 1) $。这些断言的证明见 [Rog70, 定理 30 及随后的注]。
+
+\item
+
+$ \mathbb{R}^n $ 上的勒贝格测度存在真延拓，这些延拓在等距下不变；见 [Els99]。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{线性映射的换元法则}
+
+设 $ \varphi $ 是 $ \mathbb{R}^n $ 的等距且 $ \varphi(0) = 0 $。习题 VII.9.1 与 VII.9.2 表明 $ \varphi $ 是自同构，并且 $ |\det \varphi| = 1 $。因此由推论 5.23 可得
+
+\[
+\lambda_n(\varphi(A)) = |\det \varphi| \lambda_n(A) \quad \text{对 } A \in \mathcal{L}(n) .
+\]
+
+我们现在的目标是把这一公式从等距推广到任意的线性映射 $ T \in \mathcal{L}(\mathbb{R}^n) $。在下一章中，我们将得到一个更加深远的推广：其中 $ \varphi $ 被 $ C^1 $ 微分同胚替换，而 $ \lambda_n $ 被勒贝格积分替换。
+
+\begin{theorem}
+
+设 $ T \in \mathcal{L}(\mathbb{R}^n) $ 是线性映射。则
+
+\begin{equation}
+\lambda_n(T(A)) = |\det T| \lambda_n(A) \quad \text{对 } A \in \mathcal{L}(n) .\tag{5.13}
+\end{equation}
+
+\proofhead
+我们知道 $ T $ 是利普希茨连续的；见结论 VI.2.4(b)。因此由定理 5.12，对每个 $ A \in \mathcal{L}(n) $，$ T(A) $ 都是勒贝格可测的。
+
+\begin{subitems}
+\item
+
+若 $ T $ 不是 $ \mathbb{R}^n $ 的自同构，则 $ \det T = 0 $，且 $ T(A) $ 落在 $ \mathbb{R}^n $ 的一个 $ (n-1) $ 维超平面中。由于 $ \lambda_n $ 是运动不变量，我们可以假定 $ T(A) $ 落在某个坐标超平面中。于是例 5.2 表明 $ T(A) $ 的勒贝格 $ n $-测度为零，从而在此情形下证明了 (5.13)。
+
+\item
+
+反之，设 $ T \in \mathcal{L}\mathrm{aut}(\mathbb{R}^n) $，并对 $ A \in \mathcal{L}(n) $ 定义 $ \mu(A) := \lambda_n(T(A)) $。不难验证 $ \mu $ 是 $ \mathcal{L}(n) $ 上的平移不变的局部有限测度。定理 5.19 于是表明 $ \mu = \mu([0, 1)^n) \lambda_n $；这就会蕴含 (5.13)，只要我们证明
+
+\begin{equation}
+\lambda_n(T([0, 1)^n)) = |\det T| .\tag{5.14}
+\end{equation}
+\item
+
+设有序 $ n $ 元组 $ [Te_1, \ldots, Te_n] $ 是 $ \mathbb{R}^n $ 的标准基 $ [e_1, \ldots, e_n] $ 的一个排列。则 $ T([0, 1)^n) = [0, 1)^n $ 且 $ |\det T| = 1 $。因此 (5.14) 成立，从而 (5.13) 也成立。
+
+\item
+
+设 $ \alpha \in \mathbb{R}^{\times} $，并如下定义 $ T $：
+
+\begin{equation*}
+Te_j = \begin{cases} \alpha e_1 , & j = 1 , \\ e_j , & j \in \{2, \ldots, n\} . \end{cases}
+\end{equation*}
+
+则 $ |\det T| = |\alpha| $，并且
+
+\begin{equation*}
+T([0, 1)^n) = \begin{cases} [0, \alpha) \times [0, 1)^{n-1} , & \alpha > 0 , \\ (\alpha, 0] \times [0, 1)^{n-1} , & \alpha < 0 . \end{cases}
+\end{equation*}
+
+于是 (5.14) 再次成立，从而 (5.13) 也成立。
+
+\item
+
+最后设 $ n \ge 2 $，并令
+
+\begin{equation*}
+Te_j = \begin{cases} e_1 + e_2 , & j = 1 , \\ e_j , & j \in \{2, \ldots, n\} . \end{cases}
+\end{equation*}
+
+则 $ \det T = 1 $，并且
+
+\[
+T([0, 1)^n) = \{ (y_1, \ldots, y_n) \in \mathbb{R}^n ;\ 0 \le y_1 \le y_2 < y_1 + 1, \ y_j \in [0, 1) \text{ 对 } j \ne 2 \} .
+\]
+
+令 $ B_1 := \{ y \in T([0, 1)^n) ;\ y_2 < 1 \} $、$ B_2 := T([0, 1)^n) \setminus B_1 $，我们看到 $ B_1 \cup (B_2 - e_2) = [0, 1)^n $ 且 $ B_1 \cap (B_2 - e_2) = \varnothing $。
+
+\end{subitems}
+
+\bookfigure[0.50]{figures/f028d2ff813fb01f.png}
+
+$ \lambda_n $ 的平移不变性于是给出
+
+\begin{equation*}
+\begin{aligned}
+\lambda_n(T([0, 1)^n)) &= \lambda_n(B_1 \cup B_2) = \lambda_n(B_1) + \lambda_n(B_2) \\ &= \lambda_n(B_1) + \lambda_n(B_2 - e_2) = \lambda_n(B_1 \cup (B_2 - e_2)) = \lambda_n([0, 1)^n) .
+\end{aligned}
+\end{equation*}
+
+于是 (5.14) 再次成立，从而 (5.13) 也成立。
+
+\begin{subitems}
+\item[（vi）]
+
+现在考虑 $ \mathbb{R}^n $ 的任意自同构 $ T $。线性代数的标准形定理（见 [Koe83] 中的 § 2.6）表明，$ T $ 可以写成映射 $ T_1, \ldots, T_k \in \mathcal{L}\mathrm{aut}(\mathbb{R}^n) $ 的复合 $ T = T_1 \circ \cdots \circ T_k $，其中每个映射都具有 (iii)–(v) 中所讨论的某个线性映射的形式。因此
+
+\begin{equation*}
+\begin{aligned}
+\lambda_n(T(A)) &= \lambda_n((T_1 \circ T_2 \circ \cdots \circ T_k)(A)) \\ &= |\det T_1| \lambda_n((T_2 \circ \cdots \circ T_k)(A)) = \cdots \\ &= |\det T_1| \cdot \cdots \cdot |\det T_k| \lambda_n(A) = |\det T| \lambda_n(A)
+\end{aligned}
+\end{equation*}
+
+对 $ A \in \mathcal{L}(n) $。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $ [t_1, \ldots, t_n] \in \mathbb{R}^{n \times n} $ 是 $ T \in \mathcal{L}(\mathbb{R}^n) $ 关于典范基的矩阵表示 $ [T] $ 的各列。则
+
+\[
+T([0, 1)^n) = \{ x_1 t_1 + \cdots + x_n t_n ;\ 0 \le x_j < 1, \ 1 \le j \le n \} = P(t_1, \ldots, t_n)
+\]
+
+是由向量 $ t_1, \ldots, t_n $ 生成的平行多面体。定理 5.25 表明，$ |\det T| $ 就是平行多面体 $ P(t_1, \ldots, t_n) $ 的体积，也就是它的勒贝格 $ n $-测度。
+
+\item
+
+对 $ r \ge 0 $，有
+
+\[
+\lambda_n(r\mathbb{B}^n) = r^n \lambda_n(\mathbb{B}^n) .
+\]
+
+\proofhead
+令 $ T := r\mathbf{1}_n $，则 $ \det T = r^n $ 且 $ T(\mathbb{B}^n) = r\mathbb{B}^n $。结论由定理 5.25 推出。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{没有勒贝格测度的集合}
+
+我们现在转向这样一个问题：$ \sigma $-代数 $ \mathcal{L}(n) $ 是否与 $ \mathbb{R}^n $ 的幂集重合，或者说，是否存在不是勒贝格可测的集合。为了回答这个问题，我们必须诉诸选择公理（见注 I.6.10 与 5.31(d)）。在这方面，斯坦豪斯定理（定理 5.18）将非常有用。
+
+我们首先考虑阿贝尔群 $ (\mathbb{R}^n, +) $ 模子群 $ (\mathbb{Q}^n, +) $ 的商群 $ \mathbb{R}^n/\mathbb{Q}^n $。由选择公理，我们可以从每个陪集 $ [x] $ 中选取一个代表元，这些代表元合起来构成 $ \mathbb{R}^n $ 的一个子集 $ R $。更确切地说，选择公理保证存在映射 $ \varphi: \mathbb{R}^n/\mathbb{Q}^n \to \mathbb{R}^n $，使得 $ \varphi([x]) \in [x] $。我们令
+
+\begin{equation}
+R := \mathrm{im}(\varphi) = \{ x \in \mathbb{R}^n ;\ \exists\, [u] \in \mathbb{R}^n/\mathbb{Q}^n \text{ 使得 } x = \varphi([u]) \} .\tag{5.15}
+\end{equation}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $ x, y \in R $ 满足 $ x - y \in \mathbb{Q}^n $。则 $ x = y $。
+
+\proofhead
+对 $ x \in R $ 以及如 (5.15) 中的 $ [u] $，我们有 $ x = \varphi([u]) \in [u] $，故 $ [u] = [x] $，从而 $ x = \varphi([x]) $。类似地，$ y = \varphi([y]) $。但 $ x - y \in \mathbb{Q}^n $ 蕴含 $ [x] = [y] $，因此 $ x = \varphi([x]) = \varphi([y]) = y $。\nobreak\hspace{0.35em}■
+\item
+
+对每个 $ B \subset R $，有 $ (B - B) \cap \mathbb{Q}^n = \{0\} $。
+
+\proofhead
+这由 (a) 推出。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+\begin{theorem}
+
+对每个满足 $ \lambda_n(A) > 0 $ 的 $ A \in \mathcal{L}(n) $，存在 $ B \subset A $，使得 $ B \notin \mathcal{L}(n) $。
+
+\proofhead
+固定满足 $ \lambda_n(A) > 0 $ 的 $ A \in \mathcal{L}(n) $，并定义 $ B := \{ b \in R ;\ [b] \cap A \ne \varnothing \} $。在构造 $ R $ 时，只要 $ [b] \cap A \ne \varnothing $，我们就要求 $ b \in R $ 落在 $ A $ 中，从而保证 $ B $ 是 $ A $ 的子集。假设 $ B $ 是勒贝格可测的；则它的测度为零，否则定理 5.18 会蕴含 $ B - B $ 是 $ \mathbb{R}^n $ 中 $ 0 $ 的邻域，这与注 5.27(b) 矛盾。因为 $ \lambda_n $ 是平移不变的，所以每个形如 $ B + r $（其中 $ r \in \mathbb{Q}^n $）的集合的测度也为零。
+
+现在考虑 $ a \in A $，并取 $ b := \varphi([a]) \in R $。则 $ b \in [a] $，从而 $ a \in [b] $。因此 $ a \in [b] \cap A $，也就是说 $ b \in B $，并且
+\[
+A \subset \bigcup_{b \in B} [b] = \bigcup_{r \in \mathbb{Q}^n} (B + r) .
+\]
+
+$ \lambda_n $ 的完备性蕴含 $ A $ 的测度也为零，这与我们的假设矛盾。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\begin{corollary}
+
+博雷尔–勒贝格测度空间 $ (\mathbb{R}^n, \mathcal{B}^n, \beta_n) $ 不是完备的。
+
+证明
+
+\begin{subitems}
+\item
+
+我们首先考虑 $ n = 1 $ 的情形。设 $ C $ 为康托尔集，$ f: [0, 1] \to [0, 1] $ 为习题 III.3.8 中的康托尔函数。由于 $ C $ 是紧致的，它是博雷尔集；习题 4.7 告诉我们它的测度为零。下面的习题 17 表明，由 $ g(x) = x + f(x) $ 给出的映射 $ g: [0, 1] \to [0, 2] $ 是同胚，并且 $ g(C) $ 的测度为 1。由定理 5.28，$ g(C) $ 包含一个甚至不是勒贝格可测的集合 $ B $。我们断言 $ N_1 := g^{-1}(B) \subset C $ 不是博雷尔可测的。事实上，由于 $ g $ 是同胚，$ g^{-1} $ 是博雷尔可测映射，并且我们有
+
+\[
+B = g(N_1) = (g^{-1})^{-1}(N_1) .
+\]
+
+若 $ N_1 $ 是博雷尔可测的，则 $ B $ 也会是博雷尔可测的，这与假设矛盾。
+
+\item
+
+当 $ n \ge 2 $ 时，令 $ A := C \times \mathbb{R}^{n-1} $、$ N_n := N_1 \times \mathbb{R}^{n-1} $。则推论 1.18 与习题 1 表明 $ A $ 的博雷尔 $ n $-测度为零。如果我们假设 $ N_n \in \mathcal{B}^n $，则由推论 1.18 与命题 1.19 可推出 $ N_1 $ 属于 $ \mathcal{B}^1 $，这与 (i) 矛盾。这就完成了证明。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{corollary}
+
+\begin{corollary}
+
+博雷尔 $ \sigma $-代数是勒贝格 $ \sigma $-代数的真 $ \sigma $-子代数。
+
+\proofhead
+设 $ A $ 与 $ N_n $ 如推论 5.29 的证明中那样。则 $ \lambda_n(A) = 0 $，而 $ \lambda_n $ 的完备性蕴含 $ N_n $ 属于 $ \mathcal{L}(n) $，即 $ N_n \in \mathcal{L}(n) \setminus \mathcal{B}^n $。\nobreak\hspace{0.35em}■
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $ (X, \le) $ 是有序集。若 $ Y $ 中任意两个元素都可比较，也就是说，若 $ (x, y) \in Y \times Y $ 总蕴含 $ (x \le y) \lor (y \le x) $，则称 $ X $ 的非空子集 $ Y $ 是\textbf{全序的}。若 $ x \ge m $ 蕴含 $ x \le m $，也就是说，若 $ X $ 中没有严格大于\footnote{注意，一个集合一般可以有多个极大元。} $ m $ 的元素，则称 $ X $ 的元素 $ m $ 为\textbf{极大元}。\textbf{佐恩引理}的表述是：\textbf{若 $ X $ 是有序集，且 $ X $ 的每个全序子集都有上界，则 $ X $ 有极大元。}可以证明（见 [Dug66] 中的定理 II.2.1），佐恩引理等价于选择公理。
+
+\item
+
+设 $ \mathcal{V} $ 是域上的非平凡向量空间。则 $ \mathcal{V} $ 有基。
+
+\proofhead
+其证明（用到佐恩引理）可参见 [Art93] 附录中的命题 (1.10)。\nobreak\hspace{0.35em}■
+\item
+
+设 $ B \subset \mathbb{R} $ 是 $ \mathbb{R} $ 作为 $ \mathbb{Q} $ 上向量空间的基。取 $ b_0 \in B $，并令 $ M := \mathrm{span}(B \setminus \{b_0\}) $。则 $ M $ 不是勒贝格可测的。
+
+\proofhead
+假设 $ M $ 属于 $ \mathcal{L}(1) $。则 $ \lambda_1(M) > 0 $，因为否则由 $ \lambda_1 $ 的平移不变性可推出，对每个 $ r \in \mathbb{Q} $，$ M + r b_0 $ 都是 $ \lambda_1 $-零集。然而，由于
+\[
+\bigcup_{r \in \mathbb{Q}} (M + r b_0) = \mathrm{span}(B) = \mathbb{R} ,
+\]
+
+这是不可能的。因此定理 5.18 表明 $ M - M $ 是 $ \mathbb{R} $ 中 $ 0 $ 的邻域；特别地，存在 $ r_0 \in \mathbb{Q} $ 使得 $ r_0 \ne 0 $ 且 $ r_0 b_0 \in M - M $。由于 $ M = M - M $，存在 $ k \in \mathbb{N}^{\times} $、$ r_j \in \mathbb{Q} $ 以及 $ b_j \in B $（$ j = 1, \ldots, k $），使得 $ r_0 b_0 = \sum_{j=1}^{k} r_j b_j $，这与 $ B $ 在 $ \mathbb{Q} $ 上的线性无关性矛盾。\nobreak\hspace{0.35em}■
+
+\item
+
+在定理 5.28 的证明中，我们明确使用了选择公理。(c) 的证明同样依赖于选择公理；见 (a) 与 (b)。事实上，可以证明（见 [BS79]、[Sol70]）：如果在不包含选择公理的公理集合论中工作，原则上不可能具体指定一个不是勒贝格可测的集合。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+证明
+
+\[
+\mathcal{L}(m) \boxtimes \mathcal{L}(n) \subset \mathcal{L}(m+n) \quad \text{且} \quad \lambda_m(A)\lambda_n(B) = \lambda_{m+n}(A \times B)
+\]
+
+对 $ A \times B \in \mathcal{L}(m) \boxtimes \mathcal{L}(n) $ 成立。
+
+（提示：先考虑 $ \mathbb{R}^m $ 中的开集 $ A $ 与 $ \mathbb{R}^n $ 中的开集 $ B $ 的情形，并利用命题 5.6 与定理 II.8.10。对 $ A \times B \in \mathcal{L}(m) \boxtimes \mathcal{L}(n) $，注意推论 5.5。）
+
+\item
+
+证明 $ \mathcal{B}^m \otimes \mathcal{B}^n \subset \mathcal{L}(m) \otimes \mathcal{L}(n) \subset \mathcal{L}(m+n) $，并证明这些包含关系都是真包含。
+
+\item
+
+设 $ M $ 是 $ \mathbb{R}^n $ 的一个 $ m $ 维 $ C^1 $ 子流形。证明：若 $ m < n $，则 $ M $ 的勒贝格 $ n $-测度为 0。
+
+\item
+
+验证：对 $ A \in \mathcal{L}(n) $，有
+
+\[
+\lambda_n(A) = \sup\{\, \lambda_n(B) ;\ B \subset \mathbb{R}^n \text{ 是闭集且 } B \subset A \,\} .
+\]
+\item
+
+设 $ g : (0,\infty) \to \mathbb{R} $ 对 $ s,t \in (0,\infty) $ 满足 $ g(s+t) = g(s) + g(t) $。证明：若 $ g $ 递增或在有界集上有界，则对 $ s > 0 $ 有 $ g(s) = sg(1) $。
+
+\item
+
+令
+
+\[
+S := \{\, g \in \mathbb{R}^{\mathbb{R}} ;\ g(s+t) = g(s) + g(t),\ s,t \in \mathbb{R},\ \exists s_0 \in \mathbb{R} : g(s_0) \ne s_0 g(1) \,\} .
+\]
+
+证明：
+
+\begin{items}
+\item
+
+对每个 $ g \in S $，$ g $ 的图像在 $ \mathbb{R}^2 $ 中稠密；
+
+\item
+
+$ S \ne \varnothing $。
+（对 (b) 的提示：利用 $ \mathbb{Q} $-向量空间 $ \mathbb{R} $ 的一个基来定义 $ g $。）
+
+\end{items}
+
+\item
+
+设 $ n \ge 2 $，$ \mu $ 是 $ \mathcal{B}^n $［或 $ \mathcal{L}(n) $］上的平移不变的局部有限测度。若 $ A \in \mathcal{B}^1 $［或 $ A \in \mathcal{L}(1) $］，且 $ a', b' \in \mathbb{R}^{n-1} $，令
+
+\[
+\mu_1(A) := \mu\left(A \times [a', b')\right) .
+\]
+
+证明 $ \mu_1 $ 是 $ \mathcal{B}^1 $［或 $ \mathcal{L}(1) $］上的平移不变的局部有限测度。
+
+\item
+
+设 $ B $ 是 $ \mathbb{Q} $-向量空间 $ \mathbb{R} $ 的基。证明或反驳：$ B $ 是有限的。
+
+\item
+
+定义 $ M := \{\, \log p ;\ p \in \mathbb{N} \text{ 是素数} \,\} $。证明：
+
+\begin{items}
+\item
+
+$ M $ 在 $ \mathbb{Q} $ 上线性无关。
+
+\item
+
+$ M $ 不是 $ \mathbb{R} $ 的基。
+
+\end{items}
+
+\item
+
+若 $ B $ 是 $ \mathbb{R} $ 在 $ \mathbb{Q} $ 上的一个勒贝格可测的基，则 $ B $ 的勒贝格测度为 0。
+
+\item
+
+验证康托尔集 $ C $ 满足 $ C + C = [0,2] $。
+
+\item
+
+证明存在勒贝格测度为 0 的集合 $ A $，使得 $ A - A $ 是 $ 0 $ 的邻域。\footnote{比较定理 5.18。}
+
+\item
+
+证明存在 $ \mathbb{Q} $-向量空间 $ \mathbb{R} $ 的一个勒贝格可测的基。
+
+（提示：设 $ C $ 是康托尔集，并定义
+
+\[
+\mathcal{A} := \{\, M \subset C ;\ M \text{ 在 } \mathbb{Q} \text{ 上线性无关} \,\} .
+\]
+
+则 $ \mathcal{A} $ 有极大元 $ B $，由习题 11 可知它张成 $ \mathbb{R} $。）
+
+\item
+
+设 $ R $ 如 (5.15) 中所述。验证 $ R $ 不属于 $ \mathcal{L}(n) $。
+
+\item
+
+令 $ G := \mathbb{Q} + \sqrt{2}\mathbb{Z} $，$ G_1 := \mathbb{Q} + 2\sqrt{2}\mathbb{Z} $，$ G_2 := G \setminus G_1 $。证明：
+
+\begin{items}
+\item
+
+$ G $ 与 $ G_1 $ 是阿贝尔群 $ (\mathbb{R},+) $ 的子群。
+
+\item
+
+取 $ \varphi : \mathbb{R}/G \to \mathbb{R} $ 使得 $ \varphi([x]) \in [x] $，并令 $ R := \operatorname{im}(\varphi) $。设 $ A := R + G_1 $。则 $ (A - A) \cap G_2 = \varnothing $。
+
+\end{items}
+
+\item
+
+证明存在 $ \mathbb{R} $ 的子集 $ A $，使得包含在 $ A $ 或 $ A^{c} $ 中的每个勒贝格可测集的测度都为 0。
+
+（提示：借助定理 5.18 证明习题 15 中的集合 $ A $ 具有所需性质。）
+
+\item
+
+设 $ f : [0,1] \to [0,1] $ 是习题 III.3.8 中的康托尔函数。证明：
+
+\begin{items}
+\item
+
+存在测度为 0 的集合 $ N \subset [0,1] $，使得 $ f $ 在 $ [0,1] \setminus N $ 的每一点处都可微，且导数为 0。
+
+\item
+
+映射 $ g : [0,1] \to [0,2] $，$ x \mapsto x + f(x) $ 是同胚。
+
+\item
+
+$ \lambda_1(g(C)) = 1 $。
+
+\end{items}
+
+\item
+
+验证：
+
+\begin{items}
+\item
+
+每个有限维赋范向量空间都是局部紧的。
+
+\item
+
+局部紧空间的任何开子集与任何闭子集都是局部紧的。
+
+\item
+
+局部紧空间是 $ \sigma $-紧的当且仅当它是可分的。
+
+\item
+
+$ \sigma $-紧的局部紧度量空间的任何开子集与任何闭子集都是 $ \sigma $-紧的。
+
+\end{items}
+
+\item
+
+设 $ F : \mathbb{R} \to \mathbb{R} $ 是测度生成函数。则由 $ F $ 诱导的 $ \mathbb{R} $ 上的勒贝格–斯蒂尔杰斯测度是正则的。
+
+\item
+
+设 $ X $ 是度量空间。验证
+
+\[
+\mathcal{B}(X) = \mathcal{A}_\sigma\left(\{\, f^{-1}(0) ;\ f \in C(X,\mathbb{R}) \,\}\right) .
+\]
+
+（存在非可度量化的拓扑空间，使得 $ \mathcal{B}(X) $ 严格大于 $ \mathcal{A}_\sigma(\{\, f^{-1}(0) ;\ f \in C(X,\mathbb{R}) \,\}) $；见 [Flo81, 11.1.2]。）
+
+\item
+
+设 $ X $ 是拓扑空间，并用 $ (X,\mathcal{A},\mu) $ 表示一个满足 $ \mathcal{A} \supset \mathcal{B}(X) $ 的正则测度空间。又设 $ A \in \mathcal{A} $，$ \mathcal{C} := \mathcal{A} \mid A $，$ \nu := \mu \mid \mathcal{C} $。验证 $ (A,\mathcal{C},\nu) $ 是正则的。
+
+\end{exercises}

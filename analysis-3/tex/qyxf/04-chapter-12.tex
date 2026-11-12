@@ -1,0 +1,3691 @@
+\chapter{流形上的积分}
+在本书的前两章中，我们建立了测度与积分理论的基础；在第 XI 章中，我们深化了对流形的认识，并引入了微分形式的理论。现在我们已准备好把积分理论推广到流形上，这意味着我们能够在“弯曲空间”上积分。
+
+在第 1 节中，我们引入流形上的黎曼–勒贝格测度。它的构造完全基于勒贝格测度的性质，我们利用局部坐标卡把这些性质从 $ \mathbb{R}^m $ “提升”到流形上。变换定理起主要作用，因为它保证这一构造与局部坐标无关。我们证明黎曼–勒贝格体积测度是完备的拉东测度，这使得第 X 章中发展起来的整个积分理论都可以使用。作为一般理论的第一个应用，我们计算若干流形的体积。
+
+在第 2 节中，我们推广线积分理论，它说明了如何沿曲线、从而沿 1 维流形积分 $ 1 $-形式。现在我们说明如何沿 $ m $ 维流形积分 $ m $-形式。为使这套演算更为有力，我们推广变换定理与富比尼定理，使它们能用于微分形式的积分。随后我们就能够处理更复杂的积分问题，正如我们将通过一系列例子所演示的那样。
+
+我们还给出微分形式积分的物理与几何解释，并介绍向量场通量的基本思想。作为一个应用，我们证明输运定理并导出它的一些推论。
+
+流形的微分与积分演算的高潮无疑是斯托克斯定理，最后一节即第 3 节就致力于它。我们证明一个适用于带奇点的流形的版本；这个版本对于实际中见到的大多数情形已经足够。当然，我们展示了斯托克斯定理的几个经典应用，并初步窥见其拓扑推论。然而，在这篇导言的框架内，我们必须放弃任何更深入的探讨。本书旨在为你今后进入这一引人入胜的数学分支提供基础。如果你选择继续修读分析方面的课程，或更深入地钻研它的文献，你将学到这里所发展的理论的众多应用与推广。
+
+\section{体积测度}
+
+在 VIII.1 节中，我们学习了如何计算曲线的长度。我们也知道如何求图形下方的面积以及简单立体的体积。现在我们转向确定曲面面积与一般流形容度的问题。
+
+在本节中，我们引入伪黎曼流形的黎曼–勒贝格体积测度，并证明它是完备的 massive 拉东测度。于是第 X 章发展起来的整个积分理论也将适用于流形。借助局部表示，我们在许多情形下都能显式计算流形上的积分，正如我们的例子将要展示的那样。
+
+在本节中
+
+- $ M $ 是 $ m $ 维流形，$ m \in \mathbb{N}^{\times} $。
+
+\needspace{3\baselineskip}\subsection*{M 的勒贝格 σ-代数}
+
+由于流形局部“看起来”像 $ \overline{\mathbb{H}}^m $ 的开子集，显然可测性可以借助局部坐标卡从 $ \overline{\mathbb{H}}^m $ “提升”到 $ M $。
+
+称 $ M $ 的子集 $ A $ 是（\textbf{勒贝格}）\textbf{可测的}，若对每个 $ p \in A $，在 $ p $ 附近存在坐标卡 $ (\varphi, U) $，使得 $ \varphi(A \cap U) $ 属于 $ \mathcal{L}(m) $，即 $ \varphi(A \cap U) $ 是 $ \lambda_m $-可测的。我们令
+
+\[
+\mathcal{L}_M := \{ A \subset M ; A \text{ 可测} \} .
+\]
+
+下面的注说明这个定义是有意义的。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+该定义与坐标无关。
+
+\proofhead
+设 $ A \subset M $，$ (\varphi_p, U_p) $ 是 $ p \in A $ 处的坐标卡，且 $ \varphi_p(A \cap U_p) \in \mathcal{L}(m) $。又设 $ (\psi, V) $ 是 $ M $ 的坐标卡，$ q \in A \cap V $。由于集合 $ \varphi_p(U_q \cap V) $ 在 $ \overline{\mathbb{H}}^m $ 中是开的，它是 $ \lambda_m $-可测的，因此
+\[
+\varphi_q(A \cap V \cap U_q) = \varphi_q(A \cap U_q) \cap \varphi_q(V \cap U_q)
+\]
+
+也是 $ \lambda_m $-可测的。由推论 IX.5.13，从
+
+\[
+\psi(A \cap V \cap U_q) = \psi \circ \varphi_q^{-1}\left(\varphi_q(A \cap V \cap U_q)\right)
+\]
+
+可知 $ \psi(A \cap V \cap U_q) $ 属于 $ \mathcal{L}(m) $。这对每个 $ q \in A \cap V $ 都成立，而根据注 IX.5.14(c)，可测性是局部性质。因此 $ \psi(A \cap V) \in \mathcal{L}(m) $，证毕。\nobreak\hspace{0.35em}■
+
+\item
+
+若 $ M $ 在 $ \mathbb{R}^m $ 中是开的，则 $ \mathcal{L}_M = \mathcal{L}(m)|M $。因此这里引入的记号与 X.5 节的记号一致。
+
+\proofhead
+这可由使用平凡坐标卡 $ (\operatorname{id}, M) $ 得到。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{remark}
+
+\begin{proposition}
+
+$ \mathcal{L}_M $ 是 $ M $ 上的 σ-代数，即 $ M $ 的\textbf{勒贝格 σ-代数}。它包含博雷尔 σ-代数 $ \mathcal{B}(M) $。
+
+\proofhead
+设 $ (\varphi, U) $ 是 $ M $ 的坐标卡。若 $ A \in \mathcal{L}_M $，则 $ \varphi(A \cap U) $ 属于 $ \mathcal{L}(m) $。由于 $ \mathcal{L}(m) $ 是 σ-代数，我们有 $ \varphi(A^c \cap U) = \varphi(U) \setminus \varphi(A \cap U) \in \mathcal{L}(m) $。由于这对每个坐标卡都成立，故 $ A^c \in \mathcal{L}_M $。
+
+若 $ (A_j) $ 是 $ \mathcal{L}_M $ 中的序列，则类似地得到
+\[
+\varphi\left(\left(\bigcup_j A_j\right) \cap U\right) = \varphi\left(\bigcup_j (A_j \cap U)\right) = \bigcup_j \varphi(A_j \cap U) \in \mathcal{L}(m) ,
+\]
+
+从而 $ \bigcup_j A_j \in \mathcal{L}_M $。
+
+最后，显然 $ M $ 属于 $ \mathcal{L}_M $。于是我们证明了 $ \mathcal{L}_M $ 是 σ-代数。
+
+若 $ O $ 在 $ M $ 中是开的，则 $ \varphi(O \cap U) $ 在 $ \overline{\mathbb{H}}^m $ 中是开的，因而属于 $ \mathcal{L}(m) $。所以 $ O $ 属于 $ \mathcal{L}_M $，这意味着 $ \mathcal{L}_M \supset \mathcal{B}(M) $。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{体积测度的定义}
+
+现在设 $ g $ 是 $ M $ 上的伪黎曼度量，$ (\varphi, U) $ 是 $ M $ 的坐标卡，$ \varphi = (x^1, \ldots, x^m) $。则格拉姆行列式 $ G = \det[g_{jk}] $ 有定义，其中 $ g_{jk} = g(\partial/\partial x^j, \partial/\partial x^k) $，且 $ \sqrt{|G|} \in \mathcal{E}(U) $。对 $ A \in \mathcal{L}_M $，$ A \subset U $，我们令
+
+\begin{equation}
+\operatorname{vol}_{g,U}(A) := \int_{\varphi(A)} \varphi_*\sqrt{|G|} \, d\lambda_m = \int_{\varphi(A)} \varphi_*\sqrt{|G|} \, dx .\tag{1.1}
+\end{equation}
+
+\begin{lemma}
+
+对 $ A \in \mathcal{L}_M $，当 $ A \subset U $ 时，体积 $ \operatorname{vol}_{g,U}(A) $ 与坐标卡 $ (\varphi, U) $ 无关。
+
+\proofhead
+设 $ (\psi, V) $ 是另一个坐标卡，$ A \subset V $，$ \psi = (y^1, \ldots, y^m) $。我们可以假定 $ V = U $。现在把 $ U $ 视为带有正图册 $ \{(\varphi, U)\} $ 的定向流形。于是根据注 XI.5.4(g)，
+\[
+\omega_U := \sqrt{|G|} \, dx^1 \wedge \cdots \wedge dx^m \in \Omega^m(U)
+\]
+
+是 $ U $ 的体积元。又
+
+\[
+\omega_U = \pm\sqrt{|G|} \, dy^1 \wedge \cdots \wedge dy^m ,
+\]
+
+其中若 $ \psi $ 是正定向的则取正号，否则取负号。由于 $ f := \psi \circ \varphi^{-1} \in \operatorname{Diff}(\varphi(U), \psi(U)) $ 且 $ \varphi = f^{-1} \circ \psi $，由例 XI.3.4(c) 可得
+
+\begin{equation*}
+\begin{aligned}
+\varphi_*\sqrt{|G|} \, dx^1 \wedge \cdots \wedge dx^m &= \varphi_*\omega_U = (f^{-1})_*\psi_*\omega_U = f^*\psi_*\omega_U \\ &= \pm f^*\left(\psi_*\sqrt{|G|} \, dy^1 \wedge \cdots \wedge dy^m\right) \\ &= \pm f^*\left(\psi_*\sqrt{|G|}\right)\det(\partial f) \, dx^1 \wedge \cdots \wedge dx^m \\ &= f^*\left(\psi_*\sqrt{|G|}\right)|\det(\partial f)| \, dx^1 \wedge \cdots \wedge dx^m ,
+\end{aligned}
+\end{equation*}
+
+因为 $ f $ 保持定向当且仅当 $ \psi $ 是正定向的，而 $ f $ 在其余情形反向定向。因此
+
+\[
+\varphi_*\sqrt{|G|} = \left(\psi_*\sqrt{|G|}\right) \circ f \, |\det(\partial f)| .
+\]
+
+由于 $ \varphi(U \cap \partial M) = \varphi(U) \cap \partial\mathbb{H}^m $ 是 $ \lambda_m $-零集，且 $ \varphi(U \setminus \partial M) = \varphi(U) \setminus \partial\mathbb{H}^m $ 在 $ \mathbb{R}^m $ 中是开的，又由于 $ f(\varphi(U)) = \psi(U) $，由推论 X.8.5 版本的变换定理可得
+
+\[
+\int_{\varphi(U)} \varphi_*\sqrt{|G|} \, dx = \int_{\psi(U)} \psi_*\sqrt{|G|} \, dy .
+\]
+
+这便证明了断言。\nobreak\hspace{0.35em}■
+
+\end{lemma}
+
+由注 XI.1.21(b) 与命题 IX.1.8，$ M $ 是林德勒夫空间。因此 $ M $ 有可数图册 $ \mathfrak{A} := \{(\varphi_j, U_j) ; j \in \mathbb{N}\} $。对 $ A \in \mathcal{L}_M $，我们令
+
+\[
+A_0 := A \cap U_0 \quad \text{且} \quad A_{n+1} := (A \cap U_{n+1}) \setminus \bigcup_{k=0}^{n} A_k \quad \text{对 } n \in \mathbb{N} .
+\]
+
+于是 $ (A_j) $ 是 $ \mathcal{L}_M $ 中满足 $ A_j \subset U_j $ 的不交序列，且 $ A = \bigcup_j A_j $。因此
+
+\begin{equation}
+\operatorname{vol}_g(A) := \sum_{j=0}^{\infty} \operatorname{vol}_{g,U_j}(A_j)\tag{1.2}
+\end{equation}
+
+是 $ \overline{\mathbb{R}}^+ $ 中一个有定义的元素。
+
+\begin{lemma}
+
+定义 (1.2) 与图册的特殊选取无关。
+
+\proofhead
+设 $ \widetilde{\mathfrak{A}} := \{(\tilde{\varphi}_j, \tilde{U}_j) ; j \in \mathbb{N}\} $ 是另一个可数图册，并设 $ \tilde{A}_j $ 是仿照 $ A_j $、但用 $ \tilde{U}_j $ 代替 $ U_j $ 而定义的。现在 $ \operatorname{vol}_{g,U_j} $ 与 $ \operatorname{vol}_{g,\tilde{U}_k} $ 分别是 $ U_j $ 与 $ \tilde{U}_k $ 上的测度，因而都是 σ-可加的。于是由 $ \bigcup_j A_j = \bigcup_k \tilde{A}_k = A $ 可得
+\[
+\operatorname{vol}_{g,U_j}(A_j) = \operatorname{vol}_{g,U_j}(A_j \cap A) = \operatorname{vol}_{g,U_j}\left(A_j \cap \bigcup_k \tilde{A}_k\right) = \operatorname{vol}_{g,U_j}\left(\bigcup_k (A_j \cap \tilde{A}_k)\right) = \sum_k \operatorname{vol}_{g,U_j}(A_j \cap \tilde{A}_k) .
+\]
+
+交换 $ \mathfrak{A} $ 与 $ \widetilde{\mathfrak{A}} $ 的角色，我们类似地得到
+
+\[
+\operatorname{vol}_{g,\tilde{U}_k}(\tilde{A}_k) = \sum_j \operatorname{vol}_{g,\tilde{U}_k}(\tilde{A}_k \cap A_j) .
+\]
+
+由于 $ A_j \cap \tilde{A}_k \subset U_j \cap \tilde{U}_k $，引理 1.3 给出
+
+\[
+\operatorname{vol}_{g,U_j}(A_j \cap \tilde{A}_k) = \operatorname{vol}_{g,\tilde{U}_k}(\tilde{A}_k \cap A_j) .
+\]
+
+再由注 X.3.6(b)，我们得到
+
+\begin{equation*}
+\begin{aligned}
+\sum_j \operatorname{vol}_{g,U_j}(A_j) &= \sum_j \sum_k \operatorname{vol}_{g,U_j}(A_j \cap \tilde{A}_k) = \sum_j \sum_k \operatorname{vol}_{g,\tilde{U}_k}(\tilde{A}_k \cap A_j) \\ &= \sum_k \sum_j \operatorname{vol}_{g,\tilde{U}_k}(\tilde{A}_k \cap A_j) = \sum_k \operatorname{vol}_{g,\tilde{U}_k}(\tilde{A}_k) ,
+\end{aligned}
+\end{equation*}
+
+即所求。\nobreak\hspace{0.35em}■
+
+\end{lemma}
+
+显然，$ \operatorname{vol}_g(A) $ 应表示 $ A \subset M $ 的“体积”，它相对于度量张量 $ g $ 来度量。我们现在来思考这应当如何理解。
+
+定义 (1.2) 表明，$ M $ 的任意可测子集 $ A $ 被分解成可数多个两两不交的部分 $ A_j $，而 $ A $ 的“体积”正是这些部分的体积的“和”。该定义要求每个 $ A_j $ 都包含在图册的某个坐标卡中。因此，只需弄清当 $ A $ 包含在坐标卡 $ (\varphi, U) $ 的定义域 $ U $ 中时，$ \operatorname{vol}_g(A) $ 应如何解释。
+
+于是设 $ \bar x \in \varphi(U) $，$ \bar p := \varphi^{-1}(\bar x) $，并设 $ \ell^1, \ldots, \ell^m $ 是正数，使得
+
+\[
+Q := \prod_{j=1}^{m} [\bar x^j, \bar x^j + \ell^j] ,
+\]
+
+即以 $ \bar x $ 为“左下角”、体积为 $ \lambda_m(Q) = \ell^1 \cdot \ldots \cdot \ell^m $ 的矩形仍完全落在 $ \varphi(U) $ 中。若边长 $ \ell^j $ 足够小，则由向量
+
+\[
+\ell^1 \left.\frac{\partial}{\partial x^1}\right|_{\bar p} , \ldots , \ell^m \left.\frac{\partial}{\partial x^m}\right|_{\bar p}
+\]
+
+张成的平行多面体 $ \widehat{Q} := T_{\bar x}\varphi^{-1}(Q) $ 在 $ T_{\bar p}M $ 中就会很好地逼近 $ Q $ 在 $ M $ 中的像 $ A := \varphi^{-1}(Q) $。
+
+\bookfigure[0.37]{figures/dd3b43c1aa94a362.png}
+
+我们可以假定 $ (\varphi, U) $ 是 $ U $ 的正坐标卡。则由注 XI.2.12(c) 可知 $ \widehat{Q} $ 的体积满足
+
+\begin{equation*}
+\begin{aligned}
+\omega(\bar p)\left(\ell^1 \left.\frac{\partial}{\partial x^1}\right|_{\bar p}, \ldots, \ell^m \left.\frac{\partial}{\partial x^m}\right|_{\bar p}\right) &= \omega(\bar p)\left(\left.\frac{\partial}{\partial x^1}\right|_{\bar p}, \ldots, \left.\frac{\partial}{\partial x^m}\right|_{\bar p}\right)\ell^1 \cdot \ldots \cdot \ell^m \\ &= \sqrt{|G|}(\bar p)\lambda_m(Q) = \varphi_*\sqrt{|G|}(\bar x)\lambda_m(Q) .
+\end{aligned}
+\end{equation*}
+
+现在我们把 $ Q $ 分解为有限多个矩形 $ Q_j $（其边沿笛卡尔轴），它们至多沿公共边相交。
+
+\bookfigure[0.67]{figures/e9fbfcc783c703e7.png}
+
+我们用 $ \bar x_j $ 表示 $ Q_j $ 的左下角，并令 $ \bar p_j := \varphi^{-1}(\bar x_j) $。再令 $ \widehat{Q}_j $ 为 $ Q_j $ 在切映射 $ T_{\bar x_j}\varphi^{-1} $ 下于 $ T_{\bar p_j}M $ 中的像。于是由上面的考虑可得
+
+\[
+\operatorname{vol}_g(A) = \int_Q \varphi_*\sqrt{|G|} \, dx \approx \sum_j \varphi_*\sqrt{|G|}(\bar x_j)\lambda_m(Q_j) .
+\]
+
+这表明 $ \operatorname{vol}_g(\varphi^{-1}(Q)) $ 近似等于那些逼近 $ A \subset M $ 的平行多面体的体积之和。通过“无限细分”，这些和趋近于积分，因而趋近于 $ \operatorname{vol}_g(A) $，同时 $ \widehat{Q}_j $ 任意接近 $ A $。这表明 $ \operatorname{vol}_g(A) $ 确实与我们通常对 $ A $ 的体积的理解一致。
+
+下文我们令 $ \lambda_{(M,g)} := \operatorname{vol}_g $。在上下文允许时，我们也可以把它写作 $ \lambda_M $ 或 $ \lambda_g $。又
+
+\[
+\operatorname{vol}(M) := \lambda_M(M)
+\]
+
+是 $ M $ 的\textbf{体积}；当 $ m = 2 $ 时，它是 $ M $ 的\textbf{面积}。
+
+\begin{proposition}
+
+$ \lambda_M $ 是 $ M $ 上的拉东测度，即 $ M $ 的\textbf{黎曼–勒贝格体积测度}。
+
+证明
+
+\begin{items}
+\item
+
+显然，$ \lambda_M $ 把 σ-代数 $ \mathcal{L}_M $ 映到 $ [0, \infty] $，并把空集赋值为 0。
+设 $ \{(\varphi_j, U_j) ; j \in \mathbb{N}\} $ 是可数图册，$ (A_k) $ 是 $ \mathcal{L}_M $ 中的不交序列。则 $ (A_k \cap U_j)_{k \in \mathbb{N}} $ 是 $ U_j $ 中的不交序列。因此，取 $ A := \bigcup_k A_k $、$ \lambda_{M,U_j} := \operatorname{vol}_{g,U_j} $，命题 1.2 给出
+
+\[
+\lambda_{M,U_j}(A \cap U_j) = \sum_k \lambda_{M,U_j}(A_k \cap U_j) .
+\]
+
+由于 $ \lambda_M(A_k) = \sum_j \lambda_{M,U_j}(A_k \cap U_j) $，我们得到
+
+\begin{equation*}
+\begin{aligned}
+\lambda_M(A) &= \sum_j \lambda_{M,U_j}(A \cap U_j) = \sum_j \sum_k \lambda_{M,U_j}(A_k \cap U_j) \\ &= \sum_k \sum_j \lambda_{M,U_j}(A_k \cap U_j) = \sum_k \lambda_M(A_k) ,
+\end{aligned}
+\end{equation*}
+
+其中我们再次引用了注 X.3.6(b)。因此 $ \lambda_M $ 是 σ-可加函数，从而是一个测度。
+
+\item
+
+设 $ A \in \mathcal{L}_M $，并设 $ (\varphi, U) $ 是满足 $ A \subset U $ 的坐标卡。则由推论 IX.5.5，在 $ \varphi(U) $ 中存在 $ G_\delta $ 集 $ \widetilde{G} $ 与 $ F_\sigma $ 集 $ \widetilde{F} $，使得 $ \widetilde{F} \subset \varphi(A) \subset \widetilde{G} $ 且 $ \lambda_m(\widetilde{F}) = \lambda_m(\varphi(A)) = \lambda_m(\widetilde{G}) $。于是
+
+\[
+\int_{\widetilde{F}} \varphi_*\sqrt{|G|} \, dx = \int_{\varphi(A)} \varphi_*\sqrt{|G|} \, dx = \int_{\widetilde{G}} \varphi_*\sqrt{|G|} \, dx .
+\]
+
+因此可以找到 $ \widetilde{F} $ 的紧致子集 $ \widetilde{F}_j $ 组成的递增序列，使得 $ \bigcup_j \widetilde{F}_j = \widetilde{F} $。于是 $ F_j := \varphi^{-1}(\widetilde{F}_j) $ 是 $ A $ 的紧致子集，而单调收敛定理给出
+
+\[
+\lambda_M(F_j) = \int_{\widetilde{F}_j} \varphi_*\sqrt{|G|} \, dx \uparrow \int_{\widetilde{F}} \varphi_*\sqrt{|G|} \, dx = \int_{\varphi(A)} \varphi_*\sqrt{|G|} \, dx = \lambda_M(A) .
+\]
+
+因此
+
+\begin{equation}
+\lambda_M(A) = \sup\{ \lambda_M(K) ; K \subset A, K \text{ 在 } M \text{ 中紧致} \} .\tag{1.3}
+\end{equation}
+
+类似地，我们证明
+
+\begin{equation}
+\lambda_M(A) = \inf\{ \lambda_M(O) ; O \supset A, O \text{ 在 } M \text{ 中开} \} .\tag{1.4}
+\end{equation}
+\item
+
+现在设 $ A $ 是 $ \mathcal{L}_M $ 中的任意集合。则引理 1.4 的证明表明，存在 $ \mathcal{L}_M $ 中的不交序列 $ (A_j) $，使得 $ A_j \subset U_j $ 且 $ \bigcup_j A_j = A $。若对某个 $ j_0 \in \mathbb{N} $ 有 $ \lambda_M(A_{j_0}) = \infty $，则 $ \lambda_M(A) = \infty $。此时 (b) 还表明，对每个 $ \alpha > 0 $ 都存在紧致集 $ K $，使得 $ K \subset A_{j_0} \subset A $ 且 $ \lambda_M(K) > \alpha $。由此可知，在这一情形下 (1.3) 也成立。因此设 $ \lambda_M(A_j) < \infty $（$ j \in \mathbb{N} $），并设 $ \alpha < \beta < \lambda_M(A) $。则存在 $ N $，使得 $ \sum_{j=0}^{N} \lambda_M(A_j) > \beta > \alpha $。根据 (b)，对每个 $ j $ 都能找到 $ A_j $ 的紧致子集 $ K_j $，使得 $ \lambda_M(K_j) > \lambda_M(A_j) - (\beta - \alpha)2^{-j-1} $。于是 $ K := \bigcup_{j=0}^{N} K_j $ 是 $ A $ 的紧致子集，并且
+
+\[
+\lambda_M(K) = \sum_{j=0}^{N} \lambda_M(K_j) > \sum_{j=0}^{N} \lambda_M(A_j) - (\beta - \alpha)\sum_{j=0}^{N} 2^{-j-1} > \beta - (\beta - \alpha) = \alpha .
+\]
+
+由于这对每个 $ \alpha < \lambda_M(A) $ 都成立，我们看到 (1.3) 在这一情形下也成立。
+由 (b) 还可推出，对每个 $ \varepsilon > 0 $ 与 $ j \in \mathbb{N} $，存在开集 $ O_j $，使得 $ A \subset O_j \subset U_j $ 且 $ \lambda_M(O_j) < \lambda_M(A_j) + \varepsilon 2^{-j-1} $。于是 $ O := \bigcup_j O_j $ 在 $ M $ 中是开的，并且满足 $ O \supset A $ 以及
+
+\[
+\lambda_M(O) \le \sum_j \lambda_M(O_j) < \sum_j \lambda_M(A_j) + \varepsilon = \lambda_M(A) + \varepsilon .
+\]
+
+这表明 (1.4) 也成立。
+
+\item
+
+设 $ p \in M $，$ (\varphi, U) $ 是 $ p $ 附近的坐标卡。则存在 $ p $ 在 $ M $ 中的紧致邻域 $ K $，使得 $ K \subset U $。由于 $ \varphi(K) $ 在 $ \overline{\mathbb{H}}^m $ 中紧致，因而在 $ \mathbb{R}^m $ 中也紧致，由 (1.1)、$ \varphi_*\sqrt{|G|} $ 的连续性、定理 X.5.1(i) 与推论 X.3.15(iii) 可知 $ \varphi_*\sqrt{|G|} $ 在 $ \varphi(K) $ 上可积。因此 $ \lambda_M(K) $ 有限，这表明 $ \lambda_M $ 局部有限。于是它是拉东测度。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{性质}
+
+下一个命题刻画 $ \lambda_M $-零集。
+
+\begin{proposition}
+
+设 $ A \in \mathcal{L}_M $。下列陈述等价：
+
+\begin{subitems}
+\item
+
+$ \lambda_M(A) = 0 $；
+
+\item
+
+对每张坐标卡 $ (\varphi, U) $ 都有 $ \lambda_m(\varphi(A \cap U)) = 0 $；
+
+\item
+
+对 $ M $ 的某个可数图册中的每张坐标卡都有 $ \lambda_m(\varphi(A \cap U)) = 0 $。
+
+\proofhead
+“(i)$ \Rightarrow $(ii)” 因为 $ A \cap U \in \mathcal{L}_M $ 且 $ A \cap U \subset A $，所以
+\[
+0 = \lambda_M(A) \ge \lambda_M(A \cap U) = \int_{\varphi(A \cap U)} \varphi_*\sqrt{|G|} \, dx .
+\]
+
+因为 $ \varphi_*\sqrt{|G|} $ 连续且逐点严格为正，注 X.3.3(c) 给出 $ \lambda_m(\varphi(A \cap U)) = 0 $。
+“(ii)$ \Rightarrow $(iii)” 这是显然的。
+“(iii)$ \Rightarrow $(i)” 由 $ \lambda_m(\varphi(A \cap U)) = 0 $ 及 (1.1) 可得 $ \lambda_M(A \cap U) = 0 $。设 $ \{(\varphi_j, U_j) ; j \in \mathbb{N}\} $ 是可数图册。则 $ A = A \cap \bigcup_j U_j = \bigcup_j (A \cap U_j) $，而结论由 $ \lambda_M $ 的 σ-次可加性得到。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+该命题表明，$ \lambda_M $-零集这一概念与所选取的伪黎曼度量无关。因此我们可以径直把 $ \lambda_M $-零集称为 \textbf{零集}，或称为 $ M $ 的\textbf{勒贝格零集}。
+
+下一个定理列出黎曼–勒贝格测度的基本性质。
+
+\begin{theorem}
+
+设 $ (M, g) $ 是伪黎曼流形。
+
+\begin{subitems}
+\item
+
+$ (M, \mathcal{L}_M, \lambda_M) $ 是 σ-紧致的完备测度空间。
+
+\item
+
+$ \lambda_M $ 是 massive 拉东测度。
+
+\item
+
+$ M $ 的一切满足 $ n < m $ 的 $ n $ 维子流形都是 $ M $ 中的零集，$ \partial M $ 也是 $ M $ 中的零集。
+
+\item
+
+若 $ M $ 是 $ \mathbb{R}^m $ 的 $ m $ 维子流形，则 $ \lambda_M = \lambda_m $。
+
+\proofhead
+(i) 因为 $ M $ 是局部紧致的度量空间，且是 Lindelöf 空间，由注 X.1.16(e) 知 $ (M, \mathcal{L}_M, \lambda_M) $ 是 σ-紧致的。其完备性由命题 1.5、1.6 以及勒贝格测度的完备性得到。
+\end{subitems}
+
+\begin{subitems}
+\item[（ii）]
+
+设 $ O $ 是 $ M $ 中的非空开集，$ (\varphi, U) $ 是满足 $ U \cap O \ne \varnothing $ 的坐标卡。则 $ \varphi(O \cap U) $ 具有正的勒贝格测度。因为 $ \varphi_*\sqrt{|G|} $ 连续且逐点严格为正，注 X.3.3(c) 给出
+
+\[
+\lambda_M(O) \ge \lambda_M(O \cap U) = \int_{\varphi(O \cap U)} \varphi_*\sqrt{|G|} \, dx > 0 .
+\]
+
+于是由 (i) 与命题 1.5 得到 (ii)。
+
+\item[（iii）]
+
+这由命题 1.6 与例 IX.5.2 得到。
+
+\item[（iv）]
+
+使用平凡坐标卡，我们得到
+
+\[
+\lambda_M(A) = \int_A dx = \lambda_m(A) \quad \text{对 } A \in \mathcal{L}_M ,
+\]
+
+这正是所要的。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{可积性}
+
+设 $ E := (E, |\cdot|) $ 是巴拿赫空间。由定理 1.7，我们可以使用 X.1–X.4 节中发展起来的整套积分理论。特别地，对 $ p \in [1, \infty] \cup \{0\} $ 定义了空间 $ \mathcal{L}_p(M, \lambda_M, E) $ 与 $ L_p(M, \lambda_M, E) $。
+
+\begin{proposition}
+
+对 $ f: M \to E $，下列陈述等价：
+
+\begin{subitems}
+\item
+
+$ f \in \mathcal{L}_0(M, \lambda_M, E) $；
+
+\item
+
+对 $ M $ 的每张坐标卡 $ (\varphi, U) $ 都有 $ \varphi_* f \in \mathcal{L}_0(\varphi(U), E) $；
+
+\item
+
+对 $ M $ 的某个可数图册中的每张坐标卡都有 $ \varphi_* f \in \mathcal{L}_0(\varphi(U), E) $。
+
+\proofhead
+“(i)$ \Rightarrow $(ii)” 设 $ f $ 是 $ \lambda_M $-可测的。则由定理 X.1.4，$ f $ 是 $ \lambda_M $-几乎可分值的且 $ \mathcal{L}_M $-可测的。由命题 1.6 与 $ \mathcal{L}_M $ 的定义，容易推出 $ \varphi_* f: \varphi(U) \to E $ 是 $ \lambda_m $-几乎可分值的且 $ \mathcal{L}_{\varphi(U)} $-可测的。因此定理 X.1.4 蕴含 $ \varphi_* f $ 属于 $ \mathcal{L}_0(\varphi(U), E) $。
+“(ii)$ \Rightarrow $(iii)” 这是平凡的。
+“(iii)$ \Rightarrow $(i)” 设 $ \{(\varphi_j, U_j) ; j \in \mathbb{N}\} $ 是 $ M $ 的可数图册，并设对 $ j \in \mathbb{N} $ 有 $ \varphi_{j*} f \in \mathcal{L}_0(\varphi_j(U_j), E) $。命题 XI.1.20 保证存在从属于 $ M $ 的覆盖 $ \{U_j ; j \in \mathbb{N}\} $ 的光滑单位分解 $ \{\pi_j ; j \in \mathbb{N}\} $。则对 $ j \in \mathbb{N} $ 有 $ \varphi_{j*}\pi_j \in C^\infty(\varphi_j(U_j)) $。因此由注 X.1.2(d) 得到
+\[
+\varphi_{j*}(\pi_j f) = (\varphi_{j*}\pi_j)(\varphi_{j*} f) \in \mathcal{L}_0(\varphi_j(U_j), E) \quad \text{对 } j \in \mathbb{N} .
+\]
+
+与证明的第一部分一样，我们可以推出对 $ j \in \mathbb{N} $ 有 $ \pi_j f \in \mathcal{L}_0(M, \lambda_M, E) $。因为 $ f = (\sum_{j=1}^{\infty}\pi_j)f = \sum_{j=1}^{\infty}\pi_j f $，所以由定理 X.1.14 即得 $ f $ 的 $ \lambda_M $-可测性。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+因为 $ \lambda_M $ 是 massive 拉东测度，所以我们可以使用在命题 X.4.17 之后设定的约定。这一点在下一个命题中要注意。
+
+\begin{proposition}
+
+\begin{items}
+\item
+
+在向量子空间的意义下，下列结论成立：
+
+\begin{subitems}
+\item
+
+$ C(M, E) \subset L_0(M, \lambda_M, E) $。
+
+\item
+
+当 $ 1 \le p < \infty $ 时，$ C_c(M, E) $ 在 $ L_p(M, \lambda_M, E) $ 中稠密。
+
+\end{subitems}
+
+\item
+
+若 $ K $ 是 $ M $ 的紧致子集，则
+
+\[
+\left|\int_K f \, d\lambda_M\right| \le \int_K |f| \, d\lambda_M \le \|f\|_{C(K,E)} \lambda_M(K) \quad \text{对 } f \in C(M, E) .
+\]
+
+\proofhead
+由于定理 1.7，本命题由定理 X.4.18(i) 与推论 X.3.15(iii) 得到。\nobreak\hspace{0.35em}■
+\end{items}
+
+\end{proposition}
+
+现在说明如何把 $ \int_M f \, d\lambda_M $ 的计算化为局部坐标中的积分。因此先考虑局部情形。
+
+\begin{theorem}
+
+设 $ (\varphi, U) $ 是 $ M $ 的坐标卡，$ f \in \mathcal{L}_0(U, \lambda_M, E) $。则 $ f $ 属于 $ \mathcal{L}_1(U, \lambda_M, E) $ 当且仅当 $ (\varphi_* f)\varphi_*\sqrt{|G|} $ 属于 $ \mathcal{L}_1(\varphi(u), \lambda_m, E) $。此时有
+
+\begin{equation}
+\int_U f \, d\lambda_M = \int_{\varphi(U)} (\varphi_* f)\varphi_*\sqrt{|G|} \, dx .\tag{1.5}
+\end{equation}
+
+证明
+
+\begin{subitems}
+\item
+
+设 $ f = \chi_A $，其中 $ A \in \mathcal{L}_M $ 且 $ A \subset U $。则
+
+\[
+\int_U f \, d\lambda_M = \int_A d\lambda_M = \int_{\varphi(A)} \varphi_*\sqrt{|G|} \, dx = \int_{\varphi(U)} (\varphi_* f)\varphi_*\sqrt{|G|} \, dx
+\]
+
+因为 $ \varphi_* f = \varphi_*\chi_A = \chi_{\varphi(A)} $。现在可知 (1.5) 对简单函数成立。
+
+\item
+
+设 $ f \in \mathcal{L}_1(U, \lambda_M, E) $。则存在由简单函数组成的 $ \mathcal{L}_1 $-柯西序列 $ (f_j) $，使得 $ f_j \to f $ $ \lambda_M $-几乎处处，且
+
+\begin{equation}
+\int_U f_j \, d\lambda_M \to \int_U f \, d\lambda_M .\tag{1.6}
+\end{equation}
+
+进一步，$ (\varphi_* f_j) $ 是 $ \mathcal{S}(\varphi(U), E) $ 中的序列，且
+
+\[
+(\varphi_* f_j)\varphi_*\sqrt{|G|} \to (\varphi_* f)\varphi_*\sqrt{|G|} \quad \text{在 } \varphi(U) \text{ 中 } \lambda_m\text{-几乎处处} .
+\]
+
+此外，由 (1.5) 对简单函数成立可得
+
+\[
+\int_U |f_j - f_k| \, d\lambda_M = \int_{\varphi(U)} |\varphi_* f_j - \varphi_* f_k|\varphi_*\sqrt{|G|} \, dx = \int_{\varphi(U)} |h_j - h_k| \, dx ,
+\]
+
+其中 $ h_j := \varphi_*(f_j\sqrt{|G|}) $。因此 $ (h_j) $ 是 $ F := \mathcal{L}_1(\varphi(U), E) $ 中的 $ \mathcal{L}_1 $-柯西序列。由定理 X.2.10(ii)，存在 $ h \in F $ 使 $ h_j \to h $ 于 $ F $。于是由定理 X.2.18(i) 知存在 $ (h_j) $ 的子序列 $ (h_{j_k})_{k \in \mathbb{N}} $，使得当 $ k \to \infty $ 时 $ h_{j_k} \to h $ $ \lambda_m $-几乎处处。因为 $ f_j \to f $ $ \lambda_M $-几乎处处蕴含 $ h_j \to \varphi_*(f\sqrt{|G|}) $ $ \lambda_m $-几乎处处，所以 $ h $ 与 $ \varphi_*(f\sqrt{|G|}) $ $ \lambda_m $-几乎处处相等。于是定理 X.2.18(ii) 蕴含
+
+\[
+\int_U f_j \, d\lambda_M = \int_{\varphi(U)} h_j \, dx \to \int_{\varphi(U)} \varphi_*(f\sqrt{|G|}) \, dx .
+\]
+
+因此由 (1.6) 即得结论。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+我们现在处理一般情形。先引入一个有用的缩写：设 $ \{(\varphi_j, U_j) ; j \in \mathbb{N}\} $ 是 $ M $ 的可数图册，并设 $ \{\pi_j ; j \in \mathbb{N}\} $ 是从属于 $ M $ 的覆盖 $ \{U_j ; j \in \mathbb{N}\} $ 的光滑单位分解。则称 $ \{(\varphi_j, U_j, \pi_j) ; j \in \mathbb{N}\} $ 为 $ M $ 的\textbf{局部系统}。这类系统的存在性由命题 XI.1.20 保证。
+
+\begin{proposition}
+
+设 $ \{(\varphi_j, U_j, \pi_j) ; j \in \mathbb{N}\} $ 是 $ M $ 的局部系统。则 $ f \in \mathcal{L}_0(M, \lambda_M, E) $ 属于 $ \mathcal{L}_1(M, \lambda_M, E) $ 当且仅当对每个 $ j \in \mathbb{N} $ 有 $ \pi_j f \in \mathcal{L}_1(U_j, \lambda_M, E) $，且
+
+\begin{equation}
+\sum_{j=0}^{\infty} \int_{U_j} \pi_j |f| \, d\lambda_M < \infty .\tag{1.7}
+\end{equation}
+
+此时有
+
+\begin{equation}
+\int_M f \, d\lambda_M = \sum_{j=0}^{\infty} \int_{U_j} \pi_j f \, d\lambda_M .\tag{1.8}
+\end{equation}
+
+证明
+
+\begin{subitems}
+\item
+
+设 $ f \in \mathcal{L}_1(M, \lambda_M, E) $。则 $ f = (\sum_{j=0}^{\infty}\pi_j)f = \sum_{j=0}^{\infty}\pi_j f $ 逐点成立，且
+
+\[
+|\pi_k f| \le \sum_{j=0}^{n} |\pi_j f| = \sum_{j=0}^{n} \pi_j |f| \le |f| \quad \text{对 } 0 \le k \le n < \infty .
+\]
+
+因此由 $ \operatorname{supp}(\pi_k) \subset\subset U_k $ 得到 $ \pi_k f \in \mathcal{L}_1(U_k, \lambda_M, E) $。定理 X.3.9、1.10 与勒贝格定理现在蕴含 (1.7) 与 (1.8)。
+
+\item
+
+设对 $ j \in \mathbb{N} $ 有 $ \pi_j f \in \mathcal{L}_1(U_j, \lambda_M, E) $，并设 (1.7) 成立。令 $ h_n := \sum_{j=0}^{n} \pi_j f $（$ n \in \mathbb{N} $），可得
+
+\[
+\int_M |h_j - h_k| \, d\lambda_M \le \sum_{i=j+1}^{k} \int_{U_i} \pi_i |f| \, d\lambda_M \quad \text{对 } 0 \le j < k < \infty .
+\]
+
+因此 $ (h_j) $ 是 $ \mathcal{L}_1(M, \lambda_M, E) $ 中的 $ \mathcal{L}_1 $-柯西序列。因为 $ (h_j) $ 逐点收敛于 $ f $，所以由 $ \mathcal{L}_1(M, \lambda_M, E) $ 的完备性及定理 X.2.18 知 $ f $ 关于测度 $ \lambda_M $ 可积。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{proposition}
+
+\begin{remark}
+
+（正则性） 显然，上面的所有定义与命题在 $ M $ 是 $ C^1 $ 流形时仍然成立。\nobreak\hspace{0.35em}■
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{若干体积的计算}
+
+当然，命题 1.11 主要具有理论意义。在实际情形中，人们往往处于这样一种舒适的情形：$ M $ 除一个（可能存在的）零集之外可由单张坐标卡描述。此时可以使用定理 1.10。在下面的例子中，我们在 $ f = 1 $ 的特殊情形下考虑这类情形。
+
+\begin{example}
+
+除另有说明外，我们在 $ M $ 上使用标准度量。
+
+\begin{items}
+\item
+
+（曲线） 设 $ \gamma: J \to \mathbb{R}^m $ 是完全区间 $ J \subset \mathbb{R} $ 的嵌入。则 $ M := \gamma(J) $ 是 $ \mathbb{R}^m $ 中的嵌入曲线，且 $ \operatorname{vol}(M) = L(M) $，其中 $ L $ 表示弧长。更一般地，$ f \in \mathcal{L}_1(M, \lambda_M, E) $ 满足
+
+\[
+\int_M f \, d\lambda_M = \int_J (f \circ \gamma)|\dot\gamma| \, dt .
+\]
+
+在此情形下，我们令 $ ds := \sqrt{G} \, dt $，并称 $ ds $ 为\textbf{弧长元}，其动机来自定理 VIII.1.7。
+
+\proofhead
+这由例 XI.5.3(e) 与定理 VIII.1.7 得到。\nobreak\hspace{0.35em}■
+\item
+
+（图像） 设 $ X $ 是 $ \mathbb{R}^m $ 中的开集，$ f \in C^\infty(X, \mathbb{R}) $。则\footnote{见例 VIII.1.9(a)。}
+
+\[
+\operatorname{vol}(\operatorname{graph}(f)) = \int_X \sqrt{1 + |\nabla f|^2} \, dx .
+\]
+
+\proofhead
+例 XI.5.3(d)。\nobreak\hspace{0.35em}■
+\item
+
+（球面） 设 $ m \in \mathbb{N}^\times $，$ r > 0 $。则
+
+\[
+r \operatorname{vol}(rS^m) = (m+1)\operatorname{vol}(r\mathbb{B}^{m+1}) .
+\]
+
+特别地，$ \operatorname{vol}(rS^1) = 2\pi r $，$ \operatorname{vol}(rS^2) = 4\pi r^2 $，$ \operatorname{vol}(rS^3) = 2\pi^2 r^3 $。
+
+\proofhead
+由注 IX.5.26(b) 知
+\begin{equation}
+\operatorname{vol}(r\mathbb{B}^{m+1}) = r^{m+1}\operatorname{vol}(\mathbb{B}^{m+1}) .\tag{1.9}
+\end{equation}
+
+于是由例 VIII.1.9(c)，我们可以假定 $ m \ge 2 $。令
+
+\[
+h_\pm: \mathbb{B}^m_r \to \mathbb{R} , \quad x \mapsto \pm\sqrt{r^2 - |x|^2}
+\]
+
+为上半球面与下半球面 $ rS^m_\pm $ 的参数化。对这些参数化可得 $ \nabla h_\pm(x) = -x/h_\pm(x) $，从而对 $ x \in r\mathbb{B}^m $ 有 $ |\nabla h_\pm(x)|^2 = |x|^2/(r^2 - |x|^2) $。因此由 (b) 与变换定理可得
+
+\[
+\operatorname{vol}(rS^m_\pm) = \int_{r\mathbb{B}^m} \sqrt{r^2/(r^2 - |x|^2)} \, dx = r^m \int_{\mathbb{B}^m} \sqrt{1/(1 - |y|^2)} \, dy = r^m \operatorname{vol}(S^m_\pm) .
+\]
+
+因为 $ S^m = S^m_+ \cup S^m_- \cup S^{m-1} $，其中 $ S^{m-1} $ 与 $ S^m $ 的“赤道球面” $ S^{m-1} \times \{0\} $ 等同，且 $ \lambda_{S^m}(S^{m-1}) = 0 $，所以我们得到
+
+\begin{equation}
+\operatorname{vol}(rS^m) = r^m \operatorname{vol}(S^m) .\tag{1.10}
+\end{equation}
+
+由 (1.9) 与 (1.10)，只需证明
+
+\[
+\operatorname{vol}(S^m) = (m+1)\operatorname{vol}(\mathbb{B}^{m+1}) .
+\]
+
+我们使用例 XI.5.5(h) 中考虑过的 $ S^m \setminus H_m $ 的参数化 $ h_m: W_m \to \mathbb{R}^{m+1} $，并将其坐标卡记为 $ \psi $。于是从那里给出的 $ g_{S^m} $ 的公式（因为基本矩阵是对角的）可以读出
+
+\[
+\psi_* G = \prod_{k=0}^{m-1} a_{m+1,k} = \prod_{k=0}^{m-1} \prod_{i=k+1}^{m-1} \sin^2 \vartheta_i = w_{m+1}^2(\vartheta) ,
+\]
+
+其中
+
+\[
+w_{m+1}(\vartheta) := \sin\vartheta_1 \sin^2\vartheta_2 \cdot \ldots \cdot \sin^{m-1}\vartheta_{m-1} \quad \text{对 } \vartheta = (\vartheta_1, \ldots, \vartheta_{m-1}) \in [0, \pi]^{m-1} .
+\]
+
+因为 $ W_m = (0, 2\pi) \times (0, \pi)^{m-1} $，由例 X.8.10(c) 与富比尼定理可得
+
+\[
+\lambda_{S^m}(S^m \setminus H_m) = \int_{W_m} \psi_*\sqrt{G} \, d(\varphi, \vartheta) = 2\pi \int_{(0, \pi)^{m-1}} w_{m+1}(\vartheta) \, d\vartheta = (m+1)\omega_{m+1} ,
+\]
+
+其中 $ \omega_{m+1} := \operatorname{vol}(\mathbb{B}^{m+1}) $。因为 $ S^m \cap H_m $ 是 $ S^m $ 的零集，故结论成立。\nobreak\hspace{0.35em}■
+
+\item
+
+（螺旋面） 设 $ 0 \le \alpha < \beta < \infty $，$ a \ge 0 $。令 $ T > 0 $，并定义
+
+\[
+h : (\alpha, \beta) \times (0, T) \to \mathbb{R}^3
+\]
+
+为
+
+\[
+h(s, t) := (s\cos t, s\sin t, at) .
+\]
+\end{items}
+
+\bookfigure[0.31]{figures/c9c41bbabc7a6d8a.png}
+
+则 $ h $ 是螺旋面 $ F $ 的参数化。它是这样生成的：从 $ t = 0 $ 开始，取位于 $ x $ 轴上、由区间 $ (\alpha, \beta) $ 构成的“杆”，然后令其绕 $ z $ 轴以角速度 1 旋转，同时以速度 $ a $ 上升。它满足
+
+\[
+\operatorname{vol}(F) = \frac{T}{2}\left[ s\sqrt{s^2 + a^2} + a^2 \log\left(s + \sqrt{s^2 + a^2}\right)\right]\bigg|_{\alpha}^{\beta} .
+\]
+
+特别地，取 $ \alpha = 0 $、$ \beta = 1 $、$ T = 2\pi $——即长为 $ 1 $ 的杆绕其端点作整周旋转——我们有
+
+\[
+\operatorname{vol}(F)=\pi\left[\sqrt{1+a^{2}}+a^{2}\log\left(1+\sqrt{1+a^{2}}\right)-a^{2}\log a\right]=\pi\left[\sqrt{1+a^{2}}+a^{2}\log\left(\sqrt{1+1/a^{2}}+1/a\right)\right].
+\]
+
+这个公式在若干特殊情形下给出了我们所期望的结果：当 $ a=0 $ 时，我们得到面积为 $ \pi $ 的单位圆盘，而当 $ a>0 $ 时 $ \operatorname{vol}(F)>\pi $。
+
+\proofhead
+简单计算表明 $ \varphi_{*}\sqrt{G}=\sqrt{s^{2}+a^{2}} $，其中 $ \varphi $ 是属于 $ h $ 的坐标卡，即 $ h=i\circ\varphi^{-1} $。因为
+\[
+\left[s\sqrt{s^{2}+a^{2}}+a^{2}\log\left(s+\sqrt{s^{2}+a^{2}}\right)\right]^{\cdot}=2\sqrt{s^{2}+a^{2}},
+\]
+
+由富比尼定理即得结论。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（e）]
+
+双曲平面 $ H^{2} $ 中圆盘 $ R\mathbb{B}^{2} $ 的体积满足
+
+\[
+\operatorname{vol}_{g_{H^{2}}}\left(R\mathbb{B}^{2}\right)=2\pi\left(\sqrt{1+R^{2}}-1\right).
+\]
+
+当 $ R $ 变大时，该表达式近似表现为 $ 2\pi R $，而在欧氏情形下体积按 $ R^{2} $ 增长。
+
+\proofhead
+使用极坐标，我们回顾例 XI.5.5(k)：
+\[
+g_{H^{2}}=\frac{(dr)^{2}}{1+r^{2}}+r^{2}(d\varphi)^{2}.
+\]
+
+由此读出
+
+\[
+\omega_{H^{2}}=\frac{r}{\sqrt{1+r^{2}}}\,dr\wedge d\varphi.
+\]
+
+因为 $ H^{2} $ 的单点集是零集，由此得到
+
+\[
+\operatorname{vol}_{g_{H^{2}}}\left(R\mathbb{B}^{2}\right)=\int_{0}^{R}\int_{0}^{2\pi}\frac{r}{\sqrt{1+r^{2}}}\,dr\,d\varphi=2\pi\int_{0}^{R}\frac{r\,dr}{\sqrt{1+r^{2}}},
+\]
+
+如所求。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $ N $ 是 $ m $ 维流形，$ f\in\operatorname{Diff}^{1}(M,N) $。证明 $ A\in\mathcal{L}_{M} \iff f(A)\in\mathcal{L}_{N} $。
+
+\item
+
+对双曲面 $ H:=\{(x,y,z)\in\mathbb{R}^{3} ; x^{2}+y^{2}-z^{2}=1\} $，关于标准度量与参数化
+
+\[
+(t,\varphi)\mapsto(\cosh t\cos\varphi,\cosh t\sin\varphi,\sinh t)
+\]
+
+确定 $ \omega_{M} $。再计算 $ H $ 中满足 $ 0<z<1 $ 的部分的体积。
+
+\item
+
+设 $ Z:=S^{1}\times(-1,1) $ 是 $ \mathbb{R}^{3} $ 中的圆柱面。计算 $ \int_{Z}|x|^{2}\,d\lambda_{Z} $。
+
+\item
+
+计算积分 $ \int_{S^{2}}x^{2}y^{2}z^{2}\,d\lambda_{S^{2}} $。
+
+\item
+
+从球 $ R\mathbb{B}^{3} $ 中被圆柱面
+
+\[
+Z_{R}:=\{(x,y,z)\in\mathbb{R}^{3} ; x^{2}+y^{2}=Rx\}
+\]
+
+截出的立体称为 \textbf{维维亚尼立体} $ V_{R} $。
+
+\bookfigure[0.31]{figures/771129d3e701a353.png}
+
+证明
+
+\begin{subitems}
+\item
+
+$ \operatorname{vol}(V_{R})=2(\pi-4/3)R^{3}/3 $；
+
+\item
+
+$ Z_{R} $ 与 $ RS^{2} $ 的交 $ D_{R} $（图中 $ V_{R} $ 的左、右两个“帽”）的面积等于 $ 4R^{2}(\pi/2-1) $。
+
+\end{subitems}
+
+\item
+
+证明：若 $ N $ 是无边的 $ n $ 维流形，则 $ \operatorname{vol}(M\times N)=\operatorname{vol}(M)\operatorname{vol}(N) $。
+
+\item
+
+设 $ \gamma:[0,1]\to(0,\infty)\times\mathbb{R} $，$ t\mapsto(\rho(t),\sigma(t)) $ 是光滑嵌入，$ i:S^{1}\hookrightarrow\mathbb{R}^{2} $，且
+
+\[
+f:S^{1}\times[0,1]\to\mathbb{R}^{3},\quad (q,t)\mapsto(\rho(t)i(q),\sigma(t)).
+\]
+
+最后记 $ Z_{\gamma}^{2}:=f\left(S^{1}\times[0,1]\right) $ 为 $ \mathbb{R}^{3} $ 中由 $ \gamma $ 生成的旋转曲面。证明
+
+\[
+\operatorname{vol}(Z_{\gamma}^{2})=2\pi\int_{0}^{1}\rho(t)|\gamma'(t)|\,dt.
+\]
+\item
+
+设 $ E_{a,b} $ 是 $ \mathbb{R}^{3} $ 中半轴为 $ a\ge b>0 $ 的旋转椭球。再令 $ k:=\sqrt{a^{2}-b^{2}}/a $。于是\footnote{见注 VIII.2.3(b)。}
+
+\[
+\operatorname{vol}(E_{a,b})=4\pi ab\int_{0}^{\pi/2}\sqrt{1-k^{2}\sin t}\,dt.
+\]
+\item
+
+证明：$ a>1 $ 的环面 $ \mathbb{T}_{a,1}^{2} $ 满足 $ \operatorname{vol}(\mathbb{T}_{a,1}^{2})=4\pi^{2}a $。
+
+\item
+
+设 $ \alpha\in(1/2,1] $，$ r(x):=x^{-\alpha} $（$ x\ge 1 $）。证明集合
+
+\[
+\{(x,y,z)\in[1,\infty)\times\mathbb{R}^{2} ; y^{2}+z^{2}\le r^{2}(x)\}
+\]
+
+的体积有限，尽管其表面积无限。
+
+\bookfigure[0.30]{figures/790577c47d285ebe.png}
+
+\item
+
+设 $ \mathbb{H}^{2}:=\{(x,y)\in\mathbb{R}^{2} ; y>0\} $，$ i:S^{1}\hookrightarrow\mathbb{R}^{2} $。又设 $ M $ 是 $ \mathbb{H}^{2} $ 的紧致子流形，$ \dim(M)=2 $。则
+
+\[
+R_{M}:=\{(x,u)\in\mathbb{R}\times\mathbb{R}^{2} ; (x,|u|)\in M\}\subset\mathbb{R}^{3}
+\]
+
+是由 $ M $ 绕 $ x $ 轴旋转生成的旋转对称立体。证明以下事实：
+
+\begin{items}
+\item
+
+$ R_{M}\to M\times S^{1} $，$ (x,u)\mapsto((x,|u|),u/|u|) $ 是微分同胚，且
+
+\[
+M\times S^{1}\to R_{M},\quad ((x,y),\sigma)\mapsto(x,y\,i(\sigma))
+\]
+
+是其逆映射（“柱坐标”）；
+
+\item
+
+$ \operatorname{vol}(R_{M})=2\pi\int_{M}y\,d\lambda_{M} $；
+
+\item
+
+\textbf{古尔丁第一规则}说
+
+\[
+\operatorname{vol}(R_{M})=2\pi S_{2}(M)\operatorname{vol}(M),
+\]
+
+其中 $ S_{2}(M) $ 表示 $ M $ 的形心 $ S(M) $ 的第二个坐标，从而是该点到旋转轴的距离（见习题 X.6.4）。也就是说，\textbf{旋转体的体积等于子午截面的面积与该截面形心到旋转轴距离为半径的圆周长之积}。
+
+\end{items}
+
+\item
+
+使用习题 11 的记号，但令 $ \dim(M)=1 $。证明：
+
+\begin{items}
+\item
+
+习题 11 的陈述 (a) 与 (b) 在此情形下也成立。\footnote{见习题 7。}
+
+\item
+
+以\textbf{形心}
+
+\[
+S(M):=\frac{1}{\operatorname{vol}(M)}\int_{M}i\,d_{\mathbb{R}^{3}}\,d\lambda_{M}\in\mathbb{R}^{3},
+\]
+
+我们有\textbf{古尔丁第二规则}
+
+\[
+\operatorname{vol}(R_{M})=2\pi S_{2}(M)\operatorname{vol}(M),
+\]
+
+也就是说，\textbf{旋转曲面的体积等于子午截面的弧长与该截面形心到旋转轴距离为半径的圆周长之积}。
+
+\end{items}
+
+\item
+
+确定半圆盘 $ R\mathbb{B}^{2}\cap\mathbb{H}^{2} $ 的形心。（提示：习题 12。）
+
+\item
+
+设 $ N $ 是伪黎曼流形，$ \varphi\in\operatorname{Diff}(M,N) $。令 $ p\in[1,\infty] $，并设 $ E $ 是巴拿赫空间。对 $ f\in E^{N} $，由
+
+\[
+\mathcal{J}_{\varphi}f(s):=\varphi^{\ast}f(s)\det T_{s}\varphi\quad \text{对 } s\in M
+\]
+
+定义 $ \mathcal{J}_{\varphi}f\in E^{M} $。证明以下断言：
+
+\begin{items}
+\item
+
+$ \mathcal{J}_{\varphi} $ 将 $ \mathcal{L}_{p}(N,d\lambda_{N},E) $ 线性且连续地映到 $ \mathcal{L}_{p}(M,d\lambda_{M},E) $。
+
+\item
+
+对 $ f\in\mathcal{L}_{0}(N,d\lambda_{N},E) $，以下两个陈述
+
+\begin{subitems}
+\item
+
+$ f=0 $ $ \lambda_{N} $-几乎处处，与
+
+\item
+
+$ \mathcal{J}_{\varphi}f=0 $ $ \lambda_{M} $-几乎处处
+等价。
+
+\end{subitems}
+
+\item
+
+设对 $ [f]\in L_{p}(N,d\lambda_{N},E) $ 令 $ \mathcal{J}_{\varphi}[f]:=[\mathcal{J}_{\varphi}f] $。则 $ \mathcal{J}_{\varphi}[f] $ 在 $ L_{p}(M,d\lambda_{M},E) $ 中有定义，且 $ \mathcal{J}_{\varphi} $ 本身是从 $ L_{p}(N,d\lambda_{N},E) $ 到 $ L_{p}(M,d\lambda_{M},E) $ 的等距同构映射。
+
+\end{items}
+
+\item
+
+对 $ p\in[1,\infty] $，给出从 $ L_{p}((0,\infty)\times S^{n-1}) $ 到 $ L_{p}(\mathbb{R}^{n}) $ 的等距同构。
+
+\item
+
+对 $ f\in\mathcal{L}_{0}(\mathbb{R}^{n}) $ 与 $ s\in S^{n-1} $，由
+
+\[
+T_{0}f(s)(r):=f(rs)r^{n-1}\quad \text{对 } r\in(0,\infty)
+\]
+
+定义函数 $ T_{0}f(s):(0,\infty)\to\mathbb{R} $。又令 $ p\in[1,\infty) $。
+
+证明：
+
+\begin{items}
+\item
+
+若 $ f\in\mathcal{E}_{c}(\mathbb{R}^{n}) $，则 $ T_{0}f $ 属于 $ \mathcal{L}_{0}\left(S^{n-1},L_{p}(0,\infty)\right) $；
+
+\item
+
+设 $ f\in\mathcal{E}_{c}(\mathbb{R}^{n}) $。则 $ T_{0}f $ 的类 $ [T_{0}f] $ 属于 $ L_{p}\left(S^{n-1},L_{p}(0,\infty)\right) $。
+
+\item
+
+映射 $ \mathcal{E}_{c}(\mathbb{R}^{n})\to L_{p}\left(S^{n-1},L_{p}(0,\infty)\right) $，$ f\mapsto[T_{0}f] $ 存在唯一延拓
+
+\[
+T\in\mathcal{L}\mathrm{is}\left(L_{p}(\mathbb{R}^{n}),L_{p}\left(S^{n-1},L_{p}(0,\infty)\right)\right),
+\]
+
+且 $ T $ 是等距。
+（提示：研究引理 X.6.20 与定理 X.6.22 的证明。）
+
+\end{items}
+
+\end{exercises}
+
+\section{微分形式的积分}
+
+在 §VIII.4 中，我们引入了线积分这一重要概念，即 1-形式在定向曲线上的积分，因而也是在 1 维流形上的积分。本节我们引入高维的类似物，即 $ m $-形式在定向 $ m $ 维流形上的积分。
+
+在引入基本内容之后，我们证明变换定理与富比尼定理对微分形式的推广。通过例子，我们说明这些想法如何用于具体情形。
+
+最后，我们讨论流形上的通量，并证明重要的输运定理。后者不仅在连续介质力学中具有重要意义，而且给出向量场散度的几何解释。
+
+本节中，设
+
+- $ M $ 为 $ m $ 维、$ N $ 为 $ n $ 维的定向流形，其中 $ m, n \in \mathbb{N}^{\times} $。
+
+\needspace{3\baselineskip}\subsection*{m-形式的积分}
+
+设 $ g $ 是 $ M $ 上的伪黎曼度量，$ \omega_M $ 是体积元，$ \lambda_M $ 是相伴的黎曼–勒贝格体积测度。若 $ \omega $ 是 $ M $ 的 $ m $-形式，则由于对 $ p \in M $ 有 $ \dim(\bigwedge^m T_p^* M) = 1 $，恰有一个 $ f \in \mathbb{R}^M $ 使 $ \omega = f \omega_M $。于是称 $ (M, g) $ 上的 $ m $-形式 $ \omega $ 是\textbf{可积的}，如果 $ f $ 是 $ \lambda_M $-可积的，即 $ f $ 属于 $ \mathcal{L}_1(M, \lambda_M) $。此时，我们令
+
+\begin{equation}
+\int_M \omega := \int_M f \, d\lambda_M\tag{2.1}
+\end{equation}
+
+并称 $ \int_M \omega $ 为 $ m $-形式 $ \omega $ 在 $ M $ 上的\textbf{积分}。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+（局部表示）设 $ (\varphi, U) $ 是 $ M $ 的正坐标卡，使 $ \varphi = (x^1, \ldots, x^m) $。$ m $-形式 $ \omega := a\,dx^1 \wedge \cdots \wedge dx^m $ 在 $ U $ 上可积，当且仅当 $ \varphi_* a $ 属于 $ \mathcal{L}_1(\varphi(U)) $。若如此，则
+
+\begin{equation}
+\int_U \omega = \int_U a\,dx^1 \wedge \cdots \wedge dx^m = \int_{\varphi(U)} \varphi_* a \, dx = \int_{\varphi(U)} \varphi_* \omega .\tag{2.2}
+\end{equation}
+
+\proofhead
+由 $ \omega_U = \sqrt{|G|}\, dx^1 \wedge \cdots \wedge dx^m $ 可得 $ \omega = (a/\sqrt{|G|})\omega_U $。因此 $ \omega $ 可积当且仅当 $ a/\sqrt{|G|} $ 属于 $ \mathcal{L}_1(U, \lambda_M) $。由定理 1.10，这当且仅当
+\[
+\varphi_* a = \varphi_*(a/\sqrt{|G|}) \varphi_* \sqrt{|G|} \in \mathcal{L}_1(\varphi(U))
+\]
+
+时成立。现在由 (1.5) 与 (2.1) 即得结论。\nobreak\hspace{0.35em}■
+
+\item
+
+（化归为局部表示）设 $ \omega $ 是 $ M $ 上的 $ m $-形式，并设 $ \{(\varphi_j, U_j, \pi_j) \ ; \ j \in \mathbb{N}\} $ 是 $ M $ 的局部系统，其坐标卡全为正，即正局部系统。对 $ j \in \mathbb{N} $，设 $ a_j dx_j^1 \wedge \cdots \wedge dx_j^m $ 是 $ \omega|U_j $ 关于坐标卡 $ (\varphi_j, U_j) $ 的局部表示，并令 $ \omega_j := \pi_j \omega|U_j $。则 $ \omega $ 在 $ M $ 上可积当且仅当
+
+\begin{equation}
+\sum_{j=0}^{\infty} \int_{U_j} \pi_j |a_j|\, dx_j^1 \wedge \cdots \wedge dx_j^m = \sum_{j=0}^{\infty} \int_{\varphi_j(U_j)} \varphi_{j*}(\pi_j |a_j|)\, dx < \infty .\tag{2.3}
+\end{equation}
+
+若 (2.3) 成立，则
+
+\begin{equation}
+\int_M \omega = \sum_{j=0}^{\infty} \int_{U_j} \omega_j .\tag{2.4}
+\end{equation}
+
+\proofhead
+这由 (a) 与命题 1.11（的证明）推出。\nobreak\hspace{0.35em}■
+\item
+
+$ M $ 上每个具有紧支集的连续 $ m $-形式都在 $ M $ 上可积。
+
+\proofhead
+设 $ \omega $ 是具有紧支集的连续 $ m $-形式。则存在正局部系统 $ \{(\varphi_j, U_j, \pi_j) \ ; \ j \in \mathbb{N}\} $ 与 $ k \in \mathbb{N} $ 使
+\[
+\operatorname{supp}(\pi_j) \cap \operatorname{supp}(\omega) = \varnothing \quad \text{对 } j > k .
+\]
+
+因此 (2.3) 中的级数化为有限和，且 $ \pi_j |a_j| \in C_c(U_j) $，$ j \in \mathbb{N} $。命题 1.9(b) 给出这些函数的可积性。\nobreak\hspace{0.35em}■
+
+\item
+
+由 (a) 与 (b) 可见，$ M $ 上 $ m $-形式的积分与所取的特定伪黎曼度量无关。因此我们总取标准度量而不失一般性。事实上，微分形式的积分不需要任何度量。也就是说，我们可以用公式 (2.2)–(2.4) 来定义 $ \int_M \omega $，从而只用到 $ \mathbb{R}^m $ 中的勒贝格积分。由上述讨论（其中可取某个黎曼度量，例如标准度量）可知，这些定义有意义，即与所选局部系统无关。特别地，具有紧支集的连续 $ m $-形式的积分可在任意\footnote{当考虑抽象流形时，这一事实很重要。可以证明这类流形上总存在黎曼度量。}定向 $ m $ 维流形上定义。
+
+\item
+
+（线性）设 $ \Omega_c^m(M) $ 是 $ M $ 上所有具有紧支集的光滑 $ m $-形式的集合。特别地，$ \mathcal{E}_c(M) := \Omega_c^0(M) $。则 $ \Omega_c^m(M) $ 是 $ \Omega^m(M) $ 的 $ \mathcal{E}(M) $-子模，且
+
+\[
+\int_M : \Omega_c^m(M) \to \mathbb{R} , \quad \omega \mapsto \int_M \omega
+\]
+
+是良定义的，且为 $ \mathbb{R} $-线性的。
+
+\proofhead
+第一个结论显然。由 (c)，所给映射良定义，其线性由积分关于 $ \lambda_M $ 的线性推出。\nobreak\hspace{0.35em}■
+\item
+
+（可定向性）$ m $-形式的积分是\textbf{定向的}，即若 $ M $ 的定向反转，则符号改变：
+
+\[
+\int_{(M, -Or)} \omega = - \int_M \omega .
+\]
+
+\proofhead
+这由 $ \omega_{(M, -Or)} = -\omega_M $ 推出。\nobreak\hspace{0.35em}■
+\item
+
+$ M $ 上的 $ m $-形式 $ \omega $ 可积，当且仅当对每个 $ A \in \mathcal{L}_M $，$ \chi_A \omega $ 可积。此时，我们令
+
+\[
+\int_A \omega := \int_M \chi_A \omega \quad \text{对 } A \in \mathcal{L}_M .
+\]
+
+\proofhead
+这容易由 (a) 与 (b) 推出。\nobreak\hspace{0.35em}■
+\item
+
+（正则性）只需假设 $ M $ 是 $ C^1 $ 流形。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+设 $ (M, g) $ 是伪黎曼流形。则 $ A \in \mathcal{L}_M $ 满足 $ \lambda_M(A) < \infty $。于是 $ \chi_A \omega_M $ 是 $ M $ 上可积的 $ m $-形式，且
+
+\begin{equation}
+\lambda_M(A) = \int_A \omega_M .\tag{2.5}
+\end{equation}
+
+若 $ \lambda_M(A) = \infty $，我们令 $ \int_A \omega_M := \infty $。此定义使 (2.5) 对每个 $ A \in \mathcal{L}_M $ 成立。
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{到子流形的限制}
+
+设 $ M $ 或是 $ N $ 的子流形，或是 $ N $ 的边界 $ \partial N $；用 $ i : M \hookrightarrow N $ 记自然嵌入。又设 $ \omega $ 是 $ N $ 上的 $ m $-形式，且 $ \omega|M = i^* \omega $ 在 $ M $ 上可积。则我们令
+
+\begin{equation}
+\int_M \omega := \int_M i^* \omega .\tag{2.6}
+\end{equation}
+
+\begin{remark}
+
+设 $ (\varphi, U) $ 是 $ M $ 的正坐标卡，$ \varphi = (x^1, \ldots, x^m) $，并令 $ h := i \circ \varphi^{-1} $。
+
+\begin{items}
+\item
+
+$ N $ 上的 $ m $-形式 $ \omega $ 满足
+
+\[
+\int_U \omega = \int_{\varphi(U)} h^* \omega
+\]
+
+若 $ \omega|U $ 可积。
+
+\proofhead
+由 (2.6) 与注 2.1(a) 可得
+\[
+\int_U \omega = \int_U i^* \omega = \int_{\varphi(U)} \varphi_* i^* \omega = \int_{\varphi(U)} (\varphi^{-1})^* i^* \omega = \int_{\varphi(U)} (i \circ \varphi^{-1})^* \omega = \int_{\varphi(U)} h^* \omega .
+\]
+
+由此即得结论。\nobreak\hspace{0.35em}■
+
+\item
+
+（线积分）设 $ X := N $ 是 $ \mathbb{R}^n $ 中的开集，并设 $ \omega := \sum_{j=1}^n a_j dx^j \in \Omega^1(X) $。又设 $ m = 1 $。则
+
+\[
+\int_M \omega = \int_M a_1 dx^1 + \cdots + a_n dx^n
+\]
+
+是线积分。
+
+\proofhead
+这由 §VIII.4（将其关于非紧曲线的结果作显然的推广）与定理 XI.1.18 推出。\nobreak\hspace{0.35em}■
+\item
+
+（向量线元）设 $ X $ 是 $ \mathbb{R}^n $ 中的开集，且 $ m = 1 $。在物理学中，$ \omega := \sum_{j=1}^n a_j dx^j \in \Omega^1(X) $ 常写成向量场 $ \vec a := (a_1, \ldots, a_n) $ 与\textbf{向量线元}\footnote{见注 VIII.4.10(b)。} $ d\vec s := (dx^1, \ldots, dx^n) $ 的形式内积 $ \vec a \cdot d\vec s $。则
+
+\[
+\int_M \omega = \int_M \vec a \cdot d\vec s .
+\]
+
+令 $ J := \varphi(U) $。则 $ J $ 是 $ \mathbb{R} $ 中的开区间。由于 $ M $ 是一维且定向的，对 $ p \in M $ 恰有一个 $ M $ 在 $ p $ 处的\textbf{正单位切向量} $ \mathbf{t}(p) $，即恰有一个 $ \mathbf{t}(p) = \sum_j t^j e_j \in T_p M $ 使 $ |\mathbf{t}(p)| = 1 $ 且 $ \omega_M(p)(\mathbf{t}(p)) = 1 $。于是 $ t := \varphi(p) \in J $ 满足 $ (\varphi_* t^j)(t) = \dot{h}^j(t)/|\dot{h}(t)| $。因此由 (a)、例 1.13(a) 与定理 1.10 可得
+
+\begin{equation*}
+\begin{aligned}
+\int_U \omega &= \int_{\varphi(U)} h^* \omega = \int_J \sum_{j=1}^n (a_j \circ \varphi^{-1}) \dot{h}^j \, dt = \int_{\varphi(U)} \sum_{j=1}^n \varphi_* a_j \, \varphi_* t^j \, |\dot{h}| \, dt \\ &= \int_{\varphi(U)} \varphi_*(\Theta^{-1} \omega|\mathbf{t}) \varphi_* \sqrt{G} \, dt = \int_U (\Theta^{-1} \omega|\mathbf{t}) \, ds .
+\end{aligned}
+\end{equation*}
+
+因此
+
+\[
+\int_M \vec a \cdot d\vec s = \int_M (\vec a|\mathbf{t}) \, ds ,
+\]
+
+这也可表示为 $ d\vec s = \mathbf{t}\, ds $。
+
+\item
+
+（空间中的曲面）设 $ m = 2 $，$ N $ 是 $ \mathbb{R}^3 $ 中的开集。又设 $ (x, y, z) $ 是 $ \mathbb{R}^3 $ 的欧几里得坐标，并令
+
+\[
+\omega := a\,dy \wedge dz + b\,dz \wedge dx + c\,dx \wedge dy .
+\]
+
+用 $ (u, v) $ 记 $ U $ 的局部坐标，我们有
+
+\begin{equation*}
+\begin{aligned}
+\int_U \omega &= \int_U a\,dy \wedge dz + b\,dz \wedge dx + c\,dx \wedge dy \\ &= \int_{\varphi(U)} \left[ h^* a \frac{\partial(y, z)}{\partial(u, v)} + h^* b \frac{\partial(z, x)}{\partial(u, v)} + h^* c \frac{\partial(x, y)}{\partial(u, v)} \right] d(u, v) \\ &= \int_{\varphi(U)} (h^* \vec a) \cdot (\vec X_u \times \vec X_v) \, d(u, v)
+\end{aligned}
+\end{equation*}
+
+其中 $ \vec a := (a, b, c) $，$ \vec X := h $。
+
+\proofhead
+这是例 XI.3.4(d) 与注 XI.6.25(c) 的推论。\nobreak\hspace{0.35em}■
+\item
+
+（向量面积元）我们使用 (d) 的假设与记号。我们要求对每个 $ p \in M $ 及 $ T_p M $ 的每个正标准正交基 $ (v_1, v_2) $，$ (\nu(p), v_1, v_2) $ 都是 $ T_p \mathbb{R}^3 $ 的正标准正交基，以此定义 $ M $ 的\textbf{正（单位）法向量} $ \nu := \nu_M $。若 $ (u, v) $ 是 $ U $ 上的正坐标，则
+
+\begin{equation}
+\nu|U = \left( \frac{\partial}{\partial u} \times \frac{\partial}{\partial v} \right) \Big/ \left| \frac{\partial}{\partial u} \times \frac{\partial}{\partial v} \right| .\tag{2.7}
+\end{equation}
+\end{items}
+
+\bookfigure[0.35]{figures/014dea14356f0c81.png}
+
+在物理学中，三元组 $ (dy \wedge dz, dz \wedge dx, dx \wedge dy) $ 常称为\textbf{定向向量面积元}。它写作 $ d\vec F $，并被理解为一个“无穷小面积元”连同其定向，定向由法向量 $ \nu $ 指定。
+
+我们还令
+
+\[
+\int_M \vec a \cdot d\vec F := \int_M a\,dy \wedge dz + b\,dz \wedge dx + c\,dx \wedge dy .
+\]
+
+于是，利用\textbf{标量面积元} $ dF := \sqrt{G}\, dx \wedge dy \wedge dz $，我们得到
+
+\begin{equation}
+\int_M \vec a \cdot d\vec F = \int_M \vec a \cdot \nu \, dF ,\tag{2.8}
+\end{equation}
+
+这也可表示为 $ d\vec F = \nu \, dF $。
+
+\proofhead
+如同例 XI.5.3(g) 的证明，可见 $ \nu $ 良定义。我们令 $ w_1 := \partial/\partial u $，$ w_2 := \partial/\partial v $。则 $ (w_1(p), w_2(p)) $ 是 $ T_p M \subset T_p \mathbb{R}^3 $ 的正基。因此 $ w_1(p) \times w_2(p) \neq 0 $。我们定义 $ \tilde{\nu}|U $ 为 (2.7) 的右端。则 $ \tilde{\nu}|U $ 属于 $ C^{\infty}(U, \mathbb{R}^3) $。注 XI.6.25(b) 给出
+\begin{equation}
+\omega_{\mathbb{R}^3}(\tilde{\nu}, w_1, w_2) = \omega_{\mathbb{R}^3}(w_1, w_2, \tilde{\nu}) = (\tilde{\nu}|w_1 \times w_2) = |w_1 \times w_2| .\tag{2.9}
+\end{equation}
+
+因此 $ (w_1(p), w_2(p), \tilde{\nu}(p)) $ 是 $ T_p \mathbb{R}^3 $ 的正基，且 $ \tilde{\nu}(p) $ 与 $ w_1(p) $、$ w_2(p) $ 正交。这意味着 $ U $ 上的正法向量由 (2.7) 给出。
+
+注 XI.6.25(b) 与例 XI.5.3(f) 蕴涵
+
+\[
+|w_1 \times w_2| = \sqrt{|w_1|^2 |w_2|^2 - (w_1 \mid w_2)^2} = \sqrt{EG - F^2} .
+\]
+
+因此 $ w_1 \times w_2 = \nu \sqrt{EG - F^2} $ 在 $ U $ 上成立，这又由例 XI.5.3(f) 得出。现在 (2.8) 是 (d) 与 $ \lambda_M $ 的定义的推论。\nobreak\hspace{0.35em}■
+
+(f) 设或者 $ M $ 是 $ N $ 的子流形，或者 $ M := \partial N $。所谓 \textbf{$ N $ 沿 $ M $ 的向量场}，我们指的是一个映射
+
+\[
+v: M \to TN \qquad \text{其中 } v(p) \in T_p N \text{ 且 } p \in M .
+\]
+\bookfigure[0.36]{figures/8df42724cfd37ac1.png}
+
+注意 $ v(p) $ 未必是 $ M $ 的切向量，也就是说，$ v $ 一般不是 $ M $ 上的向量场。若 $ k \in \mathbb{N} \cup \{\infty\} $，则称 $ v $ 是 $ N $ 沿 $ M $ 的 $ C^k $ 向量场（当 $ k = \infty $ 时为\textbf{光滑}向量场），如果每个 $ p \in M $ 都有 $ N $ 关于 $ M $ 的子流形坐标卡 $ (\varphi, U) $，使得 $ \varphi_* v \in C^k(\varphi(U \cap M), \mathbb{R}^n) $。容易验证这个定义与坐标卡无关。\footnote{见注 XI.4.2(a)。}
+
+现在设 $ (\cdot \mid \cdot) $ 是 $ N $ 上的黎曼度量，$ M $ 是 $ N $ 中的定向超曲面，即 $ m = n - 1 $。则恰有一个 $ N $ 沿 $ M $ 的光滑向量场 $ \nu := \nu_M $，具有以下性质
+
+\begin{subitems}
+\item
+
+对 $ p \in M $，$ \nu(p) \perp T_p M $；
+
+\item
+
+对 $ p \in M $，$ |\nu(p)| = 1 $；以及
+
+\item
+
+若 $ (v_1, \dots, v_m) $ 是 $ T_p M $ 的正基，则 $ (\nu(p), v_1, \dots, v_m) $ 是 $ T_p N $ 的正基。
+我们称 $ \nu $ 为沿 $ M $ 的\textbf{正单位法向量场}，或简称 $ M $ 的\textbf{正法向量}。
+
+\proofhead
+该断言由例 XI.5.3(g) 的证明作显然的修改即得。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\begin{items}
+\item[（g）]
+
+设 $ (N, (\cdot \mid \cdot)) $ 是黎曼流形，且或者 $ M $ 是 $ N $ 中的定向超曲面，或者 $ M := \partial N $。则 $ N $ 沿 $ M $ 的每个向量场 $ v $ 都满足
+
+\[
+v \lrcorner \omega_N = (v \mid \nu)\omega_M .
+\]
+
+\proofhead
+设 $ p \in M $，$ (v_1, \dots, v_m) $ 是 $ T_p M $ 的正标准正交基。则向量组 $ (\nu(p), v_1, \dots, v_m) $ 是 $ T_p N $ 的正标准正交基。因此 $ v(p) \in T_p N $ 有基表示
+\[
+v(p) = (v(p) \mid \nu(p))\nu(p) + \sum_{j=1}^{m} (v(p) \mid v_j)v_j .
+\]
+
+于是由 $ \omega_N $ 的交错性得到
+
+\begin{equation*}
+\begin{aligned}
+v(p) \lrcorner \omega_N(p)(v_1, \dots, v_m) &= \omega_N(p)(v(p), v_1, \dots, v_m) \\ &= (v(p) \mid \nu(p))\omega_N(p)(\nu(p), v_1, \dots, v_m) \\ &= (v(p) \mid \nu(p))(\nu(p) \lrcorner \omega_N(p)(v_1, \dots, v_m)) .
+\end{aligned}
+\end{equation*}
+
+现在
+
+\[
+\nu(p) \lrcorner \omega_N(p)(v_1, \dots, v_m) = \omega_N(p)(\nu(p), v_1, \dots, v_m) = 1
+\]
+
+而 $ \nu \lrcorner \omega_N \in \Omega^m(M) $ 蕴涵 $ \nu \lrcorner \omega_N = \omega_M $，于是证毕。\nobreak\hspace{0.35em}■
+
+\item[（h）]
+
+设 $ (N, (\cdot \mid \cdot)) $ 是黎曼流形，且或者 $ M $ 是 $ N $ 中的定向超曲面，或者 $ M := \partial N $。又设 $ v $ 是 $ N $ 沿 $ M $ 的向量场，且 $ (v \mid \nu) \in \mathcal{L}(M, d\lambda_M) $。则由 (g) 可得
+
+\[
+\int_M v \lrcorner \omega_N = \int_M (v \mid \nu) \, d\lambda_M .
+\]
+
+这个积分称为\textbf{向量场 $ v $ 穿过 $ M $ 的通量}（沿正法向的方向）。在 (e) 的情形中，
+
+\[
+\int_M \vec{a} \cdot d\vec{F}
+\]
+
+就是向量场 $ \vec{a} $ 穿过 $ M $ 的通量。
+为了说明这个想法，我们考虑 (e) 中 $ N = X $ 的情形，并假设 $ X $ 中充满一种（虚构的）流动流体（或者更一般地，一种连续可形变的介质）。我们考虑一个（无穷小的）流体元，它在时刻 $ t = 0 $ 时“经过点 $ x $”。用 $ \chi^t(x) := \chi(x,t) $ 表示它在时刻 $ t $ 的位置。因此 $ t \mapsto \chi^t(x) $ 就是在 $ t = 0 $ 时位于 $ x $ 的那个流体元的轨迹。
+现在设 $ v(y,t) $ 是在时刻 $ t $ 位于 $ y $ 的流体元的速度向量。则
+
+\[
+\frac{d\chi^t(x)}{dt} = v(\chi^t(x), t) ,
+\]
+
+其中 $ d\chi^t(x)/dt $ 是 $ s \mapsto \chi^s(x) $ 在 $ s = t $ 处的导数。
+我们假设该流动在每一时刻都有确定（光滑）的质量（或电荷）密度 $ \rho(x,t) > 0 $。这意味着，在时刻 $ t $，包含在 $ X $ 的（可测）子集 $ A $ 中的流体的总质量（或电荷）由下式给出
+
+\[
+\rho(A,t) := \int_A \rho(x,t) \, dx .
+\]
+\end{items}
+
+\bookfigure[0.38]{figures/05eba64a33560dcf.png}
+
+现在我们考虑附着在点 $ x $ 上的向量面积元 $ d\vec{F}_x $。则向外（从而沿正法向）流过 $ dF_x $ 的流体，在时间区间 $ [t, t + \Delta t] $ 内，近似填满一个底面积为 $ dF_x $、高为 $ \Delta t(v(x,t) \mid \nu_F(x)) $ 的斜圆柱。
+
+因此
+
+\[
+\Delta t \rho(x,t)(v(x,t) \mid \nu(x)) \, dF_x
+\]
+
+近似等于在区间 $ [t, t + \Delta t] $ 内向外流过 $ d\vec{F}_x $ 的流体质量（或电荷）。（见习题 X.6.1。）这些考虑表明，向量场 $ (\rho v)(\cdot, t) $ 穿过 $ M $ 的通量，即
+
+\[
+\int_M ((\rho v)(\cdot, t) \mid \nu) \, d\lambda_M
+\]
+
+给出了时刻 $ t $ 总质量（或电荷）流出 $ M $ 的速率。
+
+\begin{subitems}
+\item
+
+设 $ (N, g) $ 是伪黎曼流形，且或者 $ M $ 是 $ N $ 中的超曲面，或者 $ M := \partial N $。又设 $ v $ 是 $ N $ 沿 $ M $ 的向量场。则我们称
+
+\[
+\int_M v \lrcorner \omega_N
+\]
+
+为 $ v $ 穿过 $ M $ 的\textbf{通量}，如果 $ v \lrcorner \omega_M $ 在 $ M $ 上可积。我们有
+
+\[
+\int_M v \lrcorner \omega_N = \int_M \ast\Theta v .
+\]
+
+\proofhead
+这由习题 XI.6.4 得出。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{变换定理}
+
+关于勒贝格积分的变换定理是具体计算与理论探讨中最重要的辅助工具之一，它有一个整体化的版本：
+
+\qyxffntextdef{1}{注意 $ M \cong N $ 也蕴涵 $ m = n $。}
+\begin{theorem}
+
+（变换定理） 设 $ f \in \operatorname{Diff}(M,N) $ 保定向。则 $ n $-形式 $ \omega $ 在 $ N $ 上可积当且仅当 $ f^*\omega $ 在 $ M $ 上可积。\qyxffnmark{1} 此时 $ \int_N \omega = \int_M f^*\omega $。
+
+证明
+
+\begin{subitems}
+\item
+
+设 $ \omega $ 在 $ M $ 上可积，$ (\varphi, U) $ 是 $ M $ 的正坐标卡。则 $ (\psi, V) := (\varphi \circ f^{-1}, f(U)) $ 是 $ N $ 的正坐标卡，且 $ f $ 是从 $ U $ 到 $ V $ 的保定向微分同胚。又 $ \psi(V) = \varphi(U) $，且 $ \psi_* = (\varphi \circ f^{-1})_* = \varphi_* f^* $。对于可积微分形式 $ \omega \in \Omega^m(V) $，由注 2.1(a) 可得
+
+\[
+\int_V \omega = \int_{\psi(V)} \psi_*\omega = \int_{\varphi(U)} \varphi_*(f^*\omega) = \int_U f^*\omega .
+\]
+
+因此 $ m $-形式 $ f^*\omega $ 在 $ U $ 上可积。
+
+\item
+
+设 $ \{ (\varphi_j, U_j, \pi_j) ;\ j \in \mathbb{N} \} $ 是 $ M $ 的正局部系统。则 $ \{ (\psi_j, V_j, \rho_j) ;\ j \in \mathbb{N} \} $，其中
+
+\[
+(\psi_j, V_j, \rho_j) := (\varphi_j \circ f^{-1}, f(U_j), \pi_j \circ f^{-1})
+\]
+
+是 $ N $ 的正局部系统。若 $ \omega $ 是 $ N $ 的可积 $ m $-形式且 $ j \in \mathbb{N} $，则 $ \rho_j \omega \mid V_j $ 是 $ V_j $ 上的可积 $ m $-形式。由 (i) 得到
+
+\[
+\int_{V_j} \rho_j \omega = \int_{U_j} f^*(\rho_j \omega) = \int_{U_j} (f^*\rho_j) f^*\omega = \int_{U_j} \pi_j f^*\omega \qquad \text{对 } j \in \mathbb{N} .
+\]
+
+于是由注 2.1(b) 得到
+
+\[
+\int_N \omega = \sum_{j=0}^{\infty} \int_{V_j} \rho_j \omega = \sum_{j=0}^{\infty} \int_{U_j} \pi_j f^*\omega = \int_M f^*\omega .
+\]
+
+特别地，$ f^*\omega $ 在 $ M $ 上可积。
+
+\item
+
+现在将 (ii) 应用于 $ f^{-1} $ 即得结论。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{富比尼定理}
+
+下面我们对积流形的情形证明富比尼定理的一个整体版本。更确切地说，我们现在假设 $ M $ 或 $ N $ 无边界，并令 $ L := M \times N $，$ \ell := m + n $。此外，我们给 $ L $ 配备积定向（见例 XI.4.17(b) 与习题 XI.4.3）。
+
+对每个 $ (p,q) \in M \times N $，积流形 $ \{p\} \times N $ 与 $ M \times \{q\} $ 分别是 $ L $ 的 $ n $ 维与 $ m $ 维的定向子流形。显然，自然的微分同胚
+
+\begin{equation}
+\{p\} \times N \to N , \quad (p,q) \mapsto q \qquad \text{与} \qquad M \times \{q\} \to M , \quad (p,q) \mapsto p\tag{2.10}
+\end{equation}
+
+保持定向。
+
+由于
+
+\[
+T_{(p,q)}L = T_{(p,q)}(M \times \{q\}) \oplus T_{(p,q)}(\{p\} \times N)
+\]
+
+（见习题 XI.5.1），微分同胚 (2.10) 诱导出自然的向量空间同构
+
+\[
+T_{(p,q)}L \to T_p M \times T_q N \qquad \text{对 } (p,q) \in M \times N .
+\]
+
+以下我们借助 (2.10) 把 $ \{p\} \times N $ 与 $ N $ 等同、把 $ M \times \{q\} $ 与 $ M $ 等同；于是 $ T_{(p,q)}L $ 与 $ T_p M \times T_q N $ 等同，从而可以写
+
+\begin{equation}
+T_{(p,q)}L = T_p M \oplus T_q N \qquad \text{对 } (p,q) \in M \times N ,\tag{2.11}
+\end{equation}
+
+只要意义从上下文看是清楚的。
+
+设 $ \omega $ 是 $ L $ 上的 $ \ell $-形式，且 $ (p,q) \in M \times N $。对 $ a_1, \dots, a_m \in T_p M $，
+
+\[
+(b_1, \dots, b_n) \mapsto \omega(p,q)(a_1, \dots, a_m, b_1, \dots, b_n)
+\]
+
+属于 $ \bigwedge^n T_q^* N $。因此
+
+\[
+\widehat{\omega}(p,\cdot)(a_1, \dots, a_m) := \omega(p,\cdot)(a_1, \dots, a_m, \cdot, \dots, \cdot)
+\]
+
+是 $ N $ 上的 $ n $-形式。映射
+
+\[
+\widehat{\omega}(p,\cdot) := \left( (a_1, \dots, a_m) \mapsto \widehat{\omega}(p,\cdot)(a_1, \dots, a_m) \right)
+\]
+
+在 $ (T_p M)^m $ 上 $ m $ 重线性、交错，且取值于 $ N $ 上 $ n $-形式构成的向量空间。因此它是 $ M $ 上的一个\textbf{取值于 $ n $-形式的 $ m $-形式}。此外，我们说 $ \widehat{\omega}(p,\cdot) $ 在 $ N $ 上\textbf{可积}，如果对每个 $ m $ 元组 $ (a_1, \dots, a_m) \in (T_p M)^m $，$ n $-形式 $ \widehat{\omega}(p,\cdot)(a_1, \dots, a_m) $ 都在 $ N $ 上可积。于是显然
+
+\[
+\int_N \widehat{\omega}(p,\cdot) := \left( (a_1, \dots, a_m) \mapsto \int_N \widehat{\omega}(p,\cdot)(a_1, \dots, a_m) \right)
+\]
+
+属于 $ \bigwedge^m T_p^* M $。
+
+类似地，
+
+\[
+\widehat{\omega}(\cdot,q)(b_1, \dots, b_n) := \omega(\cdot,q)(\cdot, \dots, \cdot, b_1, \dots, b_n) \qquad \text{对 } b_1, \dots, b_n \in T_q N
+\]
+
+定义了 $ N $ 上一个取值于 $ m $-形式的 $ n $-形式 $ \widehat{\omega}(\cdot,q) $，并且若对 $ T_q N $ 中的每个 $ n $ 元组 $ (b_1, \dots, b_n) $，$ m $-形式 $ \widehat{\omega}(\cdot,q)(b_1, \dots, b_n) $ 在 $ M $ 上可积，则 $ \widehat{\omega}(\cdot,q) $ 在 $ M $ 上可积。此时，
+
+\[
+\int_M \widehat{\omega}(\cdot,q) := \left( (b_1, \dots, b_n) \mapsto \int_M \widehat{\omega}(\cdot,q)(b_1, \dots, b_n) \right)
+\]
+
+属于 $ \bigwedge^n T_q^* N $。
+
+现在我们可以证明微分形式的富比尼定理的一个有用的类似结论。
+
+\begin{theorem}
+
+（富比尼） 设 $ \omega $ 是 $ L $ 上的可积 $ \ell $-形式。则以下三条成立：
+
+\begin{subitems}
+\item
+
+对 $ \lambda_M $-几乎每个 $ p \in M $，$ \widehat{\omega}(p,\cdot) $ 在 $ N $ 上可积；对 $ \lambda_N $-几乎每个 $ q \in N $，$ \widehat{\omega}(\cdot,q) $ 在 $ M $ 上可积。
+
+\item
+
+$ m $-形式
+
+\[
+\int_N \omega := \left( p \mapsto \int_N \widehat{\omega}(p,\cdot) \right) ,
+\]
+
+它在 $ \lambda_M $-几乎处处有定义，且在 $ M $ 上可积；而 $ n $-形式
+
+\[
+\int_M \omega := \left( q \mapsto \int_M \widehat{\omega}(\cdot,q) \right) ,
+\]
+
+它在 $ \lambda_N $-几乎处处有定义，且在 $ N $ 上可积。
+
+\item
+\[
+\int_L \omega = \int_M \left( \int_N \omega \right) = \int_N \left( \int_M \omega \right) .
+\]
+\end{subitems}
+
+证明
+
+\begin{items}
+\item
+
+设 $ (\varphi, U) $ 是 $ M $ 的正坐标卡，$ \varphi = (x^1, \dots, x^m) $。设 $ (\psi, V) $ 是 $ N $ 的正坐标卡，$ \psi = (y^1, \dots, y^n) $。则 $ (\chi, W) := (\varphi \times \psi, U \times V) $ 是 $ L $ 的正积坐标卡。最后，设
+
+\[
+\omega := a \, dx^1 \wedge \cdots \wedge dx^m \wedge dy^1 \wedge \cdots \wedge dy^n
+\]
+
+在 $ W $ 上可积。则 $ \chi_* a $ 属于 $ \mathcal{L}_1(\varphi(U) \times \psi(V), \lambda_{m+n}) $。因此由定理 X.6.9 可得
+
+\begin{equation}
+\chi_* a(x, \cdot) \in \mathcal{L}_1(\psi(V), \lambda_n) \qquad \text{对 } \lambda_m\text{-几乎每个 } x \in \varphi(U) ,\tag{2.12}
+\end{equation}
+
+以及
+
+\begin{equation}
+\int_{\psi(V)} \chi_* a(\cdot, y) \, dy \in \mathcal{L}_1(\varphi(U), \lambda_m)\tag{2.13}
+\end{equation}
+
+（其中这个函数只在 $ \lambda_m $-几乎处处有定义），并且
+
+\begin{equation}
+\int_{\chi(W)} \chi_* a \, d\lambda_{m+n} = \int_{\varphi(U)} \left( \int_{\psi(V)} \chi_* a(x,y) \, dy \right) dx .\tag{2.14}
+\end{equation}
+
+对 $ (p,q) \in U \times V $ 与 $ v_1, \dots, v_m \in T_p U $，可得
+
+\begin{equation*}
+\begin{aligned}
+\widehat{\omega}(p,\cdot)(v_1, \dots, v_m) &= a(p,\cdot) \, dx^1 \wedge \cdots \wedge dx^m \wedge dy^1 \wedge \cdots \wedge dy^n (v_1, \dots, v_m, \cdot, \dots, \cdot) \\ &= \alpha(p) a(p,\cdot) \, dy^1 \wedge \cdots \wedge dy^n
+\end{aligned}
+\end{equation*}
+
+其中
+
+\[
+\alpha(p) := dx^1 \wedge \cdots \wedge dx^m(p)(v_1, \dots, v_m) ,
+\]
+
+因为由 (2.11)，这可以从 (XI.2.3) 读出。因此得到
+
+\[
+\psi_* \widehat{\omega}(p,\cdot)(v_1, \dots, v_m) = \alpha(p)\psi_*(a(p,\cdot)) \, dy^1 \wedge \cdots \wedge dy^n .
+\]
+
+现在注意关系式
+
+\[
+\psi_*(a(p,\cdot))(y) = a(p, \psi^{-1}(y)) = a(\varphi^{-1}(x), \psi^{-1}(y)) = \chi_* a(x,y)
+\]
+
+其中 $ x = \varphi(p) $，$ y \in \psi(V) $。利用这一点并借助注 2.1(a)，由 (2.12) 得到
+
+\[
+\int_V \widehat{\omega}(p,\cdot) = \int_{\psi(V)} a(p, \psi^{-1}(y)) \, dy \, dx^1 \wedge \cdots \wedge dx^m (p) \in \bigwedge^m T_p^* U
+\]
+
+它对 $ \lambda_M $-几乎每个 $ p \in U $ 都有定义。又由 (2.13) 得到
+
+\begin{equation*}
+\begin{aligned}
+\varphi_* \int_V \widehat{\omega}(p,\cdot)(x) &= \int_{\psi(V)} a(\varphi^{-1}(x), \psi^{-1}(y)) \, dy \, dx^1 \wedge \cdots \wedge dx^m \\ &= \int_{\psi(V)} \chi_* a(x,y) \, dy \, dx^1 \wedge \cdots \wedge dx^m
+\end{aligned}
+\end{equation*}
+
+对 $ \lambda_M $-几乎处处的 $ p \in U $（其中 $ x = \varphi(p) $），由 (2.14) 与注 2.1(a) 可得
+
+\[
+\int_U \int_V \omega = \int_U \int_V \widehat{\omega}(p,\cdot) = \int_{\varphi(U)} \int_{\psi(V)} \chi_*a(x,y)\,dy\,dx = \int_{\chi(W)} \chi_*a\,d\lambda_{m+n} = \int_W \omega.
+\]
+
+交换 $ U $ 与 $ V $ 的角色，即得本情形下其余的断言，
+
+\item
+
+设 $ \{ (\varphi_j,U_j,\pi_j) ;\ j \in \mathbb{N} \} $ 与 $ \{ (\psi_j,V_j,\rho_j) ;\ j \in \mathbb{N} \} $ 分别为 $ M $ 与 $ N $ 的正局部系统。于是，对 $ (p,q) \in M \times N $ 令 $ \pi_j \otimes \rho_k(p,q) := \pi_j(p)\rho_k(q) $，则
+
+\[
+\{ (\varphi_j \times \psi_k, U_j \times V_k, \pi_j \otimes \rho_k) ;\ (j,k) \in \mathbb{N}^2 \}
+\]
+
+为 $ L $ 的正局部系统。由 (a) 可得
+
+\[
+\int_{U_j \times V_k} \pi_j \otimes \rho_k \omega = \int_{U_j} \pi_j \int_{V_k} \rho_k \omega \quad \text{对 } (j,k) \in \mathbb{N}^2 .
+\]
+
+现在断言由注 2.1(b) 推出。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{theorem}
+
+\begin{corollary}
+
+设 $ L := M \times N $，并设 $ \pi_1: L \to M $ 与 $ \pi_2: L \to N $ 为典范投影。若 $ \alpha $ 是 $ M $ 上的可积 $ m $-形式，$ \beta $ 是 $ N $ 上的可积 $ n $-形式，则 $ \gamma := \pi_1^*\alpha \wedge \pi_2^*\beta $ 在 $ L $ 上可积，且 $ \int_L \gamma = \int_M \alpha \int_N \beta $。
+
+\end{corollary}
+
+\begin{remark}
+
+（正则性） 只需 $ M $ 与 $ N $ 是 $ C^1 $ 流形，且定理 2.3 中的 $ f $ 是 $ C^1 $ 微分同胚。\nobreak\hspace{0.35em}■
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{若干积分的计算}
+
+公式 (2.5) 与本节的各个定理为计算体积奠定了基础。我们用一些例子来说明这一点，这些例子中我们始终使用标准度量。
+
+\begin{example}
+
+\begin{items}
+\item
+
+$ (A,B) \in \mathcal{L}_M \times \mathcal{L}_N $ 满足 $ \lambda_{M \times N}(A \times B) = \lambda_M(A)\lambda_N(B) $。特别地，由此可得
+
+\[
+\operatorname{vol}(M \times N) = \operatorname{vol}(M)\operatorname{vol}(N) .
+\]
+
+\proofhead
+我们考虑乘积流形 $ L := M \times N $ 上的 $ (m+n) $-形式 $ \omega := \chi_{A \times B}\omega_L = \chi_A\omega_M \wedge \chi_B\omega_N $（见习题 XI.5.1）。于是由推论 2.5 即得该断言（这里考虑到约定 $ 0 \cdot \infty := \infty \cdot 0 := 0 $）。\nobreak\hspace{0.35em}■
+\item
+
+（球面） 对 $ m \ge 1 $，$ \mathbb{R}^{m+1} $ 中具有典范定向的 $ m $-球面 $ S^m $ 满足
+
+\[
+\int_{S^m} \sum_{j=1}^{m+1} (-1)^{j-1} x^j\,dx^1 \wedge \cdots \wedge \widehat{dx^j} \wedge \cdots \wedge dx^{m+1} = \operatorname{vol}(S^m) .
+\]
+
+特别地，\footnote{我们已在例 VIII.4.2(a) 中计算过线积分 (2.15)。现在我们理解了这个公式。}
+
+\begin{equation}
+\int_{S^1} x\,dy - y\,dx = 2\pi\tag{2.15}
+\end{equation}
+
+以及
+
+\[
+\int_{S^2} x\,dy \wedge dz + y\,dz \wedge dx + z\,dx \wedge dy = 4\pi .
+\]
+
+\proofhead
+这由例 XI.5.3(c) 与 1.13(c) 推出。\nobreak\hspace{0.35em}■
+\item
+
+（星形区域） 设 $ m \ge 1 $，并定义 $ f $ 为“极坐标微分同胚”
+
+\[
+(0,\infty) \times S^m \to \mathbb{R}^{m+1}\setminus\{0\} , \quad (r,\sigma) \mapsto r\sigma := ri(\sigma)
+\]
+
+其中 $ i: S^m \hookrightarrow \mathbb{R}^{m+1} $ 是典范嵌入。则
+
+\begin{equation}
+f^*(dy^1 \wedge \cdots \wedge dy^{m+1}) = r^m\,dr \wedge \omega_{S^m} .\tag{2.16}
+\end{equation}
+
+还设 $ R \in \mathcal{L}_1(S^m, \mathbb{R}^+) $，并令
+
+\[
+A := \{ y \in \mathbb{R}^{m+1}\setminus\{0\} ;\ |y| \le R(y/|y|) \} .
+\]
+\end{items}
+
+\bookfigure[0.37]{figures/792df474c95636ed.png}
+
+因此 $ A $ 是（关于 $ 0 $ 的）星形区域，其“外边界”在 $ m $-球面上参数化。它满足
+
+\begin{equation}
+\lambda_{m+1}(A) = \frac{1}{m+1} \int_{S^m} R^{m+1}\,d\lambda_{S^m} .\tag{2.17}
+\end{equation}
+
+\proofhead
+设 $ (\varphi,U) $ 是 $ S^m $ 的正坐标卡，且 $ h := i \circ \varphi^{-1}: \varphi(U) \to \mathbb{R}^{m+1} $ 为相伴的参数化。则 $ f $ 有局部表示
+\[
+f_\psi: (0,\infty) \times \varphi(U) \to \mathbb{R}^{m+1} , \quad (r,x) \mapsto rh(x)
+\]
+
+其中 $ M := (0,\infty) \times S^m $ 的正坐标卡为
+
+\[
+(\psi,V) := (\operatorname{id} \times \varphi, (0,\infty) \times U)
+\]
+
+而 $ \mathbb{R}^{m+1}\setminus\{0\} $ 取平凡坐标卡。因此
+
+\[
+df_\psi^j(r,x) = h^j(x)\,dr + r\,dh^j(x) \quad \text{对 } 1 \le j \le m+1 .
+\]
+
+由容易的归纳法可得
+
+\[
+f_\psi^*(dy^1 \wedge \cdots \wedge dy^{m+1}) = df_\psi^1 \wedge \cdots \wedge df_\psi^{m+1} = r^m \sum_{j=1}^{m+1} (-1)^{j-1} h^j\,dr \wedge dh^1 \wedge \cdots \wedge \widehat{dh^j} \wedge \cdots \wedge dh^{m+1} + r^{m+1} dh^1 \wedge \cdots \wedge dh^{m+1} .
+\]
+
+由 $ |h|^2 = 1 $ 可得 $ \sum_{j=1}^{m+1} h^j\,dh^j = 0 $，也就是说，对每个 $ x \in \varphi(U) $，余向量 $ dh^1(x),\ldots,dh^{m+1}(x) $ 线性无关。因此 $ dh^1 \wedge \cdots \wedge dh^{m+1} = 0 $。由例 XI.5.3(c) 可得
+
+\[
+f_\psi^*(dy^1 \wedge \cdots \wedge dy^{m+1}) = r^m\,dr \wedge \sum_{j=1}^{m+1} (-1)^{j-1} h^j\,dh^1 \wedge \cdots \wedge \widehat{dh^j} \wedge \cdots \wedge dh^{m+1} = r^m\,dr \wedge h^*\omega_{S^m} = \psi_*(r^m\,dr \wedge \omega_{S^m}) .
+\]
+
+因为这对 $ S^m $ 的每个正坐标卡都成立，所以得到 (2.16)。这也说明 $ f $ 是从 $ M $ 到 $ N := \mathbb{R}^{m+1}\setminus\{0\} $ 的保定向微分同胚。
+
+我们令 $ \omega := \chi_A\omega_N = \chi_A\,dy^1 \wedge \cdots \wedge dy^{m+1} $。则变换定理给出
+
+\[
+\lambda_{m+1}(A) = \lambda_N(A) = \int_N \omega = \int_M f^*\omega = \int_M f^*\chi_A r^m\,dr \wedge \omega_{S^m} = \int_{f^{-1}(A)} r^m\,dr \wedge \omega_{S^m} .
+\]
+
+因为 $ f^{-1}(A) = \{ (r,\sigma) \in (0,\infty) \times S^m ;\ 0 < r \le R(\sigma) \} $，所以由富比尼定理可得
+
+\[
+\int_{f^{-1}(A)} r^m\,dr \wedge \omega_{S^m} = \int_{S^m} \left( \int_0^{R(\sigma)} r^m\,dr \right)\omega_{S^m}(\sigma) = \frac{1}{m+1} \int_{S^m} R^{m+1}\omega_{S^m} = \frac{1}{m+1} \int_{S^m} R^{m+1}\,d\lambda_{S^m} .\quad\blacksquare
+\]
+
+\begin{items}
+\item[（d）]
+
+（球面的锥形切片） 设 $ B $ 是 $ S^m $（$ m \ge 1 $）的可测子集。则
+
+\[
+K(rB) := \{ t\sigma ;\ 0 \le t \le 1,\ \sigma \in rB \}
+\]
+
+这是以原点为顶点、以球面 $ rS^m $ 的子集 $ rB $ 为底面的锥。
+
+\end{items}
+
+\bookfigure[0.23]{figures/631065ad3c2830c4.png}
+
+我们有\footnote{该公式是习题 X.6.1 关于具有“平坦底面”的锥的陈述的类比。}
+
+\[
+(m+1)\operatorname{vol}(K(rB)) = r\operatorname{vol}(rB) .
+\]
+
+对 $ B := S^m $，我们再次得到例 1.13(c) 的公式 $ r\operatorname{vol}(rS^m) = (m+1)\operatorname{vol}(r\mathbb{B}^{m+1}) $。
+
+\proofhead
+取 $ R := r\chi_B $，由 (1.10) 可知这可由 (c) 推出。\nobreak\hspace{0.35em}■
+
+(e)（用极坐标做积分） 设 $ g \in \mathcal{L}_0(\mathbb{R}^n) $。则 $ g $ 可积当且仅当
+\[
+(r \mapsto g(r\sigma)r^{n-1}) \in \mathcal{L}_1((0,\infty)) \quad \text{对几乎每个 } \sigma \in S^{n-1}
+\]
+
+以及
+
+\[
+\left(\sigma \mapsto \int_0^\infty g(r\sigma)r^{n-1}\,dr\right) \in \mathcal{L}_1(S^{n-1}) .
+\]
+
+于是我们有公式\footnote{见命题 X.8.9。}
+
+\begin{equation}
+\int_{\mathbb{R}^n} g\,dx = \int_{S^{n-1}}\int_0^\infty g(r\sigma)r^{n-1}\,dr\,d\lambda_{S^{n-1}} .\tag{2.18}
+\end{equation}
+
+若 $ g $ 是旋转对称的，且对 $ x \in \mathbb{R}^n $ 有 $ g(x) = \dot{g}(|x|) $，则 $ g $ 可积当且仅当 $ \dot{g}(r)r^{n-1} $ 在 $ (0,\infty) $ 上可积。此时 (2.18) 化为
+
+\[
+\int_{\mathbb{R}^n} g\,dx = \operatorname{vol}(S^{n-1})\int_0^\infty \dot{g}(r)r^{n-1}\,dr ,
+\]
+
+正如我们已经从定理 X.8.11 知道的那样。
+
+\proofhead
+我们考虑 $ N := \mathbb{R}^n\setminus\{0\} $ 上的 $ n $-形式 $ \omega := g\,dy^1\wedge\cdots\wedge dy^n $。则 $ \omega $ 在 $ N $ 上可积当且仅当 $ g $ 属于 $ \mathcal{L}_1(\mathbb{R}^n) $。利用 (c) 中的极坐标微分同胚，由 (2.16) 得到
+\[
+f^*\omega = (f^*g)r^{n-1}\,dr\wedge\omega_{S^{n-1}} .
+\]
+
+于是论断由定理 2.3 与推论 2.5 推出。\nobreak\hspace{0.35em}■
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{向量场的流}
+
+所谓 $ M $ 上的（整体）\textbf{流}，是指一个光滑映射
+
+\[
+\chi : M\times\mathbb{R}\to M , \quad (p,t)\mapsto \chi^t(p) := \chi(p,t)
+\]
+
+使得
+
+\begin{equation}
+\chi^0 = \operatorname{id}_M \quad \text{且 } \chi^{s+t} = \chi^s\circ\chi^t \quad \text{对 } s,t \in \mathbb{R} .\tag{2.19}
+\end{equation}
+
+由 (2.19) 可得
+
+\[
+\chi^t \in \operatorname{Diff}(M,M) \quad \text{且 } (\chi^t)^{-1} = \chi^{-t} \quad \text{对 } t \in \mathbb{R} .
+\]
+
+由于对 $ p \in M $ 有 $ \chi(p,\cdot) \in C^\infty(\mathbb{R},M) $，向量 $ v(p) := T_0\chi(p,\cdot)(0,1) \in T_pM $ 定义良好，且 $ v $ 是 $ M $ 上的光滑向量场。由 (2.19) 还可得
+
+\begin{equation}
+\frac{d\chi^t(p)}{dt} = v(\chi^t(p)) \quad \text{对 } p \in M \text{ 和 } t \in \mathbb{R} .\tag{2.20}
+\end{equation}
+
+这意味着对每个 $ p \in M $，\textbf{轨道} $ \chi(p,\cdot) $ 都是初值问题（在 $ \mathbb{R}^m $ 中）
+
+\begin{equation}
+\dot{y} = v(y) \quad \text{和 } y(0) = p\tag{2.21}
+\end{equation}
+
+的全局解。
+
+以下我们用 $ \mathcal{V}_c^k(M) $ 表示 $ \mathcal{V}^k(M) $ 中由\textbf{具有紧支集的 $ C^k $ 向量场}构成的 $ C^k(M) $-子模。我们记 $ \mathcal{V}_c(M) := \mathcal{V}_c^\infty(M) $。
+
+反之，设 $ v \in \mathcal{V}_c(M) $ 且 $ M $ 无边界。那么常微分方程理论\footnote{例如 [Ama95]，若 $ M $ 是 $ \mathbb{R}^m $ 中的开集。借助局部坐标卡（见 [Con93]、[Lan95]），这可推广到一般情形。}表明，恰有一个 $ M $ 上的流 $ \chi $，即\textbf{由 $ v $ 生成的流}，满足 (2.20)。把 $ \chi(p,\cdot) $ 看作在时刻 $ t = 0 $ 位于点 $ p $ 的“流体元”的轨道，我们看到 $ v(p) $ 就是这个元经过 $ p $ 时的速度\footnote{注意，与注 2.2(h) 相反，这里考虑的是“定常的”，即与时间无关的向量场。}。在这个解释下，$ \chi^t $ 是整个流场在时刻 $ t $ 的一幅快照。
+
+现在我们来建立向量场的散度与它所生成的流之间的联系。为此，我们先证明一个关于线性非自治微分方程的结果。
+
+\qyxffntextdef{1}{见习题 VII.8.13。}
+\qyxffnnumdef{2}
+\afterpage{\qyxffntextof{2}{另一方面，见习题 VII.8.13。}}
+\begin{proposition}
+
+（刘维尔） 设 $ A \in C(\mathbb{R},\mathcal{L}(\mathbb{R}^m)) $，且 $ X \in C^1(\mathbb{R},\mathcal{L}(\mathbb{R}^m)) $ 是齐次线性微分方程
+
+\[
+\dot{Y} = A(t)Y \quad \text{对 } t \in \mathbb{R}
+\]
+
+在 $ \mathcal{L}(\mathbb{R}^m) $ 中的解。则 $ W := \det(X) $ 是标量方程
+
+\begin{equation}
+\dot{y} = \operatorname{tr}\big(A(t)\big)y \quad \text{对 } t \in \mathbb{R} .\tag{2.22}
+\end{equation}
+
+的解。因此
+
+\[
+W(t) = W(t_0)e^{\int_{t_0}^{t}\operatorname{tr}(A(s))\,ds} \quad \text{对 } t,t_0 \in \mathbb{R} .
+\]
+
+\proofhead
+设 $ r \in \mathbb{R} $。对 $ \eta \in \mathbb{R}^m $，我们考虑初值问题
+\begin{equation}
+\dot{y} = A(t)y \quad \text{对 } t \in \mathbb{R} , \quad y(r) = \eta .\tag*{(2.23)${}_{r,\eta}$}
+\end{equation}
+
+由皮卡–林德勒夫定理（定理 VII.8.14）容易推出，该问题有唯一的全局解 $ u(\cdot,r,\eta) \in C^1(\mathbb{R},\mathbb{R}^m) $。\qyxffnmark{1}于是
+
+\[
+u\big(\cdot,s,u(s,r,\eta)\big) \quad \text{对 } r,s \in \mathbb{R}
+\]
+\bookfigure[0.36]{figures/6a3ad96fc67f00f3.png}
+
+是 $ (2.23)_{s,u(s,r,\eta)} $ 的唯一解。换言之，我们沿 $ (2.23)_{r,\eta} $ 的解 $ u(\cdot,r,\eta) $ 走到时刻 $ s $。然后我们“重新开始”，即重新求解微分方程 $ \dot{y} = A(t)y $，这次把值 $ u(s,r,\eta) $ 取作时刻 $ s $ 的起始值。然而，我们也可以沿解 $ u(\cdot,r,\eta) $ 走到时刻 $ t $。于是 $ (2.23)_{r,\eta} $ 对每个 $ (r,\eta) \in \mathbb{R}\times\mathbb{R}^m $ 都有唯一解，这一点蕴含
+
+\begin{equation}
+u(t,r,\eta) = u\big(t,s,u(s,r,\eta)\big) \quad \text{对 } r,s,t \in \mathbb{R} \text{ 和 } \eta \in \mathbb{R}^m .\tag{2.24}
+\end{equation}
+
+微分方程 $ \dot{y} = A(t)y $ 的线性性以及它有唯一解，容易推出：对任意一对 $ (t,r) \in \mathbb{R}^2 $，$ \eta \mapsto u(t,r,\eta) $ 都是线性函数。因此
+
+\begin{equation}
+u(t,r,\eta) = U(t,r)\eta \quad \text{对 } t,r \in \mathbb{R} \text{ 和 } \eta \in \mathbb{R}^m ,\tag{2.25}
+\end{equation}
+
+其中 $ U(t,r) \in \mathcal{L}(\mathbb{R}^m) = \mathbb{R}^{m\times m} $。于是由 (2.24) 读出
+
+\begin{equation}
+U(t,r) = U(t,s)U(s,r) , \quad U(t,t) = 1_m \quad \text{对 } r,s,t \in \mathbb{R} .\tag{2.26}
+\end{equation}
+
+最后，由 (2.25)，并且因为 $ u(\cdot,r,\eta) $ 对每个 $ \eta \in \mathbb{R}^m $ 都是 $ (2.23)_{r,\eta} $ 的解，可知
+
+\begin{equation}
+\partial_1U(t,r) = A(t)U(t,r) \quad \text{对 } t \in \mathbb{R} , \quad U(r,r) = 1_m .\tag{2.27}
+\end{equation}
+
+这表明 $ U(\cdot,r) $ 是 $ E := \mathcal{L}(\mathbb{R}^m) $ 中由
+
+\[
+\dot{Y} = A(t)Y \quad \text{对 } t \in \mathbb{R} , \quad Y(r) = 1_m .
+\]
+
+给出的初值问题\qyxffnmark{2}的唯一全局解。
+
+现在设 $ B = [b_1,\ldots,b_m] \in \mathbb{R}^{m\times m} $。则上述讨论表明
+
+\[
+U(\cdot,r)B = \big[U(\cdot,r)b_1,\ldots,U(\cdot,r)b_m\big]
+\]
+
+是
+
+\[
+\dot{Y} = A(t)Y \quad \text{对 } t \in \mathbb{R} , \quad Y(r) = B
+\]
+
+在 $ E $ 中的唯一全局解。若 $ X $ 是 $ \dot{Y} = A(t)Y $ 的某个解，则取 $ B := X(r) $ 可得
+
+\begin{equation}
+X(t) = U(t,r)X(r) \quad \text{对 } r,t \in \mathbb{R} .\tag{2.28}
+\end{equation}
+
+我们固定 $ r $，并令 $ \alpha(t) := \det\big(U(t,r)\big) $。则例 VII.4.8(a) 连同 (2.27) 以及关系式 $ U(t,r) = [u_1(t),\ldots,u_m(t)] $ 给出
+
+\begin{equation}
+\begin{aligned}
+\dot{\alpha}(t) &= \sum_{j=1}^{m}\det\big[u_1(t),\ldots,u_{j-1}(t),\dot{u}_j(t),u_{j+1}(t),\ldots,u_m(t)\big] \\ &= \sum_{j=1}^{m}\det\big[u_1(t),\ldots,u_{j-1}(t),A(t)u_j(t),u_{j+1}(t),\ldots,u_m(t)\big] .
+\end{aligned}\tag{2.29}
+\end{equation}
+
+对 $ t = r $，由 $ U(r,r) = 1_m $ 读出：对 $ 1 \le j \le m $ 有 $ u_j(r) = e_j $，其中 $ (e_1,\ldots,e_m) $ 表示 $ \mathbb{R}^m $ 的标准基。于是 (2.29) 给出
+
+\begin{equation}
+\begin{aligned}
+\dot{\alpha}(r) &= \sum_{j=1}^{m}\det\big[e_1,\ldots,e_{j-1},a_j(r),e_{j+1},\ldots,e_m\big] \\ &= \sum_{j=1}^{m}a_j^j(r) = \operatorname{tr}\big(A(r)\big)
+\end{aligned}\tag{2.30}
+\end{equation}
+
+其中 $ A(r) = [a_1(r),\ldots,a_m(r)] $。最后，由 (2.28) 得到 $ \dot{X}(t) = \partial_1U(t,r)X(r) $，因此
+
+\[
+\dot{W}(t) = \dot{\alpha}(t)W(r) \quad \text{对 } t \in \mathbb{R} .
+\]
+
+由此及 (2.30) 得到
+
+\[
+\dot{W}(r) = \operatorname{tr}\big(A(r)\big)W(r) \quad \text{对 } r \in \mathbb{R} ,
+\]
+
+这表明 $ W $ 满足方程 (2.22)。至此，论断是例 VII.8.11(e) 的推论。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+命题 2.8 的证明已经为初值问题 $ (2.23)_{r,\eta} $ 产生了一批结果，它们推广了第 VII.1 节中关于常矩阵 $ A \in \mathcal{L}(\mathbb{R}^n) $ 的线性微分方程 $ \dot{x} = Ax $ 的相应结果。特别地，这种情形有
+
+\[
+e^{(t-s)A} = U(t,s) \quad \text{对 } s,t \in \mathbb{R} .
+\]
+
+在与时间无关的情形，定理 VII.1.11(ii) 说 $ t \mapsto e^{tA} $ 是群同态；在非自治情形，即在“时变系数”的情形，这一结论被 (2.26) 取代。
+
+\item
+
+若 $ X $ 是 $ \mathcal{L}(\mathbb{R}^m) $ 中解微分方程 $ \dot{Y} = A(t)Y $ 的矩阵，则 $ W := \det(X) $ 称为\textbf{朗斯基行列式}（Wronskian 或 Wronski determinant）。由命题 2.8 中给出的 $ W $ 的显式形式可知，$ W(t) $ 对每个 $ t \in \mathbb{R} $ 都不为零，当且仅当对某个 $ t_0 \in \mathbb{R} $ 有 $ W(t_0) \ne 0 $。此时，$ X $ 的各列 $ x_1,\ldots,x_m $ 构成微分方程 $ \dot{y} = A(t)y $ 在 $ \mathbb{R}^m $ 中的一个\textbf{基本解组}，因为我们容易验证该方程的每个解都能写成 $ x_1,\ldots,x_m $ 的线性组合。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+现在我们可以建立前面提到的向量场的流与其散度之间的联系。
+
+\end{remark}
+
+\begin{proposition}
+
+设 $ M $ 无边界且是伪黎曼的。又设 $ v \in \mathcal{V}_c(M) $，且 $ \chi $ 是由 $ v $ 生成的 $ M $ 上的流。则
+
+\[
+\operatorname{div}(v)\omega_M = (\chi^t)_*\frac{d}{ds}\big[(\chi^s)^*\omega_M\big]\Big|_{s=t} \quad \text{对 } t \in \mathbb{R} ,
+\]
+
+因此特别地
+
+\[
+\operatorname{div}(v)\omega_M = \frac{d}{dt}\left[(\chi^t)^*\omega_M\right]\big|_{t=0} .
+\]
+
+\proofhead
+因为该断言是局部陈述，所以只需在局部标准正交坐标中证明它。因此我们可以假设 $ M $ 是 $ \mathbb{R}^m $ 中的开集，并定义 $ \omega := \omega_M = dx^1 \wedge \cdots \wedge dx^m $。
+
+我们对 (2.20) 关于 $ p $ 求导。链式法则给出
+\[
+[\partial\chi^t]^{\cdot} = ((\chi^t)^*\partial v)\partial\chi^t \quad \text{对 } t \in \mathbb{R} ,
+\]
+
+其中 $ \partial := \partial_p $。于是刘维尔定理（应用于每个固定的 $ p \in M $）给出
+
+\begin{equation}
+[\det(\partial\chi^t)]^{\cdot} = \operatorname{tr}\left[(\chi^t)^*\partial v\right] \det(\partial\chi^t) \quad \text{对 } t \in \mathbb{R} .\tag{2.31}
+\end{equation}
+
+于是例 XI.6.8(a) 给出
+
+\begin{equation}
+\operatorname{tr}\left[(\chi^t)^*\partial v\right] = (\chi^t)^*\sum_{j=1}^{m}\partial_j v^j = (\chi^t)^*\operatorname{div} v .\tag{2.32}
+\end{equation}
+
+由例 XI.3.4(c)，我们知道
+
+\[
+(\chi^t)^*\omega = \det(\partial\chi^t)\omega \quad \text{对 } t \in \mathbb{R} .
+\]
+
+由此，由 (2.31) 与 (2.32) 可得
+
+\begin{equation*}
+\begin{aligned}
+[(\chi^t)^*\omega]^{\cdot} &= [\det(\partial\chi^t)]^{\cdot}\omega = ((\chi^t)^*\operatorname{div} v)\det(\partial\chi^t)\omega \\ &= (\chi^t)^*\operatorname{div} v\,(\chi^t)^*\omega = (\chi^t)^*(\operatorname{div}(v)\omega)
+\end{aligned}
+\end{equation*}
+
+对 $ t \in \mathbb{R} $。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\needspace{3\baselineskip}\subsection*{输运定理}
+
+命题 2.10 使向量场散度的几何解释成为可能。为说明这一点，我们首先证明重要的输运定理，它在连续介质力学中特别有用。
+
+\qyxffntextdef{1}{$ \chi_{A^t} $ 是 $ A^t $ 的特征函数。}
+\begin{theorem}
+
+（输运定理） 设 $ M $ 无边界且是伪黎曼的。又设 $ v \in \mathcal{V}_c(M) $，且 $ \chi $ 是 $ v $ 在 $ M $ 上生成的流。最后设 $ f \in \mathcal{E}(M \times \mathbb{R}) $。则对每个相对紧致集 $ A \in \mathcal{L}_M $，有
+
+\[
+\frac{d}{dt}\int_{A^t} f(\cdot,t)\,d\lambda_M = \int_{A^t}\left[\partial_2 f(\cdot,t) + \operatorname{div}(f(\cdot,t)v)\right] d\lambda_M \quad \text{对 } t \in \mathbb{R} ,
+\]
+
+其中 $ A^t := \chi^t(A) $。
+
+\proofhead
+因为 $ \chi^t \in \operatorname{Diff}(M,M) $，所以只要 $ A \in \mathcal{L}_M $ 就有 $ A^t \in \mathcal{L}_M $（见习题 1.1），并且还有 $ \overline{A^t} = (\overline{A})^t $。因此 $ A^t $ 是相对紧致的，命题 1.9(b) 表明 $ f(\cdot,t) $ 在 $ A^t $ 上可积。于是 $ m $-形式\qyxffnmark{1} $ \omega_t := \chi_{A^t} f(\cdot,t)\omega_M $ 在 $ M $ 上可积，变换定理给出
+\[
+\int_{A^t} f(\cdot,t)\,d\lambda_M = \int_M \omega_t = \int_M (\chi^t)^*\omega_t = \int_A (\chi^t)^*(f(\cdot,t)\omega_M) .
+\]
+
+关于含参积分可微性的定理（定理 X.3.18）于是给出
+
+\begin{equation}
+\frac{d}{dt}\int_{A^t} f(\cdot,t)\,d\lambda_M = \int_A \frac{d}{dt}(\chi^t)^*(f(\cdot,t)\omega_M) .\tag{2.33}
+\end{equation}
+
+因为 $ (\chi^t)^*(f(\cdot,t)\omega_M) = f(\chi^t,t)(\chi^t)^*\omega_M $，命题 2.10 说
+
+\begin{equation*}
+\begin{aligned}
+\frac{d}{dt}(\chi^t)^*(f(\cdot,t)\omega_M) &= \left(\frac{d}{dt}f(\chi^t,t)\right)(\chi^t)^*\omega_M + f(\chi^t,t)\frac{d}{dt}\left((\chi^t)^*\omega_M\right) \\ &= \left(\langle\langle (\chi^t)^* df(\cdot,t), \frac{d}{dt}\chi^t \rangle\rangle + (\chi^t)^*\partial_2 f(\cdot,t)\right)(\chi^t)^*\omega_M \\ &\quad + (\chi^t)^* f(\cdot,t)(\chi^t)^*(\operatorname{div}(v)\omega_M) .
+\end{aligned}
+\end{equation*}
+
+考虑 (2.20)，现在得到
+
+\begin{equation*}
+\begin{aligned}
+\frac{d}{dt}(\chi^t)^*(f(\cdot,t)\omega_M) &= (\chi^t)^*\left[(\langle df(\cdot,t), v\rangle + \partial_2 f(\cdot,t) + f(\cdot,t)\operatorname{div} v)\omega_M\right] \\ &= (\chi^t)^*\left[(\partial_2 f(\cdot,t) + (\operatorname{grad} f(\cdot,t)\,|\,v)_M + f(\cdot,t)\operatorname{div} v)\omega_M\right] \\ &= (\chi^t)^*\left[(\partial_2 f(\cdot,t) + \operatorname{div}(f(\cdot,t)v))\omega_M\right] ,
+\end{aligned}
+\end{equation*}
+
+其中最后一步用了命题 XI.6.11(ii)。现在由 (2.33) 与变换定理即得该断言。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\begin{corollary}
+
+设 $ t \in \mathbb{R} $。则对每个相对紧致集 $ A \in \mathcal{L}_M $ 与每个 $ v \in \mathcal{V}_c(M) $，有
+
+\[
+\frac{d}{dt}\operatorname{vol}_M(A^t) = \int_{A^t} \operatorname{div} v \, d\lambda_M \quad \text{对 } v \in \mathcal{V}_c(M) .
+\]
+
+称向量场 $ v \in \mathcal{V}(M) $ 是\textbf{无散度的}，若 $ \operatorname{div} v = 0 $。若 $ v $ 具有紧支集，则称 $ v $ 生成的流 $ \chi $ 是\textbf{体积保持的}，若
+
+\[
+\operatorname{vol}_M(A^t) = \operatorname{vol}_M(A) \quad \text{对 } t \in \mathbb{R} \text{ 与 } A \in \mathcal{L}_M .
+\]
+
+由推论 2.12 可知，对 $ M $ 的相对紧可测子集 $ A $，若 $ \operatorname{div} v \ge 0 $，则输运集 $ A^t $ 的体积随时间增大；当 $ \operatorname{div} v \le 0 $ 时，该体积减小。
+
+\end{corollary}
+
+\begin{proposition}
+
+设 $ M $ 无边界且是伪黎曼的。又设 $ v \in \mathcal{V}_c(M) $。则 $ v $ 是无散度的当且仅当 $ v $ 生成的流是体积保持的。
+
+\proofhead
+“$ \Rightarrow $” 设 $ \operatorname{div} v = 0 $。则由推论 2.12 可得
+\begin{equation}
+\operatorname{vol}(A^t) = \operatorname{vol}(A) \quad \text{对 } t \in \mathbb{R}\tag{2.34}
+\end{equation}
+
+对 $ M $ 的每个紧致子集 $ A $ 成立。因为 $ M $ 是 σ-紧致的且 $ \lambda_M $ 正则，所以 (2.34) 对每个 $ A \in \mathcal{L}_M $ 成立。
+
+“$ \Leftarrow $” 设 $ \chi $ 是体积保持的。则推论 2.12 特别表明
+
+\begin{equation}
+\int_A \operatorname{div} v \, d\lambda_M = 0 \quad \text{对 } A \in \mathcal{L}_M \text{ 且 } \overline{A} \subset\subset M .\tag{2.35}
+\end{equation}
+
+因为 $ \operatorname{div} v $ 属于 $ C_c(M) $，所以 (2.35) 蕴含
+
+\begin{equation}
+\int_M f \operatorname{div} v \, d\lambda_M = 0 \quad \text{对 } f \in \mathcal{S}(M,\lambda_M) .\tag{2.36}
+\end{equation}
+
+因为 $ \operatorname{div} v \in \mathcal{L}_2(M,\lambda_M) $，且由命题 X.4.8，$ \mathcal{S}(M,\lambda_M) $ 在 $ \mathcal{L}_2(M,\lambda_M) $ 中稠密，所以存在 $ \mathcal{S}(M,\lambda_M) $ 中的序列 $ (f_j) $，使得 $ f_j \to \operatorname{div} v $ 在 $ \mathcal{L}_2(M,\lambda_M) $ 中。因此由 $ \mathcal{L}_2(M,\lambda_M) $ 中标量积的连续性（即柯西–施瓦茨不等式）可得
+
+\[
+\int_M (\operatorname{div} v)^2 d\lambda_M = \lim_{j\to\infty}\int_M f_j \operatorname{div} v \, d\lambda_M = 0 .
+\]
+
+现在由注 X.3.3(c) 即得该断言。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\begin{example}
+
+（连续性方程） 设 $ X $ 是 $ \mathbb{R}^3 $ 中的开有界集，且 $ v \in \mathcal{V}_c(X) $。又设 $ \chi $ 是 $ v $ 生成的流。如同注 2.2(h) 中那样，我们把 $ \chi $ 解释为 $ X $ 中具有（光滑）质量密度 $ \rho $ 的流动流体。在流体力学中，常假设质量在 $ X $ 中既不产生也不消灭，因此它服从\textbf{质量守恒定律}：在时刻 $ t = 0 $ 位于区域 $ A $ 中的质量，在随流输运时保持不变。这意味着 $ \rho(A^t,t) = \rho(A,0) $ 对 $ t \in \mathbb{R} $ 成立，因此
+
+\[
+\frac{d}{dt}\int_{A^t} \rho(\cdot,t)\,dx = 0 \quad \text{对 } t \in \mathbb{R} \text{ 与 } A \in \mathcal{L}_X .
+\]
+
+输运定理表明这等价于
+
+\begin{equation}
+\int_{A^t}\left(\partial_t\rho + \operatorname{div}(\rho v)\right) dx = 0 \quad \text{对 } t \in \mathbb{R} \text{ 与 } A \in \mathcal{L}_X .\tag{2.37}
+\end{equation}
+
+因此质量守恒定律等价于\textbf{连续方程}
+
+\begin{equation}
+\partial_t\rho + \operatorname{div}(\rho v) = 0 \quad \text{在 } X \text{ 中} .\tag{2.38}
+\end{equation}
+
+（这里以及在类似公式中，我们处理的是“与时间有关”的向量场，散度算子只作用于“位置变量”。）
+
+在密度 $ \rho > 0 $ 为常数的特殊情形，即\textbf{不可压缩流体}的情形，质量守恒定律等价于 $ \operatorname{div} v = 0 $，也就是等价于速度场的散度为零。因此，我们也把无散度的向量场称为\textbf{不可压缩的}。
+
+\proofhead
+(2.37) 与 (2.38) 的等价性可仿照命题 2.13 的证明得到。\nobreak\hspace{0.35em}■
+\end{example}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+为简单起见，我们集中讨论整体流体的情形。若放松向量场具有紧支集这一假设，则 $ v \in \mathcal{V}(M) $ 生成一个\textbf{局部}流。此时定理 2.10、2.11、2.13 与推论 2.12 的相应局部版本仍然成立。
+
+\proofhead
+例如可与 [Ama95] 中的第 10 节与定理 11.8 相比较。\nobreak\hspace{0.35em}■
+\item
+
+（正则性）关于向量场生成的流及其相关定理的陈述，当 $ M $ 是 $ C^2 $ 流形且 $ v $ 是 $ C^1 $ 向量场时仍然成立。当然，此时我们只有 $ \chi \in C^1(M \times \mathbb{R}, M) $。在这种情况下，输运定理需要 $ f \in C^1(M \times \mathbb{R}) $ 这一假设。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+证明\textbf{微分形式的勒贝格定理}的如下形式：设 $ \omega $ 是 $ M $ 上可积的 $ m $-形式，而 $ f, f_j \in \mathcal{L}_\infty(M, \lambda_M) $ 满足 $ f_j \to f $ $ \lambda_M $-几乎处处且 $ \sup_j \|f_j\|_\infty < \infty $。又设 $ \omega_j := f_j\omega $，$ j \in \mathbb{N} $。证明当 $ j \to \infty $ 时 $ \int_M \omega_j \to \int_M \omega $。
+
+\item
+
+设 $ a \in \mathbb{R}^3 $、$ R > 0 $，并定义 $ M := a + RS^2 $。计算 $ \int_M \omega $，其中
+
+\[
+\omega := x^2\,dy \wedge dz + y^2\,dz \wedge dx + z^2\,dx \wedge dy .
+\]
+\item
+
+设 $ v \in \mathcal{V}_c(M) $，并用 $ \chi $ 表示由 $ v $ 生成的 $ M $ 上的流。称函数 $ f \in \mathcal{E}(M) $ 为 $ v $ 的\textbf{首次积分}，如果
+
+\[
+\frac{d}{dt}(\chi^t)^*f = 0 \qquad \text{在 } M \times \mathbb{R} \text{ 上} .
+\]
+
+证明这些陈述等价：
+
+\begin{subitems}
+\item
+
+$ f $ 是 $ v $ 的首次积分。
+
+\item
+
+对 $ t \in \mathbb{R} $，$ (\chi^t)^*f = f $。
+
+\item
+
+$ L_v f = 0 $。
+
+\end{subitems}
+
+\item
+
+设 $ H \in \mathcal{E}_c(\mathbb{R}^{2n}) $。证明下列陈述等价：
+
+\begin{subitems}
+\item
+
+$ f $ 是 $ \operatorname{sgrad} H $ 的首次积分；
+
+\item
+
+$ \{f, H\} = 0 $。
+特别地，$ H $ 是 $ \operatorname{sgrad} H $ 的首次积分。
+
+\end{subitems}
+
+\item
+
+设 $ v \in \mathcal{V}_c(M) $，并设 $ \chi $ 是 $ v $ 生成的流。对 $ \alpha \in \Omega(M) $，
+
+\[
+L_v(\alpha) := \frac{d}{dt}\left[(\chi^t)^*\alpha\right]\big|_{t=0}
+\]
+
+称为 $ \alpha $ 的\textbf{李导数}。证明下列各条。
+
+\begin{subitems}
+\item
+
+若 $ \alpha \in \Omega^r(M) $，则 $ L_v(\alpha) $ 属于 $ \Omega^r(M) $；当 $ r = 0 $ 时，上述定义与第 XI.6 节的定义一致。
+
+\item
+
+$ L_v \circ d = d \circ L_v $。
+
+\item
+
+形式 $ \alpha, \beta \in \Omega(M) $ 满足\textbf{乘积法则} $ L_v(\alpha \wedge \beta) = L_v(\alpha) \wedge \beta + \alpha \wedge L_v(\beta) $。
+
+\item
+
+对 $ \alpha \in \Omega(M) $，$ L_v(\alpha) = d(v \lrcorner \alpha) + v \lrcorner d\alpha $。
+
+\item
+
+$ L_v(\omega_M) = \operatorname{div}(v)\omega_M $。
+
+\item
+
+若 $ w \in \mathcal{V}_c(M) $，则 $ \Theta_M[v, w] = L_v(\Theta_M w) $。
+
+\end{subitems}
+
+\item
+
+描述下列向量场生成的流：
+
+\begin{subitems}
+\item
+
+$ x\,\partial/\partial x + y\,\partial/\partial y \in \mathcal{V}(\mathbb{R}^2) $；
+
+\item
+
+$ -y\,\partial/\partial x + x\,\partial/\partial y \in \mathcal{V}(\mathbb{R}^2) $；
+
+\item
+
+$ -y\,\partial/\partial x + x\,\partial/\partial y \in \mathcal{V}(\mathbb{R}^3) $；
+
+\item
+
+$ (x - y)\,\partial/\partial x + (x + y)\,\partial/\partial y \in \mathcal{V}(\mathbb{R}^2) $；
+
+\item
+
+$ (x + y)\,\partial/\partial x + x^2\,\partial/\partial y \in \mathcal{V}(\mathbb{R}^2) $；
+
+\item
+
+$ (x + y)\,\partial/\partial x + (x - y)\,\partial/\partial y + z\,\partial/\partial z \in \mathcal{V}(\mathbb{R}^3) $。
+
+\end{subitems}
+
+\end{exercises}
+
+\section{斯托克斯定理}
+
+在本节中，我们把流形上的微分学与积分学结合起来，并证明一般的斯托克斯定理。它是微积分基本定理的高维推广，在数学与理论物理中有大量应用。特别地，它构成了拓扑学与几何学中理论探索的基础，不过我们不在这里深入这些主题。
+
+我们说明斯托克斯定理如何用于计算体积，以及它如何为算子 $ \operatorname{div} $ 与 $ \operatorname{curl} $ 提供物理解释。作为一个拓扑应用，我们证明布劳威尔不动点定理。
+
+本节最后，我们建立外积与余微分之间的联系，不过我们把这一联系的全部意义留待后续的整体分析课程。
+
+本节中始终假设
+
+- $ m \ge 2 $；
+- $ M $ 是 $ m $ 维定向流形。
+
+若 $ M $ 带边界，则 $ \partial M $ 将由外法向定向（相对于周围空间 $ \mathbb{R}^m $ 诱导的度量）。
+
+\needspace{3\baselineskip}\subsection*{光滑流形上的斯托克斯定理}
+
+我们用 $ i: \partial M \hookrightarrow M $ 表示自然嵌入，并回忆定义
+
+\[
+\int_{\partial M} \omega := \int_{\partial M} i^*\omega = \int_{\partial M} \omega|\partial M \qquad \text{对 } \omega \in \Omega^{m-1}(M),
+\]
+
+只要 $ \omega|\partial M $ 可积，它就是有意义的。此外，我们约定 $ \int_\varnothing \omega := 0 $。
+
+\begin{theorem}
+
+（斯托克斯） 任意 $ \omega \in \Omega_c^{m-1}(M) $ 都满足 $ \int_M d\omega = \int_{\partial M} \omega $。
+
+证明
+
+\begin{subitems}
+\item
+
+首先考虑 $ M = \mathbb{R}^m $ 的情形。此时 $ \partial M = \varnothing $，且 $ \omega $ 有表示
+
+\begin{equation}
+\omega = \sum_{j=1}^{m} (-1)^{j-1} a_j \, dx^1 \wedge \cdots \wedge \widehat{dx^j} \wedge \cdots \wedge dx^m\tag{3.1}
+\end{equation}
+
+其中 $ a_j \in \mathcal{D}(\mathbb{R}^m) $，如我们从例 XI.3.2(b) 所知。例 XI.3.7(b) 蕴含
+
+\begin{equation}
+d\omega = \left( \sum_{j=1}^{m} \partial_j a_j \right) dx^1 \wedge \cdots \wedge dx^m.\tag{3.2}
+\end{equation}
+
+因此由注 2.1(a) 推出
+
+\[
+\int_M d\omega = \int_{\mathbb{R}^m} \sum_{j=1}^{m} \partial_j a_j \, dx = \sum_{j=1}^{m} \int_{\mathbb{R}^m} \partial_j a_j \, dx = 0,
+\]
+
+其中，由于 $ \partial_j a_j = \mathbf{1}\partial_j a_j $，最后一个等式由分部积分推出，依据是命题 X.7.22。因此在这一情形下结论成立，因为 $ \int_{\partial M} \omega = \int_\varnothing \omega = 0 $。
+
+\item
+
+设 $ M = \overline{\mathbb{H}}^m $。此时 (3.1) 与 (3.2) 同样成立，只是现在 $ a_j $ 属于 $ C_c^\infty(\overline{\mathbb{H}}^m) $。由富比尼定理与命题 X.7.22，取 $ x' = (x^1, \ldots, x^{m-1}) $，我们得到
+
+\begin{equation}
+\int_{\overline{\mathbb{H}}^m} \partial_j a_j \, dx = \int_0^\infty \left( \int_{\mathbb{R}^{m-1}} \partial_j a_j \, dx' \right) dx^m = 0 \qquad \text{对 } 1 \le j \le m-1.\tag{3.3}
+\end{equation}
+
+富比尼定理与微积分基本定理蕴含
+
+\begin{equation}
+\int_{\overline{\mathbb{H}}^m} \partial_m a_m \, dx = \int_{\mathbb{R}^{m-1}} \left( \int_0^\infty \partial_m a_m \, dx^m \right) dx' = - \int_{\mathbb{R}^{m-1}} a_m(x', 0) \, dx'.\tag{3.4}
+\end{equation}
+
+因为 $ i(x') = (x', 0) $，由例 XI.3.4(j) 推出
+
+\begin{equation}
+i^*\omega = (-1)^{m-1} i^* a_m \, dx^1 \wedge \cdots \wedge dx^{m-1}.\tag{3.5}
+\end{equation}
+
+由于 $ \partial\overline{\mathbb{H}}^m $ 的标准定向（见例 XI.5.3(h)）以及 (3.2)、(3.3) 与 (3.5)，我们可以把 (3.4) 写成如下形式
+
+\begin{equation*}
+\begin{aligned}
+\int_M d\omega &= \int_{\overline{\mathbb{H}}^m} \partial_m a_m \, dx = - \int_{\mathbb{R}^{m-1}} i^* a_m \, dx' \\ &= (-1)^{m-1} \int_{\partial\overline{\mathbb{H}}^m} (i^* a_m) \, dx^1 \wedge \cdots \wedge dx^{m-1} = \int_{\partial M} i^*\omega = \int_{\partial M} \omega.
+\end{aligned}
+\end{equation*}
+
+于是这一情形下结论也成立。
+
+\item
+
+现在设 $ \partial M = \varnothing $，且 $ M $ 由单个（正）坐标卡 $ (\varphi, M) $ 描述。由于 $ \omega $ 具有紧支集，$ \varphi_*\omega $ 属于 $ \Omega_c^{m-1}(\mathbb{R}^m) $。由 $ \varphi_* = (\varphi^{-1})^* $ 与定理 XI.4.10 推出 $ \varphi_* \circ d = d \circ \varphi_* $。因此 (i) 给出
+
+\[
+\int_M d\omega = \int_{\varphi(M)} \varphi_* d\omega = \int_{\varphi(M)} d(\varphi_*\omega) = \int_{\mathbb{R}^m} d(\varphi_*\omega) = 0 = \int_\varnothing \omega = \int_{\partial M} \omega.
+\]
+\item
+
+设 $ \partial M \neq \varnothing $，且 $ M $ 由单个（正）坐标卡 $ (\varphi, M) $ 描述。则 $ \{(\varphi_\partial, \partial M)\} $，其中 $ \varphi_\partial := \varphi|\partial M $，是 $ \partial M $ 的一个正图册。此外 $ \varphi_*\omega $ 在 $ \overline{\mathbb{H}}^m $ 中具有紧支集，且 $ i \circ \varphi_\partial^{-1} = \varphi^{-1} \circ i_{\partial\overline{\mathbb{H}}^m} $。因此
+
+\[
+(\varphi_\partial)_* i^* = (i_{\partial\overline{\mathbb{H}}^m})^* \varphi_*.
+\]
+
+因此由 (ii)，类似于步骤 (iii)，推出
+
+\begin{equation*}
+\begin{aligned}
+\int_M d\omega &= \int_{\varphi(M)} \varphi_* d\omega = \int_{\varphi(M)} d(\varphi_*\omega) = \int_{\overline{\mathbb{H}}^m} d(\varphi_*\omega) \\ &= \int_{\partial\overline{\mathbb{H}}^m} i^*_{\partial\overline{\mathbb{H}}^m} \varphi_*\omega = \int_{\partial\overline{\mathbb{H}}^m} (\varphi_\partial)_* i^*\omega = \int_{\partial M} i^*\omega = \int_{\partial M} \omega.
+\end{aligned}
+\end{equation*}
+
+这证明了这一情形下的结论。
+
+\item
+
+最后，设 $ \{(\varphi_j, U_j, \pi_j) ; j \in \mathbb{N}\} $ 是 $ M $ 的一个局部系统。因为 $ K := \operatorname{supp}(\omega) $ 是紧致的，我们可以这样选取它，使得存在 $ k \in \mathbb{N} $，满足当 $ j > k $ 时 $ \operatorname{supp}(\pi_j) \cap K = \varnothing $。令 $ \omega_j := \pi_j\omega|U_j \in \Omega_c^{m-1}(U_j) $，则推出 $ \omega = \sum_{j=0}^{k} \omega_j $。因此由 (iii) 与 (iv)，我们得到
+
+\[
+\int_M d\omega = \sum_{j=0}^{k} \int_M d\omega_j = \sum_{j=0}^{k} \int_{U_j} d\omega_j = \sum_{j=0}^{k} \int_{\partial U_j} \omega_j = \sum_{j=0}^{k} \int_{\partial M} \omega_j = \int_{\partial M} \omega.
+\]
+
+这里我们用到了 $ \{(\varphi_{j,\partial}, \partial U_j, i^*\pi_j) ; j \in \mathbb{N}\} $ 是 $ \partial M $ 的一个局部系统，且当 $ j > k $ 时 $ \operatorname{supp}(i^*\pi_j) \cap K = \varnothing $。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{带奇点的流形}
+
+对许多应用来说，$ M $ 是流形这一假设过于严格。人们还希望把斯托克斯定理应用于诸如柱体或锥体这样的“分段光滑流形”。
+
+\bookfigure[0.95]{figures/092bbdecf0a63fca.png}
+
+若没有“奇点”，也就是棱、角、尖点等，上述集合本会是带边界的流形。事实上，这些例外由相对于边界来说“薄”的集合组成。因此可以预料，就积分而言，奇点无关紧要。
+
+我们现在引入一类“带薄奇异集的流形”，它包含上述例子，并且我们证明斯托克斯定理对这些对象也成立。
+
+设 $ B $ 是 $ M $ 的闭子集且内部非空。我们把所有满足以下条件的 $ p \in B $ 组成的集合记为 $ \mathrm{M}_B $：存在 $ p $ 在 $ M $ 中的开邻域 $ V_p $，使得 $ B \cap V_p $ 是 $ V_p $ 的 $ m $ 维子流形。于是 $ \mathrm{M}_B $ 是 $ M $ 的 $ m $ 维子流形，即 $ B $ 的\textbf{支撑流形}。集合 $ \mathrm{S}_B := B \setminus \mathrm{M}_B $ 称为 $ B $ 的\textbf{奇异集}，而 $ B $ 称为 $ M $ 的 $ m $ 维\textbf{带奇点的子流形}。显然 $ \mathrm{S}_B $ 在 $ M $ 中是闭的。
+
+所谓 $ B $ 的边界，我们指的是 $ \mathrm{M}_B $ 的边界；即 $ \partial B := \partial\mathrm{M}_B $。不要把 $ \partial B $ 与 $ B $ 在 $ M $ 中的拓扑边界 $ \operatorname{Rd}(B) $ 混淆。最后，我们给 $ \mathrm{M}_B $ 赋予由 $ M $ 典范诱导的定向。
+
+\bookfigure[0.42]{figures/bb1a8b38cc5201fc.png}
+
+设 $ \mathcal{H}^s $ 是 $ M $ 上的 $ s $ 维豪斯多夫测度（其中 $ M $ 带有由 $ \mathbb{R}^m $ 诱导的度量）。于是，当它是 $ \mathcal{H}^{m-1} $-零集时，我们称 $ B $ 的奇异集 $ \mathrm{S}_B $ 是\textbf{薄的}。在这一情形下，$ B $ 是\textbf{带薄奇异集的流形}。
+
+如果我们只要求集合 $ \mathrm{M}_B $ 是某个 $ k \in \mathbb{N}^\times $ 的 $ C^k $ 类子流形，那么我们自然称 $ B $ 为 $ M $ 的带奇点的 $ C^k $ 子流形。这里只要求 $ M $ 是 $ C^k $ 流形。
+
+\begin{example}
+
+\begin{items}
+\item
+
+$ M $ 的每个在 $ M $ 中拓扑闭的 $ m $ 维子流形——特别地 $ M $ 本身——都具有薄的（实际上是空的）奇异集。
+
+\item
+
+若豪斯多夫维数满足 $ \dim_H(\mathrm{S}_B) < m-1 $，则 $ \mathrm{S}_B $ 是薄的。
+
+\proofhead
+这由习题 IX.3.5 中 $ \dim_H $ 的定义推出。\nobreak\hspace{0.35em}■
+\item
+
+设 $ (J_k) $ 是 $ \mathbb{R}^{m-2} $ 中的一列区间，且 $ f_k \in C^{1-}(J_k, M) $ 满足 $ \bigcup_{k=0}^{\infty} f_k(J_k) = \mathrm{S}_B $。则 $ \mathrm{S}_B $ 是薄的。
+
+\proofhead
+由习题 IX.3.6(a) 与 (f) 推出 $ \dim_H(f_k(J_k)) \le m-2 $。因此对每个 $ k \in \mathbb{N} $，$ f_k(J_k) $ 都是 $ \mathcal{H}^{m-1} $-零集，而豪斯多夫测度的 $ \sigma $-次可加性完成证明。\nobreak\hspace{0.35em}■
+\end{items}
+
+\begin{items}
+\item[（d）]
+
+（分段光滑区域） 设 $ \Omega $ 是 $ M $ 中的非空\textbf{区域}，即 $ M $ 的非空开连通子集。于是 $ \mathrm{S}_{\overline{\Omega}} $ 与 $ \mathrm{M}_{\overline{\Omega}} $，从而 $ \partial\overline{\Omega} = \partial\mathrm{M}_{\overline{\Omega}} $ 也有定义。设 $ \mathbb{B}_\infty^{m-1} = (-1,1)^{m-1} $ 是 $ (\mathbb{R}^{m-1}, |\cdot|_\infty) $ 中的开单位球。我们称 $ \Omega $ 是 $ M $ 中的\textbf{分段光滑区域}，如果存在有限多个函数\footnote{如果 $ \overline{\Omega} $ 只是 $ M $ 的带奇点的 $ C^k $ 子流形，我们称 $ \Omega $ 为 $ M $ 中的**分段 $ C^k $ 区域**。}
+
+\[
+h_j \in C^1(\overline{\mathbb{B}}_\infty^{m-1}, M) \cap C^\infty(\mathbb{B}_\infty^{m-1}, M) \qquad \text{对 } 0 \le j \le n
+\]
+
+使得
+
+\begin{subitems}
+\item
+
+$ h_j|\mathbb{B}_\infty^{m-1} $ 是 $ \partial\overline{\Omega} $ 的某个子集的参数化，$ 0 \le j \le n $；
+
+\item
+
+$ \partial\overline{\Omega} = \bigcup_{j=0}^{n} h_j(\mathbb{B}_\infty^{m-1}) $；
+
+\item
+
+$ \operatorname{Rd}(\Omega) = \bigcup_{j=0}^{n} h_j(\overline{\mathbb{B}}_\infty^{m-1}) $。
+则 $ \overline{\Omega} $ 是 $ M $ 的带薄奇异集的 $ m $ 维子流形，并且我们约定 $ \partial\Omega := \partial\overline{\Omega} $。更确切地说，我们有
+
+\[
+\mathrm{S}_{\overline{\Omega}} = \bigcup_{j=0}^{n} h_j(\operatorname{Rd}(\mathbb{B}_\infty^{m-1})) \qquad \text{且} \qquad \mathrm{M}_{\overline{\Omega}} = \Omega \cup \bigcup_{j=0}^{n} h_j(\mathbb{B}_\infty^{m-1}),
+\]
+
+并且 $ \overline{\Omega} $ 具有紧边界 $ \operatorname{Rd}(\Omega) $。此外，$ \partial\Omega = \operatorname{Rd}(\Omega) $ 当且仅当 $ \overline{\Omega} $ 的奇异集为空。
+
+\proofhead
+中值定理与 $ M \hookrightarrow \mathbb{R}^m $ 蕴含 $ h_j \in C^{1-}(\overline{\mathbb{B}}_\infty^{m-1}, M) $（见注 VII.3.11(b)）。因此 $ h_j|\operatorname{Rd}(\mathbb{B}_\infty^{m-1}) $ 也局部利普希茨连续，而结论由 (c) 推出。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\item[（e）]
+
+$ \mathbb{R}^m $ 中每个内部非空的开多面体都是 $ \mathbb{R}^m $ 中的分段光滑区域。其边界由“开的”$ (m-1) $ 维“面”组成。换言之，奇异集由所有位于维数 $ \le m-2 $ 的“棱”中的点组成。因此，例如 $ \mathbb{R}^3 $ 中立方体的奇异集由 12 条棱与 8 个顶点组成。
+
+\proofhead
+这由 (d) 推出。\nobreak\hspace{0.35em}■
+\item[（f）]
+
+设 $ M $ 与 $ N $ 分别是 $ \mathbb{R}^m $ 与 $ \mathbb{R}^n $ 的 $ m $ 维与 $ n $ 维拓扑闭子流形。则 $ B := M \times N $ 是 $ \mathbb{R}^{m+n} $ 的带薄奇异集的子流形。更确切地说，
+
+\[
+\mathrm{S}_B = \partial M \times \partial N, \qquad \partial B = (\mathring{M} \times \partial N) \cup (\partial M \times \mathring{N}), \qquad \mathrm{M}_B = (\mathring{M} \times \mathring{N}) \cup \partial B.
+\]
+
+\proofhead
+容易看出 $ \mathrm{S}_B $、$ \mathrm{M}_B $ 与 $ \partial B $ 就是所给的集合。由习题 XI.1.8，我们知道 $ \dim_H(\partial M) \le m-1 $ 且 $ \dim_H(\partial N) \le n-1 $。因此习题 IX.3.8 表明 $ \dim_H(\partial M \times \partial N) \le m+n-2 $。于是 $ \mathrm{S}_B $ 是薄的。\nobreak\hspace{0.35em}■
+\item[（g）]
+
+设 $ B $ 是 $ S^m $ 的带薄奇异集的 $ m $ 维子流形，且 $ r > 0 $。则例 2.7(d) 的锥 $ K(rB) $ 是 $ \mathbb{R}^{m+1} $ 的带薄奇异集的 $ (m+1) $ 维子流形。更确切地说（约定 $ K(\varnothing, r) := \varnothing $），我们有
+
+\[
+\mathrm{S}_{K(rB)} = \{0\} \cup K(\mathrm{S}_{rB}) \cup \partial(rB)
+\]
+
+以及
+
+\[
+\partial K(rB) = \operatorname{int}(rB) \cup \{ t\,i(\sigma) ; 0 < t < 1,\ \sigma \in \partial(rB) \}
+\]
+
+其中 $ i: rB \hookrightarrow \mathbb{R}^{m+1} $。
+
+\end{items}
+
+\bookfigure[0.35]{figures/de011e8c0f031593.png}
+
+\proofhead
+我们留给你去验证所给出的奇异集与 $ K(rB) $ 的边界的表示。由 $ \dim_H(\partial B) \le m-1 $ 与习题 IX.1.4(b)，$ r\partial B = \partial(rB) $ 是 $ \mathcal{H}^m $-零集。
+
+作为紧致集 $ S^m $ 的闭子集，集合 $ \mathrm{S}_B $ 在 $ \mathbb{R}^{m+1} $ 中是紧致的。设 $ \varepsilon \in (0,1] $ 且 $ \rho > 0 $。因为 $ \mathrm{S}_B $ 是 $ \mathcal{H}^{m-1} $-零集，存在 $ \mathbb{R}^{m+1} $ 中的开集 $ O_0, \ldots, O_J $，使得 $ \operatorname{diam} O_j < \varepsilon $ 且
+
+\[
+\sum_{j=0}^{J} [\operatorname{diam} O_j]^{m-1} < \rho.
+\]
+
+设 $ K \in \mathbb{N}^\times $ 满足 $ K\varepsilon < r \le (K+1)\varepsilon $。则区间
+
+\[
+J_k := [k\varepsilon, (k+1)\varepsilon] \qquad \text{对 } 0 \le k \le K
+\]
+
+覆盖区间 $ [0,r] $，且满足 $ \operatorname{diam}(J_k) = \varepsilon $。因此
+
+\[
+\{ Q_j \times J_k ; 0 \le j \le J,\ 0 \le k \le K \}
+\]
+
+是 $ \mathrm{S}_B \times [0,r] $ 在 $ \mathbb{R}^{m+1} \times \mathbb{R} $ 中由 $ \mathbb{R}^{m+1} $ 的子集构成的覆盖，且满足
+
+\[
+\operatorname{diam}(Q_j \times J_k) \le \sqrt{2}\varepsilon\operatorname{diam}(Q_j) \le \sqrt{2}\operatorname{diam}(Q_j) \le \sqrt{2}\varepsilon.
+\]
+
+由此我们得到
+
+\begin{equation*}
+\begin{aligned}
+\sum_{j=0}^{J}\sum_{k=0}^{K} [\operatorname{diam}(Q_j \times J_k)]^m &\le (K+1)2^{m/2}\sum_{j=0}^{J}[\operatorname{diam} Q_j]^m \\ &\le (r+1)2^{m/2}\sum_{j=0}^{J}\varepsilon^{-1}[\operatorname{diam} Q_j]^m \\ &\le (r+1)2^{m/2}\sum_{j=0}^{J}[\operatorname{diam} Q_j]^{m-1} < (r+1)2^{m/2}\rho.
+\end{aligned}
+\end{equation*}
+
+由于这对每个 $ \varepsilon \in (0,1] $ 与每个 $ \rho > 0 $ 都成立，我们从习题 IX.3.4(a) 看出 $ \mathrm{S}_B \times [0,r] $ 是 $ \mathbb{R}^{m+1} \times \mathbb{R} $ 中的 $ \mathcal{H}^m $-零集。显然 $ K(\mathrm{S}_{rB}) $ 是 $ \mathrm{S}_B \times [0,r] $ 在如下利普希茨连续映射下的像：
+
+\[
+\mathbb{R}^{m+1} \times \mathbb{R} \to \mathbb{R}^{m+1}, \qquad (x,t) \mapsto tx
+\]
+
+因此习题 IX.3.4(b) 蕴含 $ K(\mathrm{S}_{rB}) $ 也是 $ \mathcal{H}^m $-零集。由此推出 $ \mathrm{S}_{K(rB)} $ 是薄奇异集。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（h）]
+
+设 $ N $ 是 $ m $ 维流形，且 $ f \in \operatorname{Diff}(M,N) $。若 $ B $ 是 $ M $ 的带薄奇异集的子流形，则 $ f(B) $ 是 $ N $ 的带薄奇异集的子流形。
+
+\proofhead
+这容易由注 XI.1.1(g) 与习题 IX.3.4(b) 推出。\nobreak\hspace{0.35em}■
+\end{items}
+
+\bookfigure[0.67]{figures/643e7ebe99a4f563.png}
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{带奇点的斯托克斯定理}
+
+我们现在把定理 3.1 推广到带薄奇异集的 $ C^2 $ 流形的情形。\footnote{我们的证明遵循 [Lan95] 中给出的想法。另一种途径见 [HR72] 与 [AMR83]。} 我们首先需要一个引理。这里我们用 $ \mathbb{B}^m(A,r) $ 表示 $ A \subset \mathbb{R}^m $ 的半径为 $ r > 0 $ 的开邻域，即
+
+\[
+\mathbb{B}^m(A,r) := \bigcup_{x\in A}\mathbb{B}^m(x,r) = \{ x\in\mathbb{R}^m ;\ \operatorname{dist}(x,A) < r \}
+\]
+
+若 $ A \neq \varnothing $。
+
+\begin{lemma}
+
+设 $ K $ 是 $ \mathbb{R}^m $ 中的非空紧 $ \mathcal{H}^{m-1} $-零集。则对每一对 $ \varepsilon, r > 0 $，存在开集 $ U $ 与 $ V $ 以及 $ \chi \in \mathcal{E}(\mathbb{R}^m) $，使得
+
+\begin{equation}
+K \subset\subset U \subset\subset V \subset\subset \mathbb{B}^m(K,r)\tag{3.6}
+\end{equation}
+
+且
+
+\begin{equation}
+\chi|U = 0 , \quad \chi|V^c = \mathbf{1} , \quad 0 \le \chi \le \mathbf{1} , \quad \int_{\mathbb{R}^m} |\nabla\chi| \, dx \le \varepsilon .\tag{3.7}
+\end{equation}
+
+\proofhead
+我们固定一个 $ \psi \in \mathcal{E}(\mathbb{R}) $，其中 $ 0 \le \psi \le \mathbf{1} $，令 $ \psi|[0,1] = 0 $ 且 $ \psi|[2,\infty) = \mathbf{1} $，并置 $ \kappa := 2^m\operatorname{vol}(\mathbb{B}^m)\|\psi'\|_\infty $。因为 $ \mathcal{H}^{m-1}(K) = 0 $，故对每个 $ \delta > 0 $ 都有 $ \mathcal{H}^{m-1}_\delta(K) = 0 $。由于 $ K $ 紧，存在开集 $ W_j $（$ 0 \le j \le n $）使得 $ K \subset \bigcup_{j=0}^{n} W_j $，$ K \cap W_j \neq \varnothing $，且 $ \rho_j := \operatorname{diam}(W_j) < r/3 $，并且
+\begin{equation}
+\sum_{j=0}^{n}\rho_j^{m-1} \le \varepsilon/\kappa .\tag{3.8}
+\end{equation}
+
+我们选取 $ x_j \in W_j \cap K $，并置 $ U_j := \mathbb{B}^m(x_j,\rho_j) $ 与 $ V_j := \mathbb{B}^m(x_j,2\rho_j) $（$ 0 \le j \le n $）。则 $ U := \bigcup_{j=0}^{n}U_j $ 与 $ V := \bigcup_{j=0}^{n}V_j $ 是开集，并且满足 (3.6)，因为对 $ 0 \le j \le n $ 有 $ U_j \supset W_j $。
+
+现在我们置
+
+\[
+\chi(x) := \prod_{j=0}^{n}\psi\left(\frac{|x-x_j|}{\rho_j}\right) \quad \text{对 } x \in \mathbb{R}^m .
+\]
+
+则 $ \chi $ 属于 $ \mathcal{E}(\mathbb{R}^m) $，并且满足 $ \chi|U = 0 $ 与 $ \chi|V^c = \mathbf{1} $。我们还有
+
+\[
+\nabla\chi(x) = \sum_{j=0}^{n}\psi'\left(\frac{|x-x_j|}{\rho_j}\right)\frac{x-x_j}{|x-x_j|}\frac{1}{\rho_j}\prod_{k=0,\,k\neq j}^{n}\psi\left(\frac{|x-x_k|}{\rho_k}\right)
+\]
+
+对 $ x \in \mathbb{R}^m $，因此
+
+\[
+|\nabla\chi| \le \|\psi'\|_\infty \sum_{j=0}^{n}\rho_j^{-1}\chi_{[\rho_j \le |x-x_j| \le 2\rho_j]} .
+\]
+
+然后这与勒贝格测度的平移不变性给出
+
+\begin{equation*}
+\begin{aligned}
+\int_{\mathbb{R}^m}|\nabla\chi|\,dx &\le \|\psi'\|_\infty \sum_{j=0}^{n}\rho_j^{-1}\operatorname{vol}(2\rho_j\mathbb{B}^m) \\ &= 2^m\operatorname{vol}(\mathbb{B}^m)\|\psi'\|_\infty \sum_{j=0}^{n}\rho_j^{m-1} = \kappa \sum_{j=0}^{n}\rho_j^{m-1} .
+\end{aligned}
+\end{equation*}
+
+由 (3.8)，这蕴含 (3.7) 的最后一个断言。\nobreak\hspace{0.35em}■
+
+\end{lemma}
+
+我们现在可以证明前面预告的斯托克斯定理的推广。
+
+\begin{theorem}
+
+（带奇点的斯托克斯定理） 设 $ B $ 是 $ M $ 的具有薄奇异集的 $ m $ 维子流形，并设 $ \omega \in \Omega_c^{m-1}(M) $。若 $ \omega|\partial B $ 可积，则 $ \int_B d\omega = \int_{\partial B}\omega $。
+
+证明
+
+\begin{subitems}
+\item
+
+设 $ M $ 是 $ \overline{\mathbb{H}}^m $ 中的开集，且 $ K := S_B \cap \operatorname{supp}(\omega) $。由于 $ \operatorname{supp}(\omega) $ 紧且 $ S_B $ 在 $ M $ 中闭，我们知道 $ K $ 是 $ \mathbb{R}^m $ 中的紧 $ \mathcal{H}^{m-1} $-零集。因此由引理 3.3，对每个 $ \varepsilon > 0 $ 与 $ k \in \mathbb{N}^\times $，存在常数 $ \kappa > 0 $ 与开集 $ U_k $、$ V_k $，使得
+
+\[
+K \subset\subset U_k \subset\subset V_k \subset\subset \mathbb{B}^m(K,1/k) .
+\]
+
+还存在 $ \chi_k \in \mathcal{E}(\mathbb{R}^m) $ 使得
+
+\[
+\chi_k|U_k = 0 , \quad \chi_k|V_k^c = \mathbf{1} , \quad 0 \le \chi_k \le \mathbf{1} , \quad \int_{\mathbb{R}^m}|\nabla\chi_k|\,dx \le \varepsilon .
+\]
+
+特别地，
+
+\begin{equation}
+\bigcap_{k=1}^{\infty}(\overline{V_k}\cap\partial B) = \varnothing .\tag{3.9}
+\end{equation}
+
+我们置 $ \omega_k := \chi_k\omega $。则 $ \omega_k $ 属于 $ \Omega_c^{m-1}(M_B) $。于是因为 $ B\setminus M_B = S_B $ 是 $ \lambda_m $-零集，定理 3.1 给出
+
+\begin{equation}
+\int_B d\omega_k = \int_{M_B}d\omega_k = \int_{\partial M_B}\omega_k = \int_{\partial B}\omega_k \quad \text{对 } k \in \mathbb{N}^\times .\tag{3.10}
+\end{equation}
+
+令 $ \psi_k := 1-\chi_k $，可得
+
+\[
+\int_{\partial B}\omega - \int_{\partial B}\omega_k = \int_{\partial B}(1-\chi_k)\omega = \int_{\partial B}\psi_k\omega .
+\]
+
+因为 $ \omega|\partial B $ 可积且 $ \operatorname{supp}(\psi_k) \subset \overline{V}_k $，(3.9) 与勒贝格定理（见习题 2.1）蕴含 $ (\int_{\partial B}\psi_k\omega) $ 是零序列。因此
+
+\begin{equation}
+\lim_{k\to\infty}\int_{\partial B}\omega_k = \int_{\partial B}\omega .\tag{3.11}
+\end{equation}
+
+此外，定理 XI.4.10(ii) 给出等式
+
+\begin{equation}
+\int_B d\omega_k = \int_B d\chi_k\wedge\omega + \int_B \chi_k d\omega .\tag{3.12}
+\end{equation}
+
+由于 $ B\setminus M_B $ 是 $ \lambda_m $-零集，我们有
+
+\[
+\int_B \chi_k d\omega = \int_{M_B}\chi_k d\omega \quad \text{对 } k \in \mathbb{N}^\times .
+\]
+
+因为 $ d\omega \in \Omega^m(M) $ 具有紧支集，$ d\omega $ 在 $ M_B $ 上可积。又 $ \chi_k(x) \to 1 $ 对 $ x \in M_B $。再次利用勒贝格定理，我们得到
+
+\begin{equation}
+\lim_{k\to\infty}\int_B \chi_k d\omega = \int_B d\omega .\tag{3.13}
+\end{equation}
+
+现在 $ \omega $ 有表示 $ \omega = \sum_{j=1}^{m}(-1)^{j-1}a_j dx^1\wedge\cdots\wedge\widehat{dx^j}\wedge\cdots\wedge dx^m $，其中 $ a_j \in \mathcal{D}(M) $。由此读出 $ d\chi_k\wedge\omega = b_k\omega_{\mathbb{R}^n} $，其中
+
+\[
+b_k := \sum_{j=1}^{m}a_j\partial_j\chi_k \quad \text{对 } k \in \mathbb{N}^\times .
+\]
+
+因此我们得到
+
+\[
+\left|\int_B d\chi_k\wedge\omega\right| = \left|\int_M b_k\,dx\right| \le c\int_{\mathbb{R}^m}|\nabla\chi_k|\,dx \le c\varepsilon \quad \text{对 } k \in \mathbb{N}^\times ,
+\]
+
+其中 $ c $ 是与 $ k $ 无关的常数。当 $ k\to\infty $ 时，结果 (3.10)–(3.13) 蕴含
+
+\[
+\left|\int_B d\omega - \int_{\partial B}\omega\right| \le c\varepsilon .
+\]
+
+因为这对每个 $ \varepsilon > 0 $ 都成立，故本情形下断言得证。
+
+\item
+
+现在设 $ M $ 由单个坐标卡 $ (\varphi,U) $ 描述。则断言可由 (i) 通过“向下移动”到 $ \varphi(U) \subset \overline{\mathbb{H}}^m $ 得到。
+
+\item
+
+最后设 $ M $ 任意，而 $ \{(\varphi_j,U_j,\pi_j) ;\ j\in\mathbb{N}\} $ 是 $ M $ 的局部系统。则如同定理 3.1 的证明第 (v) 步那样，只需对 $ \omega_j := \pi_j\omega $ 与 $ B_j := B\cap U_j $（$ j \in \mathbb{N} $）证明断言。它们在本情形下的有效性由 (ii) 推出。证毕。\nobreak\hspace{0.35em}■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{corollary}
+
+\begin{subitems}
+\item
+
+若 $ \omega $ 是闭的，则 $ \int_{\partial B}\omega = 0 $。
+
+\item
+
+若 $ M $ 没有边界，则 $ \int_M d\omega = 0 $。
+我们再次指出，定理 3.4 包含定理 3.1 的“正则情形”，即 $ B = M $ 的情形。
+
+\end{subitems}
+
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+（一维情形） 我们考虑连通的紧一维定向流形 $ \Gamma $。根据定理 XI.1.18，$ \Gamma $ 或者是嵌入 $ \mathbb{R}^m $ 中的 1-球面，或者微分同胚于 $ I := [0,1] $。因此 $ \Gamma $ 是一条定向光滑曲线，它要么是闭的，要么具有起点 $ A $ 与终点 $ E $。因为 $ \Omega^0(\Gamma) = \mathcal{E}(\Gamma) $ 且 $ m := \dim(\Gamma) = 1 $，我们知道 $ \omega \in \Omega^0(\Gamma) $ 是 $ \Gamma $ 上的函数。于是由注 2.2(b) 与例 VIII.4.2(b)（当考虑到该证明只用到 $ f $ 与 $ \Gamma $ 的值时）可得
+
+\begin{equation}
+\int_{\Gamma} d\omega = \omega(E) - \omega(A) ,\tag{3.14}
+\end{equation}
+
+其中在 $ \Gamma $ 是嵌入 1-球面的情形我们置 $ E = A $。通过规定 0 维流形的体积测度是 0 维豪斯多夫测度（计数测度），并给边界 $ \partial\Gamma $（若非空）赋予在 $ E $ 处为 $ +1 $、在 $ A $ 处为 $ -1 $ 的定向，我们可以把 (3.14) 写成 $ \int_{\Gamma} d\omega = \int_{\partial\Gamma}\omega $ 的形式。在 $ \Gamma $ 是区间 $ [a,b] $ 的特殊情形，方程 (3.14) 不是别的，正是微积分基本定理。这表明斯托克斯定理是定理 VI.4.13 的高维推广——而且确实以它为基础。。
+
+\item
+
+推论 3.5(i) 蕴含线积分基本定理“一半”的高维推广，即定理 VIII.4.4 的陈述 $ (i)\Rightarrow(ii) $。在一般情形下“另一半”同样成立（例如 [Lan95] 中的定理 XIII.1.1）。
+
+\item
+
+（正则性） 对证明的分析表明，斯托克斯定理（带奇点）仍然成立，如果只假设 $ \omega $ 属于 $ \Omega^{m-1}_{(1)}(M_B) $ 且在 $ M $ 中具有紧支集，并且 $ \omega|\partial B $ 与 $ \omega|M_B $ 可积。此外，只需假设 $ B $ 是 $ M $ 的具有薄奇点的 $ C^2 $ 子流形，且 $ M $ 本身仅是 $ C^2 $ 流形。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{平面区域}
+
+设 $ \Omega $ 是 $ \mathbb{R}^2 $ 中的分段光滑区域。则存在有限多条两两不交、无自交点的闭分段光滑曲线 $ \Gamma_0,\Gamma_1,\dots,\Gamma_n $，使得 $ \operatorname{Rd}(\Omega) = \Gamma := \Gamma_0+\cdots+\Gamma_n $。这里每条曲线 $ \Gamma_j $ 由 $ \partial\overline{\Omega}\cap\Gamma_j $ 的外法向定向。这意味着每条 $ \Gamma_j $ 的定向使得：沿 $ \Gamma_j $ 行进时，$ \Omega $ 中与 $ \Gamma_j $ 相邻的部分位于左侧。简言之，我们说 $ \Gamma $ 是 $ \Omega $ 的\textbf{定向边界曲线}。
+
+\bookfigure[0.36]{figures/8910ec71f9883c8d.png}
+
+\begin{proposition}
+
+（格林–黎曼） 设 $ \Omega $ 是 $ \mathbb{R}^2 $ 中有界的、边界曲线为 $ \Gamma $ 的分段光滑区域。又设 $ X $ 是 $ \overline{\Omega} $ 在 $ \mathbb{R}^2 $ 中的开邻域，且 $ a,b \in C^1(X) $。则（参见 VIII.1 中的习题 6 和 7 以及例 VIII.4.2(a)。）
+
+\[
+\int_{\Gamma} a\,dx + b\,dy = \int_{\Omega}\left(\frac{\partial b}{\partial x} - \frac{\partial a}{\partial y}\right)d(x,y) .
+\]
+
+\proofhead
+设 $ \overline{\Omega} \subset\subset U \subset\subset X $，并设 $ \chi $ 是 $ U $ 的截断函数。再定义 $ \alpha := a\,dx + b\,dy $。则 $ \alpha $ 属于 $ \Omega^1_{(1)}(X) $，且 $ d\alpha = (\partial_1 b - \partial_2 a)\,dx\wedge dy $。因此 $ \omega := \chi\alpha $ 属于 $ \Omega^1_{(1)}(X) $，在 $ X $ 中具有紧支集，并且在 $ U $ 上与 $ \alpha $ 一致。因为线积分 $ \int_{\Gamma}\alpha $ 存在，$ \alpha $ 在 $ \partial\Omega $ 上可积，且
+\[
+\int_{\Gamma} a\,dx + b\,dy = \int_{\partial\Omega}\alpha = \int_{\partial\Omega}\omega .
+\]
+
+因为 $ \lambda_2(\operatorname{Rd}(\Omega)) = 0 $，我们有
+
+\[
+\int_{\overline{\Omega}} d\omega = \int_{\overline{\Omega}} d\alpha = \int_{\Omega} d\alpha = \int_{\Omega}(\partial_2 b - \partial_1 a)\,d(x,y) .
+\]
+
+现在断言由定理 3.4 与注 3.6(c) 推出。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\qyxffntextdef{1}{$ A(\cdot) $ 表示面积。}
+\begin{corollary}
+
+在命题 3.7 的假设下，我们有\textbf{莱布尼茨面积公式}\qyxffnmark{1}
+
+\[
+A(\Omega) := \lambda_2(\Omega) = \int_{\Gamma} x\,dy = -\int_{\Gamma} y\,dx = \frac{1}{2}\int_{\Gamma} x\,dy - y\,dx .
+\]
+
+\proofhead
+按要求，置 $ (a,b) := (0,X) $、$ (a,b) := (-Y,0) $ 或 $ (a,b) := (-Y,X) $。\nobreak\hspace{0.35em}■
+\end{corollary}
+
+\begin{example}
+
+\begin{items}
+\item
+
+设 $ \Omega $ 是 $ \mathbb{R}^2 $ 中有界的、边界曲线 $ \Gamma $ 为定向的分段光滑区域。在极坐标 $ (r,\varphi) $ 下，我们有
+
+\[
+A(\Omega) = \frac{1}{2}\int_{\Gamma} r^2\,d\varphi .
+\]
+
+这个公式有简单的几何解释：由例 XI.4.6(b)，我们知道 $ d\varphi $ 是单位圆 $ S^1 $ 的体积元。于是我们可以把 $ r\,d\varphi $ 解释为与 $ rS^1 $ 相切的一个\footnote{参见注 VI.5.2(c)。}无穷小正向线段的长度。而 $ r^2 d\varphi/2 $ 可以解释为其顶点位于原点以及位置向量 $ r $ 与 $ r+r\,d\varphi $ 的端点的三角形的面积。这些“无穷小”定向面积之和，即积分，就给出总面积。
+
+\end{items}
+
+\bookfigure[0.32]{figures/2285c6406084b81b.png}
+
+\proofhead
+利用平面极坐标映射 $ f_2 $（见第 X.8 节），可以验证 $ f_2^*(x\,dy - y\,dx) = r^2 d\varphi $。因此断言由推论 3.8 推出。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（b）]
+
+（莱布尼茨扇形公式） 设 $ \Omega $ 是 $ \mathbb{R}^2 $ 中的分段光滑区域，其边界曲线 $ \Gamma $ 是定向的，且满足 $ \Gamma = \Sigma+\Gamma_0 $，其中 $ \Sigma $ 由端点位于 $ 0 $ 的线段组成。则
+
+\[
+A(\Omega) = \frac{1}{2}\int_{\Gamma_0} x\,dy - y\,dx .
+\]
+\end{items}
+
+\bookfigure[0.39]{figures/c79389bfe27a3fc5.png}
+
+\proofhead
+由 (a) 立即可得 $ \Sigma $ 上的积分为零。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（c）]
+
+（柯西积分定理） 我们把 $ \mathbb{C} $ 与 $ \mathbb{R}^2 $ 等同，并考虑 $ \mathbb{C} $ 中边界曲线 $ \Gamma $ 为定向的分段光滑区域 $ \Omega $。设 $ X $ 是 $ \overline{\Omega} $ 在 $ \mathbb{C} $ 中的开邻域，并设 $ f: X\to\mathbb{C} $ 是全纯的。则柯西积分定理成立\footnote{比较定理 VIII.5.5 与 VIII.6.20，并注意此时 $ \Gamma $ 可以有多条连通分支。}，即 $ \int_{\Gamma} f\,dz = 0 $。
+
+\proofhead
+我们把 $ z = x+iy $ 与 $ f = u+iv $ 分解为实部与虚部。这给出 $ f\,dz = \alpha + i\beta $，其中 $ \alpha := u\,dx - v\,dy $，$ \beta := u\,dy + v\,dx $。则柯西–黎曼方程蕴含
+\[
+d\alpha = -(u_y + v_x)\,dx\wedge dy = 0 \quad \text{且} \quad d\beta = (u_x - v_y)\,dx\wedge dy = 0
+\]
+
+（见注 VIII.5.4(c)）。现在断言由命题 3.7（或者，借助截断函数，直接由定理 3.4）推出。\nobreak\hspace{0.35em}■
+
+\item[（d）]
+
+设\footnote{参见 [SW96] 第四卷中的例 II.B.10。} $ B := \{ (x,y)\in\mathbb{R}^2 ;\ 0 \le x \le 1,\ 0 \le y \le f(x) \} $，其中
+
+\begin{equation*}
+f(x) := \begin{cases} 1 & \text{若 } x = 0 , \\ 1 + x\sin(\pi/x^2) & \text{若 } x \neq 0 . \end{cases}
+\end{equation*}
+
+则 $ S_B = \{ (0,0),(0,1),(1,0),(1,1) \} $，并且取 $ \omega = (x\,dy - y\,dx)/2 $ 可得 $ \lambda_2(B) = \int_B dx\wedge dy = \int_B d\omega < \infty $。沿曲线 $ \operatorname{graph}(f) $，我们有
+
+\[
+2\omega = x\,dy - y\,dx = \left(xf'(x) - f(x)\right)dx = \left(-1 - \frac{2\pi}{x}\cos\frac{\pi}{x^2}\right)dx .
+\]
+
+因此 $ \omega\,|\,\partial B $ 不可积，莱布尼茨面积公式不成立。这说明定理 3.4 确实需要 $ \omega\,|\,\partial B $ 可积这一假设。 \nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{高维问题}
+
+在下面的例子中，我们考虑把上面的结果推广到高维情形。
+
+\begin{example}
+
+\begin{items}
+\item
+
+（体积的计算） 设 $ \Omega $ 是 $ \mathbb{R}^m $ 中的有界分段光滑区域。则
+
+\[
+\operatorname{vol}(\overline{\Omega}) = \operatorname{vol}(\Omega) = \frac{1}{m}\int_{\partial\Omega}\sum_{j=1}^{m}(-1)^{j-1}x^{j}\,dx^{1}\wedge\cdots\wedge\widehat{dx^{j}}\wedge\cdots\wedge dx^{m}.
+\]
+
+\proofhead
+我们置
+\[
+\alpha := \sum_{j=1}^{m}(-1)^{j-1}x^{j}\,dx^{1}\wedge\cdots\wedge\widehat{dx^{j}}\wedge\cdots\wedge dx^{m}\in\Omega^{m-1}(\mathbb{R}^{m})
+\]
+
+且 $ \omega := \varphi\alpha $，其中 $ \varphi $ 是关于 $ \overline{\Omega} $ 的紧邻域 $ U $ 上的光滑截断函数。于是 $ \omega $ 属于 $ \Omega_c^{m-1}(\mathbb{R}^m) $，在 $ U $ 上与 $ \alpha $ 一致，并且满足
+
+\[
+d\omega\,|\,\overline{\Omega} = m\omega_{\mathbb{R}^m}\,|\,\overline{\Omega},
+\]
+
+这由例 XI.3.7(b) 推出。因为 $ \mathcal{H}^{m-1}(S_{\overline{\Omega}}) = 0 $，并且由定理 1.7(iii) 与 (iv)，我们看到 $ \operatorname{Rd}(\overline{\Omega}) = S_{\overline{\Omega}}\cup\partial\Omega $ 是 $ \lambda_m $-零集。因此我们得到
+
+\[
+m\operatorname{vol}(\Omega) = m\operatorname{vol}(\overline{\Omega}) = \int_{\overline{\Omega}}dx = \int_{\overline{\Omega}}d\omega = \int_{\partial\Omega}\omega = \int_{\partial\Omega}\alpha,
+\]
+
+其中最后一个等式由定理 3.4 形式的斯托克斯定理推出。 \nobreak\hspace{0.35em}■
+
+\item
+
+（球面） 对 $ \Omega = \mathbb{B}^m $，我们再次得到公式
+
+\[
+\operatorname{vol}(S^{m-1}) = m\operatorname{vol}(\mathbb{B}^{m}),
+\]
+
+这已在例 1.13(c) 中导出。
+
+\proofhead
+这由 (a) 并借助例 XI.5.3(c) 推出。 \nobreak\hspace{0.35em}■
+\item
+
+设 $ N $ 是 $ \mathbb{R}^m\setminus\{0\} $ 中的一个非空紧致超曲面，使得从 $ 0 $ 出发的每条半射线至多与 $ N $ 相交一次。又设 $ K(N) $ 是以 $ N $ 为底、以 $ 0 $ 为顶点的锥。于是，作为莱布尼茨扇形公式的一个（部分）推广，我们有
+
+\[
+\operatorname{vol}(K(N)) = \frac{1}{m}\int_{N}\sum_{j=1}^{m}(-1)^{j-1}x^{j}\,dx^{1}\wedge\cdots\wedge\widehat{dx^{j}}\wedge\cdots\wedge dx^{m}.
+\]
+
+\proofhead
+我们容易验证，$ B := K(N) $ 是 $ \mathbb{R}^m $ 的一个带薄奇异集的 $ m $ 维紧致子流形，且 $ \partial B = \operatorname{int}(N)\cup S $，其中 $ S := \{\,t\,i(p) \,;\, p\in N,\ 0 < t < 1\,\} $，而 $ i: N\hookrightarrow\mathbb{R}^m $。例 XI.4.13(b) 给出
+\[
+\alpha := \sum_{j=1}^{m}(-1)^{j-1}x^{j}\,dx^{1}\wedge\cdots\wedge\widehat{dx^{j}}\wedge\cdots\wedge dx^{m} = v\lrcorner\omega_{\mathbb{R}^m}
+\]
+
+其中 $ v(x) := (x,x)\in T_x\mathbb{R}^m $。于是注 2.2(g) 表明 $ \alpha = (v\,|\,\nu)\omega_{\partial B} $。因为对 $ p\in S $ 有 $ v(p)\in T_p S $，我们得到 $ \alpha\,|\,S = 0 $。又因为 $ d\alpha = m\omega_{\mathbb{R}^m} $，定理 3.4 给出
+
+\[
+m\operatorname{vol}(B) = \int_{B}d\alpha = \int_{\partial B}\alpha = \int_{\operatorname{int}(N)}\alpha = \int_{N}\alpha
+\]
+
+从而得到结论。 \nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{example}
+
+\needspace{3\baselineskip}\subsection*{同伦不变性与应用}
+
+设 $ I := [0,1] $，$ r\in\mathbb{N} $，并假定 $ M $ 是紧致的且没有边界。正如在微分形式的富比尼定理之前的讨论中那样，对 $ \omega\in\Omega^{r+1}(I\times M) $ 与 $ p\in M $，我们用 $ \widehat{\omega}(\cdot,p) $ 表示由 $ \omega $ 诱导的 $ M $ 上取值于 1-形式的 $ r $-形式。它定义为
+
+\[
+\widehat{\omega}(\cdot,p)(v_1,\ldots,v_r) := \omega(\cdot,p)(\cdot,v_1,\ldots,v_r)\quad \text{对 } v_1,\ldots,v_r\in T_p M .
+\]
+
+由于对每个 $ r $-元组 $ (v_1,\ldots,v_r)\in(T_p M)^r $，1-形式 $ \widehat{\omega}(\cdot,p)(v_1,\ldots,v_r) $ 都连续，从而是 $ I $ 上可积的，因此
+
+\[
+\int_I\omega := \left(p\mapsto\int_I\widehat{\omega}(\cdot,p)\right)
+\]
+
+对每个 $ \omega\in\Omega^{r+1}(I\times M) $ 都是 $ \Omega^r(M) $ 中一个良定义的元素。因此线性映射
+
+\begin{equation}
+K : \Omega^{r+1}(I\times M)\to\Omega^r(M),\quad \omega\mapsto\int_I\omega\tag{3.15}
+\end{equation}
+
+是有定义的。与第 XI.3 节中一样，我们用 $ i_\ell $ 表示嵌入
+
+\[
+i_\ell : M\to I\times M,\quad p\mapsto(\ell,p)
+\]
+
+其中 $ \ell\in\{0,1\} = \partial I $。于是引理 XI.3.9 有如下整体推广：
+
+\begin{lemma}
+
+$ K\circ d + d\circ K = i_1^* - i_0^* $。
+
+\proofhead
+因为该陈述关于 $ M $ 是局部的，所以只需在局部坐标中验证它。而这正是引理 XI.3.9 所做的事。 \nobreak\hspace{0.35em}■
+\end{lemma}
+
+作为这个引理的一个应用，我们现在可以证明命题 VIII.4.7 的高维推广，该命题讨论的是线积分的同伦不变性。
+
+\begin{theorem}
+
+设 $ M $ 与 $ N $ 是不带边界的紧 $ m $ 维定向流形。若 $ f_0,f_1\in C^\infty(M,N) $ 同伦，则
+
+\[
+\int_M f_0^*\omega = \int_M f_1^*\omega \quad \text{对 } \omega\in\Omega^m(N) .
+\]
+
+\proofhead
+按假设，存在 $ h\in C^\infty(I\times M,N) $ 使得对 $ j = 0,1 $ 有 $ h(j,\cdot) = f_j $。现在令 $ g := K\circ h^* $，其中 $ K $ 是映射 (3.15)。于是，因为 $ d $ 与 $ h^* $ 可交换，我们有
+\[
+d\circ g + g\circ d = d\circ K\circ h^* + K\circ h^*\circ d = d\circ K\circ h^* + K\circ d\circ h^* = (d\circ K + K\circ d)\circ h^* = i_1^*h^* - i_0^*h^* = f_1^* - f_0^*.
+\]
+
+由 $ d\omega = 0 $（对 $ \omega\in\Omega^m(N) $），于是推出
+
+\[
+f_1^*\omega - f_0^*\omega = (d\circ g)\omega - g\circ d\omega = d(Kh^*\omega) .
+\]
+
+因此我们得到
+
+\[
+\int_M f_1^*\omega - \int_M f_0^*\omega = \int_M d(Kh^*\omega) = 0
+\]
+
+由推论 3.5(ii) 推出。 \nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+下面我们演示斯托克斯定理的几个拓扑应用。
+
+\begin{proposition}
+
+（毛球定理） 偶数维球面上的每个光滑向量场都有零点。
+
+\proofhead
+由例 VII.10.14(a)，我们知道对 $ p\in S^m $，$ T_p S^m $ 是 $ \mathbb{R}p $ 在 $ \mathbb{R}^{m+1} $ 中的正交补。因此，我们可以把 $ v\in\mathcal{V}(S^m) $ 看作一个光滑映射 $ v: S^m\to\mathbb{R}^{m+1} $，且对 $ p\in S^m $ 有 $ v(p)\perp p $。若 $ v $ 有零点，则我们可以把 $ v $ 换成 $ p\mapsto v(p)/|v(p)| $。因此我们可以假定对 $ p\in S^m $ 有 $ |v(p)| = 1 $，也就是说，可以假定 $ v(S^m)\subset S^m $。由此，因为
+\[
+|\cos(\pi t)p + \sin(\pi t)v(p)|^2 = \cos^2(\pi t)|p|^2 + \sin^2(\pi t)|v(p)|^2 = 1,
+\]
+
+我们发现映射
+
+\[
+h : I\times S^m\to S^m,\quad (t,p)\mapsto\cos(\pi t)p + \sin(\pi t)v(p)
+\]
+
+是有定义的。注 XI.1.1(j) 表明 $ h $ 光滑，且 $ h(0,\cdot) = \operatorname{id}_{S^m} $、$ h(1,\cdot) = -\operatorname{id}_{S^m} $。因此 $ f_0 := \operatorname{id}_{S^m} $ 同伦于\textbf{对跖映射} $ f_1 := -\operatorname{id}_{S^m} $。现在定理 3.12 给出
+
+\begin{equation}
+\int_{S^m}\omega = \int_{S^m}f_1^*\omega \quad \text{对 } \omega\in\Omega^m(S^m) .\tag{3.16}
+\end{equation}
+
+假定 $ m $ 是偶数。则 $ F := -\operatorname{id}_{\overline{\mathbb{B}}^{m+1}} $ 是 $ \overline{\mathbb{B}}^{m+1} $ 到自身的反转定向的微分同胚。现在这一点与注 XI.1.1(j) 表明 $ f_1 = F\,|\,S^m $ 也是 $ S^m $ 到自身的反转定向的微分同胚。因此注 2.1(f) 与定理 2.3 给出等式 $ \int_{S^m}f_1^*\omega = -\int_{S^m}\omega $，它连同 (3.16) 表明 $ \int_{S^m}\omega = 0 $（对 $ \omega\in\Omega^m(S^m) $）。然而，这与 $ \int_{S^m}\omega_{S^m} = \operatorname{vol}(S^m)\neq 0 $ 矛盾。 \nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+我们可以把 $ S^2 $ 上的光滑向量场解释为对“毛球”的一种（数学上理想化的）梳理。于是命题 3.13 说：“一个被光滑梳理过的毛球至少有一个秃点”。
+
+我们还可以由定理 3.12 推出基本的布劳威尔不动点定理。
+
+\qyxffntextdef{1}{当 $ m = 1 $ 时，该断言由介值定理推出（见习题 III.5.1）。}
+\begin{theorem}
+
+（布劳威尔不动点定理） $ \overline{\mathbb{B}}^m $ 到自身的每个连续映射都至少有一个不动点。
+
+证明\qyxffnmark{1}
+
+\begin{subitems}
+\item
+
+设 $ f\in C(\overline{\mathbb{B}}^m,\overline{\mathbb{B}}^m) $，并假定 $ f $ 没有不动点。我们考虑径向收缩
+
+\begin{equation*}
+\rho : \mathbb{R}^m\to\overline{\mathbb{B}}^m,\quad x\mapsto \begin{cases} x & \text{若 } x\in\overline{\mathbb{B}}^m, \\ x/|x| & \text{若 } x\in(\overline{\mathbb{B}}^m)^c. \end{cases}
+\end{equation*}
+
+容易验证 $ \rho $ 是一致连续的。因此函数 $ g := f\circ\rho: \mathbb{R}^m\to\overline{\mathbb{B}}^m $ 也一致连续，且 $ g\,|\,\overline{\mathbb{B}}^m = f $。特别地，$ g $ 没有不动点。因为 $ g(\mathbb{R}^m)\subset\overline{\mathbb{B}}^m $，所以对 $ |x|\ge 2 $ 有 $ |g(x) - x|\ge |x| - |g(x)|\ge 1 $。因为 $ 2\overline{\mathbb{B}}^m $ 是紧致的，存在 $ \delta\in(0,1/2] $ 使得对 $ |x|\le 2 $ 有 $ |g(x) - x|\ge 2\delta $。因此对所有 $ x\in\mathbb{R}^m $ 有 $ |g(x) - x|\ge 2\delta > 0 $。
+假定 $ \{\varphi_\varepsilon\,;\,\varepsilon > 0\} $ 是一个磨光核。因为 $ g $ 属于 $ BUC(\mathbb{R}^m) $，定理 X.7.11 表明存在 $ \varepsilon_0 > 0 $ 使得 $ h := \varphi_{\varepsilon_0} * g $ 满足估计
+
+\[
+|h(x) - g(x)|\le \|h - g\|_\infty < \delta \quad \text{对 } x\in\mathbb{R}^m .
+\]
+
+因此
+
+\[
+|h(x) - x|\ge |g(x) - x| - |h(x) - g(x)|\ge \delta \quad \text{对 } x\in\mathbb{R}^m .
+\]
+
+此外，我们发现
+
+\[
+|h(x)| = \left|\int_{\mathbb{R}^m}\varphi_{\varepsilon_0}(x - y)g(y)\,dy\right|\le \|g\|_\infty\int_{\mathbb{R}^m}\varphi_{\varepsilon_0}(x - y)\,dy = \|g\|_\infty\int_{\mathbb{R}^m}\varphi_1\,dx\le 1
+\]
+
+对 $ x\in\mathbb{R}^m $。最后，由定理 X.7.8(iv) 推出 $ h $ 光滑。因此 $ h\,|\,\overline{\mathbb{B}}^m $ 是 $ \overline{\mathbb{B}}^m $ 到自身的、没有不动点的光滑映射。在下一步中，我们证明这是不可能的。
+
+\item
+
+设 $ f \in C^\infty(\overline{\mathbb{B}}^m,\overline{\mathbb{B}}^m) $，并假设 $ f $ 没有不动点。则对 $ x \in \overline{\mathbb{B}}^m $，可以定义一条从 $ f(x) $ 出发且经过 $ x $ 的半射线。我们用 $ g(x) $ 表示它与 $ S^{m-1} $ 的交点。于是对 $ x \in \overline{\mathbb{B}}^m $ 有 $ g(x) = f(x) + t(x)(x - f(x)) $，其中 $ t(x) $ 表示二次方程
+
+\[
+|x - f(x)|^2 t^2 + 2t(x - f(x) \mid f(x)) + |f(x)|^2 = 1
+\]
+
+的正解。
+
+\end{subitems}
+
+\bookfigure[0.31]{figures/731759877ab56e41.png}
+
+由此可知，$ g $ 属于 $ C^\infty(\overline{\mathbb{B}}^m,\overline{\mathbb{B}}^m) $，并且满足 $ g|S^{m-1} = \operatorname{id}_{S^{m-1}} $。
+
+现在考虑光滑映射
+
+\[
+h : I \times S^{m-1} \to S^{m-1}, \quad (t,x) \mapsto g(tx)
+\]
+
+则 $ h_0 := h(0,\cdot) = g(0) $，$ h_1 := h(1,\cdot) = \operatorname{id}_{S^{m-1}} $。换言之，$ S^{m-1} $ 上的恒等映射在 $ S^{m-1} $ 中同伦于常值映射 $ h_0 $，也就是说，$ \operatorname{id}_{S^{m-1}} $ 在 $ S^{m-1} $ 中是零同伦的。因为对 $ \omega \in \Omega^{m-1}(S^{m-1}) $ 有 $ h_0^*\omega = 0 $，所以由定理 3.12 得到如下错误结论：对 $ \omega \in \Omega^{m-1}(S^{m-1}) $ 有 $ \int_{S^{m-1}} \omega = \int_{S^{m-1}} h_0^*\omega = 0 $。这表明每个 $ f \in C^\infty(\overline{\mathbb{B}}^m,\overline{\mathbb{B}}^m) $ 都至少有一个不动点。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\needspace{3\baselineskip}\subsection*{高斯定律}
+
+除另有说明外，后文将使用以下假设与约定：
+
+- $ (\cdot \mid \cdot) := (\cdot \mid \cdot)_M $ 是 $ M $ 上的黎曼度量；
+- $ B $ 是 $ M $ 的带薄奇异集的 $ m $ 维子流形；
+- $ \nu := \nu_B $ 是 $ \partial B $ 的\textbf{外法向}；
+- $ \mu := \lambda_M $，$ \sigma := \lambda_{\partial B} $。
+
+斯托克斯定理（带奇点）直接蕴涵散度定理。由于散度定理通常不以微分形式表述，它也许是斯托克斯定理最著名的推论。
+
+\begin{theorem}
+
+（高斯定律，散度定理） 对满足 $ (v \mid \nu) \in \mathcal{L}_1(\partial B,\sigma) $ 的 $ v \in \mathcal{V}_c(M) $，有
+
+\[
+\int_B \operatorname{div} v\, d\mu = \int_{\partial B} (v \mid \nu)\, d\sigma.
+\]
+
+\proofhead
+注 2.2(g) 给出 $ v \lrcorner \omega_M = (v \mid \nu)\omega_{\partial B} $。因此由定理 3.4，并因为 $ d(v \lrcorner \omega_M) = \operatorname{div}(v)\omega_M $，得到
+\begin{equation*}
+\begin{aligned}
+\int_B \operatorname{div} v\, d\mu &= \int_B \operatorname{div}(v)\omega_M = \int_B d(v \lrcorner \omega_M) \\ &= \int_{\partial B} v \lrcorner \omega_M = \int_{\partial B} (v \mid \nu)\omega_{\partial B} = \int_{\partial B} (v \mid \nu)\, d\sigma,
+\end{aligned}
+\end{equation*}
+
+这就完成了证明。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+对 $ v \in \mathcal{V}_c(M) $，当下列情形之一成立时，$ (v \mid \nu) \in \mathcal{L}_1(\partial B,\sigma) $ 的假设自动满足：
+
+\begin{subitems}
+\item
+
+$ B = M $；
+或
+
+\item
+
+$ \Omega $ 是 $ M $ 中的分段光滑区域，且 $ B = \overline{\Omega} $。
+
+\proofhead
+（i）是显然的，（ii）留给你。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\item
+
+（\textbf{散度的物理解释}）设 $ v \in \mathcal{V}(M) $ 且 $ p \in M $。则有关系
+
+\begin{equation}
+\operatorname{div} v(p) = \lim_{\Omega \to p} \frac{\int_{\partial\Omega} (v \mid \nu)\, d\sigma}{\operatorname{vol}(\Omega)}.\tag{3.17}
+\end{equation}
+
+更确切地说，这意味着：对每个 $ \varepsilon > 0 $，存在 $ p $ 在 $ M $ 中的邻域 $ U $，使得对 $ M $ 中每个满足 $ p \in \Omega \subset U $ 的相对紧分段光滑区域 $ \Omega $，都有
+
+\begin{equation}
+\left| \operatorname{div} v(p) - \frac{\int_{\partial\Omega} (v \mid \nu)\, d\sigma}{\operatorname{vol}(\Omega)} \right| < \varepsilon.\tag{3.18}
+\end{equation}
+
+由注 2.2(h) 可知，商
+
+\begin{equation}
+\frac{\int_{\partial\Omega} (v \mid \nu)\, d\sigma}{\operatorname{vol}(\Omega)}\tag{3.19}
+\end{equation}
+
+是向量场 $ v $ 通过 $ \partial\Omega $ 的单位体积通量。在特殊情形 $ v := \rho w $ 下，其中 $ \rho $ 是密度、$ w $ 是 $ M $ 中流体的速度，(3.19) 表示单位时间、单位体积内向外流过 $ \partial\Omega $ 的质量。因此在这种情形下 (3.17) 度量的是点 $ p $ 处单位时间内产生或消灭多少质量（取决于 $ \operatorname{div} v(p) $ 的符号）。由于这个原因，$ \operatorname{div} v(p) $ 也称为向量场 $ v $ 在点 $ p $ 处的\textbf{源}。特别地，若 $ \operatorname{div} v = 0 $，则称 $ v $ 是\textbf{无源的}或\textbf{无散度的}。
+
+\proofhead
+由 $ \operatorname{div} v $ 的连续性，对每个 $ \varepsilon > 0 $ 存在 $ p $ 在 $ M $ 中的邻域 $ U $，使得
+\begin{equation}
+|\operatorname{div} v(q) - \operatorname{div} v(p)| \le \varepsilon \quad \text{对 } q \in U.\tag{3.20}
+\end{equation}
+
+设 $ \Omega $ 是 $ M $ 中满足 $ p \in \Omega \subset U $ 的相对紧分段光滑区域。则由 (3.20) 得到估计
+
+\[
+\left| \int_\Omega \operatorname{div} v\, d\mu - \operatorname{div} v(p)\operatorname{vol}(\Omega) \right| \le \int_\Omega |\operatorname{div} v - \operatorname{div} v(p)|\, d\mu \le \varepsilon \operatorname{vol}(\Omega).
+\]
+
+现在由高斯定律推出 (3.18)。\nobreak\hspace{0.35em}■
+
+\item
+
+（\textbf{正则性}）当 $ M $ 是 $ C^2 $ 流形、$ B $ 是带薄奇异集的分片 $ C^2 $ 子流形、$ v $ 是 $ M $ 沿 $ B $ 的 $ C^2 $ 向量场，且 $ \operatorname{div} v \in \mathcal{L}_1(M_B,\mu) $、$ (v \mid \nu) \in \mathcal{L}_1(\partial B,\sigma) $ 时，高斯定律仍然成立。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{格林公式}
+
+设 $ f \in C^1(M) $。我们用 $ \partial_\nu f $ 表示 $ f $ 沿 $ B $ 的外法向的导数，即
+
+\[
+\partial_\nu f(p) := (\operatorname{grad} f(p) \mid \nu(p)) \quad \text{对 } p \in \partial B.
+\]
+
+我们称 $ \partial_\nu f $ 为 $ f $ 的\textbf{法向导数}。
+
+\begin{theorem}
+
+设 $ \Omega $ 是 $ M $ 中的分段光滑区域，且 $ \overline{\Omega} = B $，$ f, g \in \mathcal{E}(M) $。定义 $ M $ 的拉普拉斯–贝尔特拉米算子 $ \Delta := \Delta_M $，则
+
+\begin{subitems}
+\item
+
+（1. 格林公式）
+
+\[
+\int_\Omega f \Delta g\, d\mu + \int_\Omega (\operatorname{grad} f \mid \operatorname{grad} g)\, d\mu = \int_{\partial\Omega} f \partial_\nu g\, d\sigma
+\]
+
+若 $ f $ 或 $ g $ 有紧支集；
+
+\item
+
+（2. 格林公式）
+
+\[
+\int_\Omega (f \Delta g - g \Delta f)\, d\mu = \int_{\partial\Omega} (f \partial_\nu g - g \partial_\nu f)\, d\sigma
+\]
+
+若 $ f $ 与 $ g $ 有紧支集。
+
+\proofhead
+（i）取 $ v := \operatorname{grad} g $，由于 $ \Delta = \operatorname{div} \operatorname{grad} $，该结论容易由命题 XI.6.11(ii) 与定理 3.15 推出。（ii）类似地由命题 XI.6.11(iv) 推出。\nobreak\hspace{0.35em}■
+\end{subitems}
+
+\end{theorem}
+
+\begin{corollary}
+\[
+\int_\Omega \Delta u\, d\mu = \int_{\partial\Omega} \partial_\nu u\, d\sigma \quad \text{对 } u \in \mathcal{E}_c(M).
+\]
+
+\proofhead
+取 $ f := \mathbf{1} $，$ g := u $。\nobreak\hspace{0.35em}■
+\end{corollary}
+
+作为应用，我们推导诺伊曼边值问题可解性的一个必要条件。
+
+设 $ \Omega $ 是 $ \mathbb{R}^m $ 中的有界\textbf{区域}，具有\textbf{光滑边界}，即 $ \overline{\Omega} $ 是 $ \mathbb{R}^m $ 的连通紧 $ m $ 维光滑子流形。又设 $ f \in \mathcal{E}(\overline{\Omega}) $，$ g \in \mathcal{E}(\Gamma) $，其中 $ \Gamma := \partial\Omega $。所谓 $ \Omega $ 中拉普拉斯算子的\textbf{诺伊曼边值问题}，是指求函数 $ u \in \mathcal{E}(\overline{\Omega}) $ 使之满足方程
+
+\begin{equation}
+-\Delta u = f \quad \text{在 } \Omega \text{ 中}, \qquad \partial_\nu u = g \quad \text{在 } \Gamma \text{ 上}.\tag{3.21}
+\end{equation}
+
+这里 $ \Delta := \Delta_m $ 是 $ m $ 维拉普拉斯算子，即我们使用标准度量。
+
+\begin{proposition}
+
+\begin{subitems}
+\item
+
+为使边值问题 (3.21) 可解，要求\textbf{相容性条件}
+
+\[
+\int_\Omega f\, dx + \int_\Gamma g\, d\sigma = 0
+\]
+
+得到满足。
+
+\item
+
+(3.21) 的两个解 $ u, v \in \mathcal{E}(\overline{\Omega}) $ 至多相差一个常数。
+
+\proofhead
+（i）是推论 3.18 的结论。
+\end{subitems}
+
+（ii）由 $ \Delta $ 与 $ \partial_\nu $ 的线性性可知，$ w := u - v $ 满足齐次方程
+
+\[
+-\Delta w = 0 \quad \text{在 } \Omega \text{ 中}, \qquad \partial_\nu w = 0 \quad \text{在 } \Gamma \text{ 上}.
+\]
+
+于是由取 $ f := g := w $ 的第一格林公式可得
+
+\[
+\int_\Omega |\operatorname{grad} w|^2\, dx = 0.
+\]
+
+由此可知 $ \operatorname{grad} w = 0 $，从而 $ w = \operatorname{const} $，正如由注 VII.3.11(c) 所知。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+显然，每个常值函数都是\textbf{齐次}诺伊曼问题
+
+\[
+-\Delta u = 0 \quad \text{在 } \Omega \text{ 中}, \qquad \partial_\nu u = 0 \quad \text{在 } \Gamma \text{ 上}.
+\]
+
+的解。这意味着诺伊曼边值问题 (3.21) 从不会有唯一解。也就是说，若 $ u $ 是 (3.21) 的解，则对每个 $ c \in \mathbb{R} $，$ u + c\mathbf{1} $ 也是 (3.21) 的解。
+
+诺伊曼问题的边界条件可以修改，从而给出另一个重要的边值问题，即\textbf{狄利克雷问题}。这就是如下问题：
+
+找出 $ u \in \mathcal{E}(\overline{\Omega}) $，使得
+
+\[
+-\Delta u = f \quad \text{in } \Omega, \qquad u = g \quad \text{on } \Gamma .
+\]
+
+与诺伊曼问题相反，狄利克雷问题至多有一个解，如下一结果所示。
+
+\begin{proposition}
+
+齐次狄利克雷问题
+
+\begin{equation}
+-\Delta u = 0 \quad \text{in } \Omega, \qquad u = 0 \quad \text{on } \Gamma\tag{3.22}
+\end{equation}
+
+只有平凡解 $ u = 0 $。
+
+\proofhead
+若 $ u \in \mathcal{E}(\overline{\Omega}) $ 解 (3.22)，则由取 $ f := g := u $ 的第一格林公式，以及 $ u $ 解此狄利克雷问题，可得 $ \int_\Omega |\operatorname{grad} u|^2 dx = 0 $，从而 $ u = \mathrm{const} $。由于 $ u|\Gamma = 0 $，这意味着 $ u = 0 $。\nobreak\hspace{0.35em}■
+\end{proposition}
+
+偏微分方程理论证明，狄利克雷问题与诺伊曼问题都是可解的，不过后一种情形要求相容性条件得到满足。
+
+\needspace{3\baselineskip}\subsection*{经典斯托克斯定理}
+
+照例，我们假定 $ \mathbb{R}^3 $ 带有标准度量。作为一般斯托克斯定理的特殊情形，我们现在证明它的经典版本。
+
+\begin{theorem}
+
+（斯托克斯） 设 $ X $ 是 $ \mathbb{R}^3 $ 中的开集，$ M $ 是 $ X $ 中的定向曲面。又设 $ \mathbf{t} $ 是 $ \partial B $ 的正单位切向量，即 $ \partial M_B $ 的正单位切向量。则对 $ v \in \mathcal{V}_c(X) $ 且 $ (v|\mathbf{t}) \in \mathcal{L}_1(\partial M, \lambda_{\partial M}) $，有
+
+\[
+\int_B \operatorname{curl} v \cdot d\vec{F} = \int_{\partial B} v \cdot d\vec{s}
+\]
+
+从而
+
+\[
+\int_B (\operatorname{curl} v|\nu)\, dF = \int_{\partial B} (v|\mathbf{t})\, ds .
+\]
+
+\proofhead
+例 XI.4.13(b) 表明
+\[
+\operatorname{curl} v \lrcorner \omega_{\mathbb{R}^3} = (\operatorname{curl} v)^1 dy \wedge dz + (\operatorname{curl} v)^2 dz \wedge dx + (\operatorname{curl} v)^3 dx \wedge dy .
+\]
+
+于是由注 2.2(e)、定义 (XI.6.24) 与定理 3.4 得到
+
+\[
+\int_B \operatorname{curl} v \cdot d\vec{F} = \int_B \operatorname{curl} v \lrcorner \omega_{\mathbb{R}^3} = \int_B d(\Theta v) = \int_{\partial B} \Theta v = \int_{\partial B} v \cdot d\vec{s} ,
+\]
+
+其中最后一个等式由注 2.2(c) 得出。结论的第二部分则是注 2.2(c) 与 (e) 的推论。\nobreak\hspace{0.35em}■
+
+\end{theorem}
+
+\begin{remark}
+
+（旋度的物理解释） 积分
+
+\[
+\int_\Gamma (v|\mathbf{t})\, ds
+\]
+
+称为向量场 $ v $ 沿 $ \Gamma := \partial B $ 的\textbf{环量}。在注 2.2(h) 的流体模型中，$ \int_\Gamma (\rho v|\mathbf{t})\, ds $ 是沿曲线 $ \Gamma $ 单位时间内输运的总质量的度量。
+
+\bookfigure[0.41]{figures/760d01e639bb72b1.png}
+
+对 $ p \in M $，有
+
+\begin{equation}
+\lim_{B \to p} \frac{\int_{\partial\Omega}(v|\mathbf{t})\, ds}{\operatorname{vol}(B)} = (\operatorname{curl} v|\nu)(p) ,\tag{3.23}
+\end{equation}
+
+其中极限按如下方式理解：对每个 $ \varepsilon > 0 $，存在 $ p $ 在 $ M $ 中的邻域 $ U $，使得
+
+\[
+\left| \frac{\int_{\partial\Omega}(v|\mathbf{t})\, ds}{\operatorname{vol}(B)} - (\operatorname{curl} v|\nu)(p) \right| < \varepsilon
+\]
+
+对每个满足 $ p \in B \subset U $ 的 $ M $ 中的分段光滑区域 $ B $ 成立。(3.23) 左端的极限称为向量场 $ v $ 在点 $ p $ 处关于 $ \nu(p) $ 轴的\textbf{环量密度}（即指向 $ \nu(p) $ 方向的那个轴）。
+
+\bookfigure[0.29]{figures/6eba419aa86925da.png}
+
+现在为 $ M $ 选取过点 $ p $ 的定向平面，使得 $ \nu(p) $ 是 $ M $ 的正法向量。又设 $ B_r $ 是 $ M $ 中以 $ p $ 为圆心、半径为 $ r > 0 $ 的圆盘，$ \Gamma_r $ 是 $ B_r $ 的定向边界。则
+
+\begin{equation}
+\lim_{r \to 0} \frac{1}{r^2\pi} \int_{\Gamma_r} (v|\mathbf{t})\, ds = (\operatorname{curl} v|\nu)(p) .\tag{3.24}
+\end{equation}
+
+由于 $ \int_{\Gamma_r}(\rho v|\mathbf{t})\, ds $ 是沿定向圆周 $ \Gamma_r $ 单位时间内输运的流体量，(3.24) 表明 $ \operatorname{curl} v(p) $ 沿单位向量 $ \nu(p) $ 的分量等于关于 $ \nu(p) $ 轴的环量密度。对 $ \operatorname{curl} v(p) \neq 0 $，由柯西–施瓦茨不等式可得
+
+\[
+(\operatorname{curl} v|\nu)(p) \le |\operatorname{curl} v(p)| = \left(\operatorname{curl} v \middle| \frac{\operatorname{curl} v}{|\operatorname{curl} v|}\right)(p) .
+\]
+
+因此，当关于 $ (p + \operatorname{curl} v(p)\mathbb{R}) $ 轴取环量密度时，它在点 $ p $ 处最大。\footnote{见注 XI.6.15(c)。} 基于这些理由，$ \operatorname{curl} v $ 也称为\textbf{涡量向量}。若 $ \operatorname{curl} v = 0 $，则称 $ v $ 是\textbf{无旋的}。
+
+\proofhead
+由定理 3.21，(3.23) 可类比注 3.16(b) 的证明得到。\nobreak\hspace{0.35em}■
+\end{remark}
+
+\needspace{3\baselineskip}\subsection*{星算子与余微分}
+
+在本节余下的部分，设 $ g $ 是 $ M $ 上的伪黎曼度量，使得 $ \operatorname{sign}(g) $ 为常数。我们还置 $ (\cdot|\cdot)_M := g $。
+
+下述定理是伪黎曼情形下散度定理的一般形式。
+
+\begin{theorem}
+
+（散度定理） 对 $ v \in \mathcal{V}_c(M) $，
+
+\[
+\int_M \operatorname{div} v\, d\lambda_M = \int_{\partial M} \ast\Theta v .
+\]
+
+\proofhead
+由定义 (XI.6.13)（它定义了散度）与注 2.2(i)，这是斯托克斯定理（定理 3.1）的直接推论。\nobreak\hspace{0.35em}■
+\end{theorem}
+
+设 $ r \in \mathbb{N} $ 且 $ r \le m $。对 $ \alpha, \beta \in \Omega_c^r(M) $，我们置
+
+\[
+[\alpha|\beta]_M := \int_M \alpha \wedge \ast\beta .
+\]
+
+\begin{remark}
+
+$ [\cdot|\cdot]_M $ 是 $ \Omega_c^r(M) $ 上的非退化对称双线性型。若 $ g $ 是黎曼度量，则 $ [\cdot|\cdot]_M $ 是 $ M $ 上的标量积。
+
+\proofhead
+由注 XI.5.11(a) 我们知道
+\[
+\alpha \wedge \ast\beta = \beta \wedge \ast\alpha = \operatorname{sign}(g)(\alpha|\beta)_{g,r}\omega_M .
+\]
+
+结论由这一点以及 $ (\cdot|\cdot)_{g(p),r} $ 是 $ \bigwedge^r T_p^*M $ 上的内积这一事实得出。\nobreak\hspace{0.35em}■
+
+\begin{items}
+\item[（b）]
+
+显然，当 $ \alpha \wedge \ast\beta $ 是 $ M $ 上可积的 m-形式时，$ [\alpha|\beta]_M $ 有定义。特别地，当 $ \alpha $ 与 $ \beta $ 属于 $ \Omega^r(M) $ 且它们支集之交为紧致集时就是这种情形。\nobreak\hspace{0.35em}■
+
+\end{items}
+
+由斯托克斯定理，我们容易得到一般的格林积分公式：
+
+\end{remark}
+
+\begin{proposition}
+
+设 $ 1 \le r \le m $，$ \alpha \in \Omega_c^{r-1}(M) $，$ \beta \in \Omega_c^r(M) $。则
+
+\[
+[d\alpha|\beta]_M + [\alpha|\delta\beta]_M = [\alpha|\beta]_{\partial M} .
+\]
+
+\proofhead
+由外微分的乘积法则可知
+\[
+d(\alpha \wedge \ast\beta) = d\alpha \wedge \ast\beta + (-1)^{r-1}\alpha \wedge d\ast\beta .
+\]
+
+注 XI.5.9(d) 表明 $ d\ast\beta = (-1)^{r+1}\ast\delta\beta $。于是得到
+
+\[
+d(\alpha \wedge \ast\beta) = d\alpha \wedge \ast\beta + \alpha \wedge \ast\delta\beta .
+\]
+
+现在定理 3.1（斯托克斯）给出
+
+\[
+\int_M d\alpha\wedge\ast\beta + \int_M \alpha\wedge\ast\delta\beta = \int_{\partial M} \alpha\wedge\ast\beta
+\]
+
+从而断言成立。\nobreak\hspace{0.35em}■
+
+\end{proposition}
+
+\qyxffntextdef{1}{在几何中通常使用的符号约定下，余微分 $ \delta $ 是 $ d $ 的形式伴随。}
+\begin{corollary}
+
+设 $ M $ 紧致且没有边界。则我们有对偶公式
+
+\[
+[d\alpha|\beta]_M = -[\alpha|\delta\beta]_M \qquad \text{对 } \alpha \in \Omega^{r-1}(M) \text{ 与 } \beta \in \Omega^r(M).
+\]
+
+在黎曼流形的情形，对偶公式表明，$ -\delta $ 是 $ d $ 关于内积 $ [\cdot|\cdot]_M $ 的形式伴随算子。\qyxffnmark{1}
+
+上述公式是流形拓扑探索的出发点；这些内容我们只能留待微分几何与整体分析的后续课程或其他书籍。
+
+\end{corollary}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $ M $ 紧致且没有边界，并设 $ \omega \in \Omega^{m-1}(M) $。证明 $ d\omega $ 有零点。
+
+\item
+
+设 $ \rho: \mathbb{R}^3\setminus\{0\} \to S^2 $ 表示径向收缩，并设 $ \sigma := \rho^*\omega_{S^2} $。证明 $ \sigma $ 是闭的但不是恰当的。（提示：例 XI.4.13(c)；考虑 $ \int_{S^2}\sigma $。）
+
+\item
+
+设 $ M $ 是无边界的黎曼流形，并设 $ f \in \mathcal{E}_c(M) $ 满足 $ \Delta f \ge 0 $。证明 $ f $ 是常数。（提示：先证明 $ \Delta f = 0 $，然后考虑 $ \Delta(f^2) $；格林公式。）
+
+\item
+
+设 $ (e_1,e_2,e_3) $ 是标准基，$ (x,y,z) $ 是 $ \mathbb{R}^3 $ 的欧几里得坐标。又设 $ M $ 是 $ \mathbb{R}^3 $ 的紧致三维子流形，$ \Gamma := \partial M $，外法向为 $ \nu $。证明\textbf{阿基米德定理}，即
+
+\[
+\int_\Gamma z\nu\,d\lambda_\Gamma = \operatorname{vol}(M)e_3.
+\]
+
+物理解释：我们把 $ M $ 看作浸没在密度为 $ \rho = 1 $、表面为 $ (x,y) $ 平面的流体中的一个物体。因为流体中 $ z < 0 $，所以 $ \rho z\,d\vec{F} $ \textbf{是力}（= 沿内法向的压强 $ \rho|z| $ 乘以（无穷小）面积元 $ dF $），它作用在点 $ p \in \Gamma $ 处的流体上。于是因为
+
+\[
+\int_\Gamma z\nu\,d\lambda_\Gamma = \int_\Gamma z\,d\vec{F},
+\]
+
+阿基米德定理说的是，合力沿 $ z $ 轴正方向作用，且等于物体的质量：\textbf{浮力等于排开流体的重量。尤里卡。}
+
+（提示：$ \int_\Gamma z\nu^1\,d\lambda_\Gamma = \int_\Gamma z\,dy\wedge dz $ 等等；斯托克斯定理。）
+
+\item
+
+采用习题 XI.6.5 的假设。利用高斯定律，求出麦克斯韦方程组的积分形式。例如，证明：对 $ \Omega $ 中每个相对紧致的分段光滑区域 $ M $（外法向为 $ \nu $），
+
+\[
+\int_{\partial M} E\cdot d\vec{F} = 4\pi\int_M \rho\,dx
+\]
+
+也就是说，\textbf{通过闭曲面的电场通量正比于它所包含的总电荷}。
+
+证明微分形式与积分形式是等价的。
+
+\item
+
+设 $ \Omega $ 是 $ \mathbb{R}^3 $ 中的分段光滑有界区域，且 $ p_1,\ldots,p_k \in \Omega $。计算
+
+\[
+\sum_{j=1}^{k}\int_{\partial\Omega}\partial_\nu (1/|x-p_j|^3)\,d\sigma(x).
+\]
+
+（提示：习题 X.3.6 与推论 3.18。）
+
+\item
+
+设 $ M $ 是 $ \mathbb{R}^{m+1}\setminus\{0\} $ 中的非空紧致超曲面，使得从 $ 0 $ 出发的每条半射线与 $ M $ 至多相交一次。又设
+
+\[
+K_\infty(M) := \{\,ti(p)\,;\,t \in \mathbb{R}^+,\ p \in M\,\}
+\]
+
+其中 $ i: M \hookrightarrow \mathbb{R}^{m+1} $，上述（无限）锥由所有从原点出发且与 $ M $ 相交的线段组成。最后设 $ \rho: \mathbb{R}^{m+1}\setminus\{0\} \to S^m $ 为径向收缩。证明
+
+\[
+\int_M \rho^*\omega_{S^m} = \operatorname{vol}_{S^m}(K_\infty(M)\cap S^m).
+\]
+
+注 $ \operatorname{vol}_{S^m}(K_\infty(M)\cap S^m) $ 是锥 $ K_\infty(M) $ 的\textbf{立体角}。
+
+（提示：例 XI.4.13(c) 与 3.10(c)；斯托克斯定理。）
+
+\item
+
+证明 $ S^2 $ 上每个闭微分形式都是恰当的。
+
+（提示：回顾引理 3.11，并研读定理 XI.3.11 的证明。）
+
+\item
+
+设 $ B $ 是 $ M $ 的紧致 $ m $ 维带边子流形，$ f $ 是从 $ \partial B $ 到流形 $ N $ 的光滑映射。证明下列各条：
+
+\begin{items}
+\item
+
+若存在光滑映射 $ F: B \to N $ 使 $ F|_{\partial B} = f $，则对每个闭形式 $ \omega \in \Omega^{n-1}(N) $ 有 $ \int_{\partial B} f^*\omega = 0 $。
+
+\item
+
+在 $ M = \mathbb{R}^m $ 且 $ N := \partial B $ 的情形，不存在光滑映射 $ F: B \to \partial B $ 使 $ F|_B = \operatorname{id}_{\partial B} $，也就是说，不存在 $ B $ 到 $ \partial B $ 的光滑收缩。
+（提示：(a) 令 $ F = (F^1,\ldots,F^n) $，考虑形式 $ F^1\,dF^2\wedge\cdots\wedge dF^n $；利用斯托克斯定理。）
+
+\end{items}
+
+\item
+
+证明：若 $ M $ 没有边界，则拉普拉斯–贝尔特拉米算子 $ \Delta_M $ 在 $ \mathcal{E}_c(M) $ 上的限制在 $ L_2(M,d\lambda_M) $ 中是对称的，即
+
+\[
+(\Delta f|g)_{L_2(M,d\lambda_M)} = (f|\Delta g)_{L_2(M,d\lambda_M)} \qquad \text{对 } f,g \in \mathcal{E}_c(M).
+\]
+\item
+
+设 $ M := H^2 $ 是双曲平面，$ v \in \mathcal{V}_c(M) $。确定散度定理（定理 3.15）在下列情形下的显式形式：
+
+\begin{items}
+\item
+
+极坐标参数化（例 XI.5.5(k)）；
+
+\item
+
+庞加莱模型；
+
+\item
+
+罗巴切夫斯基模型；
+
+\item
+
+克莱因模型。
+
+\end{items}
+
+\item
+
+设 $ M $ 是无边界的黎曼流形，$ \omega \in \Omega_c(M) $。证明下列条件等价：
+
+\begin{subitems}
+\item
+
+$ \Delta\omega = 0 $；
+
+\item
+
+$ d\omega = \delta\omega = 0 $。
+
+\end{subitems}
+
+\item
+
+设 $ M $ 是黎曼流形。证明：对 $ \alpha \in \Omega_c^{r-1}(M) $ 与 $ \beta,\gamma \in \Omega_c^r(M) $，下列结论成立：
+
+\begin{subitems}
+\item
+
+$ \int_M[(d\alpha|\beta)_r + (\alpha|\delta\beta)_{r-1}] = \int_{\partial M}\alpha\wedge\ast\beta $；
+
+\item
+
+$ \int_M[(d\beta|d\gamma)_{r+1} + (\beta|\delta d\gamma)_r] = \int_{\partial M}\beta\wedge\ast d\gamma $。
+（提示：考虑 $ d(\alpha\wedge\ast\beta) $。）
+
+\end{subitems}
+
+\item
+
+设 $ M $ 紧致且没有边界。证明关于内积 $ [\cdot|\cdot]_M $ 的霍奇–拉普拉斯算子是对称的，即
+
+\[
+[\Delta\omega_1|\omega_2]_M = [\omega_1|\Delta\omega_2]_M \qquad \text{对 } \omega_1,\omega_2 \in \Omega^r(M).
+\]
+\end{exercises}

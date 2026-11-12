@@ -1,0 +1,2607 @@
+\chapter{函数序列}
+在本章中，逼近再次成为我们兴趣的中心。正如在第 II 章中那样，我们研究序列与级数。区别在于，这里我们考虑的是更为复杂的情形，即其各项均为函数的序列。在这种情形下有两种观点：我们可以局部地考察这样的序列，即在每个点处考察，也可以整体地考察。在第二种情形下，自然要把序列的各项看作某个函数空间的元素，这样我们就又回到了第 II 章的情形。如果序列中的函数都是有界的，那么我们就在有界函数的巴拿赫空间中得到了一个序列，从而可以应用我们在第二章中建立的关于序列与级数的全部结果。这一方法尤为富有成效，能够给出简短而优美的证明，并且首次展示了抽象框架的优越性——我们正是在这一框架中建立了分析的基础。
+
+在第一节中，我们分析在研究函数序列时出现的各种收敛概念。其中最重要的是一致收敛，它其实就是有界函数空间中的收敛。本节的主要结果是魏尔斯特拉斯优级数判别法，它无非是把第二章中的优级数判别法应用于有界函数的巴拿赫空间。
+
+第 2 节专门讨论函数序列的连续性、可微性与收敛之间的联系。除我们已有的具体巴拿赫空间之外，我们再补充一个极其重要而自然的例子：紧致度量空间上的连续函数空间。
+
+在下一节中，我们继续先前对幂级数的研究，并研究那些能够局部地用幂级数表示的函数，即解析函数。特别地，我们再次分析泰勒级数，并推导出若干经典的幂级数表示。要更深入地探讨解析函数这一优美而重要的理论，必须等到我们掌握积分的概念之后。
+
+最后一节考虑用多项式逼近连续函数。泰勒多项式给出的是局部逼近，而这里我们感兴趣的是一致逼近。主要结果是斯通–魏尔斯特拉斯定理。此外，我们首次考察周期函数的行为，并证明连续 $ 2\pi $-周期函数的巴拿赫代数与单位圆上连续函数的巴拿赫代数同构。直接由这一事实我们便得到周期函数的魏尔斯特拉斯逼近定理。
+
+\section{一致收敛}
+
+对于函数序列，视我们所关心的是所涉及函数的逐点行为还是“整体”行为而定，可以有若干种不同的收敛方式。在本节中，我们引入逐点收敛与一致收敛，并研究它们之间的关系。本节所得结论构成了分析学中一切更深入的研究赖以建立的基础。
+
+贯穿本节，$X$ 是一个集合，$E := (E, |\cdot|)$ 是 $\mathbb{K}$ 上的巴拿赫空间。
+
+\subsection*{逐点收敛}
+
+$X$ 上的 $E$ 值函数序列就是 $E^X$ 中的一个序列 $(f_n)$。若 $X$ 与 $E$ 的选取可由上下文看出（或无关紧要），我们就简单地说 $(f_n)$ 是一个函数序列。
+
+函数序列 $(f_n)$ 逐点收敛到 $f \in E^X$，若对每个 $x \in X$，序列 $(f_n(x))$ 在 $E$ 中收敛到 $f(x)$。在此情形下，我们记作 $f_n \xrightarrow[\text{pointw}]{}$ $f$ 或 $f_n \to f$ (pointw)，并称 $f$ 为 $(f_n)$ 的（逐点）极限或（逐点）极限函数。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+假设 $ (f_{n}) $ 逐点收敛。则其极限函数是唯一的。
+
+\proofhead
+这直接由推论 II.1.13 得出。
+\item
+
+下列各命题等价：
+
+\begin{subitems}
+\item
+
+$ f_{n} \rightarrow f $ (pointw)。
+
+\item
+
+对每个 $ x \in X $ 和 $ \varepsilon > 0 $，存在自然数 $ N = N(x, \varepsilon) $，使得对 $ n \geq N $ 有 $ |f_n(x) - f(x)| < \varepsilon $。
+
+\item
+
+对每个 $ x \in X $，$ (f_n(x)) $ 是 $ E $ 中的柯西序列。
+
+\proofhead
+蕴含“$(i) \Rightarrow (ii) \Rightarrow (iii)$”是显然的。断言“$(iii) \Rightarrow (i)$”成立，因为 $ E $ 是完备的。■
+\end{subitems}
+
+\item
+
+上述定义在把 $ E $ 换成任意度量空间时仍然有意义。■
+
+\end{items}
+
+\end{remark}
+
+\begin{example}
+
+\begin{items}
+\item
+
+设 $ X := [0,1] $，$ E := \mathbb{R} $，并令 $ f_n(x) := x^{n+1} $。则 $ (f_n) $ 逐点收敛到由下式定义的函数 $ f: [0,1] \to \mathbb{R} $：
+
+\begin{equation*}
+f(x):=\left\{\begin{array}{l l}{0,}&{\quad x\in[0,1),}\\ {1,}&{\quad x=1.}\end{array}\right.
+\end{equation*}
+\item
+
+设 $ X := [0, 1] $，$ E := \mathbb{R} $ 且\footnote{这里以及类似情形中，$ 1/ab $ 表示 $ 1/(ab) $，而不是 $ (1/a)b = b/a $。}
+
+\begin{equation*}
+f_{n}(x):=\left\{\begin{array}{r l}{2n x~,}&{\quad x\in\left[0,1/2n\right]~,}\\ {2-2n x~,}&{\quad x\in\left[1/2n,1/n\right]~,}\\ {0~,}&{\quad x\in(1/n,1]~.}\\ \end{array}\right.
+\end{equation*}
+
+则 $ (f_{n}) $ 逐点收敛到 0。
+
+\item
+
+设 $X := \mathbb{R}$，$E := \mathbb{R}$，且
+
+\begin{equation*}
+f_{n}(x):=\left\{\begin{array}{c l}{1/(n+1),}&{\quad x\in[n,n+1),}\\ {0}&{\quad\text{其他情形}.}\end{array}\right.
+\end{equation*}
+
+在此情形下也一样，$ (f_{n}) $ 逐点收敛到 0。■
+
+\end{items}
+
+\bookfigure[0.17]{figures/325c737721a7b773.jpg}
+
+例 (a)
+
+\bookfigure[0.17]{figures/3da0007bcbdab0e0.jpg}
+
+例 (b)
+
+\bookfigure[0.19]{figures/018e59bb4f31606e.jpg}
+
+例 (c)
+
+在例 1.2(a) 中我们看到，尽管序列的所有项都无穷次可微，其极限函数却甚至不连续。因此，对于许多目的而言，逐点收敛太弱了，我们需要定义一种更强的收敛方式，以保证序列中函数的性质被极限函数所共享。
+
+\end{example}
+
+\subsection*{一致收敛}
+
+函数序列 $ (f_n) $ 一致收敛到 $ f $，若对每个 $ \varepsilon > 0 $，存在某个 $ N = N(\varepsilon) \in \mathbb{N} $，使得
+
+\begin{equation}
+|f_{n}(x)-f(x)|<\varepsilon\;,\qquad n\geq N\;,\quad x\in X\;.
+\end{equation}
+
+在此情形下我们记作 $ f_{n} \xrightarrow[\mathrm{unf}]{} f $ 或 $ f_{n} \to f $ (unf)。
+
+逐点收敛与一致收敛的本质区别在于：对一致收敛而言，$N$ 依赖于 $\varepsilon$ 而不依赖于 $x \in X$；而对逐点收敛而言，对于给定的 $\varepsilon$，$N(\varepsilon, x)$ 一般来说随点而变。对一致收敛而言，不等式 (1.1) 关于 $x \in X$ 一致地成立。
+
+\begin{examplenote}
+
+\begin{items}
+\item
+
+任何一致收敛的函数序列都逐点收敛，也就是说，$ f_n \to f $ (unf) 蕴含 $ f_n \to f $ (pointw)。
+
+\item
+
+(a) 的逆命题不成立，也就是说，存在逐点收敛但不一致收敛的函数序列。
+
+\proofhead
+设 $ (f_n) $ 为例 1.2(b) 中的序列。对一切 $ n \in \mathbb{N}^\times $ 令 $ x_n := 1/2n $。则 $ |f_n(x_n) - f(x_n)| = 1 $。因此 $ (f_n) $ 不可能一致收敛。
+\item
+
+例 1.2(c) 中的函数序列 $ f_{n} $ 一致收敛到 0。
+
+\item
+
+设 $ X := (0, \infty) $，$ E := \mathbb{R} $，并对一切 $ n \in \mathbb{N}^\times $ 令 $ f_n(x) := 1/nx $。
+
+\begin{subitems}
+\item
+
+$ f_{n} \rightarrow 0 $ (pointw)。
+
+\item
+
+对每个 $a>0$，$(f_{n})$ 在 $[a,\infty)$ 上一致收敛到 0。
+
+\item
+
+函数序列 $ (f_{n}) $ 不一致收敛到 0。
+
+\proofhead
+第一个断言是显然的。
+\end{subitems}
+
+\begin{subitems}
+\item
+
+设 $a > 0$。则
+
+\[
+|f_{n}(x)|=1/n x\leq1/n a\;,\qquad n\in\mathbb{N}^{\times}\;,\quad x\geq a\;.
+\]
+
+因此 $(f_{n})$ 在 $[a,\infty)$ 上一致收敛到 0。
+
+\item
+
+对 $ \varepsilon > 0 $ 与 $ x > 0 $，$ |f_n(x)| = 1/nx < \varepsilon $ 当且仅当 $ n > 1/x\varepsilon $。因此 $ (f_n) $ 在 $ (0, \infty) $ 上不可能一致收敛到 0。■
+
+\end{subitems}
+
+\item
+
+下列各命题等价：
+
+\begin{subitems}
+\item
+
+$ f_n \to f $ (unf)。
+
+\item
+
+在 $ B(X, E) $ 中，$ (f_n - f) \to 0 $。
+
+\item
+
+在 $ \mathbb{R} $ 中，$ \|f_n - f\|_\infty \to 0 $。
+注意，即使 $ f_n $ 与 $ f $ 不属于 $ B(X, E) $，$ f_n $ 也可能一致收敛到 $ f $。例如，令 $ X := \mathbb{R} $，$ E := \mathbb{R} $，对一切 $ n \in \mathbb{N}^\times $ 令 $ f_n(x) := x + 1/n $，并令 $ f(x) := x $。则 $ (f_n) $ 一致收敛到 $ f $，但 $ f $ 与 $ f_n $ 都不属于 $ B(\mathbb{R}, \mathbb{R}) $。
+
+\end{subitems}
+
+\item
+
+若 $f_n$ 与 $f$ 属于 $B(X,E)$，则 $(f_n)$ 一致收敛到 $f$ 当且仅当 $(f_n)$ 在 $B(X,E)$ 中收敛到 $f$。
+
+\end{items}
+
+\end{examplenote}
+
+\begin{proposition}
+
+（一致收敛的柯西准则）下列各命题等价：
+
+\begin{subitems}
+\item
+
+函数序列 $ (f_{n}) $ 一致收敛。
+
+\item
+
+对每个 $ \varepsilon > 0 $，存在某个 $ N := N(\varepsilon) \in \mathbb{N} $，使得
+
+\[
+\|f_{n}-f_{m}\|_{\infty}<\varepsilon\;,\qquad n,m\geq N\;.
+\]
+
+\proofhead
+“$(i) \Rightarrow (ii)$” 由假设，存在某个 $ f \in E^X $ 使得 $ f_n \to f $ (unf)。因此，由注 1.3(e)，$ (f_n - f) $ 在空间 $ B(X, E) $ 中收敛到 0。此断言现由三角不等式
+\[
+\|f_{n}-f_{m}\|_{\infty}\leq\|f_{n}-f\|_{\infty}+\|f-f_{m}\|_{\infty}.
+\]
+
+“$(ii) \Rightarrow (i)$” 对每个 $ \varepsilon > 0 $，存在某个 $ N = N(\varepsilon) $ 使得对一切 $ m, n \geq N $ 有 $ \|f_n - f_m\|_\infty < \varepsilon $。令 $ \varepsilon := 1 $ 与 $ \widehat{f} := f_{N(1)} $，我们看到，对一切 $ n \geq N(1) $，$ f_n - \widehat{f} $ 属于 $ B(X, E) $。因此 $ (f_n - \widehat{f}) $ 是 $ B(X, E) $ 中的柯西序列。由定理 II.6.6，$ B(X, E) $ 是完备的，从而存在某个 $ \widetilde{f} \in B(X, E) $ 使得在 $ B(X, E) $ 中有 $ (f_n - \widehat{f}) \to \widetilde{f} $。由注 1.3(e)，序列 $ (f_n) $ 一致收敛到 $ \widetilde{f} + \widehat{f} $。$ \blacksquare $
+
+\end{subitems}
+
+\end{proposition}
+
+\subsection*{函数级数}
+
+设 $ (f_k) $ 是 $ X $ 上的 $ E $ 值函数序列，即 $ E^X $ 中的一个序列。则
+
+\[
+s_{n}:=\sum_{k=0}^{n}f_{k}\in E^{X}~,\qquad n\in\mathbb{N}~,
+\]
+
+从而我们得到 $ E^X $ 中的一个良定义的序列 $(s_n)$。与 II.7 节一样，这个序列记作 $\sum f_k$ 或 $\sum_k f_k$，并称为 $ X $ 上的 $ E $ 值函数级数，或简称为（$ X $ 上的）函数级数。此外，$s_n$ 称为该级数的第 $ n $ 部分和，$f_k$ 称为该级数的第 $ k $ 项。
+
+级数 $ \sum f_k $ 称为
+
+逐点收敛的：$ \Leftrightarrow \sum f_k(x) $ 在 $ E $ 中收敛，对每个 $ x \in X $，
+
+绝对收敛的：$ \Leftrightarrow \sum |f_k(x)| < \infty $，对每个 $ x \in X $，
+
+一致收敛的：$ \Leftrightarrow (s_n) $ 一致收敛，
+
+依范数收敛的：$ \Leftrightarrow \sum \| f_k \|_\infty < \infty $。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $\sum f_k$ 是 $ X $ 上的逐点收敛的 $ E $ 值函数级数。则
+
+\[
+X\to E~,\quad x\mapsto\sum_{k=0}^{\infty}f_{k}(x)
+\]
+
+定义了一个函数，称为级数 $\sum f_k$ 的（逐点）和或（逐点）极限函数。
+
+\item
+
+设 $ (f_k) $ 是 $ B(X, E) $ 中的一个序列。则我们可以把级数 $\sum f_k$ 看作 $ B(X, E) $ 中的级数，或看作 $ X $ 上的 $ E $ 值函数级数。该函数级数的依范数收敛
+于是无非是该级数 $\sum f_k$ 在巴拿赫空间 $ B(X, E) $ 中的绝对收敛\footnote{必须把函数级数 $ \sum f_k $ 的（逐点）绝对收敛与 $ \sum f_k $ 在巴拿赫空间 $ B(X, E) $ 中的绝对收敛区分开来。因此，后者称为“依范数收敛”。}。
+
+\item
+
+这些收敛概念有如下关系：\footnote{$ (A \nRightarrow B) := \neg(A \Rightarrow B) $。}
+
+\end{items}
+
+\begin{subitems}
+\item
+
+$ \sum f_k $ 绝对收敛 $ \Rightarrow \sum f_k $ 逐点收敛。
+
+\item
+
+$ \sum f_k $ 一致收敛 $ \overset{\not\Leftarrow}{\nRightarrow} \sum f_k $ 绝对收敛。
+
+\item
+
+$ \sum f_k $ 依范数收敛 $ \overset{\Rightarrow}{\not\Leftarrow} \sum f_k $ 绝对且一致收敛。
+
+\proofhead
+第一个断言由命题 II.8.1 得出。
+\end{subitems}
+
+\begin{subitems}
+\item[（ii）]
+
+令 $X := \mathbb{R}$，$E := \mathbb{R}$，并对一切 $k \in \mathbb{N}^\times$ 令 $f_k(x) := (-1)^k/k$。则 $\sum f_k$ 一致收敛但不绝对收敛（见注 II.8.2(a)）。
+为验证第二个断言，考虑 $ X := (0,1) $，$ E := \mathbb{R} $ 与 $ f_k(x) := x^k $，$ k \in \mathbb{N} $。则 $\sum f_k$ 绝对收敛，且其极限函数为
+
+\[
+s(x)=\sum_{k=0}^{\infty}f_{k}(x)=1/(1-x),\qquad x\in(0,1).
+\]
+
+由于
+
+\[
+s(x)-s_{n}(x)=\sum_{k=n+1}^{\infty}x^{k}=x^{n+1}/(1-x),\qquad x\in(0,1),\quad n\in\mathbb{N},
+\]
+
+我们有
+
+\[
+s(x)-s_{n}(x)<\varepsilon\Longleftrightarrow\frac{x^{n+1}}{1-x}<\varepsilon
+\]
+
+对一切 $ \varepsilon, x \in (0,1) $ 成立。由于右端不等式对充分靠近 1 的 $ x $ 不成立，故部分和序列 $ (s_n) $ 不一致收敛。
+
+\item[（iii）]
+
+设 $\sum f_k$ 依范数收敛。则对每个 $ x \in X $，有不等式 $\sum |f_k(x)| \leq \sum \|f_k\|_\infty < \infty$。因此 $\sum f_k$ 绝对收敛。进一步，由 (b) 与命题 II.8.1 可得，级数 $\sum f_k$ 在 $ B(X, E) $ 中收敛。于是 $\sum f_k$ 的一致收敛由注 1.3(f) 得出。
+最后，设 $(f_k)$ 为例 1.2(c) 中的函数序列。则 $\sum f_k$ 绝对且一致收敛，但由于 $\sum \|f_k\|_\infty = \sum 1/(k+1) = \infty$，$\sum f_k$ 不依范数收敛。
+
+\end{subitems}
+
+\end{remark}
+
+\subsection*{魏尔斯特拉斯优级数判别法}
+
+对于巴拿赫空间 $ B(X, E) $ 中的函数级数，会出现一种特别简单的情形，因为此时可以直接应用第 II 章的结果。例如，我们得到下面这个简单而重要的收敛定理。
+
+\[
+{}^{3}(A\nRightarrow B):=\neg(A\Rightarrow B).
+\]
+
+\begin{theorem}
+
+（魏尔斯特拉斯优级数判别法）假设对一切 $ k \in \mathbb{N} $ 有 $ f_k \in B(X, E) $。若存在 $ \mathbb{R} $ 中的收敛级数 $ \sum \alpha_k $，使得对几乎所有的 $ k \in \mathbb{N} $ 有 $ \|f_k\|_\infty \leq \alpha_k $，则 $ \sum f_k $ 依范数收敛。特别地，$ \sum f_k $ 绝对且一致收敛。
+
+\proofhead
+由于对一切 $ k \in \mathbb{N} $ 有 $\|f_k\|_\infty < \infty$，我们可以把级数 $\sum f_k$ 看作巴拿赫空间 $ B(X, E) $ 中的级数。则此断言直接由优级数判别法（定理 II.8.3）与注 1.5(c) 得出。
+\end{theorem}
+
+\begin{example}
+
+\begin{items}
+\item
+
+函数级数 $\sum_k \cos(kx)/k^2$ 在 $\mathbb{R}$ 上依范数收敛。
+
+\proofhead
+对 $ x \in \mathbb{R} $ 与 $ k \in \mathbb{N}^{\times} $，
+\[
+|\cos(kx)/k^{2}|\leq1/k^{2}.
+\]
+
+因此该断言由定理 1.6 与例 II.7.1(b) 得出。■
+
+\item
+
+对每个 $ \alpha > 1 $，级数\footnote{函数 $ \zeta(z) := \sum_k 1/k^z $ 对所有 $ z \in \mathbb{C} $（$ \mathrm{Re} z > 1 $）有定义，称为（黎曼）zeta 函数。我们将在 VI.6 节详细研究这个函数。}$\sum_{k} 1/k^{z}$ 依范数收敛于
+
+\[
+X_{\alpha}:=\left\{z\in\mathbb{C}\;;\;\mathrm{R e}z\geq\alpha\right\}.
+\]
+
+\proofhead
+显然
+\[
+|1/k^{z}|=1/k^{\mathrm{R e}z}\leq1/k^{\alpha}\;,\qquad z\in X_{\alpha}\;,\quad k\in\mathbb{N}^{\times}\;.
+\]
+
+由于级数 $\sum 1/k^\alpha$ 收敛（见习题 II.7.12），此断言由定理 1.6 得出。
+
+\item
+
+对每个 $ m \in \mathbb{N}^\times $，级数 $\sum_k x^{m+2} e^{-kx^2}$ 在 $\mathbb{R}$ 上依范数收敛。
+
+\proofhead
+对一切 $ x \in \mathbb{R} $ 定义 $ f_{m,k}(x) := |x^{m+2}e^{-kx^2}| $。则 $ f_{m,k} $ 在点 $ x_M := \sqrt{(m+2)/2k} $ 处取得其绝对最大值 $ [(m+2)/2ek]^{(m+2)/2} $。换言之，$ \|f_{m,k}\|_{\infty} = c_m k^{-(m+2)/2} $，其中 $ c_m := [(m+2)/2e]^{(m+2)/2} $。由习题 II.7.12，级数 $ \sum_k k^{-(m+2)/2} $ 收敛，于是此断言再次由定理 1.6 得出。
+作为魏尔斯特拉斯优级数判别法的一个重要应用，我们证明幂级数在其收敛圆盘的任何紧致子集上依范数收敛。
+\end{items}
+
+\end{example}
+
+\qyxffntextdef{1}{按照 I.8 节的约定，我们把单项式 $ a_k Y^k $ 与相应的“单项式”函数等同起来。}
+\begin{theorem}
+
+设 $ \sum a_k Y^k $ 是收敛半径 $ \rho $ 为正的幂级数，且 $ 0 < r < \rho $。则级数\qyxffnmark{1}$\sum a_k Y^k$ 在 $ r\bar{\mathbb{B}}_{\mathbb{K}} $ 上依范数收敛。特别地，它绝对且一致收敛。
+
+\proofhead
+由定理 II.9.2，任何幂级数都在其收敛圆盘的内部绝对收敛，于是，令 $ X := r\bar{\mathbb{B}}_{\mathbb{K}} $，并对一切 $ x \in X $ 与 $ k \in \mathbb{N} $ 令 $ f_k(x) := a_k x^k $，我们有
+\[
+\sum\Vert f_{k}\Vert_{\infty}=\sum|a_{k}|r^{k}<\infty~.
+\]
+
+此断言现由定理 1.6 得出。
+
+\end{theorem}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+下列函数序列 $ (f_n) $ 中，哪些在 $ X := (0, 1) $ 上一致收敛？
+
+\begin{items}
+\item
+
+$ f_n := \sqrt[n]{x} $，(b)  $ f_n := 1/(1 + nx) $，(c)  $ f_n := x/(1 + nx) $。
+
+\end{items}
+
+\item
+
+证明：由 $ f_n(x) := \sqrt{(1/n^2) + |x|^2} $ 定义的 $(f_n)$ 在 $\mathbb{K}$ 上一致收敛到绝对值函数 $x \mapsto |x|$。
+
+\item
+
+证明或反驳：$\sum x^n / n^2$ 与 $\sum x^n$ 在 $\mathbb{B}_{\mathbb{C}}$ 上一致收敛。
+
+\item
+
+证明或反驳：$\sum(-1)^n/nx$ 在 $(0,1]$ 上逐点收敛（或一致收敛，或绝对收敛）。
+
+\item
+
+设 $ X := \mathbb{B}_{\mathbb{K}} $。研究下列各情形中级数 $\sum f_n$ 的依范数收敛性：
+
+\[
+(a)f_{n}:=x^{n},(b)f_{n}:=|x|^{2}/(1+|x|^{2})^{n},(c)f_{n}:=x(1-x^{2})^{n},(d)f_{n}:=\left[x(1-x^{2})\right]^{n}.
+\]
+\item
+
+验证下列每个级数
+
+\begin{items}
+\item
+
+$\sum(1 - \cos(x/n)) $，(b)  $\sum n(x/n - \sin(x/n)) $。
+在 $\mathbb{R}$ 的任何紧致子区间上一致收敛。
+（提示：用一阶与二阶泰勒多项式逼近这些级数的各项。）
+
+\end{items}
+
+\item
+
+设 $(f_n)$ 与 $(g_n)$ 是 $X$ 上的一致收敛的 $E$ 值函数序列，其极限函数分别为 $f$ 与 $g$。证明下列结论：
+
+\begin{items}
+\item
+
+$(f_{n} + g_{n})$ 一致收敛到 $f + g$。
+
+\item
+
+若 $f$ 或 $g$ 属于 $B(X,\mathbb{K})$，则 $(f_{n}g_{n})$ 一致收敛到 $fg$。
+举例说明，在 (b) 中，其中一个极限函数的有界性是必要的。
+
+\end{items}
+
+\item
+
+设 $(f_n)$ 是 $X$ 上的一致收敛的 $\mathbb{K}$ 值函数序列，其极限函数为 $f$。假设存在某个 $\alpha > 0$，使得
+
+\[
+|f_{n}(x)|\geq\alpha>0\;,\qquad n\in\mathbb{N}\;,\quad x\in X\;.
+\]
+\end{exercises}
+
+\begin{proof}
+
+$(1/f_{n})$ 一致收敛到 $1/f$。
+
+\end{proof}
+
+\begin{exercises}
+\item[9.]
+
+设 $(f_n)$ 是 $X$ 上的一致收敛的 $E$ 值函数序列，$F$ 是巴拿赫空间。假设对一切 $n \in \mathbb{N}$ 有 $f_n(X) \subseteq D$，且 $g: D \to F$ 一致连续。证明 $(g \circ f_n)$ 一致收敛。
+
+\end{exercises}
+
+\section{函数序列的连续性与可微性}
+
+在本节中，我们考虑其项为连续或连续可微函数的收敛函数序列，并研究极限函数在何种条件下“继承”这些相同性质。
+
+在下文中，$ X := (X, d) $ 是度量空间，$ E := (E, |\cdot|) $ 是巴拿赫空间，$ (f_n) $ 是 $ X $ 上 $ E $ 值函数的序列。
+
+\subsection*{连续性}
+
+例 1.2(a) 表明，连续（甚至无限次可微）函数序列的逐点极限可能不是连续的。然而，如果收敛是一致收敛，那么极限函数的连续性就得到保证，如下面的定理所示。
+
+\begin{theorem}
+
+若 $ (f_n) $ 一致收敛到 $ f $，且几乎所有 $ f_n $ 在 $ a \in X $ 处连续，则 $ f $ 在 $ a $ 处也连续。
+
+\proofhead
+设 $ \varepsilon > 0 $。因为 $ f_n $ 一致收敛到 $ f $，由注 1.3(e)，存在某个 $ N \in \mathbb{N} $，使得对所有 $ n \geq N $ 有 $ \|f_n - f\|_\infty < \varepsilon/3 $。由于几乎所有 $ f_n $ 在 $ a $ 处连续，我们可以假设 $ f_N $ 在 $ a $ 处连续。于是存在 $ a $ 在 $ X $ 中的邻域 $ U $，使得对所有 $ x \in U $ 有 $ |f_N(x) - f_N(a)| < \varepsilon/3 $。那么，对每个 $ x \in U $，我们有
+\begin{equation*}
+\begin{aligned}
+\left|f(x)-f(a)\right|&\leq\left|f(x)-f_{N}(x)\right|+\left|f_{N}(x)-f_{N}(a)\right|+\left|f_{N}(a)-f(a)\right|\\&\leq2\left\|f-f_{N}\right\|_{\infty}+\left|f_{N}(x)-f_{N}(a)\right|<\varepsilon,
+\end{aligned}
+\end{equation*}
+
+这证明了 $ f $ 在 $ a $ 处的连续性。
+
+\end{theorem}
+
+\begin{remark}
+
+显然，若将 $ X $ 换为任意拓扑空间、将 $ E $ 换为度量空间，则定理 2.1 及其证明仍然成立。这对本节只涉及连续性的任何陈述也都成立。
+
+\end{remark}
+
+\subsection*{局部一致收敛}
+
+检查定理 2.1 的证明可以看出，如果存在 $a$ 的邻域 $U$ 使得 $(f_n)$ 在 $U$ 上一致收敛，那么该定理仍然成立。$(f_n)$ 在 $U$ 之外的行为与 $f$ 在 $a$ 处的连续性无关，因为连续性是“局部”性质。这就促使我们定义一致收敛的“局部”版本。
+
+如果每个 $x \in X$ 都有邻域 $U$ 使得 $(f_n|U)$ 一致收敛，则称函数序列 $(f_n)$ 是局部一致收敛的。如果部分和序列 $(s_n)$ 局部一致收敛，则称函数级数 $\sum f_n$ 是局部一致收敛的。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+任何一致收敛的函数序列都是局部一致收敛的。
+
+\item
+
+任何局部一致收敛的函数序列都逐点收敛。
+
+\item
+
+若 $X$ 是紧致的且 $(f_{n})$ 局部一致收敛，则 $(f_{n})$ 一致收敛。
+
+\proofhead
+由 (b)，$(f_n)$ 的（逐点）极限函数 $f$ 是良定义的。设 $\varepsilon > 0$。因为 $(f_n)$ 局部一致收敛，对每个 $x \in X$，存在 $x$ 的开邻域 $U_x$ 和某个 $N(x) \in \mathbb{N}$ 使得
+\[
+|f_{n}(y)-f(y)|<\varepsilon\;,\qquad y\in U_{x}\;,\quad n\geq N(x)\;.
+\]
+
+族 $\{U_x; x \in X\}$ 是紧致空间 $X$ 的开覆盖，因此存在有限多个点 $x_0, \ldots, x_m \in X$，使得 $X$ 被 $U_{x_j}$（$0 \leq j \leq m$）覆盖。对于 $N := \max\{N(x_0), \ldots, N(x_m)\}$，我们有
+
+\[
+|f_{n}(x)-f(x)|<\varepsilon\;,\qquad x\in X\;,\quad n\geq N\;.
+\]
+
+这表明 $ (f_{n}) $ 一致收敛到 $ f $。
+
+\end{items}
+
+\end{remark}
+
+\begin{theorem}
+
+（函数序列极限的连续性）若连续函数序列 $ (f_n) $ 局部一致收敛到 $ f $，则 $ f $ 也连续。换句话说，连续函数的局部一致极限是连续的。
+
+\proofhead
+由于 $ f $ 的连续性是局部性质，该断言直接由定理 2.1 得出。■
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+若函数序列 $ (f_{n}) $ 逐点收敛到 $ f $，且所有 $ f_{n} $ 与 $ f $ 都连续，则一般而言不能推出 $ (f_{n}) $ 局部一致收敛到 $ f $。
+
+\proofhead
+对于例 1.2(b) 中的函数序列 $ (f_n) $，我们有 $ f_n \in C(\mathbb{R}) $，且 $ f_n \xrightarrow[\text{pointw}]{} 0 $。即便如此，也不存在 $ 0 $ 的邻域使得 $ (f_n) $ 在其上一致收敛。
+\item
+
+定理 2.4 可以解释为关于交换极限的陈述：若函数序列 $ (f_n) $ 局部一致收敛到 $ f $，则对所有 $ a \in X $，
+
+\[
+\lim_{x\to a}\lim_{n\to\infty}f_{n}(x)=\lim_{n\to\infty}\lim_{x\to a}f_{n}(x)=\lim_{n\to\infty}f_{n}(a)=f(a).
+\]
+
+类似地，对于局部一致收敛的函数级数，我们有
+
+\[
+\lim_{x\to a}\sum_{k=0}^{\infty}f_{k}(x)=\sum_{k=0}^{\infty}\lim_{x\to a}f_{k}(x)=\sum_{k=0}^{\infty}f_{k}(a),\qquad a\in X.
+\]
+
+这些事实可以表述为：“局部一致收敛尊重取极限的运算”。
+
+\proofhead
+这是定理 III.1.4 之后那个注的推论。
+\item
+
+收敛半径为正的幂级数在其收敛圆盘上表示一个连续函数。\footnote{我们将在下一节证明，这样的函数事实上是无穷次可微的。}
+
+\proofhead
+由定理 1.8，幂级数在其收敛圆盘上局部一致收敛。于是该断言由定理 2.4 得出。
+\end{items}
+
+\end{remark}
+
+\subsection*{有界连续函数的巴拿赫空间}
+
+空间 $B(X,E)$（$X$ 上的有界 $E$ 值函数空间）的一个特别重要的子空间是空间
+
+\[
+BC(X,E):=B(X,E)\cap C(X,E)
+\]
+
+，即从 $ X $ 到 $ E $ 的有界连续函数空间。显然，$ BC(X,E) $ 是 $ B(X,E) $（也是 $ C(X,E) $）的子空间，并且也是赋范空间，以上确界范数
+
+\[
+\left\|\cdot\right\|_{B C}:=\left\|\cdot\right\|_{\infty},
+\]
+
+，即具有由 $ B(X,E) $ 诱导的子空间拓扑。下面的定理表明 $ BC(X,E) $ 是巴拿赫空间。
+
+\begin{theorem}
+
+\begin{subitems}
+\item
+
+$BC(X,E)$ 是 $B(X,E)$ 的闭子空间，因而是巴拿赫空间。
+
+\item
+
+若 $ X $ 是紧致的，则
+
+\[
+BC(X,E)=C(X,E),
+\]
+
+且上确界范数 $ \|\cdot\|_{\infty} $ 与最大值范数
+
+\[
+f\mapsto\max_{x\in X}|f(x)|.
+\]
+
+\proofhead
+(i) 设 $(f_n)$ 是 $BC(X,E)$ 中在 $B(X,E)$ 中收敛到 $f$ 的序列。则由注 1.3(e)，$(f_n)$ 一致收敛到 $f$，且由定理 2.4，$f$ 连续，即 $f$ 在 $BC(X,E)$ 中。这表明 $BC(X,E)$ 是 $B(X,E)$ 的闭子空间，也表明 $BC(X,E)$ 是完备的（见习题 II.6.4）。
+\end{subitems}
+
+(ii) 若 $X$ 是紧致的，则由极值定理（推论 III.3.8），我们有 $C(X,E)\subseteq B(X,E)$，且
+
+\[
+\max_{x\in X}|f(x)|=\sup_{x\in X}|f(x)|=\|f\|_{\infty},
+\]
+
+这证明了该断言。■
+
+\end{theorem}
+
+\begin{remark}
+
+若 $X$ 是并非紧致的度量空间，例如 $\mathbb{K}^n$ 的开子集，则不可能用范数来刻画 $C(X, E)$ 中的局部一致收敛。换句话说，若 $X$ 不是紧致的，则 $C(X, E)$ 不是赋范向量空间。关于这一事实的证明，我们必须请读者参考泛函分析文献。
+
+\end{remark}
+
+\subsection*{可微性}
+
+我们现在研究可微函数序列的逐点极限在何种条件下本身可微。
+
+\begin{theorem}
+
+（函数序列极限的可微性）设 $X$ 是 $\mathbb{K}$ 的开（或凸）的完全子集，且对所有 $n \in \mathbb{N}$ 有 $f_n \in C^1(X, E)$。假设存在 $f, g \in E^X$ 使得
+
+\begin{subitems}
+\item
+
+$(f_{n})$ 逐点收敛到 $f$，且
+
+\item
+
+$ (f_{n}^{\prime}) $ 局部一致收敛到 $ g $。
+则 $f$ 在 $C^{1}(X,E)$ 中，且 $f'=g$。此外，$(f_{n})$ 局部一致收敛到 $f$。
+
+\proofhead
+设 $ a \in X $。则存在某个 $ r > 0 $，使得 $ (f_n') $ 在 $ B_r := \mathbb{B}_{\mathbb{K}}(a, r) \cap X $ 上一致收敛到 $ g $。若 $ X $ 是开的，我们可以选取 $ r > 0 $ 使得 $ \mathbb{B}(a, r) $ 包含于 $ X $。因此在我们的任一假设下，$ B_r $ 是凸的且完全的。于是，对每个 $ x \in B_r $，我们可以对函数
+\[
+[0,1]\to E~,\quad t\mapsto f_{n}\big(a+t(x-a)\big)-t f_{n}^{\prime}(a)(x-a)
+\]
+
+应用中值定理（定理 IV.2.18），得到
+
+\[
+\left|f_{n}(x)-f_{n}(a)-f_{n}^{\prime}(a)(x-a)\right|\leq\sup_{0<t<1}\left|f_{n}^{\prime}\left(a+t(x-a)\right)-f_{n}^{\prime}(a)\right|\left|x-a\right|.
+\]
+
+令 $ n \to \infty $ 取极限，我们得到
+
+\begin{equation}
+\left|f(x)-f(a)-g(a)(x-a)\right|\leq\sup_{0<t<1}\left|g\big(a+t(x-a)\big)-g(a)\right|\left|x-a\right|
+\end{equation}
+
+对每个 $ x \in B_r $ 成立。定理 2.4 表明 $ g $ 在 $ C(X, E) $ 中，因此由 (2.1) 可得
+
+\[
+f(x)-f(a)-g(a)(x-a)=o(|x-a|)\quad(x\to a).
+\]
+
+因此 $f$ 在 $a$ 处可微，且 $f'(a) = g(a)$。由于这对所有 $a \in X$ 都成立，我们已经证明了 $f \in C^1(X, E)$。
+还需证明 $ (f_{n}) $ 局部一致收敛到 $ f $。对函数
+
+\[
+[0,1]\to E~,\quad t\mapsto(f_{n}-f)\big(a+t(x-a)\big)
+\]
+
+应用中值定理，我们得到不等式
+
+\begin{equation*}
+\begin{aligned}
+\left|f_{n}(x)-f(x)\right|&\leq\left|f_{n}(x)-f(x)-\left(f_{n}(a)-f(a)\right)\right|+\left|f_{n}(a)-f(a)\right|\\&\leq r\sup_{0<t<1}\left|f_{n}^{\prime}\big(a+t(x-a)\big)-f^{\prime}\big(a+t(x-a)\big)\right|+\left|f_{n}(a)-f(a)\right|\\&\leq r\left\|f_{n}^{\prime}-f^{\prime}\right\|_{\infty,B_{r}}+\left|f_{n}(a)-f(a)\right|
+\end{aligned}
+\end{equation*}
+
+对每个 $x \in B_r$ 成立。该不等式右端与 $x \in B_r$ 无关，且由 (ii) 与 $f' = g$ 这一事实，当 $n \to \infty$ 时收敛到 $0$。因此 $(f_n)$ 在 $B_r$ 上一致收敛到 $f$。
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{corollary}
+
+（函数级数极限的可微性）假设 $X \subseteq \mathbb{K}$ 是开的（或凸的）且完全的，且 $(f_n)$ 是 $C^1(X, E)$ 中的序列，使得 $\sum f_n$ 逐点收敛且 $\sum f'_n$ 局部一致收敛。则和 $\sum_{n=0}^{\infty} f_n$ 在 $C^1(X, E)$ 中，且
+
+\[
+\Bigl(\sum_{n=0}^{\infty}f_{n}\Bigr)^{\prime}=\sum_{n=0}^{\infty}f_{n}^{\prime}.
+\]
+
+此外，$ \sum f_n $ 局部一致收敛。
+
+\proofhead
+这直接由定理 2.8 得出。
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $ (f_n) $ 是 $ C^1(X, E) $ 中一致收敛到 $ f $ 的序列。即使 $ f $ 连续可微，$ (f'_n) $ 一般也不逐点收敛到 $ f' $。
+
+\proofhead
+设 $ X := \mathbb{R} $，$ E := \mathbb{R} $，且对所有 $ n \in \mathbb{N}^{\times} $ 有 $ f_n(x) := (1/n) \sin(nx) $。因为
+\[
+|f_{n}(x)|=|\sin(n x)|/n\leq1/n\;,\qquad x\in X\;,
+\]
+
+$ (f_n) $ 一致收敛到 $ 0 $。由于 $ \lim f_n'(0) = 1 $，序列 $ (f_n'(0)) $ 不收敛到极限函数在点 $ 0 $ 处的导数。■
+
+\item
+
+设 $ (f_n) $ 是 $ C^1(X, E) $ 中的序列，使得 $ \sum f_n $ 一致收敛。则一般而言，$ \sum f'_n $ 甚至不逐点收敛。
+
+\proofhead
+假设 $X := \mathbb{R}$，$E := \mathbb{R}$，且对所有 $n \in \mathbb{N}^\times$ 有 $f_n(x) := (1/n^2) \sin(nx)$。则 $\|f_n\|_\infty = 1/n^2$，因此由魏尔斯特拉斯优级数判别法，级数 $\sum f_n$ 一致收敛。由于 $f_n'(x) = (1/n) \cos(nx)$，$\sum f_n'(0)$ 不收敛。
+\end{items}
+
+\end{remark}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+证明下列各题：
+
+\begin{items}
+\item
+
+若 $ (f_{n}) $ 一致收敛且每个 $ f_{n} $ 都一致连续，则极限函数也一致连续。
+
+\item
+
+$ BUC(X, E) := \left( \left\{ f \in BC(X, E) ; f \text{ 是一致连续的} \right\} , \|\cdot\|_\infty \right) $ 是巴拿赫空间。
+
+\item
+
+若 $ X $ 是紧致的，则 $ BUC(X,E)=C(X,E) $。
+
+\end{items}
+
+\item
+
+考虑 $ E $ 中的二重序列 $ (x_{jk}) $，使得
+
+\begin{subitems}
+\item
+
+对每个 $ j \in \mathbb{N} $，$ (x_{jk})_{k \in \mathbb{N}} $ 收敛。
+
+\item
+
+对每个 $ \varepsilon > 0 $，存在某个 $ N \in \mathbb{N} $ 使得
+
+\[
+|x_{m k}-x_{n k}|<\varepsilon\;,\qquad m,n\ge N\;,\quad k\in\mathbb{N}\;.
+\]
+
+证明对每个 $k\in\mathbb{N}$，$(x_{jk})_{j\in\mathbb{N}}$ 收敛。证明序列 $(\lim_{k}x_{jk})_{j\in\mathbb{N}}$ 与 $(\lim_{j}x_{jk})_{k\in\mathbb{N}}$ 收敛，且
+
+\[
+\lim_{j}(\lim_{k}x_{jk})=\lim_{k}(\lim_{j}x_{jk}).
+\]
+\end{subitems}
+
+\item
+
+假设 $X$ 是紧致的，且 $(f_n)$ 是 $X$ 上实值连续函数的逐点收敛序列。证明：若极限函数连续且 $(f_n)$ 是单调的，则 $(f_n)$ 一致收敛（迪尼定理）。
+
+(提示：若 $ f_{n} $) 是递增的，则
+
+\[
+0\leq f(y)-f_{N_{x}}(y)=\left(f(y)-f(x)\right)+\left(f(x)-f_{N_{x}}(x)\right)+\left(f_{N_{x}}(x)-f_{N_{x}}(y)\right)
+\]
+
+对所有 $ x, y \in X $ 和 $ N_x \in \mathbb{N} $ 成立。)
+
+\item
+
+举例说明，在迪尼定理中，极限函数的连续性与单调收敛是必要的假设。
+
+\item
+
+设 $ (f_n) $ 是紧致区间 $ I $ 上单调函数的序列，它逐点收敛到连续函数 $ f $。证明 $ f $ 是单调的，且 $ (f_n) $ 一致收敛到 $ f $。
+
+\item
+
+考虑 $ X $ 上满足下列条件的实值函数序列 $ (f_{n}) $：
+
+\begin{subitems}
+\item
+
+对每个 $ x \in X $，$ (f_n(x)) $ 是递减的。
+
+\item
+
+$ (f_{n}) $ 一致收敛到 $ 0 $。
+
+\end{subitems}
+
+\end{exercises}
+
+\begin{proof}
+
+$ \sum(-1)^n f_n $ 一致收敛。
+
+\end{proof}
+
+\begin{exercises}
+\item[7.]
+
+设 $ (f_n) $ 是 $ X $ 上的实值函数序列，$ (g_n) $ 是 $ X $ 上的 $ \mathbb{K} $ 值函数序列，它们满足下列条件：
+
+\begin{subitems}
+\item
+
+对每个 $ x \in X $，$ (f_n(x)) $ 是递减的。
+
+\item
+
+$ (f_{n}) $ 一致收敛到 $ 0 $。
+
+\item
+
+$ \sup_n\|\sum_{k=0}^{n} g_k\|_\infty < \infty $。
+
+\end{subitems}
+
+\end{exercises}
+
+\begin{proof}
+
+$ \sum g_n f_n $ 一致收敛。
+
+(提示：令 $ \alpha_k := \sum_{j=0}^k g_j $，我们有)
+
+\[
+\sum_{k=m+1}^{n}g_{k}f_{k}=\sum_{k=m}^{n-1}\alpha_{k}(f_{k}-f_{k+1})+\alpha_{n}f_{n}-\alpha_{m}f_{m}
+\]
+
+对所有 $m < n$ 成立。对于给定的 $\varepsilon > 0$ 和 $M := \sup_k \|\alpha_k\|_\infty$，存在某个 $N \in \mathbb{N}$，使得对所有 $n \geq N$ 有 $\|f_n\|_\infty < \varepsilon/2M$。由此可得
+
+\[
+\bigg|\sum_{k=m+1}^{n}g_{k}(x)f_{k}(x)\bigg|\leq M\sum_{k=m}^{n-1}(f_{k}-f_{k+1})(x)+M(f_{n}+f_{m})(x)<\varepsilon
+\]
+
+对所有 $ x \in X $ 和 $ n > m \geq N $ 成立。现在使用命题 1.4。)
+
+\end{proof}
+
+\begin{exercises}
+\item[8.]
+
+借助上一道习题证明，对每个 $\alpha\in(0,\pi)$，级数 $\sum_{k}e^{ikx}/k$ 在 $[\alpha,2\pi-\alpha]$ 上一致收敛。
+
+\[
+|e^{i x}-1|\geq\sqrt{2(1-\operatorname{c o s}\alpha)}\;,\qquad x\in[\alpha,2\pi-\alpha]\;,
+\]
+
+从而
+
+\[
+\left|\sum_{k=0}^{n}e^{i k x}\right|=\frac{\left|e^{i n x}-1\right|}{\left|e^{i x}-1\right|}\leq\sqrt{2/(1-\cos\alpha)}
+\]
+
+对所有 $ x \in [\alpha, 2\pi - \alpha] $ 成立。)
+
+\item[9.]
+
+假设 $ A: E \to E $ 是线性的，且 $ \alpha \geq 0 $ 满足对所有 $ x \in E $ 有 $ \|Ax\| \leq \alpha \|x\| $。固定 $ x_0 \in E $ 并定义
+
+\[
+u(z):=\sum_{k=0}^{\infty}\frac{z^{k}}{k!}A^{k}x_{0},\qquad z\in\mathbb{K}.
+\]
+
+这里 $ A^k $ 表示 $ A $ 的第 $ k $ 次迭代。证明 $ u \in C^\infty(\mathbb{K}, E) $，并对所有 $ n \in \mathbb{N}^\times $ 确定 $ \partial^n u $。
+
+(提示：级数 $ \sum(z^k/k!)A^k x_0 $ 以 $ \|x_0\| e^{|z|\alpha} $ 为收敛优级数。我们还有 $ \sum A(z^k/k!)A^k x_0 = Au(z) $。)
+
+\item[10.]
+
+设 $X$ 在 $\mathbb{K}$ 中是开的，$n \in \mathbb{N}^\times$，且
+
+\[
+B C^{n}(X,E):=\left(\left\{f\in C^{n}(X,E);\partial^{j}f\in B(X,E),j=0,\ldots,n\right\},\|\cdot\|_{B C^{n}}\right)
+\]
+
+其中 $ \|f\|_{BC^n} := \max_{1 \leq j \leq n} \|\partial^j f\|_\infty $。证明下列各题：
+
+\begin{items}
+\item
+
+$ BC^{n}(X,E) $ 不是 $ BC(X,E) $ 的闭子空间。
+
+\item
+
+$ BC^{n}(X,E) $ 是巴拿赫空间。
+
+\end{items}
+
+\item[11.]
+
+设 $ -\infty < a < b < \infty $，且对所有 $ n \in \mathbb{N} $ 有 $ f_n \in C^1([a, b], E) $。假设序列 $ (f_n') $ 一致收敛，且存在某个 $ x_0 \in [a, b] $ 使得 $ (f_n(x_0))_{n \in \mathbb{N}} $ 收敛。证明 $ (f_n) $ 一致收敛。（提示：使用定理 IV.2.18。）
+
+\end{exercises}
+
+\section{解析函数}
+
+本节我们再次研究幂级数。这些当然是一类具有特别简单形式的函数级数。我们已经知道幂级数在其收敛圆盘上局部一致收敛。本节我们将证明这样的级数可以“逐项”求导，且结果仍是一个与原来级数具有相同收敛半径的幂级数。由此直接可得，幂级数在其收敛圆盘上表示一个光滑函数。
+
+这些观察引导我们去研究解析函数，即可以局部地用幂级数表示的函数。这些函数具有非常丰富的“内在”结构，其优美与重要性我们将在后面的章节中进一步探讨。
+
+\subsection*{幂级数的可微性}
+
+设 $ a = \sum_k a_k X^k \in \mathbb{K}[\![X]\!] $ 是收敛半径为 $ \rho = \rho_a > 0 $ 的幂级数，$ \underline{a} $ 是 $ a $ 在 $ \rho \mathbb{B}_{\mathbb{K}} $ 上表示的函数。当不会引起误解时，我们把 $ \mathbb{B}_{\mathbb{K}} $ 写作 $ \mathbb{B} $。
+
+\begin{theorem}
+
+（幂级数的可微性）设 $ a = \sum_k a_k X^k $ 是幂级数。则 $ \underline{a} $ 在 $ \rho \mathbb{B} $ 上连续可微。“逐项求导”后的级数 $ \sum_{k \geq 1} ka_k X^{k-1} $ 的收敛半径为 $ \rho $，并且
+
+\[
+\underline{{a}}^{\prime}(x)=\Bigl(\sum_{k=0}^{\infty}a_{k}x^{k}\Bigr)^{\prime}=\sum_{k=1}^{\infty}k a_{k}x^{k-1}~,\qquad x\in\rho \mathbb{B}~.
+\]
+
+\proofhead
+设 $ \rho' $ 是幂级数 $ \sum k a_k X^{k-1} $ 的收敛半径。由阿达马公式 (II.9.3)、例 II.4.2(d) 与习题 II.5.2(d) 我们有
+\[
+\rho^{\prime}=\frac{1}{\varlimsup\sqrt[k]{k\left|a_{k}\right|}}=\frac{1}{\lim\sqrt[k]{k}\varlimsup\sqrt[k]{\left|a_{k}\right|}}=\frac{1}{\varlimsup\sqrt[k]{\left|a_{k}\right|}}=\rho.
+\]
+
+由定理 1.8，幂级数 $ \sum_{k \geq 1} ka_k X^{k-1} $ 在 $ \rho\mathbb{B} $ 上局部一致收敛，因此结论由推论 2.9 得出。■
+
+\end{theorem}
+
+\begin{corollary}
+
+若 $a = \sum a_k X^k$ 是收敛半径 $\rho$ 为正的幂级数，则 $\underline{a} \in C^\infty(\rho\mathbb{B},\mathbb{K})$ 且 $\underline{a} = \mathcal{T}(\underline{a},0)$。换言之，$\sum a_k X^k$ 是 $\underline{a}$ 在 0 处的泰勒级数，并且 $a_k = \underline{a}^{(k)}(0)/k!$。
+
+\proofhead
+用归纳法，由定理 3.1 可得 $ \underline{a} $ 在 $ \rho\mathbb{B} $ 上光滑，且对一切 $ x\in\rho\mathbb{B} $，
+\[
+\underline{{a}}^{(k)}(x)=\sum_{n=k}^{\infty}n(n-1)\cdots(n-k+1)a_{n}x^{n-k},\qquad k\in\mathbb{N}.
+\]
+
+因此对一切 $ k \in \mathbb{N} $ 有 $ \underline{a}^{(k)}(0) = k! a_k $，我们已证得该结论。■
+
+\end{corollary}
+
+\subsection*{解析性}
+
+设 $D$ 在 $\mathbb{K}$ 中开。函数 $f: D \to \mathbb{K}$ 称为 $\text{解析的}$（在 $D$ 上），如果对每个 $x_0 \in D$，存在某个 $r = r(x_0) > 0$ 使得 $\mathbb{B}(x_0, r) \subseteq D$，且存在收敛半径 $\rho \geq r$ 的幂级数 $\sum_k a_k X^k$，使得
+
+\[
+f(x)=\sum_{k=0}^{\infty}a_{k}(x-x_{0})^{k},\qquad x\in\mathbb{B}(x_{0},r).
+\]
+
+此时，我们说 $ \sum_k a_k(X - x_0)^k $ 是 $ f $ 在 $ x_0 $ 处的\textbf{幂级数展开}。$ D $ 上全体解析函数之集记作 $ C^\omega(D, \mathbb{K}) $，在不会引起误解时也记作 $ C^\omega(D) $。进一步，若 $ \mathbb{K} = \mathbb{R} $（或 $ \mathbb{K} = \mathbb{C} $），则 $ f \in C^\omega(D) $ 称为\textbf{实}（或 \textbf{复}）\textbf{解析的}。
+
+\begin{example}
+
+\begin{items}
+\item
+
+多项式函数在 $ \mathbb{K} $ 上是解析的。
+
+\proofhead
+这可由 (IV.3.1) 得出。
+\item
+
+函数 $ \mathbb{K}^{\times} \to \mathbb{K}^{\times} $，$ x \mapsto 1/x $ 是解析的。
+
+\proofhead
+设 $ x_0 \in \mathbb{K}^\times $。则由例 II.7.4，对每个 $ x \in \mathbb{B}(x_0, |x_0|) $，我们有
+\[
+\frac{1}{x}=\frac{1}{x_{0}}\frac{1}{1+(x-x_{0})/x_{0}}=\frac{1}{x_{0}}\sum_{k=0}^{\infty}(-1)^{k}\Big(\frac{x-x_{0}}{x_{0}}\Big)^{k}=\sum_{k=0}^{\infty}\frac{(-1)^{k}}{x_{0}^{k+1}}\big(x-x_{0}\big)^{k}.
+\]
+
+这证明了 $ x \mapsto 1/x $ 在 $ \mathbb{K}^\times $ 上是解析的。■
+
+\end{items}
+
+\end{example}
+
+\begin{remark}
+
+设 $D$ 在 $\mathbb{K}$ 中开且 $f \in \mathbb{K}^D$。
+
+\begin{items}
+\item
+
+若 f 是解析的，则 f 在 $x_0$ 处的幂级数展开是唯一的。
+
+\proofhead
+这可由推论 II.9.9 得出。
+\item
+
+$f$ 是解析的当且仅当 $f$ 属于 $C^\infty(D)$ 且每个 $x_0 \in D$ 在 $D$ 中有邻域 $U$，使得
+
+\[
+f(x)=\mathcal{T}(f,x_{0})(x),\qquad x\in U,
+\]
+
+也就是说，在每个 $ x_0 \in D $ 处，$ f \in C^\infty(D) $ 可以局部地由其泰勒级数表示。
+
+\proofhead
+这直接由推论 3.2 得出。
+\item
+
+解析性是局部性质，也就是说，$f$ 在 $D$ 上解析当且仅当每个 $x_0 \in D$ 有邻域 $U$ 使得 $f|U \in C^\omega(U)$。
+
+\item
+
+由例 IV.1.17，由下式定义的函数 $ f: \mathbb{R} \to \mathbb{R} $
+
+\begin{equation*}
+f(x):=\left\{\begin{array}{c l}{e^{-1/x}\;,}&{\quad x>0\;,}\\ {0\;,}&{\quad x\leq0\;,}\\ \end{array}\right.
+\end{equation*}
+
+满足 $ f \in C^\infty(\mathbb{R}) $，且对一切 $ x > 0 $ 有 $ f(x) \neq \mathcal{T}(f,0)(x) = 0 $。因此不存在 0 的邻域使得函数 $ f $ 在其上由其泰勒级数表示，从而 $ f $ 不是解析的。
+
+\item
+
+$ C^\omega(D,\mathbb{K}) $ 是 $ C^\infty(D,\mathbb{K}) $ 的子代数，且 $ \mathbf{1} \in C^\omega(D,\mathbb{K}) $。
+
+\proofhead
+由定理 IV.1.12 我们知道 $ C^\infty(D, \mathbb{K}) $ 是一个 $ \mathbb{K} $-代数，因此该结论由命题 II.9.7 得出。$ \blacksquare $
+\end{items}
+
+接下来我们证明幂级数在其收敛圆盘上表示一个解析函数。鉴于注 3.4(b) 与推论 3.2，只需证明幂级数可以局部地由其泰勒级数表示。
+
+\end{remark}
+
+\begin{proposition}
+
+假设 $ a = \sum a_k X^k $ 是收敛半径为 $ \rho > 0 $ 的幂级数。则 $ \underline{a} \in C^\omega(\rho\mathbb{B}, \mathbb{K}) $，且
+
+\[
+{\underline{{a}}}(x)={\mathcal{T}}({\underline{{a}}},x_{0})(x)~,\qquad x_{0}\in\rho{\mathbb{B}}~,\quad x\in{\mathbb{B}}(x_{0},\rho-|x_{0}|)~.
+\]
+
+幂级数在其收敛圆盘上表示一个解析函数。
+
+证明
+
+\begin{subitems}
+\item
+
+与推论 3.2 的证明相同，我们有
+
+\[
+\underline{a}^{(k)}(x_{0})=\sum_{n=k}^{\infty}n(n-1)\cdots(n-k+1)a_{n}x_{0}^{n-k}=k!\sum_{n=k}^{\infty}\binom{n}{k}a_{n}x_{0}^{n-k}
+\]
+
+对一切 $ x_0 \in \rho\mathbb{B} $。注意到对一切 $ k > n $ 有 $ \binom{n}{k} = 0 $，我们有
+
+\begin{equation}
+\mathcal{T}(\underline{{a}},x_{0})=\sum_{k=0}^{\infty}\Bigl(\sum_{n=0}^{\infty}\binom{n}{k}a_{n}x_{0}^{n-k}\Bigr)(X-x_{0})^{k}\;.
+\end{equation}
+\item
+
+令 $ r := \rho - |x_0| > 0 $，且
+
+\[
+b_{n,k}(x):=\binom{n}{k}a_{n}x_{0}^{n-k}(x-x_{0})^{k}~,\qquad n,k\in\mathbb{N}~,\quad x\in\mathbb{B}(x_{0},r)~,
+\]
+
+由二项式定理（定理 I.8.4）可得
+
+\begin{equation}
+\sum_{n,k=0}^{m}|b_{n,k}(x)|=\sum_{n=0}^{m}|a_{n}|\left(|x_{0}|+|x-x_{0}|\right)^{n},\qquad m\in\mathbb{N},\quad x\in\mathbb{B}(x_{0},r).
+\end{equation}
+
+对 $ x \in \rho\mathbb{B} $，我们有 $ |x_0| + |x - x_0| < \rho $，又由于幂级数 $ a $ 在 $ \rho\mathbb{B} $ 上绝对收敛，
+
+\[
+M(x):=\sum_{n=0}^{\infty}\left|a_{n}\right|\left(\left|x_{0}\right|+\left|x-x_{0}\right|\right)^{n}<\infty.
+\]
+
+结合 (3.2)，我们现在有
+
+\[
+\operatorname*{s u p}_{m\in\mathbb{N}}\sum_{n,k=0}^{m}|b_{n,k}(x)|\leq M(x)~,\qquad x\in\mathbb{B}(x_{0},r)~.
+\]
+
+这意味着二重级数 $ \sum_{n,k}\binom{n}{k}a_n x_0^{n-k}(x - x_0)^k $ 对每个 $ x \in \mathbb{B}(x_0, r) $ 都是可求和的。由定理 II.8.10(ii) 与 (3.1) 我们现在得到
+
+\begin{equation*}
+\begin{aligned}
+\mathcal{T}(\underline{a},x_{0})(x)&=\sum_{k=0}^{\infty}\sum_{n=0}^{\infty}\binom{n}{k}a_{n} x_{0}^{n-k}(x-x_{0})^{k}\\&=\sum_{n=0}^{\infty}\Big(\sum_{k=0}^{n}\binom{n}{k}x_{0}^{n-k}(x-x_{0})^{k}\Big)a_{n}=\sum_{n=0}^{\infty}a_{n} x^{n}=\underline{a}(x)
+\end{aligned}
+\end{equation*}
+
+对一切 $ x \in \mathbb{B}(x_0, r) $，这里我们对一切 $ k > n $ 置 $ \binom{n}{k} = 0 $，并再次用到了二项式定理。由推论 3.2 与注 3.4(b)，证明完成。■
+
+\end{subitems}
+
+\end{proposition}
+
+\begin{corollary}
+
+\begin{subitems}
+\item
+
+函数 $ \exp $、$ \cos $ 与 $ \sin $ 在 $ \mathbb{K} $ 上是解析的。
+
+\item
+
+若 $ f \in C^\omega(D, \mathbb{K}) $，则 $ f' \in C^\omega(D, \mathbb{K}) $。
+
+\proofhead
+第一个结论直接由命题 3.5 得出。由定理 3.1，(ii) 也由命题 3.5 得出。■
+\end{subitems}
+
+\end{corollary}
+
+\subsection*{解析函数的原函数}
+
+假设 $D$ 在 $\mathbb{K}$ 中开，$E$ 是赋范向量空间，$f: D \to E$。若 $F$ 可微且 $F' = f$，则称 $F: D \to E$ 是 $f$ 的 $\text{原函数}$。
+
+度量空间的非空开连通子集称为区域。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $ D \subseteq \mathbb{K} $ 是区域，$ f: D \to E $。若 $ F_1, F_2 \in E^D $ 是 $ f $ 的原函数，则 $ F_2 - F_1 $ 是常数。也就是说，原函数在相差一个加法常数意义下唯一。
+
+\begin{subitems}
+\item
+
+\proofhead
+(i) 令 $F := F_2 - F_1$。则 $F$ 可微且 $F' = 0$。我们需要证明 $F$ 是常数。固定 $x_0 \in D$，并定义 $Y := \{ x \in D ; F(x) = F(x_0) \}$。这个集合非空，因为它含有 $x_0$。
+\item
+
+我们断言 $Y$ 在 $D$ 中开。设 $y \in Y$。由于 $D$ 是开集，存在某个 $r > 0$ 使得 $\mathbb{B}(y, r) \subseteq D$。对 $x \in \mathbb{B}(y, r)$，定义 $\varphi(t) := F(y + t(x - y))$，$t \in [0,1]$。则 $\varphi: [0,1] \to E$ 可微，且由于 $F' = 0$，其导数满足
+
+\[
+\varphi^{\prime}(t)=F^{\prime}\big(y+t(x-y)\big)(x-y)=0,\qquad t\in[0,1].
+\]
+
+由注 IV.2.6(a)，$ \varphi $ 是常数，从而 $ F(x) = \varphi(1) = \varphi(0) = F(y) = F(x_0) $。这意味着 $ \mathbb{B}(y, r) $ 包含于 Y，且 Y 在 D 中开。
+
+\item
+
+函数 $F$ 可微，因而是连续的。由于 $Y$ 是 $F$ 在点 $F(x_0)$ 处的纤维，即 $Y = F^{-1}(F(x_0))$，故 $Y$ 在 $D$ 中闭（见例 III.2.22(a)）。
+
+\item
+
+由于 $D$ 连通，由注 III.4.3 可得 $Y = D$，即 $F$ 是常数。
+
+\end{subitems}
+
+\item
+
+设 $ a = \sum a_k X^k $ 是收敛半径为 $ \rho > 0 $ 的幂级数。则 $ \underline{a} $ 在 $ \rho\mathbb{B} $ 上有由幂级数 $ \sum(a_k/(k+1))X^{k+1} $ 表示的原函数，且这个原函数在相差一个加法常数意义下唯一。
+
+\proofhead
+由于 $\rho\mathbb{B}$ 连通，由 (a)，只需证明所给幂级数在 $\rho\mathbb{B}$ 上表示 $\underline{a}$ 的一个原函数。这直接由定理 3.1 得出。
+\end{items}
+
+\end{remark}
+
+\begin{proposition}
+
+若 $ f \in C^\omega(D, \mathbb{K}) $ 有原函数 $ F $，则 $ F $ 也是解析的。
+
+\proofhead
+设 $ x_0 \in D $。则存在某个 $ r > 0 $ 使得
+\[
+f(x)=\sum_{k=0}^{\infty}\frac{f^{(k)}(x_{0})}{k!}(x-x_{0})^{k},\qquad x\in\mathbb{B}(x_{0},r)\subseteq D.
+\]
+
+由注 3.7(b)，存在某个 $ a \in \mathbb{K} $ 使得
+
+\begin{equation}
+F(x)=a+\sum_{k=0}^{\infty}\frac{f^{(k)}(x_{0})}{(k+1)!}(x-x_{0})^{k+1},\qquad x\in\mathbb{B}(x_{0},r).
+\end{equation}
+
+由命题 3.5 可得，$F$ 在 $\mathbb{B}(x_0, r)$ 上解析。由于解析性是局部性质，结论得证。
+
+\end{proposition}
+
+\subsection*{对数的幂级数展开}
+
+在下一个定理中，我们加强例 IV.3.5 与应用 IV.3.9(d) 的结果。
+
+\begin{theorem}
+
+对数函数在 $ \mathbb{C}\backslash(-\infty,0] $ 上解析，且对一切 $ z \in \mathbb{B}_{\mathbb{C}} $，
+
+\[
+\log(1+z)=\sum_{k=1}^{\infty}(-1)^{k-1}z^{k}/k~.
+\]
+
+\proofhead
+由例 IV.1.13(e) 我们知道对数函数在 $ \mathbb{C}\backslash(-\infty,0] $ 上是 $ z \mapsto 1/z $ 的原函数。因此第一个结论由命题 3.8 与例 3.3(b) 得出。
+
+由幂级数展开
+\[
+\frac{1}{z}=\sum_{k=0}^{\infty}\frac{(-1)^{k}}{z_{0}^{k+1}}(z-z_{0})^{k},\qquad z_{0}\in\mathbb{C}^{\times},\quad z\in\mathbb{B}_{\mathbb{C}}(z_{0},|z_{0}|),
+\]
+
+与注 3.7(b) 可得
+
+\[
+\log z=c+\sum_{k=0}^{\infty}\frac{(-1)^{k}}{(k+1)z_{0}^{k+1}}(z-z_{0})^{k+1},\qquad z,z_{0}\in\mathbb{C}\backslash(-\infty,0],\quad|z-z_{0}|<|z_{0}|,
+\]
+
+其中 c 是某个适当的常数。令 $ z = z_0 $，我们得到 $ c = \log z_0 $，于是取 $ z_0 = 1 $ 即得所求的幂级数展开。
+
+\end{theorem}
+
+\subsection*{二项级数}
+
+对 $ \alpha \in \mathbb{C} $ 与 $ n \in \mathbb{N} $，（广义）二项系数定义为
+
+\[
+\binom{\alpha}{n}:=\frac{\alpha(\alpha-1)\cdot\cdots\cdot(\alpha-n+1)}{n!},\quad n\in\mathbb{N}^{\times},\qquad\binom{\alpha}{0}:=1.
+\]
+
+当 $ \alpha \in \mathbb{N} $ 时，这个定义显然与第 I.5 节的定义一致。此外，公式
+
+\begin{equation}
+\binom{\alpha}{n}=\binom{\alpha-1}{n}+\binom{\alpha-1}{n-1}\quad\text{且}\quad\alpha\binom{\alpha-1}{n}=(n+1)\binom{\alpha}{n+1}
+\end{equation}
+
+对一切 $ \alpha \in \mathbb{C} $ 与 $ n \in \mathbb{N} $ 成立（见习题 7）。幂级数
+
+\[
+\sum_{k}\binom{\alpha}{k}X^{k}\in\mathbb{C}[\![X]\!]
+\]
+
+称为指数 $ \alpha $ 的二项级数。若 $ \alpha \in \mathbb{N} $，则对一切 $ k > \alpha $ 有 $ \binom{\alpha}{k} = 0 $，且二项级数化为多项式
+
+\[
+\sum_{k=0}^{\alpha}\binom{\alpha}{k}X^{k}=(1+X)^{\alpha}.
+\]
+
+在下面的定理中，我们把这一陈述推广到任意指数的情形。
+
+\begin{theorem}
+
+设 $ \alpha \in \mathbb{C} \backslash \mathbb{N} $。
+
+\begin{subitems}
+\item
+
+二项级数的收敛半径为 1，且
+
+\begin{equation}
+\sum_{k=0}^{\infty}{\binom{\alpha}{k}}z^{k}=(1+z)^{\alpha}\;,\qquad z\in\mathbb{B}_{\mathbb{C}}\;.
+\end{equation}
+\item
+
+幂函数 $ z \mapsto z^\alpha $ 在 $ \mathbb{C}\backslash(-\infty,0] $ 上解析，且
+
+\[
+z^{\alpha}=\sum_{k=0}^{\infty}\binom{\alpha}{k}z_{0}^{\alpha-k}(z-z_{0})^{k},\qquad z,z_{0}\in\mathbb{C}\backslash(-\infty,0],\quad|z-z_{0}|<|z_{0}|.
+\]
+\item
+
+对一切满足 $ z + w \in \mathbb{C} \setminus (-\infty, 0] $ 与 $ |z| > |w| $ 的 $ z, w \in \mathbb{C} \setminus (-\infty, 0] $，
+
+\[
+(z+w)^{\alpha}=\sum_{k=0}^{\infty}\binom{\alpha}{k}z^{\alpha-k}w^{k}.
+\]
+\item
+
+对一切 $ \alpha \in (0, \infty) $，二项级数在 $ \bar{\mathbb{B}}_{\mathbb{C}} $ 上依范数收敛。
+
+\proofhead
+下面令 $ a_{k} := \binom{\alpha}{k} $。
+\end{subitems}
+
+(i) 由于 $ \alpha \notin \mathbb{N} $，我们有 $ \lim |a_k/a_{k+1}| = \lim_k \left((k+1)/|\alpha - k|\right) = 1 $，因此由命题 II.9.4，二项级数的收敛半径为 1。
+
+对一切 $ z \in \mathbb{B}_{\mathbb{C}} $，定义 $ f(z) := \sum_{k=0}^{\infty} a_k z^k $。由定理 3.1 与 (3.4) 可得
+
+\[
+f^{\prime}(z)=\sum_{k=1}^{\infty}k\binom{\alpha}{k}z^{k-1}=\sum_{k=0}^{\infty}(k+1)\binom{\alpha}{k+1}z^{k}=\alpha\sum_{k=0}^{\infty}\binom{\alpha-1}{k}z^{k},
+\]
+
+并且，利用 (3.4) 的第一个公式，
+
+\begin{equation*}
+\begin{aligned}
+(1+z)f^{\prime}(z)&=\alpha\biggl(\sum_{k=0}^{\infty}\binom{\alpha-1}{k}z^{k}+\sum_{k=0}^{\infty}\binom{\alpha-1}{k}z^{k+1}\biggr)\\&=\alpha\biggl\{1+\sum_{k=1}^{\infty}\biggl(\binom{\alpha-1}{k}+\binom{\alpha-1}{k-1}\biggr)z^{k}\biggr\}=\alpha f(z)
+\end{aligned}
+\end{equation*}
+
+对一切 $ z \in \mathbb{B}_{\mathbb{C}} $。因此
+
+\[
+(1+z)f^{\prime}(z)-\alpha f(z)=0~,\qquad z\in\mathbb{B}_{\mathbb{C}}~,
+\]
+
+由此可得
+
+\[
+\bigl[(1+z)^{-\alpha}f(z)\bigr]^{\prime}=(1+z)^{-\alpha-1}\bigl[(1+z)f^{\prime}(z)-\alpha f(z)\bigr]=0~,\qquad z\in\mathbb{B}_{\mathbb{C}}~.
+\]
+
+由于 $\mathbb{B}_{\mathbb{C}}$ 是区域，注 3.7(a) 蕴含对某个常数 $c\in\mathbb{C}$ 有 $(1+z)^{-\alpha}f(z)=c$。由于 $f(0)=1$，我们有 $c=1$，从而对一切 $z\in\mathbb{B}_{\mathbb{C}}$ 有 $f(z)=(1+z)^{\alpha}$。
+
+\begin{subitems}
+\item[（ii）]
+
+设 $ z, z_0 \in \mathbb{C} \setminus (-\infty, 0] $ 满足 $ |z - z_0| < |z_0| $。则由 (3.5) 可得
+
+\begin{equation*}
+\begin{aligned}
+z^{\alpha}&=\left(z_{0}+(z-z_{0})\right)^{\alpha}=z_{0}^{\alpha}\Big(1+\frac{z-z_{0}}{z_{0}}\Big)^{\alpha}\\&=z_{0}^{\alpha}\sum_{k=0}^{\infty}\binom{\alpha}{k}\frac{(z-z_{0})^{k}}{z_{0}^{k}}=\sum_{k=0}^{\infty}\binom{\alpha}{k}z_{0}^{\alpha-k}(z-z_{0})^{k}\;.
+\end{aligned}
+\end{equation*}
+
+特别地，$ z \mapsto z^\alpha $ 在 $ \mathbb{C}\backslash(-\infty,0] $ 上解析。
+
+\item[（iii）]
+
+由于 $ |w/z| < 1 $，(3.5) 蕴含
+
+\[
+(z+w)^{\alpha}=z^{\alpha}\Big(1+\frac{w}{z}\Big)^{\alpha}=z^{\alpha}\sum_{k=0}^{\infty}\binom{\alpha}{k}\Big(\frac{w}{z}\Big)^{k}=\sum_{k=0}^{\infty}\binom{\alpha}{k}z^{\alpha-k}w^{k}.
+\]
+\item[（iv）]
+
+对一切 $ k \in \mathbb{N} $ 令 $ \alpha_k := \left| \binom{\alpha}{k} \right| $。则
+
+\begin{equation}
+k\alpha_{k}-(k+1)\alpha_{k+1}=\alpha\alpha_{k}>0,\qquad k>\alpha>0.
+\end{equation}
+
+因此对一切 $ k > \alpha $，序列 $ (k\alpha_k) $ 递减，且存在某个 $ \beta \geq 0 $ 使得 $ \lim k\alpha_k = \beta $。这蕴含
+
+\[
+\lim_{n}\sum_{k=0}^{n}\left(k\alpha_{k}-(k+1)\alpha_{k+1}\right)=-\lim_{n}\left((n+1)\alpha_{n+1}\right)=-\beta.
+\]
+
+由 (3.6) 我们现在得到
+
+\[
+\sum_{k>\alpha}\alpha_{k}=\frac{1}{\alpha}\sum_{k>\alpha}\left(k\alpha_{k}-(k+1)\alpha_{k+1}\right)<\infty.
+\]
+
+因为对一切 $ |z| \leq 1 $ 有 $ |a_k z^k| \leq \alpha_k $，故结论是魏尔斯特拉斯优级数判别法（定理 1.6）的结果。$ \blacksquare $
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{example}
+
+下面我们进一步研究特殊值 $ \alpha = 1/2 $ 与 $ \alpha = -1/2 $ 的二项级数。
+
+\begin{items}
+\item
+
+（$ \alpha = 1/2 $ 的情形）首先我们计算二项系数：
+
+\begin{equation*}
+\begin{aligned}
+\binom{1/2}{k}&=\frac{1}{k!}\frac{1}{2}\Big(\frac{1}{2}-1\Big)\cdot\cdots\cdot\Big(\frac{1}{2}-k+1\Big)\\&=\frac{(-1)^{k-1}}{k!}\frac{1\cdot3\cdot\cdots\cdot(2k-3)}{2^{k}}\\&=(-1)^{k-1}\frac{1\cdot3\cdot\cdots\cdot(2k-3)}{2\cdot4\cdot\cdots\cdot2k}
+\end{aligned}
+\end{equation*}
+
+对一切 k > 2。由定理 3.10 我们得到级数展开
+
+\begin{equation}
+\sqrt{1+z}=1+\frac{z}{2}+\sum_{k=2}^{\infty}(-1)^{k-1}\frac{1\cdot3\cdot\cdots\cdot(2k-3)}{2\cdot4\cdot\cdots\cdot2k}z^{k},\qquad z\in\bar{\mathbb{B}}_{\mathbb{C}}.
+\end{equation}
+\item
+
+（平方根的计算）把 (3.7) 写成如下形式
+
+\[
+\sqrt{1+z}=1+\frac{z}{2}-z^{2}\sum_{k=0}^{\infty}(-1)^{k}b_{k}z^{k},\qquad z\in\bar{\mathbb{B}}_{\mathbb{C}},
+\]
+
+其中
+
+\[
+b_{0}:=1/8~,\quad b_{k+1}:=b_{k}(2k+3)/(2k+6)~,\qquad k\in\mathbb{N}~,
+\]
+
+并在区间 [0, 1] 上考虑这个级数。由交错级数的误差估计（推论 II.7.9）可得
+
+\[
+1+\frac{x}{2}-x^{2}\Big(\sum_{k=0}^{2n}(-1)^{k}b_{k}x^{k}\Big)\leq\sqrt{1+x}\leq1+\frac{x}{2}-x^{2}\Big(\sum_{k=0}^{2n+1}(-1)^{k}b_{k}x^{k}\Big)
+\]
+
+对一切 $ n \in \mathbb{N} $ 与 $ x \in [0,1] $。
+这提供了计算平方根数值近似的又一种方法。例如，对 n = 2 与 x = 1，我们有
+
+\[
+1+\frac{1}{2}-\frac{1}{8}+\frac{1}{16}-\frac{5}{128}=1.39843\ldots\leq\sqrt{2}\leq1.39843\ldots+\frac{7}{256}=1.42578\ldots
+\]
+
+这个方法可用于计算区间 $ [0,2] $ 中数的平方根的近似值。
+一个简单的技巧可以把这种方法推广到大于 2 的数：
+为确定 $ a > 2 $ 的平方根，找出 $ m \in \mathbb{N} $ 使得 $ m^2 < a \leq 2m^2 $，并
+令 $ x := (a - m^2)/m^2 $。则 $ x \in (0,1) $ 且 $ a = m^2(1 + x) $。因此
+
+\[
+\sqrt{a}=m\sqrt{1+x}=m\Big(1+\frac{x}{2}-\frac{x^{2}}{8}+\frac{x^{3}}{16}\mp\cdots\Big),
+\]
+
+并且
+
+\[
+m\Big[1+\frac{x}{2}-x^{2}\sum_{k=0}^{2n}(-1)^{k}b_{k}x^{k}\Big]\leq\sqrt{a}\leq m\Big[1+\frac{x}{2}-x^{2}\sum_{k=0}^{2n+1}(-1)^{k}b_{k}x^{k}\Big].
+\]
+
+例如，$ \sqrt{10} $ 有级数展开
+
+\[
+\sqrt{10}=3\Big(1+\frac{1}{2\cdot9}-\frac{1}{8\cdot81}+\frac{1}{16\cdot729}-\frac{5}{128\cdot6561}\pm\cdots\Big)
+\]
+
+由此得到不等式
+
+\begin{equation*}
+\begin{aligned}
+3\Big(1+\frac{1}{18}-\frac{1}{648}+\frac{1}{11664}-\frac{5}{839808}\Big)&=3.16227637\cdots\leq\sqrt{10}\\&\leq3.16227637\cdots+\frac{21}{15116544}\\&=3.16227776\cdots
+\end{aligned}
+\end{equation*}
+
+作为比较，$ \sqrt{10} $ 的精确十进制展开以 3.162277660... 开头
+
+\item
+
+（$ \alpha = -1/2 $ 的情形）此时我们有
+
+\[
+\binom{-1/2}{k}=(-1)^{k}\frac{1\cdot3\cdot\cdots\cdot(2k-1)}{2\cdot4\cdot\cdots\cdot2k},\qquad k\geq2.
+\]
+
+由定理 3.10 我们得到
+
+\[
+\frac{1}{\sqrt{1+z}}=1-\frac{z}{2}+\sum_{k=2}^{\infty}(-1)^{k}\frac{1\cdot3\cdot\cdots\cdot(2k-1)}{2\cdot4\cdot\cdots\cdot2k}z^{k},\qquad z\in\bar{\mathbb{B}}_{\mathbb{C}}.
+\]
+
+若 $ |z| < 1 $，则 $ |-z^2| < 1 $，因此我们可以把 z 代换为 $ -z^2 $ 得到
+
+\begin{equation}
+\frac{1}{\sqrt{1-z^{2}}}=1+\frac{z^{2}}{2}+\sum_{k=2}^{\infty}\frac{1\cdot3\cdot\cdots\cdot(2k-1)}{2\cdot4\cdot\cdots\cdot2k}z^{2k},\qquad z\in\bar{\mathbb{B}}_{\mathbb{C}}.
+\end{equation}
+
+特别地，由命题 3.5 可得，函数 $ z \mapsto 1 / \sqrt{1 - z^2} $ 在 $ \mathbb{B}_{\mathbb{C}} $ 上解析。$ \blacksquare $
+
+\end{items}
+
+对实自变量，(3.8) 给出了反正弦函数的幂级数展开。
+
+\end{example}
+
+\begin{corollary}
+
+反正弦函数在 $ (-1,1) $ 上是实解析的，且
+
+\[
+\arcsin(x)=x+\sum_{k=1}^{\infty}\frac{1\cdot3\cdot\cdots\cdot(2k-1)}{2\cdot4\cdot\cdots\cdot2k}\frac{x^{2k+1}}{2k+1},\qquad x\in(-1,1).
+\]
+
+\proofhead
+由注 3.7(b) 与 (3.8)，
+\[
+F(x):=x+\frac{x^{3}}{2\cdot3}+\sum_{k=2}^{\infty}\frac{1\cdot3\cdot\cdots\cdot(2k-1)}{2\cdot4\cdot\cdots\cdot2k}\frac{x^{2k+1}}{2k+1},\qquad x\in(-1,1),
+\]
+
+是 $f: (-1,1) \to \mathbb{R}$，$x \mapsto 1/\sqrt{1-x^2}$ 的原函数。由于反正弦函数是 $f$ 的另一个原函数（应用 IV.2.10），且 $F(0) = 0 = \arcsin(0)$，由注 3.4(a) 可得 $F = \arcsin$。最后，命题 3.5 表明 $\arcsin$ 在 $(-1,1)$ 上解析。
+
+\end{corollary}
+
+\subsection*{解析函数的唯一性定理}
+
+作为本节的结尾，我们证明解析函数的一个重要整体性质：若解析函数在其区域 $D$ 的一个开子集上为零，则它在整个 $D$ 上为零。
+
+\begin{theorem}
+
+（解析函数的唯一性定理）设 $D$ 是 $\mathbb{K}$ 中的区域，$f \in C^\omega(D, \mathbb{K})$。若 $f$ 的零点集在 $D$ 中有极限点，则 $f$ 在 $D$ 上为零。
+
+\proofhead
+令
+\[
+Y:=\left\{x\in D\;;\;\exists\left(x_{n}\right)\text{ 在 }D\backslash\{x\}\text{ 中 }\text{ 使得 }\lim x_{n}=x\text{ 且 }f(x_{n})=0\text{ 对 }n\in\mathbb{N}\right\}
+\]
+
+由假设，$Y$ 非空。由于 $f$ 连续，对一切 $y \in Y$ 有 $f(y) = 0$。因此 $Y$ 的每个极限点都含于 $Y$，由命题 III.2.11，$Y$ 在 $D$ 中闭。设 $x_0 \in Y$。由于 $f$ 解析，存在 $x_0$ 在 $D$ 中的某个邻域 $V$ 与幂级数 $\sum a_k X^k$，使得对一切 $x \in V$ 有 $f(x) = \sum a_k (x - x_0)^k$。由于 $x_0$ 属于 $Y$，存在 $\mathbb{V}\setminus\{x_0\}$ 中的序列 $(y_n)$，使得 $y_n \to x_0$ 且对一切 $n \in \mathbb{N}$ 有 $f(y_n) = 0$。于是由幂级数的唯一性定理（推论 II.9.9）可得，对一切 $k \in \mathbb{N}$ 有 $a_k = 0$，即 $f$ 在 $V$ 上为零，且 $V$ 含于 $Y$。因此我们已经证明了 $Y$ 在 $D$ 中开。
+
+由于 Y 是区域 D 的非空开且闭的子集，而 D 连通，我们有 Y = D（见注 III.4.3）。■
+
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $D$ 是 $\mathbb{K}$ 中的区域，$f, g \in C^\omega(D, \mathbb{K})$。若存在在 $D$ 中收敛的序列 $(x_n)$，使得对一切 $n \in \mathbb{N}$ 有 $x_n \neq x_{n+1}$ 且 $f(x_n) = g(x_n)$，则 $f = g$。
+
+\proofhead
+函数 $ h := f - g $ 在 $ D $ 上解析，且 $ \lim x_n $ 是 $ h $ 的零点集在 $ D $ 中的极限点，因此结论由定理 3.13 得出。
+\item
+
+若 $D$ 在 $\mathbb{R}$ 中开，则 $C^\omega(D,\mathbb{R})$ 是 $C^\infty(D,\mathbb{R})$ 的真子代数。
+
+\proofhead
+由于可微性与解析性都是局部性质，我们可以假设 $D$ 是有界开区间。容易看出，对一切 $x_0 \in D$ 与 $f \in C^\omega(D,\mathbb{R})$，函数 $x \mapsto f(x-x_0)$ 在 $x_0 + D$ 上解析。因此只需考虑对某个 $a > 0$ 的 $D := (-a,a)$ 的情形。设 $f$ 是例 IV.1.17 中函数在 $D$ 上的限制。则 $f \in C^\infty(D,\mathbb{R})$ 且 $f|(-a,0) = 0$，但 $f \neq 0$。因此由 (a) 可得 $f$ 不是解析的。
+\item
+
+非零解析函数可能有无限多个零点，余弦函数即为一例。定理 3.13 只是说，这些零点在该函数的区域内不能有极限点。
+
+\item
+
+(b) 的证明表明，在实情形下，定理 3.13 中 $f$ 的解析性是必要的。在复情形下，情况完全不同。我们以后会看到，“复可微性”与“复解析性”这两个概念是相同的，因此对 $\mathbb{C}$ 的每个开子集 $D$，$C^1(D,\mathbb{C})$ 与 $C^\omega(D,\mathbb{C})$ 相同。
+
+\end{items}
+
+\end{remark}
+
+\begin{remark}
+
+假设 $D$ 在 $\mathbb{R}$ 中开且 $f: D \to \mathbb{R}$ 是（实）解析的。则对每个 $x \in D$，存在某个 $r_x > 0$ 使得
+
+\[
+f(y)=\sum_{k=0}^{\infty}\frac{f^{(k)}(x)}{k!}(y-x)^{k},\qquad y\in\mathbb{B}_{\mathbb{R}}(x,r_{x})\cap D.
+\]
+
+集合
+
+\[
+D_{\mathbb{C}}:=\bigcup_{x\in D}\mathbb{B}_{\mathbb{C}}(x,r_{x})
+\]
+
+是 $D$ 在 $\mathbb{C}$ 中的开邻域。由命题 3.5，对每个 $x \in D$，
+
+\[
+f_{\mathbb{C},x}(z):=\sum_{k=0}^{\infty}\frac{f^{(k)}(x)}{k!}(z-x)^{k},\qquad z\in\mathbb{B}_{\mathbb{C}}(x,r_{x}),
+\]
+
+在 $\mathbb{B}_{\mathbb{C}}(x,r_x)$ 上定义了一个解析函数。解析函数的唯一性定理蕴含，任意两个这样的函数 $f_{\mathbb{C},x}$ 与 $f_{\mathbb{C},y}$ 在其定义域的交上相同。这意味着
+
+\[
+f_{\mathbb{C}}(z):=f_{\mathbb{C},x}(z),\qquad z\in\mathbb{B}_{\mathbb{C}}(x,r_{x}),\quad x\in D,
+\]
+
+定义了一个解析函数 $ f_{\mathbb{C}}: D_{\mathbb{C}} \to \mathbb{C} $，使得 $ f_{\mathbb{C}} \supseteq f $。函数 $ f_{\mathbb{C}} $ 称为 $ f $ 在 $ D_{\mathbb{C}} $ 上的解析延拓。
+
+现在假设 $D$ 在 $\mathbb{C}$ 中开。令 $D_{\mathbb{R}} := D \cap \mathbb{R} \neq \emptyset$。若 $f \in C^\omega(D, \mathbb{C})$ 且 $f(D_{\mathbb{R}}) \subseteq \mathbb{R}$，则 $f|D_{\mathbb{R}}$ 是实解析的。
+
+这些考虑表明，在我们对解析函数的进一步研究中，我们可以局限于复情形。■
+
+\end{remark}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $D$ 在 $\mathbb{C}$ 中开，$D_{\mathbb{R}} := D \cap \mathbb{R} \neq \emptyset$，且 $f \in C^\omega(D, \mathbb{C})$。证明下列结论：
+
+\begin{items}
+\item
+
+(Re $f$) | $D_{\mathbb{R}}$ 与 (Im $f$) | $D_{\mathbb{R}}$ 是实解析的。
+
+\item
+
+设 $ f = \sum a_k(X - x_0)^k $ 是 $ f $ 在 $ x_0 \in D_R $ 处的幂级数展开，收敛半径为 $ \rho > 0 $。令 $ \widetilde{D} := D_R \cap (x_0 - \rho, x_0 + \rho) $。则下列各条等价：
+
+\end{items}
+
+\begin{subitems}
+\item
+
+$ f|\tilde{D} \in C^{\omega}(\tilde{D}, \mathbb{R}) $。
+
+\item
+
+对每个 $ k \in \mathbb{N} $ 有 $ a_k \in \mathbb{R} $。
+
+\end{subitems}
+
+\item
+
+假设 $ f \in C^\omega(D, \mathbb{K}) $ 没有零点。证明 $ 1/f $ 也是解析的。
+
+（提示：利用习题 II.9.9 的带余除法。）
+
+\item
+
+由下式定义 $h: \mathbb{C} \to \mathbb{C}$：
+
+\begin{equation*}
+h(z):=\left\{\begin{array}{c l}{(e^{z}-1)/z\;,}&{\quad z\in\mathbb{C}^{\times}\;,}\\ {1\;,}&{\quad z=0\;.}\\ \end{array}\right.
+\end{equation*}
+\end{exercises}
+
+\begin{proof}
+
+$ h \in C^\omega(\mathbb{C}, \mathbb{C}) $，且若 $ |z| < 1/(e - 1) $ 则 $ h(z) \neq 0 $。
+
+（提示：关于解析性，考虑级数 $ \sum X^k/(k+1)! $。由注 II.8.2(c)，我们得到不等式
+
+\[
+|h(z)|=\left|\frac{e^{z}-1}{z}\right|\geq1-\sum_{k=1}^{\infty}\frac{|z|^{k}}{(k+1)!}
+\]
+
+对一切 $ z \in \mathbb{C} $。）
+
+\end{proof}
+
+\begin{exercises}
+\item[4.]
+
+设 $ h: \mathbb{C} \to \mathbb{C} $ 同习题 3。由习题 2 与习题 3，函数 $ 1/h $ 在 $ \mathbb{B}(0,1/(e-1)) $ 上解析，因此存在 $ \rho > 0 $ 与 $ B_k \in \mathbb{C} $ 使得
+
+\[
+\frac{1}{h}=\sum_{k=0}^{\infty}\frac{B_{k}}{k!}z^{k},\qquad z\in\rho\mathbb{B}.
+\]
+
+计算 $B_{0},\ldots,B_{10}$，并证明所有的 $B_{k}$ 都是有理数。
+
+\item[5.]
+
+假设 $D$ 是 $\mathbb{C}$ 中的区域，$f \in C^\omega(D,\mathbb{C})$ 满足下列条件之一：
+
+\begin{subitems}
+\item
+
+Re f = const.
+
+\item
+
+$ \mathrm{Im} f = \mathrm{const} $
+
+\item
+
+$ \overline{f} \in C^\omega(D, \mathbb{C}) $。
+
+\item
+
+$ |f| = \mathrm{const}. $
+
+\end{subitems}
+
+\end{exercises}
+
+\begin{proof}
+
+$f$ 是常数。（提示：(i) 利用适当的差商证明 $f'(z) \in i\mathbb{R} \cap \mathbb{R}$。(iii) $2\operatorname{Re}f = f + \overline{f}$ 与 (i)。(iv) $|f|^2 = f\overline{f}$ 与习题 2。）
+
+\end{proof}
+
+\begin{exercises}
+\item[6.]
+
+设 $ f \in C^\omega(\rho\mathbb{B}) $ 对某个 $ \rho > 0 $ 在 $ \rho\mathbb{B} $ 上由 $ \sum a_k X^k $ 表示。假设 $ (x_n) $ 是 $ (\rho\mathbb{B})\setminus\{0\} $ 中的零序列。证明下列各条等价：
+
+\begin{subitems}
+\item
+
+f 是偶函数。
+
+\item
+
+$ f(x_n) = f(-x_n), \ n \in \mathbb{N} $。
+
+\item
+
+$ a_{2m+1}=0 $，$ m\in\mathbb{N} $。
+对 $ \rho\mathbb{B} $ 上的奇解析函数给出类似的刻画。
+
+\end{subitems}
+
+\item[7.]
+
+证明公式 (3.4)。
+
+\item[8.]
+
+证明
+
+\[
+\binom{\alpha+\beta}{k}=\sum_{\ell=0}^{k}\binom{\alpha}{\ell}\binom{\beta}{k-\ell}
+\]
+
+对一切 $ \alpha, \beta \in \mathbb{C} $ 与 $ k \in \mathbb{N} $。
+
+\item[9.]
+
+验证下列函数
+
+\begin{items}
+\item
+
+$ \sinh: \mathbb{C} \to \mathbb{C} $、$ \cosh: \mathbb{C} \to \mathbb{C} $、$ \tanh: \mathbb{C} \setminus i\pi(\mathbb{Z} + 1/2) \to \mathbb{C} $；
+
+\item
+
+$ \tan: \mathbb{C} \backslash \pi(\mathbb{Z} + 1/2) \to \mathbb{C} $、$ \cot: \mathbb{C} \backslash \pi\mathbb{Z} \to \mathbb{C} $；
+是解析的。（提示：利用命题 3.8。）
+
+\end{items}
+
+\item[10.]
+
+证明函数
+
+\[
+\ln(\cos)\ ,\quad\ln(\cosh)\ ,\quad x\mapsto\ln^{2}(1+x)
+\]
+
+在 0 的邻域内解析。它们在 0 处的相应幂级数展开是什么？（提示：先求导数的幂级数展开。）
+
+\item[11.]
+
+证明，对 $ x \in [-1, 1] $，
+
+\[
+\arctan x=\sum_{k=0}^{\infty}(-1)^{k}\frac{x^{2k+1}}{2k+1}=x-\frac{x^{3}}{3}+\frac{x^{5}}{5}-\frac{x^{7}}{7}+\cdots\ ,
+\]
+
+并由此（莱布尼茨公式）
+
+\[
+\frac{\pi}{4}=\sum_{k=0}^{\infty}\frac{(-1)^{k}}{2k+1}=1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\cdots\;.
+\]
+
+（提示：$ \arctan' x = 1/(1 + x^2) $。对 $ x = \pm 1 $，收敛性由莱布尼茨判别法（定理 II.7.8）得出。）
+
+\end{exercises}
+
+\section{多项式逼近}
+
+解析函数可由幂级数局部表示，因此在给定点  $ x_{0} $ 附近，它能够被多项式以任意精度逼近，也就是说，只要允许多项式具有足够高的次数，并把逼近限制在该点  $ x_{0} $ 的充分小的邻域内，误差就可以任意小。这里的逼近多项式，即泰勒多项式，由待逼近函数及其各阶导数在该点  $ x_{0} $ 处的值显式给出。此外，逼近误差可以利用泰勒级数余项的各种公式加以控制。这一事实正是泰勒定理之所以极为重要的原因，尤其是对于研究函数逼近与方程求解的有效算法的数值数学而言。
+
+本节研究用多项式对函数作整体逼近的问题。本节的主要结果，斯通–魏尔斯特拉斯定理，保证了对于  $ \mathbb{R}^n $ 的紧致子集上的任意连续函数，这样的多项式是存在的。
+
+\subsection*{巴拿赫代数}
+
+一个代数 A，如果它同时也是一个巴拿赫空间，并且满足
+
+\[
+\left\| \mathbf{a} \mathbf{b} \right\|\leq \left\| \mathbf{a} \right\| \left\| \mathbf{b} \right\| ~, \quad \mathbf{a},\mathbf{b}\in \mathbf{A}~,
+\]
+
+则称其为巴拿赫代数。如果  $ A $ 含有单位元  $ e $，我们还要求  $ \|e\| = 1 $。
+
+\begin{example}
+
+\begin{items}
+\item
+
+设 $X$ 为非空集合。则 $B(X,\mathbb{K})$ 是一个以 1 为单位元的巴拿赫代数。
+
+\proofhead
+由定理 II.6.6 我们知道  $ B(X,\mathbb{K}) $ 是巴拿赫空间。此外
+\begin{equation*}
+\begin{array}{r}{\|f g\|_{\infty}=\underset{x\in X}{\operatorname*{s u p}}|f(x)g(x)|\leq\underset{x\in X}{\operatorname*{s u p}}|f(x)|\underset{x\in X}{\operatorname*{s u p}}|g(x)|=\|f\|_{\infty}\left\|g\right\|_{\infty},\qquad f,g\in B(X,\mathbb{K}).}\end{array}
+\end{equation*}
+
+这表明  $ B(X, \mathbb{K}) $ 是  $ \mathbb{K}^X $ 的子代数。对于  $ \mathbb{K}^X $ 的单位元 1，我们有  $ \mathbf{1} \in B(X, E) $ 且  $ \|\mathbf{1}\|_{\infty} = 1 $。 $ \blacksquare $
+
+\item
+
+设 $X$ 为度量空间。则 $BC(X, \mathbb{K})$ 是 $B(X, \mathbb{K})$ 的一个含 1 的闭子代数，因而是具有单位元的巴拿赫代数。
+
+\proofhead
+由定理 2.6， $ BC(X, \mathbb{K}) $ 是  $ B(X, \mathbb{K}) $ 的闭子空间，从而它本身是一个巴拿赫空间。于是结论由 (a) 与命题 III.1.5 推出。■
+\item
+
+设 $X$ 为紧致度量空间。则 $C(X,\mathbb{K})$ 是一个以 1 为单位元的巴拿赫代数。
+
+\proofhead
+在定理 2.6 中我们已证得，在这种情形下巴拿赫空间  $ C(X, \mathbb{K}) $ 与  $ BC(X, \mathbb{K}) $ 相同。
+\item
+
+在巴拿赫代数  $ A $ 中，乘法运算  $ A \times A \to A $， $ (a, b) \mapsto ab $ 是连续的。
+
+\proofhead
+对于  $ A\times A $ 中所有的  $ (a,b) $ 与  $ (a_{0},b_{0}) $，我们有
+\[
+\left\|a b-a_{0}b_{0}\right\|\leq\left\|a-a_{0}\right\|\left\|b\right\|+\left\|a_{0}\right\|\left\|b-b_{0}\right\|,
+\]
+
+由此结论容易推出（参见例 III.1.3(m) 的证明）。■
+
+\item
+
+如果 $B$ 是巴拿赫代数 $A$ 的子代数，则 $\overline{B}$ 是巴拿赫代数。
+
+\proofhead
+对于 $a, b \in \overline{B}$，存在序列 $(a_n)$ 与 $(b_n)$ 使得在 $A$ 中 $a_n \to a$ 且 $b_n \to b$。由命题 II.2.2 与注 II.3.1(c) 可得
+\[
+a+\lambda b=\lim a_{n}+\lambda\lim b_{n}=\lim(a_{n}+\lambda b_{n})\in\overline{B}
+\]
+
+对所有的 $\lambda \in \mathbb{K}$ 成立。因此 $\overline{B}$ 是 $A$ 的闭子空间，从而也是一个巴拿赫空间。由 (d)，我们还有 $a_n b_n \to ab$，故 $ab$ 属于 $\overline{B}$。于是 $\overline{B}$ 是 $A$ 的子代数，因而是巴拿赫代数。
+
+\end{items}
+
+\end{example}
+
+\subsection*{稠密性与可分性}
+
+度量空间 $X$ 的子集 $D$ 在 $X$ 中稠密，如果 $\overline{D} = X$。如果一个度量空间含有一个可数稠密子集，则称其为可分的。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+下列各命题等价：
+
+\begin{subitems}
+\item
+
+D 在 X 中稠密。
+
+\item
+
+对于每个  $ x \in X $ 以及  $ x $ 的每个邻域  $ U $，我们有  $ U \cap D \neq \emptyset $。
+
+\item
+
+对于每个  $ x \in X $，存在  $ D $ 中的序列  $ (d_n) $ 使得  $ d_n \to x $。
+
+\end{subitems}
+
+\item
+
+假设  $ X_1, \ldots, X_m $ 是度量空间，且对于  $ 1 \leq j \leq m $， $ D_j $ 在  $ X_j $ 中稠密。则  $ D_1 \times \cdots \times D_m $ 在  $ X_1 \times \cdots \times X_m $ 中稠密。
+
+\proofhead
+这是 (a) 与例 II.1.8(e) 的直接推论。■
+\item
+
+稠密性与可分性的定义显然对一般拓扑空间也成立。(a) 中的命题 (i) 与 (ii) 在一般拓扑空间中彼此等价，但与 (iii) 不等价。
+
+\item
+
+设 X 与 Y 是度量空间，且  $ h: X \to Y $ 是同胚。则 D 在 X 中稠密当且仅当  $ h(D) $ 在 Y 中稠密。
+
+\proofhead
+这直接由 (a) 中的刻画 (ii) 以及同胚把邻域映成邻域这一事实（见习题 III.3.3）推出。■
+\end{items}
+
+\end{remark}
+
+\begin{example}
+
+\begin{items}
+\item
+
+Q 在  $ \mathbb{R} $ 中稠密。特别地， $ \mathbb{R} $ 是可分的。
+
+\proofhead
+这由命题 I.10.8 与 I.9.4 推出。
+\item
+
+无理数  $ \mathbb{R} \backslash Q $ 构成  $ \mathbb{R} $ 的稠密子集。
+
+\proofhead
+这在命题 I.10.11 中已证得。
+\item
+
+对于 X 的任意子集 A，A 在  $ \overline{A} $ 中稠密。
+
+\item
+
+Q + iQ 在 C 中稠密。特别地，C 是可分的。
+
+\proofhead
+这由 (a) 与注 4.2(b) 推出（另见注 II.3.13(e)）。
+\item
+
+任何有限维赋范向量空间都是可分的。特别地， $ \mathbb{K}^{n} $ 是可分的。
+
+\proofhead
+设 $V$ 是 $\mathbb{K}$ 上的赋范向量空间，且 $(b_1, \ldots, b_n)$ 是 $V$ 的一个基。由 (a) 与 (d)，$\mathbb{K}$ 是可分的。设 $D$ 是 $\mathbb{K}$ 的可数稠密子集，且
+\[
+V_{D}:=\left\{\textstyle\sum_{k=1}^{n}\alpha_{k}b_{k}\;;\;\alpha_{k}\in D\right\}.
+\]
+
+则 $V_{D}$ 是可数的，且在 $V$ 中稠密（见习题 6）。■
+
+\end{items}
+
+在下面的命题中，我们汇集了稠密性的几个有用的等价表述。
+
+\end{example}
+
+\begin{proposition}
+
+设 $X$ 为度量空间，$D \subseteq X$。则下列各命题等价：
+
+\begin{subitems}
+\item
+
+D 在 X 中稠密。
+
+\item
+
+如果 $A$ 是闭集且 $D \subseteq A \subseteq X$，则 $A = X$。因此 $X$ 是 $X$ 的唯一闭稠密子集。
+
+\item
+
+对于每个  $ x \in X $ 与  $ \varepsilon > 0 $，存在某个  $ y \in D $ 使得  $ d(x, y) < \varepsilon $。
+
+\item
+
+$D$ 的补集具有空的内部，即 $(D^{c})^{\circ} = \emptyset$。
+
+\proofhead
+‘(i)⇒(ii)’ 设 $A$ 为闭集且 $D \subseteq A \subseteq X$。由推论 III.2.13 可得 $X = \overline{D} \subseteq \overline{A} = A$，即 $A = X$。
+ $ ^(\text{ii}) \Rightarrow (\text{iii})' $ 我们用反证法。如果  $ x \in X $ 与  $ \varepsilon > 0 $ 使得  $ D \cap \mathbb{B}(x, \varepsilon) = \emptyset $，则  $ D \subseteq [\mathbb{B}(x, \varepsilon)]^c $。这与 ( $ \text{ii} $) 矛盾，因为  $ [\mathbb{B}(x, \varepsilon)]^c $ 是  $ X $ 的闭子集且  $ [\mathbb{B}(x, \varepsilon)]^c \neq X $。
+‘(iii)⇒(iv)’ 假设 $(D^c)^\circ$ 非空。由于 $(D^c)^\circ$ 是开集，存在 $x\in(D^c)^\circ$ 与 $\varepsilon>0$ 使得 $\mathbb{B}(x,\varepsilon)\subseteq(D^c)^\circ\subseteq D^c$。这蕴含 $D\cap\mathbb{B}(x,\varepsilon)=\emptyset$，与 (iii) 矛盾。
+ $ ^{‘}(iv)\Rightarrow(i) $ 由习题 III.2.5，对于  $ X $ 的任意子集  $ V $ 我们有  $ \mathring{V} = X \setminus \overline{(X \setminus V)} $。由 (iv) 可得
+\[
+\emptyset=(D^{c})^{\circ}=X\setminus\overline{{(D^{c})^{c}}}=X\setminus\overline{{D}}\;,
+\]
+
+即  $ \overline{D} = X $。证明完成。■
+
+\end{subitems}
+
+\end{proposition}
+
+当然，条件 (iii) 也与注 4.2(a) 的条件 (ii) 等价。
+
+\subsection*{斯通–魏尔斯特拉斯定理}
+
+作为证明斯通–魏尔斯特拉斯定理的准备，我们证明下面两个引理。
+
+\begin{lemma}
+\[
+|t|=\sum_{k=0}^{\infty}\binom{1/2}{k}(t^{2}-1)^{k},\qquad t\in[-1,1],
+\]
+
+且该级数在  $ [-1,1] $ 上依范数收敛。
+
+\proofhead
+对于  $ t \in [-1,1] $，设  $ x := t^2 - 1 $。则
+\[
+\left|t\right|=\sqrt{t^{2}}=\sqrt{1+t^{2}-1}=\sqrt{1+x},
+\]
+
+于是结论由定理 3.10 推出。
+
+\end{lemma}
+
+\begin{lemma}
+
+设 $X$ 为紧致度量空间，$A$ 是含 1 的 $C(X, \mathbb{R})$ 的闭子代数。如果 $f$ 与 $g$ 属于 $A$，则 $|f|$、$f \vee g$ 与 $f \wedge g$ 也属于 $A$。
+
+\proofhead
+设  $ f, g \in A $。由习题 I.8.11 我们有
+\[
+f\vee g=\frac{1}{2}(f+g+|f-g|),\quad f\wedge g=\frac{1}{2}(f+g-|f-g|).
+\]
+
+因此只需证明：如果 $f$ 属于 $A$，则 $|f|$ 也属于 $A$。此外，我们只需考虑 $f \neq 0$ 的情形。由引理 4.5 我们有
+
+\[
+\left||t|-\sum_{k=0}^{m}\binom{1/2}{k}(t^{2}-1)^{k}\right|\leq\sum_{k=m+1}^{\infty}\left|\binom{1/2}{k}\right|,\qquad t\in[-1,1],
+\]
+
+其中右边当  $ m \to \infty $ 时收敛到零。因此，对于每个  $ \varepsilon > 0 $，存在某个  $ P_\varepsilon \in \mathbb{R}[t] $ 使得
+
+\[
+\left|\left|t\right|-P_{\varepsilon}(t)\right|<\varepsilon/\|f\|_{\infty},\qquad t\in[-1,1].
+\]
+
+令  $ t := f(x)/\|f\|_\infty $，我们得到
+
+\[
+\|f\|_{\infty}\left|\left|f(x)/\|f\|_{\infty}\right|-P_{\varepsilon}\bigl(f(x)/\|f\|_{\infty}\bigr)\right|<\varepsilon,\qquad x\in X.
+\]
+
+定义 $g_\varepsilon := \| f \|_\infty P_\varepsilon(f/\| f\|_\infty)$。由于 $A$ 是含 $\mathbf{1}$ 的 $C(X, \mathbb{R})$ 的子代数，$g_\varepsilon$ 属于 $A$。因此我们已经证得：对于每个 $\varepsilon > 0$，存在某个 $g \in A$ 使得 $\big\|\|f\|-g\big\|_\infty < \varepsilon$。于是 $|f|$ 属于 $\overline{A}$。由假设，$A$ 是闭的，故结论成立。■
+
+\end{lemma}
+
+如果对于每个 $(x, y) \in X \times X$ 且 $x \neq y$，存在某个 $m \in M$ 使得 $m(x) \neq m(y)$，则称 $C(X, \mathbb{K})$ 的子集 $M$ 分离 $X$ 的点。如果 $m \in M$ 蕴含 $\overline{m} \in M$，则称集合 $M$ 是自伴的。\footnote{在实情形这一条件总成立：$C(X, \mathbb{R})$ 的任何子集都是自伴的。}
+
+经过这些准备，我们现在可以证明本节的主要定理了。
+
+\begin{theorem}
+
+（斯通–魏尔斯特拉斯定理）设 $X$ 为紧致度量空间，$A$ 是含 1 的 $C(X, \mathbb{K})$ 的子代数。如果 $A$ 分离 $X$ 的点且是自伴的，则 $A$ 在 $C(X, \mathbb{K})$ 中稠密。也就是说，对于每个 $f \in C(X, \mathbb{K})$ 与 $\varepsilon > 0$，存在某个 $a \in A$ 使得 $\|f - a\|_\infty < \varepsilon$。
+
+\proofhead
+我们分别证明  $ \mathbb{K} = \mathbb{R} $ 与  $ \mathbb{K} = \mathbb{C} $ 两种情形。
+
+\begin{items}
+\item
+
+假设  $ f \in C(X, \mathbb{R}) $ 且  $ \varepsilon > 0 $。
+
+\begin{subitems}
+\item
+
+我们断言，对于每一对  $ y, z \in X $，存在某个  $ h_{y,z} \in A $ 使得
+
+\begin{equation}
+h_{y,z}(y)=f(y)\quad\text{ 且 }\quad h_{y,z}(z)=f(z).
+\end{equation}
+
+事实上，如果 $y = z$，则常值函数 $h_{y,z} := f(y)\mathbf{1}$ 满足 (4.1)。如果 $y \neq z$，那么由于 $A$ 分离 $X$ 的点，存在某个 $g \in A$ 使得 $g(y) \neq g(z)$。现在定义
+
+\[
+h_{y,z}:=f(y)\mathbf{1}+\frac{f(z)-f(y)}{g(z)-g(y)}\big(g-g(y)\mathbf{1}\big)~.
+\]
+
+由于 $h_{y,z}$ 属于 $A$ 且 $h_{y,z}(y)=f(y)$ 与 $h_{y,z}(z)=f(z)$，故 (4.1) 成立。
+
+\item
+
+对于  $ y, z \in X $，设
+
+\[
+U_{y,z}:=\left\{x\in X;h_{y,z}(x)<f(x)+\varepsilon\right\},\quad V_{y,z}:=\left\{x\in X;h_{y,z}(x)>f(x)-\varepsilon\right\}.
+\]
+
+由于  $ h_{y,z} - f $ 连续，由例 III.2.22(c) 我们知道  $ U_{y,z} $ 与  $ V_{y,z} $ 在 X 中是开集。由 (4.1)， $ y $ 属于  $ U_{y,z} $ 且  $ z $ 属于  $ V_{y,z} $。现在固定某个  $ z \in X $。则  $ \{U_{y,z}, y \in X\} $ 是紧致空间 X 的开覆盖，故存在 X 中的  $ y_0, \ldots, y_m $ 使得  $ \bigcup_{j=0}^m U_{y_j,z} = X $。设
+
+\[
+h_{z}:=\min_{0\leq j\leq m}h_{y_{j},z}:=h_{y_{0},z}\wedge\cdots\wedge h_{y_{m},z}.
+\]
+
+由引理 4.6， $ h_{z} $ 属于  $ \overline{A} $。此外，我们有
+
+\begin{equation}
+h_{z}(x)<f(x)+\varepsilon,\qquad x\in X,
+\end{equation}
+
+因为对于每个  $ x \in X $，存在某个  $ j \in \{0, \ldots, m\} $ 使得  $ x \in U_{y_j,z} $。
+
+\item
+
+对于  $ z \in X $，令  $ V_z := \bigcap_{i=0}^{m} V_{y_i,z} $。则我们有
+
+\begin{equation}
+h_{z}(x)>f(x)-\varepsilon,\qquad x\in V_{z}.
+\end{equation}
+
+由 (4.1)，$\{V_z; z \in X\}$ 是 $X$ 的开覆盖。由于 $X$ 是紧致的，存在 $X$ 中的 $z_0, \ldots, z_n$ 使得 $X = \bigcup_{k=0}^n V_{z_k}$。设
+
+\[
+h:=\max_{0\leq k\leq n}h_{z_{k}}:=h_{z_{0}}\lor\cdots\lor h_{z_{n}}.
+\]
+
+则引理 4.6 与例 4.1(e) 表明 $h$ 属于 $\overline{A}$。此外，由 (4.2) 与 (4.3) 可得不等式
+
+\[
+f(x)-\varepsilon<h(x)<f(x)+\varepsilon,\qquad x\in X.
+\]
+
+于是  $ \|f - h\|_\infty < \varepsilon $。由于  $ h $ 属于  $ \overline{A} $，存在某个  $ a \in A $ 使得  $ \|h - a\|_\infty < \varepsilon $，从而  $ \|f - a\|_\infty < 2\varepsilon $。由于  $ \varepsilon > 0 $ 是任意的，结论现在由命题 4.4 推出。
+
+\end{subitems}
+
+\item
+
+设  $ K = C $。
+
+\end{items}
+
+\begin{subitems}
+\item
+
+设 $A_{\mathbb{R}}$ 为 $A$ 中所有实值函数的集合。则 $A_{\mathbb{R}}$ 是域 $\mathbb{R}$ 上的一个代数。因为 $A$ 是自伴的，对于每个 $f \in A$，函数 $\mathrm{Re}f = (f + \overline{f})/2$ 与 $\mathrm{Im}f = (f - \overline{f})/2$ 属于 $A_{\mathbb{R}}$。因此 $A \subseteq A_{\mathbb{R}} + iA_{\mathbb{R}}$。由于也有 $A_{\mathbb{R}} + iA_{\mathbb{R}} \subseteq A$，我们已证得 $A = A_{\mathbb{R}} + iA_{\mathbb{R}}$。
+
+\item
+
+假设 $y, z \in X$ 使得 $y \neq z$。因为 $A$ 分离 $X$ 的点，存在某个 $f \in A$ 使得 $f(y) \neq f(z)$，即要么 $\operatorname{Re} f(y) \neq \operatorname{Re} f(z)$ 要么 $\operatorname{Im} f(y) \neq \operatorname{Im} f(z)$。因此 $A_{\mathbb{R}}$ 也分离 $X$ 的点。利用 (a) 中已证的结果，我们现在有 $C(X, \mathbb{R}) = \overline{A}_{\mathbb{R}}$，从而
+
+\begin{equation}
+\overline{{A}}\subseteq C(X,\mathbb{C})=C(X,\mathbb{R})+i C(X,\mathbb{R})=\overline{{A}}_{\mathbb{R}}+i\overline{{A}}_{\mathbb{R}}~.
+\end{equation}
+\item
+
+最后，设  $ f \in \overline{A}_{\mathbb{R}} + i\overline{A}_{\mathbb{R}} $。则存在  $ g, h \in \overline{A}_{\mathbb{R}} $ 使得  $ f = g + ih $，从而存在  $ A $ 中的序列  $ (g_k) $ 与  $ (h_k) $ 使得在  $ C(X, \mathbb{R}) $ 中  $ g_k \to g $ 且  $ h_k \to h $。由于序列  $ (g_k + ih_k) $ 在  $ C(X, \mathbb{C}) $ 中收敛到  $ g + ih = f $，这蕴含  $ f $ 属于  $ \overline{A} $，从而  $ C(X, \mathbb{C}) = \overline{A}_{\mathbb{R}} + i\overline{A}_{\mathbb{R}} \subseteq \overline{A} $。这连同 (4.4) 一起完成了证明。
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{corollary}
+
+设  $ M \subseteq \mathbb{R}^n $ 是紧致的。
+
+\begin{items}
+\item
+
+$M$ 上任何连续的  $\mathbb{K}$ 值函数都可以用一个  $n$ 元多项式一致逼近，也就是说， $\mathbb{K}[X_1, \ldots, X_n] \mid M$ 在  $C(M, \mathbb{K})$ 中稠密。
+
+\item
+
+巴拿赫空间  $C(M, \mathbb{K})$ 是可分的。
+
+\proofhead
+(a) 设  $A := \mathbb{K}[X_1, \ldots, X_n] | M$。则  $A$ 显然是含 1 的  $C(M, \mathbb{K})$ 的子代数。此外， $A$ 分离  $M$ 的点且是自伴的（见习题 7）。于是结论由斯通–魏尔斯特拉斯定理推出。
+\end{items}
+
+(b) 如果  $\mathbb{K} = \mathbb{R}$，则  $\mathbb{Q}[X_1, \ldots, X_n] \mid M$ 是  $C(M, \mathbb{R})$ 的可数稠密子集。如果  $\mathbb{K} = \mathbb{C}$，则  $(\mathbb{Q} + i\mathbb{Q})[X_1, \ldots, X_n] \mid M$ 具有所需性质。
+
+\end{corollary}
+
+\begin{corollary}
+
+（魏尔斯特拉斯逼近定理）设  $-\infty < a < b < \infty$。则对于每个  $f \in C([a, b], \mathbb{K})$ 与  $\varepsilon > 0$，存在一个系数在  $\mathbb{K}$ 中的多项式  $p$ 使得对所有  $x \in [a, b]$ 有  $|f(x) - p(x)| < \varepsilon$。
+
+利用斯通–魏尔斯特拉斯定理，我们可以容易地构造一个不完备的赋范向量空间的例子。
+
+\end{corollary}
+
+\begin{example}
+
+\begin{items}
+\item
+
+设 I 为紧致完全区间， $\mathcal{P}$ 是  $C(I)$ 中由 I 上所有（多项式的限制）组成的子代数。则  $\mathcal{P}$ 是赋范向量空间，但不是巴拿赫空间。
+
+\proofhead
+由推论 4.9， $\mathcal{P}$ 在  $C(I)$ 中稠密。由于  $ \exp |X $\ 属于  $ C(I) $，但不属于  $ \mathcal{P} $， $\mathcal{P}$ 是  $C(I)$ 的真子空间。由命题 4.4 可得  $\mathcal{P}$ 不是闭的，因而不完备。 $ \blacksquare $
+\item
+
+设 I 为紧致区间，且  $ \epsilon := \exp |I $。则
+
+\[
+{A}:=\left\{\left.\sum_{k=0}^{n}a_{k}\epsilon^{k}\right.~;~a_{k}\in\mathbb{K},~n\in\mathbb{N}\right\}
+\]
+
+是 $C(I, \mathbb{K})$ 的稠密子代数。因此 $I$ 上任何连续函数都可以被形如 $t \mapsto \sum_{k=0}^{n} a_k e^{tk}$ 的“指数函数的和”一致逼近。
+
+\proofhead
+显然  $A$ 是  $C(I, \mathbb{K})$ 的子代数且  $\mathbf{1} \in A$。由于当  $s \neq t$ 时  $\epsilon(s) \neq \epsilon(t)$， $A$ 分离  $I$ 的点。由于  $A$ 是自伴的，结论由定理 4.7 推出。 $ \blacksquare $
+\item
+
+设  $S := S^1 := \{ z \in \mathbb{C} ; \, |z| = 1 \}$，且对于  $z \in S$ 设  $\chi(z) := z$。定义
+
+\[
+\mathcal{P}(S):=\mathcal{P}(S,\mathbb{C}):=\left\{\textstyle\sum_{k=-n}^{n}c_{k}\chi_{k}\;;\;c_{k}\in\mathbb{C},\;n\in\mathbb{N}\right\}
+\]
+
+其中对于所有  $k \in \mathbb{Z}$ 有  $\chi_k := \chi^k$。则  $\mathcal{P}(S)$ 是  $C(S) := C(S, \mathbb{C})$ 的稠密子代数。
+\textbf{证明} 显然， $\mathcal{P} := \mathcal{P}(S)$ 是含  $\mathbf{1} \in \mathcal{P}$ 的  $C(S)$ 的子代数。因为当  $z \neq w$ 时  $\chi(z) \neq \chi(w)$， $\mathcal{P}$ 分离  $S$ 的点，并且由于  $\overline{\chi}_k = \chi_{-k}$， $\mathcal{P}$ 是自伴的。于是结论再次由定理 4.7 推出。 $ \blacksquare $
+
+\end{items}
+
+斯通–魏尔斯特拉斯定理的极大一般性是以非构造性证明为代价得到的。在经典魏尔斯特拉斯逼近定理的背景下，也就是用多项式对连续函数作一致逼近，逼近多项式的构造有一个显式的方法（见习题 11 与 12）。
+
+\end{example}
+
+\subsection*{三角多项式}
+
+我们再次考虑例 4.10(c)，作代换  $z = e^{it}$，其中  $t \in \mathbb{R}$。则对于所有  $k \in \mathbb{N}$ 与  $c_k, c_{-k} \in \mathbb{C}$，欧拉公式 (III.6.1) 蕴含
+
+\[
+c_{k}z^{k}+c_{-k}z^{-k}=\left(c_{k}+c_{-k}\right)\cos(k t)+i\left(c_{k}-c_{-k}\right)\sin(k t).
+\]
+
+令
+
+\begin{equation}
+a_{k}:=c_{k}+c_{-k},\quad b_{k}:=i(c_{k}-c_{-k})
+\end{equation}
+
+我们可以把  $p := \sum_{k=-n}^{n} c_k \chi_k \in \mathcal{P}(S)$ 写成
+
+\begin{equation}
+p(e^{i t})=\frac{a_{0}}{2}+\sum_{k=1}^{n}\left[a_{k}\cos(k t)+b_{k}\sin(k t)\right].
+\end{equation}
+
+这启示出如下定义：对于  $n \in \mathbb{N}$ 与  $a_k, b_k \in \mathbb{K}$，函数
+
+\begin{equation}
+T_{n}\colon\mathbb{R}\to\mathbb{K},\quad t\mapsto\frac{a_{0}}{2}+\sum_{k=1}^{n}\bigl[a_{k}\operatorname{c o s}(k t)+b_{k}\operatorname{s i n}(k t)\bigr]
+\end{equation}
+
+称为（K 值）三角多项式。如果  $\mathbb{K} = \mathbb{R}$（或  $\mathbb{K} = \mathbb{C}$），则称  $T_n$ 为\textbf{实}的（或 \textbf{复}的）。如果  $(a_n, b_n) \neq (0, 0)$，则  $T_n$ 是  $n$ 次三角多项式。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设
+
+\begin{equation*}
+\begin{array}{r}{\mathcal{P}(S,\mathbb{R}):=\big\{p=\sum_{k=-n}^{n}c_{k}\chi_{k}\;;\;c_{-k}=\overline{{c}}_{k},\;-n\le k\le n,\;n\in\mathbb{N}\big\}.}\end{array}
+\end{equation*}
+
+则  $\mathcal{P}(S,\mathbb{R}) = \mathcal{P}(S,\mathbb{C}) \cap C(S,\mathbb{R})$，且  $\mathcal{P}(S,\mathbb{R})$ 是  $C(S,\mathbb{R})$ 的实子代数。
+
+\proofhead
+对于  $p \in \mathcal{P}(S, \mathbb{R})$ 我们有
+\[
+\overline{{\boldsymbol{p}}}=\sum_{k=-n}^{n}\overline{{\boldsymbol{c}}}_{k}\overline{{\boldsymbol{\chi}}}_{k}=\sum_{k=-n}^{n}\boldsymbol{c}_{-k}\boldsymbol{\chi}_{-k}=\boldsymbol{p}.
+\]
+
+这表明  $\mathcal{P}(S,\mathbb{R}) \subseteq \mathcal{P}(S) \cap C(S,\mathbb{R})$。如果  $p \in \mathcal{P}(S)$ 是实值的，则由  $\overline{\chi}_k = \chi_{-k}$ 可得
+
+\[
+\sum_{k=-n}^{n}\overline{c}_{k}\chi_{-k}=\overline{p}=p=\sum_{k=-n}^{n}c_{k}\chi_{k}=\sum_{k=-n}^{n}c_{-k}\chi_{-k},
+\]
+
+即
+
+\begin{equation}
+\sum_{k=-n}^{n}(c_{-k}-\overline{c}_{k})\chi_{-k}=0.
+\end{equation}
+
+由于  $\chi_{-n}$ 无处为零，由  $\chi_{-k} = \chi_{-n} \chi_{n-k}$ 可得 (4.8) 等价于
+
+\begin{equation}
+\varphi:=\sum_{k=0}^{2n}a_{k}\chi_{k}=0
+\end{equation}
+
+其中对于所有  $-n \leq k \leq n$ 有  $a_{n-k} := c_{-k} - \overline{c}_k$。由于  $\varphi$ 是多项式在  $S$ 上的限制，由多项式的唯一性定理（注 I.8.19(c)）可得对所有  $0 \leq k \leq 2n$ 有  $a_k = 0$。因此  $p$ 属于  $\mathcal{P}(S, \mathbb{R})$，这证明了第一个断言。第二个断言现在是显然的。 $ \blacksquare $
+
+\item
+
+设  $\mathcal{TP}(\mathbb{R},\mathbb{K})$ 是所有 K 值三角多项式的集合。则  $\mathcal{TP}(\mathbb{R},\mathbb{K})$ 是  $\mathcal{BC}(\mathbb{R},\mathbb{K})$ 的子代数，且
+
+\[
+\mathrm{c i s}^{*}:{\mathcal{P}}(S,{\mathbb{K}})\to T{\mathcal{P}}({\mathbb{R}},{\mathbb{K}}),\quad p\mapsto p\circ\mathrm{c i s}
+\]
+
+是一个代数同构。
+
+\proofhead
+由 (4.5)、(4.6) 与 (a) 容易推出函数 cis* 是良定义的。 $\mathcal{TP}(\mathbb{R}, \mathbb{K})$ 是  $BC(\mathbb{R}, \mathbb{K})$ 的子空间且 cis* 是线性单射也是显然的。设  $T_n \in \mathcal{TP}(\mathbb{R}, \mathbb{K})$ 如 (4.7) 中所示，并设  $p := \sum_{k=-n}^{n} c_k \chi_k$，其中
+\begin{equation}
+c_{0}:=a_{0}/2~,\quad c_{k}:=(a_{k}-i b_{k})/2~,\quad c_{-k}:=(a_{k}+i b_{k})/2~,\qquad1\leq k\leq n~.
+\end{equation}
+
+则由 (a) 可得 $p$ 属于 $\mathcal{P}(S,\mathbb{K})$，且 (4.5) 与 (4.6) 蕴含 $T_n = p \circ \mathrm{cis}$。因此 $\mathrm{cis}^*$ 是满射，从而也是向量空间同构。此外
+
+\[
+\mathrm{c i s}^{*}(p q)=(p q)\circ\mathrm{c i s}=(p\circ\mathrm{c i s})(q\circ\mathrm{c i s})=(\mathrm{c i s}^{*}p)(\mathrm{c i s}^{*}q)~,\qquad p,q\in\mathcal{P}(S,\mathbb{K})~,
+\]
+
+因此 cis $ ^{*} $： $\mathcal{P}(S,\mathbb{K}) \to BC(\mathbb{R},\mathbb{K})$ 是代数同态。由此可得， $\mathcal{TP}(\mathbb{R},\mathbb{K})$，即  $\mathcal{P}(S,\mathbb{K})$ 在 cis $ ^{*} $ 下的像，是  $BC(\mathbb{R},\mathbb{K})$ 的子代数，且 cis $ ^{*} $ 是从  $\mathcal{P}(S,\mathbb{K})$ 到  $\mathcal{TP}(\mathbb{R},\mathbb{K})$ 的同构。 $ \blacksquare $
+
+\item
+
+子代数  $\mathcal{TP}(\mathbb{R},\mathbb{K})$ 在  $BC(\mathbb{R},\mathbb{K})$ 中不稠密。
+
+\proofhead
+通过如下方式定义  $f \in BC(\mathbb{R}, \mathbb{K})$：
+\begin{equation*}
+f(t):=\left\{\begin{array}{r l}{-2\pi~,}&{\quad-\infty<t<-2\pi~,}\\ {t,}&{\quad-2\pi\leq t\leq2\pi~,}\\ {2\pi,}&{\quad2\pi<t<\infty~.}\end{array}\right.
+\end{equation*}
+
+假设与断言相反，$\mathcal{TP}(\mathbb{R},\mathbb{K})$ 在 $BC(\mathbb{R},\mathbb{K})$ 中稠密。则存在某个 $T\in\mathcal{TP}(\mathbb{R},\mathbb{K})$ 使得 $\|f-T\|_\infty<2\pi$。特别地，$|T(2\pi)-f(2\pi)|<2\pi$，从而 $T(2\pi)>0$。由于 $T(2\pi)=T(0)=T(-2\pi)$ 且 $f(-2\pi)=-2\pi$，这蕴含
+
+\[
+|T(-2\pi)-f(-2\pi)|=|T(2\pi)+2\pi|>2\pi,
+\]
+
+这与  $\|f - T\|_{\infty} < 2\pi$ 矛盾。■
+
+\end{items}
+
+由例 4.1(e)， $\mathcal{TP}(\mathbb{R},\mathbb{K})$ 在  $BC(\mathbb{R},\mathbb{K})$ 中的闭包是一个巴拿赫代数。下面我们证明，这个巴拿赫代数恰好就是  $\mathbb{R}$ 上连续的  $2\pi$ 周期 K 值函数代数。
+
+\end{remark}
+
+\subsection*{周期函数}
+
+首先我们证明周期函数的几个一般性质。设 $M$ 为集合且 $p \neq 0$。则如果对所有 $t \in \mathbb{R}$ 有 $f(t + p) = f(t)$，就称 $f: \mathbb{R} \to M$ 为以 $p$ 为周期的\footnote{这是推论 III.6.14 的脚注中所给定义的特殊情形。}（或简称为 $p$ 周期的）。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+一个 $p$ 周期函数完全由它限制在任何长度为 $p$ 的区间上的限制所确定。
+
+\item
+
+设  $f: \mathbb{R} \to M$ 是 $p$ 周期的，且  $q > 0$。则函数
+
+\[
+\mathbb{R}\to M\;,\quad t\mapsto f(t p/q)
+\]
+
+是 $q$ 周期的。因此，对于固定周期 $p$ 的周期函数的研究，只需考虑  $p = 2\pi$ 的情形。
+
+\item
+
+设  $\mathrm{Funct}_{2\pi}(\mathbb{R}, M)$ 是从  $\mathbb{R}$ 到  $M$ 的  $2\pi$ 周期函数的集合。则
+
+\[
+\mathrm{c i s}^{*}\colon M^{S}\to\mathrm{F u n c t}_{2\pi}({\mathbb R},M)~,\quad g\mapsto g\circ\mathrm{c i s}
+\]
+
+是双射。利用这个双射，我们可以把  $2\pi$ 周期函数与单位圆上的函数集合等同起来。
+
+\proofhead
+由于 cis： $\mathbb{R} \to S$ 以  $2\pi$ 为周期，对于每个  $g \in M^S$，函数  $g \circ \mathrm{cis}$ 也是  $2\pi$ 周期的。由命题 III.6.15， $\varphi := \mathrm{cis} \mid [0, 2\pi)$ 是从  $[0, 2\pi)$ 到  $S$ 的双射。因此，对于  $f \in \mathrm{Funct}_{2\pi}(\mathbb{R}, M)$， $g := f \circ \varphi^{-1}$ 是从  $S$ 到  $M$ 的良定义函数，且  $g \circ \mathrm{cis} = f$。于是  $\mathrm{cis}^*$ 是双射。 $ \blacksquare $
+\item
+
+假设 $M$ 是度量空间，$f \in C(\mathbb{R}, M)$ 是周期且非常数的。则 $f$ 有最小正周期 $p$，即 $\text{最小的}$ 周期，且 $p\mathbb{Z}^\times$ 是 $f$ 的全部周期之集。
+
+\proofhead
+对于 $t \in \mathbb{R}$，令 $P_t := \left\{ p \in \mathbb{R} ; f(t+p) = f(t) \right\}$ 且 $P := \bigcap_{t \in \mathbb{R}} P_t$。则 $P \setminus \{0\}$ 是 $f$ 的全部周期之集。由于 $f$ 连续，函数 $p \mapsto f(t+p)$ 在 $\mathbb{R}$ 上也连续。因为 $P_t$ 是函数 $p \mapsto f(t+p)$ 在点 $f(t)$ 处的纤维，由例 III.2.22(a) 可得 $P_t$ 在 $\mathbb{R}$ 中是闭集。因此 $P$，作为闭集的交，本身也是闭的。此外，由于 $f$ 是周期的，$P \neq \{0\}$，又由于 $f$ 非常数，$P \neq \mathbb{R}$。对于 $p_1, p_2 \in P$，对所有 $t \in \mathbb{R}$ 我们有 $f(t + p_1 - p_2) = f(t + p_1) = f(t)$，这意味着 $p_1 - p_2$ 属于 $P$。在此令 $p_1 = 0$，我们看到：如果 $p$ 属于 $P$，则 $-p$ 也属于 $P$。把 $p_2$ 换成 $-p_2$，我们看到 $p_1 + p_2 \in P$。因此 $P$ 是 $(\mathbb{R}, +)$ 的闭子群。
+因为 $P \neq \mathbb{R}$，$P$ 中必有最小正元素 $p_0$。否则，对于每个 $\varepsilon > 0$，会存在某个 $p \in P \cap (0, \varepsilon)$，从而对于每个 $s \in \mathbb{R}$，存在某个 $k \in \mathbb{Z}$ 使得 $|s - kp| < \varepsilon$。于是 $P$ 会在 $\mathbb{R}$ 中稠密，由命题 4.4 这会蕴含 $P = \mathbb{R}$。显然 $p_0 \mathbb{Z}$ 是 $P$ 的子群。假设 $q \in P \setminus p_0 \mathbb{Z}$ 且不失一般性 $q > 0$。则存在 $r \in (0, p_0)$ 与 $k \in \mathbb{N}^*$ 使得 $q = kp_0 + r$。由此可得 $r = q - kp_0 \in P$，这与 $p_0$ 的最小性矛盾。这表明 $P = p_0 \mathbb{Z}$。\footnote{这一证明表明，若 $ G $ 是 $ (\mathbb{R}, +) $ 的闭子群，则或者 $ G = \{0\} $，或者 $ G = (\mathbb{R}, +) $，或者 $ G $ 是无限\textbf{循环}群（即由单个元素生成的无限群）。}$ \blacksquare $
+\end{items}
+
+设 M 为度量空间，且
+
+\[
+C_{2\pi}(\mathbb{R},M):=\bigl\{f\in C(\mathbb{R},M)\;;\ f\text{ 是 }2\pi\text{-周期的}\bigr\}.
+\]
+
+下面的讨论表明，注 4.11(b) 中的函数 cis $ ^{*} $ 在  $C(S, \mathbb{K})$ 上有连续延拓。这一结果是注 4.12(c) 的一个相当大的加强
+
+，蕴含我们可以把连续的  $2\pi$ 周期函数与 S 上的连续函数等同起来。
+
+\end{remark}
+
+\begin{proposition}
+
+如果 $M$ 是度量空间，则 cis* 是从 $C(S,M)$ 到 $C_{2\pi}(\mathbb{R},M)$ 的双射。
+
+\proofhead
+由注 4.12(c) 与 cis 的连续性可得，cis* 是从 $C(S,M)$ 到 $C_{2\pi}(\mathbb{R},M)$ 的单射。由于 cis* 是从 $M^S$ 到 $\operatorname{Funct}_{2\pi}(\mathbb{R},M)$ 的双射，只需证明：对于所有 $f\in C_{2\pi}(\mathbb{R},M)$，函数 $(\mathrm{cis}^*)^{-1}(f)$ 在 $S$ 上连续。首先注意到，对于所有 $\varphi=\mathrm{cis}\mid[0,2\pi)$，我们有 $\varphi^{-1}=\arg|S$。由习题 III.6.9 可得，$\varphi^{-1}$ 把集合 $S^\bullet:=S\backslash\{-1\}$ 连续地映到 $(-\pi,\pi)$ 中。因此 $g:=(\mathrm{cis}^*)^{-1}(f)=f\circ\varphi^{-1}$ 把集合 $S^\bullet$ 连续地映到 $M$ 中。当 $t\in(-\pi,\pi)$ 趋于 $\pm\pi$ 时，我们有 $\mathrm{cis}(t)\to-1$，故 $f$ 的 $2\pi$ 周期性蕴含
+\[
+\lim_{z\to-1\atop z\in S^\bullet}g(z)=f(\pi)=(\mathrm{cis}^{*})^{-1}(f)(-1).
+\]
+
+于是  $(cis^{*})^{-1}(f)$ 在 S 上连续。■
+
+\end{proposition}
+
+\qyxffntextdef{1}{自然，在向量空间的情形，“同构”是指“向量空间同构”。}
+\begin{corollary}
+
+设  $E := (E, |\cdot|)$ 为巴拿赫空间。则  $C_{2\pi}(\mathbb{R}, E)$ 是巴拿赫空间  $BC(\mathbb{R}, E)$ 的闭子空间，从而是一个具有最大值范数
+
+\[
+\|f\|_{C_{2\pi}}:=\max_{-\pi\leq t\leq\pi}|f(t)|,
+\]
+
+的巴拿赫空间，且 cis $ ^{*} $ 是从  $C(S,E)$ 到  $C_{2\pi}(\mathbb{R},E)$ 的等距同构\qyxffnmark{1}。
+
+\proofhead
+由注 4.12(a)， $C_{2\pi}(\mathbb{R}, E)$ 是  $BC(\mathbb{R}, E)$ 的子空间，且  $\|\cdot\|_{\infty}$ 诱导范数  $\|\cdot\|_{C_{2\pi}}$，这是显然的。同样显然的是， $2\pi$ 周期函数序列的逐点极限（因此特别地，一致极限）也是  $2\pi$ 周期的。因此  $C_{2\pi}(\mathbb{R}, E)$ 是巴拿赫空间  $BC(\mathbb{R}, E)$ 的闭子空间，从而它本身是一个巴拿赫空间。由命题 4.13，cis* 是从  $C(S, E)$ 到  $C_{2\pi}(\mathbb{R}, E)$ 的双射，它显然是线性的。由于 cis，由命题 III.6.15，是从  $(-\pi, \pi)$ 到  $S$ 的双射，可得
+\[
+\|\mathrm{c i s}^{*}(f)\|_{C_{2\pi}}=\max_{-\pi\leq t\leq\pi}\left|f\big(\mathrm{c i s}(t)\big)\right|=\max_{z\in S}|f(z)|=\|f\|_{C(S,E)}
+\]
+
+对所有  $f \in C(S, E)$ 成立。因此 cis $ ^{*} $ 是等距的。■
+
+\end{corollary}
+
+\begin{remark}
+
+对于每个  $a \in \mathbb{R}$，我们有
+
+\[
+\|f\|_{C_{2\pi}}=\max_{a\leq t\leq a+2\pi}|f(t)|.
+\]
+
+\proofhead
+这直接由 f 的周期性推出。
+\end{remark}
+
+\subsection*{三角逼近定理}
+
+在对周期函数作过这些讨论之后，我们现在可以容易地证明魏尔斯特拉斯逼近定理的三角形式了。
+
+\begin{theorem}
+
+$C_{2\pi}(\mathbb{R},\mathbb{K})$ 是一个以 1 为单位元的巴拿赫代数，三角多项式子代数 $\mathcal{TP}(\mathbb{R},\mathbb{K})$ 在 $C_{2\pi}(\mathbb{R},\mathbb{K})$ 中稠密。此外，cis* 是从 $C(S,\mathbb{K})$ 到 $C_{2\pi}(\mathbb{R},\mathbb{K})$ 的等距代数同构。
+
+\proofhead
+由推论 4.14，cis* 是从 $C:=C(S,\mathbb{K})$ 到 $C_{2\pi}:=C_{2\pi}(\mathbb{R},\mathbb{K})$ 的等距向量空间同构。例 4.10(c) 与注 4.11(a) 蕴含 $\mathcal{P}:=\mathcal{P}(S,\mathbb{K})$ 是 $C$ 的稠密子代数。注 4.11(b) 说明 cis*$|\mathcal{T}\mathcal{P}$ 是从 $\mathcal{P}$ 到 $\mathcal{T}\mathcal{P}:=\mathcal{T}\mathcal{P}(\mathbb{R},\mathbb{K})$ 的代数同构。现在设 $f,g\in C$。则存在 $\mathcal{P}$ 中的序列 $(f_n)$ 与 $(g_n)$ 使得在 $C$ 中 $f_n\to f$ 且 $g_n\to g$。由 cis* 的连续性与乘法的连续性可得
+\[
+\mathrm{c i s}^{*}(f g)=\lim\mathrm{c i s}^{*}(f_{n}g_{n})=\lim(\mathrm{c i s}^{*}f_{n})(\mathrm{c i s}^{*}g_{n})=(\mathrm{c i s}^{*}f)(\mathrm{c i s}^{*}g).
+\]
+
+因此 cis* 是从 $C$ 到 $C_{2\pi}$ 的代数同构。由于 $\mathcal{P}$ 在 $C$ 中稠密且 cis* 是从 $C$ 到 $C_{2\pi}$ 的同胚，$\mathcal{P}$ 在 cis* 下的像 $\mathcal{TP}$ 在 $C_{2\pi}$ 中稠密（见注 4.2(d)）。
+
+\end{theorem}
+
+\begin{corollary}
+
+（魏尔斯特拉斯逼近定理的三角形式）
+
+对于  $f \in C_{2\pi}(\mathbb{R}, \mathbb{K})$ 与  $\varepsilon > 0$，存在  $n \in \mathbb{N}$ 与  $a_k, b_k \in \mathbb{K}$ 使得
+
+\[
+\left|f(t)-\frac{a_{0}}{2}-\sum_{k=1}^{n}\left[a_{k}\cos(k t)+b_{k}\sin(k t)\right]\right|<\varepsilon
+\]
+
+对所有  $t \in \mathbb{R}$ 成立。
+
+定理 4.16 特别地说明，巴拿赫代数  $C(S, \mathbb{K})$ 与  $C_{2\pi}(\mathbb{R}, \mathbb{K})$ 是同构且等距的。这意味着，无论是对于应用，还是对于连续性与极限的问题，我们可以使用这两个空间中更方便的那个。对于代数运算与抽象考虑，这常常是代数  $C(S, \mathbb{K})$，而对于  $2\pi$ 周期函数的具体表示，通常更偏好空间  $C_{2\pi}(\mathbb{R}, \mathbb{K})$。
+
+推论 4.17 引发几个问题：
+
+• 系数 $(a_{k})$ 与 $(b_{k})$ 满足什么条件能保证三角级数
+
+\begin{equation}
+\frac{a_{0}}{2}+\sum_{k}\left[a_{k}\cos(k\cdot)+b_{k}\sin(k\cdot)\right]
+\end{equation}
+
+在  $\mathbb{R}$ 上一致收敛？当这发生时，该级数显然表示一个周期为  $2\pi$ 的连续周期函数。
+
+• 在  $f \in C_{2\pi}(\mathbb{R}, \mathbb{K})$ 可由三角级数表示的情形下，系数  $a_k$ 与  $b_k$ 如何计算？它们是否由  $f$ 唯一确定？是否每个  $2\pi$ 周期连续函数都可以这样表示？
+
+对于这些问题中的第一个，魏尔斯特拉斯优级数判别法给出一个容易的充分条件。我们将在后面的章节中回到第二个问题。
+
+\end{corollary}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+验证习题 2.10 中的巴拿赫空间  $BC^k(X, \mathbb{K})$ 是一个含单位元的代数，且乘法是连续的。对于哪些  $k$， $BC^k(X, \mathbb{K})$ 是巴拿赫代数？
+
+\item
+
+设  $x_0, \ldots, x_k \in \mathbb{K}^n$ 非零。证明  $\{x \in \mathbb{K}^n; \prod_{j=0}^k (x | x_j) \neq 0\}$ 在  $\mathbb{K}^n$ 中是开且稠密的。
+
+\item
+
+设 M 为度量空间。证明或反驳下列命题：
+
+\begin{items}
+\item
+
+M 的稠密子集的有限交在 M 中稠密。
+
+\item
+
+M 的开稠密子集的有限交在 M 中是开且稠密的。
+
+\end{items}
+
+\item
+
+设  $D_k$， $k \in \mathbb{N}$，是  $\mathbb{K}^n$ 的开稠密子集，且  $D := \bigcap_k D_k$。证明下列命题：\footnote{(a) 是贝尔纲定理的特殊情形。}
+
+\begin{items}
+\item
+
+$D$ 在 $\mathbb{K}^{n}$ 中稠密
+
+\item
+
+D 是不可数的。
+（提示：(a) 设 $F_k := \bigcap_{\ell=0}^{k} D_k$。则 $F_k$ 是开且稠密的，且 $F_0 \supseteq F_1 \supseteq \cdots$。设 $x \in \mathbb{K}^n$ 且 $r > 0$。则存在 $x_0 \in F_0$ 与 $r_0 > 0$ 使得 $\bar{\mathbb{B}}(x_0, r_0) \subseteq \mathbb{B}(x, r) \cap F_0$。归纳地选取 $x_k \in F_k$ 与 $r_k > 0$ 使得对所有 $k \in \mathbb{N}$ 有 $\bar{\mathbb{B}}(x_{k+1}, r_{k+1}) \subseteq \mathbb{B}(x_k, r_k) \cap F_k$。现在利用习题 III.3.4。(b) 如果 $D$ 是可数的，则存在 $x_m \in \mathbb{K}^n$ 使得 $D = \{ x_m : m \in \mathbb{N} \}$。考虑 $\bigcap_m \{ x_m \}^c \cap \bigcap_k D_k$。
+
+\end{items}
+
+\item
+
+证明不存在从  $\mathbb{R}$ 到  $\mathbb{R}$ 的函数，它在每个有理点连续而在每个无理点不连续。（提示：设  $f$ 是这样的函数。对于所有  $k \in \mathbb{N}^\times$ 考虑  $D_k := \{ x \in \mathbb{R} ; \, \omega_f(x) < 1/k \}$，其中  $\omega_f$ 是习题 III.1.17 中的连续模。由习题 III.2.20， $D_k$ 是开集。但此时  $\mathbb{Q} \subseteq D_k$ 且  $\bigcap_k D_k = \mathbb{Q}$，与  $4(b)$ 矛盾。）
+
+\item
+
+设 $V$ 为具有基 $\{b_1, \ldots, b_n\}$ 的有限维赋范向量空间，$D$ 是 $\mathbb{K}$ 的可数稠密子集。证明 $\left\{ \sum_{k=1}^{n} \alpha_k b_k ; \, \alpha_k \in D \right\}$ 是可数的，且在 $V$ 中稠密。
+
+\item
+
+设  $M \subseteq \mathbb{R}^n$ 且  $A := \mathbb{K}[X_1, \ldots, X_n] | M$。证明  $A$ 分离  $M$ 的点且是自伴的。
+
+\item
+
+假设  $-\infty < a < b < \infty$ 且  $f \in C([a, b], \mathbb{K})$。证明  $f$ 有原函数。（提示：设  $(p_n)$ 是一致收敛到  $f$ 的多项式序列。找  $F_n \in C^1([a, b], \mathbb{K})$ 使得  $F_n' = p_n$ 且  $F_n(a) = 0$。现在应用习题 2.11 与定理 2.8。）
+
+\item
+
+设  $f \in C_{2\pi}(\mathbb{R}, \mathbb{R})$ 可微。证明  $f'$ 在  $(0, 2\pi)$ 中有零点。
+
+\item
+
+设  $D_0(\mathbb{R}, \mathbb{K})$ 是所有满足  $a_0 = 0$ 的绝对收敛三角级数的集合（见 (4.11)）。证明下列命题：
+
+\begin{items}
+\item
+
+$D_0(\mathbb{R}, \mathbb{K})$ 是  $C_{2\pi}(\mathbb{R}, \mathbb{K})$ 的子代数。
+
+\item
+
+每个  $f \in D_0(\mathbb{R}, \mathbb{K})$ 有  $2\pi$ 周期原函数。
+
+\item
+
+每个  $f \in D_0(\mathbb{R}, \mathbb{R})$ 在  $(0, 2\pi)$ 中有零点。
+
+\item
+
+断言 (c) 对  $D_{0}(\mathbb{R}, \mathbb{C})$ 中的函数不成立。
+
+\end{items}
+
+\item
+
+对于  $n \in \mathbb{N}$ 与  $0 \leq k \leq n$，（初等）伯恩斯坦多项式  $B_{n,k}$ 定义为
+
+\[
+B_{n,k}:=\binom{n}{k}X^{k}(1-X)^{n-k}.
+\]
+
+证明下列命题：
+
+\begin{items}
+\item
+
+对于每个  $n \in \mathbb{N}$，伯恩斯坦多项式构成单位分解，即  $\sum_{k=0}^{n} B_{n,k} = 1$。
+
+\begin{equation*}
+\begin{array}{r}{\sum_{k=0}^{n}k B_{n,k}=n X,~\sum_{k=0}^{n}k(k-1)B_{n,k}=n(n-1)X^{2}.}\end{array}
+\end{equation*}
+\end{items}
+
+(c)  $\sum_{k=0}^{n}(k-nX)^{2}B_{n,k}=nX(1-X)$。
+
+（提示：对于  $y \in \mathbb{R}$，令  $p_{n,y} := (X + y)^n$。考虑  $X p_{n,y}'$ 与  $X^2 p_{n,y}'$ 并令  $y := 1 - X$。）
+
+\item
+
+设 $E$ 为巴拿赫空间，$f \in C([0,1],E)$。证明 $f$ 的伯恩斯坦多项式序列 $(B_n(f))$，
+
+\[
+B_{n}(f):=\sum_{k=0}^{n}f\Big(\frac{k}{n}\Big)B_{n,k},\qquad n\in\mathbb{N},
+\]
+
+在  $C\big([0,1],E\big)$ 中（从而在  $[0,1]$ 上一致）收敛到  $f$。（提示：对于适当的  $\delta > 0$ 考虑  $|x - n/k| \leq \delta$ 与  $|x - n/k| > \delta$，并利用习题 11。）
+
+\item
+
+设 $X$ 为拓扑空间。如果对于每个 $x \in X$ 与 $x$ 的每个邻域 $U$，存在某个 $B \in \mathcal{B}$ 使得 $x \in B \subseteq U$，则称 $X$ 的开集族 $\mathcal{B}$ 为 $X$ 的拓扑的基。证明下列命题：
+
+\begin{items}
+\item
+
+任何可分度量空间有可数开集基。
+
+\item
+
+可分度量空间的任何子集是可分的（即具有诱导度量的可分度量空间）。
+
+\item
+
+$\mathbb{R}^n$ 的任何子集是可分的。
+
+\end{items}
+
+\item
+
+设 $X$ 为紧致可分度量空间。证明 $C(X, \mathbb{K})$ 是可分巴拿赫空间。（提示：考虑“单项式”$d_{B_1}^{m_1} \cdots d_{B_k}^{m_k}$ 的具有有理系数的线性组合，其中 $k \in \mathbb{N}$、$m_j \in \mathbb{N}$、$B_j \in \mathcal{B}$，$\mathcal{B}$ 是 $X$ 的拓扑的基，且对所有 $B \in \mathcal{B}$ 有 $d_B := d(\cdot, B^c)$，如例 III.1.3(l) 中那样。）
+
+注 我们将在命题 IX.1.8 中证明任何紧致度量空间都是可分的。
+
+\end{exercises}

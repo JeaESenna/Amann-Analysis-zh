@@ -1,0 +1,3513 @@
+\chapter{一元微分学}
+在第 II 章中，我们探讨了极限概念，它是分析学中最基本、最重要的观念之一。我们建立了计算极限的方法，并给出了它的许多重要应用。在第 III 章中，我们详细考察了分析学的拓扑基础以及连续性概念。在此过程中，我们尤其看到了连续性与极限概念之间的联系。在上一章的最后一节中，通过运用我们积累起来的理解，我们研究了数学中若干最重要的函数。
+
+尽管我们似乎已经对指数函数及其近亲——余弦函数与正弦函数——了解很多，但事实上，我们的理解仍是初步的，并且主要局限于这些函数的整体方面。在本章中，我们主要考虑函数的局部性质。在此过程中，我们再次遇到分析学的一个共同主题，简单地说，就是用简单的（通常是离散的）结构来逼近复杂的“连续”行为。当然，这种逼近思想是极限概念的基础，并且贯穿于所有“连续”数学之中。
+
+起初在我们的直观引导下，我们考虑实变量实值函数的图像。在一个特定点处，对看起来复杂的图像所作的一种在概念上简单的局部近似就是切线。这是一条经过该点、并在附近尽可能紧密地“贴合”图像的直线。于是，在该点附近（就像通过一台放大倍数任意高的显微镜来观察一样），函数几乎与这一线性近似无法区分。我们证明，利用这样的线性近似可以描述相当一般函数的局部性质。
+
+线性近似这一概念极为富有成果，而且并不局限于直观的一维情形。事实上，它是分析学中几乎所有局部研究的基础。我们将看到，求一个线性近似与微分是同一回事。事实上，本章前三节所讲述的微分，无非是线性近似的一种高效演算。这一思想的重要性体现在它众多优美且常常出人意料的应用之中，其中一些出现在本章的最后一节。
+
+在第一节中，我们引入可微性概念，并说明它与线性近似的联系。我们还推导了计算导数的基本法则。
+
+在第 2 节中，微分背后的几何思想充分发挥作用。通过研究图像上的切线，我们确定相应函数的局部行为。这一技巧的效用，尤其是在凸函数的研究中，得到了清楚的体现。作为第一个简单的应用，我们证明了分析学的若干基本不等式。
+
+第 3 节专门讨论高阶近似。与其用一条直线，即一次多项式，来局部地逼近给定函数，不如寻求用更高次的多项式进行逼近。当然，这样做可以得到关于该函数的更多局部信息。这类信息尤其有助于确定极值的性质。
+
+在最后一节中，我们考虑实函数零点的近似确定。我们证明巴拿赫不动点定理——其实践与理论上的重要性无论怎样强调都不过分——并利用它来证明牛顿法的收敛性。
+
+在整章中，我们仅限于研究从实数或复数到任意巴拿赫空间的函数。两个或更多变量的函数的微分将在第 VII 章中讨论。
+
+\section{可微性}
+
+正如本章导言中已经提到的，我们发展微分学的动机，是希望用线性近似来描述函数的局部行为。于是我们被引向切线问题：给定实函数图像上的一点，确定该图像在该点处的切线。
+
+\bookfigure[0.19]{figures/8c6cbe54986ed0fe.jpg}
+
+切线问题
+
+\bookfigure[0.19]{figures/2e72d8ca26f45fbd.jpg}
+
+极值问题
+
+\bookfigure[0.19]{figures/9167b846017e48d1.jpg}
+
+密切圆问题
+
+求函数的极值或求一点处的密切圆（即与图像贴合得最好的圆）的问题，与切线问题密切相关，从而也与微分学密切相关。
+
+在下文中，$X \subseteq \mathbb{K}$ 是一个集合，$a \in X$ 是 $X$ 的聚点，而 $E = (E, \|\cdot\|)$ 是 $\mathbb{K}$ 上的赋范向量空间。
+
+\subsection*{导数}
+
+函数 $ f: X \to E $ 称为在 $a$ 处可微，若极限
+
+\[
+f^{\prime}(a):=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}
+\]
+
+在 $E$ 中存在。当此情形出现时，$f'(a) \in E$ 称为 $f$ 在 $a$ 处的导数。除了符号 $f'(a)$，导数还有许多其他记号：
+
+\[
+\dot{f}(a)\;,\quad\partial f(a)\;,\quad D f(a)\;,\quad\frac{d f}{d x}(a)\;.
+\]
+
+在我们系统地研究可微函数之前，先给出定义的一些有用变形。
+
+\begin{theorem}
+
+对 $f: X \to E$，下列命题等价：
+
+\begin{subitems}
+\item
+
+$f$ 在 $a$ 处可微。
+
+\item
+
+存在某个 $ m_{a} \in E $，使得
+
+\[
+\lim_{x\to a}\frac{f(x)-f(a)-m_{a}(x-a)}{x-a}=0.
+\]
+\item
+
+存在 $ m_a \in E $ 和一个在 $a$ 处连续的函数 $ r: X \to E $，使得 $ r(a) = 0 $ 且
+
+\[
+f(x)=f(a)+m_{a}(x-a)+r(x)(x-a),\qquad x\in X.
+\]
+
+在情形 (ii) 与 (iii) 中，$ m_{a}=f'(a) $。
+
+\proofhead
+蕴含 ‘(i)⇒(ii)’ 显然，只需令 $ m_a := f'(a) $。
+‘(ii)⇒(iii)’ 定义
+\begin{equation*}
+r(x):=\left\{\begin{array}{cl}0,&x=a,\\\frac{f(x)-f(a)-m_{a}(x-a)}{x-a},&x\neq a.\end{array}\right.
+\end{equation*}
+
+于是，由注 III.2.23(b) 与 (ii)，$r$ 具有所述性质。
+‘(iii)⇒(i)’ 这同样显然。■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{corollary}
+
+若 $f: X \to E$ 在 $a$ 处可微，则 $f$ 在 $a$ 处连续。
+
+\proofhead
+这立即由定理 1.1 的蕴含 ‘(i)⇒(iii)’ 得出。■
+\end{corollary}
+
+推论 1.2 的逆命题不成立：存在连续但不可微的函数（见例 1.13(k)）。
+
+\subsection*{线性近似}
+
+设 $f: X \to E$ 在 $a$ 处可微。则函数
+
+\[
+g:\mathbb{K}\to E~,\quad x\mapsto f(a)+f^{\prime}(a)(x-a)
+\]
+
+是仿射的，且 $ g(a) = f(a) $。此外，由定理 1.1 可得
+
+\[
+\lim_{x\to a}\frac{\|f(x)-g(x)\|}{|x-a|}=0.
+\]
+
+因此 $f$ 与 $g$ 在点 $a$ 处重合，且当 $x \to a$ 时，“误差” $\|f(x) - g(x)\|$ 比 $|x - a|$ 更快地趋于零。这一观察提示如下定义：函数 $f: X \to E$ 称为在 $a$ 处近似线性，若存在仿射函数 $g: \mathbb{K} \to E$，使得
+
+\[
+f(a)=g(a)\quad\text{ 且 }\quad\lim_{x\to a}\frac{\|f(x)-g(x)\|}{|x-a|}=0.
+\]
+
+下面的推论表明，这一性质与可微性实际上是一回事。
+
+\begin{corollary}
+
+函数 $f: X \to E$ 在 $a$ 处可微，当且仅当它在 $a$ 处近似线性。此时，逼近的仿射函数 $g$ 唯一，且由下式给出
+
+\[
+g\colon\mathbb{K}\to E~,\quad x\mapsto f(a)+f^{\prime}(a)(x-a)~.
+\]
+
+\proofhead
+‘⇒’ 这直接由定理 1.1 得出。
+
+‘⇐’ 设 $ g: \mathbb{K} \to E $ 是在 $ a $ 处逼近 $ f $ 的仿射函数。由命题 I.12.8，存在唯一的元素 $ b, m \in E $，使得对所有 $ x \in \mathbb{K} $ 有 $ g(x) = b + mx $。由于 $ g(a) = f(a) $，实际上对所有 $ x \in \mathbb{K} $ 有 $ g(x) = f(a) + m(x - a) $。于是结论由定理 1.1 得出。■
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+假设函数 $f: X \to E$ 在 $a$ 处可微。如上，对所有 $x \in \mathbb{K}$ 定义 $g(x) := f(a) + f'(a)(x - a)$。则 $g$ 的图像是过 $(a, f(a))$ 且在该点 $(a, f(a))$ 附近逼近 $f$ 的图像的仿射直线。这条直线称为 $f$ 在 $(a, f(a))$ 处的\textbf{切线}。在 $\mathbb{K} = \mathbb{R}$ 的情形，这一定义与初等几何的直观一致。
+
+\end{items}
+
+\bookfigure[0.57]{figures/d860ff187ae3bb86.jpg}
+
+表达式
+
+\[
+\frac{f(y)-f(a)}{y-a},\qquad y\neq a,
+\]
+
+称为 $f$ 的差商。仿射函数
+
+\[
+h(x):=f(a)+\frac{f(y)-f(a)}{y-a}(x-a),\qquad x\in\mathbb{K},
+\]
+
+的图像称为过 $ (a, f(a)) $ 与 $ (y, f(y)) $ 的\textbf{割线}。在 $ \mathbb{K} = \mathbb{R} = E $ 的情形，$ f $ 在 $ a $ 处可微意味着，当 $ y \to a $ 时，过 $ (a, f(a)) $ 与 $ (y, f(y)) $ 的割线的\textbf{斜率} $ (f(y) - f(a)) / (y - a) $ 收敛于在 $ (a, f(a)) $ 处的切线的斜率 $ f'(a) $。
+
+\begin{items}
+\item[（b）]
+
+设 $ X = J \subseteq \mathbb{R} $ 是区间，$ E = \mathbb{R}^3 $。假设 $ f(t) $ 给出空间中的点在时刻 $ t \in J $ 的位置。则 $ |f(t) - f(t_0)| / |t - t_0| $ 是时刻 $ t_0 $ 与 $ t $ 之间“平均速度”的绝对值，而 $ \dot{f}(t_0) $ 表示该点在时刻 $ t_0 $ 的瞬时速度。
+
+\item[（c）]
+
+(i) 假设 $ \mathbb{K} = E = \mathbb{R} $，且 $ f: X \subseteq \mathbb{R} \to \mathbb{R} $ 是在 $ a $ 处可微的函数。把 $ f $ 看作从 $ \mathbb{C} $ 到 $ \mathbb{C} $ 的函数，即令
+
+\[
+f_{\mathbb{C}}\colon X\subseteq\mathbb{C}\to\mathbb{C}\;,\qquad f_{\mathbb{C}}(x):=f(x)\;,\quad x\in X\;.
+\]
+
+则 $ f_{\mathbb{C}} $ 也在 $ a $ 处可微，且 $ f_{\mathbb{C}}^{\prime}(a) = f^{\prime}(a) $。
+
+\end{items}
+
+(ii) 现在假设 $ \mathbb{K} = E = \mathbb{C} $，且 $ f: X \subseteq \mathbb{C} \to \mathbb{C} $ 是在 $ a \in Y := X \cap \mathbb{R} $ 处可微的函数。还假设 $ a $ 是 $ Y $ 的聚点，且 $ f(Y) \subseteq \mathbb{R} $。则 $ f|Y: Y \to \mathbb{R} $ 在 $ a $ 处可微，且 $ (f|Y)'(a) = f'(a) \in \mathbb{R} $。
+
+\proofhead
+这直接由定义、$ f $ 的可微性以及 $ \mathbb{R} $ 在 $ \mathbb{C} $ 中闭这一事实得出。 $ \blacksquare $
+\end{remark}
+
+\subsection*{求导法则}
+
+\begin{proposition}
+
+设 $ E_1, \ldots, E_n $ 是赋范向量空间，$ E := E_1 \times \cdots \times E_n $。则 $ f = (f_1, \ldots, f_n) : X \to E $ 在 $ a $ 处可微，当且仅当每个分量函数 $ f_j : X \to E_j $ 在 $ a $ 处可微。此时，
+
+\[
+\partial f(a)=\left(\partial f_{1}(a),\ldots,\partial f_{n}(a)\right).
+\]
+
+因此向量可以逐分量求导。
+
+\proofhead
+对差商，我们有
+\[
+\frac{f(x)-f(a)}{x-a}=\left(\frac{f_{1}(x)-f_{1}(a)}{x-a},\cdots,\frac{f_{n}(x)-f_{n}(a)}{x-a}\right),\qquad x\neq a.
+\]
+
+于是结论由例 II.1.8(e) 得出。■
+
+\end{proposition}
+
+在下一个定理中，我们汇总进一步的求导法则，这些法则使函数导数的计算变得相当容易。
+
+\begin{theorem}
+
+\begin{subitems}
+\item
+
+（线性）设 $f, g: X \to E$ 在 $a$ 处可微，$\alpha, \beta \in \mathbb{K}$。则函数 $\alpha f + \beta g$ 也在 $a$ 处可微，且
+
+\[
+\left(\alpha f+\beta g\right)^{\prime}(a)=\alpha f^{\prime}(a)+\beta g^{\prime}(a).
+\]
+
+换言之，在 $a$ 处可微的函数构成的集合形成 $E^X$ 的子空间 $V$，且函数 $V \to E$，$f \mapsto f'(a)$ 是线性的。
+
+\item
+
+（乘积法则）设 $ f, g: X \to \mathbb{K} $ 在 $ a $ 处可微。则函数 $ f \cdot g $ 也在 $ a $ 处可微，且
+
+\[
+(f\cdot g)^{\prime}(a)=f^{\prime}(a)g(a)+f(a)g^{\prime}(a).
+\]
+
+在 $a$ 处可微的函数构成的集合形成 $\mathbb{K}^{X}$ 的子代数。
+
+\item
+
+（商法则）设 $ f, g: X \to \mathbb{K} $ 在 $ a $ 处可微，且 $ g(a) \neq 0 $。则函数 $ f/g $ 也在 $ a $ 处可微，且
+
+\[
+\left(\frac{f}{g}\right)^{\prime}(a)=\frac{f^{\prime}(a)g(a)-f(a)g^{\prime}(a)}{\left[g(a)\right]^{2}}.
+\]
+
+\proofhead
+所有这些结论都直接由我们在 II.2 节证明的收敛数列的法则得出。
+对 (i)，这特别明显。为证明乘积法则 (ii)，我们把 $ f \cdot g $ 的差商写成
+\[
+\frac{f(x)g(x)-f(a)g(a)}{x-a}=\frac{f(x)-f(a)}{x-a}g(x)+f(a)\frac{g(x)-g(a)}{x-a},\qquad x\neq a.
+\]
+
+由推论 1.2，$g$ 在 $a$ 处连续，于是结论由命题 II.2.2 与 II.2.4 以及定理 III.1.4 得出。
+对 (iii)，我们有 $ g(a) \neq 0 $，于是由例 III.1.3(d)，存在 $ a $ 在 $ X $ 中的邻域 $ U $，使得对所有 $ x \in U $ 有 $ g(x) \neq 0 $。于是，对每个 $ x \in U \setminus \{a\} $，我们有
+
+\[
+\Big(\frac{f(x)}{g(x)}-\frac{f(a)}{g(a)}\Big)(x-a)^{-1}=\frac{1}{g(x)g(a)}\Big[\frac{f(x)-f(a)}{x-a}g(a)-f(a)\frac{g(x)-g(a)}{x-a}\Big],
+\]
+
+由此结论成立。■
+
+\end{subitems}
+
+\end{theorem}
+
+\subsection*{链式法则}
+
+复杂的函数常常可以表示为较简单函数的复合。下面的法则描述这种复合如何求导。
+
+\begin{theorem}
+
+（链式法则）假设 $f: X \to \mathbb{K}$ 在 $a$ 处可微，且 $f(a)$ 是 $Y$ 的聚点，其中 $f(X) \subseteq Y \subseteq \mathbb{K}$。若 $g: Y \to E$ 在 $f(a)$ 处可微，则 $g \circ f$ 在 $a$ 处可微，且
+
+\[
+(g\circ f)^{\prime}(a)=g^{\prime}\big(f(a)\big)f^{\prime}(a).
+\]
+
+\proofhead
+由假设与定理 1.1，存在在 $a$ 处连续的函数 $ r: X \to \mathbb{K} $，使得 $ r(a) = 0 $ 且
+\begin{equation}
+f(x)=f(a)+f^{\prime}(a)(x-a)+r(x)(x-a),\qquad x\in X.
+\end{equation}
+
+类似地，存在在 $b:=f(a)$ 处连续的函数 $s:Y\to E$，使得 $s(b)=0$ 且
+
+\begin{equation}
+g(y)=g(b)+g^{\prime}(b)(y-b)+s(y)(y-b),\qquad y\in Y.
+\end{equation}
+
+现在设 $ x \in X $，并在 (1.2) 中令 $ y := f(x) $。于是，利用 (1.1)，
+
+\begin{equation*}
+\begin{aligned}
+(g\circ f)(x)&=g\big(f(a)\big)+g^{\prime}\big(f(a)\big)\big(f(x)-f(a)\big)+s\big(f(x)\big)\big(f(x)-f(a)\big)\\&=(g\circ f)(a)+g^{\prime}\big(f(a)\big)f^{\prime}(a)(x-a)+t(x)(x-a),
+\end{aligned}
+\end{equation*}
+
+其中对所有 $ x \in X $，$ t(x) := g'(f(a))r(x) + s(f(x))\left(f'(a) + r(x)\right) $。由假设、推论 1.2 与定理 III.1.8，$ t: X \to E $ 在 $a$ 处连续。此外，
+
+\[
+t(a)=g^{\prime}\big(f(a)\big)r(a)+s(b)\big(f^{\prime}(a)+r(a)\big)=0~.
+\]
+
+结论现在由定理 1.1 得出。
+
+\end{theorem}
+
+\subsection*{反函数}
+
+利用链式法则，我们可以导出反函数可微性的判别准则，并计算它们的导数。
+
+\begin{theorem}
+
+（反函数的可微性）设 $f: X \to \mathbb{K}$ 是单射，且在 $a$ 处可微。此外，假设 $f^{-1}: f(X) \to X$ 在 $b := f(a)$ 处连续。则 $f^{-1}$ 在 $b$ 处可微，当且仅当 $f'(a)$ 非零。此时，
+
+\[
+(f^{-1})^{\prime}(b)=\frac{1}{f^{\prime}(a)},\qquad b=f(a).
+\]
+
+\proofhead
+‘⇄’ 对恒等式 $ f^{-1} \circ f = \mathrm{id}_X $ 应用链式法则，得到
+\[
+1=\left(\mathrm{i d}_{X}\right)^{\prime}(a)=\left(f^{-1}\right)^{\prime}\big(f(a)\big)f^{\prime}(a),
+\]
+
+从而 $ (f^{-1})'(b) = 1/f'(a) $。
+
+‘⇐’ 我们首先确认 $b$ 是 $Y := f(X)$ 的聚点。由假设，$a$ 是 $X$ 的聚点，于是由命题 III.2.9，存在 $X \setminus \{a\}$ 中的序列 $(x_k)$，使得 $\lim x_k = a$。由于 $f$ 连续，我们有 $\lim f(x_k) = f(a)$。由于 $f$ 是单射，我们还有对所有 $k \in \mathbb{N}$ 有 $f(x_k) \neq f(a)$，这表明 $b = f(a)$ 是 $Y$ 的聚点。
+
+现在设 $(y_k)$ 是 $Y$ 中的序列，使得对所有 $k \in \mathbb{N}$ 有 $y_k \neq b$，且 $\lim y_k = b$。令 $x_k := f^{-1}(y_k)$。则 $x_k \neq a$ 且 $\lim x_k = a$，因为 $f^{-1}$ 在 $b$ 处连续。由于
+
+\[
+0\neq f^{\prime}(a)=\lim_{k}\frac{f(x_{k})-f(a)}{x_{k}-a},
+\]
+
+存在某个 K，使得
+
+\[
+0\neq\frac{f(x_{k})-f(a)}{x_{k}-a}=\frac{y_{k}-b}{f^{-1}(y_{k})-f^{-1}(b)},\qquad k\geq K.
+\]
+
+因此，对 $ f^{-1} $ 的差商，我们有
+
+\[
+\frac{f^{-1}(y_{k})-f^{-1}(b)}{y_{k}-b}=\frac{x_{k}-a}{f(x_{k})-f(a)}=1\Big/\frac{f(x_{k})-f(a)}{x_{k}-a},\qquad k\geq K,
+\]
+
+于是取极限 $ k \to \infty $ 即得结论。■
+
+\end{theorem}
+
+\begin{corollary}
+
+设 $ I $ 是区间，$ f: I \to \mathbb{R} $ 严格单调且连续。假设 $ f $ 在 $ a \in I $ 处可微。则 $ f^{-1} $ 在 $ f(a) $ 处可微，当且仅当 $ f'(a) $ 非零，且此时 $ (f^{-1})' \big(f(a)\big) = 1/f'(a) $。
+
+\proofhead
+由定理 III.5.7，$f$ 是单射，且 $f^{-1}$ 在区间 $J:=f(I)$ 上连续。因此结论由定理 1.8 得出。
+\end{corollary}
+
+\subsection*{可微函数}
+
+至此我们考虑的是如下情形：$X$ 是 $\mathbb{K}$ 的任意子集，$a \in X$ 是 $X$ 的聚点。在这些条件下，我们研究了 $f: X \to E$ 在 $a$ 处的可微性。显然的下一个问题是，$f$ 是否在 $X$ 的每一点处可微。为使这一问题有意义，必须要求 $X$ 的每一点都是 $X$ 的聚点。
+
+设 $M$ 是度量空间。子集 $A \subseteq M$ 称为完全的，若每个 $a \in A$ 都是 $A$ 的聚点。\footnote{当 $ M = \mathbb{R} $ 且 $ A $ 是区间时，这个定义与 1.10 节中的定义一致（见例 1.10(b)）。}
+
+\begin{example}
+
+\begin{items}
+\item
+
+赋范向量空间的任何非空开子集都是完全的。
+
+\item
+
+赋范向量空间的凸子集（特别地，$ \mathbb{R} $ 中的区间）是完全的，当且仅当它含有多于一个点。
+设 $ X \subseteq \mathbb{K} $ 是完全的。则 $ f: X \to E $ 称为在 $ X $ 上可微，若 $ f $ 在 $ X $ 的每一点处可微。函数
+
+\[
+f^{\prime}\colon X\to E~,\quad x\mapsto f^{\prime}(x)
+\]
+
+称为 $f$ 的导数。它也记作 $\dot{f}$、$\partial f$、$Df$ 与 $df/dx$。
+
+\end{items}
+
+\end{example}
+
+\subsection*{高阶导数}
+
+若 $ f: X \to E $ 可微，那么自然要问导数 $ f' $ 本身是否可微。当此情形出现时，$ f $ 称为二次可微，我们
+
+称 $ \partial^2 f := f'' := \partial(\partial f) $ 为 $ f $ 的二阶导数。重复这一过程，我们可以定义 $ f $ 的更高阶导数。具体地，我们令
+
+\begin{equation*}
+\begin{aligned}
+\partial^{0}f:&=f^{(0)}:=f,\quad\partial^{1}f(a):=f^{(1)}(a):=f^{\prime}(a),\\\partial^{n+1}f(a)&:=f^{(n+1)}(a):=\partial(\partial^{n}f)(a)
+\end{aligned}
+\end{equation*}
+
+对所有 $ n \in \mathbb{N} $ 成立。元素 $ \partial^n f(a) \in E $ 称为 $ f $ 在 $ a $ 处的 $ n $ 阶导数。函数 $ f $ 称为在 $ X $ 上 $ n $ 次可微，若 $ n $ 阶导数在每个 $ a \in X $ 处存在。若 $ f $ 是 $ n $ 次可微的，且 $ n $ 阶导数
+
+\[
+\partial^{n}f\colon X\to E~,\quad x\mapsto\partial^{n}f(x)
+\]
+
+连续，则 $f$ 是 $n$ 次连续可微的。
+
+从 $X$ 到 $E$ 的 $n$ 次连续可微函数构成的空间记作 $C^n(X,E)$。特别地，$C^0(X,E) = C(X,E)$ 是已在 III.1 节引入的 $X$ 上的连续 $E$-值函数构成的空间。最后
+
+\[
+C^{\infty}(X,E):=\bigcap_{n\in\mathbb{N}}C^{n}(X,E)
+\]
+
+是从 $X$ 到 $E$ 的无限次可微（或光滑）函数构成的空间。在不会引起误解时，我们写
+
+\[
+C^{n}(X):=C^{n}(X,\mathbb{K}),\qquad n\in\bar{\mathbb{N}}\;,
+\]
+
+\begin{remark}
+
+设 $ n \in \mathbb{N} $。
+
+\begin{items}
+\item
+
+为使 $a$ 处的 $ (n+1) $ 阶导数有定义，$a$ 必须是 $ n $ 阶导数的定义域的聚点。特别地，若 $ n $ 阶导数在 $a$ 的某个邻域上存在，则情形正是如此。
+
+\item
+
+若函数 $ f: X \to E $ 在 $ a \in X $ 处是 $ (n+1) $-次可微的，则由推论 1.2，对每个 $ j \in \{0,1,\ldots,n\} $，$ f $ 的 $ j $ 阶导数在 $ a $ 处连续。
+
+\item
+
+不难看出，包含关系
+
+\[
+C^{\infty}(X,E)\subseteq C^{n+1}(X,E)\subseteq C^{n}(X,E)\subseteq C(X,E)~,\qquad n\in\mathbb{N}~,
+\]
+
+成立。■
+
+\end{items}
+
+在下一个定理中，我们汇总在 $n$ 次连续可微函数空间 $ C^{n}(X,E) $ 中成立的一些最重要的法则。
+
+\end{remark}
+
+\begin{theorem}
+
+设 $ X \subseteq \mathbb{K} $ 是完全的，$ k \in \mathbb{N} $ 且 $ n \in \bar{\mathbb{N}} = \mathbb{N} \cup \{\infty\} $。
+
+\begin{subitems}
+\item
+
+（线性）对所有 $ f, g \in C^k(X, E) $ 与 $ \alpha, \beta \in \mathbb{K} $，
+
+\[
+\alpha f+\beta g\in C^{k}(X,E)\quad\text{ 且 }\quad\partial^{k}(\alpha f+\beta g)=\alpha\partial^{k}f+\beta\partial^{k}g.
+\]
+
+因此 $C^{n}(X,E)$ 是 $C(X,E)$ 的子空间，且微分算子
+
+\[
+\partial:C^{n+1}(X,E)\to C^{n}(X,E)~,\quad f\mapsto\partial f
+\]
+
+是线性的。
+
+\item
+
+（莱布尼茨法则）设 $ f, g \in C^k(X) $。则 $ f \cdot g $ 属于 $ C^k(X) $，且
+
+\begin{equation}
+\partial^{k}(f g)=\sum_{j=0}^{k}\binom{k}{j}(\partial^{j}f)\partial^{k-j}g.
+\end{equation}
+
+因此 $ C^n(X) $ 是 $ \mathbb{K}^X $ 的子代数。
+
+\proofhead
+(i) 第一个断言由定理 1.6 与命题 III.1.5 得出。
+\end{subitems}
+
+(ii) 由于定理 1.6 与命题 III.1.5，只需确认莱布尼茨法则 (1.3)。我们对 $k$ 作归纳来证明。情形 $k=0$ 已在命题 III.1.5 中证明。对归纳步骤 $ k \to k + 1 $，我们利用等式
+
+\[
+\binom{k+1}{j}=\binom{k}{j-1}+\binom{k}{j},\qquad k\in\mathbb{N},\quad1\leq j\leq k,
+\]
+
+它来自习题 I.5.5。归纳假设、乘积法则与 (i) 蕴含
+
+\begin{equation*}
+\begin{aligned}
+\partial^{k+1}(fg)&=\partial\Big(\sum_{j=0}^{k}\binom{k}{j}(\partial^{j} f)\partial^{k-j}g\Big)\\&=\sum_{j=0}^{k}\binom{k}{j}\big[(\partial^{j+1}f)\partial^{k-j}g+(\partial^{j} f)\partial^{k-j+1}g\big]\\&=(\partial^{k+1}f)g+f\partial^{k+1}g+\sum_{j=1}^{k}\Big[\binom{k}{j-1}+\binom{k}{j}\Big](\partial^{j} f)\partial^{k-j+1}g\\&=\sum_{j=0}^{k+1}\binom{k+1}{j}(\partial^{j} f)\partial^{k+1-j}g.
+\end{aligned}
+\end{equation*}
+
+因此归纳完成。■
+
+\end{theorem}
+
+\begin{example}
+
+\begin{items}
+\item
+
+设 $a$ 是 $X \subseteq \mathbb{R}$ 的聚点。则 $f: X \to \mathbb{C}$ 在 $a$ 处可微，当且仅当 $\operatorname{Re} f$ 与 $\operatorname{Im} f$ 在 $a$ 处可微。此时，
+
+\[
+f^{\prime}(a)=(\operatorname{R e}f)^{\prime}(a)+i(\operatorname{I m}f)^{\prime}(a).
+\]
+
+\proofhead
+这由命题 1.5 得出。
+\item
+
+设 $ p = \sum_{k=0}^{n} a_k X^k $ 是多项式。\footnote{按照 I.8 节末的约定，我们也把多项式看作函数。} 则 $ p $ 是光滑的，且
+
+\[
+p^{\prime}(x)=\sum_{k=1}^{n}ka_{k}x^{k-1},\qquad x\in\mathbb{C}.
+\]
+
+\proofhead
+设 $ 1 := 1X^0 $ 是代数 $ \mathbb{K}[X] $ 中的单位元，按照我们的约定，它与对所有 $ x \in \mathbb{K} $ 由 $ \mathbf{1}(x) = 1 $ 定义的常值函数相同。则显然
+\begin{equation}
+\mathbf{1}\in C^{\infty}(\mathbb{K})\quad\text{且}\quad\partial\mathbf{1}=0.
+\end{equation}
+
+现在用归纳法证明
+
+\begin{equation}
+X^{n}\in C^{\infty}(\mathbb{K})\quad\text{且}\quad\partial(X^{n})=n X^{n-1},\qquad n\in\mathbb{N}^{\times}.
+\end{equation}
+
+情形 $n=1$ 成立，因为平凡地 $\partial X = \mathbf{1}$，且由 (1.4)，$\mathbf{1} \in C^\infty(\mathbb{K})$。对归纳步骤 $n \to n+1$，我们利用乘积法则：
+
+\[
+\partial(X^{n+1})=\partial(X^{n}X)=\partial(X^{n})X+X^{n}\partial X=nX^{n-1}X+X^{n}\mathbf{1}=(n+1)X^{n}.
+\]
+
+因此 (1.5) 成立。对任意多项式 $ \sum_{k=0}^{n} a_k X^k $，结论现在由定理 1.12(i) 得出。■
+
+\item
+
+有理函数在其定义域上光滑。
+
+\proofhead
+这由 (b)、定理 1.6 与推论 III.1.6 得出。
+\item
+
+指数函数属于 $ C^\infty(\mathbb{K}) $，且满足 $ \partial(\exp) = \exp $。
+
+\proofhead
+只需证明公式 $ \partial(\exp) = \exp $。对 $ z \in \mathbb{C} $，差商为
+\[
+\frac{e^{z+h}-e^{z}}{h}=e^{z}\frac{e^{h}-1}{h}\;,\qquad h\in\mathbb{C}^{\times}\;,
+\]
+
+于是结论由例 III.2.25(b) 得出。■
+
+\item
+
+对对数函数，我们有
+
+\[
+\operatorname{l o g}\in C^{\infty}\bigl(\mathbb{C}\backslash(-\infty,0],\mathbb{C}\bigr),\qquad(\operatorname{l o g})^{\prime}(z)=1/z,\quad z\in\mathbb{C}\backslash(-\infty,0].
+\]
+
+\proofhead
+由 (III.6.11)，我们有 $ \log = [\exp |\mathbb{R} + i(-\pi,\pi)]^{-1} $，且对数在 $ \mathbb{R} + i(-\pi,\pi) $ 上连续（见习题 III.6.9）。对每个 $ z \in \mathbb{C}\backslash(-\infty,0] $，存在唯一的 $ x $ 属于 $ \mathbb{R} + i(-\pi,\pi) $，使得 $ z = e^x $。由定理 1.8 与 (d)，我们有
+\[
+(\log)^{\prime}(z)=\frac{1}{(\exp)^{\prime}(x)}=\frac{1}{\exp(x)}=\frac{1}{z},
+\]
+
+于是结论由 (c) 得出。■
+
+\item
+
+设 $ a \in \mathbb{C} \setminus (-\infty, 0] $。则\footnote{为避免为函数 $ z \mapsto a^z $ 引入新记号，我们有点不精确地把 $ [z \mapsto a^z]'(z) $ 写作 $ (a^z)' $。由于不会引起误解，在类似情形中都将使用这一简化记号。}
+
+\[
+[z\mapsto a^{z}]\in C^{\infty}(\mathbb{C})\quad\text{ 且 }\quad(a^{z})^{\prime}=a^{z}\log a~,\quad z\in\mathbb{C}~.
+\]
+
+\proofhead
+由于对所有 $ z \in \mathbb{C} $ 有 $ a^z = e^{z\log a} $，
+\[
+(a^{z})^{\prime}=(e^{z\log a})^{\prime}=(\log a)e^{z\log a}=a^{z}\log a
+\]
+
+由链式法则与 (d) 得出。由于 $ [z \mapsto a^z] $: $ \mathbb{C} \to \mathbb{C} $ 连续（为什么？），一个简单的归纳表明 $ [z \mapsto a^z] \in C^\infty(\mathbb{C}) $。 $ \blacksquare $
+
+\item
+
+设 $ a \in \mathbb{C} $。则对幂函数，我们有
+
+\[
+[z\mapsto z^{a}]\in C^{\infty}\bigl(\mathbb{C}\backslash(-\infty,0],\mathbb{C}\bigr)\quad\text{且}\quad(z^{a})^{\prime}=a z^{a-1}\;.
+\]
+
+\proofhead
+与 (f) 一样，对所有 $ z \in \mathbb{C}\backslash(-\infty,0] $ 有 $ z^a = e^{a \log z} $，于是由链式法则与 (e)，我们得到
+\[
+(z^{a})^{\prime}=(e^{a\log z})^{\prime}=\frac{a}{z}e^{a\log z}=\frac{a}{z}z^{a}=a z^{a-1},
+\]
+
+其中在最后一步我们还利用了 (III.6.13)。■
+
+\item
+
+$ \mathrm{cis} \in C^{\infty}(\mathbb{R}, \mathbb{C}) $，且对所有 $ t \in \mathbb{R} $ 有 $ \mathrm{cis}^{\prime}(t) = i \mathrm{cis}(t) $。
+
+\proofhead
+由 (d) 与链式法则，对所有 $ t \in \mathbb{R} $ 有 $ \mathrm{cis}^{\prime}(t) = (e^{it})^{\prime} = i e^{it} = i \mathrm{cis}(t) $。■
+\item
+
+余弦与正弦属于 $ C^\infty(\mathbb{C}) $，且 $ \cos' = -\sin $、$ \sin' = \cos $。
+
+\proofhead
+由 (III.6.3)，余弦与正弦可以用指数函数表示：
+\[
+\cos z=\frac{e^{iz}+e^{-iz}}{2},\quad\sin z=\frac{e^{iz}-e^{-iz}}{2i},\qquad z\in\mathbb{C}.
+\]
+
+利用 (d) 与链式法则，我们得到
+
+\[
+\cos^{^{\prime}}z=i\frac{e^{iz}-e^{-iz}}{2}=-\sin z,\quad\sin^{^{\prime}}z=i\frac{e^{iz}+e^{-iz}}{2i}=\cos z,
+\]
+
+因此余弦与正弦是光滑的。
+
+\item
+
+正切函数与余切函数在其定义域上光滑，且
+
+\[
+\tan^{\prime}=\frac{1}{\cos^{2}}=1+\tan^{2},\quad\cot^{\prime}=\frac{-1}{\sin^{2}}=-1-\cot^{2}.
+\]
+
+\proofhead
+商法则与 (i) 给出
+\[
+\tan^{\prime}z=\left(\frac{\sin}{\cos}\right)^{\prime}(z)=\frac{\cos^{2}z+\sin^{2}z}{\cos^{2}z}=\frac{1}{\cos^{2}z}=1+\tan^{2}z\;,\qquad z\in\mathbb{C}\backslash\left(\pi/2+\pi\mathbb{Z}\right)\;.
+\]
+
+余切函数的证明类似。
+
+\item
+
+函数 $ f: \mathbb{R} \to \mathbb{R} $，$ x \mapsto |x| $ 在 0 处连续但不可微。
+\textbf{证明} 对所有 $ n \in \mathbb{N} $ 令 $ h_n := (-1)^n / (n + 1) $。则 $ (h_n) $ 是零序列，使得对所有 $ n \in \mathbb{N} $ 有 $ (f(h_n) - f(0)) h_n^{-1} = (-1)^n $。因此 $ f $ 在 0 处不可微。 $ \blacksquare $
+
+\end{items}
+
+(1) 考虑函数
+
+\begin{equation*}
+f(x):=\left\{\begin{array}{c l}{x^{2}\sin\frac{1}{x},}&{\quad x\in\mathbb{R}^{\times},}\\ {0,}&{\quad x=0.}\end{array}\right.
+\end{equation*}
+
+则 $f$ 在 $\mathbb{R}$ 上可微，但导数 $f'$ 在 0 处不连续。即 $f \notin C^{1}(\mathbb{R})$。
+
+\proofhead
+对 $f$ 在 0 处的差商，我们有
+\bookfigure[0.22]{figures/05ed44e8dd8e2281.jpg}
+\[
+\frac{f(x)-f(0)}{x}=x\sin\frac{1}{x},\qquad x\neq0,
+\]
+
+于是由命题 II.2.4 有 $ f'(0) = 0 $。对所有 $ x \in \mathbb{R}^\times $，$ f'(x) = 2x \sin x^{-1} - \cos x^{-1} $，因此
+
+\[
+f^{\prime}\Big(\frac{1}{2\pi n}\Big)=\frac{1}{\pi n}\operatorname{s i n}(2\pi n)-\operatorname{c o s}(2\pi n)=-1~,\qquad n\in\mathbb{N}^\times~.
+\]
+
+因此 $ f' $ 在 0 处不连续。
+
+\begin{items}
+\item[（m）]
+
+存在在 $ \mathbb{R} $ 上连续但处处不可微的函数。
+
+\proofhead
+设 $f_0$ 是习题 III.1.1 中的函数。对 $n>0$，对所有 $x\in\mathbb{R}$ 由 $f_n(x):=4^{-n}f_0(4^n x)$ 定义函数 $f_n$。显然，$f_n$ 是斜率为 $\pm1$ 的分段仿射函数，且以 $4^{-n}$ 为周期。由习题 III.5.6 我们知道，函数 $F:=\sum_{n=0}^{\infty}f_n$ 在 $\mathbb{R}$ 上连续。
+设 $a \in \mathbb{R}$。则对每个 $n \in \mathbb{N}$，存在某个 $h_n \in \{\pm 4^{-(n+1)}\}$，使得对 $k \leq n$，$f_k$ 在 $a$ 与 $a + h_n$ 之间是仿射的。因此对所有 $0 \leq k \leq n$ 有 $\left[f_k(a + h_n) - f_k(a)\right]/h_n = \pm 1$。对 $k > n$，我们有 $f_k(a + h_n) = f_k(a)$，因为此时 $f_k$ 以 $h_n$ 为周期。这蕴含
+\[
+\frac{F(a+h_{n})-F(a)}{h_{n}}=\sum_{k=0}^{n}\frac{f_{k}(a+h_{n})-f_{k}(a)}{h_{n}}=\sum_{k=0}^{n}\pm1,
+\]
+
+因此 $F$ 在 $a$ 处不可微。
+
+\[
+C^{\infty}(X,E)\subset C^{n+1}(X,E)\subset C^{n}(X,E)\subset C(X,E),\ n\in\mathbb{N}^{\times}.
+\]
+
+\proofhead
+鉴于注 1.11(c)，只需证明这些包含关系是真包含。我们只考虑情形 $X := \mathbb{R}$，$E := \mathbb{R}$，并把一般情形留给读者。对每个 $n \in \mathbb{N}$，由
+\begin{equation*}
+f_{n}(x):=\left\{\begin{array}{c l}{x^{n+2}\operatorname{s i n}(x^{-1}),}&{\quad x\neq0\;,}\\ {0,}&{\quad x=0\;.}\\ \end{array}\right.
+\end{equation*}
+
+定义 $f_n: \mathbb{R} \to \mathbb{R}$。则一个简单的归纳论证表明 $ f_n \in C^n(\mathbb{R}) \setminus C^{n+1}(\mathbb{R}) $。情形 $ n = 0 $ 已在 (l) 中证明。■
+
+\end{items}
+
+\end{example}
+
+\begin{remark}
+
+读者应当注意到，把注 1.4(c.ii) 应用于例 1.13(b)–(g) 与 (i)、(j)，就得到实多项式、有理函数、幂函数、指数函数、对数函数与三角函数的导数的通常法则。
+
+\end{remark}
+
+\subsection*{单侧可微性}
+
+若 $ X \subseteq \mathbb{R} $，$ a \in X $ 是 $ X \cap [a, \infty) $ 的聚点，且
+
+\[
+\partial_{+}f(a):=\lim_{x\to a+}\frac{f(x)-f(a)}{x-a}
+\]
+
+存在，则 $f: X \to E$ 在 $a$ 处右可微，且 $\partial_{+}f(a) \in E$ 称为 $f$ 在 $a$ 处的右导数。
+
+类似地，若 $a$ 是 $(-\infty, a] \cap X$ 的聚点，且
+
+\[
+\partial_{-}f(a):=\lim_{x\to a-}\frac{f(x)-f(a)}{x-a}
+\]
+
+存在，则 $f$ 在 $a$ 处左可微，且 $\partial_{-}f(a)$ 称为 $f$ 在 $a$ 处的左导数。若 $a$ 既是 $X \cap [a, \infty)$ 又是 $(-\infty, a] \cap X$ 的聚点，且 $f$ 在 $a$ 处可微，则显然
+
+\[
+\partial_{+}f(a)=\partial_{-}f(a)=\partial f(a).
+\]
+
+\begin{example}
+
+\begin{items}
+\item
+
+对 $ f: \mathbb{R} \to \mathbb{R} $，$ x \mapsto |x| $，
+
+\[
+\partial_{+}f(0)=1,\quad\partial_{-}f(0)=-1,\qquad\partial_{+}f(x)=\partial_{-}f(x)=\mathrm{s i g n}(x),\quad x\neq0.
+\]
+\item
+
+设 $a < b$ 且 $f: [a, b] \to E$。则 $f$ 在 $a$（或 $b$）处可微，当且仅当 $f$ 在 $a$（或 $b$）处右（或左）可微。■
+
+\end{items}
+
+例 1.15(a) 表明，函数 $f: X \to E$ 的左、右导数的存在并不蕴含导数的存在。下一个命题表明，所缺的条件是单侧导数必须相等。
+
+\end{example}
+
+\begin{proposition}
+
+设 $ X \subseteq \mathbb{R} $，$ f: X \to E $ 在 $ a \in X $ 处右可微且左可微，且 $ \partial_+(a) = \partial_-(a) $。则 $ f $ 在 $ a $ 处可微，且 $ \partial f(a) = \partial_+(a) $。
+
+\proofhead
+由假设与命题 1.1(iii)，存在函数
+\[
+r_{+}:X\cap[a,\infty)\to E\quad\text{ 且 }\quad r_{-}:(-\infty,a]\cap X\to E
+\]
+
+它们在 $a$ 处连续，且满足 $ r_{+}(a)=r_{-}(a)=0 $ 以及
+
+\[
+f(x)=f(a)+\partial_{\pm}f(a)(x-a)+r_{\pm}(x)(x-a),\qquad x\in X,\quad x\gtrless a.
+\]
+
+现在令 $ \partial f(a) := \partial_{+} f(a) = \partial_{-} f(a) $，并令
+
+\begin{equation*}
+r(x):=\left\{\begin{array}{l l}{r_{+}(x)\;,\quad}&{x\in X\cap[a,\infty)\;,}\\ {r_{-}(x)\;,\quad}&{x\in(-\infty,a]\cap X\;.}\\ \end{array}\right.
+\end{equation*}
+
+则由命题 III.1.12，$ r: X \to E $ 在 $a$ 处连续，$ r(a) = 0 $，且
+
+\[
+f(x)=f(a)+\partial f(a)(x-a)+r(x)(x-a),\qquad x\in X.
+\]
+
+因此结论由命题 1.1(iii) 得出。■
+
+\end{proposition}
+
+\begin{example}
+
+设
+
+\begin{equation}
+f(x):=\left\{\begin{array}{c l}{e^{-1/x}\;,}&{\quad x>0\;,}\\ {0\;,}&{\quad x\leq0\;.}\\ \end{array}\right.
+\end{equation}
+
+则 $f$ 是光滑的，且其所有导数在 $x = 0$ 处都为零。
+
+\proofhead
+只需证明 $f$ 的所有导数都存在，且满足
+\bookfigure[0.25]{figures/0ebdefc7b2618980.jpg}
+\begin{equation*}
+\partial^{n}f(x)=\left\{\begin{array}{c l}{p_{2n}(x^{-1})e^{-x^{-1}},}&{\quad x>0,}\\ {0,}&{\quad x\leq0,}\\ \end{array}\right.
+\end{equation*}
+
+其中 $ p_{2n} $ 表示次数 $ \leq 2n $ 的实系数多项式。
+
+显然对 $x < 0$，(1.6) 成立。在情形 $x > 0$，对 $n = 0$，(1.6) 成立。若公式对某个 $n \in \mathbb{N}$ 成立，则
+
+\begin{equation*}
+\begin{aligned}
+\partial^{n+1}f(x)&=\partial\big(p_{2n}(x^{-1})e^{-x^{-1}}\big)\\&=-\partial p_{2n}(x^{-1})(x^{-2})e^{-x^{-1}}+p_{2n}(x^{-1})e^{-x^{-1}}x^{-2}\\&=p_{2(n+1)}(x^{-1})e^{-x^{-1}},
+\end{aligned}
+\end{equation*}
+
+其中 $p_{2(n+1)}(X):=\big(p_{2n}(X)-\partial p_{2n}(X)\big)X^{2}$。由于 $\deg(p_{2n})\leq2n$，$\partial p_{2n}$ 的次数至多为 $2n-1$，且 (I.8.20) 给出 $\deg(p_{2(n+1)})\leq2(n+1)$。因此对所有 $x>0$，(1.6) 成立。
+
+还需考虑情形 $x = 0$。我们再次用归纳法证明。情形 $ n = 0 $ 是平凡的。对归纳步骤 $ n \to n + 1 $，我们计算
+
+\[
+\partial_{+}(\partial^{n}f)(0)=\lim_{x\to0+}\frac{\partial^{n}f(x)-\partial^{n}f(0)}{x-0}=\lim_{x\to0+}\left[x^{-1}p_{2n}(x^{-1})e^{-x^{-1}}\right],
+\]
+
+其中第二个等号利用了归纳假设与 (1.6)。此外，由命题 III.6.5(iii) 与 II.5.2(i)，我们有
+
+\begin{equation}
+\lim_{x\to0+}\left[q(x^{-1})e^{-x^{-1}}\right]=\lim_{y\to\infty}\frac{q(y)}{e^{y}}=0
+\end{equation}
+
+对所有 $ q \in \mathbb{R}[X] $ 成立。因此 $ \partial^n f $ 在 0 处右可微，且 $ \partial_+(\partial^n f)(0) = 0 $。由于 $ \partial^n f $ 显然在 0 处左可微，且 $ \partial_-( \partial^n f)(0) = 0 $，由命题 1.16 可得 $ \partial^{n+1} f(0) = 0 $。这就完成了 (1.6) 的证明。 $ \blacksquare $
+
+\end{example}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+当 $ f(x) $ 为下列函数时，计算 $ f: (0, \infty) \to \mathbb{R} $ 的导数：
+
+\[
+\mathrm{(a)~}(x^{x})^{x}~,\quad\mathrm{(b)~}x^{(x^{x})}~,\quad\mathrm{(c)~}x^{1/x}~,\quad\mathrm{(d)~}\log\log(1+x)~,
+\]
+\[
+\mathrm{(e)}x^{\sin x},\quad\mathrm{(f)}\sqrt[3]{x^{3/5}+\sin^{3}(1/x)-\tan^{2}(x)},\quad\mathrm{(g)}\frac{\cos x}{2+\sin\log x}.
+\]
+\item
+
+对 $ m, n \in \mathbb{N} $，由
+
+\begin{equation*}
+f_{m,n}(x):=\left\{\begin{array}{c l}{x^{n}\operatorname{s i n}(x^{-m})~,}&{\quad x\neq0~,}\\ {0~,}&{\quad x=0~.}\\ \end{array}\right.
+\end{equation*}
+
+定义 $ f_{m,n} : \mathbb{R} \to \mathbb{R} $。对哪些 $ k \in \bar{\mathbb{N}} $ 有 $ f_{m,n} \in C^k(\mathbb{R}) $？
+
+\item
+
+假设 $ f, g: \mathbb{K} \to \mathbb{K} $ 满足 $ f' = f $，对所有 $ x \in \mathbb{K} $ 有 $ f(x) \neq 0 $，且 $ g' = g $。证明 $ f $ 与 $ g $ 属于 $ C^\infty(\mathbb{K}, \mathbb{K}) $，且存在某个 $ c \in \mathbb{K} $，使得 $ g = cf $。
+
+\item
+
+证明 $ f: \mathbb{C} \to \mathbb{C} $，$ z \mapsto \overline{z} $ 处处不可微。
+
+\item
+
+$f: \mathbb{C} \to \mathbb{C}$，$z \mapsto z\overline{z}$ 在哪些点处可微？
+
+\item
+
+设 $U$ 是 $\mathbb{K}$ 中 $0$ 的邻域，$E$ 是赋范向量空间，$f: U \to E$。
+
+\begin{items}
+\item
+
+假设存在数 $ K > 0 $ 与 $ \alpha > 1 $，使得对所有 $ x \in U $ 有 $ |f(x)| \leq K|x|^\alpha $。证明 $ f $ 在 0 处可微。
+
+\item
+
+假设 $ f(0) = 0 $，且存在 $ K > 0 $ 与 $ \alpha \in (0,1) $，使得对所有 $ x \in U $ 有 $ |f(x)| \geq K|x|^\alpha $。证明 $ f $ 在 0 处不可微。
+
+\item
+
+若对所有 $ x \in U $ 有 $ |f(x)| = K|x| $，能得出什么结论？
+
+\end{items}
+
+\item
+
+对函数 $ f: \mathbb{R} \to \mathbb{R} $，$ x \mapsto \lfloor x \rfloor + \sqrt{x - \lfloor x \rfloor} $ 计算 $ \partial_\pm f(x) $。$ f $ 在何处可微？
+
+\item
+
+假设 $ I $ 是完全区间，$ f, g: I \to \mathbb{R} $ 可微。证明或反驳函数 $ |f| $、$ f \vee g $ 与 $ f \wedge g $ (a) 可微，(b) 单侧可微。
+
+\item
+
+设 $U$ 在 $\mathbb{K}$ 中开，$a \in U$，$f: U \to E$。证明或反驳下列命题：
+
+\begin{items}
+\item
+
+若 $f$ 在 $a$ 处可微，则
+
+\[
+f^{\prime}(a)=\lim_{h\to0}\frac{f(a+h)-f(a-h)}{2h}.
+\]
+\item
+
+若 $ \lim_{h\to0}\left[f(a+h)-f(a-h)\right]/2h $ 存在，则 $f$ 在 $a$ 处可微，且 (1.8) 成立。
+
+\end{items}
+
+\item
+
+设 $ n \in \mathbb{N}^\times $ 且 $ f \in C^n(\mathbb{K}) $。证明
+
+\begin{equation}
+\partial^{n}\left(x f(x)\right)=x\partial^{n}f(x)+n\partial^{(n-1)}f(x).
+\end{equation}
+\item
+
+对 $ n \in \mathbb{N}^* $，证明
+
+\[
+\partial^{n}(x^{n-1}e^{1/x})=(-1)^{n}\frac{e^{1/x}}{x^{n+1}},\qquad x>0.
+\]
+\item
+
+勒让德多项式 $ P_{n} $ 由下式定义：
+
+\[
+P_{n}(x):=\frac{1}{2^{n}n!}\partial^{n}\bigl[(x^{2}-1)^{n}\bigr],\qquad n\in\mathbb{N}.
+\]
+
+\begin{items}
+\item
+
+计算 $ P_{0}, P_{1}, \ldots, P_{5} $。
+
+\item
+
+\proofhead
+$ P_{n} $ 是次数为 $n$ 且在 $ (-1,1) $ 中有 $n$ 个零点的多项式。
+\end{items}
+
+\end{exercises}
+
+\section{中值定理及其应用}
+
+设 $ f: \mathbb{R} \to \mathbb{R} $ 是一个可微函数。若我们从几何上把 $ f' $ 视为 $ f $ 的图像上各点处切线的斜率，则直观上很清楚：借助 $ f' $，不仅可以研究 $ f $ 的局部性质，还可以研究其整体性质。例如，若 $ f $ 在 $ a $ 处取得局部极值，则在 $ (a, f(a)) $ 处的切线必为水平，即 $ f'(a) = 0 $。另一方面，若导数 $ f' $ 处处为正，则 $ f $ 具有递增这一整体性质。
+
+\bookfigure[0.53]{figures/122a209a7858aff0.jpg}
+
+下面，我们将这些想法加以推广并使之更加精确。
+
+\subsection*{极值}
+
+设 $X$ 是度量空间，$f$ 是 $X$ 上的实值函数。若存在 $x_0$ 的邻域 $U$ 使得对所有 $x \in U$ 有 $f(x_0) \leq f(x)$（或 $f(x_0) \geq f(x)$），则称 $f$ 在 $x_0 \in X$ 处取得 $\text{局部}$ $\text{极小值}$（或 $\text{局部}$ $\text{极大值}$）。若对所有 $x \in X$ 有 $f(x_0) \leq f(x)$（或 $f(x_0) \geq f(x)$），则称函数 $f$ 在 $x_0$ 处取得 $\text{全局}$ $\text{极小值}$（或 $\text{全局}$ $\text{极大值}$）。最后，若 $f$ 在 $x_0$ 处取得 $\text{局部}$（或 $\text{全局}$）$\text{极小值}$ 或 $\text{极大值}$，则称 $f$ 在 $x_0$ 处取得 $\text{局部}$（或 $\text{全局}$）$\text{极值}$。
+
+\begin{theorem}
+
+（局部极值的必要条件） 设 $ X \subseteq \mathbb{R} $ 且 $ f: X \to \mathbb{R} $ 在 $ a \in \mathring{X} $ 处取得局部极值。若 $ f $ 在 $ a $ 处可微，则 $ f'(a) = 0 $。
+
+\proofhead
+设 $f$ 在 $a$ 处取得局部极小值。则存在开区间 $I$ 使得 $a \in I \subseteq X$ 且对所有 $x \in I$ 有 $f(x) \geq f(a)$。于是
+\begin{equation}
+\frac{f(x)-f(a)}{x-a}\left\{\begin{array}{ll}\geq0,\quad&x\in I\cap(a,\infty),\\ \leq0,\quad&x\in(-\infty,a)\cap I.\end{array}\right.
+\end{equation}
+
+在极限 $ x \to a $ 下，这意味着 $ 0 \leq \partial_+ f(a) = \partial_- f(a) \leq 0 $，从而 $ f'(a) = 0 $。若 $ f $ 在 $ a $ 处取得局部极大值，则 $ -f $ 在 $ a $ 处取得局部极小值。因此，此时也有 $ f'(a) = 0 $。■
+
+\end{theorem}
+
+若 $X \subseteq \mathbb{K}$ 且 $f: X \to E$ 在 $a \in X$ 处可微且 $f'(a) = 0$，则称 $a$ 为 $f$ 的\textbf{临界点}。因此，定理 2.1 表明：若 $f$ 在 $a \in \mathring{X}$ 处取得局部极值且在 $a$ 处可微，则 $a$ 是 $f$ 的临界点。
+
+\begin{remark}
+
+设 $ f\colon [a,b] \to \mathbb{R} $ 且 $ -\infty < a < b < \infty $。
+
+\begin{items}
+\item
+
+若 $f$ 在 $a$ 处可微且在 $a$ 处取得局部极小值（或极大值），则 $f'(a) \geq 0$（或 $f'(a) \leq 0$）。类似地，若 $f$ 在 $b$ 处可微且在 $b$ 处取得局部极小值（或极大值），则 $f'(b) \leq 0$（或 $f'(b) \geq 0$）。
+
+\proofhead
+这直接由定理 2.1 的证明得出。
+\end{items}
+
+\bookfigure[0.19]{figures/698806c2e01a54da.jpg}
+\bookfigure[0.19]{figures/0e5f0aa62fe4a5d5.jpg}
+\bookfigure[0.19]{figures/aa803a27f34f88b0.jpg}
+
+\begin{items}
+\item[（b）]
+
+设 $f$ 在 $ [a,b] $ 上连续且在 $ (a,b) $ 上可微。则
+
+\[
+\max_{x\in[a,b]}f(x)=f(a)\lor f(b)\lor\max\{f(x);x\in(a,b),f^{\prime}(x)=0\},
+\]
+
+也就是说，$f$ 要么在 $[a,b]$ 的端点处，要么在 $(a,b)$ 内的临界点处取得最大值。类似地
+
+\[
+\min_{x\in[a,b]}f(x)=f(a)\land f(b)\land\min\{f(x)~;~x\in(a,b),~f^{\prime}(x)=0\}~.
+\]
+
+\proofhead
+由极值定理（推论 III.3.8），存在 $ x_0 \in [a, b] $ 使得对 $ x \in [a, b] $ 有 $ f(x_0) \geq f(x) $。若 $ x_0 $ 不是 $ [a, b] $ 的端点，则由定理 2.1，$ x_0 $ 是 $ f $ 的临界点。第二个断言可类似证明。
+\item[（c）]
+
+若 $ x_0 \in (a, b) $ 是 $ f $ 的临界点，并不能推出 $ f $ 在 $ x_0 $ 处取得极值。
+
+\proofhead
+考虑三次多项式 $ f(x) := x^3 $ 在 $ x_0 = 0 $ 处的情形。■
+\end{items}
+
+\end{remark}
+
+\subsection*{中值定理}
+
+在下面两个定理中，$a$ 和 $b$ 是满足 $a < b$ 的实数。
+
+\begin{theorem}
+
+（罗尔定理） 设 $ f \in C([a, b], \mathbb{R}) $ 在 $ (a, b) $ 上可微。若 $ f(a) = f(b) $，则存在某个 $ \xi \in (a, b) $ 使得 $ f'(\xi) = 0 $。
+
+\proofhead
+若 $f$ 在区间 $[a,b]$ 上为常数，则结论显然。事实上，此时 $f'=0$。若 $f$ 在 $[a,b]$ 上不为常数，则 $f$ 在 $(a,b)$ 内取得极值，结论由注 2.2(b) 得出。
+\end{theorem}
+
+\begin{theorem}
+
+（中值定理） 若 $ f \in C([a, b], \mathbb{R}) $ 在 $ (a, b) $ 上可微，则存在某个 $ \xi \in (a, b) $ 使得
+
+\[
+f(b)=f(a)+f^{\prime}(\xi)(b-a).
+\]
+
+\proofhead
+令
+\[
+g(x):=f(x)-\frac{f(b)-f(a)}{b-a}x~,\qquad x\in[a,b]~.
+\]
+
+则 $ g\colon [a,b] \to \mathbb{R} $ 满足罗尔定理的假设。因此存在某个 $ \xi \in (a,b) $ 使得
+
+\[
+0=g^{\prime}(\xi)=f^{\prime}(\xi)-\frac{f(b)-f(a)}{b-a},
+\]
+
+这就证明了结论。■
+
+\end{theorem}
+
+从几何上看，中值定理说的是：存在（至少）一个点 $ \xi \in (a, b) $，使得 $ f $ 的图像在 $ (\xi, f(\xi)) $ 处的切线 $ t $ 平行于经过 $ (a, f(a)) $ 与 $ (b, f(b)) $ 的割线 $ s $，也就是说，这两条直线的斜率相等：
+
+\[
+f^{\prime}(\xi)=\frac{f(b)-f(a)}{b-a}.
+\]
+\bookfigure[0.28]{figures/9c067d371cae1632.jpg}
+\bookfigure[0.28]{figures/517aa82e7d05e512.jpg}
+
+\subsection*{单调性与可微性}
+
+\begin{theorem}
+
+（单调函数的刻画） 设 $I$ 是完全区间且 $f \in C(I, \mathbb{R})$ 在 $\mathring{I}$ 上可微。
+
+\begin{subitems}
+\item
+
+$f$ 递增（或递减）当且仅当对所有 $x \in \mathring{I}$ 有 $f'(x) \geq 0$（或 $f'(x) \leq 0$）。
+
+\item
+
+若对所有 $ x \in \mathring{I} $ 有 $ f'(x) > 0 $（或 $ f'(x) < 0 $），则 $ f $ 严格递增（或严格递减）。
+
+\proofhead
+(i) “$\Rightarrow$” 若 $f$ 递增，则
+\[
+\frac{f(y)-f(x)}{y-x}\geq0,\qquad x,y\in\mathring{I},\quad x\neq y.
+\]
+
+取极限 $ y \to x $，我们得到对所有 $ x \in \mathring{I} $ 有 $ f'(x) \geq 0 $。$ f $ 递减的情形可类似证明。
+“⇐” 设 $ x, y \in I $ 满足 $x < y$。由中值定理，存在某个 $ \xi \in (x, y) $ 使得
+
+\[
+f(y)=f(x)+f^{\prime}(\xi)(y-x).
+\]
+
+若对所有 $ z \in \mathring{I} $ 有 $ f'(z) \geq 0 $，则特别地有 $ f'(\xi) \geq 0 $，于是由 (2.1) 可得 $ f(y) \geq f(x) $。因此 $ f $ 递增。类似地，若对所有 $ z \in \mathring{I} $ 有 $ f'(z) \leq 0 $，则 $ f $ 递减。
+断言 (ii) 直接由 (2.1) 得出。■
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+（常数函数的刻画） 在定理 2.5 的假设下，$f$ 为常数当且仅当 $ f' = 0 $。
+
+\proofhead
+这由定理 2.5(i) 得出。
+\item
+
+定理 2.5(ii) 的逆命题不成立。函数 $ f(x) := x^3 $ 严格递增，但其导数在 $0$ 处为零。此外，在 (a) 中，定义域为区间这一点是本质性的（为什么？）。
+作为罗尔定理的进一步应用，我们证明实可微函数单射性的一个简单判据。
+
+\end{items}
+
+\end{remark}
+
+\begin{proposition}
+
+设 $ I $ 是完全区间且 $ f \in C(I, \mathbb{R}) $ 在 $ \mathring{I} $ 上可微。若 $ f' $ 在 $ \mathring{I} $ 内没有零点，则 $ f $ 是单射。
+
+\proofhead
+若 $f$ 不是单射，则存在 $x, y \in I$ 使得 $x < y$ 且 $f(x) = f(y)$。于是，由罗尔定理，$f'$ 在 $x$ 与 $y$ 之间有一个零点。
+\end{proposition}
+
+\begin{theorem}
+
+设 $ I $ 是完全区间且 $ f: I \to \mathbb{R} $ 可微，且对所有 $ x \in I $ 有 $ f'(x) \neq 0 $。
+
+\begin{subitems}
+\item
+
+$f$ 严格单调。
+
+\item
+
+$J := f(I)$ 是完全区间。
+
+\item
+
+$ f^{-1} $: $ J \to \mathbb{R} $ 可微，且对所有 $ x \in I $ 有 $ (f^{-1})' \big(f(x)\big) = 1/f'(x) $。
+
+\proofhead
+首先我们验证 (ii)。由推论 1.2 与命题 2.7，$f$ 连续且单射。于是介值定理与例 1.10(b) 蕴含 $J$ 是完全区间。
+为证 (i)，假设 $f$ 不严格单调。由于由注 2.6(a)，$f$ 在任何完全子区间上都不为常数，故存在 $x < y < z$ 使得 $f(x) > f(y) < f(z)$ 或 $f(x) < f(y) > f(z)$。由介值定理与极值定理，$f$ 在某个 $\xi \in (x, z)$ 处取得极值。由定理 2.1，我们有 $f'(\xi) = 0$，这与我们的假设矛盾。最后，断言 (iii) 由 (i) 及推论 1.2 与 1.9 得出。
+\end{subitems}
+
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+函数 cis: $ \mathbb{R} \to \mathbb{C} $ 具有周期 $ 2\pi $，因此当然不是单射。尽管如此，对所有 $ t \in \mathbb{R} $ 有 $ \mathrm{cis}'(t) = ie^{it} \neq 0 $。这表明命题 2.7 对复值（或向量值）函数不成立。
+
+\item
+
+若定理 2.8 的假设成立，则由 (i) 与定理 2.5 可得，要么
+
+\begin{equation}
+f^{\prime}(x)>0,\quad x\in I,\qquad\text{或}\qquad f^{\prime}(x)<0,\quad x\in I.
+\end{equation}
+
+注意，(2.2) 并不能由“对所有 $ x \in I $ 有 $ f'(x) \neq 0 $”与介值定理推出，因为 $ f' $ 可能不连续。■
+
+\end{items}
+
+\end{remark}
+
+\begin{application}
+
+对三角函数，我们有
+
+\[
+\cos^{\prime}x=-\sin x\neq0,\quad\cot^{\prime}x=-1/\sin^{2}x\neq0,\quad x\in(0,\pi),
+\]
+\[
+\sin^{\prime}x=\cos x\neq0,\qquad\tan^{\prime}x=1/\cos^{2}x\neq0,\qquad x\in(-\pi/2,\pi/2).
+\]
+
+因此，由定理 2.8，这些函数在给定区间上的限制是单射，且具有可微的反函数，即反三角函数。这些反函数的通常记号是
+
+\[
+\arcsin:=\left(\sin\big|(-\pi/2,\pi/2)\right)^{-1}:(-1,1)\to(-\pi/2,\pi/2),
+\]
+\[
+\arccos:=\left(\cos\mid(0,\pi)\right)^{-1}:(-1,1)\to(0,\pi),
+\]
+\[
+\arctan:=\left(\tan\big|(-\pi/2,\pi/2)\right)^{-1}:\mathbb{R}\to(-\pi/2,\pi/2)~,
+\]
+\[
+\operatorname{a r c c o t}:=\left(\cot\mid(0,\pi)\right)^{-1}\qquad\quad:\mathbb{R}\to(0,\pi)~.
+\]
+
+为计算反三角函数的导数，我们使用定理 2.8(iii)。对反正弦函数，这给出
+
+\[
+\arcsin^{\prime}x=\frac{1}{\sin^{\prime}y}=\frac{1}{\cos y}=\frac{1}{\sqrt{1-\sin^{2}y}}=\frac{1}{\sqrt{1-x^{2}}},\qquad x\in(-1,1),
+\]
+
+其中我们已令 $ y := \arcsin x $ 并使用了 $ x = \sin y $。类似地，对反正切函数，
+
+\[
+\arctan^{\prime}x=\frac{1}{\tan^{\prime}y}=\frac{1}{1+\tan^{2}y}=\frac{1}{1+x^{2}},\qquad x\in\mathbb{R},
+\]
+
+其中 $ y \in (-\pi/2, \pi/2) $ 由 $ x = \tan y $ 确定。
+
+反余弦函数与反余切函数的导数可用同样方法计算，总结起来，我们有
+
+\begin{equation}
+\begin{aligned}
+\arcsin^{\prime}x&=\frac{1}{\sqrt{1-x^{2}}},\quad\arccos^{\prime}x=\frac{-1}{\sqrt{1-x^{2}}},\quad&x\in(-1,1),\\\arctan^{\prime}x&=\frac{1}{1+x^{2}},\quad\operatorname{arccot}^{\prime}x=\frac{-1}{1+x^{2}},\quad&x\in\mathbb{R}.
+\end{aligned}
+\end{equation}
+
+特别地，(2.3) 表明反三角函数是光滑的。
+
+\bookfigure[0.14]{figures/9172bf9bbea6762f.jpg}
+
+反正弦
+
+\bookfigure[0.35]{figures/d7d34f71b147a1c2.jpg}
+
+反正切
+
+\bookfigure[0.14]{figures/8d92d33105d4dd6c.jpg}
+
+反余弦
+
+\bookfigure[0.35]{figures/f5ea2c8049f7c4a0.jpg}
+
+反余切
+
+\end{application}
+
+\subsection*{凸性与可微性}
+
+我们已经看到，单调性是研究实函数时一个非常有用的概念。因此，导数单调的可微函数具有“特别良好”的性质，也就不足为奇了。
+
+设 $C$ 是向量空间 $V$ 的凸子集。则 $f: C \to \mathbb{R}$ 是凸的，若
+
+\begin{equation}
+f\big((1-t)x+t y\big)\leq(1-t)f(x)+t f(y),\qquad x,y\in C,\quad t\in(0,1),
+\end{equation}
+
+且严格凸的，若
+
+\[
+f\big((1-t)x+t y\big)<(1-t)f(x)+t f(y),\qquad x,y\in C,\quad x\neq y,\quad t\in(0,1).
+\]
+
+最后，若 $-f$ 是凸的（或严格凸的），则称 $f$ 是凹的（或严格凹的）。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+显然，$f$ 是凹的（或严格凹的）当且仅当
+
+\[
+f\big((1-t)x+ty\big)\geq(1-t)f(x)+tf(y),
+\]
+
+（或
+
+\[
+f\big((1-t)x+ty\big)>(1-t)f(x)+tf(y)\ \Big)
+\]
+
+对所有满足 $ x \neq y $ 的 $ x, y \in C $ 以及对所有 $ t \in (0,1) $ 成立。
+
+\item
+
+设 $ I \subseteq \mathbb{R} $ 是完全区间\footnote{由注 III.4.9(c)，$ \mathbb{R} $ 的子集 $ I $ 是凸的当且仅当 $ I $ 是区间。}且 $ f: I \to \mathbb{R} $。则下列各命题等价：
+
+\begin{subitems}
+\item
+
+$f$ 是凸的。
+
+\item
+
+对所有满足 $a < b$ 的 $ a, b \in I $，
+
+\[
+f(x)\leq f(a)+\frac{f(b)-f(a)}{b-a}(x-a),\qquad a<x<b.
+\]
+\item
+
+对所有满足 $a < b$ 的 $ a, b \in I $，
+
+\[
+\frac{f(x)-f(a)}{x-a}\leq\frac{f(b)-f(a)}{b-a}\leq\frac{f(b)-f(x)}{b-x},\qquad a<x<b.
+\]
+\item
+
+对所有满足 $a < b$ 的 $ a, b \in I $，
+
+\[
+\frac{f(x)-f(a)}{x-a}\leq\frac{f(b)-f(x)}{b-x},\qquad a<x<b.
+\]
+
+若在 (ii)–(iv) 中，符号 $ \leq $ 处处被 $<$ 替换，则这些命题等价于 $f$ 严格凸。对凹函数与严格凹函数，有类似的命题成立。
+
+\proofhead
+“(i) $\Rightarrow$ (ii) 设 $a, b \in I$ 满足 $a < b$ 且 $x \in (a, b)$。令 $t := (x - a)/(b - a)$。则 $t \in (0,1)$ 且 $(1 - t)a + tb = x$，于是由 $f$ 的凸性可得
+\[
+f(x)\leq\Big(1-\frac{x-a}{b-a}\Big)f(a)+\frac{x-a}{b-a}f(b)=f(a)+\frac{f(b)-f(a)}{b-a}(x-a).
+\]
+
+“(ii)⇒(iii)” (iii) 中的第一个不等式直接由 (ii) 得出。由 (ii) 我们还有
+
+\[
+f(b)-f(x)\geq f(b)-f(a)-\frac{f(b)-f(a)}{b-a}(x-a)=\frac{f(b)-f(a)}{b-a}(b-x),
+\]
+
+由此可得
+
+\[
+\frac{f(b)-f(a)}{b-a}\leq\frac{f(b)-f(x)}{b-x}.
+\]
+
+'(iv)$\Rightarrow$(i)' 设 $ a, b \in I $ 满足 $ a < b $ 且 $ t \in (0,1) $。则 $ x := (1 - t)a + tb $ 属于 $ (a,b) $，于是
+
+\[
+\frac{f(x)-f(a)}{x-a}\leq\frac{f(b)-f(x)}{b-x}.
+\]
+
+这个不等式蕴含
+
+\[
+f\big((1-t)a+t b\big)=f(x)\leq\frac{b-x}{b-a}f(a)+\frac{x-a}{b-a}f(b)=(1-t)f(a)+t f(b).
+\]
+
+因此 $f$ 是凸的。
+其余断言可类似证明。■
+
+\end{subitems}
+
+\item
+
+从几何上看，(b) 的 (ii) 说的是：$f|(a,b)$ 的图像位于经过 $(a,f(a))$ 与 $(b,f(b))$ 的割线下方。
+
+\end{items}
+
+(b) 的不等式 (iii) 说的是：经过 $(a, f(a))$ 与 $(x, f(x))$ 的割线的斜率，小于经过 $(a, f(a))$ 与 $(b, f(b))$ 的割线的斜率，而后者又小于经过 $(x, f(x))$ 与 $(b, f(b))$ 的割线的斜率。
+
+\end{remark}
+
+\begin{theorem}
+
+（凸函数的刻画） 设 $I$ 是完全区间且 $f: I \to \mathbb{R}$ 可微。则 $f$（严格）凸当且仅当 $f'$（严格）递增。
+
+\bookfigure[0.22]{figures/ac1a1f9214a08770.jpg}
+
+\proofhead
+‘$\Rightarrow$’ 设 $f$ 严格凸，且 $a,b\in I$ 满足 $a<b$。则我们可选取 $(a,b)$ 中的严格递减序列 $(x_n)$ 与 $(a,b)$ 中的严格递增序列 $(y_n)$，使得 $\lim x_n=a$、$\lim y_n=b$ 且 $x_0<y_0$。由注 2.11(b) 我们有
+\[
+\frac{f(x_{n})-f(a)}{x_{n}-a}<\frac{f(x_{0})-f(a)}{x_{0}-a}<\frac{f(y_{0})-f(x_{0})}{y_{0}-x_{0}}<\frac{f(y_{n})-f(y_{0})}{y_{n}-y_{0}}<\frac{f(y_{n})-f(b)}{y_{n}-b}.
+\]
+
+取极限 $ n \to \infty $，我们得到
+
+\[
+f^{\prime}(a)\leq\frac{f(x_{0})-f(a)}{x_{0}-a}<\frac{f(y_{0})-f(x_{0})}{y_{0}-x_{0}}\leq f^{\prime}(b).
+\]
+
+因此 $ f^{\prime} $ 严格递增。
+
+若 $f$ 凸，则上述讨论表明不等式 $a < b$ 蕴含 $f'(a) \leq f'(b)$。也就是说，$f'$ 递增。
+
+“⇐” 设 $a,b,x \in I$ 满足 $a < x < b$。由中值定理，存在 $\xi \in (a,x)$ 与 $\eta \in (x,b)$ 使得
+
+\[
+\frac{f(x)-f(a)}{x-a}=f^{\prime}(\xi)\quad\text{且}\quad\frac{f(b)-f(x)}{b-x}=f^{\prime}(\eta).
+\]
+
+于是结论由注 2.11(b) 及 $ f' $ 的（严格）单调性得出。■
+
+\end{theorem}
+
+\begin{corollary}
+
+设 $ I $ 是完全区间且 $ f: I \to \mathbb{R} $ 二次可微。
+
+\begin{subitems}
+\item
+
+$f$ 凸当且仅当对所有 $ x \in I $ 有 $ f''(x) \geq 0 $。
+
+\item
+
+若对所有 $ x \in I $ 有 $ f''(x) > 0 $，则 $ f $ 严格凸。
+
+\proofhead
+这直接由定理 2.5 与 2.12 得出。
+\end{subitems}
+
+\end{corollary}
+
+\begin{example}
+
+\begin{items}
+\item
+
+$ \exp: \mathbb{R} \to \mathbb{R} $ 严格递增且严格凸。
+
+\item
+
+$ \log: (0, \infty) \to \mathbb{R} $ 严格递增且严格凹。
+
+\item
+
+对 $ \alpha \in \mathbb{R} $，设 $ f_{\alpha}:(0, \infty) \to \mathbb{R} $，$ x \mapsto x^{\alpha} $ 为幂函数。则 $ f_{\alpha} $ 是
+严格递增且严格凸的，若 $ \alpha > 1 $，
+严格递增且严格凹的，若 $ 0 < \alpha < 1 $，
+严格递减且严格凸的，若 $ \alpha < 0 $。
+
+\end{items}
+
+\bookfigure[0.17]{figures/374a231de88528c7.jpg}
+
+\proofhead
+所有断言都由定理 2.5、推论 2.13 及下列关系得出：
+
+ $ (\alpha)\ \exp = \exp' = \exp'' > 0, $
+
+ $ (\beta)\ \log'(x) = x^{-1} > 0,\ \log''(x) = -x^{-2} < 0 $ 对所有 $ x \in (0, \infty) $ 成立，
+
+ $ (\gamma) $  $ f'_{\alpha} = \alpha f_{\alpha-1} $， $ f''_{\alpha} = \alpha (\alpha-1) f_{\alpha-2} $，且 $ f_{\beta}(x) > 0 $ 对所有 $ x \in (0, \infty) $ 与 $ \beta \in \mathbb{R} $ 成立。■
+\end{example}
+
+\subsection*{杨、赫尔德与闵可夫斯基不等式}
+
+对数函数的凹性与指数函数的单调性，使得分析学中一个基本不等式——杨不等式——可以得到一个优雅的证明。为给出这个证明，引入下列记号是很有用的：对 $p \in (1, \infty)$，我们称 $p' := p/(p-1)$ 为 $p$ 的赫尔德共轭。它由方程\footnote{特别地，由 (2.4) 可得 $ (p')' = p $。}确定
+
+\[
+\frac{1}{p}+\frac{1}{p^{\prime}}=1.
+\]
+
+\begin{theorem}
+
+（杨不等式） 对 $ p \in (1, \infty) $，
+
+\[
+\xi\eta\leq\frac{1}{p}\xi^{p}+\frac{1}{p^{\prime}}\eta^{p^{\prime}},\qquad\xi,\eta\in\mathbb{R}^{+}.
+\]
+
+\proofhead
+只需考虑 $ \xi, \eta \in (0, \infty) $ 的情形。对数函数的凹性与 (2.4) 蕴含不等式
+\[
+\log\Bigl(\frac{\xi^{p}}{p}+\frac{\eta^{p^{\prime}}}{p^{\prime}}\Bigr)\geq\frac{1}{p}\log\xi^{p}+\frac{1}{p^{\prime}}\log\eta^{p^{\prime}}=\log\xi+\log\eta=\log\xi\eta.
+\]
+
+由于指数函数递增，且对所有 $ x $ 有 $ \exp \log x = x $，故所证不等式成立。■
+
+\end{theorem}
+
+\begin{application}
+
+\begin{items}
+\item
+
+（几何平均与算术平均不等式\footnote{见习题 I.10.10。}） 对 $ n \in \mathbb{N}^\times $ 与 $ x_j \in \mathbb{R}^+ $，$ 1 \leq j \leq n $，
+
+\begin{equation}
+\sqrt[n]{\prod_{j=1}^{n} x_{j}}\leq\frac{1}{n}\sum_{j=1}^{n} x_{j}.
+\end{equation}
+
+\proofhead
+我们可以假设所有 $ x_j $ 均为正。对 $ n = 1 $，(2.5) 显然成立。现在假设 (2.5) 对某个 $ n \in \mathbb{N}^* $ 成立。则
+\[
+\sqrt[n+1]{\prod_{j=1}^{n+1}x_{j}}\leq\left(\frac{1}{n}\sum_{j=1}^{n}x_{j}\right)^{n/(n+1)}(x_{n+1})^{1/(n+1)}.
+\]
+
+对这个不等式的右边，我们应用杨不等式，其中
+
+\[
+\xi:=\left(\frac{1}{n}\sum_{j=1}^{n}x_{j}\right)^{n/(n+1)},\quad\eta:=(x_{n+1})^{1/(n+1)},\quad p:=1+\frac{1}{n}.
+\]
+
+则
+
+\[
+\xi\eta\leq\frac{1}{p}\xi^{p}+\frac{1}{p^{\prime}}\eta^{p^{\prime}}=\frac{1}{n+1}\sum_{j=1}^{n}x_{j}+\frac{1}{n+1}x_{n+1}=\frac{1}{n+1}\sum_{j=1}^{n+1}x_{j},
+\]
+
+这就证明了结论。■
+
+\item
+
+（赫尔德不等式） 对 $ p \in (1, \infty) $ 与 $ x = (x_1, \ldots, x_n) \in \mathbb{K}^n $，定义
+
+\[
+|x|_{p}:=\big(\sum_{j=1}^{n}|x_{j}|^{p}\big)^{1/p}.
+\]
+
+则\footnote{在 $ p = p' = 2 $ 的情形，此式化为柯西-施瓦茨不等式。}
+
+\[
+\sum_{j=1}^{n}\left|x_{j} y_{j}\right|\leq\left|x\right|_{p}\left|y\right|_{p^{\prime}},\qquad x,y\in\mathbb{K}^{n}.
+\]
+
+\proofhead
+只需考虑 $ x \neq 0 $ 且 $ y \neq 0 $ 的情形。由杨不等式我们有
+\[
+\frac{|x_{j}|}{|x|_{p}}\frac{|y_{j}|}{|y|_{p^{\prime}}}\leq\frac{1}{p}\frac{|x_{j}|^{p}}{|x|_{p}^{p}}+\frac{1}{p^{\prime}}\frac{|y_{j}|^{p^{\prime}}}{|y|_{p^{\prime}}^{p^{\prime}}},\qquad1\leq j\leq n.
+\]
+
+对这些不等式关于 $j$ 求和，得到
+
+\[
+\frac{\sum_{j=1}^{n}\left|x_{j}y_{j}\right|}{\left|x\right|_{p}\left|y\right|_{p^{\prime}}}\leq\frac{1}{p}+\frac{1}{p^{\prime}}=1,
+\]
+
+于是结论成立。■
+
+\item
+
+（闵可夫斯基不等式） 对所有 $ p \in (1, \infty) $，
+
+\[
+|x+y|_{p}\leq|x|_{p}+|y|_{p}\;,\qquad x,y\in\mathbb{K}^{n}\;.
+\]
+
+\proofhead
+由三角不等式我们有
+\begin{equation*}
+\begin{aligned}
+\left|x+y\right|_{p}^{p}&=\sum_{j=1}^{n}\left|x_{j}+y_{j}\right|^{p-1}\left|x_{j}+y_{j}\right|\\&\leq\sum_{j=1}^{n}\left|x_{j}+y_{j}\right|^{p-1}\left|x_{j}\right|+\sum_{j=1}^{n}\left|x_{j}+y_{j}\right|^{p-1}\left|y_{j}\right|.
+\end{aligned}
+\end{equation*}
+
+因此赫尔德不等式蕴含
+
+\begin{equation*}
+\begin{aligned}
+|x+y|^{p}_{p}&\leq|x|_{p}\left(\sum^{n}_{j=1}|x_{j}+y_{j}|^{p}\right)^{1/p^{\prime}}+|y|_{p}\left(\sum^{n}_{j=1}|x_{j}+y_{j}|^{p}\right)^{1/p^{\prime}}\\&=\left(|x|_{p}+|y|_{p}\right)|x+y|^{p/p^{\prime}}_{p}.
+\end{aligned}
+\end{equation*}
+
+若 $x + y = 0$，则结论平凡成立。否则我们可以用 $|x + y|_{p}^{p/p'}$ 去除这个不等式的两边，得到 $|x + y|_{p}^{p-p/p'} \leq |x|_{p} + |y|_{p}$。由于 $p - p/p' = 1$，这就证明了结论。
+这些不等式的一个直接推论是，$ |\cdot|_{p} $ 是 $ \mathbb{K}^{n} $ 上的一个范数：
+
+\end{items}
+
+\end{application}
+
+\begin{proposition}
+
+对每个 $p \in [1, \infty]$，$|\cdot|_{p}$ 是 $\mathbb{K}^{n}$ 上的范数。
+
+\proofhead
+我们已经在 II.3 节中看到，$ |\cdot|_{1} $ 与 $ |\cdot|_{\infty} $ 是 $ \mathbb{K}^{n} $ 上的范数。若 $ p \in (1, \infty) $，则闵可夫斯基不等式恰好是 $ |\cdot|_{p} $ 的三角不等式。其余范数公理的有效性是显然的。 $ \blacksquare $
+\end{proposition}
+
+\subsection*{向量值函数的中值定理}
+
+在本节的其余部分，$a$ 和 $b$ 是满足 $a < b$ 的实数。
+
+设 $ f: [a, b] \to \mathbb{R} $ 可微。则由中值定理，存在某个 $ \xi \in (a, b) $ 使得
+
+\[
+f(b)-f(a)=f^{\prime}(\xi)(b-a).
+\]
+
+即使 $\xi \in (a, b)$ 未知，(2.6) 仍然给出了 $f$ 在 $[a, b]$ 上的改变量与 $f'$ 在该区间上的取值之间的一种关系。对于从 $[a, b]$ 映入赋范向量空间 $E$ 的可微函数，(2.6) 一般并不成立，这正如我们从注 2.9(a) 所知。
+
+在应用中，往往并不需要知道 $f$ 在 $[a, b]$ 上改变量的精确值。有时知道一个合适的界就足够了。对实值函数，我们直接由 (2.6) 得到这样一个界：
+
+\begin{equation}
+\left|f(b)-f(a)\right|\leq\sup_{\xi\in(a,b)}\left|f^{\prime}(\xi)\right|(b-a).
+\end{equation}
+
+下一个定理对向量值函数证明了一个类似的命题。
+
+\begin{theorem}
+
+（向量值函数的中值定理） 设 $E$ 是赋范向量空间且 $f \in C([a, b], E)$ 在 $(a, b)$ 上可微。则
+
+\[
+\left\|f(b)-f(a)\right\|\leq\sup_{t\in(a,b)}\left\|f^{\prime}(t)\right\|(b-a).
+\]
+
+\proofhead
+只需考虑 $f'$ 有界的情形，于是存在某个 $\alpha > 0$ 使得对所有 $t \in (a, b)$ 有 $\alpha > \|f'(t)\|$。固定 $\varepsilon \in (0, b - a)$，令
+\begin{equation}
+{S}:=\left\{\sigma\in[a+\varepsilon,b];\|f(\sigma)-f(a+\varepsilon)\|\leq\alpha(\sigma-a-\varepsilon)\right\}.
+\end{equation}
+
+集合 $S$ 非空，因为 $a + \varepsilon$ 属于 $S$。由于 $f$ 的连续性，$S$ 是闭的（见例 III.2.22(c)），并且由海涅-博雷尔定理，它是紧致的。因此 $s := \max S$ 存在，且属于区间 $[a + \varepsilon, b]$。
+
+假设 $s < b$。则对所有 $ t \in (s, b) $，
+
+\[
+\left\|f(t)-f(a+\varepsilon)\right\|\leq\left\|f(t)-f(s)\right\|+\alpha(s-a-\varepsilon).
+\]
+
+由于 $f$ 在 $[a+\varepsilon,b)$ 上可微，我们有
+
+\[
+\frac{\|f(t)-f(s)\|}{t-s}\to\|f^{\prime}(s)\|\ (t\to s)~.
+\]
+
+由 $ \alpha $ 的定义，存在某个 $ \delta \in (0, b - s) $ 使得
+
+\[
+\left\|f(t)-f(s)\right\|\leq\alpha(t-s),\qquad0<t-s<\delta.
+\]
+
+结合 (2.7)，这蕴含
+
+\[
+\left\|f(t)-f(a+\varepsilon)\right\|\leq\alpha(t-a-\varepsilon),\qquad s<t<s+\delta,
+\]
+
+这与 $s$ 的最大性矛盾。因此我们有 $s = b$，从而也有
+
+\[
+\left\|f(b)-f(a+\varepsilon)\right\|\leq\alpha(b-a-\varepsilon)
+\]
+
+对 $ \left\{ \|f'(t)\| ; t \in (a,b) \right\} $ 的每个上界 $ \alpha $ 成立，也就是说，
+
+\[
+\left\|f(b)-f(a+\varepsilon)\right\|\leq\sup_{t\in(a,b)}\left\|f^{\prime}(t)\right\|(b-a-\varepsilon).
+\]
+
+由于这对每个 $ \varepsilon \in (0, b - a) $ 成立，取极限 $ \varepsilon \to 0 $ 并利用 $ f $ 的连续性，即得结论。 $ \blacksquare $
+
+\end{theorem}
+
+\begin{corollary}
+
+设 $I$ 是紧致的完全区间，$E$ 是赋范向量空间，且 $f \in C(I, E)$ 在 $\mathring{I}$ 上可微。若 $f'$ 在 $\mathring{I}$ 上有界，则 $f$ 是利普希茨连续的。特别地，$C^1(I, E)$ 中的任何函数都是利普希茨连续的。
+
+\proofhead
+第一个断言直接由定理 2.18 得出。若 $ f \in C^1(I, E) $，则由推论 III.3.7，导数 $ f' $ 在 $ I $ 上有界。
+\end{corollary}
+
+\subsection*{第二中值定理}
+
+下面这个命题通常被称为第二中值定理。
+
+\begin{proposition}
+
+设 $ f, g \in C([a, b], \mathbb{R}) $ 在 $ (a, b) $ 上可微，且对所有 $ x \in (a, b) $ 有 $ g'(x) \neq 0 $。则存在某个 $ \xi $ 属于 $ (a, b) $ 使得
+
+\[
+\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f^{\prime}(\xi)}{g^{\prime}(\xi)}.
+\]
+
+\proofhead
+罗尔定理蕴含 $ g(a) \neq g(b) $，于是
+\[
+h(x):=f(x)-\frac{f(b)-f(a)}{g(b)-g(a)}\big(g(x)-g(a)\big)
+\]
+
+对所有 $x \in [a,b]$ 有良好定义。此外，$h$ 在 $[a,b]$ 上连续，在 $(a,b)$ 上可微，且满足 $h(a) = h(b)$。由罗尔定理，存在某个 $\xi \in (a,b)$ 使得 $h'(\xi) = 0$。由于
+
+\[
+h^{\prime}(x)=f^{\prime}(x)-\frac{f(b)-f(a)}{g(b)-g(a)}g^{\prime}(x),\qquad x\in(a,b),
+\]
+
+结论成立。■
+
+\end{proposition}
+
+\subsection*{洛必达法则}
+
+作为第二中值定理的一个应用，我们推导一个法则，它对于计算两个函数之商的极限是有用的，此时该极限具有“0/0”或“∞/∞”的形式。
+
+\begin{proposition}
+
+设 $ f, g: (a, b) \to \mathbb{R} $ 可微，且对所有 $ x \in (a, b) $ 有 $ g(x) \neq 0 $。又设下列两者之一成立：
+
+\begin{subitems}
+\item
+
+$ \lim_{x \to a} f(x) = \lim_{x \to a} g(x) = 0 $
+
+\item
+
+$ \lim_{x \to a} g(x) = \pm \infty $。
+则
+
+\[
+\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f^{\prime}(x)}{g^{\prime}(x)},
+\]
+
+若右边的极限在 $ \bar{\mathbb{R}} $ 中存在。
+
+\proofhead
+设 $\alpha := \lim_{x \to a} f'(x) / g'(x) < \infty$。则对每一对满足 $\alpha < \alpha_1 < \alpha_0$ 的 $\alpha_0$ 与 $\alpha_1$，存在某个 $x_1 \in (a, b)$ 使得对所有 $a < x < x_1$ 有 $f'(x) / g'(x) < \alpha_1$。由第二中值定理，对所有满足 $x < y$ 的 $x, y \in (a, x_1)$，存在某个 $\xi \in (x, y)$ 使得
+\begin{equation}
+\frac{f(y)-f(x)}{g(y)-g(x)}=\frac{f^{\prime}(\xi)}{g^{\prime}(\xi)}.
+\end{equation}
+
+由于 $ \xi < y < x_{1} $，可得
+
+\[
+\frac{f(y)-f(x)}{g(y)-g(x)}<\alpha_{1}<\alpha_{0},\qquad x,y\in(a,x_{1}).
+\]
+
+假设 (i) 成立。则在 (2.8) 中取极限 $ x \to a $，得到
+
+\begin{equation}
+f(y)/g(y)\leq\alpha_{1}<\alpha_{0},\qquad a<y<x_{1}.
+\end{equation}
+
+若取而代之的是 $ \lim_{x \to a} g(x) = \infty $，则对每个 $ y \in (a, x_1) $，存在某个 $ x_2 \in (a, y) $ 使得对所有 $ a < x < x_2 $ 有 $ g(x) > 1 \lor g(y) $。由 (2.8) 我们得到
+
+\[
+\frac{f(x)}{g(x)}<\alpha_{1}-\alpha_{1}\frac{g(y)}{g(x)}+\frac{f(y)}{g(x)},\qquad a<x<x_{2}.
+\]
+
+当 $x \to a$ 时，这个不等式的右边收敛到 $\alpha_1$。因此存在某个 $x_3 \in (a, x_2)$ 使得对所有 $a < x < x_3$ 有 $f(x)/g(x) < \alpha_0$。由于 $\alpha_0$ 可取得任意接近于 $\alpha$，由这一点与 (2.9) 可得，在两种情形下都有
+
+\[
+\varlimsup_{x\to a}f(x)/g(x)\leq\alpha.
+\]
+
+若 $ \alpha \in (-\infty, \infty] $，则由类似的论证，
+
+\[
+\varliminf_{x\to a}f(x)/g(x)\geq\alpha.
+\]
+
+因此，若 (i) 或 $ \lim_{x \to a} g(x) = \infty $ 成立，我们就已证明了结论。情形 $ \lim_{x \to a} g(x) = -\infty $ 可类似证明，留给读者。
+
+\end{subitems}
+
+\end{proposition}
+
+\begin{remark}
+
+当然，关于左极限 $ x \to b $ 的相应命题也成立。此外，命题 2.21 的证明在 $ a = -\infty $ 与 $ b = \infty $ 的情形下仍然有效。■
+
+\end{remark}
+
+\begin{example}
+
+\begin{items}
+\item
+
+对所有 $ m, n \in \mathbb{N}^* $ 与 $ a \in \mathbb{R} $，
+
+\[
+\lim_{x\to a}\frac{x^{n}-a^{n}}{x^{m}-a^{m}}=\lim_{x\to a}\frac{nx^{n-1}}{mx^{m-1}}=\frac{n}{m}a^{n-m}.
+\]
+\item
+
+设 $ n \geq 2 $ 且对 $ 1 \leq k \leq n $ 有 $ a_k \in [0, \infty) $。则由命题 2.21，我们有
+
+\begin{equation*}
+\begin{aligned}
+\lim_{x\to\infty}\left(\sqrt[n]{x^{n}+a_{1}x^{n-1}+\cdots+a_{n}}-x\right)&=\lim_{y\to0+}\frac{\sqrt[n]{1+a_{1}y+\cdots+a_{n}y^{n}}-1}{y}\\&=\lim_{y\to0+}\frac{1}{n}\frac{a_{1}+2a_{2}y+\cdots+na_{n} y^{n-1}}{(1+a_{1}y+\cdots+a_{n} y^{n})^{1-1/n}}\\&=\frac{a_{1}}{n}.
+\end{aligned}
+\end{equation*}
+\item
+
+对所有 $ a \in \mathbb{R}^* $，
+
+\[
+\lim_{x\to0}\frac{1-\cos(ax)}{1-\cos x}=a^{2}.
+\]
+
+\proofhead
+使用洛必达法则两次，我们得到
+\[
+\lim_{x\to0}\frac{1-\cos(ax)}{1-\cos x}=\lim_{x\to0}\frac{a\sin(ax)}{\sin x}=\lim_{x\to0}\frac{a^{2}\cos(ax)}{\cos x}=a^{2},
+\]
+
+于是结论得证。■
+
+\end{items}
+
+\end{example}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $ f: \mathbb{R} \to \mathbb{R} $ 由下式定义：
+
+\begin{equation*}
+f(x):=\left\{\begin{array}{c l}{e^{-1/x^{2}},}&{\quad x\neq0,}\\ {0,}&{\quad x=0.}\\ \end{array}\right.
+\end{equation*}
+\end{exercises}
+
+\begin{proof}
+
+$f$ 属于 $C^\infty(\mathbb{R})$，$f$ 在 $x=0$ 处有孤立\footnote{若存在 $ x_0 $ 的邻域 $ U $ 使得对所有 $ x \in U \setminus \{x_0\} $ 有 $ f(x) > f(x_0) $，则称函数 $ f $ 在 $ x_0 $ 处有\textbf{孤立极小值}。}的全局极小值，且对 $k\in\mathbb{N}$ 有 $f^{(k)}(0)=0$。
+
+\end{proof}
+
+\begin{exercises}
+\item[2.]
+
+设 $f$ 为例 1.17 中的函数，并令 $F(x) := e^e f(f(1) - f(1 - x))$，$x \in \mathbb{R}$。证明
+
+\begin{equation*}
+F(x)=\left\{\begin{array}{ll}0,&x\leq0,\\1,&x\geq1,\end{array}\right.
+\end{equation*}
+
+且 $F$ 在 $[0,1]$ 上严格递增。
+
+\item[3.]
+
+设 $ -\infty < a < b < \infty $ 且 $ f \in C([a, b], \mathbb{R}) $ 在 $ (a, b] $ 上可微。证明：若 $ \lim_{x \to a} f'(x) $ 存在，则 $ f $ 属于 $ C^1([a, b], \mathbb{R}) $ 且 $ f'(a) = \lim_{x \to a} f'(x) $。（提示：使用中值定理。）
+
+\item[4.]
+
+设 $ a > 0 $ 且 $ f \in C^2([-a, a], \mathbb{R}) $ 为偶函数。证明：存在某个 $ g \in C^1([0, a^2], \mathbb{R}) $ 使得对所有 $ x \in [-a, a] $ 有 $ f(x) = g(x^2) $。特别地，$ f'(0) = 0 $。（提示：习题 3。）
+
+\item[5.]
+
+函数
+
+\[
+\operatorname{c o s h}^{-1}\colon[1,\infty)\to\mathbb{R}^{+}\quad\text{且}\quad\sinh^{-1}\colon\mathbb{R}\to\mathbb{R}
+\]
+
+分别称为反双曲余弦函数与反双曲正弦函数。
+
+\begin{items}
+\item
+
+\proofhead
+$ \cosh^{-1} $ 与 $ \sinh^{-1} $ 有良好定义，且
+\[
+\cosh^{-1}(x)=\log\bigl(x+\sqrt{x^{2}-1}\bigr),\qquad x\geq1,
+\]
+\[
+\sinh^{-1}(x)=\log\bigl(x+\sqrt{x^{2}+1}\bigr)~,\qquad x\in\mathbb{R}~.
+\]
+\item
+
+计算这些函数的前两个导数。
+
+\item
+
+讨论 $\cosh$、$\sinh$、$ \cosh^{-1} $ 与 $ \sinh^{-1} $ 的凸性与凹性。画出这些函数的图像草图。
+
+\end{items}
+
+\item[6.]
+
+设 $ n \in \mathbb{N}^\times $ 且对所有 $ x \in \mathbb{R} $ 有 $ f(x) := 1 + x + x^2/2! + \cdots + x^n/n! $。证明：若 $ n $ 为奇，则方程 $ f(x) = 0 $ 恰有一个实解；若 $ n $ 为偶，则没有实解。
+
+\item[7.]
+
+设 $ -\infty \leq a < b \leq \infty $ 且 $ f: (a, b) \to \mathbb{R} $ 连续。若存在 $ a_0, b_0 $ 使得 $ a \leq a_0 < x_o < b_0 \leq b $，且 $ f|(a_0, x_0) $ 凸而 $ f|(x_0, b_0) $ 凹，或 $ f|(a_0, x_0) $ 凹而 $ f|(x_0, b_0) $ 凸，则称点 $ x_0 \in (a, b) $ 为 $ f $ 的拐点。
+
+\begin{items}
+\item
+
+设 $ f: \mathbb{R} \to \mathbb{R} $ 由下式定义：
+
+\begin{equation*}
+f(x):=\left\{\begin{array}{r l}{\sqrt{x}\;,}&{\quad x\geq0\;,}\\ {-\sqrt{-x}\;,}&{\quad x<0\;.}\end{array}\right.
+\end{equation*}
+\end{items}
+
+\end{exercises}
+
+\begin{proof}
+
+$f$ 在 $0$ 处有拐点。
+
+\begin{items}
+\item[（b）]
+
+设 $ f: (a,b) \to \mathbb{R} $ 二次可微且在 $ x_0 $ 处有拐点。证明 $ f''(x_0) = 0 $。
+
+\item[（c）]
+
+证明函数 $ f: \mathbb{R} \to \mathbb{R} $，$ x \mapsto x^4 $ 没有拐点。
+
+\item[（d）]
+
+设 $ f \in C^3((a,b), \mathbb{R}) $，$ f''(x_0) = 0 $ 且 $ f'''(x_0) \neq 0 $。证明 $ f $ 在 $ x_0 $ 处有拐点。
+
+\end{items}
+
+\end{proof}
+
+\begin{exercises}
+\item[8.]
+
+当 $f(x)$ 由下式给定时，确定 $f$ 的所有拐点：
+
+\[
+\mathrm{(a)}x^{2}-1/x,x>0,\qquad\mathrm{(b)}\sin x+\cos x,x\in\mathbb{R},\qquad\mathrm{(c)}x^{x},x>0.
+\]
+\item[9.]
+
+证明 $ f: (0, \infty) \to \mathbb{R} $，$ x \mapsto (1 + 1/x)^x $ 严格递增。
+
+\item[10.]
+
+设 $ f \in C([a, b], \mathbb{R}) $ 在 $ (a, b) $ 上可微，且满足 $ f(a) \geq 0 $ 及 $ f'(x) \geq 0 $，$ x \in (a, b) $。证明对所有 $ x \in [a, b] $ 有 $ f(x) \geq 0 $。
+
+\item[11.]
+
+证明
+
+\[
+1-1/x\leq\log x\leq x-1,\qquad x>0.
+\]
+\item[12.]
+
+设 $ I $ 是完全区间且 $ f, g: I \to \mathbb{R} $ 是凸的。证明或否定下列命题：
+
+\begin{items}
+\item
+
+$ f \lor g $ 是凸的。
+
+\item
+
+对 $ \alpha, \beta \in \mathbb{R} $，$ \alpha f + \beta g $ 是凸的。
+
+\item
+
+$fg$ 是凸的。
+
+\end{items}
+
+\item[13.]
+
+设 $I$ 是完全区间，$f \in C(I, \mathbb{R})$ 是凸的，且 $g: f(I) \to \mathbb{R}$ 是凸的且递增。证明 $g \circ f: I \to \mathbb{R}$ 也是凸的。找出 $f$ 与 $g$ 上能保证 $g \circ f$ 严格凸的条件。
+
+\item[14.]
+
+设 $ -\infty < a < b < \infty $ 且 $ f: [a, b] \to \mathbb{R} $ 是凸的。证明或否定下列命题：
+
+\begin{items}
+\item
+
+对每个 $ x \in (a, b) $，极限 $ \partial_{\pm} f(x) $ 存在且 $ \partial_{-} f(x) \leq \partial_{+} f(x) $
+
+\item
+
+$ f|(a,b) $ 连续。
+
+\item
+
+$f$ 连续。
+
+\end{items}
+
+\item[15.]
+
+设 $ I $ 是完全区间，$ a \in I $ 且 $ n \in \mathbb{N} $。设 $ \varphi, \psi \in C^n(I, \mathbb{R}) $ 满足
+
+\[
+\varphi^{(k)}(a)=\psi^{(k)}(a)=0,\qquad0\leq k\leq n,
+\]
+
+且 $ \varphi^{(n+1)} $ 与 $ \psi^{(n+1)} $ 在 $ \mathring{I} $ 上存在，并且
+
+\[
+\psi^{(k)}(x)\neq0\;,\qquad x\in\mathring{I}\backslash\{a\}\;,\quad0\leq k\leq n+1\;.
+\]
+
+证明：对每个 $ x \in I \setminus \{a\} $，存在某个 $ \xi \in (x \land a, x \lor a) $ 使得
+
+\[
+\frac{\varphi(x)}{\psi(x)}=\frac{\varphi^{(n+1)}(\xi)}{\psi^{(n+1)}(\xi)}~.
+\]
+\item[16.]
+
+设 $I$ 是区间，$f \in C^{n-1}(I, \mathbb{R})$ 且对某个 $n \geq 2$，$f^{(n)}$ 在 $\mathring{I}$ 上存在。设 $x_0 < x_1 < \cdots < x_n$ 是 $f$ 的零点。证明存在某个 $\xi \in (x_0, x_n)$ 使得 $f^{(n)}(\xi) = 0$（广义罗尔定理）。
+
+\item[17.]
+
+计算下列极限：
+
+\[
+\mathrm{(a)}\operatorname*{l i m}_{x\to\infty}(1+2x)^{1/3x},\quad\mathrm{(b)}\operatorname*{l i m}_{x\to1}\frac{1+\cos\pi x}{x^{2}-2x+1},\quad\mathrm{(c)}\operatorname*{l i m}_{x\to0}\frac{\log\cos3x}{\log\cos2x},\quad\mathrm{(d)}\operatorname*{l i m}_{x\to0}\biggl(\frac{1}{\sin^{2}x}-\frac{1}{x^{2}}\biggr)
+\]
+\item[18.]
+
+设 $ (x_k) $ 与 $ (y_k) $ 是 $ \mathbb{K}^{\mathbb{N}} $ 中的序列，$ 1 < p < \infty $，且 $ p' $ 是 $ p $ 的赫尔德共轭。证明级数的赫尔德不等式：
+
+\[
+\Bigl|\sum_{k=0}^{\infty}x_{k}y_{k}\Bigr|\leq\sum_{k=0}^{\infty}|x_{k}y_{k}|\leq\Bigl(\sum_{k=0}^{\infty}|x_{k}|^{p}\Bigr)^{1/p}\Bigl(\sum_{k=0}^{\infty}|y_{k}|^{p^{\prime}}\Bigr)^{1/p^{\prime}},
+\]
+
+以及级数的闵可夫斯基不等式。
+
+\[
+\Big(\sum_{k=0}^{\infty}|x_{k}+y_{k}|^{p}\Big)^{1/p}\leq\Big(\sum_{k=0}^{\infty}|x_{k}|^{p}\Big)^{1/p}+\Big(\sum_{k=0}^{\infty}|y_{k}|^{p}\Big)^{1/p}.
+\]
+\item[19.]
+
+对 $ x = (x_k) \in \mathbb{K}^{\mathbb{N}} $，定义
+
+\begin{equation*}
+\|x\|_{p}:=\left\{\begin{array}{c c}{\left(\sum_{k=0}^{\infty}|x_{k}|^{p}\right)^{1/p},}&{\quad1\leq p<\infty,}\\ {\operatorname*{s u p}_{k\in\mathbb{N}}\left|x_{k}\right|,}&{\quad p=\infty,}\\ \end{array}\right.
+\end{equation*}
+
+以及
+
+\[
+\ell_{p}:=\left\{x\in\mathbb{K}^{\mathbb{N}};~\|x\|_{p}<\infty\right\},\qquad1\le p\le\infty.
+\]
+
+证明下列命题：
+
+\begin{items}
+\item
+
+$ \ell_p := (\ell_p, \|\cdot\|_p) $ 是 $ \mathbb{K}^{\mathbb{N}} $ 的赋范子空间。
+
+\item
+
+$ \ell_{\infty} = B(\mathbb{N}, \mathbb{K}) $。
+
+\item
+
+对 $ 1 \leq p \leq q \leq \infty $，我们有 $ \ell_p \subseteq \ell_q $ 且 $ \|x\|_q \leq \|x\|_p $，$ x \in \ell_p $。
+
+\end{items}
+
+\item[20.]
+
+设 $I$ 是完全区间且 $f: I \to \mathbb{R}$ 是凸的。证明
+
+\[
+f(\lambda_{1}x_{1}+\cdots+\lambda_{n}x_{n})\leq\lambda_{1}f(x_{1})+\cdots+\lambda_{n}f(x_{n})
+\]
+
+对所有 $ x_1, \ldots, x_n \in I $ 与满足 $ \lambda_1 + \cdots + \lambda_n = 1 $ 的 $ \lambda_1, \ldots, \lambda_n \in \mathbb{R}^+ $ 成立。
+
+\item[21.]
+
+设 $I$ 是区间且 $f: I \to \mathbb{R}$ 是凸的。证明：若 $x \in I$ 与 $h > 0$ 满足 $x + 2h \in I$，则 $\triangle_h^2 f(x) \geq 0$。这里 $\triangle_h$ 是长度为 $h$ 的差商算子（见 I.12 节）。（提示：从几何上思考。）
+
+\end{exercises}
+
+\section{泰勒定理}
+
+在本章中我们已经看到，对于函数 $f$，在一点 $a$ 可微与在 $a$ 处近似线性是同一性质。此外，利用中值定理，我们说明了 $f'$ 如何决定 $f$ 的某些局部与全局性质。
+
+这提出了一个显然的问题：任一光滑函数 $ f: D \to E $ 能否在点 $ a \in D $ 附近被一个多项式逼近？如果可以，这个逼近对 $ f $ 的局部与全局性质说明了什么？如果我们知道 $ f $ 在 $ a $ 处的足够多、甚至全部导数，那么关于 $ f $ 我们能说些什么？
+
+设 $X$ 和 $E$ 为赋范向量空间，$D$ 为 $X$ 的非空子集，且 $f: D \to E$。为了描述 $f$ 在点 $a \in \overline{D}$ 处的行为，我们使用 $\mathbf{兰道}$ 符号 $o$。若 $\alpha \geq 0$，我们说“$f$ 在 $a'$ 处有 $\alpha$ 阶零点”，并写出
+
+\subsection*{兰道符号}
+
+\[
+f(x)=o(\|x-a\|^\alpha)\ \ (x\to a)\ ,
+\]
+
+若
+
+\[
+\lim_{x\to a}\frac{f(x)}{\|x-a\|^\alpha}=0.
+\]
+
+\begin{remark}
+
+\begin{items}
+\item
+
+函数 $f$ 在 $a$ 处有 $\alpha$ 阶零点，当且仅当对每个 $\varepsilon>0$，存在 $a$ 在 $D$ 中的邻域 $U$，使得
+
+\[
+\left\|f(x)\right\|\leq\varepsilon\left\|x-a\right\|^{\alpha},\qquad x\in U.
+\]
+
+\proofhead
+这由注 III.2.23(a) 可得。
+\item
+
+假设 $ X = \mathbb{K} $ 且 $ r: D \to E $ 在 $ a \in D $ 处连续。则
+
+\[
+f:D\to E\;,\quad x\mapsto\big(r(x)-r(a)\big)(x-a)
+\]
+
+在 a 处有 1 阶零点，即 $ f(x) = o(|x - a|) $（$ x \to a $）。
+
+\item
+
+设 $ X = \mathbb{K} $。则 $ f: D \to E $ 在 $ a \in D $ 处可微，当且仅当存在某个（唯一的）$ m_a \in E $，使得
+
+\[
+f(x)-f(a)-m_{a}(x-a)=o(|x-a|)\quad(x\to a).
+\]
+
+\proofhead
+这是 (b) 与定理 1.1(iii) 的推论。■
+\item
+
+函数 $ f \colon (0, \infty) \to \mathbb{R} $，$ x \mapsto e^{-1/x} $ 在 0 处有无限阶零点，即
+
+\[
+f(x)=o(|x|^{\alpha})\ \ (x\to0)\ ,\qquad\alpha>0\ .
+\]
+
+\proofhead
+设 $ \alpha > 0 $。则
+\[
+\lim_{x\to0}e^{-1/x}/x^{\alpha}=\lim_{y\to\infty}y^{\alpha}e^{-y}=0
+\]
+
+由命题 III.6.5(iii) 可得。
+函数 $g: D \to E$ 在 $a$ 处以 $\alpha$ 阶逼近函数 $f: D \to E$，若
+
+\[
+f(x)=g(x)+o(\|x-a\|^\alpha)\quad(x\to a),
+\]
+
+即，若 $f-g$ 在 $a$ 处有 $\alpha$ 阶零点。
+除符号 $o$ 外，我们偶尔也会使用兰道符号 $O$。若 $a \in \overline{D}$ 且 $\alpha \geq 0$，则我们写
+
+\[
+f(x)=O(\|x-a\|^\alpha)\ \ (x\to a)\ ,
+\]
+
+若存在 r > 0 和 K > 0，使得
+
+\[
+\|f(x)\|\leq K\left\|x-a\right\|^{\alpha},\qquad x\in\mathbb{B}(a,r)\cap D.
+\]
+
+在这种情况下，我们说“f 在 $ a' $ 处至多以 $ \alpha $ 阶递增”。特别地，$ f(x) = O(1) $（$ x \to a $）蕴含 f 在 a 的某个邻域中有界。
+对本节的其余部分，$ E := (E, \|\cdot\|) $ 为巴拿赫空间，$ D $ 为 $ \mathbb{K} $ 的完全子集，且 $ f $ 为从 $ D $ 到 $ E $ 的函数。
+
+\end{items}
+
+\end{remark}
+
+\subsection*{泰勒公式}
+
+我们首先考察一个必要条件，使得系数\footnote{系数在 $ E $ 中的多项式是形如 $ \sum_{k=0}^{n} c_k X^k $（$ c_k \in E $）的形式表达式。若把“未定元”$ X $ 换成域元素 $ x \in \mathbb{K} $，则得到一个完全确定的元素 $ p(x) := \sum_{k=0}^{n} c_k x^k \in E $。于是多项式函数 $ \mathbb{K} \to E $，$ x \mapsto p(x) $ 是良定义的。系数在 $ E $ 中的多项式一般不构成环！见 I.8 节。} $ c_k $ 取自 $ E $ 的“多项式” $ p = \sum_{k=0}^{n} c_k X^k $ 可以被选成 $ p $ 在 $ a \in D $ 处以 $ n $ 阶逼近函数 $ f $。
+
+首先考虑特殊情形：$ f = \sum_{k=0}^{n} b_k X^k $ 本身就是系数取自 $ E $ 的多项式。由二项式定理我们得到
+
+\[
+f(x)=\sum_{k=0}^{n}b_{k}(x-a+a)^{k}=\sum_{k=0}^{n}b_{k}\sum_{j=0}^{k}\binom{k}{j}(x-a)^{j}a^{k-j},\qquad x\in\mathbb{K}.
+\]
+
+因此 f 可以写成 x - a 的多项式，形如
+
+\[
+f(x)=\sum_{k=0}^{n}c_{k}(x-a)^{k},\qquad x\in\mathbb{K},
+\]
+
+其中
+
+\[
+c_{k}:=\sum_{\ell=k}^{n}b_{\ell}\binom{\ell}{k}a^{\ell-k},\qquad k=0,\ldots,n.
+\]
+
+显然我们有
+
+\[
+f(a)=\sum_{\ell=0}^{n}b_{\ell}a^{\ell}=c_{0},\quad f^{\prime}(a)=\sum_{\ell=1}^{n}b_{\ell}\ell a^{\ell-1}=c_{1},
+\]
+\[
+f^{\prime\prime}(a)=\sum_{\ell=2}^{n}b_{\ell}\ell(\ell-1)a^{\ell-2}=2c_{2},\quad f^{\prime\prime\prime}(a)=\sum_{\ell=3}^{n}b_{\ell}\ell(\ell-1)(\ell-2)a^{\ell-3}=6c_{3}.
+\]
+
+一个简单的归纳论证表明，对 $ k = 0, \ldots, n $ 有 $ f^{(k)}(a) = k! c_k $，从而
+
+\[
+f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^{k},\qquad x\in\mathbb{K}.
+\]
+
+因此，当 f 写成 x - a 的多项式时，我们得到了其系数的一个简单表达式（见命题 I.8.16）。
+
+下面的基本定理表明，任何函数 $ f \in C^n(D, E) $ 在任意点 $ a \in D $ 处都有 $ n $ 阶的多项式逼近。
+
+\begin{theorem}
+
+（泰勒定理）设 $D$ 为凸集且 $n \in \mathbb{N}^\times$。则对每个 $f \in C^n(D, E)$ 和 $a \in D$，存在函数 $R_n(f, a) \in C(D, E)$，使得
+
+\[
+f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^{k}+R_{n}(f,a)(x),\qquad x\in D.
+\]
+
+余项函数 $ R_{n}(f,a) $ 满足
+
+\[
+\left\|R_{n}(f,a)(x)\right\|\leq\frac{1}{(n-1)!}\sup_{0<t<1}\left\|f^{(n)}\big(a+t(x-a)\big)-f^{(n)}(a)\right\||x-a|^{n}
+\]
+
+对所有 $ x \in D $。
+
+\proofhead
+对 $ f \in C^n(D, E) $ 和 $ a \in D $，定义
+\[
+R_{n}(f,a)(x):=f(x)-\sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^{k},\qquad x\in D.
+\]
+
+则只需证明关于 $ R_n(f, a) $ 的所述估计。对 $ t \in [0,1] $ 和固定的 $ x \in D $，令
+
+\[
+h(t):=f(x)-\sum_{k=0}^{n-1}\frac{f^{(k)}\big(a+t(x-a)\big)}{k!}(x-a)^{k}(1-t)^{k}-\frac{f^{(n)}(a)}{n!}(x-a)^{n}(1-t)^{n}.
+\]
+
+则 $ h(0) = R_{n}(f, a)(x) $ 且 $ h(1) = 0 $，并且
+
+\[
+h^{\prime}(t)=\left[f^{(n)}(a)-f^{(n)}\big(a+t(x-a)\big)\right]\frac{(1-t)^{n-1}}{(n-1)!}(x-a)^{n},\qquad t\in(0,1).
+\]
+
+向量值函数的中值定理（定理 2.18）蕴含
+
+\begin{equation*}
+\begin{aligned}
+\|R_{n}(f,a)(x)\|=\|h(1)-h(0)\|&\leq\sup_{0<t<1}\|h^{\prime}(t)\|\\&\leq\sup_{0<t<1}\frac{\left\|f^{(n)}\left(a+t(x-a)\right)-f^{(n)}(a)\right\|}{(n-1)!}\left|x-a\right|^{n},
+\end{aligned}
+\end{equation*}
+
+此即所欲证。■
+
+\end{theorem}
+
+\begin{corollary}
+
+（泰勒定理的定性版本）在定理 3.2 的假设下，
+
+\[
+f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^{k}+o(|x-a|^{n})\quad(x\to a).
+\]
+\end{corollary}
+
+\subsection*{泰勒多项式与泰勒级数}
+
+对 $ n \in \mathbb{N} $，$ f \in C^n(D, E) $ 和 $ a \in D $，
+
+\[
+\mathcal{T}_{n}(f,a):=\sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(X-a)^{k}
+\]
+
+是系数取自 $ E $、次数 $ \leq n $ 的多项式\footnote{按照 I.8 节的约定，我们把系数在 $ E $ 中的多项式与相应的 $ E $ 值多项式函数等同起来。}，即 $ f $ 在 $ a $ 处的第 $ n $ 个泰勒多项式，而
+
+\[
+R_{n}(f,a):=f-\mathcal{T}_{n}(f,a)
+\]
+
+是 f 在 a 处的第 $ n $ 个余项函数。推论 3.3 表明，泰勒多项式 $ \mathcal{T}_{n}(f, a) $ 在 a 处以高于 n 的阶逼近函数 f。
+
+现设 $ E := \mathbb{K} $ 且 $ f \in C^\infty(D) := C^\infty(D, \mathbb{K}) $。则形式表达式
+
+\[
+\mathcal{T}(f,a):=\sum_{k}\frac{f^{(k)}(a)}{k!}(X-a)^{k}
+\]
+
+称为 f 在 a 处的泰勒级数，而所谓 $ \mathcal{T}(f,a) $ 的收敛半径，是指幂级数
+
+\[
+\sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}X^{k}.
+\]
+
+若 $ \mathcal{T}(f,a) $ 有正的收敛半径 $ \rho $，则
+
+\[
+\mathcal{T}(f,a)\colon\mathbb{B}(a,\rho)\to\mathbb{K}~,\quad x\mapsto\sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}(x-a)^{k}
+\]
+
+是一个良定义的函数。
+
+正如对其他幂级数那样，我们将泰勒级数 $ \mathcal{T}(f, a) $ 与函数 (3.2) 等同起来。注意，这一等同仅在 $ \mathbb{B}(a, \rho) $ 上有意义。
+
+\begin{remark}
+
+设 $D$ 为 $\mathbb{K}$ 中的开集且 $a \in D$。
+
+\begin{items}
+\item
+
+泰勒多项式 $ \mathcal{T}_n(f, a) $ 是泰勒级数 $ \mathcal{T}(f, a) $ 的第 $ n $ 个“部分和”。若泰勒级数的收敛半径为正，则 f 在 a 处以 n 阶被 $ \mathcal{T}_n(f, a) $ 逼近。这并不意味着 f 在 a 的某个邻域 U 中等于其泰勒级数。
+
+\proofhead
+例 1.17 中的函数 $f$ 光滑，且对 $k \in \mathbb{N}$ 满足 $f^{(k)}(0) = 0$。因此 $\mathcal{T}(f,0) = 0 \neq f$。
+\item
+
+假设函数 $f$ 的泰勒级数 $\mathcal{T}(f,a)$ 有正的收敛半径 $\rho$。则函数 $f$ 在 $a$ 的某个邻域 $U \subseteq \mathbb{B}(a,\rho) \cap D$ 中等于其泰勒级数，当且仅当对所有 $x \in U$ 有 $\lim_{n \to \infty} R_n(f,a)(x) = 0$。
+
+\end{items}
+
+\end{remark}
+
+\begin{example}
+
+（对数的级数表示）对 $|z| < 1/2$，
+
+\bookfigure[0.24]{figures/3e86a56e6f8ab8e7.jpg}
+\[
+\log(1+z)=\sum_{k=1}^{\infty}\frac{(-1)^{k-1}}{k}z^{k}=z-\frac{z^{2}}{2}+\frac{z^{3}}{3}-\frac{z^{4}}{4}+\cdots.
+\]
+
+\proofhead
+对 $ z \in \mathbb{C} \setminus \{-1\} $ 令 $ f(z) := \log(1 + z) $。则由归纳法，
+\[
+f^{(n)}(z)=(-1)^{n-1}\frac{(n-1)!}{(1+z)^{n}},\qquad n\in\mathbb{N}^{\times},\quad z\in\mathbb{C}\backslash(-\infty,-1].
+\]
+
+由定理 3.2 我们得到公式
+
+\begin{equation}
+\log(1+z)=\sum_{k=1}^{n}\frac{(-1)^{k-1}}{k}z^{k}+R_{n}(f,0)(z),\qquad n\in\mathbb{N}^{\times},\quad z\in\mathbb{C}\backslash(-\infty,-1],
+\end{equation}
+
+其中余项函数 $ R_{n}(f,0) $ 满足
+
+\[
+|R_{n}(f,0)(z)|\leq\sup_{0<t<1}\left|\frac{1}{(1+t z)^{n}}-1\right||z|^{n},\qquad n\in\mathbb{N}^{\times},\quad z\in\mathbb{C}\backslash(-\infty,-1].
+\]
+
+对 $ |z| \leq 1/2 $ 和 $ t \in [0,1] $，我们有不等式 $ |1 + tz| \geq 1 - |z| \geq 1/2 $，从而
+
+\[
+\left|\frac{1}{(1+t z)^{n}}-1\right|\leq\frac{1}{(1-|z|)^{n}}+1\leq2^{n}+1\leq2^{n+1},\qquad n\in\mathbb{N}^{\times}.
+\]
+
+因此
+
+\[
+|R_{n}(f,0)(z)|\leq2(2\left|z\right|)^{n}\to0\quad(n\to\infty)
+\]
+
+对所有 $ |z| < 1/2 $ 成立，结论得证。■
+
+\end{example}
+
+\begin{remark}
+
+对 $ a_k := (-1)^{k-1}/k $，$ k \in \mathbb{N}^\times $，
+
+\[
+\lim_{k\to\infty}\frac{|a_{k+1}|}{|a_{k}|}=\lim_{k\to\infty}\frac{k}{k+1}=1.
+\]
+
+故幂级数 $ \sum(-1)^{k-1}X^k/k $ 的收敛半径为 1。于是产生一个问题：该级数是否在整个 $ \mathbb{B}_{\mathbb{C}} $ 上等于函数 $ z \mapsto \log(1+z) $。对复 $ z $，我们在 V.3 节回答这个问题。对实情形，见应用 3.9(d)。$ \blacksquare $
+
+\end{remark}
+
+\subsection*{实情形下的余项函数}
+
+借助第二中值定理，我们可以对 $ \mathbb{K} = \mathbb{R} $ 和 $ E = \mathbb{R} $ 的情形导出余项函数 $ R_n(f, a) $ 的进一步估计。
+
+\begin{theorem}
+
+（施勒米尔希余项公式）设 $ I $ 为完全区间，$ a \in I $，$ p > 0 $ 且 $ n \in \mathbb{N} $。假设 $ f \in C^n(I, \mathbb{R}) $ 且 $ f^{(n+1)} $ 在 $ \mathring{I} $ 上存在。则对每个 $ x \in I \setminus \{a\} $，存在某个 $ \xi := \xi(x) \in (x \land a, x \lor a) $，使得
+
+\begin{equation}
+R_{n}(f,a)(x)=\frac{f^{(n+1)}(\xi)}{p n!}\Big(\frac{x-\xi}{x-a}\Big)^{n-p+1}(x-a)^{n+1}~.
+\end{equation}
+
+\proofhead
+固定 $x \in I$ 并令 $J := (x \land a, x \lor a)$。定义
+\[
+g(t):=\sum_{k=0}^{n}\frac{f^{(k)}(t)}{k!}(x-t)^{k},\quad h(t):=(x-t)^{p},\qquad t\in J.
+\]
+
+显然 $ g, h \in C(\overline{J}, \mathbb{R}) $，且这两个函数都在 $ J $ 上可微，且
+
+\[
+g^{\prime}(t)=f^{(n+1)}(t)\frac{(x-t)^{n}}{n!}\;,\quad h^{\prime}(t)=-p(x-t)^{p-1}\;,\qquad t\in J\;.
+\]
+
+由第二中值定理（命题 2.20），存在某个 $ \xi $ 位于 $ J $ 中，使得
+
+\[
+g(x)-g(a)=\frac{g^{\prime}(\xi)}{h^{\prime}(\xi)}\big(h(x)-h(a)\big).
+\]
+
+由于 $ R_{n}(f,a)(x)=g(x)-g(a) $ 且 $ h(x)-h(a)=-(x-a)^{p} $，结论得证。■
+
+\end{theorem}
+
+\begin{corollary}
+
+（拉格朗日与柯西余项公式）在定理 3.7 的假设下。
+
+\[
+R_{n}(f,a)(x)=\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-a)^{n+1}
+\]
+
+以及
+
+\[
+R_{n}(f,a)(x)=\frac{f^{(n+1)}(\xi)}{n!}\Big(\frac{x-\xi}{x-a}\Big)^{n}(x-a)^{n+1}
+\]
+
+\proofhead
+在定理 3.7 中分别取 $p = n + 1$ 与 $p = 1$。
+\end{corollary}
+
+\begin{application}
+
+\begin{items}
+\item
+
+（局部极值的充分条件）设 $ I $ 为完全区间，且对某个 $ n \geq 1 $ 有 $ f \in C^n(I, \mathbb{R}) $。假设存在某个 $ a \in \mathring{I} $，使得
+
+\[
+f^{\prime}(a)=f^{\prime\prime}(a)=\cdots=f^{(n-1)}(a)=0\quad\text{ 且 }\quad f^{(n)}(a)\neq0.
+\]
+
+\begin{subitems}
+\item
+
+若 n 为奇数，则 f 在 a 处无极值。
+
+\item
+
+若 $n$ 为偶数，则当 $f^{(n)}(a) > 0$ 时 $f$ 在 $a$ 处有局部极小值，当 $f^{(n)}(a) < 0$ 时 $f$ 在 $a$ 处有局部极大值。
+
+\proofhead
+假设与泰勒定理（推论 3.3）蕴含
+\begin{equation}
+f(x)=f(a)+\Big[\frac{f^{(n)}(a)}{n!}+\frac{o(|x-a|^{n})}{(x-a)^{n}}\Big](x-a)^{n}\quad(x\to a).
+\end{equation}
+
+令 $ \gamma := |f^{(n)}(a)|/(2n!) > 0 $。则由注 3.1，存在某个 $ \delta > 0 $，使得
+
+\begin{equation}
+\frac{\left|o(|x-a|^{n})\right|}{|x-a|^{n}}\leq\gamma,\qquad x\in I\cap(a-\delta,a+\delta).
+\end{equation}
+
+现在区分下列情形：
+（$ \alpha $）设 n 为奇数且 $ f^{(n)}(a) > 0 $。则由 (3.3) 与 (3.4)，我们有
+
+\[
+f(x)\geq f(a)+\gamma(x-a)^{n},\qquad x\in(a,a+\delta)\cap I,
+\]
+
+以及
+
+\[
+f(x)\leq f(a)-\gamma(a-x)^{n},\qquad x\in(a-\delta,a)\cap I.
+\]
+
+因此 f 在 a 处不能有极值。
+（$ \beta $）若 n 为奇数且 $ f^{(n)}(a) < 0 $，则由 (3.3) 与 (3.4)，我们有
+
+\[
+f(x)\leq f(a)-\gamma(x-a)^{n},\qquad x\in(a,a+\delta)\cap I,
+\]
+
+以及
+
+\[
+f(x)\geq f(a)+\gamma(a-x)^{n},\qquad x\in(a-\delta,a)\cap I.
+\]
+
+故在此情形下 f 在 a 处也不能有极值。
+（$ \gamma $）设 n 为偶数且 $ f^{(n)}(a) > 0 $。则
+
+\[
+f(x)\geq f(a)+\gamma(x-a)^{n},\qquad x\in(a-\delta,a+\delta)\cap I.
+\]
+
+因此 f 在 a 处有局部极小值。
+（$ \delta $）最后，若 n 为偶数且 $ f^{(n)}(a) < 0 $，则
+
+\[
+f(x)\leq f(a)-\gamma(x-a)^{n},\qquad x\in(a-\delta,a+\delta)\cap I,
+\]
+
+即 f 在 a 处有局部极大值。
+注 上述条件是充分的，但非必要的。例如，函数
+
+\begin{equation*}
+f(x):=\left\{\begin{array}{c l}{e^{-1/x}\;,}&{\quad x>0\;,}\\ {0\;,}&{\quad x\leq0\;,}\\ \end{array}\right.
+\end{equation*}
+
+在 0 处有全局极小值，尽管由例 1.17，f 光滑且对所有 $ n \in \mathbb{N} $ 有 $ f^{(n)}(0) = 0 $。■
+
+\end{subitems}
+
+\item
+
+（指数函数的一个刻画\footnote{这就是说，$ z \mapsto ae^{bz} $ 是满足初值条件 $ f(0) = a $ 的微分方程 $ f' = bf $ 的唯一解。微分方程将在第 IX 章详细研究。}）假设 $ a, b \in \mathbb{C} $，函数 $ f: \mathbb{C} \to \mathbb{C} $ 可微，且
+
+\begin{equation}
+f^{\prime}(z)=b f(z),\quad z\in\mathbb{C},\qquad f(0)=a.
+\end{equation}
+
+则对所有 $ z \in \mathbb{C} $ 有 $ f(z) = ae^{bz} $。
+
+\proofhead
+由 $f'=bf$ 与推论 1.2，我们看出 $f\in C^\infty(\mathbb{C})$ 且对所有 $k\in\mathbb{N}$ 有 $f^{(k)}=b^kf$。若再设 $f(0)=a$，则
+\[
+\sum_{k}\frac{f^{(k)}(0)}{k!}X^{k}=f(0)\sum_{k}\frac{b^{k}}{k!}X^{k}=a\sum_{k}\frac{b^{k}}{k!}X^{k}.
+\]
+\[
+\mathcal{T}(f,0)(z)=a e^{b z}~,\qquad z\in\mathbb{C}~.
+\]
+
+为完成证明，我们需要证明该泰勒级数在 $\mathbb{C}$ 上等于 $f$，即我们必须证明余项收敛于 $0$。对 $z \in \mathbb{C}$，我们如下用定理 3.2 估计 $R_n(f, 0)(z)$：
+
+\begin{equation*}
+\begin{aligned}
+\left|R_{n}(f,0)(z)\right|&\leq\sup_{0<t<1}\left|f^{(n)}(tz)-f^{(n)}(0)\right|\frac{\left|z\right|^{n}}{(n-1)!}=\frac{\left|b\right|^{n}\left|z\right|^{n}}{(n-1)!}\sup_{0<t<1}\left|f(tz)-a\right|\\&\leq M\left|bz\right|\frac{\left|bz\right|^{n-1}}{(n-1)!},
+\end{aligned}
+\end{equation*}
+
+其中 $ M > 0 $ 的选取使得对所有 $ w \in \mathbb{B}(0, |z|) $ 有 $ |f(w) - a| \leq M $。由例 II.4.2(c) 现在可得，当 $ n \to \infty $ 时 $ R_n(f, 0)(z) \to 0 $。■
+
+\item
+
+（用函数方程刻画指数函数）若 $ f: \mathbb{C} \to \mathbb{C} $ 满足
+
+\begin{equation}
+f(z+w)=f(z)f(w)~,\qquad z,w\in\mathbb{C}~,
+\end{equation}
+
+以及
+
+\begin{equation}
+\lim_{z\to0}\frac{f(z)-1}{z}=b\quad\text{ 对某个 } b\in\mathbb{C}~,
+\end{equation}
+
+则对所有 $ z \in \mathbb{C} $ 有 $ f(z) = e^{bz} $。
+
+\proofhead
+由 (3.6)，我们有 $ f(0) = f(0)^2 $，故 $ f(0) \in \{0,1\} $。但若 $ f(0) = 0 $，则由 (3.6)，对所有 $ z \in \mathbb{C} $ 有 $ f(z) = f(z)f(0) = 0 $，即 $ f = 0 $。这与 (3.7) 矛盾，故必有 $ f(0) = 1 $。
+对每个 $ z \in \mathbb{C} $，(3.6) 蕴含
+\[
+\frac{f(z+h)-f(z)}{h}=f(z)\frac{f(h)-1}{h},\qquad h\in\mathbb{C}^{\times}.
+\]
+
+因此，由 (3.7)，f 可微且满足 $ f' = bf $。结论现在由 (b) 可得。■
+
+\item
+
+（实对数函数的泰勒级数）对所有 $ x \in (-1,1] $，\footnote{另见例 3.5。}
+
+\[
+\log(1+x)=\sum_{k=1}^{\infty}\frac{(-1)^{k-1}}{k}x^{k}=x-\frac{x^{2}}{2}+\frac{x^{3}}{3}-\frac{x^{4}}{4}+\cdots.
+\]
+
+特别地，交错调和级数的值为 $ \log 2 $。
+
+\proofhead
+如例 3.5 的证明那样，对 x > -1 令 $ f(x) := \log(1 + x) $。则
+\[
+f^{(n+1)}(x)=(-1)^{n}\frac{n!}{(1+x)^{n+1}},\qquad x>-1,
+\]
+
+以及
+
+\[
+\log(1+x)=\sum_{k=1}^{n}\frac{(-1)^{k-1}}{k}x^{k}+R_{n}(f,0)(x),\qquad x>-1.
+\]
+
+为在 [0,1] 上估计余项，我们使用拉格朗日公式（推论 3.8），并对每个 $ x \in [0,1] $ 找到某个 $ \xi_n \in (0,x) $，使得
+
+\[
+|R_{n}(f,0)(x)|=\left|\frac{x^{n+1}}{(n+1)(1+\xi_{n})^{n+1}}\right|\leq\frac{1}{n+1},\qquad n\in\mathbb{N}.
+\]
+
+因此泰勒级数在 [0,1] 上等于 $ \log(1+x) $。
+对 $ x \in (-1,0) $ 的情形，我们使用 $ R_n(f,0) $ 的柯西公式（推论 3.8）。因此，对每个 $ n \in \mathbb{N} $，存在某个 $ \eta_n \in (x,0) $，使得
+
+\[
+|R_{n}(f,0)(x)|\leq\left|\frac{1}{1+\eta_{n}}\right|\left|\frac{x-\eta_{n}}{1+\eta_{n}}\right|^{n}.
+\]
+
+对 $ \eta \in (x,0) $，我们有 $ \eta - x = \eta + 1 - (x+1) $，故
+
+\[
+\left|\frac{x-\eta}{1+\eta}\right|=\frac{\eta-x}{1+\eta}=1-\frac{1+x}{1+\eta}<-x<1.
+\]
+
+因此对所有 $ x \in (-1, 0) $ 有 $ \lim_{n} R_n(f, 0)(x) = 0 $。第二个结论由在泰勒级数中取 x = 1 得到。$ \blacksquare $
+
+\item
+
+（凸函数的一个刻画）
+设 $ I $ 为完全区间且 $ f \in C^2(I, \mathbb{R}) $。则 $ f $ 为凸函数，当且仅当 $ f $ 的图像在其所有切线的上方，即若
+
+\[
+f(y)\geq f(x)+f^{\prime}(x)(y-x)
+\]
+\end{items}
+
+\bookfigure[0.20]{figures/88ad8e8f86b0ad43.jpg}
+
+对所有 $ x, y \in I $。
+
+\proofhead
+设 $ x, y \in I $。则由定理 3.2 和 $ R_1(f, x) $ 的拉格朗日公式，存在某个 $ \xi \in I $，使得
+\[
+f(y)=f(x)+f^{\prime}(x)(y-x)+\frac{f^{\prime\prime}(\xi)}{2}(y-x)^{2}.
+\]
+
+由于由推论 2.13 我们知道 $f$ 为凸函数当且仅当对所有 $\xi \in I$ 有 $f''(\xi) \geq 0$，这便证明了结论。
+
+\end{application}
+
+\subsection*{多项式插值}
+
+设 $ -\infty < a \leq x_0 < x_1 < \cdots < x_m \leq b < \infty $ 且 $ f: [a, b] \to \mathbb{R} $。在命题 I.12.9 中我们证明了存在唯一的次数 $ \leq m $ 的插值多项式 $ p = p_m[f; x_0, \ldots, x_m] $，使得对所有 $ 1 \leq j \leq m $ 有 $ f(x_j) = p(x_j) $。现在我们可以估计误差函数
+
+\begin{equation}
+r_{m}[f;x_{0},\ldots,x_{m}]:=f-p_{m}[f;x_{0},\ldots,x_{m}]
+\end{equation}
+
+在区间 $ I := [a, b] $ 上，假设 f 足够光滑。
+
+\begin{proposition}
+
+设 $ m \in \mathbb{N} $ 且 $ f \in C^m(I) $ 使得 $ f^{(m+1)} $ 在 $ \mathring{I} $ 上存在。则存在某个 $ \xi := \xi(x, x_0, \ldots, x_m) \in (x \land x_0, x \lor x_m) $，使得
+
+\[
+r_{m}[f;x_{0},\ldots,x_{m}](x)=\frac{1}{(m+1)!}f^{(m+1)}(\xi)\prod_{j=0}^{m}(x-x_{j}),\qquad x\in I.
+\]
+
+\proofhead
+若 $x$ 等于某个 $x_j$，结论显然成立。故我们假设对所有 $0 \leq j \leq m$ 有 $x \neq x_j$，并定义
+\[
+g(x):=\frac{f(x)-p_{m}[f;x_{0},\ldots,x_{m}](x)}{\prod_{j=0}^{m}(x-x_{j})}
+\]
+
+以及
+
+\[
+\varphi(t):=f(t)-p_{m}[f;x_{0},\ldots,x_{m}](t)-g(x)\prod_{j=0}^{m}(t-x_{j}),\qquad t\in I.
+\]
+
+则 $ \varphi $ 属于 $ C^{m}(I) $，$ \varphi^{(m+1)} $ 在 $ \mathring{I} $ 上存在，且
+
+\begin{equation}
+\varphi^{(m+1)}(t)=f^{(m+1)}(t)-(m+1)!g(x)~,\qquad t\in\mathring{I}~.
+\end{equation}
+
+此外，$\varphi$ 有 $m+2$ 个不同的零点 $x,x_0,\ldots,x_m$。由广义罗尔定理（习题 2.16），存在某个 $\xi\in(x\land x_0,x\lor x_m)$，使得 $\varphi^{(m+1)}(\xi)=0$。因此，由 (3.9)，$g(x)=f^{(m+1)}(\xi)/(m+1)!$。结论现在由 (3.8) 可得。
+
+\end{proposition}
+
+\begin{corollary}
+
+对 $ f \in C^{m+1}(I, \mathbb{R}) $，
+
+\begin{equation}
+\left|r_{m}[f;x_{0},\ldots,x_{m}](x)\right|\leq\frac{\|f^{(m+1)}\|_{\infty}}{(m+1)!}\prod_{j=0}^{m}\left|x-x_{j}\right|,\qquad x\in I.
+\end{equation}
+\end{corollary}
+
+\subsection*{高阶差商}
+
+由注 I.12.10(b)，我们还可以将插值多项式 $ p_m[f; x_0, \ldots, x_m] $ 表示为牛顿形式
+
+\begin{equation}
+p_{m}[f;x_{0},\ldots,x_{m}]=\sum_{j=0}^{m}f[x_{0},\ldots,x_{j}]\prod_{k=0}^{j-1}(X-x_{k}).
+\end{equation}
+
+这里 $ f[x_{0}, \ldots, x_{n}] $ 是 f 的各阶差商。这些差商可用公式递归计算
+
+\[
+f[x_{0},\ldots,x_{n}]=\frac{f[x_{0},\ldots,x_{n-1}]-f[x_{1},\ldots,x_{n}]}{x_{0}-x_{n}},\qquad1\leq n\leq m,
+\]
+
+（见习题 I.12.10）。由 (3.11)（取 $n=1$）与中值定理可得，对某个合适的 $\xi\in(x_0,x_1)$ 有 $f[x_0,x_1]=f'(\xi)$。下一命题表明，对高阶差商也有类似的结果。
+
+\begin{proposition}
+
+假设 $ f \in C^m(I, \mathbb{R}) $ 且 $ f^{(m+1)} $ 在 $ \mathring{I} $ 上存在。则存在某个依赖于 $ x, x_0, \ldots, x_m $ 的 $ \xi \in (x \land x_0, x \lor x_m) $，使得
+
+\[
+f[x_{0},\ldots,x_{m},x]=\frac{1}{(m+1)!}f^{(m+1)}(\xi),\qquad x\in I,\quad x\neq x_{j},\quad0\leq j\leq m.
+\]
+
+\proofhead
+由 (3.10)（将 m 换成 $ m+1 $），我们有
+\[
+p_{m+1}[f;x_{0},\ldots,x_{m+1}]=p_{m}[f;x_{0},\ldots,x_{m}]+f[x_{0},\ldots,x_{m+1}]\prod_{j=0}^{m}(X-x_{j})~.
+\]
+
+在 $x = x_{m+1}$ 处求值得到
+
+\[
+f(x_{m+1})=p_{m}[f;x_{0},\ldots,x_{m}](x_{m+1})+f[x_{0},\ldots,x_{m+1}]\prod_{j=0}^{m}(x_{m+1}-x_{j}).
+\]
+
+在此方程中将 $ x_{m+1} $ 换成 x 得到
+
+\[
+f(x)-p_{m}[f;x_{0},\ldots,x_{m}](x)=f[x_{0},\ldots,x_{m},x]\prod_{j=0}^{m}(x-x_{j}).
+\]
+
+按构造，此方程对所有 $ x_m < x \leq b $ 成立，且对 $ x = x_m $ 显然为真。习题 I.12.10(b) 表明差商是其变量的对称函数，故方程 (3.12) 事实上对所有 $ x \in I $ 成立。
+
+(3.12) 的左边是误差函数 $ r_m[f; x_0, \ldots, x_m] $，故由命题 3.10 可得
+
+\[
+\frac{1}{(m+1)!}f^{(m+1)}(\xi)\prod_{j=0}^{m}(x-x_{j})=f[x_{0},\ldots,x_{m},x]\prod_{j=0}^{m}(x-x_{j}),\qquad x\in I,
+\]
+
+对某个 $ \xi := \xi(x, x_0, \ldots, x_m) \in (x \land x_0, x \lor x_m) $。■
+
+\end{proposition}
+
+\begin{corollary}
+
+设 $ f \in C^{m+1}(I, \mathbb{R}) $。则对所有 $ x \in I $，
+
+\[
+\lim_{(x_{0},\ldots,x_{m})\to(x,\ldots,x)}f[x_{0},\cdots,x_{m},x]=\frac{1}{(m+1)!}f^{(m+1)}(x),
+\]
+
+只要在取极限时任何 $ x_{j} $ 都不等于 x。
+
+此推论表明，高阶差商可用于逼近高阶导数，正如通常的差商逼近一阶导数那样。
+
+若点 $ x_{0}, x_{1}, \ldots, x_{n} $ 等距分布，即出现一种特别简单的情形，即
+
+\[
+x_{j}:=x_{0}+j h~,\qquad0\leq j\leq n~,
+\]
+
+对某个 h > 0。
+
+\end{corollary}
+
+\begin{proposition}
+
+假设 $ f \in C^{n-1}(I, \mathbb{R}) $，$ f^{(n)} $ 在 $ \mathring{I} $ 上存在，且 $ 0 < h \leq (b - a)/n $。则存在某个 $ \xi \in (a, a + nh) $，使得
+
+\begin{equation}
+\triangle_{h}^{n}f(a)=f^{(n)}(\xi).
+\end{equation}
+
+\proofhead
+由 (3.10)、插值多项式的唯一性（命题 I.12.9）以及 (I.12.15)，我们有
+\begin{equation}
+\frac{1}{n!}\triangle_{h}^{n}f(a)=f[x_{0},x_{1},\ldots,x_{n}],\qquad x_{0}:=a\;.
+\end{equation}
+
+结论随后由命题 3.12 可得。■
+
+\end{proposition}
+
+\begin{corollary}
+
+对所有 $ f \in C^n(I, \mathbb{R}) $，
+
+\[
+\lim_{h\to0+}\triangle_{h}^{n} f(x)=f^{(n)}(x),\qquad x\in I.
+\]
+
+\proofhead
+这直接由 (3.13) 与推论 3.13 可得。
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $ f \in C^n(I, \mathbb{R}) $。由命题 I.12.13，对 $ f $ 以及等距点 $ x_j := x_0 + jh \in I $，$ 0 \leq j \leq n $，$ h > 0 $，牛顿插值多项式具有形式
+
+\[
+N_{n}[f;x_{0};h]=\sum_{j=0}^{n}\frac{\triangle_{h}^{j}f(x_{0})}{j!}\prod_{k=0}^{j-1}(X-x_{k})~.
+\]
+
+由推论 3.15，我们得到
+
+\[
+\lim_{h\to0+}N_{n}[f;x_{0};h]=\sum_{j=0}^{n}\frac{f^{(j)}(x_{0})}{j!}(X-x_{0})^{j}=\mathcal{T}_{n}(f,x_{0}).
+\]
+
+这表明，在极限 $ h \to 0+ $ 下，牛顿插值多项式成为泰勒多项式。
+
+\item
+
+推论 3.13 与 3.15 是数值微分的理论基础。细节与进一步发展参见例如 [WS79] 与 [IK66]，以及数值分析方面的文献。
+
+\end{items}
+
+\end{remark}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+假设 $ \alpha, \beta, R > 0 $ 且 $ p \in C^2([0, R), \mathbb{R}) $ 满足
+
+\[
+p(x)\geq\alpha~,\quad(1+\beta)\big[p^{\prime}(x)\big]^{2}\leq p^{\prime\prime}(x)p(x)~,\qquad x\geq0~.
+\]
+\end{exercises}
+
+\begin{proof}
+
+$ R < \infty $ 且当 $ x \to R^{-} $ 时 $ p(x) \to \infty $。
+
+（提示：函数 $ p^{-\beta} $ 是凹的。利用 $ p^{-\beta} $ 的切线给出 $ p $ 的一个下界（见应用 3.9(e)）。）
+
+\end{proof}
+
+\begin{exercises}
+\item[2.]
+
+设 $ a, b \in \mathbb{C} $，$ \omega \in \mathbb{R} $，且 $ f : \mathbb{C} \to \mathbb{C} $ 为满足
+
+\begin{equation}
+f(z)+\omega^{2}f^{\prime\prime}(z)=0~,\quad z\in\mathbb{C}~,\qquad f(0)=a~,\qquad f^{\prime}(0)=\omega b~.
+\end{equation}
+
+\begin{items}
+\item
+
+\proofhead
+$f$ 属于 $C^{\infty}(\mathbb{C})$ 且 $f$ 由 (3.14) 唯一确定。确定 $f$。
+\item
+
+若 (3.14) 换成
+
+\[
+f(z)=\omega^{2}f^{\prime\prime}(z)~,\quad z\in\mathbb{C}~,\qquad f(0)=a~,\qquad f^{\prime}(0)=\omega b~?
+\]
+\end{items}
+
+\item[3.]
+
+确定 $ f: \mathbb{C} \to \mathbb{C} $ 在点 1 处的泰勒级数，当
+
+\begin{items}
+\item
+
+$ f(z) = 3z^{3} - 7z^{2} + 2z + 4 $，（b）$ f(z) = e^{z} $。
+
+\end{items}
+
+\item[4.]
+
+计算 $ \log\left((1+x)/(1-x)\right) $，$ x \in (-1,1) $，在 0 处的第 $ n $ 个泰勒多项式。
+
+\item[5.]
+
+确定下列实函数的定义域、极值与拐点：
+
+\[
+\text{(a)}\ x^{3}/(x-1)^{2},\qquad\text{(b)}e^{\sin x},\qquad\text{(c)}x^{n}e^{-x^{2}},\qquad\text{(d)}x^{2}/\log x,\qquad\text{(e)}\sqrt[3]{(x-1)^{2}(x+1)},
+\]
+
+\begin{items}
+\item[（f）]
+
+$ (\log(3x))^2 / x $。
+
+\end{items}
+
+\item[6.]
+
+对 a > 1，证明
+
+\[
+\frac{1}{1+x}-\frac{1}{1+ax}\leq\frac{\sqrt{a}-1}{\sqrt{a}+1},\qquad x\geq1.
+\]
+\item[7.]
+
+假设 $ s \in \mathbb{R} $ 且 $ n \in \mathbb{N} $。证明：对每个 $ x > -1 $，存在某个 $ \tau \in (0,1) $，使得
+
+\begin{equation}
+(1+x)^{s}=\sum_{k=0}^{n}\binom{s}{k}x^{k}+\binom{s}{n+1}\frac{x^{n+1}}{(1+\tau x)^{n+1-s}}.
+\end{equation}
+
+这里
+
+\begin{equation*}
+\binom{\alpha}{k}:=\left\{\begin{array}{c ll}{\frac{\alpha(\alpha-1)\cdots(\alpha-k+1)}{k!}}&{,\quad}&{k\in\mathbb{N}^{\times}}\\ {1}&{,\quad}&{k=0\;,}\\ \end{array}\right.
+\end{equation*}
+
+表示对 $ \alpha \in \mathbb{C} $ 的（广义）二项式系数\footnote{见 V.3 节。}。
+
+\item[8.]
+
+利用 (3.15) 逼近 $ \sqrt[5]{30} $。估计误差。（提示：$ \sqrt[5]{30} = 2\sqrt[5]{1 - (1/16)} $。）
+
+\item[9.]
+
+证明一般幂函数的下列泰勒级数展开：\footnote{另见定理 V.3.10。}
+
+\[
+(1+x)^{s}=\sum_{k=0}^{\infty}\binom{s}{k}x^{k},\qquad x\in(-1,1).
+\]
+
+（提示：为估计余项，区分 $ x \in (0,1) $ 与 $ x \in (-1,0) $ 两种情形（见应用 3.9(d)）。）
+
+\item[10.]
+
+设 $ X \subseteq \mathbb{K} $ 为完全集，且对某个 $ n \in \mathbb{N}^\times $ 有 $ f \in C^n(X, \mathbb{K}) $。若 $ f(x_0) = \cdots = f^{(n-1)}(x_0) = 0 $ 且 $ f^{(n)}(x_0) \neq 0 $，则数 $ x_0 \in X $ 称为 $ f $ 的一个 $ n $ \textbf{重零点}。证明：若 $ X $ 为凸集，则 $ f $ 在 $ x_0 $ 处有重数 $ \geq n $ 的零点，当且仅当存在某个 $ g \in C(X, \mathbb{K}) $，使得对所有 $ x \in X $ 有 $ f(x) = (x - x_0)^n g(x) $。
+
+\item[11.]
+
+设 $ p = X^n + a_{n-1}X^{n-1} + \cdots + a_0 $ 为系数在 $ \mathbb{R} $ 中的多项式。证明或否定：函数 $ p + \exp $ 在 $ \mathbb{R} $ 中有重数 $ \leq n $ 的零点。
+
+\item[12.]
+
+证明下列命题：
+
+\begin{items}
+\item
+
+对每个 $ n \in \mathbb{N} $，$ T_n(x) := \cos(n \arccos x) $，$ x \in \mathbb{R} $，是 n 次多项式，且
+
+\[
+T_{n}(x)=x^{n}+\binom{n}{2}x^{n-2}(x^{2}-1)+\binom{n}{4}x^{n-4}(x^{2}-1)^{2}+\cdots.
+\]
+
+$ T_{n} $ 称为 n 次切比雪夫多项式。
+
+\item
+
+这些多项式满足递推公式
+
+\[
+T_{n+1}=2X T_{n}-T_{n-1}~,\qquad n\in\mathbb{N}^{\times}~.
+\]
+\item
+
+对每个 $ n \in \mathbb{N}^\times $，$ T_n = 2^{n-1}X^n + p_n $，其中 $ p_n $ 为某个满足 $ \deg(p_n) < n $ 的多项式。
+
+\item
+
+$ T_{n} $ 在下列每个点处有单零点，即重数为 1 的零点：
+
+\[
+x_{k}:=\cos\frac{(2k-1)\pi}{2n},\qquad k=1,2,\ldots,n.
+\]
+\item
+
+$ T_{n} $ 在下列每个点处有极值：
+
+\[
+y_{k}:=\cos\frac{k\pi}{n},\qquad k=0,1,\ldots,n,
+\]
+
+在 $ [-1,1] $ 中，且 $ T_{n}(y_{k})=(-1)^{k} $
+（提示：（a）对 $ \alpha\in[0,\pi] $ 和 $ x:=\cos\alpha,\cos n\alpha+i\sin n\alpha=\left(x+i\sqrt{1-x^{2}}\right)^{n} $。
+
+\end{items}
+
+（b）余弦函数的加法定理。）
+
+\item[13.]
+
+定义规范化切比雪夫多项式：对 $ n \in \mathbb{N}^* $ 令 $ \tilde{T}_n := 2^{1-n}T_n $，并令 $ \tilde{T}_0 := T_0 $。对 $ n \in \mathbb{N} $，设 $ \mathcal{P}_n $ 为所有满足 $ a_1, \ldots, a_n \in \mathbb{R} $ 的多项式 $ X^n + a_1X^{n-1} + \cdots + a_n $ 的集合。设 $ \|\cdot\|_\infty $ 为 $ [-1,1] $ 上的最大值范数。证明下列命题：\footnote{命题 (a) 通常称为切比雪夫定理。}
+
+\begin{items}
+\item
+
+在集合 $ \mathcal{P}_n $ 中，$ n $ 次规范化切比雪夫多项式是零在区间 $ [-1,1] $ 上的最佳逼近，即对每个 $ n \in \mathbb{N} $，
+
+\[
+\|\widetilde{T}_{n}\|_{\infty}\leq\|p\|_{\infty},\qquad p\in\mathcal{P}_{n}.
+\]
+\item
+
+对 $ -\infty < a < b < \infty $，
+
+\[
+\operatorname*{m a x}_{a\leq x\leq b}|p(x)|\geq2^{1-2n}(b-a)^{n}\;,\qquad p\in\mathcal{P}_{n}\;.
+\]
+\item
+
+设 $ x_0, \ldots, x_n $ 为 $ T_{n+1} $ 的零点。假设 $ f \in C^{n+1}([-1,1], \mathbb{R}) $，$ p_n $ 为次数 $ \leq n $ 的插值多项式，使得对 $ j = 0,1,\ldots,n $ 有 $ f(x_j) = p(x_j) $。则
+
+\[
+\|r_{n}[f;x_{0},\ldots,x_{n}]\|_\infty\leq\frac{\|f^{(n+1)}\|_\infty}{2^{n}(n+1)!}\;.
+\]
+
+证明这个误差界是最优的。
+
+\end{items}
+
+\end{exercises}
+
+\section{迭代法}
+
+我们已经推导出关于函数零点的各种定理。其中最突出的是代数基本定理、介值定理与罗尔定理。这些重要而深刻的结果的共同之处在于，它们预言了零点的存在，但对于如何求出这些零点却只字未提。因此，例如，我们知道实函数
+
+\[
+x\mapsto x^{5}e^{|x|}-\frac{1}{\pi}x^{2}\sin\bigl(\log(x^{2})\bigr)+1998
+\]
+
+至少有一个零点（为什么？），但迄今为止，我们还没有求出这个零点的算法。\footnote{见习题 9。}
+
+在本节中，我们建立求函数零点与解方程的方法——至少是近似地。本节的核心结果，巴拿赫不动点定理，事实上其重要性远远超出本节的需要，这一点我们将在后面的章节中看到。
+
+\subsection*{不动点与压缩}
+
+设 $f: X \to Y$ 是集合 $X$ 与 $Y$ 之间的函数，其中 $X \subseteq Y$。满足 $f(a) = a$ 的元素 $a \in X$ 称为 $f$ 的不动点。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+设 $E$ 是向量空间，$X \subseteq E$ 且 $f: X \to E$。对所有 $x \in X$ 令 $g(x) := f(x) + x$。则 $a \in X$ 是 $f$ 的零点当且仅当 $a$ 是 $g$ 的不动点。因此，确定 $f$ 的零点与确定 $g$ 的不动点是同一回事。
+
+\item
+
+给定函数 $ f: X \to E $，一般来说，如（a）中的函数 $ g $ 有许多种取法。例如，设 $ E = \mathbb{R} $ 且 0 是函数 $ h: \mathbb{R} \to \mathbb{R} $ 的唯一零点。对 $ x \in X $ 令 $ g(x) = h(f(x)) + x $。则 $ a \in X $ 是 $ f $ 的零点当且仅当 $ a $ 是 $ g $ 的不动点。
+
+\item
+
+设 $X$ 是度量空间，$a$ 是 $f: X \to Y$ 的不动点。设 $x_0 \in X$ 且序列 $(x_k)$ 可由“迭代” $x_{k+1} := f(x_k)$ 递归地定义。这当然意味着对每个 $k$ 都有 $f(x_k)$ 在 $X$ 中。若 $x_k \to a$，则我们说“$a$ 可由逐次逼近法算出”，或者说“逐次逼近法收敛到 $a$”。
+下面的图说明了最简单情形下的这种方法。它们特别表明，即使 $f$ 只有一个不动点，用这种方法产生的序列也可能不收敛。
+
+\end{items}
+
+\bookfigure[0.26]{figures/d0cf79b7484d8075.jpg}
+\bookfigure[0.26]{figures/ed15f9fdde9ab412.jpg}
+
+例如，考虑由 $f(x):=1-x$ 定义的函数 $f:[0,1]\to[0,1]$。它恰好有一个不动点，即 $a=1/2$。对于由 $x_{k+1}:=f(x_k)$（对所有 $k\in\mathbb{N}$）定义的序列 $(x_k)$，我们对所有 $k\in\mathbb{N}$ 都有 $x_{2k}=x_0$ 与 $x_{2k+1}=1-x_0$。因此，若 $x_0\neq1/2$，则 $(x_k)$ 发散。
+
+两个度量空间 $X$ 与 $Y$ 之间的函数 $f: X \to Y$ 称为 $\text{压缩}$，若存在某个 $q \in (0,1)$ 使得
+
+\[
+d\bigl(f(x),f(x^{\prime})\bigr)\leq q d(x,x^{\prime}),\qquad x,x^{\prime}\in X.
+\]
+
+此时，q 称为 f 的压缩常数。
+
+\end{remark}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+函数 $ f: X \to Y $ 是压缩，当且仅当 f 是利普希茨连续的，且利普希茨常数小于 1。
+
+\item
+
+设 $E$ 是赋范向量空间，$X \subseteq \mathbb{K}$ 是凸的且完全的。设 $f: X \to E$ 可微且 $\sup_X \|f'(x)\| < 1$。则由向量值函数的中值定理（定理 2.18）可知 $f$ 是压缩。
+
+\end{items}
+
+\end{remark}
+
+\subsection*{巴拿赫不动点定理}
+
+下面的定理是本节的主要结果，有着数不胜数的应用，特别是在应用数学中。
+
+\begin{theorem}
+
+（压缩定理，巴拿赫不动点定理）设 X 是完备度量空间，且 $ f: X \to X $ 是压缩。
+
+\begin{subitems}
+\item
+
+f 有唯一的不动点 a。
+
+\item
+
+对任意初始值 $ x_{0} $，逐次逼近法收敛到 a。
+
+\item
+
+若 q 是 f 的压缩常数，则
+
+\[
+d(x_{k},a)\leq\frac{q^{k}}{1-q}d(x_{1},x_{0}),\qquad k\in\mathbb{N}.
+\]
+\end{subitems}
+
+证明
+
+\begin{items}
+\item
+
+（唯一性）若 $a, b \in X$ 是 $f$ 的两个不同的不动点，则
+
+\[
+d(a,b)=d\big(f(a),f(b)\big)\leq q d(a,b)<d(a,b),
+\]
+
+这是不可能的。
+
+\item
+
+（存在性与收敛性）设 $ x_0 \in X $。对所有 $ k \in \mathbb{N} $ 由 $ x_{k+1} := f(x_k) $ 递归地定义序列 $ (x_k) $。则
+
+\[
+d(x_{n+1},x_{n})=d\bigl(f(x_{n}),f(x_{n-1})\bigr)\leq q d(x_{n},x_{n-1}),\qquad n\in\mathbb{N}^{\times},
+\]
+
+并且，由归纳法可得
+
+\begin{equation}
+d(x_{n+1},x_{n})\leq q^{n-k}d(x_{k+1},x_{k})
+\end{equation}
+
+对所有 $ n > k \geq 0 $ 成立。这一不等式蕴含
+
+\begin{equation}
+\begin{aligned}
+d(x_{n},x_{k})&\leq d(x_{n},x_{n-1})+d(x_{n-1},x_{n-2})+\cdots+d(x_{k+1},x_{k})\\&\leq(q^{n-k-1}+q^{n-k-2}+\cdots+1)d(x_{k+1},x_{k})\\&=\frac{1-q^{n-k}}{1-q}d(x_{k+1},x_{k})
+\end{aligned}
+\end{equation}
+
+对所有 $ n > k \geq 0 $ 成立。因为由 (4.1) 有 $ d(x_{k+1}, x_k) \leq q^k d(x_1, x_0) $，故由 (4.2) 可得
+
+\begin{equation}
+d(x_{n},x_{k})\leq\frac{q^{k}-q^{n}}{1-q}d(x_{1},x_{0})\leq\frac{q^{k}}{1-q}d(x_{1},x_{0}),\qquad n>k\geq0.
+\end{equation}
+
+这表明 $(x_k)$ 是柯西序列。因为 $X$ 是完备度量空间，所以存在某个 $a \in X$ 使得 $\lim x_k = a$。由 $f$ 的连续性及序列 $(x_k)$ 的定义，$a$ 是 $f$ 的不动点。
+
+\item
+
+（误差估计）因为序列 $ (x_n) $ 收敛到 a，我们可以在 (4.3) 中令 $ n \to \infty $ 取极限，以得到所断言的误差估计（见例 III.1.3(1)）。
+
+\end{items}
+
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+除了定理 4.3(iii) 的先验误差估计之外，我们还有后验界
+
+\[
+d(x_{k},a)\leq\frac{q}{1-q}d(x_{k},x_{k-1}),\qquad k\in\mathbb{N}.
+\]
+
+\proofhead
+在 (4.2) 中令 $ n \to \infty $ 取极限，得到
+\[
+d(x_{k},a)\leq\frac{1}{1-q}d(x_{k+1},x_{k})\leq\frac{q}{1-q}d(x_{k},x_{k-1}),
+\]
+
+其中我们还用到了 (4.1)。■
+
+\item
+
+设 $f: X \to X$ 是压缩常数为 $q$ 的压缩，$a$ 是 $f$ 的不动点。则对于逐次逼近法，我们还有另一个误差估计：
+
+\[
+d(x_{k+1},a)=d\bigl(f(x_{k}),f(a)\bigr)\leq q d(x_{k},a)~,\qquad k\in\mathbb{N}~.
+\]
+
+因此，人们称这个迭代过程是线性收敛的。
+一般地，若 $ \alpha \geq 1 $ 且存在常数 $ n_0 $ 与 $ c $ 使得
+
+\[
+d(x_{n+1},a)\leq c\big[d(x_{n},a)\big]^{\alpha},\qquad n\geq n_{0}.
+\]
+
+则称序列 $ (x_n) $ 以阶 $ \alpha $ 收敛到 $ a $。若 $\alpha=1$，即收敛是线性的，我们还要求 $c<1$。一般地，收敛阶越高，序列收敛得越快。例如，对于二次收敛，若 $d(x_{n_0},a)<1$ 且 $c\leq1$，则每一步都使近似值的正确小数位数加倍。在实践中，$c$ 常常大于 1，因此这一效果部分地被削弱。
+
+\item
+
+在应用中经常出现如下情形：设 $E$ 是巴拿赫空间，$X$ 是 $E$ 的闭子集，$f: X \to E$ 是满足 $f(X) \subseteq X$ 的压缩。则因为 $X$ 是完备度量空间（见习题 II.6.4），压缩定理的所有断言对 $f$ 都成立。
+
+\item
+
+（b）中的假设 $f(X) \subseteq X$ 可以减弱。若存在某个初始值 $x_0 \in X$ 使得迭代 $x_{k+1} = f(x_k)$ 能对所有 $k$ 进行，则压缩定理的断言对这个特定的 $x_0$ 成立。
+借助上面的注，我们可以导出巴拿赫不动点定理的一个有用的“局部版本”。
+
+\end{items}
+
+\end{remark}
+
+\begin{proposition}
+
+设 $E$ 是巴拿赫空间，$X := \bar{\mathbb{B}}_E(x_0, r)$，其中 $x_0 \in E$ 且 $r > 0$。设 $f: X \to E$ 是压缩常数为 $q$ 的压缩，且满足 $\|f(x_0) - x_0\| \leq (1 - q)r$。则 $f$ 有唯一的不动点，且若 $x_0$ 是初始值，则逐次逼近法收敛。
+
+\proofhead
+因为 $X$ 是巴拿赫空间的闭子集，所以 $X$ 是完备度量空间。因此，由注 4.4(d)，只需证明 $x_{k+1}=f(x_k)$ 在每次迭代时都保持在 $X$ 中。对 $x_1=f(x_0)$，由于假设 $\|f(x_0)-x_0\|=\|x_1-x_0\|\leq(1-q)r$，这一点成立。
+
+设 $ x_1, \ldots, x_k \in X $。由 (4.3) 可得
+\[
+\left\|x_{k+1}-x_{0}\right\|\leq\frac{1-q^{k+1}}{1-q}\left\|x_{1}-x_{0}\right\|\leq(1-q^{k+1})r<r.
+\]
+
+因此，$x_{k+1}$ 也在 $X$ 中，且迭代 $x_{k+1}=f(x_k)$ 对所有 $k$ 都有定义。■
+
+\end{proposition}
+
+\begin{example}
+
+\begin{items}
+\item
+
+考虑在区间 $\pi/2 < \xi < 3\pi/2$ 中求方程 $\tan x = x$ 的解 $\xi$ 的问题。令 $I := (\pi/2, 3\pi/2)$，并对 $x \in I$ 令 $f(x) := \tan x$，从而 $f'(x) = 1 + f^2(x)$。由中值定理可知，$f$ 在 $\xi$ 的任何邻域上都不是压缩。
+为了使用压缩定理，我们转而考虑 $f$ 的反函数，
+即函数
+
+\[
+g\colon\bigl[\tan\bigl|(\pi/2,3\pi/2)\bigr]^{-1}\colon\mathbb{R}\to(\pi/2,3\pi/2)~.
+\]
+
+因为正切函数在 $(\pi/2, 3\pi/2)$ 上严格递增，所以函数 $g$ 有良好定义，且 $g(x) = \arctan(x) + \pi$。此外，$f$ 与 $g$ 的不动点问题是等价的，即对所有 $a \in (\pi/2, 3\pi/2)$，
+
+\end{items}
+
+\bookfigure[0.22]{figures/685766da41145171.jpg}
+\[
+a=\tan a\Longleftrightarrow a=\arctan(a)+\pi.
+\]
+
+因为 $ g'(x) = 1/(1 + x^2) $（见 (IV.2.3)），压缩定理适用于 $ g $。从图中我们看到 $ \xi > \pi $。令 $ X := [\pi, \infty) \subseteq \mathbb{R} $，使得 $ g(X) \subseteq [\pi, 3\pi/2) \subseteq X $。因为对所有 $ x \in X $ 都有 $ |g'(x)| \leq 1/(1 + \pi^2) < 1 $，所以 $ g $ 在 $ X $ 上是压缩。因此由定理 4.3 可知，存在唯一的 $ \xi \in [\pi, 3\pi/2) $ 使得 $ \xi = g(\xi) $，并且以 $ x_0 := \pi $ 为初始值时，逐次逼近法收敛到 $ \xi $。
+
+\begin{items}
+\item[（b）]
+
+设 $ -\infty < a < b < \infty $，且 $ f \in C^1([a, b], \mathbb{R}) $ 是压缩。假设对 $ x_0 \in [a, b] $ 的迭代 $ x_{k+1} = f(x_k) $ 定义了一个无限序列。由注 4.4(d)，存在唯一的 $ \xi \in [a, b] $ 使得 $ x_k \to \xi $。若对所有 $ x \in [a, b] $ 都有 $ f'(x) > 0 $，则收敛是单调的；若对所有 $ x \in [a, b] $ 都有 $ f'(x) < 0 $，则收敛是交错的，即 $ \xi $ 介于每对 $ x_k $ 与 $ x_{k+1} $ 之间。
+
+\end{items}
+
+\bookfigure[0.24]{figures/46c3751c6d33ad50.jpg}
+
+单调收敛
+
+\bookfigure[0.24]{figures/84ee07f3fde2eac1.jpg}
+
+交错收敛
+
+\proofhead
+由中值定理，对每个 $ k \in \mathbb{N} $，存在某个 $ \eta_k \in (a, b) $ 使得
+\[
+x_{k+1}-x_{k}=f(x_{k})-f(x_{k-1})=f^{\prime}(\eta_{k})(x_{k}-x_{k-1}).
+\]
+
+若对所有 $ k \in \mathbb{N}^\times $ 都有 $ f'(\eta_k) \geq 0 $，则
+
+\[
+\mathrm{s i g n}(x_{k+1}-x_{k})\in\left\{\mathrm{s i g n}(x_{k}-x_{k-1}),0\right\}\;,\qquad k\in\mathbb{N}^{\times}\;,
+\]
+
+从而 $ (x_k) $ 是单调序列。若对所有 $ k \in \mathbb{N}^* $ 都有 $ f'(\eta_k) \leq 0 $，则
+
+\[
+\mathrm{s i g n}(x_{k+1}-x_{k})\in\left\{-\mathrm{s i g n}(x_{k}-x_{k-1}),0\right\},\qquad k\in\mathbb{N}^{\times},
+\]
+
+即收敛是交错的。■
+
+例 4.6(a) 最重要的意义在于表明：对于具体的应用，重要的是先从理论上分析问题，并在需要时把问题改写成新的形式，以便能有效地使用逐次逼近法。
+
+\end{example}
+
+\subsection*{牛顿法}
+
+在本节的剩余部分，我们考虑如下情形：
+
+\begin{equation}
+\begin{aligned}
+\text{设 } -\infty < a < b < \infty \text{，且 } f \in C^2([a, b], \mathbb{R}) \text{ 满足：对所有 } x \in [a, b] \text{ 都有 } f'(x) \neq 0\text{。} \\ \text{我们进一步假设存在某个 } \xi \in (a, b) \text{ 使得 } f(\xi) = 0\text{。}
+\end{aligned}
+\end{equation}
+
+利用 $f$ 的线性近似，我们将建立一种近似 $f$ 的零点 $\xi$ 的方法。从几何上看，$\xi$ 是 $f$ 的图像与 $x$ 轴的交点。
+
+\bookfigure[0.34]{figures/ee0547de200668a7.jpg}
+
+从 $\xi$ 的一个初始近似 $ x_{0} $ 出发，我们用 f 的图像在点 $ (x_{0}, f(x_{0})) $ 处的切线 $ t_{0} $ 来代替它。由假设 (4.4)，$ f' $ 在 $ [a, b] $ 上不为零，因此切线 $ t_{0} $ 与 x 轴相交于一点 $ x_{1} $，它是 $\xi$ 的一个新的近似。在点 $ (x_{0}, f(x_{0})) $ 处的切线由如下方程给出
+
+\[
+x\mapsto f(x_{0})+f^{\prime}(x_{0})(x-x_{0}),
+\]
+
+因此 $ x_{1} $ 可由方程 $ f(x_{0}) + f'(x_{0})(x_{1} - x_{0}) = 0 $ 算出：
+
+\[
+x_{1}=x_{0}-\frac{f(x_{0})}{f^{\prime}(x_{0})}.
+\]
+
+这一过程的迭代称为牛顿法：
+
+\[
+x_{n+1}=x_{n}-\frac{f(x_{n})}{f^{\prime}(x_{n})},\quad n\in\mathbb{N},\qquad x_{0}\in[a,b].
+\]
+
+(4.4) 中的假设不足以确保收敛 $ x_{n} \to \xi $，如下面的图所示：
+
+\bookfigure[0.30]{figures/7f1a0ff7cda208ad.jpg}
+
+由下式定义 $ g\colon [a,b]\to\mathbb{R} $：
+
+\begin{equation}
+g(x):=x-f(x)/f^{\prime}(x).
+\end{equation}
+
+则 $\xi$ 显然是 g 的不动点，而牛顿法正是关于函数 g 的逐次逼近法。这提示我们应用巴拿赫不动点定理，而事实上，该定理正是下面关于牛顿法的收敛性结果之证明的核心。
+
+\begin{theorem}
+
+存在某个 $\delta > 0$，使得对区间 $\left[\xi - \delta, \xi + \delta\right]$ 中的任何 $x_0$，牛顿法都收敛到 $\xi$。换句话说：若初始值充分接近零点 $\xi$，则牛顿法收敛。
+
+证明
+
+\begin{subitems}
+\item
+
+由极值定理（推论 III.3.8），存在常数 $ M_{1}, M_{2}, m > 0 $ 使得
+
+\begin{equation}
+m\leq|f^{\prime}(x)|\leq M_{1}~,\quad|f^{\prime \prime}(x)|\leq M_{2}~,\qquad x\in[a,b]~.
+\end{equation}
+
+对于 (4.5) 中定义的函数 g，我们有 $ g' = ff'' / [f']^2 $，因此
+
+\[
+|g^{\prime}(x)|\leq\frac{M_{2}}{m^{2}}|f(x)|,\qquad x\in[a,b].
+\]
+
+因为 $ f(\xi) = 0 $，f 的绝对值可以借助中值定理作如下估计：
+
+\begin{equation}
+|f(x)|=|f(x)-f(\xi)|\leq M_{1}\left|x-\xi\right|,\qquad x\in[a,b].
+\end{equation}
+
+因此
+
+\[
+|g^{\prime}(x)|\leq\frac{M_{1}M_{2}}{m^{2}}\left|x-\xi\right|,\qquad x\in[a,b].
+\]
+\item
+
+选取 $ \delta_{1} > 0 $ 使得
+
+\[
+I:=\left[\xi-\delta_{1},\xi+\delta_{1}\right]\subseteq\left[a,b\right]\quad\text{且}\quad\frac{M_{1}M_{2}}{m^{2}}\delta_{1}\leq\frac{1}{2}.
+\]
+
+则 $g$ 在 $I$ 上是压缩，压缩常数为 $1/2$。现在令 $r := \delta_1/2$，并选取 $\delta > 0$ 使得 $M_1\delta/m \leq r/2$。因为 $M_1 \geq m$，我们有 $\delta \leq \delta_1/4$。因此，对每个 $x_0 \in [\xi - \delta, \xi + \delta]$ 与 $x \in [x_0 - r, x_0 + r]$，我们有
+
+\[
+\left|x-\xi\right|\leq\left|x-x_{0}\right|+\left|x_{0}-\xi\right|\leq r+\delta\leq\frac{\delta_{1}}{2}+\frac{\delta_{1}}{4}<\delta_{1}.
+\]
+
+这表明对每个 $ x_0 \in [\xi - \delta, \xi + \delta] $ 都有包含关系 $ \bar{\mathbb{B}}(x_0, r) \subseteq I $。因此 $ g $ 在 $ \bar{\mathbb{B}}(x_0, r) $ 上是压缩，压缩常数为 $ 1/2 $。
+最后，由 (4.6) 与 (4.7) 可得
+
+\[
+\left|x_{0}-g(x_{0})\right|=\left|\frac{f(x_{0})}{f^{\prime}(x_{0})}\right|\leq\frac{M_{1}}{m}\left|x_{0}-\xi\right|\leq\frac{M_{1}\delta}{m}\leq\frac{r}{2}.
+\]
+
+因此 $g$ 满足命题 4.5 的假设，且 $g$ 在 $\left[\xi-\delta,\xi+\delta\right]$ 中有唯一的不动点 $\eta$。因为 $\eta$ 是 $f$ 的零点，并且由罗尔定理，$f$ 在 $[a,b]$ 中只有一个零点，所以 $\eta=\xi$。所断言的收敛性质现在由巴拿赫不动点定理得出。
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+牛顿法是二次收敛的，即存在某个 c > 0 使得
+
+\[
+\left|x_{n+1}-\xi\right|\leq c\left|x_{n}-\xi\right|^{2},\qquad n\in\mathbb{N}.
+\]
+
+\proofhead
+对每个 $ n \in \mathbb{N} $，泰勒级数的拉格朗日余项公式确保存在某个 $ \eta_n \in (\xi \wedge x_n, \xi \vee x_n) $ 使得
+\[
+0=f(\xi)=f(x_{n})+f^{\prime}(x_{n})(\xi-x_{n})+\frac{1}{2}f^{\prime\prime}(\eta_{n})(\xi-x_{n})^{2}.
+\]
+
+因此由牛顿法，我们有
+
+\[
+\xi-x_{n+1}=\xi-x_{n}+\frac{f(x_{n})}{f^{\prime}(x_{n})}=-\frac{1}{2}\frac{f^{\prime\prime}(\eta_{n})}{f^{\prime}(x_{n})}(\xi-x_{n})^{2}.
+\]
+
+利用 (4.6) 的记号并令 $ c := M_2/(2m) $，断言即得证。■
+
+\item
+
+若 $f$ 是凸的且 $f(x_{0})$ 为正（或若 $f$ 是凹的且 $f(x_{0})$ 为负），则牛顿法单调收敛。
+
+\proofhead
+这直接由应用 3.9(e) 以及定理 2.12 中凸函数与凹函数的刻画得出。
+\end{items}
+
+\end{remark}
+
+\begin{example}
+
+（计算根）对 $a > 0$ 与 $n \geq 2$，我们考虑如何用牛顿法确定 $\sqrt[n]{a}$。对所有 $x \geq 0$ 令 $f(x) = x^n - a$，我们有迭代
+
+\begin{equation}
+x_{k+1}=x_{k}-\frac{x_{k}^{n}-a}{n x_{k}^{n-1}}=\Big(1-\frac{1}{n}\Big)x_{k}+\frac{a}{n x_{k}^{n-1}},\qquad k\in\mathbb{N}.
+\end{equation}
+
+设 $x_0 > \max\{1, a\}$。因为 $f(x_0) = x_0^n - a > 0$ 且 $f$ 是凸的，由注 4.8(b)，$(x_k)$ 单调收敛到 $\sqrt[n]{a}$。在特殊情形 $n = 2$ 下，(4.8) 变成
+
+\[
+x_{k+1}=\frac{1}{2}\Big(x_{k}+\frac{a}{x_{k}}\Big)~,\quad k\in\mathbb{N}~,\qquad x_{0}=\operatorname*{m a x}\{1,a\}~,
+\]
+
+这正是习题 II.4.4 中的巴比伦算法。
+
+\end{example}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $X$ 是完备度量空间，并且对 $f: X \to X$，设 $f^n$ 表示 $f$ 的第 $n$ 次迭代，即 $f^0 := \text{id}_X$ 且 $f^n := f \circ f^{n-1}$，$n \in \mathbb{N}^\times$。假设对每个 $n \in \mathbb{N}$，存在某个 $q_n \geq 0$ 使得
+
+\[
+d\bigl(f^{n}(x),f^{n}(y)\bigr)\leq q_{n}d(x,y)~,\qquad x,y\in X~.
+\]
+
+证明：若 $ (q_{n}) $ 是零序列，则 f 在 X 中有不动点。
+
+\item
+
+设 $X$ 与 $\Lambda$ 是度量空间，其中 $X$ 完备，且 $f \in C(X \times \Lambda, X)$。假设存在某个 $\alpha \in [0,1)$，并且对每个 $\lambda \in \Lambda$，存在某个 $q(\lambda) \in [0,\alpha]$ 使得
+
+\[
+d\big(f(x,\lambda),f(y,\lambda)\big)\leq q(\lambda)d(x,y)~,\qquad x,y\in X~.
+\]
+
+由巴拿赫不动点定理，对每个 $ \lambda \in \Lambda $，$ f(\cdot, \lambda) $ 在 $ X $ 中有唯一的不动点 $ x(\lambda) $。证明 $ [\lambda \mapsto x(\lambda)] \in C(\Lambda, X) $。
+
+\item
+
+验证函数 $ f: \mathbb{R} \to \mathbb{R} $，$ x \mapsto e^{x-1} - e^{1-x} $ 有唯一的不动点 $ x^* $。近似地计算 $ x^* $。
+
+\item
+
+用牛顿法近似 $ X^{3} - 2X - 5 $ 的实零点。
+
+\item
+
+数值地确定下列方程的最小正解：
+
+\[
+x\tan x=1,\quad x^{3}+e^{-x}=2,\quad x-\cos^{2}x=0,\quad2\cos x=x^{2}.
+\]
+\item
+
+由习题 2.6，函数 $ f(x) = 1 + x + x^2/2! + \cdots + x^n/n! $，$ x \in \mathbb{R} $，对奇数 $ n \in \mathbb{N}^\times $ 有唯一的零点。近似地确定这些零点。
+
+\item
+
+设 $ -\infty < a < b < \infty $，且 $ f: [a, b] \to \mathbb{R} $ 是可微的凸函数，满足
+
+\[
+f(a)<0<f(b)\quad\text{或}\quad f(a)>0>f(b).
+\]
+
+证明递归定义的序列
+
+\begin{equation}
+x_{n+1}:=x_{n}-\frac{f(x_{n})}{f^{\prime}(x_{0})},\qquad n\in\mathbb{N}^{\times},
+\end{equation}
+
+对任何满足 $f(x_0) > 0$ 的初始值 $x_0$ 都收敛到 $f$ 在 $[a, b]$ 中的零点。\footnote{(4.9) 中给出的迭代过程称为简化牛顿法。} 若 $f$ 是凹的，则此方法对哪些初始值收敛？
+
+\item
+
+设 $ -\infty < a < b < \infty $，且 $ f \in C([a, b], \mathbb{R}) $ 满足 $ f(a) < 0 < f(b) $。令 $ a_0 := a $，$ b_0 := b $，并递归地定义
+
+\begin{equation}
+c_{n+1}:=a_{n}-\frac{b_{n}-a_{n}}{f(b_{n})-f(a_{n})}f(a_{n}),\qquad n\in\mathbb{N},
+\end{equation}
+
+以及
+
+\begin{equation}
+a_{n+1}:=\left\{\begin{array}{ll}c_{n+1},&\quad f(c_{n+1})\leq0,\\a_{n}&\quad\text{其他情形},\end{array}\right.,\quad b_{n+1}:=\left\{\begin{array}{ll}b_{n},&\quad f(c_{n+1})\leq0,\\c_{n+1}&\quad\text{其他情形}.\end{array}\right.
+\end{equation}
+\end{exercises}
+
+\begin{proof}
+
+$(c_n)$ 收敛到 $f$ 的某个零点。这一过程（称为 regula falsi，即试位法）的几何解释是什么？若 $f(a) > 0 > f(b)$，公式应如何修改？
+
+\end{proof}
+
+\begin{exercises}
+\item[9.]
+
+近似地确定下式的零点
+
+\[
+x^{5}e^{|x|}-\frac{1}{\pi}x^{2}\sin\bigl(\log(x^{2})\bigr)+1998\;.
+\]
+\item[10.]
+
+设 $ I $ 是紧致完全区间，$ f \in C^1(I, I) $ 是压缩，满足对所有 $ x \in I $ 都有 $ f'(x) \neq 0 $。设 $ x_0 \in I $，并用 $ x^* := \lim f^n(x_0) $ 表示 $ f $ 在 $ I $ 中的唯一不动点。最后，假设 $ x_0 \neq x^* $。证明下列结论：
+
+\begin{items}
+\item
+
+对每个 $ n \in \mathbb{N}^* $ 都有 $ f^n(x_0) \neq x^* $。
+
+\item
+
+$ \lim_{n \to \infty} \frac{f^{n+1}(x_0) - x^*}{f^n(x_0) - x^*} = f'(x^*) $。
+
+\end{items}
+
+\end{exercises}

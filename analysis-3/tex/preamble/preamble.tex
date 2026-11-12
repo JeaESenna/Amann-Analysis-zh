@@ -1,0 +1,63 @@
+% =====================================================================
+%  preamble.tex —— 书籍信息与正文用到的少量宏
+%
+%  排版定义（定理类环境、证明、列表、编号）在 qyxf-book.cls 中；
+%  OCR 导出的 Unicode 字符映射在 preamble/_unicode-map.tex 中。
+%  本文件只放这两样之外的东西。
+% =====================================================================
+
+% 不要载入 amssymb：文类已用 unicode-math 载入数学字体，两者对
+% \square、\blacksquare、\eth、\smallsetminus、\digamma、\backepsilon
+% 等符号重复定义，会直接报 "Command ... already defined"。
+% unicode-math 缺的几个同义符号在 qyxf-book.cls 里已用 \providecommand 补齐；
+% \xrightarrow / \xleftarrow 由 LaTeX2e 内核提供，无需额外宏包。
+\usepackage{stmaryrd}          % \rightleftarrows：原文用 ⇄ 标注证明方向
+\usepackage{newunicodechar}
+\usepackage{array,makecell}
+\usepackage{indentfirst}
+\usepackage{fvextra}           % damagedformula：无法排版的公式原样展示
+\usepackage{needspace}         % A2：小标题/带框条目起排前的最小空间保护（避免页底孤行）
+% 交换图。OCR 把原书的交换图拆成了散落的 array + \downarrow 文字，
+% 版面完全走形；这里用 tikz-cd 重画（见项目文档《交换图与表格规范》）。
+\usepackage{tikz-cd}
+\usetikzlibrary{arrows.meta}
+\tikzcdset{arrow style=tikz, diagrams={>={Straight Barb[scale=0.8]}}}
+
+% 数学粗体字母（\symbfup 等）取自 XITS Math Bold；不声明的话 unicode-math 会把
+% 粗体数学字母回退到正文字体 XITS Bold，希腊字母（U+1D6E9 一带）在那里是缺字。
+\setmathfont{XITS Math Bold}[version=bold]
+
+% ------------------------------------------------------------------ 版式
+% 首行缩进两字、段间不空行、行距按 ctex 中文默认；应急伸长留足，
+% 以免 OCR 造成的长串不可断行文字冲出右边界。
+\setlength{\emergencystretch}{3em}
+\sloppy
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+
+% 表格：OCR 真值表按 booktabs 排出，字号略微收小以便与正文区分
+\renewcommand{\arraystretch}{1.15}
+
+% ------------------------------------------------------------------ 宏
+% 缺图占位（图片缓存缺失时使用）
+\newcommand{\figplaceholder}[2]{%
+  \fbox{\begin{minipage}[c][3.2cm][c]{#1\textwidth}\centering\small\itshape [ #2 ]\end{minipage}}}
+% 无法排版的公式：原样展示（OCR 已损坏的公式，按项目铁律不改写源文）
+\DefineVerbatimEnvironment{damagedformula}{Verbatim}{breaklines=true,breakanywhere=true,fontsize=\scriptsize,frame=single,framesep=4pt}
+
+% 图：原文的插图居中放置，不编号（原文也未给插图编号）
+\newcommand{\bookfigure}[2][0.5]{%
+  \begin{center}\includegraphics[width=#1\textwidth]{#2}\end{center}}
+
+% ------------------------------------------------------------ 书籍信息
+\title{分析学 III}
+\subtitle{Analysis III}
+\author{Herbert Amann \quad Joachim Escher}
+\date{2026 年 10 月}
+\org{\textit{中文译本}\\[1ex]\textsc{Analysis III, Amann \& Escher}}
+\footorg{分析学 III · 中文译本}
+\license{%
+本译本为原著的中文翻译，仅供个人学习与研究使用，不得用于任何商业用途。\\[1ex]
+原著 \textit{Analysis III}（Herbert Amann, Joachim Escher）版权归作者与
+Birkhäuser Verlag 所有，英译由 Silvio Levy 与 Matthew Cargo 完成（Birkhäuser Verlag，2009）。\\[1ex]
+翻译、排版：Jea神纳}

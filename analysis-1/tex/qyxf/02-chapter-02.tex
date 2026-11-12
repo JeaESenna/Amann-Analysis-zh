@@ -1,0 +1,5113 @@
+\chapter{收敛}
+从本章开始，我们终于进入了分析学的领域。数学的这一分支在很大程度上建立于收敛的概念之上，这一概念使我们能够在某种意义下把无穷多个数（或向量）加在一起。这种考虑无穷运算的能力正是分析学与代数学的本质区别。
+
+将关于数列收敛的朴素想法公理化的尝试，自然引出了距离、点的邻域以及度量空间等概念——第 1 节的主题。在数列这一特殊情形中，我们可以利用 $ \mathbb{K} $ 的向量空间结构。对这一情形中证明的分析表明，只要存在绝对值的某种类似物，其中大部分证明就能应用于向量空间中的向量序列。于是我们自然地被引向赋范向量空间的定义，这是一类特别重要的度量空间。
+
+在赋范向量空间中，内积空间因其结构的丰富性而与众不同，也因其几何与平面上的熟知的欧几里得几何非常相似。事实上，对于初等分析学而言，最重要的内积空间类就是 $m$ 维欧几里得空间 $\mathbb{R}^m$ 与 $\mathbb{C}^m$。
+
+在第 4 节与第 5 节中，我们回到最简单的情形，即 $ \mathbb{R} $ 中的收敛。利用序结构，特别是 $ \mathbb{R} $ 的序完备性，我们导出最初的具体收敛判别准则。这些准则使我们能够计算出许多重要序列的极限。此外，由 $ \mathbb{R} $ 的序完备性，我们导出一条基本的存在性原理，即波尔查诺-魏尔斯特拉斯定理。
+
+第 6 节专门讨论度量空间中的完备性概念。特殊化到赋范向量空间就引出了巴拿赫空间的定义。这类空间的基本例子是 $ \mathbb{K}^m $，但我们也会证明有界函数的集合是巴拿赫空间。
+
+巴拿赫空间在分析学中无处不在，因而在我们的讲述中扮演着核心角色。即便如此，它们的结构也足够简单，使得初学者能够不太困难地从理解实数过渡到理解巴拿赫。
+
+空间。此外，这些空间的及早引入使得后面各章中的简短而优美的证明成为可能。
+
+为了完备性，也为了对读者的一般（数学）教育，我们在第 6 节给出康托尔关于存在一个序完备的有序域的证明，该证明利用了对 $ \mathbb{Q} $ 的“完备化”。
+
+在本章其余各节中，我们讨论级数的收敛。在第 7 节中，我们学习级数的基本性质并讨论最重要的例子。于是我们便能够研究实数的十进制表示及其他表示，这使得我们能够证明实数构成一个不可数集。
+
+在收敛级数中，那些绝对收敛的级数扮演着特别重要的角色。绝对收敛往往容易识别，而且这类级数相对容易处理。此外，许多在实际中重要的级数都绝对收敛。对于幂级数尤其如此，我们将在本章最后一节引入并研究幂级数。其中最重要的是指数级数，其重要性将在后面各章中变得清晰。
+
+\section{序列的收敛}
+
+本节考察定义在自然数上、因而只取可数个值的函数。对于这样的函数  $ \varphi\colon \mathbb{N} \to X $，我们特别关心当  $ n $ 趋于无穷时值  $ \varphi(n) $ 的性态。由于我们只能对  $ \varphi $ 求值有限多次，也就是说，我们永远无法“到达无穷”，因此我们必须发展出一些方法，使我们能够证明关于无穷多个“在无穷附近”的函数值的陈述。这样的方法构成了收敛序列的理论，我们在本节中加以介绍。
+
+\subsection*{序列}
+
+设 $X$ 为一个集合。$X$ 中的一个序列就是 $\mathbb{N}$ 到 $X$ 的一个函数。若 $\varphi: \mathbb{N} \to X$ 是一个序列，我们也写
+
+\[
+(x_{n}),\;(x_{n})_{n\in\mathbb{N}}\quad\text{ 或 }\quad(x_{0},x_{1},x_{2},\ldots)
+\]
+
+来表示  $ \varphi $，其中  $ x_n := \varphi(n) $ 是序列  $ \varphi = (x_0, x_1, x_2, \ldots) $ 的第  $ n $ 项。
+
+$ \mathbb{K} $ 中的序列称为数列，全体数列构成的  $ \mathbb{K} $-向量空间  $ \mathbb{K}^{\mathbb{N}} $ 记作  $ s $ 或  $ s(\mathbb{K}) $（见例 I.12.3(e)）。更确切地说，若  $ \mathbb{K} = \mathbb{R} $（或  $ \mathbb{K} = \mathbb{C} $），则称  $ (x_n) $ 为\textbf{实}（或\textbf{复}）\textbf{数列}。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+区分序列  $ (x_n) $ 与其像  $ \{x_n : n \in \mathbb{N}\} $ 至关重要。例如，若对所有  $ n $ 都有  $ x_n = x \in X $，即  $ (x_n) $ 是常值序列，则  $ (x_n) = (x, x, x, \ldots) \in X^{\mathbb{N}} $，而  $ \{x_n : n \in \mathbb{N}\} $ 是单元素集  $ \{x\} $。
+
+\item
+
+设  $ (x_n) $ 是  $ X $ 中的序列，$ E $ 是一个性质。则若存在某个  $ m \in \mathbb{N} $，使得对所有  $ n \geq m $ 都有  $ E(x_n) $ 为真，即  $ E $ 对除有限多个  $ x_n $ 之外的所有项都成立，我们就说  $ E $ 对  $ (x_n) $ 的\textbf{几乎所有}项成立。当然，$ E(x_n) $ 也可能对若干（或全部）$ n < m $ 为真。若存在子集  $ N \subseteq \mathbb{N} $，使得  $ \text{Num}(N) = \infty $ 且  $ E(x_n) $ 对每个  $ n \in N $ 都为真，则  $ E $ 对\textbf{无穷多}项为真。例如，实数列
+
+\[
+\left(-5,4,-3,2,-1,0,-\frac{1}{2},\frac{1}{3},-\frac{1}{4},\frac{1}{5},\cdots,-\frac{1}{2n},\frac{1}{2n+1},\cdots\right)
+\]
+
+有无穷多个正项、无穷多个负项，且其绝对值对几乎所有项都小于 1。
+
+\item
+
+对  $ m \in \mathbb{N}^\times $，函数  $ \psi: m + \mathbb{N} \to X $ 也称为  $ X $ 中的序列。也就是说，$ (x_j)_{j \geq m} = (x_m, x_{m+1}, x_{m+2}, \ldots) $ 是  $ X $ 中的序列，尽管其指标不从 0 开始。这一约定是合理的，因为在用函数  $ \mathbb{N} \to m + \mathbb{N} $，$ n \mapsto m + n $ 进行“重新编号”之后，“平移序列” $ (x_j)_{j \geq m} $ 可与（通常的）序列  $ (x_{m+k})_{k \in \mathbb{N}} \in X^{\mathbb{N}} $ 等同。■
+
+\end{items}
+
+若画出由  $ z_n := (1 - 1/n)(1 + i) $ 定义的复数列  $ (z_n)_{n \geq 1} $ 的前几项，就会观察到，随着  $ n $ 增大，点  $ z_n $ 越来越“任意接近”于  $ z := 1 + i $。换句话说，随着  $ n $ 增大，$ z_n $ 到  $ z $ 的距离变得“任意小”。本节的目标是把我们关于这类数列收敛的直观与几何观念公理化，使之能应用于向量空间以及其他更抽象的集合中的序列。
+
+首先我们认识到，距离的概念至关重要。在  $ \mathbb{K} $ 中，借助绝对值函数我们可以确定两点之间的距离。为了研究任意集合  $ X $ 中序列的收敛性，我们首先需要给  $ X $ 赋予一种结构，使得  $ X $ 中两个元素之间的“距离”能够被确定。
+
+\bookfigure[0.25]{figures/7019c869a5a2b932.jpg}
+\end{remark}
+
+\subsection*{度量空间}
+
+设 $X$ 为一个集合。若下列条件成立，则称函数 $d: X \times X \to \mathbb{R}^+$ 为 $X$ 上的一个 $\mathbf{度量}$：
+
+$ (M_1) $  $ d(x, y) = 0 \Leftrightarrow x = y $。
+
+\[
+(\mathrm{M}_{2})~d(x,y)=d(y,x),~x,y\in X(\text{对称性}).
+\]
+\[
+\mathrm{(M_{3})}\ d(x,y)\leq d(x,z)+d(z,y),\ x,y,z\in X\ (\text{三角不等式}).
+\]
+
+若 $d$ 是 $X$ 上的度量，则称 $(X,d)$ 为度量空间。当度量由上下文明确时，我们就用 $X$ 简记 $(X,d)$。最后，我们称 $d(x,y)$ 为度量空间 $X$ 中点 $x$ 与 $y$ 之间的距离。
+
+公理 $(M_{1})-(\mathrm{M}_{3})$ 显然是距离函数相当自然的性质。例如，$(M_{3})$ 可视为如下规则的公理化表述：“从 $x$ 到 $y$ 的直达路径比从 $x$ 到 $z$ 再到 $y$ 的路径更短”。
+
+在度量空间  $ (X, d) $ 中，对  $ a \in X $ 和  $ r > 0 $，集合
+
+\[
+\mathbb{B}(a,r):=\mathbb{B}_{X}(a,r):=\left\{x\in X;d(a,x)<r\right\}
+\]
+
+称为以 a 为中心、r 为半径的开球，而
+
+\[
+\bar{\mathbb{B}}(a,r):=\bar{\mathbb{B}}_{X}(a,r):=\left\{x\in X;d(a,x)\leq r\right\}
+\]
+
+称为以 a 为中心、r 为半径的闭球。
+
+\begin{example}
+
+\begin{items}
+\item
+
+K 是带有自然度量的度量空间
+
+\[
+\mathbb{K}\times\mathbb{K}\to\mathbb{R}^{+}~,\quad(x,y)\mapsto\left|x-y\right|.
+\]
+
+除非另有说明，我们总把 K 视为带有自然度量的度量空间。\footnote{注意，按照这个约定，上面给出的开球与闭球的定义（应用于 $\mathbb K$ 时）与第 I.11 节中的定义一致。}
+
+\proofhead
+$ (M_{1})-(M_{3}) $ 的有效性直接由命题 I.11.4 得出。
+\item
+
+设 $(X,d)$ 为度量空间，$Y$ 为 $X$ 的非空子集。则 $d$ 在 $Y\times Y$ 上的限制 $d_{Y}:=d|Y\times Y$ 是 $Y$ 上的度量，称为诱导度量，且 $(Y,d_{Y})$ 是度量空间，是 $X$ 的度量子空间。当不会引起误解时，我们用 $d$ 代替 $d_{Y}$。
+
+\item
+
+C 的任意非空子集都是度量空间，其度量由 C 上的自然度量诱导而来。以这种方式在 R 上诱导出的度量就是 （a）中所定义的自然度量。
+
+\item
+
+设 $X$ 为非空集合。则由 $d(x,y):=1$（当 $x\neq y$）与 $d(x,x):=0$ 所定义的函数是 $X$ 上的度量，称为 $X$ 上的 $\text{离散}$ 度量。
+
+\item
+
+设  $ (X_j, d_j) $，$ 1 \leq j \leq m $ 为度量空间，且  $ X := X_1 \times \cdots \times X_m $。则函数
+
+\[
+d(x,y):=\max_{1\leq j\leq m}d_{j}(x_{j},y_{j})
+\]
+
+（其中 $x := (x_1, \ldots, x_m) \in X$，$y := (y_1, \ldots, y_m) \in X$）是 $X$ 上的度量，称为积度量。度量空间 $X := (X, d)$ 称为度量空间 $(X_j, d_j)$ 的积。可以验证
+
+\[
+\mathbb{B}_{X}(a,r)=\prod_{j=1}^{m}\mathbb{B}_{X_{j}}(a_{j},r),\quad\bar{\mathbb{B}}_{X}(a,r)=\prod_{j=1}^{m}\bar{\mathbb{B}}_{X_{j}}(a_{j},r)
+\]
+
+对所有  $ a := (a_1, \ldots, a_m) \in X $ 和  $ r > 0 $ 成立。■
+
+\end{items}
+
+度量空间公理的一个重要推论是反向三角不等式（见推论 I.11.5）。
+
+\end{example}
+
+\begin{proposition}
+
+设  $ (X,d) $ 为度量空间。则对所有  $ x,y,z\in X $ 我们有
+
+\[
+d(x,y)\geq|d(x,z)-d(z,y)|.
+\]
+
+\proofhead
+由 (M$_3$) 我们得到不等式  $ d(x, y) \geq d(x, z) - d(y, z) $。交换 x 与 y 得到
+\[
+d(x,y)=d(y,x)\geq d(y,z)-d(x,z)=-\left(d(x,z)-d(y,z)\right),
+\]
+
+若存在某个  $ r > 0 $，使得  $ \mathbb{B}(a, r) \subseteq U $，则称度量空间  $ X $ 的子集  $ U $ 为  $ a \in X $ 的邻域。点  $ a $ 的所有邻域构成的集合记作  $ \mathcal{U}(a) $，即
+
+$ \mathcal{U}(a) := \mathcal{U}_X(a) := \{ U \subseteq X ; \, U \text{ 是 } a \text{ 的邻域 } \} \subseteq \mathcal{P}(X) $。
+
+\bookfigure[0.50]{figures/cccf393ca6b368c0.jpg}
+\end{proposition}
+
+\begin{example}
+
+设 X 为度量空间，$a\in X$。
+
+\begin{items}
+\item
+
+对每个  $ \varepsilon > 0 $，$ \mathbb{B}(a, \varepsilon) $ 和  $ \bar{\mathbb{B}}(a, \varepsilon) $ 都是 a 的邻域，分别称为  $ a $ 的开  $ \varepsilon $-邻域与闭  $ \varepsilon $-邻域。
+
+\item
+
+显然 $X$ 属于 $\mathcal{U}(a)$。若 $U_1, U_2 \in \mathcal{U}(a)$，则 $U_1 \cap U_2$ 与 $U_1 \cup U_2$ 也属于 $\mathcal{U}(a)$。凡包含 $a \in X$ 的某个邻域的 $U \subseteq X$ 也属于 $\mathcal{U}(a)$。
+
+\proofhead
+依假设，存在  $ r_j > 0 $，使得  $ \mathbb{B}(a, r_j) \subseteq U_j $（$ j = 1, 2 $）。由  $ r := \min\{r_1, r_2\} $ 定义  $ r > 0 $，则  $ \mathbb{B}(a, r) \subseteq U_1 \cap U_2 \subseteq U_1 \cup U_2 $。其余断言是显然的。
+\item
+
+对带有由  $ \mathbb{R} $ 诱导的度量的  $ X := [0,1] $，$ [1/2,1] $ 是 1 的邻域，但不是  $ 1/2 $ 的邻域。■
+
+\end{items}
+
+本节其余部分，$X := (X, d)$ 是度量空间，$(x_n)$ 是 $X$ 中的序列。
+
+\end{example}
+
+\subsection*{聚点}
+
+若 a 的每个邻域都包含序列的无穷多项，则称  $ a \in X $ 为  $ (x_n) $ 的聚点。
+
+在考察一些例子之前，先给出聚点的如下刻画是有用的：
+
+\begin{proposition}
+
+下列诸条件等价：
+
+\begin{subitems}
+\item
+
+a 是  $ (x_{n}) $ 的聚点
+
+\item
+
+对每个  $ U \in \mathcal{U}(a) $ 与  $ m \in \mathbb{N} $，存在某个  $ n \geq m $，使得  $ x_n \in U $。
+
+\item
+
+对每个  $ \varepsilon > 0 $ 与  $ m \in \mathbb{N} $，存在某个  $ n \geq m $，使得  $ x_n \in \mathbb{B}(a, \varepsilon) $。
+
+\proofhead
+这直接由定义得出。
+\end{subitems}
+
+\end{proposition}
+
+\begin{example}
+
+\begin{items}
+\item
+
+实数列  $ ((-1)^n)_{n \in \mathbb{N}} $ 有两个聚点，即 1 与 -1。
+
+\item
+
+复数列  $ (i^n)_{n \in \mathbb{N}} $ 有四个聚点，即  $ \pm 1 $ 与  $ \pm i $。
+
+\item
+
+常值序列  $ (x,x,x,\ldots) $ 有唯一的聚点 x。
+
+\item
+
+自然数序列  $ (n)_{n \in \mathbb{N}} $ 没有聚点。
+
+\item
+
+设  $ \varphi $ 为  $ \mathbb{N} $ 到  $ \mathbb{Q} $ 的双射（由命题 I.9.4，这样的函数存在）。对每个  $ n \in \mathbb{N} $，由  $ x_n := \varphi(n) $ 定义序列  $ (x_n) $。则所有实数都是  $ (x_n) $ 的聚点。
+
+\proofhead
+假设存在某个  $ a \in \mathbb{R} $ 不是  $ (x_n) $ 的聚点。则由命题 1.5，存在  $ \varepsilon > 0 $ 与  $ m \in \mathbb{N} $，使得
+\[
+x_{n}\notin\mathbb{B}(a,\varepsilon)=(a-\varepsilon,a+\varepsilon),\qquad n\geq m.
+\]
+
+也就是说，区间  $ (a - \varepsilon, a + \varepsilon) $ 只包含有限多个有理数。但由命题 I.10.8，这是不可能的。
+
+\end{items}
+
+\end{example}
+
+\subsection*{收敛}
+
+若 a 的每个邻域都包含序列的几乎所有项，则称序列  $ (x_n) $ 收敛（或是收敛的），其极限为 a。此时我们写\footnote{当不会产生误解时，我们也写 $\lim_{n}x_{n}=a$、$\lim x_{n}=a$ 或 $x_{n}\to a$。}
+
+\[
+\lim_{n\to\infty}x_{n}=a\qquad\text{或}\qquad x_{n}\to a\qquad(n\to\infty),
+\]
+
+并且我们说当 n 趋于  $ \infty $ 时  $ (x_n) $ 收敛于 a。不收敛的序列  $ (x_n) $ 称为发散的，我们说  $ (x_n) $ 发散。
+
+定义的本质部分是：极限的每个邻域都包含序列的几乎所有项。在  $ X = \mathbb{K} $ 的情形，这一要求对应于如下几何直观：$ x_n $ 到 a 的距离“变得任意小”。若  $ a $ 是  $ (x_n) $ 的聚点而  $ U $ 是  $ a $ 的邻域，则  $ U $ 当然包含序列的无穷多项，但序列的无穷多项也可能不在  $ U $ 中。
+
+下一个命题同样只是相应定义的重新表述。
+
+\qyxffntextdef{1}{我们用这个记号表示数 $N$ 一般依赖于 $U$（或 $\varepsilon$）。}
+\begin{proposition}
+
+下列陈述等价：
+
+\begin{subitems}
+\item
+
+$ \lim x_{n}=a $
+
+\item
+
+对每个  $ U \in \mathcal{U}(a) $，存在某个\qyxffnmark{1} $ N := N(U) $，使得对所有  $ n \geq N $ 都有  $ x_n \in U $。
+
+\item
+
+对每个  $ \varepsilon > 0 $，存在某个\textsuperscript{\thefootnote} $ N := N(\varepsilon) $，使得对所有  $ n \geq N $ 都有  $ x_n \in \mathbb{B}(a, \varepsilon) $。
+下列例子相当简单。对于更复杂的例子，我们需要从第 4 节开始建立的方法。
+
+\end{subitems}
+
+\end{proposition}
+
+\begin{example}
+
+\begin{items}
+\item
+
+对实数列  $ (1/n)_{n \in \mathbb{N}^\times} $，我们有  $ \lim(1/n) = 0 $。
+
+\proofhead
+设  $ \varepsilon > 0 $。由推论 I.10.7，存在某个  $ N \in \mathbb{N}^\times $，使得  $ 1/N < \varepsilon $。则对所有  $ n \geq N $ 有  $ 1/n \leq 1/N < \varepsilon $，即对所有  $ n \geq N $ 有  $ 1/n \in (0, \varepsilon) \subseteq \mathbb{B}(0, \varepsilon) $。■
+\item
+
+对由下式定义的复数列  $ (z_{n}) $
+
+\[
+z_{n}:=\frac{n+2}{n+1}+i\frac{2n}{n+2},
+\]
+
+我们有  $ \lim z_{n}=1+2i $
+
+\proofhead
+设  $ \varepsilon > 0 $。由推论 I.10.7，存在某个  $ N \in \mathbb{N} $，使得  $ 1/N < \varepsilon/8 $。则对所有  $ n \geq N $，我们有
+\[
+\frac{n+2}{n+1}-1=\frac{1}{n+1}<\frac{1}{N}<\frac{\varepsilon}{8}<\frac{\varepsilon}{2}
+\]
+
+且
+
+\[
+2-\frac{2n}{n+2}=\frac{4}{n+2}<\frac{4}{N}<\frac{\varepsilon}{2}.
+\]
+
+从而
+
+\[
+\left|z_{n}-(1+2i)\right|^{2}=\left|\frac{n+2}{n+1}-1\right|^{2}+\left|\frac{2n}{n+2}-2\right|^{2}<\frac{\varepsilon^{2}}{4}+\frac{\varepsilon^{2}}{4}<\varepsilon^{2},\qquad n\geq N.
+\]
+
+这表明对所有  $ n \geq N $ 都有  $ z_n \in \mathbb{B}_{\mathbb{C}}((1 + 2i), \varepsilon) $。■
+
+\item
+
+常值序列  $ (a, a, a, \ldots) $ 收敛于 a。
+
+\item
+
+实数列  $ ((-1)^n)_{n \in \mathbb{N}} $ 是发散的。
+
+\item
+
+设 $X$ 为度量空间 $(X_j, d_j)$（$1 \leq j \leq m$）的积。则序列\footnote{下文我们常常记 $x^{j}:=\mathrm{pr}_{j}(x)$，其中 $x\in X$ 且 $1\leq j\leq m$。即使在 $X_{j}=\mathbb K$ 的情形，从上下文也能看出 $x^{j}$ 是积空间中点的分量还是 $x$ 的幂。}$(x_n) = \left((x_n^1, \ldots, x_n^m)\right)_{n \in \mathbb{N}}$ 在 $X$ 中收敛于点 $a := (a^1, \ldots, a^m)$ 当且仅当，对每个 $j \in \{1, \ldots, m\}$，序列 $(x_n^j)_{n \in \mathbb{N}}$ 在 $X_j$ 中收敛于 $a^j \in X_j$。
+
+\proofhead
+对每个给定的 $\varepsilon > 0$，几乎所有 $x_n$ 都在 $\mathbb{B}_X(a, \varepsilon) = \prod_{j=1}^m \mathbb{B}_{X_j}(a^j, \varepsilon)$ 中，当且仅当对每个 $j = 1, \ldots, m$，几乎所有 $x_n^j$ 都在 $\mathbb{B}_{X_j}(a^j, \varepsilon)$ 中（见例 1.2(e)）。
+\end{items}
+
+\end{example}
+
+\subsection*{有界集}
+
+若存在某个  $ M > 0 $，使得对所有  $ x, y \in Y $ 都有  $ d(x, y) \leq M $，则称子集  $ Y \subseteq X $ 是  $ d $-有界的，或称为在  $ X $ 中有界（关于度量  $ d $）。在这种情况下，由下式定义的  $ Y $ 的直径
+
+\[
+diam(Y):=\sup_{x,y\in Y}d(x,y),
+\]
+
+是有限的。若序列  $ (x_n) $ 的像  $ \{x_n; n \in \mathbb{N}\} $ 有界，则称  $ (x_n) $ 有界。
+
+\begin{example}
+
+\begin{items}
+\item
+
+对所有  $ a \in X $ 与  $ r > 0 $，$ \mathbb{B}(a, r) $ 和  $ \bar{\mathbb{B}}(a, r) $ 在  $ X $ 中有界。
+
+\item
+
+有界集的每个子集都有界。有界集的有限并有界。
+
+\item
+
+$ X $ 的子集  $ Y $ 在  $ X $ 中有界，当且仅当存在某个  $ x_0 \in X $ 与  $ r > 0 $，使得  $ Y \subseteq \mathbb{B}_X(x_0, r) $。若  $ Y \neq \emptyset $，则存在某个具有此性质的  $ x_0 \in Y $。
+
+\item
+
+有界区间是有界的。
+
+\item
+
+$ \mathbb{K} $ 的子集  $ Y $ 有界，当且仅当存在某个  $ M > 0 $，使得对所有  $ y \in Y $ 都有  $ |y| \leq M $。 $ \blacksquare $
+
+\end{items}
+
+\end{example}
+
+\begin{proposition}
+
+任何收敛序列都是有界的。
+
+\proofhead
+设  $ x_n \to a $。则存在某个  $ N $，使得对所有  $ n \geq N $ 都有  $ x_n \in \mathbb{B}(a,1) $。由三角不等式可得
+\[
+d(x_{n},x_{m})\leq d(x_{n},a)+d(a,x_{m})\leq2~,\qquad m,n\geq N~.
+\]
+
+由于还存在某个 $M \geq 0$，使得对所有 $j, k \leq N$ 都有 $d(x_j, x_k) \leq M$，故对所有 $m, n \in \mathbb{N}$ 都有 $d(x_n, x_m) \leq M + 2$。
+
+\end{proposition}
+
+\subsection*{极限的唯一性}
+
+\begin{proposition}
+
+设  $ (x_{n}) $ 收敛，极限为 a。则 a 是  $ (x_{n}) $ 的唯一聚点。
+
+\proofhead
+$ a $ 显然是  $ (x_n) $ 的聚点。为证唯一性，设  $ b \neq a $ 是  $ X $ 的某个点。则由  $ (M_1) $，$ \varepsilon := d(b, a)/2 $ 为正。由于  $ a = \lim x_n $，存在某个  $ N $，使得对所有  $ n \geq N $ 都有  $ d(a, x_n) < \varepsilon $。于是由命题 1.3 可得
+\[
+d(b,x_{n})\geq|d(b,a)-d(a,x_{n})|\geq d(b,a)-d(a,x_{n})>2\varepsilon-\varepsilon=\varepsilon,\qquad n\geq N.
+\]
+
+也就是说，$ (x_n) $ 的几乎所有项都在  $ \mathbb{B}(b, \varepsilon) $ 之外。故  $ b $ 不是  $ (x_n) $ 的聚点。 $ \blacksquare $
+
+\end{proposition}
+
+\begin{remark}
+
+命题 1.11 的逆命题不成立，也就是说，存在恰好只有一个聚点的发散序列，例如  $ \left(\frac{1}{2}, 2, \frac{1}{3}, 3, \frac{1}{4}, 4, \ldots\right) $。
+
+作为命题 1.11 的直接推论，我们有：
+
+\end{remark}
+
+\begin{corollary}
+
+收敛序列的极限是唯一的。
+
+\end{corollary}
+
+\subsection*{子序列}
+
+设 $\varphi = (x_n)$ 为 $X$ 中的序列，$\psi: \mathbb{N} \to \mathbb{N}$ 为严格递增函数。则 $\varphi \circ \psi \in X^{\mathbb{N}}$ 称为 $\varphi$ 的子序列。把上面为序列 $\varphi$ 引入的记号 $(x_n)_{n \in \mathbb{N}}$ 加以推广，我们对于子序列 $\varphi \circ \psi$ 写作 $(x_{n_k})_{k \in \mathbb{N}}$，其中 $n_k := \psi(k)$。由于 $\psi$ 严格递增，我们有 $n_0 < n_1 < n_2 < \cdots$。
+
+\begin{example}
+
+序列  $ ((-1)^n)_{n \in \mathbb{N}} $ 有两个常值子序列  $ ((-1)^{2k})_{k \in \mathbb{N}} = (1,1,1,\ldots) $ 与  $ ((-1)^{2k+1})_{k \in \mathbb{N}} = (-1,-1,-1,\ldots) $。■
+
+\end{example}
+
+\begin{proposition}
+
+若  $ (x_n) $ 是极限为  $ a $ 的收敛序列，则  $ (x_n) $ 的每个子序列  $ (x_{n_k})_{k \in \mathbb{N}} $ 都收敛，且  $ \lim_{k \to \infty} x_{n_k} = a $。
+
+\proofhead
+设  $ (x_{n_k})_{k \in \mathbb{N}} $ 为  $ (x_n) $ 的子序列，$ U $ 为  $ a $ 的邻域。因为  $ a = \lim x_n $，存在某个  $ N $，使得对所有  $ n \geq N $ 都有  $ x_n \in U $。由子序列的定义，对所有  $ k \in \mathbb{N} $ 都有  $ n_k \geq k $，于是特别地，对所有  $ k \geq N $ 都有  $ n_k \geq N $。故对所有  $ k \geq N $ 都有  $ x_{n_k} \in U $。这意味着  $ (x_{n_k}) $ 收敛于  $ a $。
+\end{proposition}
+
+\begin{example}
+
+对  $ m \geq 2 $，
+
+\[
+\frac{1}{k^{m}}\to0\quad(k\to\infty)\quad\text{ 且 }\quad\frac{1}{m^{k}}\to0\quad(k\to\infty).
+\]
+
+\proofhead
+对所有 $k \in \mathbb{N}^\times$，令 $\psi_1(k) := k^m$ 与 $\psi_2(k) := m^k$。由于 $\psi_i: \mathbb{N}^\times \to \mathbb{N}^\times$（$i=1,2$）严格递增，$(k^{-m})_{k\in\mathbb{N}^\times}$ 与 $(m^{-k})_{k\in\mathbb{N}^\times}$ 是 $(1/n)_{n\in\mathbb{N}^\times}$ 的子序列。于是断言由命题 1.15 与例 1.8(a) 得出。
+
+下一个命题给出序列聚点的进一步刻画。
+\end{example}
+
+\begin{proposition}
+
+点 $a$ 是序列 $(x_n)$ 的聚点，当且仅当存在 $(x_n)$ 的某个子序列 $(x_{n_k})_{k \in \mathbb{N}}$ 收敛于 $a$。
+
+\proofhead
+设 $a$ 为 $(x_n)$ 的聚点。我们递归地定义自然数序列 $(n_k)_{k \in \mathbb{N}}$：
+\[
+n_{0}:=0~,\quad n_{k}:=\operatorname*{m i n}\bigl\{m\in\mathbb{N}~;~m>n_{k-1},~x_{m}\in\mathbb{B}(a,1/k)\bigr\}~,\qquad k\in\mathbb{N}^{\times}~.
+\]
+
+由于 $a$ 是 $(x_{n})$ 的聚点，集合
+
+\[
+\left\{m\in\mathbb{N}\;;\;m>n_{k-1},\;x_{m}\in\mathbb{B}(a,1/k)\right\}\;,\qquad k\in\mathbb{N}^{\times}\;,
+\]
+
+非空。由良序原理，对每个  $ k \in \mathbb{N}^\times $，$ n_k $ 都有良定义。于是  $ \psi: \mathbb{N} \to \mathbb{N} $，$ k \mapsto n_k $ 有良定义且严格递增。
+
+下面证明子序列 $(x_{n_k})_{k \in \mathbb{N}}$ 收敛于 $a$。设 $\varepsilon > 0$。由推论 I.10.7，存在某个 $K := K(\varepsilon) \in \mathbb{N}^\times$，使得对所有 $k \geq K$ 都有 $1/k < \varepsilon$。由 $n_k$ 的构造，我们有
+
+\[
+x_{n_{k}}\in\mathbb{B}(a,1/k)\subseteq\mathbb{B}(a,\varepsilon),\qquad k\geq K.
+\]
+
+故  $ a = \lim_{k \to \infty} x_{n_k} $。
+
+反之，设  $ (x_{n_k})_{k \in \mathbb{N}} $ 为  $ (x_n) $ 的子序列，且  $ a = \lim_{k \to \infty} x_{n_k} $。则由命题 1.11，$ a $ 是  $ (x_{n_k})_{k \in \mathbb{N}} $ 的聚点，从而也是  $ (x_n) $ 的聚点。■
+
+\end{proposition}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $d$ 为 $\mathbb{K}$ 上的离散度量，且 $X := (\mathbb{K}, d)$。
+
+\begin{items}
+\item
+
+对  $ a \in X $ 与  $ r > 0 $，显式描述  $ \mathbb{B}_X(a, r) $ 与  $ \bar{\mathbb{B}}_X(a, r) $。
+
+\item
+
+描述 X 中任意序列的聚点。
+
+\item
+
+对  $ a \in X $，描述  $ X $ 中所有满足  $ x_n \to a $ 的序列  $ (x_n) $。
+
+\end{items}
+
+\item
+
+证明例 1.2(e) 的断言。
+
+\item
+
+证明序列  $ (z_n)_{n \geq 1} $（其中  $ z_n := (1 - 1/n)(1 + i) $）收敛于  $ 1 + i $（正如注 1.1 后面的图所表明的那样）。
+
+\item
+
+证明例 1.9 的断言。
+
+\item
+
+在下列情形中，确定复数列  $ (z_{n}) $ 的所有聚点：
+
+\begin{items}
+\item
+
+$ z_n := \left( (1 + i) / \sqrt{2} \right)^n $
+
+\item
+
+$ z_n := (1 + (-1)^n)(n + 1)n^{-1} + (-1)^n $。
+
+\item
+
+$ z_n: = (-1)^n n / (n + 1) $。
+
+\end{items}
+
+\item
+
+对  $ n \in \mathbb{N} $，定义
+
+\[
+a_{n}:=n+\frac{1}{k}-\frac{k^{2}+k-2}{2},
+\]
+
+其中  $ k \in \mathbb{N}^\times $ 满足
+
+\[
+k^{2}+k-2\leq2n\leq k^{2}+3k-2.
+\]
+\end{exercises}
+
+\begin{proof}
+
+$ (a_{n}) $ 有良定义，并确定  $ (a_{n}) $ 的所有聚点。（提示：显式算出序列的前几项以理解整个序列。）
+
+\end{proof}
+
+\begin{exercises}
+\item[7.]
+
+对  $ m, n \in \mathbb{N}^\times $，定义
+
+\begin{equation*}
+d(m,n):=\left\{\begin{array}{c l}{(m+n)/m n~,}&{\quad m\neq n~,}\\ {0~,}&{\quad m=n~.}\\ \end{array}\right.
+\end{equation*}
+\end{exercises}
+
+\begin{proof}
+
+$ (\mathbb{N}^\times, d) $ 是度量空间，并对  $ n \in \mathbb{N}^\times $ 描述  $ A_n := \bar{\mathbb{B}}(n, 1 + 1/n) $。
+
+\end{proof}
+
+\begin{exercises}
+\item[8.]
+
+设  $ X := \{ z \in \mathbb{C} ; \, |z| \leq 3 \} $ 带有自然度量。描述  $ \mathbb{B}_X(0,3) $ 与  $ \mathbb{B}_X(2,4) $。证明  $ \mathbb{B}_X(2,4) \subset \mathbb{B}_X(0,3) $。
+
+\item[9.]
+
+集合  $ X $ 上的两个度量  $ d_1 $ 与  $ d_2 $ 称为\textbf{等价}的，若对每个  $ x \in X $ 与  $ \varepsilon > 0 $，存在正数  $ r_1 $ 与  $ r_2 $，使得
+
+\[
+\mathbb{B}_{1}(x,r_{1})\subseteq\mathbb{B}_{2}(x,\varepsilon)\;,\quad\mathbb{B}_{2}(x,r_{2})\subseteq\mathbb{B}_{1}(x,\varepsilon)\;.
+\]
+
+这里 $\mathbb{B}_j$ 表示 $(X, d_j)$ 中的球，$j = 1, 2$。现设 $(X, d)$ 为度量空间，且
+
+\[
+\delta(x,y):=\frac{d(x,y)}{1+d(x,y)}~,\qquad x,y\in X~.
+\]
+\end{exercises}
+
+\begin{proof}
+
+$d$ 与 $\delta$ 是 $X$ 上的等价度量。（提示：函数 $t \mapsto t/(1 + t)$ 是递增的。）
+
+\end{proof}
+
+\begin{exercises}
+\item[10.]
+
+对 $X := (0,1)$，证明下列各点：
+
+\begin{items}
+\item
+
+$ d(x, y) := |(1/x) - (1/y)| $ 是 X 上的度量。
+
+\item
+
+自然度量与 d 等价。
+
+\item
+
+在  $ \mathbb{R} $ 上不存在与自然度量等价、且在 X 上诱导出度量 d 的度量。
+
+\end{items}
+
+\item[11.]
+
+设  $ (X_j, d_j) $（$ j = 1, \ldots, n $）为度量空间，$ X := X_1 \times \cdots \times X_n $，$ d $ 为  $ X $ 上的积度量。证明
+
+\[
+\delta(x,y):=\sum_{j=1}^{n}d_{j}(x_{j},y_{j}),\qquad x:=(x_{1},\ldots,x_{n})\in X,\quad y:=(y_{1},\ldots,y_{n})\in X,
+\]
+
+是 X 上的度量，且与 d 等价。
+
+\item[12.]
+
+对  $ z, w \in \mathbb{C} $，令
+
+\begin{equation*}
+\delta(z,w):=\left\{\begin{array}{c l}{\left|z-w\right|,}&{\quad\text{若}\;z=\lambda w\;\text{对某个}\;\lambda>0\;,}\\ {\left|z\right|+\left|w\right|}&{\quad\text{其他情形}\;.}\\ \end{array}\right.
+\end{equation*}
+\end{exercises}
+
+\begin{proof}
+
+$ \delta $ 在 $ \mathbb{C} $ 上定义了一个度量，即 SNCF-度量。\footnote{法国铁路系统（SNCF）的使用者会注意到，两座城市之间（例如波尔多与里昂之间）最快的连接常常要经过巴黎。}
+
+\end{proof}
+
+\begin{exercises}
+\item[13.]
+
+设  $ (x_n) $ 为  $ \mathbb{C} $ 中的序列，且对所有  $ n \in \mathbb{N} $ 都有  $ \mathrm{Re} x_n = 0 $。证明：若  $ (x_n) $ 收敛于  $ x $，则  $ \mathrm{Re} x = 0 $。
+
+\end{exercises}
+
+\section{实序列与复序列}
+
+本节我们导出数列计算的最重要法则。若把这些序列解释为向量空间 $ s = s(\mathbb{K}) = \mathbb{K}^{\mathbb{N}} $ 中的向量，则这些法则表明收敛序列构成 $ s $ 的一个子空间。对于实序列，我们利用 $ \mathbb{R} $ 的序结构导出比较判别法，它是研究 $ s(\mathbb{R}) $ 中收敛性的主要工具。
+
+\subsection*{零序列}
+
+$ \mathbb{K} $ 中的序列 $ (x_n) $ 称为\textbf{零序列}，若它收敛于零，即若对于每个 $ \varepsilon > 0 $，存在某个 $ N \in \mathbb{N} $ 使得对一切 $ n \geq N $ 有 $ |x_n| < \varepsilon $。我们以 $ c_0 $ 记 $ \mathbb{K} $ 中所有零序列之集，即
+
+\[
+c_{0}:=c_{0}(\mathbb{K}):=\big\{(x_{n})\in s\;;\;(x_{n})\text{ 收敛且 }\operatorname*{l i m}x_{n}=0\big\}\;.
+\]
+
+\begin{remark}
+
+设 $ (x_n) $ 是 $ \mathbb{K} $ 中的序列，且 $ a \in \mathbb{K} $。
+
+\begin{items}
+\item
+
+$ (x_n) $ 是零序列当且仅当 $ (|x_n|) $，即绝对值序列，是 $ \mathbb{R} $ 中的零序列。
+
+\proofhead
+这直接由定义可得。
+\item
+
+$ (x_{n}) $ 收敛于 a 当且仅当“平移序列” $ (x_{n}-a) $ 是零序列。
+
+\proofhead
+由命题 1.7 我们知道，$(x_n)$ 收敛于 $a$ 当且仅当对于每个 $\varepsilon > 0$，存在某个 $N$ 使得对一切 $n \geq N$ 有 $|x_n - a| < \varepsilon$。因此该论断由 (a) 可得。
+\item
+
+若存在实零序列 $ (r_n) $，使得对几乎所有 $ n \in \mathbb{N} $ 有 $ |x_n| \leq r_n $，则 $ (x_n) $ 是零序列。
+
+\proofhead
+设 $ \varepsilon > 0 $。由假设，存在 $ M, N \in \mathbb{N} $ 使得对一切 $ n \geq M $ 有 $ |x_n| \leq r_n $，且对一切 $ n \geq N $ 有 $ r_n < \varepsilon $。从而对一切 $ n \geq \max\{M, N\} $ 有 $ |x_n| < \varepsilon $。■
+\end{items}
+
+\end{remark}
+
+\subsection*{基本法则}
+
+\begin{proposition}
+
+设 $ (x_n) $ 与 $ (y_n) $ 是 $ \mathbb{K} $ 中的收敛序列，且 $ \lim x_n = a $，$ \lim y_n = b $。设 $ \alpha \in \mathbb{K} $。
+
+\begin{subitems}
+\item
+
+序列 $ (x_{n} + y_{n}) $ 收敛，且 $ \lim(x_{n} + y_{n}) = a + b $。
+
+\item
+
+序列 $ (\alpha x_n) $ 收敛，且 $ \lim(\alpha x_n) = \alpha a $。
+
+\proofhead
+设 $ \varepsilon > 0 $。
+\end{subitems}
+
+(i) 因为 $ x_n \to a $ 且 $ y_n \to b $，存在 $ M, N \in \mathbb{N} $ 使得 $ |x_n - a| < \varepsilon/2 $
+
+对一切 $ n \geq M $ 成立，且 $ |y_n - b| < \varepsilon/2 $ 对一切 $ n \geq N $ 成立。因此
+
+\[
+\left|x_{n}+y_{n}-(a+b)\right|\leq\left|x_{n}-a\right|+\left|y_{n}-b\right|<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon,\qquad n\geq\max\{M,N\}.
+\]
+
+这表明 $ (x_{n} + y_{n}) $ 收敛于 $ a + b $。
+
+(ii) 由于 $ \alpha = 0 $ 的情形是显然的，我们设 $ \alpha \neq 0 $。由假设，($ x_n $) 收敛，其极限为 $ a $。于是存在某个 $ N $ 使得对一切 $ n \geq N $ 有 $ |x_n - a| < \varepsilon / |\alpha| $。由此可得
+
+\[
+\left|\alpha x_{n}-\alpha a\right|=\left|\alpha\right|\left|x_{n}-a\right|\leq\left|\alpha\right|\frac{\varepsilon}{\left|\alpha\right|}=\varepsilon\;,\qquad n\geq N\;,
+\]
+
+这就证明了该论断。■
+
+\end{proposition}
+
+\begin{remark}
+
+记 K 中所有收敛序列之集为
+
+\[
+c:=c(\mathbb{K}):=\bigl\{(x_{n})\in s~;~\left(x_{n}\right)\text{ 收敛}\bigr\}.
+\]
+
+那么命题 2.2 有如下解释：
+
+c 是 s 的子空间，且函数
+
+\[
+\lim:c\to\mathbb{K},\quad(x_{n})\mapsto\lim x_{n}
+\]
+
+是线性的。
+
+显然 $ \ker(\lim) = c_0 $，从而由例 I.12.3(c)，$ c_0 $ 是 $ c $ 的子空间。■
+
+下一个命题特别表明，收敛序列可以“逐项”相乘。
+
+\end{remark}
+
+\begin{proposition}
+
+设 $ (x_{n}) $ 与 $ (y_{n}) $ 是 $ \mathbb{K} $ 中的序列。
+
+\begin{subitems}
+\item
+
+若 $ (x_{n}) $ 是零序列且 $ (y_{n}) $ 是有界序列，则 $ (x_{n}y_{n}) $ 是零序列。
+
+\item
+
+若 $ \lim x_{n}=a $ 且 $ \lim y_{n}=b $，则 $ \lim(x_{n}y_{n})=ab $。
+
+\proofhead
+(i) 由于 $(y_n)$ 有界，存在某个 $M > 0$ 使得对一切 $n \in \mathbb{N}$ 有 $|y_n| \leq M$。由于 $(x_n)$ 是零序列，对于每个 $\varepsilon > 0$，存在某个 $N \in \mathbb{N}$ 使得对一切 $n \geq N$ 有 $|x_n| < \varepsilon/M$。现在由此可得
+\[
+|x_{n}y_{n}|=|x_{n}||y_{n}|<\frac{\varepsilon}{M}M=\varepsilon,\qquad n\geq N.
+\]
+
+因此 $(x_{n}y_{n})$ 是零序列。
+
+\end{subitems}
+
+(ii) 由于 $ x_n \to a $，$ (x_n - a) $ 是零序列。由命题 1.10，$ (y_n) $ 有界。由 (i)，$ ((x_n - a)y_n)_{n \in \mathbb{N}} $ 是零序列。由于 $ (a(y_n - b))_{n \in \mathbb{N}} $ 也是零序列，命题 2.2 蕴含
+
+\[
+x_{n}y_{n}-a b=(x_{n}-a)y_{n}+a(y_{n}-b)\to0\quad(n\to\infty).
+\]
+
+因此序列 $ (x_{n}y_{n}) $ 收敛于 ab。
+
+\end{proposition}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+命题 2.4(i) 中序列 $ (y_{n}) $ 有界的假设不可去掉。
+
+\proofhead
+设对一切 $ n \in \mathbb{N}^\times $ 有 $ x_n := 1/n $，$ y_n := n^2 $。则 $ (x_n) $ 是零序列，但序列 $ (x_ny_n) = (n)_{n \in \mathbb{N}} $ 发散。■
+\item
+
+由例 I.12.11(a) 我们知道 $ s = s(\mathbb{K}) = \mathbb{K}^{\mathbb{N}} $ 是一个（$ \mathbb{K} $ 上的）代数。因此，结合注 2.3，命题 2.4(ii) 可以改述如下：
+
+\[
+c\text{ 是 }s\text{ 的子代数，且函数}
+\]
+\[
+\lim:c\to\mathbb{K}\text{ 是代数同态}\;.
+\]
+
+最后，由命题 1.10 与命题 2.4(i) 可知，$ c_{0} $ 也是 c 的理想。
+下一个命题与注 2.5(b) 表明，商序列的极限等于分子的极限除以分母的极限，只要这些极限存在。
+
+\end{items}
+
+\end{remark}
+
+\begin{proposition}
+
+设 $ (x_n) $ 是 $ \mathbb{K} $ 中的收敛序列，其极限为 $ a \in \mathbb{K}^\times $。则 $ (x_n) $ 的几乎所有项都非零，且 $ 1/x_n \to 1/a $（$ n \to \infty $）。
+
+\proofhead
+由于 $ |a| > 0 $，存在某个 $ N \in \mathbb{N} $ 使得对一切 $ n \geq N $ 有 $ |x_n - a| < |a|/2 $。因此，由反向三角不等式，
+\[
+|a|-|x_{n}|\leq|x_{n}-a|\leq\frac{|a|}{2},\qquad n\geq N,
+\]
+
+即对几乎所有 $ n $ 有 $ |x_n| \geq |a|/2 > 0 $。这证明了第一个论断。由 $ |x_n| \geq |a|/2 $ 还可得
+
+\begin{equation}
+\left|\frac{1}{x_{n}}-\frac{1}{a}\right|=\frac{\left|x_{n}-a\right|}{\left|x_{n}\right|\left|a\right|}\leq\frac{2}{\left|a\right|^{2}}\left|x_{n}-a\right|,\qquad n\geq N.
+\end{equation}
+
+由假设与注 2.1(b)，$(|x_n-a|)$ 是零序列，从而由命题 2.2，$(2|x_n-a|/|a|^2)$ 也是零序列。于是该论断由 (2.1) 以及注 2.1(b) 与 (c) 可得。
+
+\end{proposition}
+
+\subsection*{比较判别法}
+
+接下来我们考察收敛实序列与 $ \mathbb{R} $ 的序结构之间的关系。特别地，在命题 2.9 中我们导出比较判别法，这是一种简单但非常有用的确定实序列极限的方法。
+
+\begin{proposition}
+
+设 $ (x_n) $ 与 $ (y_n) $ 是 $ \mathbb{R} $ 中的收敛序列，且对无穷多个 $ n \in \mathbb{N} $ 有 $ x_n \leq y_n $。则
+
+\[
+\lim x_{n}\leq\lim y_{n}.
+\]
+
+\proofhead
+设 $ a := \lim x_n $，$ b := \lim y_n $，并反设 $ a > b $。则 $ \varepsilon := a - b $ 为正，于是存在某个 $ n \in \mathbb{N} $ 使得
+\[
+a-\varepsilon/4<x_{n}\leq y_{n}<b+\varepsilon/4,
+\]
+
+即 $ \varepsilon = a - b < \varepsilon/2 $，这是不可能的。■
+
+\end{proposition}
+
+\begin{remark}
+
+命题 2.7 对严格不等式不成立，即对无穷多个 $ n \in \mathbb{N} $ 有 $ x_n < y_n $ 并不蕴含 $ \lim x_n < \lim y_n $。
+
+\proofhead
+设对一切 $ n \in \mathbb{N}^\times $ 有 $ x_n := -1/n $，$ y_n := 1/n $。则对一切 $ n \in \mathbb{N}^\times $ 有 $ x_n < y_n $，但 $ \lim x_n = \lim y_n = 0 $。■
+\end{remark}
+
+\begin{proposition}
+
+设 $(x_n)$、$(y_n)$ 与 $(z_n)$ 是实序列，具有性质：对几乎所有 $n \in \mathbb{N}$ 有 $x_n \leq y_n \leq z_n$。若 $\lim x_n = \lim z_n =: a$，则 $(y_n)$ 也收敛于 $a$。
+
+\proofhead
+设 $ m_0 $ 使得对一切 $ n \geq m_0 $ 有 $ x_n \leq y_n \leq z_n $。给定 $ \varepsilon > 0 $，设 $ m_1 $ 与 $ m_2 $ 使得
+\[
+x_{n}>a-\varepsilon,\quad n\geq m_{1}\qquad\text{且}\qquad z_{n}<a+\varepsilon,\quad n\geq m_{2}.
+\]
+
+令 $N := \max\{m_0, m_1, m_2\}$。则
+
+\[
+a-\varepsilon<x_{n}\leq y_{n}\leq z_{n}<a+\varepsilon,\qquad n\geq N,
+\]
+
+即 $ (y_{n}) $ 的几乎所有项都位于 $ a $ 的 $ \varepsilon $-邻域 $ \mathbb{B}(a,\varepsilon) $ 中。  $ \blacksquare $
+
+\end{proposition}
+
+\subsection*{复序列}
+
+若 $(x_n)$ 是 $\mathbb{R}$ 中的收敛序列且 $\lim x_n = a$，则 $\lim |x_n| = |a|$。事实上，若 $(x_n)$ 是零序列，则这就是例 2.1(a)。若 $a > 0$，则 $(x_n)$ 的几乎所有项都为正（见习题 3），从而 $\lim |x_n| = \lim x_n = a = |a|$。最后，若 $a < 0$，则序列 $(x_n)$ 的几乎所有项都为负，于是我们有
+
+\[
+\lim\left|x_{n}\right|=\lim(-x_{n})=-\lim x_{n}=-a=\left|a\right|.
+\]
+
+下一个命题表明，这对复序列同样成立。
+
+\begin{proposition}
+
+设 $ (x_n) $ 是 $ \mathbb{K} $ 中的收敛序列，使得 $ \lim x_n = a $。则 $ (|x_n|) $ 收敛，且 $ \lim |x_n| = |a| $。
+
+\proofhead
+设 $ \varepsilon > 0 $。则存在某个 $ N $ 使得对一切 $ n \geq N $ 有 $ |x_n - a| < \varepsilon $。由反向三角不等式我们有
+\[
+\left||x_{n}|-|a|\right|\leq|x_{n}-a|<\varepsilon\;,\qquad n\geq N\;.
+\]
+
+因此对一切 $ n \geq N $ 有 $ |x_n| \in \mathbb{B}_{\mathbb{R}}(|a|, \varepsilon) $。这表明 $ (|x_n|) $ 收敛于 $ |a| $。■
+
+\end{proposition}
+
+$ \mathbb{C} $ 中的收敛序列可由相应的实部与虚部的收敛来刻画。
+
+\begin{proposition}
+
+对于 $ \mathbb{C} $ 中的序列 $ (x_{n}) $，下列条件等价：
+
+\begin{subitems}
+\item
+
+$ (x_{n}) $ 收敛。
+
+\item
+
+$ (\mathrm{Re}(x_n)) $ 与 $ (\mathrm{Im}(x_n)) $ 收敛。
+在此情形下，
+
+\[
+\lim x_{n}=\lim\operatorname{R e}(x_{n})+i\lim\operatorname{I m}(x_{n}).
+\]
+
+\proofhead
+“(i)⇒(ii)” 设 $ (x_n) $ 收敛，且 $ x = \lim x_n $。则由注 2.1(b)，$ (|x_n - x|) $ 是零序列。由命题 I.11.4 我们有
+\[
+\left|\operatorname{Re}(x_{n})-\operatorname{Re}(x)\right|\leq\left|x_{n}-x\right|.
+\]
+
+由注 2.1(c)，$ \left(\mathrm{Re}(x_{n}) - \mathrm{Re}(x)\right) $ 也是零序列，即 $ \left(\mathrm{Re}(x_{n})\right) $ 收敛于 $ \mathrm{Re}(x) $。同理，$ \left(\mathrm{Im}(x_{n})\right) $ 收敛于 $ \mathrm{Im}(x) $。
+ “(ii)⇒(i)” 设 $ (Re(x_n)) $ 与 $ (Im(x_n)) $ 收敛，且 $ a := \lim Re(x_n) $，$ b := \lim Im(x_n) $。令 $ x := a + ib $。则
+
+\[
+|x_{n}-x|=\sqrt{|\operatorname{R e}(x_{n})-a|^{2}+|\operatorname{I m}(x_{n})-b|^{2}}\leq|\operatorname{R e}(x_{n})-a|+|\operatorname{I m}(x_{n})-b|.
+\]
+
+由这个不等式容易得出 $ (x_{n}) $ 在 $ \mathbb{C} $ 中收敛于 x。  $ \blacksquare $
+
+\end{subitems}
+
+\end{proposition}
+
+我们以若干例来说明上述命题，以此结束本节。
+
+\begin{example}
+
+\begin{items}
+\item
+
+$ \lim_{n \to \infty} \frac{n+1}{n+2} = 1 $。
+
+\proofhead
+把 $ (n+1)/(n+2) $ 写成 $ (1+1/n)/(1+2/n) $ 的形式。由于
+\[
+\lim(1+1/n)=\lim(1+2/n)=1
+\]
+
+（为什么？），该论断由命题 2.4 与 2.6 可得。■
+
+\item
+
+$ \lim_{n \to \infty} \left( \frac{3n}{(2n+1)^2} + i \frac{2n^2}{n^2 + 1} \right) = 2i $。
+
+\proofhead
+设
+\[
+x_{n}:=\frac{3n}{(2n+1)^{2}}+i\frac{2n^{2}}{n^{2}+1}~,\qquad n\in\mathbb{N}~.
+\]
+
+把 $ x_{n} $ 的实部写成形式
+
+\[
+\frac{3/n}{(2+1/n)^{2}}.
+\]
+
+由于 $ \lim(2+1/n)=2 $，由命题 2.4 可得 $ \lim(2+1/n)^2=4 $。由于 $ (3/n) $ 是零序列，由命题 2.4 与 2.6 我们有
+
+\[
+\mathrm{R e}(x_{n})=\frac{3n}{(2n+1)^{2}}\to0\ \mathrm{(}n\to\infty\mathrm{)}.
+\]
+
+由例 1.8(a) 与命题 2.6，$ x_{n} $ 的虚部序列满足
+
+\[
+\frac{2n^{2}}{n^{2}+1}=\frac{2}{1+1/n^{2}}\to2\ \left(n\to\infty\right).
+\]
+
+该论断现在由命题 2.11 可得。■
+
+\item
+
+$ \left(\frac{i^{n}}{1+in}\right) $ 是 $ \mathbb{C} $ 中的零序列。
+
+\proofhead
+我们写出
+\[
+\frac{i^{n}}{1+i n}=\frac{1}{n}\frac{i^{n}}{i+1/n},\qquad n\in\mathbb{N}^{\times}.
+\]
+
+则由命题 2.4，只需证明序列 $ (i^n/(i+1/n))_{n\in\mathbb{N}^\times} $ 有界。由于
+
+\[
+\left|i+\frac{1}{n}\right|=\sqrt{1+\frac{1}{n^{2}}}\geq1,\qquad n\in\mathbb{N}^{\times},
+\]
+
+我们得到不等式
+
+\[
+\left|\frac{i^{n}}{i+1/n}\right|=\frac{|i^{n}|}{|i+1/n|}=\frac{1}{|i+1/n|}\leq1,\qquad n\in\mathbb{N}^{\times},
+\]
+
+这就证明了所称的有界性。■
+
+\end{items}
+
+\end{example}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+判断 $ \mathbb{R} $ 中的下列序列 $ (x_n) $ 是否收敛。若收敛，计算其极限。
+
+\begin{items}
+\item
+\[
+x_{n}:=\sqrt{n+1}-\sqrt{n}.
+\]
+\item
+\[
+x_{n}:=(-1)^{n}\sqrt{n}\left(\sqrt{n+1}-\sqrt{n}\right).
+\]
+\[
+(c)x_{n}:=\frac{1+2+3+\cdots+n}{n+2}-\frac{n}{2}.
+\]
+\[
+(d)x_{n}:=\frac{(2-1/\sqrt{n})^{10}-(1+1/n^{2})^{10}}{1-1/n^{2}-1/\sqrt{n}}.
+\]
+\[
+(e)x_{n}:=(100+1/n)^{2}.
+\]
+\end{items}
+
+\item
+
+利用 $ (1+1)^{n} $ 的二项式展开，证明 $ (n^{3}/2^{n}) $ 是零序列。
+
+\item
+
+设 $ (x_{n}) $ 是极限为正的收敛实序列。证明该序列的几乎所有项都为正。
+
+\item
+
+设 $ (x_{j}) $ 是 $ \mathbb{K} $ 中极限为 a 的收敛序列。证明
+
+\[
+\lim_{n\to\infty}\frac{1}{n}\sum_{j=1}^{n} x_{j}=a.
+\]
+\item
+
+对于 $ m \in \mathbb{N}^\times $，把 $ \mathbb{K}^m $ 视为带有积度量的度量空间（见例 1.2(e)）。设
+
+\[
+s(\mathbb{K}^{m}):=\operatorname{F u n c t}(\mathbb{N},\mathbb{K}^{m})=(\mathbb{K}^{m})^{\mathbb{N}}
+\]
+
+且
+
+\[
+c(\mathbb{K}^{m}):=\bigl\{(x_{n})\in s(\mathbb{K}^{m})\;;\;(x_{n})\text{ 收敛}\bigr\}.
+\]
+
+证明下列结论：
+
+\begin{items}
+\item
+
+$ c(\mathbb{K}^m) $ 是 $ s(\mathbb{K}^m) $ 的子空间。
+
+\item
+
+函数
+
+\[
+\lim:c(\mathbb{K}^{m})\to\mathbb{K}^{m},\quad(x_{n})\mapsto\lim_{n\to\infty}(x_{n})
+\]
+
+是线性的。
+
+\item
+
+设 $(\lambda_n) \in c(\mathbb{K})$ 与 $(x_n) \in c(\mathbb{K}^m)$ 满足 $\lambda_n \to \alpha$ 且 $x_n \to a$。则在 $\mathbb{K}^m$ 中有 $\lambda_nx_n \to \alpha a$（提示：例 1.8(e)）。
+
+\end{items}
+
+\item
+
+设 $ (x_n) $ 是 $ \mathbb{K} $ 中的收敛序列，其极限为 $ a $。设 $ p, q \in \mathbb{K}[X] $ 满足 $ q(a) \neq 0 $。证明对于有理函数 $ r := p/q $，我们有
+
+\[
+r(x_{n})\to r(a)\quad(n\to\infty).
+\]
+
+特别地，对于每个多项式 $p$，序列 $(p(x_n))_{n\in\mathbb{N}}$ 收敛于 $p(a)$。
+
+\item
+
+设 $ (x_n) $ 是 $ (0, \infty) $ 中的收敛序列，其极限为 $ x \in (0, \infty) $。对于 $ r \in \mathbb{Q} $，证明
+
+\[
+\left(x_{n}\right)^{r}\to x^{r}\quad(n\to\infty).
+\]
+
+（提示：对于 $r = 1/q$，令 $y_n := (x_n)^r$，$y := x^r$。则
+
+\[
+x_{n}-x=\left(y_{n}-y\right)\sum_{k=0}^{q-1}y_{n}^{k}y^{q-1-k}
+\]
+
+由习题 I.8.1。）
+
+\item
+
+设 $ (x_n) $ 是 $ (0, \infty) $ 中的序列。证明 $ (1/x_n) $ 是零序列当且仅当对于每个 $ K > 0 $，存在某个 $ N $ 使得对一切 $ n \geq N $ 有 $ x_n > K $。
+
+\item
+
+设 $ (a_{n}) $ 是 $ (0, \infty) $ 中的序列，且
+
+\[
+x_{n}:=\sum_{k=0}^{n}(a_{k}+1/a_{k}),\qquad n\in\mathbb{N}.
+\]
+\end{exercises}
+
+\begin{proof}
+
+$ (1/x_n) $ 是零序列。（提示：对于 $ a > 0 $，证明 $ a + 1/a \geq 2 $（见习题 I.8.10）。然后利用习题 8。）
+
+\end{proof}
+
+\section{赋范向量空间}
+
+在本节中，我们考虑向量空间上的度量。当然，我们希望这样的度量与向量空间结构相容，因此我们从已经具有距离概念的向量空间 $ \mathbb{R}^2 $ 着手。具体地说，如果我们用 $ \|x\| $ 表示 $ \mathbb{R}^2 $ 中向量 $ x $ 的长度，那么 $\mathbb{R}^2$ 中两点 $ x, y \in \mathbb{R}^2 $ 之间的距离就是 $ \|x - y\| $。稍后我们将看到，这在 $ \mathbb{R}^2 $ 上定义了一个度量（见注 3.1(a)）。除了与度量的这种关系之外，函数 $ x \mapsto \|x\| $ 关于向量空间结构还具有某些性质：
+
+首先我们注意到，$ \mathbb{R}^2 $ 中向量的长度是非负的，即对所有 $ x \in \mathbb{R}^2 $ 有 $ \|x\| \geq 0 $，并且长度为零的唯一向量是零向量。
+
+对于 $ x \in \mathbb{R}^2 $ 和 $ \alpha > 0 $，我们可以把 $ \alpha x $ 看作向量 $ x $ 被拉伸（或压缩）了因子 $ \alpha $。如果 $ \alpha < 0 $，那么 $ \alpha x $ 就是 $ x $ 被拉伸（或压缩）了因子 $ -\alpha $，然后再反向。
+
+\bookfigure[0.32]{figures/66ce396c72cad1af.jpg}
+
+无论哪种情形，向量 $ \alpha x $ 的长度都是 $ \|\alpha x\| = |\alpha|\|x\| $。
+
+最后，对于 $ \mathbb{R}^2 $ 中所有的向量 $ x $ 和 $ y $，我们有
+
+三角不等式 $ \|x + y\| \leq \|x\| + \|y\| $。
+
+这三条性质足以使 $ \|x - y\| $ 成为 $ \mathbb{R}^2 $ 上的一个度量。由于它们也容易推广到任意向量空间，我们自然而然地引出赋范向量空间的如下定义。
+
+\bookfigure[0.19]{figures/dd096a4e46bdd9aa.jpg}
+
+\subsection*{范数}
+
+设 $ E $ 是 $ \mathbb{K} $ 上的向量空间。如果函数 $ \|\cdot\|: E \to \mathbb{R}^+ $ 满足下列条件，则称之为\textbf{范数}：
+
+$ (N_1) $  $ \|x\| = 0 \Leftrightarrow x = 0 $.
+
+$ (N_2) $  $ \|\lambda x\| = |\lambda|\|x\| $,  $ x \in E $,  $ \lambda \in \mathbb{K} $（正齐性）.
+
+$ (N_3) $  $ \|x + y\| \leq \|x\| + \|y\| $,  $ x, y \in E $（三角不等式）.
+
+由一个向量空间 $E$ 和一个范数 $\|\cdot\|$ 组成的对 $(E, \|\cdot\|)$ 称为赋范向量空间。\footnote{除非另有说明，今后向量空间都假定为 $\mathbb K$-向量空间。}如果范数在上下文中是明确的，我们就用 $E$ 代替 $(E, \|\cdot\|)$。
+
+\begin{remark}
+
+设 $ E := (E, \|\cdot\|) $ 是一个赋范向量空间。
+
+\begin{items}
+\item
+
+函数
+
+\[
+d\colon E\times E\to\mathbb{R}^{+}\;,\qquad(x,y)\mapsto\|x-y\|
+\]
+
+是 E 上的一个度量，即由范数诱导的度量。因此任何赋范向量空间也是一个度量空间。
+
+\proofhead
+公理 $(M_{1})$ 和 $(M_{2})$ 立即由 $(N_{1})$ 和 $(N_{2})$ 得出。公理 $(M_{3})$ 由 $(N_{3})$ 得出，因为
+\[
+d(x,y)=\|x-y\|=\|(x-z)+(z-y)\|\leq\|x-z\|+\|z-y\|=d(x,z)+d(z,y)
+\]
+
+对所有 $ x, y, z \in E $ 成立。 ■
+
+\item
+
+逆三角不等式对范数成立：
+
+\[
+\left\|x-y\right\|\geq\left|\left\|x\right\|-\left\|y\right\|\right|,\qquad x,y\in E.
+\]
+
+\proofhead
+命题 1.3 蕴含诱导度量的逆三角不等式。因此
+\[
+\left\|x-y\right\|=d(x,y)\geq|d(x,0)-d(0,y)|=\left|\left\|x\right\|-\left\|y\right\|\right|
+\]
+
+对所有 $ x, y \in E $ 成立。 ■
+
+\item
+
+由于 (a)，第 1 节中所有关于度量空间的陈述对 E 也成立。特别地，‘邻域’、‘聚点’和‘收敛’的概念在 E 中是良定义的。
+例如，E 中极限为 x 的序列 $ (x_{n}) $ 的收敛具有如下含义
+
+\[
+x_{n}\to x\text{（在 }E\text{ 中）}\Longleftrightarrow\forall\varepsilon>0\exists N\in\mathbb{N}:\|x_{n}-x\|<\varepsilon\forall n\geq N.
+\]
+
+进一步地，回顾第 2 节可知，任何其证明不用到 $ \mathbb{K} $ 的域结构或序结构的陈述，对 $ E $ 中的序列也成立。
+特别地，注 2.1 以及命题 2.2 和 2.10 在任何赋范向量空间中都成立。 ■
+
+\end{items}
+
+\end{remark}
+
+\subsection*{球}
+
+对 $ a \in E $ 和 $ r > 0 $，我们把以 $ a $ 为中心、以 $ r $ 为半径的开球和闭球定义为
+
+\[
+\mathbb{B}_{E}(a,r):=\mathbb{B}(a,r):=\left\{x\in E;\|x-a\|<r\right\}
+\]
+
+和
+
+\[
+\bar{\mathbb{B}}_{E}(a,r):=\bar{\mathbb{B}}(a,r):=\left\{x\in E\;;\;\|x-a\|\leq r\right\}\;.
+\]
+
+注意到，当 d 由范数诱导时，这些定义与度量空间 $ (E,d) $ 的定义一致。我们也记
+
+\[
+\mathbb{B}:=\mathbb{B}(0,1)=\{x\in E;\|x\|<1\}\quad\text{且}\quad\bar{\mathbb{B}}:=\bar{\mathbb{B}}(0,1)=\{x\in E;\|x\|\leq1\}
+\]
+
+表示 E 中的开单位球和闭单位球。利用 (I.4.1) 的记号，我们有
+
+\[
+r\mathbb{B}=\mathbb{B}(0,r),\quad r\bar{\mathbb{B}}=\bar{\mathbb{B}}(0,r),\quad a+r\mathbb{B}=\mathbb{B}(a,r),\quad a+r\bar{\mathbb{B}}=\bar{\mathbb{B}}(a,r).
+\]
+
+\subsection*{有界集}
+
+如果 E 的子集 X 在诱导度量空间中有界，则称 X 在 E 中有界（或范数有界）。
+
+\begin{remark}
+
+设 $ E := (E, \|\cdot\|) $ 是一个赋范向量空间。
+
+\begin{items}
+\item
+
+$ X \subseteq E $ 有界当且仅当存在某个 $ r > 0 $，使得 $ X \subseteq r\mathbb{B} $，即对所有 $ x \in X $ 有 $ \|x\| < r $。
+
+\item
+
+如果 $X$ 和 $Y$ 是 $E$ 的非空有界子集，那么 $X \cup Y$、$X + Y$ 以及 $\lambda X$（$\lambda \in \mathbb{K}$）也是有界的。
+
+\item
+
+例 1.2(d) 表明，在每个向量空间 $V$ 上，都存在一个度量，使得 $V$ 关于该度量是有界的。但是，如果 $V$ 非零，那么 $(N_{2})$ 蕴含在 $V$ 上不存在具有此性质的范数。
+
+\end{items}
+
+\end{remark}
+
+\subsection*{例}
+
+现在我们为 I.12 节中引入的向量空间定义适当的范数。
+
+\begin{example}
+
+\begin{items}
+\item
+
+绝对值 $ |\cdot| $ 是向量空间 $ \mathbb{K} $ 上的一个范数。
+约定 除非另有说明，今后我们把 $ \mathbb{K} $ 视为带有上述范数的赋范向量空间。
+
+\item
+
+设 $F$ 是赋范向量空间 $E := (E, \|\cdot\|)$ 的子空间。那么 $\|\cdot\|$ 到 $F$ 的限制 $\|\cdot\|_F := \|\cdot\| \big| F$ 是 $F$ 上的一个范数。因此 $F := (F, \|\cdot\|_F)$ 是带有这个诱导范数的赋范向量空间。当不会引起混淆时，我们用符号 $\|\cdot\|$ 表示 $F$ 上的诱导范数。
+
+\item
+
+设 $ (E_j, \|\cdot\|_j) $,  $ 1 \leq j \leq m $, 是 $ \mathbb{K} $ 上的赋范向量空间。那么
+
+\begin{equation}
+\|x\|_{\infty}:=\max_{1\leq j\leq m}\|x_{j}\|_{j},\qquad x=(x_{1},\ldots,x_{m})\in E:=E_{1}\times\cdots\times E_{m},
+\end{equation}
+
+在积向量空间 $E$ 上定义了一个范数，称为积范数。当 $d_j$ 是由 $\|\cdot\|_j$ 在 $E_j$ 上诱导的度量时，由这个范数在 $E$ 上诱导的度量与例 1.2(e) 的积度量一致。
+
+\proofhead
+显然 $ (\mathrm{N}_1) $ 满足。由 $ \|\cdot\|_j $ 的正齐性，对每个 $ \lambda \in \mathbb{K} $ 和 $ x \in E $，我们得到
+\[
+\|\lambda x\|_{\infty}=\max_{1\leq j\leq m}\|\lambda x_{j}\|_{j}=\max_{1\leq j\leq m}|\lambda|\|x_{j}\|_{j}=|\lambda|\max_{1\leq j\leq m}\|x_{j}\|_{j}=|\lambda|\|x\|_{\infty},
+\]
+
+因此 $ (N_{2}) $ 成立。最后，由 $ x + y = (x_{1} + y_{1}, \ldots, x_{m} + y_{m}) $ 以及
+范数 $ \|\cdot\|_j $ 的三角不等式可得
+
+\[
+\|x+y\|_{\infty}=\max_{1\leq j\leq m}\|x_{j}+y_{j}\|_{j}\leq\max_{1\leq j\leq m}(\|x_{j}\|_{j}+\|y_{j}\|_{j})\leq\|x\|_{\infty}+\|y\|_{\infty}
+\]
+
+对所有 $ x, y \in E $ 成立，即 $ (N_3) $ 成立。因此 (3.1) 在积向量空间 $ E $ 上定义了一个范数。最后一个断言是显然的。 $ \blacksquare $
+
+\item
+
+对 $ m \in \mathbb{N}^\times $，$ \mathbb{K}^m $ 是带有最大范数的赋范向量空间
+
+\[
+|x|_{\infty}:=\operatorname*{m a x}_{1\leq j\leq m}|x_{j}|~,\qquad x=(x_{1},\ldots,x_{m})\in\mathbb{K}^{m}~.
+\]
+
+在 $ m = 1 $ 的情形中，$ (\mathbb{K}^1, |\cdot|_{\infty}) = (\mathbb{K}, |\cdot|) = \mathbb{K} $。
+
+\proofhead
+这是 (c) 的特殊情形。
+\end{items}
+
+\end{example}
+
+\subsection*{有界函数空间}
+
+设 $X$ 是一个非空集合，$(E, \|\cdot\|)$ 是一个赋范向量空间。如果函数 $u \in E^X$ 在 $E$ 中的像有界，则称 $u$ 是$\text{有界的}$。对 $u \in E^X$，定义
+
+\begin{equation}
+\left\|u\right\|_{\infty}:=\left\|u\right\|_{\infty,X}:=\sup_{x\in X}\left\|u(x)\right\|\in\mathbb{R}^{+}\cup\left\{\infty\right\}.
+\end{equation}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+对 $ u \in E^X $，下列命题等价：
+
+\begin{subitems}
+\item
+
+u 是有界的。
+
+\item
+
+$ u(X) $ 在 E 中有界。
+
+\item
+
+存在某个 $ r > 0 $，使得对所有 $ x \in X $ 有 $ \|u(x)\| \leq r $
+
+\item
+
+$ \|u\|_{\infty} < \infty $。
+
+\end{subitems}
+
+\item
+
+显然 $ \mathrm{id} \in \mathbb{K}^{\mathbb{K}} $ 不是有界的，即 $ \|\mathrm{id}\|_{\infty} = \infty $。 ■
+
+\end{items}
+
+注 3.4(b) 表明，当 $ E $ 非平凡时，$ \|\cdot\|_\infty $ 可能不是向量空间 $ E^X $ 上的范数。因此我们令
+
+\[
+B(X,E):=\left\{u\in E^{X}:~u\text{ 有界}\right\},
+\]
+
+并把 $B(X,E)$ 称为从 $X$ 到 $E$ 的有界函数空间。
+
+\end{remark}
+
+\begin{proposition}
+
+$ B(X,E) $ 是 $ E^X $ 的子空间，并且 $ \|\cdot\|_\infty $ 是 $ B(X,E) $ 上的一个范数，称为上确界范数。
+
+\proofhead
+第一个断言由注 3.2(b) 得出。由注 3.4(a)，函数 $ \|\cdot\|_\infty: B(X,E) \to \mathbb{R}^+ $ 是良定义的。$ \|\cdot\|_\infty $ 的公理 ($ N_1 $) 由下式得出
+\[
+\|u\|_{\infty}=0\Longleftrightarrow\left(\|u(x)\|=0,x\in X\right)\Longleftrightarrow\left(u(x)=0,x\in X\right)\Longleftrightarrow\left(u=0\text{（在 }E^{X}\text{ 中）}\right)
+\]
+
+这里我们当然用到了 $ \|\cdot\| $ 是 $ E $ 上的范数这一事实。对 $ u \in B(X, E) $ 和 $ \alpha \in \mathbb{K} $，我们有
+
+\[
+\left\|\alpha u\right\|_{\infty}=\sup\left\{\left\|\alpha u(x)\right\|;x\in X\right\}=\sup\left\{\left|\alpha\right|\left\|u(x)\right\|;x\in X\right\}=\left|\alpha\right|\left\|u\right\|_{\infty}.
+\]
+
+因此 $ \|\cdot\|_{\infty} $ 也满足 $ (\mathrm{N}_{2}) $。
+
+最后，对所有 $ u, v \in B(X, E) $ 和 $ x \in X $，我们有 $ \|u(x)\| \leq \|u\|_\infty $，并且也有 $ \|v(x)\| \leq \|v\|_\infty $。因此
+
+\begin{equation*}
+\begin{aligned}
+\|u+v\|_{\infty}&=\sup\big\{\|u(x)+v(x)\|;x\in X\big\}\\&\leq\sup\big\{\|u(x)\|+\|v(x)\|;x\in X\big\}\leq\|u\|_{\infty}+\|v\|_{\infty},
+\end{aligned}
+\end{equation*}
+
+所以 $ \|\cdot\|_{\infty} $ 满足公理 $ (N_{3}) $。 ■
+
+\end{proposition}
+
+约定 今后，$ B(X,E) $ 表示从 $ X $ 到 $ E $ 的有界函数空间连同其上确界范数 $ \|\cdot\|_\infty $，即
+
+\begin{equation}
+B(X,E):=\big(B(X,E),\|\cdot\|_{\infty}\big).
+\end{equation}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+如果 $ X := \mathbb{N} $，那么 $ B(X, E) $ 是 $ E $ 中有界序列的赋范向量空间。在特殊情形 $ E := \mathbb{K} $ 中，$ B(\mathbb{N}, \mathbb{K}) $ 记作 $ \ell_\infty $，即
+
+\[
+\ell_{\infty}:=\ell_{\infty}(\mathbb{K}):=B(\mathbb{N},\mathbb{K})
+\]
+
+是带有上确界范数的有界序列的赋范向量空间
+
+\[
+\|(x_{n})\|_{\infty}=\operatorname*{s u p}_{n\in\mathbb{N}}|x_{n}|~,\qquad(x_{n})\in\ell_{\infty}~.
+\]
+\item
+
+由于由命题 1.10，任何收敛序列都是有界的，由注 2.3 可得，$c_0$ 和 $c$ 是 $\ell_\infty$ 的子空间。因此 $c_0$ 和 $c$ 是关于上确界范数的赋范向量空间，并且作为子空间有 $c_0 \subseteq c \subseteq \ell_\infty$。
+
+\item
+
+如果对某个 $ m \in \mathbb{N}^\times $ 有 $ X = \{1, \ldots, m\} $，那么
+
+\[
+B(X,E)=(E^{m},\|\cdot\|_\infty),
+\]
+
+其中 $ \|\cdot\|_\infty $ 是例 3.3(c) 的积范数（经过显然的等同）。因此这里的记号与例 3.3(c) 的记号是一致的。 $ \blacksquare $
+
+\end{items}
+
+\end{remark}
+
+\subsection*{内积空间}
+
+现在我们考虑赋范向量空间 $ E := (\mathbb{R}^2, |\cdot|_{\infty}) $。按照上述记号，$ E $ 的单位球是
+
+\[
+\mathbb{B}_{E}=\left\{x\in\mathbb{R}^{2}\;;\;|x|_{\infty}\leq1\right\}=\left\{\left(x_{1},x_{2}\right)\in\mathbb{R}^{2}\;;\ -1\leq x_{1},x_{2}\leq1\right\}.
+\]
+
+因此 $ \mathbb{B}_E $ 是平面中边长为 2、中心为 0 的正方形。在任何赋范向量空间 $ (F, \|\cdot\|) $ 中，集合 $ \{x \in F : \|x\| = 1\} $，即单位球的‘边界’，称为 $ (F, \|\cdot\|) $ 中的单位球面。对于我们的空间 $ E $，这就是图中正方形的边界。这个单位球面上的每一点到原点的距离都是 1 个单位。当然，这个距离是在诱导度量 $ |\cdot|_{\infty} $ 中度量的，因此‘球’和‘球面’的几何外观可能与我们以往的经验相反。在学校里我们学到，如果按照毕达哥拉斯的方式，把一点与原点之间的距离定义为它的各分量平方和的平方根，我们就得到‘圆’形的圆（关于 $ \mathbb{B}_C $ 另见 I.11 节）。我们希望通过在 $ \mathbb{K}^m $ 上定义一个称之为欧几里得范数的新范数，把这个距离概念推广到 $ \mathbb{K}^m $。这一范数无论从历史还是实用的角度看都很重要。为此，我们需要做一些准备工作。
+
+\bookfigure[0.19]{figures/40a3797e7cb91ce8.jpg}
+
+设 E 是域 K 上的向量空间。函数
+
+\begin{equation}
+(\cdot|\cdot)\colon E\times E\to\mathbb{K}\;,\quad(x,y)\mapsto(x\mid y)
+\end{equation}
+
+如果满足下列条件，则称为 E 上的标量积或内积：\footnote{若 $\mathbb K=\mathbb R$，则由命题 I.11.3，对一切 $\alpha\in\mathbb R$ 有 $\overline{\alpha}:=\alpha$ 且 $\mathrm{Re}\,\alpha:=\alpha$。因此在下面的定义中我们可以忽略复共轭符号与符号 Re。}
+
+\[
+\left(SP_{1}\right)\ \left(x\mid y\right)=\overline{\left(y\mid x\right)},\ x,y\in E.
+\]
+\[
+\left(\mathrm{SP}_{2}\right)\left(\lambda x+\mu y\left|z\right.\right)=\lambda(x\left|z\right)+\mu(y\left|z\right.),\ x,y,z\in E,\ \lambda,\mu\in\mathbb{K}.
+\]
+\[
+\left(\mathrm{SP}_{3}\right)\left(x\mid x\right)\geq0,x\in E\text{，且 }\left(x\mid x\right)=0\Longleftrightarrow x=0.
+\]
+
+带有标量积 $(\cdot|\cdot)$ 的向量空间 $E$ 称为内积空间，并记作 $(E,(\cdot|\cdot))$。同样地，当不会引起混淆时，我们用 $E$ 代替 $(E,(\cdot|\cdot))$。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+在实情形 $ \mathbb{K} = \mathbb{R} $ 中，(SP $ _{1} $) 可以写成
+
+\[
+(x\mid y)=(y\mid x),\qquad x,y\in E.
+\]
+
+换言之，当 $E$ 是实向量空间时，函数 (3.4) 是\textbf{对称的}。当 $\mathbb{K} = \mathbb{C}$ 且 $(\mathrm{SP}_1)$ 成立时，称函数 (3.4) 是\textbf{埃尔米特的}。
+
+\item
+
+由 $ (SP_{1}) $ 和 $ (SP_{2}) $ 可得
+
+\begin{equation}
+(x\mid\lambda y+\mu z)=\overline{\lambda}(x\mid y)+\overline{\mu}(x\mid z),\qquad x,y,z\in E,\quad\lambda,\mu\in\mathbb{K},
+\end{equation}
+
+也就是说，对每个固定的 $ x \in E $，函数 $ (x \mid \cdot) $: $ E \to \mathbb{K} $ 是共轭线性的。由于 $ (\mathrm{SP}_1) $ 意味着对每个固定的 $ x \in E $，$ (\cdot | x) $: $ E \to \mathbb{K} $ 是线性的，因此我们说 (3.4) 是一个\textbf{半双线性的}形式。在实情形 $ \mathbb{K} = \mathbb{R} $ 中，(3.5) 仅仅意味着对 $ x \in E $，$ (x \mid \cdot) $: $ E \to \mathbb{R} $ 是线性的。在这种情况下，(3.4) 称为 $ E $ 上的双线性形式。
+最后，$ (SP_{3}) $ 意味着形式 (3.4) 是正（定）的。有了这些定义，我们可以说：当 E 是复向量空间时，标量积是 E 上的正的埃尔米特半双线性形式；当 E 是实向量空间时，标量积是正对称双线性形式。
+
+\item
+
+对任意 $x,y\in E$，$(x\pm y\mid x\pm y)=(x\mid x)\pm2\operatorname{Re}(x\mid y)+(y\mid y)$。\footnote{正如已经提到的，用符号 $\pm$ 与 $\mp$ 可以把两个方程写得像一个方程。对其中的一个方程处处用上面的符号（$+$ 或 $-$），对另一个方程则处处用下面的符号。}
+
+\item
+
+对所有 $ x \in E $ 有 $ (x|0) = 0 $。 ■
+
+\end{items}
+
+设 $ m \in \mathbb{N}^\times $。对 $ \mathbb{K}^m $ 中的 $ x = (x_1, \ldots, x_m) $ 和 $ y = (y_1, \ldots, y_m) $，定义
+
+\[
+(x\mid y):=\sum_{j=1}^{m}x_{j}\overline{y}_{j}.
+\]
+
+容易验证，这在 $ \mathbb{K}^m $ 上定义了一个标量积。它称为 $ \mathbb{K}^m $ 上的欧几里得内积。
+
+\end{remark}
+
+\subsection*{柯西-施瓦茨不等式}
+
+做完这些准备之后，我们现在可以证明关于内积空间的最有用的定理之一。
+
+\begin{theorem}
+
+（柯西-施瓦茨不等式）设 $ (E, (\cdot \mid \cdot)) $ 是一个内积空间。那么
+
+\begin{equation}
+\left|(x\mid y)\right|^{2}\leq(x\mid x)(y\mid y),\qquad x,y\in E,
+\end{equation}
+
+并且 (3.6) 中等号成立当且仅当 x 和 y 线性相关。
+
+证明
+
+\begin{items}
+\item
+
+对 $y = 0$，该断言由注 3.7(d) 得出。那么假设 $y \neq 0$。对任何 $\alpha \in \mathbb{K}$，我们有
+
+\begin{equation}
+\begin{aligned}
+0\leq\left(x-\alpha y\right|\boldsymbol{x}-\alpha\boldsymbol{y})&=\left(\boldsymbol{x}\mid\boldsymbol{x}\right)-2\operatorname{Re}(\boldsymbol{x}\mid\alpha\boldsymbol{y})+\left(\alpha\boldsymbol{y}\mid\alpha\boldsymbol{y}\right)\\&=\left(\boldsymbol{x}\mid\boldsymbol{x}\right)-2\operatorname{Re}\left(\overline{\alpha}(\boldsymbol{x}\mid\boldsymbol{y})\right)+\left|\alpha\right|^{2}\left(\boldsymbol{y}\mid\boldsymbol{y}\right).
+\end{aligned}
+\end{equation}
+
+令 $ \alpha := (x|y)/(y|y) $，可得
+
+\[
+0\leq(x|x)-2\operatorname{R e}\Bigl(\frac{\overline{{(x|y)}}}{(y|y)}(x|y)\Bigr)+\frac{|(x|y)|^{2}}{(y|y)^{2}}(y|y)=(x|x)-\frac{|(x|y)|^{2}}{(y|y)},
+\]
+
+因此 (3.6) 成立。如果 $ x \neq \alpha y $，那么由 (3.7) 我们看到 (3.6) 是严格不等式。
+
+\item
+
+最后，设 $x$ 和 $y$ 是 $E$ 中线性相关的向量。那么存在某个 $(\alpha, \beta) \in \mathbb{K}^2 \setminus \{(0,0)\}$，使得 $\alpha x + \beta y = 0$。如果 $\alpha \neq 0$，那么 $x = -(\beta/\alpha)y$，并且我们有
+
+\[
+\left|(x\left|y\right)\right|^{2}=\left|\frac{\beta}{\alpha}\right|^{2}\left|\left(y\right|y\right)|^{2}=\left(-\frac{\beta}{\alpha}y\right|-\frac{\beta}{\alpha}y\Big)(y\left|y\right)=(x\left|x\right)(y\left|y\right).
+\]
+
+如果 $ \beta \neq 0 $，那么 $ y = -(\alpha / \beta)x $，类似的计算给出 $ |(x | y)|^2 = (x | x)(y | y) $。
+
+\end{items}
+
+\end{theorem}
+
+\begin{corollary}
+
+（经典柯西-施瓦茨不等式）设 $ \xi_1, \ldots, \xi_m $ 和 $ \eta_1, \ldots, \eta_m $ 是 $ \mathbb{K} $ 中的元素。那么
+
+\begin{equation}
+\left|\sum_{j=1}^{m}\xi_{j}\overline{\eta}_{j}\right|^{2}\leq\left(\sum_{j=1}^{m}|\xi_{j}|^{2}\right)\left(\sum_{j=1}^{m}|\eta_{j}|^{2}\right)
+\end{equation}
+
+等号成立当且仅当存在数 $\alpha, \beta \in \mathbb{K}$，使得 $(\alpha, \beta) \neq (0, 0)$，并且对所有 $j = 1, \ldots, m$ 有 $\alpha \xi_j + \beta \eta_j = 0$。
+
+\proofhead
+这由把定理 3.8 应用于带欧几里得内积的 $ \mathbb{K}^m $ 而得出。 $ \blacksquare $
+\end{corollary}
+
+设 $ (E, (\cdot|\cdot)) $ 是任意内积空间。那么由 $ (x|x) \geq 0 $ 可得，$ \|x\| := \sqrt{(x|x)} \geq 0 $ 对所有 $ x \in E $ 都是良定义的，并且
+
+\[
+\left\|x\right\|=0\Longleftrightarrow\left\|x\right\|^{2}=0\Longleftrightarrow\left(x\mid x\right)=0\Longleftrightarrow x=0.
+\]
+
+因此 $ \|\cdot\| $ 满足范数公理 $ (N_1) $。$ \|\cdot\| $ 的 $ (N_2) $ 的证明也很容易，因为对 $ \alpha \in \mathbb{K} $ 和 $ x \in E $，
+
+\[
+\left\|\alpha x\right\|=\sqrt{\left(\alpha x\left|\alpha x\right.\right)}=\sqrt{\left|\alpha\right|^{2}\left(x\left|x\right.\right)}=\left|\alpha\right|\left\|x\right\|.
+\]
+
+下一个命题表明，$ (\mathrm{N}_3) $（即三角不等式）可由柯西-施瓦茨不等式推出，从而 $ \|\cdot\|: E \to \mathbb{R}^+ $ 是 $ E $ 上的一个范数。
+
+\begin{theorem}
+
+设 $ (E, (\cdot | \cdot)) $ 是一个内积空间，并且
+
+\[
+\left\|x\right\|:=\sqrt{\left(x\left|x\right.\right)}\;,\qquad x\in E\;.
+\]
+
+那么 $ \|\cdot\| $ 是 $ E $ 上的一个范数，即由标量积 $ (\cdot|\cdot) $ 诱导的范数。
+
+\proofhead
+鉴于上述讨论，只需证明 $ \|\cdot\| $ 的三角不等式。由柯西-施瓦茨不等式，我们有
+\[
+\left|(x\mid y)\right|\leq\sqrt{(x\mid x)(y\mid y)}=\sqrt{\left\|x\right\|^{2}\left\|y\right\|^{2}}=\left\|x\right\|\left\|y\right\|.
+\]
+
+因此
+
+\begin{equation*}
+\begin{aligned}
+\left\|x+y\right\|^{2}&=(x+y\mid x+y)=(x\left|x\right)+2\mathrm{Re}(x\left|y\right)+(y\left|y\right)\\&\leq\left\|x\right\|^{2}+2\left|(x\left|y\right)\right|+\left\|y\right\|^{2}\leq\left\|x\right\|^{2}+2\left\|x\right\|\left\|y\right\|+\left\|y\right\|^{2}\\&=(\left\|x\right\|+\left\|y\right\|)^{2},
+\end{aligned}
+\end{equation*}
+
+也就是说，我们已经证明了 $ \|x + y\| \leq \|x\| + \|y\| $。 ■
+
+\end{theorem}
+
+由于定理 3.10，我们作如下约定：
+
+约定 任何内积空间 $ (E, (\cdot|\cdot)) $ 都视为一个赋范向量空间，其范数如上由 $ (\cdot|\cdot) $ 诱导。
+
+由标量积诱导的范数也称为希尔伯特范数。
+
+利用范数，我们可以把定理 3.8 的柯西-施瓦茨不等式改写成如下形式：
+
+\begin{corollary}
+
+设 $ (E, (\cdot|\cdot)) $ 是一个内积空间。那么
+
+\[
+\left|\left(x\left|y\right)\right|\leq\left\|x\right\|\left\|y\right\|,\qquad x,y\in E. \right.
+\]
+\end{corollary}
+
+\subsection*{欧几里得空间}
+
+一个特别重要的例子是 $ \mathbb{K}^m $ 上的欧几里得内积。由于我们如此频繁地使用这个内积，作如下约定是方便的：
+
+约定 除非另有说明，我们认为 $ \mathbb{K}^m $ 带有欧几里得内积（$ \cdot|\cdot $）和诱导范数\footnote{在 $m=1$ 的情形，这个记号与 $\mathbb K$ 中绝对值的记号 $|\cdot|$ 一致，因为对一切 $x,y\in\mathbb K^{1}=\mathbb K$ 有 $(x\mid y)=x\overline{y}$。它与多重指标 $\alpha\in\mathbb N^{m}$ 的长度的记号 $|\alpha|$ 并不一致。从上下文应当能看清指的是哪种含义。}
+
+\[
+\left|x\right|:=\sqrt{\left(x\left|x\right.\right)}=\sqrt{\sum_{j=1}^{m}\left|x_{j}\right|^{2}},\qquad x=\left(x_{1},\ldots,x_{m}\right)\in\mathbb{K}^{m},
+\]
+
+即欧几里得范数。在实情形中，我们也用 $ x \cdot y $ 表示 $ (x \mid y) $。
+
+现在我们有了向量空间 $ \mathbb{K}^m $ 上的两个范数，即最大范数
+
+\[
+|x|_{\infty}=\max_{1\leq j\leq m}|x_{j}|,\qquad x=(x_{1},\ldots,x_{m})\in\mathbb{K}^{m},
+\]
+
+和欧几里得范数 $ |\cdot| $。我们再按如下方式定义另一个范数
+
+\[
+|x|_{1}:=\sum_{j=1}^{m}|x_{j}|~,\qquad x=(x_{1},\ldots,x_{m})\in\mathbb{K}^{m}~.
+\]
+
+事实上，验证这是一个范数是容易的，留给读者完成。下一个命题利用柯西-施瓦茨不等式的又一次应用表明，欧几里得范数与范数 $ |\cdot|_1 $ 和 $ |\cdot|_{\infty} $ 是‘可比较的’。
+
+\begin{proposition}
+
+设 $ m \in \mathbb{N}^\times $。
+
+\[
+|x|_{\infty}\leq|x|\leq\sqrt{m}\left|x\right|_{\infty},\quad\frac{1}{\sqrt{m}}\left|x\right|_{1}\leq\left|x\right|\leq\left|x\right|_{1},\qquad x\in\mathbb{K}^{m}.
+\]
+
+\proofhead
+由对 $ k = 1, \ldots, m $ 成立的不等式 $ |x_k|^2 \leq \sum_{j=1}^m |x_j|^2 $ 立即可得 $ |x|_{\infty} \leq |x| $。不等式
+\[
+\sum_{j=1}^{m}\left|x_{j}\right|^{2}\leq\Big(\sum_{j=1}^{m}\left|x_{j}\right|\Big)^{2}\quad\text{且}\quad\sum_{j=1}^{m}\left|x_{j}\right|^{2}\leq m\max_{1\leq j\leq m}\left|x_{j}\right|^{2}=m\big(\max_{1\leq j\leq m}\left|x_{j}\right|\big)^{2}
+\]
+
+显然成立，因此我们已经证明了 $ |x| \leq |x|_{1} $ 和 $ |x| \leq \sqrt{m} |x|_{\infty} $。由推论 3.9 可得
+
+\[
+\left|x\right|_{1}=\sum_{j=1}^{m}1\cdot\left|x_{j}\right|\leq\left(\sum_{j=1}^{m}1^{2}\right)^{1/2}\left(\sum_{j=1}^{m}\left|x_{j}\right|^{2}\right)^{1/2}=\sqrt{m}\left|x\right|,
+\]
+
+这就完成了证明。 ■
+
+\end{proposition}
+
+\subsection*{等价范数}
+
+设 $E$ 是一个向量空间。$E$ 上的两个范数 $\|\cdot\|_1$ 和 $\|\cdot\|_2$ 称为等价的，如果存在某个 $K \geq 1$，使得
+
+\begin{equation}
+\frac{1}{K}\left\|x\right\|_{1}\leq\left\|x\right\|_{2}\leq K\left\|x\right\|_{1},\qquad x\in E.
+\end{equation}
+
+在这种情况下，我们记作 $ \|\cdot\|_1 \sim \|\cdot\|_2 $。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+不难证明，$ \sim $ 是一个固定向量空间的所有范数的集合上的等价关系。
+
+\item
+
+命题 3.12 的定性断言现在可以表示成如下形式
+
+\[
+|\cdot|_{1}\sim|\cdot|\sim|\cdot|_{\infty}\quad\text{在 }{\mathbb{K}}^{m}\text{ 上}.
+\]
+\item
+
+为了使命题 3.12 的定量断言更清晰，我们用 $ \mathbb{B}^{m} $ 表示实开欧几里得单位球，即
+
+\[
+\mathbb{B}^{m}:=\mathbb{B}_{\mathbb{R}^{m}},
+\]
+
+并分别用 $ \mathbb{B}_1^m $ 和 $ \mathbb{B}_\infty^m $ 表示 $ (\mathbb{R}^m, |\cdot|_1) $ 和 $ (\mathbb{R}^m, |\cdot|_{\infty}) $ 中的单位球。那么命题 3.12 说的是
+
+\[
+\mathbb{B}^{m}\subseteq\mathbb{B}_{\infty}^{m}\subseteq\sqrt{m}\mathbb{B}^{m}\;,\quad\mathbb{B}_{1}^{m}\subseteq\mathbb{B}^{m}\subseteq\sqrt{m}\mathbb{B}_{1}^{m}\;.
+\]
+
+在 m = 2 的情形中，这些包含关系如下图所示：
+
+\end{items}
+
+\bookfigure[0.48]{figures/6a919cd8ffcbe74f.jpg}
+
+注意到
+
+\begin{equation}
+\mathbb{B}_{\infty}^{m}=\underbrace{\mathbb{B}_{\infty}^{1}\times\cdots\times\mathbb{B}_{\infty}^{1}}_{m}=(-1,1)^{m},
+\end{equation}
+
+但是，对于 $ \mathbb{B}^{m} $ 和 $ \mathbb{B}_{1}^{m} $，没有类似的表示。
+
+\begin{items}
+\item[（d）]
+
+设 $ E = (E, \|\cdot\|) $ 是一个赋范向量空间，$ \|\cdot\|_1 $ 是 $ E $ 上与 $ \|\cdot\| $ 等价的一个范数。令 $ E_1 := (E, \|\cdot\|_1) $。那么
+
+\[
+\mathcal{U}_{E}(a)=\mathcal{U}_{E_{1}}(a),\qquad a\in E,
+\]
+
+也就是说，a 的邻域集合只依赖于范数的等价类。等价范数产生相同的邻域集合。
+
+\begin{subitems}
+\item
+
+\proofhead
+(i) 由注 3.1(a)，集合 $ \mathcal{U}_E(a) $ 和 $ \mathcal{U}_{E_1}(a) $ 对每个 $ a \in E $ 都是良定义的。
+\item
+
+由 (3.9) 可得 $ K^{-1}\mathbb{B}_{E_1} \subseteq \mathbb{B}_E \subseteq K\mathbb{B}_{E_1} $，因此，对 $ a \in E $ 和 $ r > 0 $，我们有
+
+\begin{equation}
+\mathbb{B}_{E_{1}}(a,K^{-1}r)\subseteq\mathbb{B}_{E}(a,r)\subseteq\mathbb{B}_{E_{1}}(a,K r)~.
+\end{equation}
+\item
+
+对每个 $U \in \mathcal{U}_E(a)$，存在一个 $r > 0$，使得 $\mathbb{B}_E(a, r) \subseteq U$。由 (3.11) 我们得到 $\mathbb{B}_{E_1}(a, K^{-1}r) \subseteq U$，即 $U \in \mathcal{U}_{E_1}(a)$。这表明 $\mathcal{U}_E(a) \subseteq \mathcal{U}_{E_1}(a)$。
+反之，如果 $U \in \mathcal{U}_{E_1}(a)$，那么存在某个 $\delta > 0$，使得 $\mathbb{B}_{E_1}(a, \delta) \subseteq U$。令 $r := \delta/K > 0$。那么由 (3.11)，我们有 $\mathbb{B}_E(a, r) \subseteq U$，从而 $U \in \mathcal{U}_E(a)$。因此我们已经证明了 $\mathcal{U}_{E_1}(a) \subseteq \mathcal{U}_E(a)$。
+
+\end{subitems}
+
+\item[（e）]
+
+利用双射
+
+\[
+\mathbb{C}\ni z=x+i y\longleftrightarrow(x,y)\in\mathbb{R}^{2},
+\]
+
+复数 $\mathbb{C} := \mathbb{R} + i\mathbb{R}$ 可以与集合 $\mathbb{R}^2$ 等同（甚至如注 I.11.2(c) 所示，与阿贝尔群 $(\mathbb{R}^2, +)$ 等同）。更一般地，对 $m \in \mathbb{N}^\times$，集合 $\mathbb{C}^m$ 和 $\mathbb{R}^{2m}$ 可以利用双射\footnote{我们要强调，复向量空间 $\mathbb C^{m}$ 不能与实向量空间 $\mathbb R^{2m}$ 等同（为什么不能？）！}
+
+\[
+\mathbb{C}^{m}\ni(z_{1},\ldots,z_{m})=(x_{1}+i y_{1},\ldots,x_{m}+i y_{m})\longleftrightarrow(x_{1},y_{1},\ldots,x_{m},y_{m})\in\mathbb{R}^{2m}.
+\]
+
+关于这个典范等同，
+
+\[
+\mathbb{B}_{\mathbb{C}^{m}}=\mathbb{B}^{2m}=\mathbb{B}_{\mathbb{R}^{2m}}
+\]
+
+从而
+
+\[
+\mathcal{U}_{\mathbb{C}^{m}}=\mathcal{U}_{\mathbb{R}^{2m}}.
+\]
+
+因此，对于拓扑问题，即关于点的邻域的陈述，集合 $ \mathbb{C}^m $ 和 $ \mathbb{R}^{2m} $ 可以等同。
+
+\item[（f）]
+
+‘聚点’和‘收敛’的概念是拓扑概念，也就是说，它们是用邻域来定义的。因此它们在换成等价范数时保持不变。
+
+\end{items}
+
+\end{remark}
+
+\subsection*{积空间中的收敛}
+
+作为上述讨论以及先前讨论的结果，我们现在有了 $ \mathbb{K}^m $ 中收敛序列的一个简单但非常有用的刻画。
+
+\begin{proposition}
+
+设 $ m \in \mathbb{N}^\times $，并且对 $ n \in \mathbb{N} $ 有 $ x_n = (x_n^1, \ldots, x_n^m) \in \mathbb{K}^m $。那么下列命题等价：
+
+\begin{subitems}
+\item
+
+序列 $ (x_n)_{n \in \mathbb{N}} $ 在 $ \mathbb{K}^m $ 中收敛到 $ x = (x^1, \ldots, x^m) $。
+
+\item
+
+对每个 $ k \in \{1, \ldots, m\} $，序列 $ (x_n^k)_{n \in \mathbb{N}} $ 在 $ \mathbb{K} $ 中收敛到 $ x^k $。
+
+\proofhead
+这直接由例 1.8(e) 以及注 3.13(c) 和 (d) 得出。
+命题 3.14 的断言 (ii) 通常称为序列 $ (x_n) $ 的按分量收敛，因此命题 3.14 可以稍微不严格地表述为：$ \mathbb{K}^m $ 中的序列收敛当且仅当它按分量收敛。因此原则上只需研究 $ \mathbb{K} $ 中序列的收敛——事实上，由于注 3.13(e)，只需研究 $ \mathbb{R} $ 中的收敛。出于许多原因（读者在进一步的学习中会自行发现），在我们的表述中作这样的‘简化’几乎没有什么好处。
+\end{subitems}
+
+\end{proposition}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $ \|\cdot\| $ 是 $ \mathbb{K} $-向量空间 $ E $ 上的一个范数。证明：对每个 $ T \in \text{Aut}(E) $，函数 $ \|x\|_T := \|Tx\| $,  $ x \in E $, 在 $ E $ 上定义了一个范数 $ \|\cdot\|_T $。特别地，对每个 $ \alpha \in \mathbb{K}^\times $，函数 $ E \to \mathbb{R}^+ $,  $ x \mapsto \|\alpha x\| $ 是 $ E $ 上的一个范数。
+
+\item
+
+假设赋范向量空间 $ E = (E, \|\cdot\|) $ 中的序列 $ (x_n) $ 收敛到 $ x $。证明：$ [0, \infty) $ 中的序列 $ (\|x_n\|) $ 收敛到 $ \|x\| $。
+
+\item
+
+验证注 3.4(a) 的断言。
+
+\item
+
+证明平行四边形恒等式。
+
+\[
+2(\|x\|^{2}+\|y\|^{2})=\|x+y\|^{2}+\|x-y\|^{2},\qquad x,y\in E,
+\]
+
+在任何内积空间 $ (E, (\cdot|\cdot)) $ 中都成立。
+
+\item
+
+对哪些 $ \lambda := (\lambda_1, \ldots, \lambda_m) \in \mathbb{K}^m $，
+
+\[
+\left(\cdot\mid\cdot\right)_{\lambda}:\mathbb{K}^{m}\times\mathbb{K}^{m}\to\mathbb{K},\quad(x,y)\mapsto\sum_{k=1}^{m}\lambda_{k}x_{k}\overline{y}_{k}
+\]
+
+是 $ \mathbb{K}^{m} $ 上的标量积？
+
+\item
+
+设 $ (E, (\cdot|\cdot)) $ 是一个实内积空间。证明不等式
+
+\[
+\left(\left\|x\right\|+\left\|y\right\|\right)\frac{\left(x\mid y\right)}{\left\|x\right\|\left\|y\right\|}\leq\left\|x+y\right\|\leq\left\|x\right\|+\left\|y\right\|~,\qquad x,y\in E\backslash\left\{0\right\}~.
+\]
+
+等号何时成立？（提示：对第一个不等式两边平方。）
+
+\item
+
+设 $X$ 是一个度量空间。$X$ 的子集 $Y$ 称为闭的，如果 $Y$ 中每个在 $X$ 中收敛的序列 $(y_n)$ 都在 $Y$ 中收敛，即 $\lim y_n \in Y$。
+
+\end{exercises}
+
+\begin{proof}
+
+$c_{0}$ 是 $\ell_{\infty}$ 的闭子空间。
+
+\end{proof}
+
+\begin{exercises}
+\item[8.]
+
+设 $ \|\cdot\|_1 $ 和 $ \|\cdot\|_2 $ 是向量空间 $ E $ 上的等价范数。定义
+
+\[
+d_{j}(x,y):=\|x-y\|_{j}~,\qquad x,y\in E~,\quad j=1,2~.
+\]
+\end{exercises}
+
+\begin{proof}
+
+$ d_{1} $ 和 $ d_{2} $ 是 E 上的等价度量。
+
+\end{proof}
+
+\begin{exercises}
+\item[9.]
+
+设 $ (X_j, d_j) $,  $ 1 \leq j \leq n $, 是度量空间。证明由下式定义的函数
+
+\[
+(x,y)\mapsto\Bigl(\sum_{j=1}^{n}d_{j}(x_{j},y_{j})^{2}\Bigr)^{1/2}
+\]
+
+对所有 $ x = (x_1, \ldots, x_n) $,  $ y = (y_1, \ldots, y_n) $ 且 $ x, y \in X := X_1 \times \cdots \times X_n $，是一个度量，且等价于 $ X $ 上的积度量。
+
+\item[10.]
+
+设 $ (E, (\cdot|\cdot)) $ 是一个内积空间。如果 $ (x|y) = 0 $，则称 $ E $ 中的两个元素 $ x, y $ 是正交的。在这种情况下我们记作 $ x \perp y $。如果对所有满足 $ x \neq y $ 的 $ x, y \in M $ 都有 $ x \perp y $，则称子集 $ M \subseteq E $ 是正交系。最后，如果 $ M $ 是一个正交系且对所有 $ x \in M $ 有 $ \|x\| = 1 $，则称 $ M $ 是标准正交系。
+
+设 $\{x_0, \ldots, x_m\} \subseteq E$ 是一个正交系，且对 $0 \leq j \leq m$ 有 $x_j \neq 0$。证明下列结论：
+
+\begin{items}
+\item
+
+$ \{x_{0}, \ldots, x_{m}\} $ 线性无关。
+
+\item
+
+$ \left\|\sum_{k=0}^{m} x_k\right\|^2 = \sum_{k=0}^{m} \|x_k\|^2 $（毕达哥拉斯定理）。
+
+\end{items}
+
+\item[11.]
+
+设 F 是内积空间 E 的一个子空间。证明 F 的正交补，即
+
+\[
+F^{\perp}:=\left\{x\in E;x\perp y=0,y\in F\right\},
+\]
+
+是 $E$ 的闭子空间（见习题 7）。
+
+\item[12.]
+
+设 $ B = \{u_0, \ldots, u_m\} $ 是内积空间 $ (E, (\cdot \mid \cdot)) $ 中的标准正交系，且 $ F := \text{span}(B) $。定义
+
+\[
+p_{F}\colon E\to F~,\quad x\mapsto\sum_{k=0}^{m}(x|u_{k})u_{k}~.
+\]
+
+证明下列结论：
+
+\begin{items}
+\item
+
+$ x - p_F(x) \in F^\perp $,  $ x \in E $。
+
+\item
+
+$ \|x - p_F(x)\| = \inf_{y \in F} \|x - y\| $,  $ x \in E $。
+
+\item
+
+$ \|x - p_F(x)\|^2 = \|x\|^2 - \sum_{k=0}^{m} |(x | u_k)|^2 $,  $ x \in E $。
+
+\item
+
+$ p_F \in \mathrm{Hom}(E, F) $ 且 $ p_F^2 = p_F $。
+
+\item
+
+$ \mathrm{im}(p_F) = F $,  $ \mathrm{ker}(p_F) = F^\perp $，且 $ E = F \oplus F^\perp $。
+（提示：(b) 对 $y \in F$，我们有 $\|x - y\|^2 = \|x - p_F(x)\|^2 + \|p_F(x) - y\|^2$，这由习题 10 和 (a) 得出。）
+
+\end{items}
+
+\item[13.]
+
+设 B 和 F 如习题 12，证明下列结论：
+
+\begin{items}
+\item
+
+对所有 $ x \in E $，$ \sum_{k=0}^{m} |(x | u_{k})|^{2} \leq \|x\|^{2} $。
+
+\item
+
+对所有 $ x \in F $，
+
+\[
+x=\sum_{k=0}^{m}(x\left|u_{k}\right)u_{k}\quad\text{且}\quad\left\|x\right\|^{2}=\sum_{k=0}^{m}\left|\left(x\left|u_{k}\right)\right|^{2}\right..
+\]
+
+（提示：为了证明 (a)，使用柯西-施瓦茨不等式。）
+
+\end{items}
+
+\item[14.]
+
+对 $m, n \in \mathbb{N}^\times$，设 $\mathbb{K}^{m \times n}$ 是所有元素属于 $\mathbb{K}$ 的 $m \times n$ 矩阵的集合。我们可以把 $\mathbb{K}^{m \times n}$ 看作从 $\{1, \ldots, m\} \times \{1, \ldots, n\}$ 到 $\mathbb{K}$ 的所有函数的集合，因此由例 I.12.3(e)，$\mathbb{K}^{m \times n}$ 是一个向量空间。这里对 $\alpha \in \mathbb{K}$ 和 $A, B \in \mathbb{K}^{m \times n}$，$\alpha A$ 和 $A + B$ 分别是通常的标量乘法和矩阵加法。证明下列结论：
+
+\begin{items}
+\item
+
+由下式定义的 $ \mathbb{K}^{m\times n} $ 上的函数
+
+\[
+|A|:=\left(\sum_{j=1}^{m}\sum_{k=1}^{n}\left|a_{j k}\right|^{2}\right)^{1/2},\qquad A=[a_{j k}]\in\mathbb{K}^{m\times n},
+\]
+
+是一个范数。
+
+\item
+
+下列函数定义了等价范数：
+ $ (\alpha)\ [a_{jk}] \mapsto \sum_{j=1}^{m} \sum_{k=1}^{n} |a_{jk}| $
+ $ (\beta) $  $ [a_{jk}] \mapsto \max_{1 \leq j \leq m} \sum_{k=1}^{n} |a_{jk}| $
+ $ (\gamma) $  $ [a_{jk}] \mapsto \max_{1 \leq k \leq n} \sum_{j=1}^{m} |a_{jk}| $
+ $ (\delta) $  $ [a_{jk}] \mapsto \max_{\substack{1 \leq j \leq m\\ 1 \leq k \leq n}} |a_{jk}| $
+
+\end{items}
+
+\item[15.]
+
+设 $E$ 和 $F$ 是赋范向量空间。证明 $B(E, F) \cap \mathrm{Hom}(E, F) = \{0\}$。
+
+\end{exercises}
+
+\section{单调序列}
+
+$\mathbb{R}$ 中的任一序列，即 $s(\mathbb{R}) = \mathbb{R}^{\mathbb{N}}$ 的任一元素，都是有序集之间的一个函数。本节中我们再次考虑这一序关系与序列收敛性之间的关系。具体地，我们研究例 I.4.7 之前所定义的单调序列的收敛性。于是，若对一切 $n \in \mathbb{N}$ 有 $x_n \leq x_{n+1}$，则称序列 $(x_n)$ 是 $\text{递增的}$\footnote{对于递增（或递减）序列 $(x_{n})$，我们常用符号 $(x_{n})\uparrow$（或 $(x_{n})\downarrow$）。此外，若 $(x_{n})$ 收敛且极限为 $x$，我们就写 $x_{n}\uparrow x$（或 $x_{n}\downarrow x$）来代替 $x_{n}\to x$。}；若对一切 $n \in \mathbb{N}$ 有 $x_n \geq x_{n+1}$，则称 $(x_n)$ 是 $\text{递减的}$。
+
+\subsection*{有界单调序列}
+
+由  $ \mathbb{R} $ 的完备性性质可得，每个有界单调序列都收敛。
+
+\begin{theorem}
+
+$ \mathbb{R} $ 中的每个递增（或递减）有界序列  $ (x_{n}) $ 都收敛，并且
+
+\[
+{x}_{n}\uparrow\operatorname*{s u p}\{{x}_{n};{n}\in\mathbb{N}\}\quad\left(\text{或 }{x}_{n}\downarrow\operatorname*{i n f}\{{x}_{n};{n}\in\mathbb{N}\}\right).
+\]
+
+证明
+
+\begin{subitems}
+\item
+
+设  $ (x_n) $ 为递增有界序列。则  $ X := \{x_n : n \in \mathbb{N}\} $ 有界且非空。由于  $ \mathbb{R} $ 是序完备的，$ x := \sup(X) $ 有良好定义。
+
+\item
+
+设  $ \varepsilon > 0 $。由命题 I.10.5，存在某个  $ N $，使得  $ x_N > x - \varepsilon $。由于  $ (x_n) $ 是递增的，故对一切  $ n \geq N $ 有  $ x_n \geq x_N > x - \varepsilon $。结合  $ x_n \leq x $，这蕴含
+
+\[
+x_{n}\in(x-\varepsilon,x+\varepsilon)=\mathbb{B}_{\mathbb{R}}(x,\varepsilon),\qquad n\geq N.
+\]
+
+于是 $x_{n}$ 在 $\mathbb{R}$ 中收敛于 $x$。
+
+\item
+
+若 $(x_n)$ 是递减有界序列，我们置 $x := \inf\{x_n ; n \in \mathbb{N}\}$。则 $(y_n) := (-x_n)$ 递增且有界，且 $-x = \sup\{y_n ; n \in \mathbb{N}\}$。由 (ii) 可得 $-x_n = y_n \to -x \quad (n \to \infty)$，于是由命题 2.2，$x_n = -y_n \to x$。■
+
+\end{subitems}
+
+\end{theorem}
+
+在命题 1.10 中我们看到，有界性是序列收敛的必要条件。定理 4.1 表明，对于单调序列的收敛性而言，有界性已足够。当然，收敛序列不必是单调的，零序列  $ (-1)^{n}/n $ 即为明证。
+
+\subsection*{若干重要极限}
+
+\begin{example}
+
+\begin{items}
+\item
+
+设  $ a \in \mathbb{C} $。则
+
+\[
+a^{n}\to0,\quad\text{若 }|a|<1,
+\]
+\[
+a^{n}\to1~,\quad\text{若 }a=1~,
+\]
+\[
+(a^{n})_{n\in\mathbb{N}}\text{ 发散},\qquad\text{若 }|a|\geq1\;,\quad a\neq1\;.
+\]
+
+\begin{subitems}
+\item
+
+\proofhead
+(i) 首先假设序列  $ (a^n)_{n\in\mathbb{N}} $ 收敛。由命题 2.2 我们有
+\[
+\lim_{n\to\infty}a^{n}=\lim_{n\to\infty}a^{n+1}=a\lim_{n\to\infty}a^{n},
+\]
+
+于是要么  $ \lim_{n\to\infty}a^n=0 $，要么 a=1。
+
+\item
+
+考虑  $ |a| < 1 $ 的情形。则序列  $ (|a|^n) = (|a^n|) $ 递减且有界。由定理 4.1 与 (i)，$ (|a^n|) $ 是零序列，即  $ a^n \to 0 $（$ n \to \infty $）。
+
+\item
+
+若  $ a = 1 $，则对  $ n \in \mathbb{N} $ 有  $ a^n = 1 $，且自然有  $ a^n \to 1 $。
+
+\item
+
+现在设  $ |a| \geq 1 $ 且  $ a \neq 1 $。若  $ (a^n) $ 收敛，则由 (i)，$ (|a^n|)_{n \in \mathbb{N}} $ 是零序列。但这是不可能的，因为对一切  $ n $ 有  $ |a^n| = |a|^n \geq 1 $。■
+
+\end{subitems}
+
+\item
+
+设  $ k \in \mathbb{N} $ 与  $ a \in \mathbb{C} $ 满足  $ |a| > 1 $。则
+
+\[
+\lim_{n\to\infty}\frac{n^{k}}{a^{n}}=0,
+\]
+
+即对于  $ |a| > 1 $，函数  $ n \mapsto a^n $ 比任何幂函数  $ n \mapsto n^k $ 增长得更快。
+
+\proofhead
+对于  $ \alpha := 1/|a| \in (0,1) $ 与  $ x_n := n^k \alpha^n $，我们有
+\[
+\frac{x_{n+1}}{x_{n}}=\left(\frac{n+1}{n}\right)^{k}\alpha=\left(1+\frac{1}{n}\right)^{k}\alpha,\qquad n\in\mathbb{N}^{\times},
+\]
+
+于是当  $ n \to \infty $ 时  $ x_{n+1}/x_n \downarrow \alpha $。固定某个  $ \beta \in (\alpha,1) $。则存在某个  $ N $，使得对一切  $ n \geq N $ 有  $ x_{n+1}/x_n < \beta $。因而，
+
+\[
+x_{N+1}<\beta x_{N}~,\quad x_{N+2}<\beta x_{N+1}<\beta^{2}x_{N}~,\quad\cdots
+\]
+
+一个简单的归纳论证给出，对一切  $ n \geq N $ 有  $ x_n < \beta^{n-N} x_N $，于是
+
+\[
+\left|\frac{n^{k}}{a^{n}}\right|=x_{n}<\beta^{n-N}x_{N}=\frac{x_{N}}{\beta^{N}}\beta^{n},\qquad n\geq N.
+\]
+
+由于由 (a) 知  $ (\beta^n)_{n\in\mathbb{N}} $ 是零序列，于是断言由注 2.1(c) 可得。
+
+\item
+
+对一切  $ a \in \mathbb{C} $，
+
+\[
+\lim_{n\to\infty}\frac{a^{n}}{n!}=0.
+\]
+
+阶乘函数 $ n \mapsto n! $ 比函数 $ n \mapsto a^{n} $ 增长得更快。\footnote{在第 8 节中我们将给出这一事实的一个非常简短的证明。}
+
+\proofhead
+对于 $n>N>|a|$ 我们有
+\[
+\Big|\frac{a^{n}}{n!}\Big|=\frac{|a|^{N}}{N!}\prod_{k=N+1}^{n}\frac{|a|}{k}\leq\frac{|a|^{N}}{N!}\Big(\frac{|a|}{N+1}\Big)^{n-N}<\frac{N^{N}}{N!}\Big(\frac{|a|}{N}\Big)^{n}.
+\]
+
+于是断言由 (a) 与注 2.1(c) 可得。  $ \blacksquare $
+
+\item
+
+$ \lim_{n \to \infty} \sqrt[n]{n} = 1 $。
+
+\proofhead
+设  $ \varepsilon > 0 $。则由 (b)，序列  $ (n(1 + \varepsilon)^{-n}) $ 是零序列。于是存在某个 N，使得
+\[
+\frac{n}{(1+\varepsilon)^{n}}<1,\qquad n\geq N,
+\]
+
+即
+
+\[
+1\leq n\leq\left(1+\varepsilon\right)^{n},\qquad n\geq N.
+\]
+
+由注 I.10.10(c)，$ n $ 次根函数是递增的，于是
+
+\[
+1\leq\sqrt[n]{n}\leq1+\varepsilon\;,\qquad n\geq N\;.
+\]
+
+这证明了断言。■
+
+\item
+
+对一切  $ a > 0 $，$ \lim_{n \to \infty} \sqrt[n]{a} = 1 $。
+
+\proofhead
+由  $ \mathbb{R} $ 的阿基米德性质，存在某个  $ N $，使得对一切  $ n \geq N $ 有  $ 1/n < a < n $。于是
+\[
+\frac{1}{\sqrt[n]{n}}=\sqrt[n]{\frac{1}{n}}\leq\sqrt[n]{a}\leq\sqrt[n]{n},\qquad n\geq N.
+\]
+
+对一切  $ n \in \mathbb{N}^\times $ 置  $ x_n := 1/\sqrt[n]{n} $ 与  $ y_n := \sqrt[n]{n} $。则由 (d) 与命题 2.6，我们有  $ \lim x_n = \lim y_n = 1 $。断言现在由定理 2.9 可得。■
+
+\item
+
+序列  $ (1+1/n)^{n} $ 收敛，其极限
+
+\[
+e:=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^{n},
+\]
+
+即欧拉数，满足  $ 2 < e \leq 3 $。
+
+\proofhead
+对一切  $ n \in \mathbb{N}^\times $，置  $ e_n := (1 + 1/n)^n $。
+
+\begin{subitems}
+\item
+
+第一步我们证明序列  $ (e_{n}) $ 是递增的。考虑
+
+\begin{equation}
+\begin{aligned}
+\frac{e_{n+1}}{e_{n}}&=\left(\frac{n+2}{n+1}\right)^{n+1}\cdot\left(\frac{n}{n+1}\right)^{n}\\&=\left(\frac{n^{2}+2n}{(n+1)^{2}}\right)^{n+1}\cdot\frac{n+1}{n}=\left(1-\frac{1}{(n+1)^{2}}\right)^{n+1}\cdot\frac{n+1}{n}.
+\end{aligned}
+\end{equation}
+
+(4.1) 中最后一个等号之后的第一个因子可以借助伯努利不等式（见习题 I.10.6）来估计：
+
+\[
+\left(1-\frac{1}{(n+1)^{2}}\right)^{n+1}\geq1-\frac{1}{n+1}=\frac{n}{n+1}.
+\]
+
+于是 (4.1) 蕴含  $ e_n \leq e_{n+1} $，如所断言。
+
+\item
+
+我们证明 $2 < e_n < 3$。由二项式定理我们有
+
+\begin{equation}
+e_{n}=\left(1+\frac{1}{n}\right)^{n}=\sum_{k=0}^{n}\binom{n}{k}\frac{1}{n^{k}}=1+\sum_{k=1}^{n}\binom{n}{k}\frac{1}{n^{k}}.
+\end{equation}
+
+进一步，对于  $ 1 \leq k \leq n $，我们有
+
+\[
+{n\choose k}\frac{1}{n^{k}}=\frac{1}{k!}\frac{n\cdot(n-1)\cdot\cdots\cdot(n-k+1)}{n\cdot n\cdot\cdots\cdot n}\leq\frac{1}{k!}\leq\frac{1}{2^{k-1}}.
+\]
+
+于是由 (4.2)（见习题 I.8.1）可得
+
+\[
+e_{n}\leq1+\sum_{k=1}^{n}\left(\frac{1}{2}\right)^{k-1}=1+\frac{1-\left(\frac{1}{2}\right)^{n}}{1-\frac{1}{2}}<1+\frac{1}{\frac{1}{2}}=3.
+\]
+
+最后，对 $n \geq 2$ 有 $2 = e_1 < e_n$。断言现在由 (i)、(ii) 与定理 4.1 可得。
+数  $ e $ 在分析中起着重要作用。其值在理论上可由序列  $ (e_n) $ 确定。遗憾的是，序列  $ (e_n) $ 收敛得并不很快。$ e $ 的数值近似为\footnote{我们在这里使用这样的‘小数表示’略显仓促。关于这种表示数的方式的完整讨论见第 7 节。}
+
+\begin{equation*}
+\begin{array}{r}2.71828\ 18284\ 59045\ 23536\ \end{array}..
+\end{equation*}
+
+将此值与  $ (e_{n}) $ 的若干项相比较，
+
+\[
+e_{1}=2~,\quad e_{10}=2.59374\ldots~,\quad e_{100}=2.70481\ldots~,\quad e_{1000}=2.71692\ldots~,\quad
+\]
+
+我们看到，即使对于 $n=1000$，误差 $e-e_n$ 也是 0.0014...（亦可参见下一例）。
+
+\end{subitems}
+
+\item
+
+我们可以把 e 表示为收敛得快得多的一个序列的极限：
+
+\[
+e=\lim_{n\to\infty}\sum_{k=0}^{n}\frac{1}{k!}.
+\]
+
+\proofhead
+(i) 置  $ x_n := \sum_{k=0}^n 1/k! $。显然，序列  $ (x_n) $ 是递增的。(f) 的证明表明，对一切  $ n \in \mathbb{N}^\times $ 有  $ e_n \leq x_n < 3 $，于是由定理 4.1，序列  $ (x_n) $ 收敛，其极限  $ e' $ 满足  $ e \leq e' \leq 3 $。
+\end{items}
+
+(ii) 为完成证明，我们需要证明  $ e' \leq e $。固定某个  $ m \in \mathbb{N}^\times $。则对一切  $ n \geq m $，我们有
+
+\begin{equation*}
+\begin{aligned}
+e_{n}=\left(1+\frac{1}{n}\right)^{n}&=\sum_{k=0}^{n}\binom{n}{k}\frac{1}{n^{k}}\geq\sum_{k=0}^{m}\binom{n}{k}\frac{1}{n^{k}}\\&=1+\sum_{k=1}^{m}\frac{1}{k!}\frac{n\cdot(n-1)\cdot\cdots\cdot(n-k+1)}{n\cdot n\cdot\cdots\cdot n}\\&=1+\sum_{k=1}^{m}\frac{1}{k!}1\cdot\left(1-\frac{1}{n}\right)\cdot\cdots\cdot\left(1-\frac{k-1}{n}\right).\\
+\end{aligned}
+\end{equation*}
+
+若我们置
+
+\[
+x_{m,n}^{\prime}:=1+\sum_{k=1}^{m}\frac{1}{k!}\Big(1-\frac{1}{n}\Big)\cdot\cdots\cdot\Big(1-\frac{k-1}{n}\Big),\qquad n\geq m,
+\]
+
+则当  $ n \to \infty $ 时  $ x'_{m,n} \uparrow x_m $，且对一切  $ n \geq m $ 有  $ x'_{m,n} \leq e_n $。由于  $ e_n \uparrow e $，由命题 2.7 可得  $ x_m \leq e $。由于这对任何  $ m \in \mathbb{N}^\times $ 都成立，$ e $ 是  $ X := \{x_m : m \in \mathbb{N}\} $ 的一个上界。由于  $ e' = \lim_{x_n} = \sup X $，定理 4.1 蕴含  $ e' \leq e $。
+
+正如我们已经提到的，序列  $ (x_{n}) $ 收敛到 e 的速度比序列  $ (e_{n}) $ 快得多。事实上，可以证明如下的误差估计（见习题 7）：
+
+\[
+0<e-x_{n}\leq\frac{1}{n n!}\;,\qquad n\in\mathbb{N}^\times\;.
+\]
+
+对于 n = 6 我们有  $ 1/(6!6) = 0.00023\ldots $，这已经比例 4.2(f) 中 n = 1000 时的误差更小。
+
+\end{example}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设  $ a_1, \ldots, a_k \in \mathbb{R}^+ $。证明
+
+\[
+\lim_{n\to\infty}\sqrt[n]{a_{1}^{n}+\cdots+a_{k}^{n}}=\max\{a_{1},\ldots,a_{k}\}.
+\]
+\item
+
+证明
+
+\[
+(1-1/n)^{n}\to1/e\ \ (n\to\infty)~.
+\]
+
+（提示：考虑  $ \lim(1 - 1/n^2)^n = 1 $ 与命题 2.6。）
+
+\item
+
+证明，对一切  $ r \in \mathbb{Q} $，
+
+\[
+(1+r/n)^{n}\to e^{r}\quad(n\to\infty).
+\]
+
+（提示：分别考虑 r > 0 与 r < 0 的情形。利用习题 2 与 2.7。）
+
+\item
+
+对于  $ a \in (0, \infty) $，用  $ x_0 \geq a $ 以及下式递归地定义实序列  $ (x_n) $：
+
+\[
+x_{n+1}:=(x_{n}+a/x_{n})/2~,\qquad n\in\mathbb{N}.
+\]
+\end{exercises}
+
+\begin{proof}
+
+$(x_{n})$ 递减且收敛到 $\sqrt{a}$。\footnote{这种确定 $\sqrt{a}$ 的方法称为巴比伦算法或海伦法。序列 $(x_{n})$ 非常快地收敛到 $\sqrt{a}$。例如，若 $x_{0} = a = 4$，则 $x_{1} = 2.5$，$x_{2} = 2.05$，$x_{3} = 2.00609\ldots$，$x_{4} = 2.000000093\ldots$。还要注意，若 $a$ 与‘初始值’ $x_{0}$ 都是有理数，则所有 $x_{n}$ 也都是有理数。在第 IV.4 节中，我们将给出海伦法的几何解释并估计其收敛速度。}
+
+\end{proof}
+
+\begin{exercises}
+\item[5.]
+
+设  $ a, x_0 \in (0, \infty) $ 且
+
+\[
+x_{n+1}:=a/(1+x_{n}),\qquad n\in\mathbb{N}.
+\]
+
+证明序列  $ (x_{n}) $ 收敛，并确定其极限。
+
+\item[6.]
+
+证明序列的收敛性：
+
+\[
+x_{0}>0~,\quad x_{1}>0~,\quad x_{n+2}:=\sqrt{x_{n+1}x_{n}}~,\qquad n\in\mathbb{N}~.
+\]
+\item[7.]
+
+\begin{items}
+\item
+
+对于  $ n \in \mathbb{N}^\times $，证明如下的误差估计：
+
+\[
+0<e-\sum_{k=0}^{n}\frac{1}{k!}<\frac{1}{nn!}.
+\]
+\item
+
+利用 (a) 中的不等式证明 e 是无理数。
+（提示：(a) 对于  $ n \in \mathbb{N}^\times $，令  $ y_m := \sum_{k=n+1}^{n+m} 1/k! $。证明  $ y_m \to e - \sum_{k=0}^n 1/k! $ 与  $ (m+n)! y_m < \sum_{k=1}^m (n+1)^{1-k} $。(b) 用反证法证明。）
+
+\end{items}
+
+\item[8.]
+
+设  $ (x_{n}) $ 由下式递归定义：
+
+\[
+x_{0}:=1~,\quad x_{n+1}:=1+1/x_{n}~,\qquad n\in\mathbb{N}~.
+\]
+
+证明序列  $ (x_{n}) $ 收敛，并确定其极限。
+
+\item[9.]
+
+斐波那契数  $ f_{n} $ 由下式递归定义：
+
+\[
+f_{0}:=0~,\quad f_{1}:=1~,\quad f_{n+1}:=f_{n}+f_{n-1}~,\qquad n\in\mathbb{N}^{\times}~.
+\]
+\end{exercises}
+
+\begin{proof}
+
+$ \lim(f_{n+1}/f_n) = g $，其中  $ g $ 是习题 8 中的极限。
+
+\end{proof}
+
+\begin{exercises}
+\item[10.]
+
+设
+
+\[
+x_{0}:=5~,\quad x_{1}:=1~,\quad x_{n+1}:=\frac{2}{3}x_{n}+\frac{1}{3}x_{n-1}~,\qquad n\in\mathbb{N}^{\times}~.
+\]
+
+验证  $ (x_{n}) $ 收敛，并确定  $ \lim x_{n} $。
+
+（提示：推导出  $ x_{n} - x_{n+1} $ 的表达式。）
+
+\end{exercises}
+
+\section{无穷极限}
+
+$\mathbb{R}$ 中的某些序列可以有益地考虑收敛到扩充实数轴 $\bar{\mathbb{R}}$ 中的 $+\infty$ 或 $-\infty$。对于极限概念的这种扩充，只需在 $\bar{\mathbb{R}}$ 中定义元素 $\pm\infty$ 的适当邻域。
+
+\subsection*{收敛到 $ \pm\infty $}
+
+由于在 $ \bar{\mathbb{R}} $ 上没有合适的度量\footnote{当然，可以在 $\bar{\mathbb R}$ 上定义各种度量，但迄今为止我们定义过的度量没有一个适合我们的目的（见习题 5）。}，我们利用如下专门定义来扩充 $ \mathbb{R} $ 中所有邻域的集合：若存在某个 $ K > 0 $ 使得 $ (K, \infty) \subseteq U $（或使得 $ (-\infty, -K) \subseteq U $），则称子集 $ U \subseteq \bar{\mathbb{R}} $ 为 $ \infty $（或 $ -\infty $）的一个\textbf{邻域}。$ \pm \infty $ 的邻域之集记为 $ \mathcal{U}(\pm \infty) $，即
+
+\[
+\mathcal{U}(\pm\infty):=\{U\subseteq\bar{\mathbb{R}};\ U\text{ 是 }\pm\infty\text{ 的邻域}\}
+\]
+
+现在设 $(x_n)$ 是 $\mathbb{R}$ 中的序列。则若 $\pm\infty$ 的每个邻域 $U$ 都包含 $(x_n)$ 的无穷多个（或几乎所有）项，就称 $\pm\infty$ 为 $(x_n)$ 的聚点（或极限）。若 $\pm\infty$ 是 $(x_n)$ 的极限，我们通常写
+
+\[
+\lim_{n\to\infty}x_{n}=\pm\infty\qquad\text{或}\qquad x_{n}\to\pm\infty\ \left(n\to\infty\right).
+\]
+
+序列 $ (x_n) $ 在 $ \bar{\mathbb{R}} $ 中收敛，如果存在某个 $ x \in \bar{\mathbb{R}} $ 使得 $ \lim_{n \to \infty} x_n = x $。序列 $ (x_n) $ 在 $ \bar{\mathbb{R}} $ 中发散，如果它在 $ \bar{\mathbb{R}} $ 中不收敛。按照这一定义，任何在 $ \mathbb{R} $ 中收敛的序列也在 $ \bar{\mathbb{R}} $ 中收敛，任何在 $ \bar{\mathbb{R}} $ 中发散的序列也在 $ \mathbb{R} $ 中发散。另一方面，存在在 $ \mathbb{R} $ 中发散但在 $ \bar{\mathbb{R}} $ 中（趋于 $ \pm\infty $）收敛的序列。在这种情况下，称该序列非正常收敛。这一区别是重要的，因为我们对度量空间中收敛的理解不适用于非正常收敛，因此这种收敛需要单独研究。
+
+\begin{example}
+
+\begin{items}
+\item
+
+设 $ (x_n) $ 是 $ \mathbb{R} $ 中的序列。则 $ x_n \to \infty $ 当且仅当，对每个 $ K > 0 $，存在某个 $ N_K \in \mathbb{N} $ 使得对所有 $ n \geq N_K $ 有 $ x_n > K $。
+
+\begin{equation*}
+\begin{array}{r}{\operatorname*{l i m}_{n\to\infty}(n^{2}-n)=\infty\text{ 且 }\operatorname*{l i m}_{n\to\infty}(-2^{n})=-\infty.}\end{array}
+\end{equation*}
+\end{items}
+
+(c) 序列 $ ((-n)^n)_{n \in \mathbb{N}} $ 有聚点 $ \infty $ 和 $ -\infty $，因此在 $ \bar{\mathbb{R}} $ 中发散。
+
+\end{example}
+
+\begin{proposition}
+
+设 $ (x_n) $ 是 $ \mathbb{R}^{\times} $ 中的序列。
+
+\begin{subitems}
+\item
+
+若 $ x_n \to \infty $ 或 $ x_n \to -\infty $，则 $ 1/x_n \to 0 $。
+
+\item
+
+若 $ x_n \to 0 $ 且对几乎所有 $ n \in \mathbb{N} $ 有 $ x_n > 0 $，则 $ 1/x_n \to \infty $。
+
+\item
+
+若 $ x_n \to 0 $ 且对几乎所有 $ n \in \mathbb{N} $ 有 $ x_n < 0 $，则 $ 1/x_n \to -\infty $。
+
+\proofhead
+(i) 设 $ \varepsilon > 0 $。则存在某个 $ N $ 使得对所有 $ n \geq N $ 有 $ |x_n| > 1/\varepsilon $，并且我们有不等式
+\[
+|1/x_{n}|=1/|x_{n}|<\varepsilon\;,\qquad n\geq N\;.
+\]
+
+因此 $ (1/x_{n}) $ 收敛到 0。
+
+\end{subitems}
+
+断言
+
+\begin{subitems}
+\item[（ii）]
+
+设 K > 0。则存在某个 N 使得对所有 $ n \geq N $ 有 $ 0 < x_{n} < 1/K $。因此
+
+\[
+1/x_{n}>K\;,\qquad n\geq N\;,
+\]
+
+因此该断言由例 5.1(a) 推出。
+
+\item[（iii）]
+
+可以类似地证明。■
+
+\end{subitems}
+
+\end{proposition}
+
+\begin{proposition}
+
+$ \mathbb{R} $ 中的每个单调序列 $ (x_n) $ 都在 $ \bar{\mathbb{R}} $ 中收敛，并且
+
+\begin{equation*}
+\begin{array}{rr}{\operatorname*{l i m}x_{n}=\left\{\begin{array}{c l}{\operatorname*{s u p}\{x_{n};~n\in\mathbb{N}\}~,\quad}&{\text{若 }(x_{n})\text{ 递增}\;,}\\ {\operatorname*{i n f}\{x_{n};~n\in\mathbb{N}\}~,\quad}&{\text{若 }(x_{n})\text{ 递减}\;.}\end{array}\right.}\end{array}
+\end{equation*}
+
+\proofhead
+我们考虑递增序列 $ (x_n) $。若 $ \{x_n; n \in \mathbb{N}\} $ 上有界，则由定理 4.1，$ (x_n) $ 在 $ \mathbb{R} $ 中收敛到 sup $ \{x_n; n \in \mathbb{N}\} $。否则，若 $ \{x_n; n \in \mathbb{N}\} $ 不是上有界的，则对每个 $ K > 0 $ 存在某个 $ m $ 使得 $ x_m > K $。由于 $ (x_n) $ 递增，我们也有对所有 $ n \geq m $ 有 $ x_n > K $，即 $ (x_n) $ 收敛到 $ \infty $。递减序列的情形类似地证明。
+\end{proposition}
+
+\subsection*{上极限与下极限}
+
+\begin{definition}
+
+设 $ (x_{n}) $ 是 $ \mathbb{R} $ 中的序列。我们可以定义两个新序列 $ (y_{n}) $ 和 $ (z_{n}) $ 如下：
+
+\[
+y_{n}:=\sup_{k\geq n}x_{k}:=\sup\{x_{k};k\geq n\},
+\]
+\[
+z_{n}:=\operatorname*{i n f}_{k\geq n}x_{k}:=\operatorname*{i n f}\{x_{k};k\geq n\}.
+\]
+
+显然 $(y_n)$ 是递减序列，而 $(z_n)$ 是 $\bar{\mathbb{R}}$ 中的递增序列。由命题 5.3，这些序列在 $\bar{\mathbb{R}}$ 中收敛：
+
+\[
+\limsup_{n\to\infty}x_{n}:=\varlimsup_{n\to\infty}x_{n}:=\lim_{n\to\infty}\left(\sup_{k\geq n}x_{k}\right),
+\]
+
+上极限，并且
+
+\[
+\liminf_{n\to\infty}x_{n}:=\varliminf_{n\to\infty}x_{n}:=\lim_{n\to\infty}\left(\inf_{k\geq n}x_{k}\right),
+\]
+
+序列 $ (x_{n}) $ 的下极限。我们还有
+
+\[
+\lim\operatorname*{s u p}x_{n}=\operatorname*{i n f}_{n\in\mathbb{N}}\bigl(\operatorname*{s u p}_{k\geq n}x_{k}\bigr)\quad\text{ 且 }\quad\operatorname*{l i m}\operatorname*{i n f}x_{n}=\operatorname*{s u p}_{n\in\mathbb{N}}\bigl(\operatorname*{i n f}_{k\geq n}x_{k}\bigr),
+\]
+
+这些再次由命题 5.3 推出。■
+
+\end{definition}
+
+接下来我们看到，序列的上极限与下极限特别地都是聚点。
+
+\begin{theorem}
+
+$ \mathbb{R} $ 中的任何序列 $ (x_n) $ 在 $ \bar{\mathbb{R}} $ 中都有一个最小聚点 $ x_* $ 和一个最大聚点 $ x^* $，并且它们满足
+
+\[
+\lim\inf x_{n}=x_{*}\quad\text{ 且 }\quad\lim\sup x_{n}=x^{*}.
+\]
+
+\proofhead
+令 $ x^* := \lim \sup x_n $，并对 $ n \in \mathbb{N} $ 令 $ y_n := \sup_{k \geq n} x_k $。则 $ (y_n) $ 是满足如下条件的递减序列：
+\begin{equation}
+x^{*}=\inf_{n\in\mathbb{N}}y_{n}.
+\end{equation}
+
+我们考虑三种情形：
+
+\begin{subitems}
+\item
+
+假设 $ x^* = -\infty $。则对每个 K > 0，存在某个 n 使得
+
+\[
+-K>y_{n}=\sup_{k\geq n}x_{k},
+\]
+
+因为否则对某个 $ K_0 \geq 0 $ 我们将有 $ x^* \geq -K_0 $。因此对所有 $ k \geq n $ 有 $ x_k \in (-\infty, -K) $，即 $ x^* = -\infty $ 是 $ (x_n) $ 的唯一聚点。
+
+\item
+
+假设 $ x^* \in \mathbb{R} $。由命题 I.10.5 和 (5.1)，对每个 $ \xi > x^* $ 存在某个 $ n $ 使得对所有 $ k \geq n $ 有 $ \xi > y_n \geq x_k $。因此，$ (x_n) $ 的任何聚点都不大于 $ x^* $。只须再证明 $ x^* $ 本身是 $ (x_n) $ 的聚点。设 $ \varepsilon > 0 $。由于
+
+\[
+\sup_{k\geq n}x_{k}=y_{n}\geq x^{*},\qquad n\in\mathbb{N},
+\]
+
+再次由命题 I.10.5，我们对每个 $n$ 有某个 $k \geq n$ 使得 $x_k > x^* - \varepsilon$。由于我们已知 $(x_n)$ 的任何聚点都不大于 $x^*$，区间 $(x^* - \varepsilon, x^* + \varepsilon)$ 必包含序列 $(x_n)$ 的无穷多项，即 $x^*$ 是 $(x_n)$ 的聚点。
+
+\item
+
+最后我们考虑 $ x^* = \infty $ 的情形。由 (5.1) 我们有对所有 $ n \in \mathbb{N} $ 有 $ y_n = \infty $。因此对每个 $ K > 0 $ 和每个 $ n $，存在某个 $ k \geq n $ 使得 $ x_k > K $。这意味着 $ x^* = \infty $ 是 $ (x_n) $ 的聚点，并且显然是最大的这种点。
+
+\proofhead
+$ x_* := \liminf x_n $ 是 $ (x_n) $ 的最小聚点是类似的。■
+\end{subitems}
+
+\end{theorem}
+
+\begin{example}
+
+\begin{items}
+\item
+
+$ \varlimsup\frac{(-1)^{n}n}{n+1}=1 $ 且 $ \varliminf\frac{(-1)^{n}n}{n+1}=-1 $。
+
+\item
+
+$ \varlimsup n^{(-1)^{n}}=\infty $ 且 $ \varliminf n^{(-1)^{n}}=0 $。$ \blacksquare $
+
+\end{items}
+
+\end{example}
+
+\begin{theorem}
+
+设 $ (x_{n}) $ 是 $ \mathbb{R} $ 中的序列。则
+
+\begin{equation*}
+\begin{array}{r}{(x_{n})\text{ 在 }\bar{\mathbb{R}}\text{ 中收敛}\iff\varlimsup x_{n}\leq\varliminf x_{n}.}\end{array}
+\end{equation*}
+
+当序列收敛时，极限 x 满足
+
+\[
+x=\lim x_{n}=\varliminf_{}x_{n}=\overline{\lim}x_{n}.
+\]
+
+\proofhead
+“⟹” 若 $(x_n)$ 在 $\bar{\mathbb{R}}$ 中收敛到 $x$，则 $x$ 是 $(x_n)$ 的唯一聚点，因此该断言由定理 5.5 推出。
+
+“⟸” 假设 $\varlimsup x_n \leq \varliminf x_n$。则再次由定理 5.5，$(x_n)$ 的唯一聚点是 $x := \varlimsup x_n = \varliminf x_n$。若 $x = -\infty$（或 $x = \infty$），则对每个 $K > 0$，存在某个 $k$ 使得对所有 $n \geq k$ 有 $x_n < -K$（或 $x_n > K$）。因此 $\lim x_n = -\infty$（或 $\lim x_n = \infty$）。
+
+若 $x$ 在 $\mathbb{R}$ 中，则由定理 5.5 和命题 I.10.5，对给定的 $\varepsilon > 0$，至多有有限多个 $j \in \mathbb{N}$ 和有限多个 $k \in \mathbb{N}$ 使得 $x_j < x - \varepsilon$ 且 $x_k > x + \varepsilon$。因此 $x$ 的每个邻域 $U$ 都包含序列 $(x_n)$ 的几乎所有项，即 $\lim x_n = x$。
+\end{theorem}
+
+\subsection*{波尔查诺-魏尔斯特拉斯定理}
+
+对于 $ \mathbb{R} $ 中的有界序列，定理 5.5 称为波尔查诺-魏尔斯特拉斯定理。我们实际上在稍一般的情形下证明这一定理。
+
+\begin{theorem}
+
+（波尔查诺-魏尔斯特拉斯）$ \mathbb{K}^m $ 中的每个有界序列都有一个收敛子序列，即一个聚点。
+
+\proofhead
+我们先考虑 $ \mathbb{K} = \mathbb{R} $ 的情形，并对 $ m $ 归纳证明该断言。$ m = 1 $ 的情形由定理 5.5 和命题 1.17 推出。对于归纳步骤 $ m \to m + 1 $，假设 $ (z_n) $ 是 $ \mathbb{R}^{m+1} $ 中的有界序列。则界 $ M := \sup\{|z_n|; n \in \mathbb{N}\} $ 在 $ [0, \infty) $ 中存在。由于 $ \mathbb{R}^{m+1} = \mathbb{R}^m \times \mathbb{R} $，我们可以把每个 $ z \in \mathbb{R}^{m+1} $ 写成 $ z = (x, y) $ 的形式，其中 $ x \in \mathbb{R}^m $ 且 $ y \in \mathbb{R} $。于是由 $ z_n = (x_n, y_n) $，我们得到 $ \mathbb{R}^m $ 中的序列 $ (x_n) $ 和 $ \mathbb{R} $ 中的序列 $ (y_n) $。由于
+\[
+\max\{|x_{n}|,|y_{n}|\}\leq|z_{n}|=\sqrt{|x_{n}|^{2}+|y_{n}|^{2}}\leq M,\qquad n\in\mathbb{N},
+\]
+
+$(x_n)$ 和 $(y_n)$ 都有界。现在我们利用归纳假设找到 $(x_n)$ 的子序列 $(x_{n_k})$ 和某个 $x \in \mathbb{R}^m$，使得当 $k \to \infty$ 时 $x_{n_k} \to x$。由于子序列 $(y_{n_k})$ 也有界，由归纳假设推出，存在 $(y_{n_k})$ 的子序列 $(y_{n_{k_j}})$ 和某个 $y \in \mathbb{R}$，使得当 $j \to \infty$ 时 $y_{n_{k_j}} \to y$。最后，由命题 1.15 和 3.14，$(z_n)$ 的子序列 $(x_{n_{k_j}}, y_{n_{k_j}})$ 当 $j \to \infty$ 时收敛到 $z := (x, y) \in \mathbb{R}^{m+1}$。这就完成了 $\mathbb{K} = \mathbb{R}$ 情形的证明。
+
+$ \mathbb{K} = \mathbb{C} $ 的情形由刚才所证以及 $ \mathbb{C}^m $ 与 $ \mathbb{R}^{2m} $ 的等同推出。$ \blacksquare $
+
+\end{theorem}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设 $ (x_n) $ 是 $ \mathbb{R} $ 中的序列，$ x_* := \varliminf_{} x_n $ 且 $ x^* := \varlimsup_{} x_n $。假设 $ x_* $ 和 $ x^* $ 都在 $ \mathbb{R} $ 中。证明：对每个 $ \varepsilon > 0 $，存在某个 $ N $ 使得
+
+\[
+x_{*}-\varepsilon<x_{n}<x^{*}+\varepsilon,\qquad n\geq N.
+\]
+
+在 $ x_* = -\infty $ 和 $ x^* = \infty $ 的情形下，该断言应如何修改？
+
+\item
+
+设 $ (x_{n}) $ 和 $ (y_{n}) $ 是 $ \mathbb{R} $ 中的序列，并且
+
+\[
+x_{*}:=\varliminf_{}x_{n},\quad x^{*}:=\varlimsup_{}x_{n},\quad y_{*}:=\varliminf_{}y_{n},\quad y^{*}:=\varlimsup_{}y_{n}.
+\]
+
+证明下列结论：
+
+\begin{items}
+\item
+
+$ \overline{\lim}(-x_n) = -x_* $
+
+\item
+
+若 $ (x^{*}, y^{*}) $ 和 $ (x_{*}, y_{*}) $ 不等于 $ (\infty, -\infty) $ 或 $ (-\infty, \infty) $，则
+
+\[
+\varlimsup_{}(x_{n}+y_{n})\leq x^{*}+y^{*}\text{ 且 }\varliminf_{}(x_{n}+y_{n})\geq x_{*}+y_{*}.
+\]
+\item
+
+若对所有 $ n \in \mathbb{N} $ 有 $ x_n \geq 0 $ 且 $ y_n \geq 0 $，并且 $ (x_*, y_*) \notin \{(0, \infty), (\infty, 0)\} $，$ (x_*, y^*) \neq (\infty, 0) $ 且 $ (x^*, y^*) \neq (0, \infty) $，则
+
+\[
+0\leq x_{*}y_{*}\leq\varliminf_{}(x_{n} y_{n})\leq x_{*}y^{*}\leq\varlimsup_{}(x_{n} y_{n})\leq x^{*}y^{*}.
+\]
+\item
+
+若 $ (y_n) $ 收敛到 $ y \in \mathbb{R} $，则
+
+\begin{equation*}
+\begin{array}{r}{\varlimsup(x_{n}+y_{n})=x^{*}+y~,\quad\varliminf(x_{n}+y_{n})=x_{*}+y~,}\end{array}
+\end{equation*}
+
+并且
+
+\begin{equation*}
+\begin{aligned}
+\varlimsup(x_{n}y_{n})&=y x^{*},\quad&y>0,\\\varlimsup(x_{n}y_{n})&=y x_{*},\quad&y<0.
+\end{aligned}
+\end{equation*}
+\item
+
+若对所有 $ n \in \mathbb{N} $ 有 $ x_n \leq y_n $，则 $ \underline{\lim} x_n \leq \underline{\lim} y_n $ 且 $ \overline{\lim} x_n \leq \overline{\lim} y_n $。
+
+\end{items}
+
+\item
+
+对 $n \in \mathbb{N}$，令 $x_n := 2^n \left(1 + (-1)^n\right) + 1$。确定下列各值：
+
+\[
+\varliminf_{}x_{n},\quad\varlimsup_{}x_{n},\quad\varliminf_{}(x_{n+1}/x_{n}),\quad\varlimsup_{}(x_{n+1}/x_{n}),\quad\varliminf_{}\sqrt[n]{x_{n}},\quad\varlimsup_{}\sqrt[n]{x_{n}}
+\]
+\item
+
+设 $ (x_n) $ 是 $ \mathbb{R} $ 中的序列，使得对所有 $ n \in \mathbb{N} $ 有 $ x_n > 0 $。证明
+
+\[
+\underline{\lim}\frac{x_{n+1}}{x_{n}}\leq\underline{\lim}\sqrt[n]{x_{n}}\leq\overline{\lim}\sqrt[n]{x_{n}}\leq\overline{\lim}\frac{x_{n+1}}{x_{n}}.
+\]
+
+（提示：若 $ q < \underline{\lim}(x_{n+1}/x_n) $，则对所有 $ n \geq n(q) $ 有 $ x_{n+1}/x_n \geq q $。）
+
+\item
+
+\begin{items}
+\item
+
+证明函数
+
+\begin{equation*}
+\varphi:\bar{\mathbb{R}}\to\left[-1,1\right],\quad\varphi(x):=\left\{\begin{array}{c l}{-1,}&{\quad x=-\infty\;,}\\ {x/(1+|x|),}&{\quad x\in\mathbb{R}\;,}\\ {1,}&{\quad x=\infty\;,}\\ \end{array}\right.
+\end{equation*}
+
+是严格递增且双射的。
+
+\item
+
+证明函数
+
+\[
+d\colon\bar{\mathbb{R}}\times\bar{\mathbb{R}}\to\mathbb{R}^{+}~,\quad(x,y)\mapsto|\varphi(x)-\varphi(y)|
+\]
+
+是 $ \bar{\mathbb{R}} $ 上的度量。
+
+\end{items}
+
+\item
+
+对于序列
+
+\[
+(x_{n}):=(0,1,2,1,0,1,2,1,0,1,2,1,\ldots)\quad\text{ 且 }\quad(y_{n}):=(2,1,1,0,2,1,1,0,2,1,1,0,\ldots)
+\]
+
+确定下列各值：
+
+\[
+\varlimsup x_{n}+\varlimsup y_{n}\ ,\qquad \varlimsup(x_{n}+y_{n})\ ,
+\]
+\[
+\underline{{\operatorname*{l i m}}}x_{n}+\underline{{\operatorname*{l i m}}}y_{n}~,\quad\underline{{\operatorname*{l i m}}}(x_{n}+y_{n})~,\quad\underline{{\operatorname*{l i m}}}x_{n}+\overline{{\operatorname*{l i m}}}y_{n}~.
+\]
+\end{exercises}
+
+\section{完备性}
+
+在 1 节中，我们利用邻域的概念定义了收敛。在这个定义中，序列的极限是显式出现的，因此，原则上，要证明一个序列收敛，就必须知道它的极限是什么。在本节中，我们将证明：在某些“完备”空间中，可以在不知道极限的情况下判别一个序列的收敛性。这种度量空间中的序列收敛，当且仅当它们是柯西序列。这些序列是收敛性理论研究中十分重要的工具。此外，它们还被用于康托尔的实数构造，这一构造我们在 I.10 节中曾提及，并将在本节中实施。
+
+\subsection*{柯西序列}
+
+在下文中，$X = (X, d)$ 是一个度量空间。
+
+$ X $ 中的序列  $ (x_n) $ 称为 \textbf{柯西序列}，若对每个  $ \varepsilon > 0 $，存在某个  $ N \in \mathbb{N} $，使得对所有  $ m, n \geq N $ 都有  $ d(x_n, x_m) < \varepsilon $。
+
+若 $(x_n)$ 是赋范向量空间 $E = (E, \|\cdot\|)$ 中的序列，则 $(x_n)$ 是柯西序列，当且仅当对每个 $\varepsilon > 0$，存在某个 $N$，使得对所有 $m, n \geq N$ 都有 $\|x_n - x_m\| < \varepsilon$。特别地，我们注意到 $E$ 中的柯西序列是“平移不变的”，也就是说，若 $(x_n)$ 是柯西序列，且 $a$ 是 $E$ 中的任意向量，则“平移后的”序列 $(x_n + a)$ 也是柯西序列。这特别表明，柯西序列不能用邻域来定义。
+
+\begin{proposition}
+
+每个收敛序列都是柯西序列。
+
+\proofhead
+设 $(x_n)$ 是 $X$ 中极限为 $x$ 的收敛序列。则对每个 $\varepsilon > 0$，存在某个 $N$，使得对所有 $n \geq N$ 都有 $d(x_n, x) < \varepsilon/2$。由三角不等式可得
+\[
+d(x_{n},x_{m})\leq d(x_{n},x)+d(x,x_{m})<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon,\qquad m,n\geq N.
+\]
+
+因此  $ (x_{n}) $ 是柯西序列。 ■
+
+\end{proposition}
+
+命题 6.1 的逆命题不成立，也就是说，存在这样的度量空间，其中并非每个柯西序列都收敛。
+
+\begin{example}
+
+递归地定义  $ (x_n) $： $ x_0 := 2 $，且对所有  $ n \in \mathbb{N} $， $ x_{n+1} := \frac{1}{2}(x_n + 2/x_n) $。则  $ (x_n) $ 是  $ \mathbb{Q} $ 中的柯西序列，但它在  $ \mathbb{Q} $ 中不收敛。
+
+\proofhead
+显然，对所有  $ n \in \mathbb{N} $ 都有  $ x_n \in \mathbb{Q} $。此外，由习题 4.4 我们知道， $ (x_n) $ 在  $ \mathbb{R} $ 中收敛于  $ \sqrt{2} $。因此，由命题 6.1， $ (x_n) $ 是  $ \mathbb{R} $ 中的柯西序列，从而也是  $ \mathbb{Q} $ 中的柯西序列。
+
+另一方面， $ (x_n) $ 不可能在  $ \mathbb{Q} $ 中收敛。事实上，若对某个  $ a \in \mathbb{Q} $ 有  $ x_n \to a $，则在  $ \mathbb{R} $ 中也有  $ x_n \to a $。但此时极限的唯一性给出  $ a = \sqrt{2} \in \mathbb{R} \setminus \mathbb{Q} $，矛盾。
+\end{example}
+
+\begin{proposition}
+
+每个柯西序列都是有界的。
+
+\proofhead
+设 $(x_n)$ 是柯西序列。则存在某个 $N \in \mathbb{N}$，使得对所有 $m, n \geq N$ 都有 $d(x_n, x_m) < 1$。特别地，对所有 $n \geq N$ 都有 $d(x_n, x_N) \leq 1$。令 $M = \max_{n < N} \{d(x_n, x_N)\}$。则对所有 $n$，都有 $d(x_n, x_N) \leq 1 + M$，从而由例 1.9(c)，$(x_n)$ 在 $X$ 中有界。
+\end{proposition}
+
+\begin{proposition}
+
+若柯西序列有一个收敛的子序列，则它本身收敛。
+
+\proofhead
+设 $(x_n)$ 是柯西序列，$(x_{n_k})_{k\in\mathbb{N}}$ 是其收敛于 $x$ 的子序列。设 $\varepsilon > 0$。则存在某个 $N$，使得对所有 $m, n \geq N$ 都有 $d(x_n, x_m) < \varepsilon/2$。又存在某个 $K$，使得对所有 $k \geq K$ 都有 $d(x_{n_k}, x) < \varepsilon/2$。令 $M := \max\{K, N\}$。则
+\[
+d(x_{n},x)\leq d(x_{n},x_{n_{M}})+d(x_{n_{M}},x)<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}=\varepsilon,\qquad n\geq M,
+\]
+
+也就是说， $ (x_{n}) $ 收敛于 x。
+
+\end{proposition}
+
+\subsection*{巴拿赫空间}
+
+若度量空间 X 中的每个柯西序列都收敛，则称 X 是完备的。完备的赋范向量空间称为巴拿赫空间。
+
+利用波尔查诺-魏尔斯特拉斯定理，我们可以证明完备度量空间是存在的。
+
+\begin{theorem}
+
+$ \mathbb{K}^{m} $ 是巴拿赫空间。
+
+\proofhead
+由 3 节我们已经知道  $ \mathbb{K}^m $ 是赋范向量空间，因此只需证明完备性。设  $ (x_n) $ 是  $ \mathbb{K}^m $ 中的柯西序列。由命题 6.3， $ (x_n) $ 有界。波尔查诺-魏尔斯特拉斯定理蕴含收敛子序列的存在性，然后命题 6.4 蕴含  $ (x_n) $ 本身收敛。 $ \blacksquare $
+\end{theorem}
+
+\begin{theorem}
+
+设 $X$ 是非空集合，$E = (E, \|\cdot\|)$ 是巴拿赫空间。则 $B(X, E)$ 也是巴拿赫空间。
+
+\proofhead
+设  $ (u_n) $ 是赋范向量空间  $ B(X, E) $ 中的柯西序列（见命题 3.5）。设  $ \varepsilon > 0 $。则存在某个  $ N := N(\varepsilon) $，使得
+
+ $ \|u_n - u_m\|_\infty \leq \varepsilon $ 对所有  $ m, n \geq N $ 成立。特别地，
+\begin{equation}
+\|u_{n}(x)-u_{m}(x)\|_{E}\leq\|u_{n}-u_{m}\|_{\infty}\leq\varepsilon\;,\qquad m,n\geq N\;,\quad x\in X\;.
+\end{equation}
+
+这表明，对每个  $ x \in X $，序列  $ (u_n(x)) $ 都是  $ E $ 中的柯西序列。 $ E $ 的完备性蕴含：对每个  $ x \in X $，存在某个向量  $ a_x \in E $，使得当  $ n \to \infty $ 时  $ u_n(x) \to a_x $。由推论 1.13， $ a_x $ 是唯一的，我们通过  $ u(x) := a_x $（ $ x \in X $）定义  $ u \in E^X $。
+
+我们将证明柯西序列  $ (u_n) $ 在  $ B(X, E) $ 中收敛于  $ u $。首先证明  $ u \in E^X $ 有界。事实上，在 (6.1) 中令  $ m \to \infty $ 取极限，得到
+
+\begin{equation}
+\|u_{n}(x)-u(x)\|_{E}\leq\varepsilon\;,\qquad n\geq N\;,\quad x\in X
+\end{equation}
+
+（见命题 2.10 与注 3.1(c)），于是我们有
+
+\[
+\|u(x)\|_{E}\leq\varepsilon+\|u_{N}(x)\|_{E}\leq\varepsilon+\|u_{N}\|_{\infty}\;,\qquad x\in X\;.
+\]
+
+这表明函数  $ u: X \to E $ 有界，即它属于  $ B(X, E) $。最后，在 (6.2) 中对所有  $ x \in X $ 取上确界，我们得到：对所有  $ n \geq N $ 都有  $ \|u_n - u\|_\infty \leq \varepsilon $，即  $ (u_n) $ 在  $ B(X, E) $ 中收敛于  $ u $。 $ \blacksquare $
+
+\end{theorem}
+
+作为前两个定理的直接推论，我们有：对每个非空集合 $X$，$B(X, \mathbb{R})$、$B(X, \mathbb{C})$ 与 $B(X, \mathbb{K}^m)$ 都是巴拿赫空间。
+
+\begin{remark}
+
+\begin{items}
+\item
+
+赋范向量空间  $ E $ 的完备性在换成等价范数时保持不变，也就是说，若  $ \|\cdot\|_1 $ 与  $ \|\cdot\|_2 $ 是  $ E $ 上的等价范数，则  $ (E, \|\cdot\|_1) $ 完备，当且仅当  $ (E, \|\cdot\|_2) $ 完备。
+
+\item
+
+带有范数  $ |\cdot|_1 $ 或  $ |\cdot|_{\infty} $ 的向量空间  $ \mathbb{K}^m $ 是完备的。（我们将在 III.3 节中证明  $ \mathbb{K}^m $ 上的所有范数都等价。）
+
+\item
+
+完备的内积空间（见定理 3.10）称为希尔伯特空间。特别地，定理 6.5 表明  $ \mathbb{K}^m $ 是希尔伯特空间。
+
+\end{items}
+
+\end{remark}
+
+\subsection*{康托尔的实数构造}
+
+我们以实数  $ \mathbb{R} $ 的第二种构造来结束本节。由于在后面的内容中我们不再使用这一构造，初次阅读本书时可以略去这一讨论。
+
+首先我们注意到，若在命题 1.7(iii)、零序列和柯西序列的定义以及相应的证明中，把“对每个  $ \varepsilon > 0 $”替换为“对每个  $ \varepsilon = 1/N $，其中  $ N \in \mathbb{N}^\times $”，则本章中关于序列的所有陈述仍然成立。这是推论 I.10.7 的结果。
+
+这使我们回到只有有理数已被构造出来的情形。由定理 I.9.5， $ \mathbb{Q} = (\mathbb{Q}, \leq) $ 是有序域，因此命题 I.8.10
+
+蕴含：Q 配上由绝对值  $ |\cdot| $ 诱导的度量，是一个度量空间。由于上面的讨论，
+
+\[
+\mathcal{R}:=\big\{r\in\mathbb{Q}^{\mathbb{N}};~r\text{ 是柯西序列}\big\}
+\]
+
+以及
+
+\[
+\mathbf{c}_{0}:=\{r\in\mathbb{Q}^{\mathbb{N}};~r\text{ 是零序列}\}
+\]
+
+都是良定义的集合。由命题 6.1 我们有  $ \mathbf{c}_0 \subseteq \mathcal{R} $。
+
+由例 I.8.2(b) 我们知道  $ \mathbb{Q}^{\mathbb{N}} $ 是带单位元的交换环。我们用  $ \overline{a} $ 表示  $ \mathbb{Q}^{\mathbb{N}} $ 中的常值序列  $ (a, a, \ldots) $。则  $ \overline{1} $ 是环  $ \mathbb{Q}^{\mathbb{N}} $ 的单位元。由例 I.4.4(c)， $ \mathbb{Q}^{\mathbb{N}} $ 也是偏序集。由于这个偏序不是全序， $ \mathbb{Q}^{\mathbb{N}} $ 不是有序环。
+
+\begin{lemma}
+
+$ \mathcal{R} $ 是  $ \mathbb{Q}^{\mathbb{N}} $ 的含  $ \overline{1} $ 的子环，且  $ \mathbf{c}_0 $ 是  $ \mathcal{R} $ 的非平凡真理想。
+
+\proofhead
+设  $ r = (r_n) $ 与  $ s = (s_n) $ 是  $ \mathcal{R} $ 中的元素，且  $ N \in \mathbb{N}^\times $。由于每个柯西序列都有界，存在某个  $ B \in \mathbb{N}^\times $，使得
+\[
+|r_{n}|\leq B\;,\qquad|s_{n}|\leq B\;,\qquad n\in\mathbb{N}.
+\]
+
+令  $ M := 2BN \in \mathbb{N}^\times $。则存在某个  $ n_0 \in \mathbb{N} $，使得
+
+\[
+|r_{n}-r_{m}|<1/M~,\quad|s_{n}-s_{m}|<1/M~,\qquad m,n\geq n_{0}~.
+\]
+
+于是我们有不等式
+
+\[
+|r_{n}+s_{n}-\left(r_{m}+s_{m}\right)|\leq|r_{n}-r_{m}|+|s_{n}-s_{m}|<2/M\leq1/N
+\]
+
+以及
+
+\[
+|r_{n}s_{n}-r_{m}s_{m}|\leq|r_{n}||s_{n}-s_{m}|+|r_{n}-r_{m}||s_{m}|<2B/M=1/N
+\]
+
+对所有  $ m, n \geq n_0 $ 成立。因此  $ r + s $ 与  $ r \cdot s $ 都在  $ \mathcal{R} $ 中，即  $ \mathcal{R} $ 是  $ \mathbb{Q}^{\mathbb{N}} $ 的子环。显然  $ \mathcal{R} $ 含有单位元  $ \overline{1} $。由命题 2.2 与 2.4（把  $ \mathbb{K} $ 换成  $ \mathbb{Q} $）以及命题 6.3，可得  $ \mathbf{c}_0 $ 是  $ \mathcal{R} $ 的理想。由于
+
+\[
+\left(\frac{1}{n+1}\right)_{n\in\mathbb{N}}\in\mathbf{c}_{0}\backslash\left\{0\right\},\quad\overline{1}\in\mathcal{R}\backslash\mathbf{c}_{0},
+\]
+
+$c_0$ 是非平凡真理想。
+
+由习题 I.8.6 我们知道  $ \mathcal{R} $ 不可能是域。设  $ R $ 是  $ \mathcal{R} $ 关于理想  $ \mathbf{c}_0 $ 的商环，即  $ R = \mathcal{R} / \mathbf{c}_0 $（见习题 I.8.6）。显然，函数
+
+\begin{equation}
+\mathbb{Q}\to R\;,\quad a\mapsto[\overline{{a}}]=\overline{{a}}+\mathbf{c}_{0}\;,
+\end{equation}
+
+它把每个有理数 $a$ 映到  $ \mathcal{R} $ 中常值序列 $\overline{a}$ 的陪集 $[\overline{a}]$，是一个单射环同态。因此，我们把 $\mathbb{Q}$ 与其在函数 (6.3) 下的像等同起来，从而将 $\mathbb{Q}$ 视为 $R$ 的子环。
+
+接下来我们在 $R$ 上定义一个序。若存在某个 $N \in \mathbb{N}^\times$ 与 $n_0 \in \mathbb{N}$，使得对所有 $n \geq n_0$ 都有 $r_n > 1/N$，则称 $r = (r_n) \in \mathcal{R}$ 是严格正的。设 $\mathcal{P}$ 为严格正柯西序列的集合，即 $\mathcal{P} := \{r \in \mathcal{R} ; r\text{ 是严格正的}\}$。 在 $R$ 上按如下方式定义关系 $\leq$：
+
+\begin{equation}
+[r]\leq[s]:\Longleftrightarrow s-r\in\mathcal{P}\cup\mathbf{c}_{0}~.
+\end{equation}
+\end{lemma}
+
+\begin{lemma}
+
+$  (R, \leq)  $ 是有序环，且它在 Q 上诱导出自然序。
+
+\proofhead
+容易看出 (6.4) 在 $R$ 上定义了一个关系，即该定义与代表元的选取无关。同样显然的是，关系 $\leq$ 是自反的，并且传递性也不难证明。为证明反对称性，设 $[r] \leq [s]$ 且 $[s] \leq [r]$。则 $r-s$ 必属于 $\mathbf{c}_0$，因为否则 $r-s$ 与 $s-r$ 都将严格正，而这是不可能的。因此 $[r]$ 与 $[s]$ 相同，从而我们证明了 $\leq$ 是 $R$ 上的偏序。
+
+设  $ r, s \in \mathcal{R} $，并假设  $ r - s $ 与  $ s - r $ 都不是严格正的。则对每个  $ N \in \mathbb{N}^\times $，存在某个  $ n \geq N $，使得  $ |r_n - s_n| < 1/N $。因此  $ r - s $ 有一个在  $ \mathbb{Q} $ 中收敛于 0 的子序列。由命题 6.4， $ r - s $ 本身是零序列，即  $ r - s \in \mathbf{c}_0 $。这蕴含  $ R $ 在  $ \leq $ 下是全序的。
+
+我们把  $ \leq $ 与 R 的环结构相容这一简单证明留给读者。
+
+最后，设  $ p, q \in \mathbb{Q} $ 满足  $ [\overline{p}] \leq [\overline{q}] $。则要么  $ p < q $，要么  $ \overline{q - p} $ 是零序列，后者蕴含  $ p = q $。因此  $ R $ 中的序在  $ \mathbb{Q} $ 上诱导出自然序。
+\end{lemma}
+
+\begin{proposition}
+
+R 是域。
+
+\proofhead
+设  $ [r] \in R^\times $。我们需要证明  $ [r] $ 可逆。我们可以假设（为什么？） $ r $ 属于  $ \mathcal{P} $。于是存在  $ n_0 \in \mathbb{N} $ 与  $ M \in \mathbb{N}^\times $，使得对所有  $ n \geq n_0 $ 都有  $ r_n \geq 1/M $。因此由下式定义的  $ s := (s_n) $
+\begin{equation*}
+s_{n}:=\left\{\begin{array}{c l}{0,}&{\quad n<n_{0},}\\ {1/r_{n},}&{\quad n\geq n_{0},}\\ \end{array}\right.
+\end{equation*}
+
+是 $\mathbb{Q}^{\mathbb{N}}$ 中的元素。由于 $r$ 是柯西序列，对 $N \in \mathbb{N}^\times$，存在某个 $n_1 \geq n_0$，使得对所有 $m, n \geq n_1$ 都有 $|r_n - r_m| < 1/(NM^2)$。这蕴含
+
+\[
+\left|s_{n}-s_{m}\right|=\left|\frac{r_{n}-r_{m}}{r_{n}r_{m}}\right|\leq M^{2}\left|r_{n}-r_{m}\right|<1/N,\qquad m,n\geq n_{1}.
+\]
+
+因此 $s$ 在 $\mathcal{R}$ 中。由于 $[r][s]=[rs]=\overline{1}$，$[r]$ 可逆，且 $[r]^{-1}=[s]$。 ■
+
+\end{proposition}
+
+现在我们要证明 R 是序完备的。为此，我们首先需要下面两个引理：
+
+\begin{lemma}
+
+Q 中每个有上界的递增序列都是柯西序列。类似地，Q 中每个有下界的递减序列都是柯西序列。
+
+\proofhead
+设  $ r = (r_n) $ 是  $ \mathbb{Q} $ 中的递增序列，且有上界  $ M \in \mathbb{N}^\times $，即对所有  $ n \in \mathbb{N} $ 都有  $ r_n < M $。我们可以假设  $ r_0 = 0 $（为什么？）。
+
+设  $ N \in \mathbb{N}^\times $。则下列集合
+\[
+I_{k}:=\left\{n\in\mathbb{N}\;;\;(k-1)/N\leq r_{n}<k/N\right\},\qquad k=1,\ldots,M N~,
+\]
+
+并非都为空。因此
+
+\[
+K:=\max\left\{k\in\{1,\ldots,MN\}:I_{k}\neq\emptyset\right\}
+\]
+
+是有定义的，且下式成立：
+
+\[
+r_{n}<K/N~,\quad n\in\mathbb{N}~,\qquad\exists n_{0}\in\mathbb{N}\colon r_{n_{0}}\geq(K-1)/N~.
+\]
+
+由序列  $ (r_{n}) $ 的单调性，我们得到不等式
+
+\[
+0\leq r_{n}-r_{m}<\frac{K}{N}-\frac{K-1}{N}=\frac{1}{N},\qquad n>m\geq n_{0},
+\]
+
+这证明了 r 属于  $ \mathcal{R} $。对递减序列的证明是类似的。
+
+\end{lemma}
+
+\begin{lemma}
+
+$ R $ 中每个有上界的递增序列  $ (\rho_k) $ 都有上确界  $ \sup\{\rho_k; k \in \mathbb{N}\} $。类似地， $ R $ 中每个有下界的递减序列  $ (\rho_k) $ 都有下确界  $ \inf\{\rho_k; k \in \mathbb{N}\} $。
+
+\proofhead
+只需考虑递增序列的情形。若存在某个  $ m \in \mathbb{N} $，使得对所有  $ k \geq m $ 都有  $ \rho_k = \rho_m $，则  $ \sup\{\rho_k; k \in \mathbb{N}\} = \rho_m $。否则我们可以递归地构造  $ (\rho_k) $ 的一个子序列  $ (\rho_{k_j})_{j \in \mathbb{N}} $，使得对所有  $ j \in \mathbb{N} $ 都有  $ \rho_{k_j} < \rho_{k_{j+1}} $。由于序列  $ (\rho_k) $ 的单调性，只需证明  $ \sup\{\rho_{k_j}; j \in \mathbb{N}\} $ 的存在性。因此我们假设对所有  $ k \in \mathbb{N} $ 都有  $ \rho_k < \rho_{k+1} $。
+
+每个 $\rho_k$ 都具有形式 $[r^k]$，其中 $r^k = (r_n^k)_{n \in \mathbb{N}} \in \mathcal{R}$。对 $k \in \mathbb{N}$，有 $\rho_{k+1} - \rho_k \in \mathcal{P}$，于是存在 $n_k \in \mathbb{N}$ 与 $N_k \in \mathbb{N}^\times$，使得对所有 $n \geq n_k$ 都有 $r_n^{k+1} - r_n^k \geq 1/N_k$。不失一般性，我们可以假设序列 $(n_k)_{k \in \mathbb{N}}$ 递增。由于 $r^k$ 与 $r^{k+1}$ 都是柯西序列，存在 $m_k \geq n_k$，使得
+\[
+r_{n}^{k}-r_{m_{k}}^{k}<\frac{1}{4N_{k}},\quad r_{m_{k}}^{k+1}-r_{n}^{k+1}<\frac{1}{4N_{k}},\qquad n\geq m_{k}.
+\]
+
+因此，对  $ s_k := r_{m_k}^k + 1/(2N_k) $，我们有
+
+\[
+r_{n}^{k+1}-s_{k}>\frac{1}{4N_{k}},\quad s_{k}-r_{n}^{k}>\frac{1}{4N_{k}},\qquad n\geq m_{k}.
+\]
+
+于是
+
+\begin{equation}
+\rho_{k}=[r^{k}]<[\overline{{s_{k}}}]=s_{k}\big[\overline{{1}}\big]<[r^{k+1}]=\rho_{k+1}~,\qquad k\in\mathbb{N}~.
+\end{equation}
+
+令 $s := (s_k)$。按构造，$s$ 是 $\mathbb{Q}$ 中的递增序列。由于序列 $(\rho_k)$ 有上界，由 (6.5)，$s$ 也有上界。由引理 6.11 可得 $s$ 属于 $\mathcal{R}$，然后 (6.5) 表明对所有 $k \in \mathbb{N}$ 都有 $\rho_k \leq [s]$。
+
+最后，设  $ \rho \in R $ 满足：对所有  $ k \in \mathbb{N} $ 都有  $ \rho_k \leq \rho < [s] $。则由 (6.5) 可得
+
+\[
+s_{k}\left[\overline{1}\right]<\rho_{k+1}\leq\rho<\left[s\right],\qquad k\in\mathbb{N},
+\]
+
+这是矛盾。因此我们有  $ [s] = \sup\{\rho_k; k \in \mathbb{N}\} $。 ■
+
+\end{lemma}
+
+为完成康托尔的构造，我们现在可以容易地证明 R 是 Q 的序完备的有序扩域。然后定理 I.10.4 的唯一性断言保证了我们又一次构造出了实数。
+
+\begin{theorem}
+
+R 是 Q 的序完备的有序扩域。
+
+\proofhead
+由引理 6.9 与命题 6.10，我们只需证明 R 的序完备性。
+
+因此，设 $A$ 是 $R$ 的非空子集，且以 $\gamma \in R$ 为上界。我们按如下方式递归地构造一个递增序列 $(\alpha_j)$ 与一个递减序列 $(\beta_j)$：选取某个 $\alpha_0 \in A$，然后令 $\beta_0 := \gamma$ 与 $\gamma_0 := (\alpha_0 + \beta_0)/2$。若存在某个 $a \in A$ 使得 $a \geq \gamma_0$，则令 $\alpha_1 := \gamma_0$ 与 $\beta_1 := \beta_0$；否则令 $\alpha_1 := \alpha_0$ 与 $\beta_1 := \gamma_0$。在下一步中，我们把 $\alpha_0$、$\beta_0$ 换成 $\alpha_1$、$\beta_1$，重复上述过程以得到 $\alpha_2$ 与 $\beta_2$。迭代这一过程产生具有所断言性质的序列 $(\alpha_j)$ 与 $(\beta_j)$，并且
+\begin{equation}
+0<\beta_{j}-\alpha_{j}\leq(\beta_{0}-\alpha_{0})/2^{j},\qquad j\in\mathbb{N}.
+\end{equation}
+
+由于 $(\alpha_j)$ 以 $\gamma$ 为上界，且 $(\beta_j)$ 以 $\alpha_0$ 为下界，引理 6.12 蕴含 $\alpha := \sup\{\alpha_j; j \in \mathbb{N}\}$ 与 $\beta := \inf\{\beta_j; j \in \mathbb{N}\}$ 都存在。此外，对 (6.6) 取下确界，得到
+
+\[
+0\leq\beta-\alpha\leq\inf\left\{(\beta_{0}-\alpha_{0})/2^{j};j\in\mathbb{N}\right\}=0.
+\]
+
+因此  $ \alpha = \beta $。
+
+最后，按构造，对所有  $ a \in A $ 与  $ j \in \mathbb{N} $ 都有  $ a \leq \beta_j $。因此
+
+\[
+a\leq\operatorname*{i n f}\{\;\beta_{j}\;;\;j\in\mathbb{N}\}\nonumber=\beta=\alpha=\operatorname*{s u p}\{\;\alpha_{j}\;;\;j\in\mathbb{N}\}\nonumber\leq\gamma\;,\qquad a\in A\;.
+\]
+
+由于这对  $ A $ 的每个上界  $ \gamma $ 都成立，可得  $ \alpha = \sup(A) $。 ■
+
+\end{theorem}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+设  $ (\alpha, \beta) \in \mathbb{R}^2 $。对  $ k \in \mathbb{N} $，令
+
+\begin{equation*}
+x_{k}:=\left\{\begin{array}{l l}{\left(\alpha,\beta\right),}&{\quad k\text{ 为偶},}\\ {\left(\beta,\alpha\right),}&{\quad k\text{ 为奇},}\end{array}\right.
+\end{equation*}
+
+且对所有  $ n \in \mathbb{N}^\times $ 令  $ s_n := \sum_{k=1}^n k^{-2} x_k $。证明  $ (s_n) $ 收敛。
+
+\item
+
+设 $X:=(X,d)$ 是完备度量空间，$(x_{n})$ 是 $X$ 中的序列。假设
+
+\[
+d(x_{n+1},x_{n})\leq\alpha d(x_{n},x_{n-1}),\qquad n\in\mathbb{N}^{\times},
+\]
+
+对某个  $ \alpha \in (0,1) $ 成立。证明  $ (x_{n}) $ 收敛。
+
+\item
+
+证明  $ \mathbb{R} $ 中的每个序列都有单调子序列。
+
+\item
+
+证明下列命题（见习题 3.7）：
+
+\begin{items}
+\item
+
+完备度量空间的每个闭子集都是完备度量空间（具有诱导度量）。
+
+\item
+
+巴拿赫空间的每个闭子空间本身都是巴拿赫空间（具有诱导范数）。
+
+\item
+
+$ \ell_{\infty} $、c 与  $ c_{0} $ 都是巴拿赫空间。
+
+\item
+
+设 $M$ 是完备度量空间，$D \subseteq M$ 是完备的子集（关于诱导度量）。则 $D$ 在 $M$ 中是闭的。
+
+\end{items}
+
+\item
+
+验证  $ R = \mathcal{R}/c_0 $ 上的序  $ \leq $ 是传递的，并且与  $ R $ 的环结构相容。
+
+\item
+
+对所有  $ n \in \mathbb{N}^\times $，令  $ x_n := \sum_{k=1}^{n} k^{-1} $。证明下列命题：
+
+\begin{items}
+\item
+
+序列  $ (x_{n}) $ 不是  $ \mathbb{R} $ 中的柯西序列。
+
+\item
+
+对每个  $ m \in \mathbb{N}^\times $， $ \lim_{n}(x_{n+m} - x_n) = 0 $
+（提示：(a) 证明  $ (x_{n}) $ 无界。）
+
+\end{items}
+
+\item
+
+对所有  $ n \in \mathbb{N}^\times $，令  $ x_n := \sum_{k=1}^n k^{-2} $。证明或反驳  $ (x_n) $ 是  $ \mathbb{Q} $ 中的柯西序列。
+
+\end{exercises}
+
+\section{级数}
+
+到目前为止，我们有两种方法可以证明巴拿赫空间\footnote{下文我们常用 $|\cdot|$ 而不用 $\|\cdot\|$ 表示巴拿赫空间 $E$ 的范数。细心的读者不难避免与欧几里得范数混淆。} $(E,|\cdot|)$中的序列 $(x_n)$ 收敛。要么我们对极限 $x$ 作出某种猜测，然后直接证明 $|x-x_n|$ 收敛于零，要么我们证明 $(x_n)$ 是柯西序列，再利用 $E$ 的完备性。
+
+在下面两节中，我们将用这两种技巧来研究一类称为级数的特殊序列。我们将看到，级数简单的递归结构会产生非常方便的收敛判别法。特别地，我们将讨论任意巴拿赫空间中的根值判别法与比值判别法，以及用于交错实级数的莱布尼茨判别法。
+
+\subsection*{级数的收敛}
+
+令 $ (x_{k}) $ 为 $E$ 中的序列。于是我们在 $E$ 中如下定义一个新序列 $ (s_{n}) $：
+
+\[
+s_{n}:=\sum_{k=0}^{n}x_{k}~,\qquad n\in\mathbb{N}~.
+\]
+
+序列 $(s_n)$ 称为 $E$ 中的级数，记为 $\sum x_k$ 或 $\sum_k x_k$。元素 $s_n$ 称为级数 $\sum x_k$ 的第 $n$ 个部分和，$x_k$ 称为级数 $\sum x_k$ 的第 $k$ 项。因此，级数不过是一个其项按如下方式递归定义的序列：
+
+\[
+s_{0}:=x_{0}~,\qquad s_{n+1}=s_{n}+x_{n+1}~,\qquad n\in\mathbb{N}.
+\]
+
+级数就是其部分和所构成的序列。
+
+若级数 $ \sum x_k $ 的部分和序列 $ (s_n) $ 收敛，则称该级数收敛（或是收敛的）。此时，$ (s_n) $ 的极限称为级数 $ \sum x_k $ 的值，记为 $ \sum_{k=0}^{\infty} x_k $\footnote{删去级数 $\sum_k x_k$ 的前 $m$ 项有时是有用的。这个新级数记作 $\sum_{k\geq m} x_k$ 或 $(s_n)_{n\geq m}$。常常出现 $x_0$ 没有定义的情形（例如 $x_k=1/k$）。此时 $\sum x_k$ 指的是 $\sum_{k\geq 1} x_k$。}。最后，若级数 $ \sum x_k $ 的部分和序列 $ (s_n) $ 在 $ E $ 中发散，则称该级数发散（或是发散的）。
+
+\begin{example}
+
+\begin{items}
+\item
+
+级数 $ \sum 1/k! $ 在 $ \mathbb{R} $ 中收敛。由例 4.2(g)，它的值为 $ e $，即 $ e = \sum_{k=0}^{\infty} 1/k! $。
+
+\item
+
+级数 $ \sum 1/k^2 $ 在 $ \mathbb{R} $ 中收敛。
+
+\proofhead
+显然，部分和序列 $ (s_n) $ 是递增的。由于对每个 $ n \in \mathbb{N}^\times $
+\[
+s_{n}=\sum_{k=1}^{n}\frac{1}{k^{2}}\leq1+\sum_{k=2}^{n}\frac{1}{k(k-1)}=1+\sum_{k=2}^{n}\Big(\frac{1}{(k-1)}-\frac{1}{k}\Big)=1+1-\frac{1}{n}<2,
+\]
+
+序列 $ (s_{n}) $ 是有界的。因此，结论由定理 4.1 可得。 $ \blacksquare $
+
+\end{items}
+
+直观上很明显，一个级数只有在各项构成零序列时才能收敛。我们在下面的命题中证明这一必要条件。
+
+\end{example}
+
+\begin{proposition}
+
+若级数 $ \sum x_k $ 收敛，则 $ (x_k) $ 是零序列。
+
+\proofhead
+令 $ \sum x_k $ 为收敛级数。由命题 6.1，部分和序列 $ (s_n) $ 是柯西序列。因此，对每个 $ \varepsilon > 0 $，存在某个 $ N \in \mathbb{N} $，使得对所有 $ m, n \geq N $ 有 $ |s_n - s_m| < \varepsilon $。特别地，
+\[
+\left|s_{n+1}-s_{n}\right|=\left|\sum_{k=0}^{n+1}x_{k}-\sum_{k=0}^{n}x_{k}\right|=\left|x_{n+1}\right|<\varepsilon,\qquad n\geq N,
+\]
+
+即 $ (x_{n}) $ 是零序列。 ■
+
+\end{proposition}
+
+\subsection*{调和级数与几何级数}
+
+下面的例子表明，命题 7.2 的逆命题不成立。
+
+\begin{example}
+
+调和级数 $ \sum 1/k $ 在 $ \mathbb{R} $ 中发散。
+
+\proofhead
+由不等式
+\[
+|s_{2n}-s_{n}|=\sum_{k=n+1}^{2n}\frac{1}{k}\geq\frac{n}{2n}=\frac{1}{2},\qquad n\in\mathbb{N}^{\times},
+\]
+
+可知 $ (s_{n}) $ 不是柯西序列。因此，由命题 6.1，序列 $ (s_{n}) $ 发散，这意味着调和级数发散。
+
+作为命题 7.2 的一个简单应用，我们对几何级数 $ \sum a^k $，$ a \in \mathbb{K} $ 的收敛性态给出完整的刻画。
+
+\end{example}
+
+\begin{example}
+
+令 $ a \in \mathbb{K} $。则
+
+\[
+\sum_{k=0}^{\infty}a^{k}=\frac{1}{1-a},\qquad|a|<1.
+\]
+
+当 $ |a| \geq 1 $ 时，几何级数发散。
+
+\proofhead
+由习题 I.8.1，我们有
+\[
+s_{n}=\sum_{k=0}^{n}a^{k}=\frac{1-a^{n+1}}{1-a},\qquad n\in\mathbb{N}.
+\]
+
+若 $ |a| < 1 $，则由例 4.2(a) 可得，当 $ n \to \infty $ 时 $ (s_n) $ 收敛于 $ 1/(1-a) $。
+
+反之，若 $ |a| \geq 1 $，则 $ |a^k| = |a|^k \geq 1 $，由命题 7.2，级数 $ \sum_k a^k $ 发散。 $ \blacksquare $
+
+\end{example}
+
+\subsection*{级数的运算}
+
+级数是特殊的序列，因此我们为收敛序列推导出的所有法则同样适用于级数。特别地，极限函数的线性性质对级数成立（见 2 节与注 3.1(c)）。
+
+\begin{proposition}
+
+令 $ \sum a_k $ 与 $ \sum b_k $ 为赋范向量空间 $ E $ 中的收敛级数，且 $ \alpha \in \mathbb{K} $。
+
+\begin{subitems}
+\item
+
+级数 $ \sum(a_k + b_k) $ 收敛，且
+
+\[
+\sum_{k=0}^{\infty}(a_{k}+b_{k})=\sum_{k=0}^{\infty}a_{k}+\sum_{k=0}^{\infty}b_{k}.
+\]
+\item
+
+级数 $ \sum(\alpha a_k) $ 收敛，且
+
+\[
+\sum_{k=0}^{\infty}(\alpha a_{k})=\alpha\sum_{k=0}^{\infty}a_{k}.
+\]
+
+\proofhead
+对 $ n \in \mathbb{N} $，令 $ s_n := \sum_{k=0}^{n} a_k $ 与 $ t_n := \sum_{k=0}^{n} b_k $。由假设，存在 $ s, t \in E $，使得 $ s_n \to s $ 且 $ t_n \to t $。鉴于恒等式
+\[
+s_{n}+t_{n}=\sum_{k=0}^{n}(a_{k}+b_{k}),\quad\alpha s_{n}=\sum_{k=0}^{n}(\alpha a_{k}),
+\]
+
+两个结论都由命题 2.2 与注 3.1(c) 可得。 ■
+
+\end{subitems}
+
+\end{proposition}
+
+\subsection*{收敛判别法}
+
+巴拿赫空间中的序列收敛当且仅当它是柯西序列这一事实，对级数而言取如下形式。
+
+\begin{theorem}
+
+（柯西准则） 对于巴拿赫空间 $ (E, |\cdot|) $ 中的级数 $ \sum x_k $，下列命题等价：
+
+\begin{subitems}
+\item
+
+$ \sum x_{k} $ 收敛。
+
+\item
+
+对每个 $ \varepsilon > 0 $，存在某个 $ N \in \mathbb{N} $，使得
+
+\[
+\Big|\sum_{k=n+1}^{m}x_{k}\Big|<\varepsilon\;,\qquad m>n\geq N\;.
+\]
+
+\proofhead
+显然，对所有 $m > n$ 有 $s_m - s_n = \sum_{k=n+1}^m x_k$。因此 $(s_n)$ 是 $E$ 中的柯西序列当且仅当 (ii) 为真。于是结论由 $E$ 的完备性可得。■
+\end{subitems}
+
+\end{theorem}
+
+对于项非负的实级数，我们有如下简单的收敛判别法：
+
+\begin{theorem}
+
+令 $ \sum x_k $ 为 $ \mathbb{R} $ 中的级数，使得对所有 $ k \in \mathbb{N} $ 有 $ x_k \geq 0 $。则 $ \sum x_k $ 收敛当且仅当 $ (s_n) $ 有界。此时，该级数的值为 $ \sup_{n \in \mathbb{N}} s_n $。
+
+\proofhead
+由于各项非负，部分和序列 $ (s_{n}) $ 是递增的。由定理 4.1，$ (s_{n}) $ 收敛当且仅当 $ (s_{n}) $ 有界。最后的结论同样来自该定理。■
+\end{theorem}
+
+若 $ \sum x_k $ 是 $ \mathbb{R} $ 中项非负的级数，且其部分和序列有界，我们记 $ \sum x_k < \infty $。使用这一记号，定理 7.7 的第一个结论可以表示为
+
+\[
+\sum x_{k}<\infty\ \Longleftrightarrow\ \sum x_{k}\text{ 收敛}.
+\]
+
+\subsection*{交错级数}
+
+若对所有 $k$，$y_k$ 与 $y_{k+1}$ 符号相反，则称 $ \mathbb{R} $ 中的级数 $\sum y_k$ 为 $\text{交错}$ 的。交错级数总可以写成 $\pm\sum(-1)^k x_k$ 的形式，其中 $x_k \geq 0$。
+
+\begin{theorem}
+
+（莱布尼茨准则） 令 $ (x_k) $ 为项非负的递减零序列。则交错级数 $ \sum(-1)^k x_k $ 在 $ \mathbb{R} $ 中收敛。
+
+\proofhead
+由于不等式
+\[
+s_{2n+2}-s_{2n}=-x_{2n+1}+x_{2n+2}\leq0~,\qquad n\in\mathbb{N}~,
+\]
+
+偶下标的部分和序列 $ (s_{2n})_{n\in\mathbb{N}} $ 是递减的。类似地，
+
+\[
+s_{2n+3}-s_{2n+1}=x_{2n+2}-x_{2n+3}\ge0~,\qquad n\in\mathbb{N}~,
+\]
+
+因此 $ (s_{2n+1})_{n\in\mathbb{N}} $ 是递增的。此外，$ s_{2n+1}\leq s_{2n} $，所以
+
+\[
+s_{2n+1}\leq s_{0}\quad\text{ 且 }\quad s_{2n}\geq0\;,\qquad n\in\mathbb{N}\;.
+\]
+
+由定理 4.1，存在实数 $s$ 与 $t$，使得当 $n \to \infty$ 时 $s_{2n} \to s$ 且 $s_{2n+1} \to t$。我们的目标是证明部分和序列 $(s_n)$ 收敛。首先注意到
+
+\[
+t-s=\lim_{n\to\infty}(s_{2n+1}-s_{2n})=\lim_{n\to\infty}x_{2n+1}=0.
+\]
+
+因此，对每个 $ \varepsilon > 0 $，存在 $ N_1, N_2 \in \mathbb{N} $，使得
+
+\[
+|s_{2n}-s|<\varepsilon\;,\quad2n\geq N_{1}\;,\qquad\text{ 且 }\qquad|s_{2n+1}-s|<\varepsilon\;,\quad2n+1\geq N_{2}\;.
+\]
+
+于是对所有 $ n \geq \max\{N_1, N_2\} $ 有 $ |s_n - s| < \varepsilon $，这就证明了结论。
+
+\end{theorem}
+
+\begin{corollary}
+
+沿用定理 7.8 的记号，我们有 $ |s - s_n| \leq x_{n+1} $，$ n \in \mathbb{N} $。
+
+\proofhead
+在定理 7.8 的证明中，我们已经证明了
+\[
+\inf_{n\in\mathbb{N}}s_{2n}=s=\sup_{n\in\mathbb{N}}s_{2n+1}.
+\]
+
+这蕴含不等式
+
+\begin{equation}
+0\leq s_{2n}-s\leq s_{2n}-s_{2n+1}=x_{2n+1},\qquad n\in\mathbb{N},
+\end{equation}
+
+以及
+
+\begin{equation}
+0\leq s-s_{2n-1}\leq s_{2n}-s_{2n-1}=x_{2n},\qquad n\in\mathbb{N}.
+\end{equation}
+
+将 (7.1) 与 (7.2) 结合起来可得 $ |s - s_n| \leq x_{n+1} $。 ■
+
+\end{corollary}
+
+推论 7.9 表明，用交错级数的第 $ n $ 个部分和来替代其值时所产生的误差，至多等于‘被省略的第一项’的绝对值。此外，(7.1) 与 (7.2) 表明，第 $ n $ 个部分和交替地小于和大于该级数的值。
+
+\begin{example}
+
+由莱布尼茨准则，交错级数
+
+\begin{items}
+\item
+
+$ \sum_{k=1}^{\infty}\frac{(-1)^{k+1}}{k}=1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\cdots $（交错调和级数）
+
+\item
+
+$ \sum_{k=0}^{\infty}\frac{(-1)^{k}}{2k+1}=1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+\cdots $
+收敛。它们的值分别为 $ \log 2 $ 与 $ \pi/4 $（见应用 IV.3.9(d) 与习题 V.3.11）。 $ \blacksquare $
+
+\end{items}
+
+\end{example}
+
+\subsection*{实数的十进制、二进制及其他表示}
+
+我们关于级数已证明的结论，可用来论证用十进制展开表示实数。例如，有理数
+
+\[
+24+\frac{1}{10^{1}}+\frac{3}{10^{2}}+\frac{0}{10^{3}}+\frac{7}{10^{4}}+\frac{1}{10^{5}}
+\]
+
+有唯一的十进制表示：
+
+\[
+24.13071:=2\cdot10^{1}+4\cdot10^{0}+\frac{1}{10^{1}}+\frac{3}{10^{2}}+\frac{0}{10^{3}}+\frac{7}{10^{4}}+\frac{1}{10^{5}}.
+\]
+
+我们也想赋予‘无限十进制展开’以意义，例如
+
+\[
+7.52341043\ldots
+\]
+
+当指定了一个确定该展开的所有后续数字的算法时。下面的例子表明，这类表示需要谨慎对待：
+
+\[
+3.999\ldots=3+\sum_{k=1}^{\infty}\frac{9}{10^{k}}=3+\frac{9}{10}\sum_{k=0}^{\infty}10^{-k}=3+\frac{9}{10}\cdot\frac{1}{1-\frac{1}{10}}=4.
+\]
+
+在上述表示中选取数字 10 作为‘基底’，也许有某种历史的、文化的或实用的理由，但它并不源于任何数学上的考虑。我们也可以考虑，例如，二进制表示，如
+
+\[
+101.10010\ldots=1\cdot2^{2}+0\cdot2^{1}+1\cdot2^{0}+1\cdot2^{-1}+0\cdot2^{-2}+0\cdot2^{-3}+1\cdot2^{-4}+0\cdot2^{-5}+\cdots
+\]
+
+下面我们把这一初步讨论表述得更精确。对于实数 $ x \in \mathbb{R} $，令 $ \lfloor x \rfloor := \max\{k \in \mathbb{Z} ; k \leq x\} $ 表示小于或等于 $ x $ 的最大整数。由良序原理 I.5.5 可以简单地推出，下取整函数
+
+\[
+\left\lfloor\cdot\right\rfloor:\mathbb{R}\to\mathbb{Z}\;,\quad x\mapsto\left\lfloor x\right\rfloor,
+\]
+
+是有良好定义的。
+
+固定某个 $g \in \mathbb{N}$，其中 $g \geq 2$。我们将集合 $\{0,1,\ldots,g-1\}$ 的 $g$ 个元素称为 $\text{底}\,g$ 数字。因此，$\{0,1\}$ 是二进制（底 2）数字的集合，$\{0,1,2\}$ 是三进制（底 3）数字的集合，$\{0,1,2,3,4,5,6,7,8,9\}$ 是十进制（底 10）数字的集合。对于底 $g$ 数字的任何序列 $(x_k)_{k\in\mathbb{N}^\times}$，即对 $x_k\in\{0,1,\ldots,g-1\}$，$k\in\mathbb{N}^\times$，我们有不等式
+
+\[
+0\leq\sum_{k=1}^{n}x_{k}g^{-k}\leq(g-1)\sum_{k=1}^{\infty}g^{-k}=1,\qquad n\in\mathbb{N}^{\times}.
+\]
+
+由定理 7.7，级数 $ \sum x_k g^{-k} $ 收敛，且其值 $ x $ 满足 $ 0 \leq x \leq 1 $。该级数称为实数 $ x \in [0,1] $ 的\textbf{底} $ g $ \textbf{展开}。在特殊情形 $ g = 2 $、$ g = 3 $ 与 $ g = 10 $ 下，该级数分别称为 $ x $ 的\textbf{二进制}展开、\textbf{三进制}展开与\textbf{十进制}展开。
+
+通常将数 $ x \in [0,1] $ 的底 $ g $ 展开写成如下形式
+
+\[
+0.x_{1}x_{2}x_{3}x_{4}\ldots:=\sum_{k=1}^{\infty}x_{k}g^{-k},
+\]
+
+假定 $g$ 的选取是明确的。容易看出，任何 $m \in \mathbb{N}$ 都有如下形式的唯一表示\footnote{见习题 I.5.11。为得到唯一性，我们必须忽略前导零。例如，我们把 $0\,3^3+0\,3^2+1\,3^1+2\,3^0$ 与 $1\,3^1+2\,3^0$ 视为 5 的相同三进制表示。}
+
+\begin{equation}
+m=\sum_{j=0}^{\ell}y_{j}g^{j},\qquad y_{k}\in\{0,1,\ldots,g-1\},\quad0\leq k\leq\ell.
+\end{equation}
+
+则
+
+\[
+x=m+\sum_{k=1}^{\infty}x_{k}g^{-k}=\sum_{j=0}^{\ell}y_{j}g^{j}+\sum_{k=1}^{\infty}x_{k}g^{-k}
+\]
+
+是一个非负实数。该等式右边称为 $x$ 的底 $ g $ 展开，记为
+
+\[
+y_{\ell}y_{\ell-1}\cdots y_{0}.x_{1}x_{2}x_{3}\cdots
+\]
+
+（若 $g$ 是明确的）。类似地，
+
+\[
+-y_{\ell}y_{\ell-1}\ldots y_{0}.x_{1}x_{2}x_{3}\ldots
+\]
+
+称为 $-x$ 的底 $g$ 展开。最后，若存在 $\ell \in \mathbb{N}$ 与 $p \in \mathbb{N}^\times$，使得对所有 $k \geq \ell$ 有 $x_{k+p} = x_k$，则称底 $g$ 展开是周期的。
+
+\qyxffntextdef{1}{此外还应验证，由这个算法构造出的级数都不满足条件：对几乎所有 $k$ 有 $x_k=g-1$。}
+\begin{theorem}
+
+设 $ g \geq 2 $。则每个实数 $ x $ 都有底 $ g $ 展开。若排除满足对几乎所有 $ k \in \mathbb{N} $ 都有 $ x_k = g - 1 $ 的展开，则该展开唯一。此外，$ x $ 是有理数当且仅当其底 $ g $ 展开是周期的。
+
+证明
+
+\begin{items}
+\item
+
+只需考虑 $ x \geq 0 $ 的情形。此时存在某个 $ r \in [0,1) $，使得 $ x = \lfloor x \rfloor + r $。鉴于上面的说明，事实上只需考虑 $x$ 位于区间 $ [0,1) $ 中的情形。
+
+\item
+
+为了证明 $x \in [0,1)$ 的底 $g$ 展开的存在性，我们按如下方式递归地定义一个序列 $x_1, x_2, \ldots$：
+
+\begin{equation}
+x_{1}:=\lfloor g x\rfloor~,\quad x_{k}:=\Big\lfloor g^{k}\Big(x-\sum_{j=1}^{k-1}x_{j} g^{-j}\Big)\Big\rfloor~,\qquad k\geq2~.
+\end{equation}
+
+当然，由构造可知 $ x_k \in \mathbb{N} $。我们来证明这些 $ x_k \in \mathbb{N} $ 事实上是底 $ g $ 数字，即
+
+\begin{equation}
+x_{k}\in\{0,1,\ldots,g-1\}~,\qquad k\in\mathbb{N}^{\times}~.
+\end{equation}
+
+我们首先写出
+
+\begin{equation}
+\begin{aligned}
+g^{k}\Big(x-\sum_{j=1}^{k-1}x_{j} g^{-j}\Big)&=g^{k} x-x_{1}g^{k-1}-x_{2}g^{k-2}-\cdots-x_{k-2}g^{2}-x_{k-1}g\\&=g^{k-2}\big(g(gx-x_{1})-x_{2}\big)-\cdots-x_{k-2}g^{2}-x_{k-1}g\\&=g\Big(\cdots g\big(g(gx-x_{1})-x_{2}\big)-\cdots-x_{k-1}\Big)\\
+\end{aligned}
+\end{equation}
+
+（见注 I.8.14(f)）。令 $ r_0 := x $ 且对所有 $ k \in \mathbb{N}^\times $ 令 $ r_k := gr_{k-1} - x_k $。则由 (7.6) 我们得到
+
+\begin{equation}
+g^{k}\Big(x-\sum_{j=1}^{k-1}x_{j}g^{-j}\Big)=g r_{k-1}~,\qquad k\in\mathbb{N}^{\times}~.
+\end{equation}
+
+于是对所有 $ k \in \mathbb{N}^\times $ 有 $ x_k = \lfloor gr_{k-1} \rfloor $。由于
+
+\[
+r_{k}=g r_{k-1}-x_{k}=g r_{k-1}-\lfloor g r_{k-1}\rfloor\in[0,1)~,\qquad k\in\mathbb{N}~,
+\]
+
+这就证明了这些 $ x_k \in \mathbb{N} $ 是底 $ g $ 数字。
+我们的下一个目标是证明级数 $ \sum x_kg^{-k} $ 的值为 $ x $。事实上，由 $ x_k = \lfloor gr_{k-1} \rfloor $ 与 (7.7) 可得
+
+\[
+0\leq x_{k}\leq g r_{k-1}=g^{k}\Big(x-\sum_{j=1}^{k-1}x_{j}g^{-j}\Big),\qquad k\in\mathbb{N}^{\times},
+\]
+
+从而
+
+\begin{equation}
+x-\sum_{j=1}^{k-1}x_{j}g^{-j}\geq0,\qquad k\geq2.
+\end{equation}
+
+另一方面，我们有 $ r_k = g^k \big( x - \sum_{j=1}^{k-1} x_j g^{-j} \big) - x_k < 1 $，所以
+
+\begin{equation}
+x-\sum_{j=1}^{k-1}x_{j}g^{-j}<g^{-k}(1+x_{k}),\qquad k\geq2.
+\end{equation}
+
+将 (7.8) 与 (7.9) 结合起来，我们有
+
+\[
+0\leq x-\sum_{j=1}^{k-1}x_{j}g^{-j}<g^{-k+1},\qquad k\geq2.
+\]
+
+由于 $ \lim_{k \to \infty} g^{-k+1} = 0 $，这蕴含 $ x = \sum_{k=1}^{\infty} x_k g^{-k} $\qyxffnmark{1}
+
+\item
+
+为证明唯一性，我们假设存在 $ x_k, y_k \in \{0,1,\ldots,g-1\} $，$ k \in \mathbb{N}^\times $，以及某个 $ k_0 \in \mathbb{N}^\times $，使得
+
+\[
+\sum_{k=1}^{\infty}x_{k}g^{-k}=\sum_{k=1}^{\infty}y_{k}g^{-k},
+\]
+
+其中 $ x_{k_0} \neq y_{k_0} $ 且对 $ 1 \leq k \leq k_0 - 1 $ 有 $ x_k = y_k $。这蕴含
+
+\begin{equation}
+(x_{k_{0}}-y_{k_{0}})g^{-k_{0}}=\sum_{k=k_{0}+1}^{\infty}(y_{k}-x_{k})g^{-k}.
+\end{equation}
+
+不失一般性，我们可以假设 $ x_{k_0} > y_{k_0} $，于是 $ 1 \leq x_{k_0} - y_{k_0} $。此外，对所有 $ x_k $ 与 $ y_k $ 我们有 $ y_k - x_k \leq g - 1 $，并且由于我们已经排除了
+几乎所有底 $g$ 数字都等于 $g-1$ 的情形，存在某个 $k_1 > k_0$，使得 $y_{k_1} - x_{k_1} < g-1$。于是，由 (7.10)，我们得到不等式
+
+\[
+g^{-k_{0}}\leq(x_{k_{0}}-y_{k_{0}})g^{-k_{0}}<(g-1)\sum_{k=k_{0}+1}^{\infty}g^{-k}=g^{-k_{0}},
+\]
+
+这显然不可能。因此我们证明了唯一性结论。
+
+\item
+
+令 $ \sum_{k=1}^{\infty} x_k g^{-k} $ 为 $ x \in [0,1) $ 的周期底 $ g $ 展开。则存在 $ \ell \in \mathbb{N} $ 与 $ p \in \mathbb{N}^\times $，使得对所有 $ k \geq \ell $ 有 $ x_{k+p} = x_k $。只需证明 $ x' := \sum_{k=\ell}^{\infty} x_k g^{-k} $ 是有理数。令
+
+\[
+x_{0}:=\sum_{k=\ell}^{\ell+p-1}x_{k}g^{-k}\in\mathbb{Q}.
+\]
+
+由于对所有 $ k \geq \ell $ 有 $ x_{k+p} = x_k $，我们有
+
+\begin{equation*}
+\begin{aligned}
+g^{p}x^{\prime}-x^{\prime}&=g^{p}x_{0}+\sum_{k=\ell+p}^{\infty}x_{k}g^{-k+p}-\sum_{k=\ell}^{\infty}x_{k}g^{-k}\\&=g^{p}x_{0}+\sum_{k=\ell}^{\infty}x_{k+p}g^{-k}-\sum_{k=\ell}^{\infty}x_{k}g^{-k}=g^{p}x_{0}.
+\end{aligned}
+\end{equation*}
+
+于是 $ x' = g^p x_0 (g^p - 1)^{-1} $ 是有理数。
+现在令 $ x \in [0,1) $ 为有理数，即 $ x = p/q $，其中 $ p $ 与 $ q $ 是满足 $ p < q $ 的正自然数。令 $ \sum_{k=1}^{\infty} x_k g^{-k} $ 为 $ x $ 的底 $ g $ 展开。同 (b) 中一样，令 $ r_0 := x $ 且对所有 $ k \in \mathbb{N}^\times $ 令 $ r_k := gr_{k-1} - x_k $。
+我们断言，对每个 $ k \in \mathbb{N} $，
+
+\begin{equation}
+\text{存在某个 }s_{k}\in\{0,1,\ldots,q-1\}\text{ 使得 }r_{k}=s_{k}/q\;.
+\end{equation}
+
+对 $k=0$，该断言取 $s_0:=p$ 时为真。假设 (7.11) 对某个 $k\in\mathbb{N}$ 为真，即 $r_k=s_k/q$，其中 $0\leq s_k\leq q-1$。由于 $x_{k+1}=\lfloor gr_k\rfloor=\lfloor gs_k/q\rfloor$，存在某个 $s_{k+1}\in\{0,1,\ldots,q-1\}$，使得 $gs_k=qx_{k+1}+s_{k+1}$，于是
+
+\[
+r_{k+1}=g r_{k}-x_{k+1}=\frac{g s_{k}}{q}-x_{k+1}=\frac{s_{k+1}}{q}.
+\]
+
+因此 (7.11) 对 $ k+1 $ 为真，由归纳法，它对所有 $ k $ 为真。由于对 $ s_k $ 而言，只有 $ q $ 个值 $ 0,1,\ldots,q-1 $ 可用，存在某个 $ k_0\in\{1,\ldots,q-1\} $ 与 $ j_0\in\{k_0,k_0+1,\ldots,k_0+q\} $，使得 $ s_{j_0}=s_{k_0} $。于是 $ r_{j_0+1}=r_{k_0} $，这蕴含对所有 $ 1\leq i\leq j_0-k_0 $ 有 $ r_{j_0+i}=r_{k_0+i} $。从而，由 $ x_{k+1}=\lfloor gr_k\rfloor $（$ k\in\mathbb{N}^\times $）可得，$ x $ 的底 $ g $ 展开是周期的。
+
+\end{items}
+
+\end{theorem}
+
+\subsection*{$\mathbb{R}$ 的不可数性}
+
+借助定理 7.11，现在可以很容易地证明 $ \mathbb{R} $ 是不可数的。
+
+\begin{theorem}
+
+实数集 $ \mathbb{R} $ 是不可数的。
+
+\proofhead
+假设 $\mathbb{R}$ 可数。子集 $\{1/n; n \geq 2\}$ $\subseteq (0,1)$ 是可数无限的，因此由例 I.6.1(a) 与命题 I.6.7，区间 $(0,1)$ 也是可数无限的。于是对某个序列 $(x_n)_{n \in \mathbb{N}}$ 有 $(0,1) = \{x_n; n \in \mathbb{N}\}$。由定理 7.11，每个 $x_n \in (0,1)$ 都有唯一的三进制展开，形如 $x_n = 0.x_{n,1}x_{n,2} \ldots$，其中对无穷多个 $k \in \mathbb{N}^\times$，$x_{n,k} \in \{0,1,2\}$ 不等于 2。特别地，由命题 I.6.7，集合
+\[
+X:=\{0.x_{n,1}x_{n,2}\ldots\;;\;x_{n,k}\neq2,\;n\in\mathbb{N},\;k\in\mathbb{N}^{\times}\}
+\]
+
+是可数的。由于 $X$ 显然与 $\{0,1\}^{\mathbb{N}}$ 等势，我们已经证明了 $\{0,1\}^{\mathbb{N}}$ 是可数的。这与命题 I.6.11 矛盾。 ■
+
+\end{theorem}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+确定下列级数的值：
+
+\[
+\mathrm{(a)}\sum\frac{(-1)^{k}}{2^{k}},\quad\mathrm{(b)}\sum\frac{1}{4k^{2}-1}.
+\]
+\item
+
+确定下列级数收敛还是发散：
+
+\[
+\mathrm{(a)}\sum\frac{\sqrt{k+1}-\sqrt{k}}{\sqrt{k}},\mathrm{(b)}\sum(-1)^{k}\big(\sqrt{k+1}-\sqrt{k}\big),\mathrm{(c)}\sum\frac{k!}{k^{k}},\mathrm{(d)}\sum\frac{(k+1)^{k-1}}{(-k)^{k}}
+\]
+\item
+
+一只无限小的蜗牛以 5 厘米/小时的恒定速度沿着一条 1 米长的橡皮筋爬行。在第一个小时以及之后每个小时的末尾，橡皮筋都被均匀地再拉长 1 米。若蜗牛从橡皮筋的左端出发，它能否在有限时间内到达右端？
+
+\item
+
+令 $ \sum a_k $ 为巴拿赫空间 $ E $ 中的收敛级数。证明由 $ r_n := \sum_{k=n}^{\infty} a_k $ 定义的序列 $ (r_n) $ 是零序列。
+
+\item
+
+令 $ (x_k) $ 为递减序列，使得 $ \sum x_k $ 收敛。证明 $ (kx_k) $ 是零序列。
+
+\item
+
+令 $ (x_{k}) $ 为 $ [0,\infty) $ 中的序列。证明
+
+\[
+\sum x_{k}<\infty\Longleftrightarrow\sum\frac{x_{k}}{1+x_{k}}<\infty.
+\]
+\item
+
+令 $ (d_k) $ 为 $ [0,\infty) $ 中的序列，使得 $ \sum_{k=0}^{\infty}d_k=\infty $。
+
+\begin{items}
+\item
+
+关于下列级数的收敛性，能说些什么？
+
+\[
+\mathrm{(i)}\sum\frac{d_{k}}{1+d_{k}}~,\quad\mathrm{(ii)}\sum\frac{d_{k}}{1+k^{2}d_{k}}~.
+\]
+
+在两种情形下，关于序列 $ (d_{k}) $ 的假设都是必需的吗？
+
+\item
+
+通过例子说明，级数
+
+\[
+(\mathrm{i})\sum\frac{d_{k}}{1+kd_{k}},\quad(\mathrm{ii})\sum\frac{d_{k}}{1+d_{k}^{2}}
+\]
+
+可以既收敛又发散。
+（提示：(a) 分别考虑 $ \overline{\lim} d_k < \infty $ 与 $ \overline{\lim} d_k = \infty $ 的情形。）
+
+\end{items}
+
+\item
+
+令 $ s := \sum_{k=1}^{\infty} k^{-2} $。证明
+
+\[
+1-\frac{1}{2^{2}}-\frac{1}{4^{2}}+\frac{1}{5^{2}}+\frac{1}{7^{2}}-\frac{1}{8^{2}}-\frac{1}{10^{2}}++--\cdots=\frac{4}{9}s.
+\]
+\item
+
+对 $ (j, k) \in \mathbb{N} \times \mathbb{N} $，令
+
+\begin{equation*}
+x_{j k}:=\left\{\begin{array}{c l}{1/(j^{2}-k^{2}),}&{\quad j\neq k\;,}\\ {0,}&{\quad j=k\;.}\\ \end{array}\right.
+\end{equation*}
+
+对每个 $ j \in \mathbb{N}^\times $，确定级数 $ \sum_{k=0}^{\infty} x_{jk} $ 的值。（提示：对 $ x_{jk} $ 作适当的因式分解。）
+
+\item
+
+若系数 $ c_k $ 是整数，使得对所有 $ k \in \mathbb{N}^\times $ 有 $ 0 \leq c_{k+1} \leq k $，则级数 $ \sum c_k/k! $ 称为康托尔级数。
+
+证明下列结论：
+
+\begin{items}
+\item
+
+每个非负实数 $x$ 都可以表示为一个康托尔级数的值，即存在一个康托尔级数，使得 $x = \sum_{k=1}^{\infty} c_k / k!$。若几乎所有的 $c_k$ 都不等于 $k-1$，则该表示唯一。
+
+\item
+
+证明
+
+\[
+\sum_{k=n+1}^{\infty}\frac{k-1}{k!}=\frac{1}{n!},\qquad n\in\mathbb{N}.
+\]
+\item
+
+令 $ x \in [0,1) $ 由康托尔级数 $ \sum c_k/k! $ 表示。则 $ x $ 是有理数\footnote{参见习题 4.7(b)。}当且仅当存在某个 $ k_0 \in \mathbb{N}^\times $，使得对所有 $ k \geq k_0 $ 有 $ c_k = 0 $。
+
+\end{items}
+
+\item
+
+证明柯西凝聚定理：若 $ (x_k) $ 是 $ [0,\infty) $ 中的递减序列，则 $ \sum x_k $ 收敛当且仅当 $ \sum 2^k x_{2^k} $ 收敛。
+
+\item
+
+令 $ s \geq 0 $ 为有理数。证明级数 $ \sum_k k^{-s} $ 收敛当且仅当 $ s > 1 $。（提示：习题 11 与例 7.4。）
+
+\item
+
+证明 (7.3) 的结论。
+
+\item
+
+令
+
+\begin{equation*}
+x_{n}:=\left\{\begin{array}{c l}{n^{-1},}&{\quad n\text{ 为奇},}\\ {-n^{-2},}&{\quad n\text{ 为偶}.}\end{array}\right.
+\end{equation*}
+\end{exercises}
+
+\begin{proof}
+
+$ \sum x_n $ 发散。莱布尼茨准则为何不适用于该级数？
+
+\end{proof}
+
+\begin{exercises}
+\item[15.]
+
+令 $ (z_n) $ 为 $ (0, \infty) $ 中的序列，满足 $ \underline{\text{lim}} z_n = 0 $。证明存在 $ (0, \infty) $ 中的零序列 $ (x_n) $ 与 $ (y_n) $，使得
+
+\begin{items}
+\item
+
+$ \sum x_n < \infty $ 且 $ \varlimsup x_n / z_n = \infty $。
+
+\item
+
+$ \sum y_n = \infty $ 且 $ \underline{\text{lim}} $ $ y_n/z_n = 0 $。
+特别地，对于任何收敛缓慢的零序列 $ (z_n) $，存在一个零序列 $ (x_n) $，它收敛得足够快，使得 $ \sum x_n < \infty $，但即便如此，它仍有一个子序列 $ (x_{n_k}) $ 比 $ (z_n) $ 的相应子序列 $ (z_{n_k}) $ 更缓慢地收敛于零。并且，对于任何收敛迅速的零序列 $ (z_n) $，存在一个零序列 $ (y_n) $，它收敛得足够慢，使得 $ \sum y_n = \infty $，但即便如此，它仍有一个子序列 $ (y_{n_k}) $ 比 $ (z_n) $ 的相应子序列 $ (z_{n_k}) $ 更迅速地收敛于零。
+（提示：令 $ (z_n) $ 为 $ (0, \infty) $ 中的序列，使得 $ \underline{\text{lim}} z_n = 0 $
+
+\end{items}
+
+\begin{items}
+\item
+
+对每个 $ k \in \mathbb{N}^\times $，选取某个 $ n_k \in \mathbb{N} $，使得 $ z_{n_k} < k^{-3} $。现在对所有 $ k \in \mathbb{N} $ 令 $ x_{n_k} = k^{-2} $，其余情形令 $ x_n = n^{-2} $。
+
+\item
+
+选取一个子序列 $ (z_{n_k}) $，使得 $ \lim_{k} z_{n_k} = 0 $。对所有 $ k \in \mathbb{N} $ 令 $ y_{n_k} = z_{n_k}^2 $，其余情形令 $ y_n = 1/n $。
+
+\end{items}
+
+\end{exercises}
+
+\section{绝对收敛}
+
+由于级数是序列的特殊类型，我们为一般序列导出的规则也适用于级数。但是，由于级数的各项属于某个底层的赋范向量空间，我们可以利用这一事实导出其他规则。例如，对于给定的级数 $ \sum x_n $，我们可以研究级数 $ \sum |x_n| $。尽管序列 $(y_n)$ 的收敛蕴含其范数序列 $(|y_n|)$ 的收敛，但级数 $ \sum x_n $ 的收敛并不蕴含 $ \sum |x_n| $ 的收敛。例如，交错调和级数 $ \sum (-1)^{k+1}/k $ 与调和级数 $ \sum 1/k $ 的不同收敛性态即可说明这一点。
+
+此外，我们不应期望结合律对“无限多个”加法成立：
+
+\[
+1=1+\left(-1+1\right)+\left(-1+1\right)+\cdots=\left(1-1\right)+\left(1-1\right)+\left(1-1\right)+\cdots=0.
+\]
+
+如果我们把注意力局限于 $ \mathbb{R} $ 中各项为正的收敛级数，或者更一般地，局限于其各项的绝对值（范数）所构成的级数收敛的级数，那么这种情况会得到相当大的改善。
+
+在本节中，$ \sum x_k $ 是巴拿赫空间 $ E := (E, |\cdot|) $ 中的级数。
+
+如果 $ \sum |x_k| $ 在 $ \mathbb{R} $ 中收敛，即 $ \sum |x_k| < \infty $，则称级数 $ \sum x_k $ 绝对收敛，或者说它是绝对收敛的。
+
+下一个命题说明了这一定义中使用“收敛”一词的理由。
+
+\begin{proposition}
+
+每个绝对收敛的级数都收敛。
+
+\proofhead
+设 $ \sum x_k $ 是 $ E $ 中的绝对收敛级数。则 $ \sum |x_k| $ 在 $ \mathbb{R} $ 中收敛。由定理 7.6，$ \sum |x_k| $ 满足柯西准则，即对于所有 $ \varepsilon > 0 $，存在某个 $ N $，使得
+\[
+\sum_{k=n+1}^{m}\left|x_{k}\right|<\varepsilon,\qquad m>n\geq N.
+\]
+
+由于
+
+\begin{equation}
+\Big|\sum_{k=n+1}^{m}x_{k}\Big|\leq\sum_{k=n+1}^{m}|x_{k}|<\varepsilon\;,\qquad m>n\geq N\;,
+\end{equation}
+
+级数 $ \sum x_k $ 也满足柯西准则。由定理 7.6 可知 $ \sum x_k $ 收敛。
+
+\end{proposition}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+交错调和级数 $ \sum(-1)^{k+1}/k $ 表明命题 8.1 的逆命题不成立。该级数收敛（见例 7.10(a)），而其对应的绝对值级数，即调和级数 $ \sum k^{-1} $，发散（见例 7.3）。
+
+\item
+
+如果 $ \sum x_k $ 收敛而 $ \sum |x_k| $ 不收敛，则称级数 $ \sum x_k $ 条件收敛。交错调和级数是一个条件收敛级数。
+
+\item
+
+对于每个绝对收敛级数 $ \sum x_k $，我们有“广义三角不等式”，
+
+\[
+\left|\sum_{k=0}^{\infty}x_{k}\right|\leq\sum_{k=0}^{\infty}\left|x_{k}\right|.
+\]
+
+\proofhead
+三角不等式蕴含
+\[
+\left|\sum_{k=0}^{n}x_{k}\right|\leq\sum_{k=0}^{n}\left|x_{k}\right|,\qquad n\in\mathbb{N}.
+\]
+
+该断言现在由命题 2.7、2.10 和 5.3 得出（亦见注 3.1(c)）。
+
+\end{items}
+
+\end{remark}
+
+\subsection*{优级数、根值与比值判别法}
+
+绝对收敛在级数的研究中起着特别重要的作用。正因如此，优级数判别法至关重要，因为它为证明级数的绝对收敛提供了一种简便而灵活的手段。
+
+设 $ \sum x_k $ 是 $ E $ 中的级数，$ \sum a_k $ 是 $ \mathbb{R}^+ $ 中的级数。如果存在某个 $ K \in \mathbb{N} $，使得对于所有 $ k \geq K $ 都有 $ |x_k| \leq a_k $（或 $ a_k \leq |x_k| $），则称级数 $ \sum a_k $ 为 $ \sum x_k $ 的\textbf{优级数}（或\textbf{劣级数}\footnote{注意，按定义，劣级数的各项都是非负的。}）。
+
+\begin{theorem}
+
+（优级数判别法） 如果巴拿赫空间中的级数有一个收敛的优级数，那么它绝对收敛。
+
+\proofhead
+设 $ \sum x_k $ 是 $ E $ 中的级数，$ \sum a_k $ 是一个收敛的优级数。则存在某个 $ K $，使得对于所有 $ k \geq K $ 都有 $ |x_k| \leq a_k $。由定理 7.6，对于 $ \varepsilon > 0 $，存在某个 $ N \geq K $，使得对于所有 $ m > n \geq N $ 都有 $ \sum_{k=n+1}^m a_k < \varepsilon $。由于 $ \sum a_k $ 是 $ \sum x_k $ 的优级数，我们有
+\[
+\sum_{k=n+1}^{m}\left|x_{k}\right|\leq\sum_{k=n+1}^{m}a_{k}<\varepsilon,\qquad m>n\geq N.
+\]
+
+由于级数 $ \sum|x_k| $ 满足柯西准则，故 $ \sum|x_k| $ 收敛。这意味着级数 $ \sum x_k $ 绝对收敛。
+
+\end{theorem}
+
+\begin{example}
+
+\begin{items}
+\item
+
+对于 $ m \geq 2 $，$ \sum_{k} k^{-m} $ 在 $ \mathbb{R} $ 中收敛。
+
+\proofhead
+因为 $ m \geq 2 $，所以对于所有 $ k \in \mathbb{N}^\times $ 都有 $ k^{-m} \leq k^{-2} $。例 7.1(b) 表明 $ \sum k^{-2} $ 是 $ \sum k^{-m} $ 的收敛优级数。$ \blacksquare $
+\item
+
+对于任意满足 $ |z| < 1 $ 的 $ z \in \mathbb{C} $，级数 $ \sum z^k $ 绝对收敛。
+
+\proofhead
+对于所有 $ k \in \mathbb{N} $，我们有 $ |z^k| = |z|^k $。由于 $ |z| < 1 $ 以及例 7.4，几何级数 $ \sum |z|^k $ 是 $ \sum z^k $ 的收敛优级数。
+利用优级数判别法，我们可以导出级数收敛的其他重要判别法。我们从根值判别法开始，它是任意巴拿赫空间中级数绝对收敛的一个充分条件。
+\end{items}
+
+\end{example}
+
+\begin{theorem}
+
+（根值判别法） 设 $ \sum x_k $ 是 $ E $ 中的级数，且
+
+\[
+\alpha:=\varlimsup_{k}\sqrt[k]{|x_{k}|}.
+\]
+
+则以下结论成立：
+
+$ \sum x_k $ 绝对收敛，如果 $ \alpha < 1 $。
+
+$ \sum x_k $ 发散，如果 $ \alpha > 1 $。
+
+对于 $ \alpha = 1 $，$ \sum x_k $ 收敛与发散都有可能。
+
+证明
+
+\begin{items}
+\item
+
+如果 $\alpha < 1$，则区间 $(\alpha, 1)$ 非空，我们可以选取某个 $q \in (\alpha, 1)$。由定理 5.5，$\alpha$ 是序列 $\left( \sqrt[k]{|x_k|} \right)$ 的最大聚点。因此存在某个 $K$，使得对于所有 $k \geq K$ 都有 $\sqrt[k]{|x_k|} < q$，也就是说，对于所有 $k \geq K$，我们有 $|x_k| < q^k$。因此几何级数 $\sum q^k$ 是 $\sum x_k$ 的收敛优级数，该断言由定理 8.3 得出。
+
+\item
+
+如果 $\alpha > 1$，则再次由定理 5.5，存在无穷多个 $k \in \mathbb{N}$，使得 $\sqrt[k]{|x_k|} \geq 1$。于是对于无穷多个 $k \in \mathbb{N}$ 有 $|x_k| \geq 1$。特别地，$(x_k)$ 不是零序列，由命题 7.2，级数 $\sum x_k$ 发散。
+
+\item
+
+为了证明 $ \alpha = 1 $ 情形的断言，只需给出 $ E = \mathbb{R} $ 中满足 $ \alpha = 1 $ 的条件收敛级数。对于交错调和级数，$ x_k := (-1)^{k+1}/k $，由例 4.2(d)，我们有
+
+\[
+\sqrt[k]{\left|x_{k}\right|}=\sqrt[k]{\frac{1}{k}}=\frac{1}{\sqrt[k]{k}}\rightarrow1\quad(k\rightarrow\infty).
+\]
+
+于是由定理 5.7 得 $ \alpha = \varlimsup\sqrt[k]{|x_k|} = 1 $。■
+
+\end{items}
+
+\end{theorem}
+
+这个证明中的核心思想是利用几何级数作为收敛的优级数。这提示了另一个有用的收敛条件，即比值判别法。
+
+\begin{theorem}
+
+（比值判别法） 设 $ \sum x_k $ 是 $ E $ 中的级数，$ K_0 $ 满足对于所有 $ k \geq K_0 $ 都有 $ x_k \neq 0 $。则以下结论成立：
+
+\begin{subitems}
+\item
+
+如果存在 $ q \in (0,1) $ 和 $ K \geq K_0 $，使得
+
+\[
+\frac{|x_{k+1}|}{|x_{k}|}\leq q,\qquad k\geq K,
+\]
+
+则级数 $ \sum x_k $ 绝对收敛。
+
+\item
+
+如果存在某个 $ K \geq K_{0} $，使得
+
+\[
+\frac{|x_{k+1}|}{|x_{k}|}\geq1,\qquad k\geq K,
+\]
+
+则级数 $ \sum x_k $ 发散。
+
+\proofhead
+(i) 由假设，对于所有 $ k \geq K $ 我们有 $ |x_{k+1}| \leq q|x_k| $。简单的归纳论证给出不等式
+\[
+\left|x_{k}\right|\leq q^{k-K}\left|x_{K}\right|=\frac{\left|x_{K}\right|}{q^{K}}q^{k},\qquad k>K.
+\]
+
+令 $ c := |x_K|/q^K $。则 $ c \sum q^k $ 是级数 $ \sum x_k $ 的收敛优级数，该断言由定理 8.3 得出。
+
+\end{subitems}
+
+(ii) 该假设蕴含 $ (x_k) $ 不是零序列。由命题 7.2，级数 $ \sum x_k $ 必发散。
+
+\end{theorem}
+
+\begin{example}
+
+\begin{items}
+\item
+
+$ \sum k^2 2^{-k} < \infty $，因为由 $ x_k := k^2 2^{-k} $，我们得到
+
+\[
+\frac{|x_{k+1}|}{|x_{k}|}=\frac{(k+1)^{2}}{2^{k+1}}\cdot\frac{2^{k}}{k^{2}}=\frac{1}{2}\Big(1+\frac{1}{k}\Big)^{2}\to\frac{1}{2}\quad(k\to\infty).
+\]
+
+于是存在某个 $K$，使得对于所有 $k \geq K$ 都有 $|x_{k+1}|/|x_k| \leq 3/4$。所断言的收敛性于是由比值判别法得出。
+
+\item
+
+考虑级数
+
+\[
+\sum\left(\frac{1}{2}\right)^{k+(-1)^{k}}=\frac{1}{2}+1+\frac{1}{8}+\frac{1}{4}+\frac{1}{32}+\frac{1}{16}+\cdots
+\]
+
+其各项为 $ x_k := \left(\frac{1}{2}\right)^{k+(-1)^k} $（$ k \in \mathbb{N} $）。则
+
+\begin{equation*}
+\frac{\left|x_{k+1}\right|}{\left|x_{k}\right|}=\left\{\begin{array}{c l}{2,}&{k\text{ 为偶},}\\ {1/8,}&{k\text{ 为奇},}\\ \end{array}\right.
+\end{equation*}
+
+并且我们看出命题 8.6 的两个假设都不满足。\footnote{出于实用的考虑，最好先试比值判别法。若它不奏效，根值判别法仍可能判定该级数的收敛性（见习题 5.4）。}即便如此，该级数仍收敛，因为
+
+\[
+\overline{\lim}\sqrt[k]{|x_{k}|}=\overline{\lim}\sqrt[k]{\left(\frac{1}{2}\right)^{k+(-1)^{k}}}=\frac{1}{2}\overline{\lim}\sqrt[k]{\left(\frac{1}{2}\right)^{(-1)^{k}}}=\frac{1}{2},
+\]
+
+如例 4.2(e) 所示。
+
+\item
+
+对于每个 $ z \in \mathbb{C} $，级数 $ \sum z^k / k! $ 绝对收敛。\footnote{这与命题 7.2 一起给出了例 4.2(c) 中断言的另一个证明。}
+
+\proofhead
+设 $ z \in \mathbb{C}^\times $。对于所有 $ k \in \mathbb{N} $，令 $ x_k := z^k/k! $，我们有
+\[
+\frac{|x_{k+1}|}{|x_{k}|}=\frac{|z|}{k+1}\leq\frac{1}{2},\qquad k\geq2|z|,
+\]
+
+因此该断言由定理 8.6 得出。
+
+\end{items}
+
+\end{example}
+
+\subsection*{指数函数}
+
+由前一个例子，我们可以定义一个函数 exp，其定义为
+
+\[
+\exp:\mathbb{C}\to\mathbb{C}\;,\quad z\mapsto\sum_{k=0}^{\infty}\frac{z^{k}}{k!}\;.
+\]
+
+这个函数称为指数函数，级数 $ \sum z^k / k! $ 称为指数级数。指数函数在整个数学中极其重要，我们将在下文中对其性质进行透彻的研究。我们已经注意到，实数的指数函数是实数，即 $ \exp(\mathbb{R}) \subseteq \mathbb{R} $。对于指数函数到 $ \mathbb{R} $ 上的限制，我们仍使用符号 $ \exp $。
+
+\subsection*{级数的重排}
+
+设 $\sigma: \mathbb{N} \to \mathbb{N}$ 是一个置换。则级数 $\sum_k x_{\sigma(k)}$ 称为 $\sum x_k$ 的一个 $\text{重排}$。重排 $\sum_k x_{\sigma(k)}$ 的各项与原级数的各项相同，但它们出现的次序不同。如果 $\sigma$ 是 $\mathbb{N}$ 的一个置换，且对于几乎所有的 $k \in \mathbb{N}$ 都有 $\sigma(k) = k$，那么 $\sum x_k$ 与 $\sum_k x_{\sigma(k)}$ 具有相同的收敛性态，且若级数收敛则它们的值相等。对于满足对无穷多个 $k \in \mathbb{N}$ 都有 $\sigma(k) \neq k$ 的置换 $\sigma: \mathbb{N} \to \mathbb{N}$，这一点可能不成立，如下例所示：
+
+\begin{example}
+
+令 $ x_k := (-1)^{k+1}/k $，设 $ \sigma: \mathbb{N}^\times \to \mathbb{N}^\times $ 由 $ \sigma(1) := 1 $、$ \sigma(2) := 2 $ 以及下式定义
+
+\begin{equation*}
+\sigma(k):=\left\{\begin{array}{ll}k+k/3,&\text{若 }3\mid k,\\k-(k-1)/3,&\text{若 }3\mid(k-1)\\k+(k-2)/3,&\text{若 }3\mid(k-2),\end{array}\right.
+\end{equation*}
+
+（$ k \geq 3 $）。容易验证 $ \sigma $ 是 $ \mathbb{N}^\times $ 的一个置换，因此
+
+\[
+\sum x_{\sigma(k)}=1-\frac{1}{2}-\frac{1}{4}+\frac{1}{3}-\frac{1}{6}-\frac{1}{8}+\frac{1}{5}-\frac{1}{10}-\frac{1}{12}+--\cdots.
+\]
+
+是交错调和级数的一个重排
+
+\[
+\sum x_{k}=1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+\cdots\cdots.
+\]
+
+我们将证明这个重排收敛。分别用 $ s_n $ 和 $ t_n $ 表示 $ \sum x_k $ 与 $ \sum_k x_{\sigma(k)} $ 的第 $ n $ 部分和。令 $ s = \lim s_n $，即 $ \sum x_k $ 的值。由于
+
+\[
+\sigma(3n)=4n~,\quad\sigma(3n-1)=4n-2~,\quad\sigma(3n-2)=2n-1~,\qquad n\in\mathbb{N}^\times~,
+\]
+
+我们有
+
+\begin{equation*}
+\begin{aligned}
+t_{3n}&=1-\frac{1}{2}-\frac{1}{4}+\frac{1}{3}-\frac{1}{6}-\frac{1}{8}+--\cdots+\frac{1}{2n-1}-\frac{1}{4n-2}-\frac{1}{4n}\\&=\left(1-\frac{1}{2}-\frac{1}{4}\right)+\left(\frac{1}{3}-\frac{1}{6}-\frac{1}{8}\right)+\cdots+\left(\frac{1}{2n-1}-\frac{1}{4n-2}-\frac{1}{4n}\right)\\&=\left(\frac{1}{2}-\frac{1}{4}\right)+\left(\frac{1}{6}-\frac{1}{8}\right)+\cdots+\left(\frac{1}{4n-2}-\frac{1}{4n}\right)\\&=\frac{1}{2}\Big(1-\frac{1}{2}+\frac{1}{3}-\frac{1}{4}+-\cdots+\frac{1}{2n-1}-\frac{1}{2n}\Big)\\&=\frac{1}{2}s_{n}.\\
+\end{aligned}
+\end{equation*}
+
+于是，子序列 $ (t_{3n})_{n \in \mathbb{N}^\times} \text{的 } (t_m)_{m \in \mathbb{N}^\times} \text{收敛于 } s/2 $。由于我们还有
+
+\[
+\lim_{n\to\infty}\left|t_{3n+1}-t_{3n}\right|=\lim_{n\to\infty}\left|t_{3n+2}-t_{3n}\right|=0,
+\]
+
+由此可知 $ (t_{m}) $ 是柯西序列。由命题 6.4 和 1.15，序列 $ (t_{m}) $ 收敛于 s/2，也就是说，
+
+\[
+\sum_{k=1}^{\infty}x_{\sigma(k)}=1-\frac{1}{2}-\frac{1}{4}+\frac{1}{3}-\frac{1}{6}-\frac{1}{8}+\frac{1}{5}-\frac{1}{10}-\frac{1}{12}+--\cdots=\frac{s}{2}.
+\]
+
+注意到 $s$ 不为零，因为由推论 7.9，$|s-1|=|s-s_1|\leq-x_2=\frac{1}{2}$。■
+
+这个例子表明，当存在“无限多个加项”时加法不可交换，也就是说，收敛级数不能任意重排而不改变其值。\footnote{见习题 4。}相反，下一个命题表明绝对收敛级数的值在重排下保持不变。
+
+\end{example}
+
+\begin{theorem}
+
+（重排定理） 绝对收敛级数 $ \sum x_k $ 的每个重排都绝对收敛，并且与 $ \sum x_k $ 有相同的值。
+
+\proofhead
+对于每个 $ \varepsilon > 0 $，由定理 7.6，存在某个 $ N \in \mathbb{N} $，使得
+\[
+\sum_{k=N+1}^{m}\left|x_{k}\right|<\varepsilon,\qquad m>N.
+\]
+
+令 $ m \to \infty $ 取极限便得不等式 $ \sum_{k=N+1}^{\infty} |x_k| \leq \varepsilon $。
+
+现在设 $ \sigma $ 是 $ \mathbb{N} $ 的一个置换。对于 $ M := \max\{\sigma^{-1}(0), \ldots, \sigma^{-1}(N)\} $，我们有 $ \{\sigma(0), \ldots, \sigma(M)\} \supseteq \{0, \ldots, N\} $。于是，对于每个 $ m \geq M $，
+
+\begin{equation}
+\left|\sum_{k=0}^{m}x_{\sigma(k)}-\sum_{k=0}^{N}x_{k}\right|\leq\sum_{k=N+1}^{\infty}\left|x_{k}\right|\leq\varepsilon
+\end{equation}
+
+并且还有
+
+\begin{equation}
+\left|\sum_{k=0}^{m}\left|x_{\sigma(k)}\right|-\sum_{k=0}^{N}\left|x_{k}\right|\right|\leq\varepsilon.
+\end{equation}
+
+不等式 (8.3) 蕴含 $ \sum x_{\sigma(k)} $ 的绝对收敛性。在 (8.2) 中令 $ m \to \infty $ 取极限，然后利用命题 2.10 和注 3.1(c)，我们看到
+
+\[
+\left|\sum_{k=0}^{\infty}x_{\sigma(k)}-\sum_{k=0}^{N}x_{k}\right|\leq\varepsilon,
+\]
+
+因此这两个级数的值相等。■
+
+\end{theorem}
+
+\subsection*{二重级数}
+
+作为重排定理的一个应用，我们考虑巴拿赫空间 $ E $ 中的二重级数 $ \sum x_{jk} $。于是我们有一个函数 $ x: \mathbb{N} \times \mathbb{N} \to E $，并且如同第 1 节中那样，我们把 $ x(j, k) $ 简记为 $ x_{jk} $。函数 $ x $ 可以用一个双向无限阵列表示
+
+\begin{equation}
+\begin{array}{ccccc} x_{00} & x_{01} & x_{02} & x_{03} & \cdots \\ x_{10} & x_{11} & x_{12} & x_{13} & \cdots \\ x_{20} & x_{21} & x_{22} & x_{23} & \cdots \\ x_{30} & x_{31} & x_{32} & x_{33} & \cdots \\ \vdots & \vdots & \vdots & \vdots & \vdots \cdots \end{array}
+\end{equation}
+
+这个阵列中的元素有许多种求和方式，也就是说，有许多种不同的方式对这些元素排序以构成级数。在什么条件下这样的级数收敛，以及这些级数的值在多大程度上与排序的选择无关，这一点完全不清楚。
+
+由命题 I.6.9，集合 $\mathbb{N} \times \mathbb{N}$ 是可数的，也就是说，存在一个双射 $\alpha: \mathbb{N} \to \mathbb{N} \times \mathbb{N}$。如果 $\alpha$ 是这样的双射，我们称级数 $\sum_n x_{\alpha(n)}$ 为二重级数 $\sum x_{jk}$ 的一个排序。如果我们固定 $j \in \mathbb{N}$（或 $k \in \mathbb{N}$），则级数 $\sum_k x_{jk}$（或 $\sum_j x_{jk}$）称为 $\sum x_{jk}$ 的第 $j$ 行级数（或第 $j$ 列级数）。如果每个行级数（或列级数）都收敛，那么我们可以考虑行和级数 $\sum_j (\sum_{k=0}^{\infty} x_{jk})$（或列和级数 $\sum_k (\sum_{j=0}^{\infty} x_{jk})$）。最后，我们称二重级数 $\sum x_{jk}$ 是\textbf{可和的}\footnote{我们只定义了行级数（与列级数）的收敛性以及二重级数的任意排序的收敛性。对于二重级数 $\sum x_{jk}$ 本身，我们还没有收敛性的定义。注意，必须先证明每个行级数（或列级数）收敛，才能考虑行和级数（或列和级数）。}，如果
+
+\[
+\sup_{n\in\mathbb{N}}\sum_{j,k=0}^{n}\left|x_{j k}\right|<\infty.
+\]
+
+\begin{theorem}
+
+（二重级数定理） 设 $ \sum x_{jk} $ 是可和的二重级数。
+
+\begin{subitems}
+\item
+
+$ \sum x_{jk} $ 的每个排序 $ \sum_{n} x_{\alpha(n)} $ 都绝对收敛于某个与 $ \alpha $ 无关的值 $ s \in E $。
+
+\item
+
+行和级数 $ \sum_j (\sum_{k=0}^{\infty} x_{jk}) $ 与列和级数 $ \sum_k (\sum_{j=0}^{\infty} x_{jk}) $ 绝对收敛，并且
+
+\[
+\sum_{j=0}^{\infty}\Bigl(\sum_{k=0}^{\infty}x_{j k}\Bigr)=\sum_{k=0}^{\infty}\Bigl(\sum_{j=0}^{\infty}x_{j k}\Bigr)=s.
+\]
+
+\proofhead
+(i) 令 $ M = \sup_{n \in \mathbb{N}} \sum_{j,k=0}^{n} |x_{jk}| < \infty $。设 $ \alpha: \mathbb{N} \to \mathbb{N} \times \mathbb{N} $ 是一个双射，$ N \in \mathbb{N} $。则存在某个 $ K \in \mathbb{N} $，使得
+\begin{equation}
+\left\{\alpha(0),\ldots,\alpha(N)\right\}\subseteq\left\{(0,0),(1,0),\ldots,(K,0),\ldots,(0,K),\ldots,(K,K)\right\}.
+\end{equation}
+
+结合 $ \sum x_{jk} $ 的可和性，这蕴含
+
+\[
+\sum_{n=0}^{N}\left|x_{\alpha(n)}\right|\leq\sum_{j,k=0}^{K}\left|x_{j k}\right|\leq M.
+\]
+
+因此由定理 7.7，$ \sum_{n} x_{\alpha(n)} $ 绝对收敛。
+现在设 $ \beta\colon \mathbb{N} \to \mathbb{N} \times \mathbb{N} $ 是另一个双射。则 $ \sigma := \alpha^{-1} \circ \beta $ 是 $ \mathbb{N} $ 的一个置换。对于所有 $ m \in \mathbb{N} $，令 $ y_m := x_{\alpha(m)} $。则
+
+\[
+y_{\sigma(n)}=x_{\alpha(\sigma(n))}=x_{\beta(n)},\qquad n\in\mathbb{N},
+\]
+
+也就是说，$ \sum_{n} x_{\beta(n)} $ 是 $ \sum_{n} x_{\alpha(n)} $ 的一个重排。由于我们已经知道 $ \sum_{n} x_{\alpha(n)} $ 绝对收敛，剩下的断言由定理 8.9 得出。
+
+\end{subitems}
+
+(ii) 首先注意到，行级数 $ \sum_{k=0}^{\infty} x_{jk} $（$ j \in \mathbb{N} $）与列级数 $ \sum_{j=0}^{\infty} x_{jk} $（$ k \in \mathbb{N} $）绝对收敛。事实上，这直接由 $ \sum x_{jk} $ 的可和性与定理 7.7 得出。因此行和级数 $ \sum_{j} (\sum_{k=0}^{\infty} x_{jk}) $ 与列和级数 $ \sum_{k} (\sum_{j=0}^{\infty} x_{jk}) $ 都有良定义。
+
+接下来我们证明这些级数绝对收敛。考虑不等式
+
+\[
+\sum_{j=0}^{\ell}\left|\sum_{k=0}^{m}x_{jk}\right|\leq\sum_{j=0}^{\ell}\sum_{k=0}^{m}\left|x_{jk}\right|\leq\sum_{j,k=0}^{m}\left|x_{jk}\right|\leq M,\qquad\ell\leq m.
+\]
+
+在极限 $ m \to \infty $ 下，我们得到 $ \sum_{j=0}^{\ell} \left| \sum_{k=0}^{\infty} x_{jk} \right| \leq M $，$ \ell \in \mathbb{N} $，这证明了行和级数 $ \sum_{j} \left( \sum_{k=0}^{\infty} x_{jk} \right) $ 的绝对收敛性。类似的论证表明列和级数绝对收敛。
+
+现在设 $\alpha: \mathbb{N} \to \mathbb{N} \times \mathbb{N}$ 是一个双射，$s := \sum_{n=0}^{\infty} x_{\alpha(n)}$。对于任意 $\varepsilon > 0$，存在某个 $N \in \mathbb{N}$，使得 $\sum_{n=N+1}^{\infty} |x_{\alpha(n)}| < \varepsilon/2$。另外存在某个 $K \in \mathbb{N}$，使得 (8.5) 成立。因此我们有
+
+\[
+\left|\sum_{j=0}^{\ell}\sum_{k=0}^{m}x_{j k}-\sum_{n=0}^{N}x_{\alpha(n)}\right|\leq\sum_{n=N+1}^{\infty}\left|x_{\alpha(n)}\right|<\varepsilon/2,\qquad\ell,m\geq K.
+\]
+
+令 $ m \to \infty $ 和 $ \ell \to \infty $ 取极限，我们得到
+
+\[
+\Bigl|\sum_{j=0}^{\infty}\Bigl(\sum_{k=0}^{\infty}x_{j k}\Bigr)-\sum_{n=0}^{N}x_{\alpha(n)}\Bigr|\leq\varepsilon/2~.
+\]
+
+对如下各式应用三角不等式
+
+\[
+\left|s-\sum_{n=0}^{N}x_{\alpha(n)}\right|\leq\sum_{n=N+1}^{\infty}\left|x_{\alpha(n)}\right|<\varepsilon/2
+\]
+\[
+\left|\sum_{j=0}^{\infty}\left(\sum_{k=0}^{\infty}x_{j k}\right)-s\right|\leq\varepsilon.
+\]
+
+便得到
+
+由于这对每个 $\varepsilon > 0$ 都成立，行和级数具有值 $s$。类似的论证表明 $\sum_{k}\left(\sum_{j=0}^{\infty}x_{jk}\right)$ 的值也是 $s$。■
+
+\end{theorem}
+
+\subsection*{柯西乘积}
+
+当人们构造两个级数的乘积时，二重级数自然会出现。如果 $ \sum x_j $ 和 $ \sum y_k $ 是 $ \mathbb{K} $ 中的级数，那么将各项相乘，我们得到如下的双向无限阵列：
+
+\begin{equation}
+\begin{aligned}
+&x_{0}y_{0}\quad x_{0}y_{1}\quad x_{0}y_{2}\quad x_{0}y_{3}\quad\cdots\\&x_{1}y_{0}\quad x_{1}y_{1}\quad x_{1}y_{2}\quad x_{1}y_{3}\quad\cdots\\&x_{2}y_{0}\quad x_{2}y_{1}\quad x_{2}y_{2}\quad x_{2}y_{3}\quad\cdots\\&x_{3}y_{0}\quad x_{3}y_{1}\quad x_{3}y_{2}\quad x_{3}y_{3}\quad\cdots\\&\vdots\quad\vdots\quad\vdots\quad\vdots\quad\vdots\quad\vdots\quad\vdots\\
+\end{aligned}
+\end{equation}
+
+如果 $\sum x_j$ 和 $\sum y_k$ 都收敛，则行和级数为 $\sum_j x_j \cdot \sum_{k=0}^{\infty} y_k$，列和级数为 $\sum_k y_k \cdot \sum_{j=0}^{\infty} x_j$。对于所有 $(j, k) \in \mathbb{N} \times \mathbb{N}$，令 $x_{jk} := x_j y_k$。设 $\delta: \mathbb{N} \to \mathbb{N} \times \mathbb{N}$ 是 (I.6.3) 中的双射，于是，第 $n$ 对角和定义为
+
+\begin{equation}
+z_{n}:=\sum_{k=0}^{n}x_{k}y_{n-k},\qquad n\in\mathbb{N},
+\end{equation}
+
+我们有
+
+\[
+\sum_{j}x_{\delta(j)}=\sum_{n}z_{n}=\sum_{n}\biggl(\sum_{k=0}^{n}x_{k}y_{n-k}\biggr).
+\]
+
+这个特殊的排序 $ \sum_n x_{\delta(n)} $ 称为级数 $ \sum x_j $ 与 $ \sum y_k $ 的柯西乘积（比较 I.8 节中的 (8.8)）。
+
+为了利用 $\sum x_j$ 与 $\sum y_k$ 的柯西乘积，二重级数 $\sum x_j y_k$ 必须是可和的。对此的一个简单充分判别条件是 $\sum x_j$ 与 $\sum y_k$ 的绝对收敛性。
+
+\begin{theorem}
+
+（级数的柯西乘积） 假设 $ \mathbb{K} $ 中的级数 $ \sum x_j $ 与 $ \sum y_k $ 绝对收敛。则 $ \sum x_j $ 与 $ \sum y_k $ 的柯西乘积 $ \sum_n \sum_{k=0}^{n} x_k y_{n-k} $ 绝对收敛，并且
+
+\[
+\Big(\sum_{j=0}^{\infty}x_{j}\Big)\Big(\sum_{k=0}^{\infty}y_{k}\Big)=\sum_{n=0}^{\infty}\sum_{k=0}^{n}x_{k}y_{n-k}.
+\]
+
+\proofhead
+对于所有 $ (j, k) \in \mathbb{N} \times \mathbb{N} $，令 $ x_{jk} := x_j y_k $，我们有
+\[
+\sum_{j,k=0}^{n}\left|x_{j k}\right|=\sum_{j=0}^{n}\left|x_{j}\right|\cdot\sum_{k=0}^{n}\left|y_{k}\right|\leq\sum_{j=0}^{\infty}\left|x_{j}\right|\cdot\sum_{k=0}^{\infty}\left|y_{k}\right|~,\qquad n\in\mathbb{N}~.
+\]
+
+因此，由于 $ \sum x_j $ 与 $ \sum y_k $ 的绝对收敛性，二重级数 $ \sum x_{jk} $ 是可和的。这些断言现在由定理 8.10 得出。
+
+\end{theorem}
+
+\begin{example}
+
+\begin{items}
+\item
+
+对于指数函数，我们有
+
+\begin{equation}
+\exp(x)\cdot\exp(y)=\exp(x+y)~,\qquad x,y\in\mathbb{C}~.
+\end{equation}
+
+\proofhead
+由例 8.7(c)，级数 $ \sum x^j / j! $ 与 $ \sum y^k / k! $ 绝对收敛，因此定理 8.11 蕴含
+\begin{equation}
+\exp(x)\cdot\exp(y)=\Big(\sum_{j=0}^{\infty}\frac{x^{j}}{j!}\Big)\Big(\sum_{k=0}^{\infty}\frac{y^{k}}{k!}\Big)=\sum_{n=0}^{\infty}\Big(\sum_{k=0}^{n}\frac{x^{k}}{k!}\frac{y^{n-k}}{(n-k)!}\Big).
+\end{equation}
+
+由二项式公式，我们得到
+
+\[
+\sum_{k=0}^{n}\frac{x^{k}}{k!}\frac{y^{n-k}}{(n-k)!}=\frac{1}{n!}\sum_{k=0}^{n}\frac{n!}{k!(n-k)!}x^{k}y^{n-k}=\frac{1}{n!}\sum_{k=0}^{n}\binom{n}{k}x^{k}y^{n-k}=\frac{1}{n!}(x+y)^{n}.
+\]
+
+于是，由 (8.9)，我们得到
+
+\[
+\exp(x)\cdot\exp(y)=\sum_{n=0}^{\infty}\frac{(x+y)^{n}}{n!}=\exp(x+y)
+\]
+
+正如所断言的那样。
+
+\item
+
+作为指数函数这一性质的一个应用，我们确定指数函数在有理数自变量处的值。\footnote{在第 III.6 节中我们将证明这一断言的一个推广。}即，
+
+\[
+\exp(r)=e^{r}\;,\qquad r\in\mathbb{Q}\;,
+\]
+
+也就是说，对于有理数 r，$ \exp(r) $ 是 e 的 $ r $ 次幂。
+
+\begin{subitems}
+\item
+
+\proofhead
+(i) 由例 7.1(a)，我们有 $ \exp(1) = \sum_{k=0}^{\infty} 1/k! = e $。于是 (8.8) 蕴含
+\[
+\exp(2)=\exp(1+1)=\exp(1)\cdot\exp(1)=\left[\exp(1)\right]^{2}=e^{2}.
+\]
+
+简单的归纳论证给出
+
+\[
+\exp(k)=e^{k}\;,\qquad k\in\mathbb{N}\;.
+\]
+\item
+
+对于 $ k \in \mathbb{N} $，(8.8) 蕴含 $ \exp(-k) \cdot \exp(k) = \exp(0) $。由于 $ \exp(0) = 1 $，我们有
+
+\[
+\exp(-k)=\left[\exp(k)\right]^{-1},\qquad k\in\mathbb{N}.
+\]
+
+利用 (i)，我们于是有（见习题 I.9.1）
+
+\[
+\exp(-k)=\frac{1}{\exp(k)}=\frac{1}{e^{k}}=(e^{-1})^{k}=e^{-k},\qquad k\in\mathbb{N},
+\]
+
+也就是说，对于所有 $ k \in \mathbb{Z} $，$ \exp(k) = e^k $。
+
+\item
+
+对于 $ q \in \mathbb{N}^* $，(8.8) 蕴含
+
+\[
+e=\exp(1)=\exp\Big(q\cdot\frac{1}{q}\Big)=\exp\Big(\underbrace{\frac{1}{q}+\cdots+\frac{1}{q}}_{q\text{ 次}}\Big)=\Big[\exp\Big(\frac{1}{q}\Big)\Big]^{q}
+\]
+
+从而 $ \exp(1/q) = e^{1/q} $。最后设 $ p \in \mathbb{N} $ 且 $ q \in \mathbb{N}^\times $。于是，利用注 I.10.10(b)，我们得到
+
+\[
+\exp\biggl(\frac{p}{q}\biggr)=\exp\Bigl(\underbrace{\frac{1}{q}+\cdots+\frac{1}{q}}_{p\text{ 次}}\Bigr)=\Bigl[\exp\Bigl(\frac{1}{q}\Bigr)\Bigr]^{p}=\bigl[e^{1/q}\bigr]^{p}=e^{p/q}
+\]
+
+（见习题 I.10.3）。由 (8.8) 和 $ \exp(0) = 1 $ 还可得
+
+\[
+\exp\Bigl(-\frac{p}{q}\Bigr)=\Bigl[\exp\Bigl(\frac{p}{q}\Bigr)\Bigr]^{-1}.
+\]
+
+由我们已经证明的结论以及习题 I.10.3，我们最终得到
+
+\[
+\exp\Bigl(-\frac{p}{q}\Bigr)=\Bigl[\exp\Bigl(\frac{p}{q}\Bigr)\Bigr]^{-1}=\bigl[e^{p/q}\bigr]^{-1}=e^{-p/q}.
+\]
+
+这就完成了证明。■
+
+\end{subitems}
+
+\item
+
+对于条件收敛级数，定理 8.11 一般不再成立。
+
+\proofhead
+对于由 $ x_k := y_k := (-1)^k / \sqrt{k+1} $（$ k \in \mathbb{N} $）定义的条件收敛级数 $ \sum x_k $ 与 $ \sum y_k $ 的柯西乘积，我们有
+\[
+z_{n}:=\sum_{k=0}^{n}\frac{(-1)^{k}(-1)^{n-k}}{\sqrt{k+1}\sqrt{n-k+1}}=(-1)^{n}\sum_{k=0}^{n}\frac{1}{\sqrt{k(n-k)}},\qquad n\in\mathbb{N}^{\times}.
+\]
+
+由不等式
+
+\[
+(k+1)(n-k+1)\leq(n+1)^{2}
+\]
+
+（$0 \leq k \leq n$），我们得到
+
+\[
+|z_{n}|=\sum_{k=0}^{n}\frac{1}{\sqrt{(k+1)(n-k+1)}}\geq\frac{n+1}{n+1}=1.
+\]
+
+于是，由命题 7.2，级数 $ \sum_{k=1}^{\infty} z_n $ 不可能收敛。
+
+\item
+
+考虑二重级数 $ \sum x_{jk} $，其中
+
+\begin{equation*}
+x_{j k}:=\left\{\begin{array}{r l}{1,}&{\quad j-k=1,}\\ {-1,}&{\quad j-k=-1,}\\ {0}&{\quad\text{其他情形},}\end{array}\right.
+\end{equation*}
+
+由如下的双向无限阵列\footnote{大号的零表示所有未另行指定的元素都是 0。}表示
+
+\begin{equation*}
+\left[\begin{array}{c c c c c ccc}{0}&{-1}&&&&&\\ {1}&{0}&{-1}&&&&{0}\\ &{1}&{0}&{-1}&&&\\ &{}&{1}&{0}&{-1}&&\\ &{}&{}&{1}&{0}&{-1}&\\ {}&{}&{}&{}&{1}&{0}&{-1}&\\ {0}&{}&{}&{}&{}&{1}&{0}&{\ddots}\\ {}&{}&{}&{}&{}&{}&{1}&{\ddots}\\ {}&{}&{}&{}&{}&{}&{}&{\ddots}\\ \end{array}\right]
+\end{equation*}
+
+这个二重级数不可和，且行级数与列级数的值不相等：
+
+\[
+\sum_{j}\Bigl(\sum_{k=0}^{\infty}x_{j k}\Bigr)=-1\;,\quad\sum_{k}\Bigl(\sum_{j=0}^{\infty}x_{j k}\Bigr)=1\;.
+\]
+
+级数 $ \sum_n x_{\delta(n)} $（其中 $ \delta: \mathbb{N} \to \mathbb{N} \times \mathbb{N} $ 表示 (I.6.3) 中的双射）发散。
+
+\end{items}
+
+\end{example}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+判断下列级数是收敛还是发散：
+
+\[
+(a)\sum\frac{k^{4}}{3^{k}},\quad(b)\sum\frac{k}{(\sqrt[3]{k+1})^{k}},\quad(c)\sum\left(1-\frac{1}{k}\right)^{k^{2}},
+\]
+\[
+\mathrm{(d)}\sum{\binom{2k}{k}}^{-1},\quad\mathrm{(e)}\sum{\binom{2k}{k}}2^{-k},\quad\mathrm{(f)}\sum{\binom{2k}{k}}5^{-k}.
+\]
+\item
+
+对于 $ a \in \mathbb{R} $ 的哪些值，级数
+
+\begin{equation*}
+\begin{array}{r l}{\sum\frac{a^{2k}}{(1+a^{2})^{k-1}}}&{{}{\text{且}}\quad\sum\frac{1-a^{2k}}{1+a^{2k}}}\end{array}
+\end{equation*}
+
+收敛？
+
+\item
+
+设 $ \sum x_k $ 是 $ \mathbb{R} $ 中的条件收敛级数。证明级数\footnote{对 $x\in\mathbb R$，定义 $x^+:=\max\{x,0\}$ 与 $x^-:=\max\{-x,0\}$。}$\sum x_k^+ $ 与 $ \sum x_k^- $ 发散。
+
+\item
+
+证明黎曼重排定理：如果 $\sum x_k$ 是 $\mathbb{R}$ 中的条件收敛级数，那么对于任意 $s \in \mathbb{R}$，存在 $\mathbb{N}$ 的一个置换 $\sigma$，使得 $\sum_k x_{\sigma(k)} = s$。此外，存在 $\mathbb{N}$ 的一个置换 $\tau$，使得 $\sum_k x_{\tau(k)}$ 发散。（提示：利用习题 3，并用级数 $\sum x_k^+$ 与 $-\sum x_k^-$ 的部分和的适当组合从上下两侧逼近 $s \in \mathbb{R}$。）
+
+\item
+
+对于所有 $ (j, k) \in \mathbb{N} \times \mathbb{N} $，令
+
+\begin{equation*}
+x_{j k}:=\left\{\begin{array}{r l}{(j^{2}-k^{2})^{-1},}&{\quad j\neq k~,}\\ {0,}&{\quad j=k~.}\\ \end{array}\right.
+\end{equation*}
+
+证明二重级数 $ \sum x_{jk} $ 不可和。（提示：利用习题 7.9，确定行和级数与列和级数的值。）
+
+\item
+
+令
+
+\begin{equation*}
+\begin{array}{r}{\ell_{1}:=\ell_{1}(\mathbb{K}):=\Big(\big\{(x_{k})\in s;\sum x_{k}\text{ 绝对收敛}\big\},\|\cdot\|_{1}\Big)}\end{array}
+\end{equation*}
+
+其中
+
+\[
+\|(x_{k})\|_{1}:=\sum_{k=0}^{\infty}|x_{k}|.
+\]
+
+证明下列结论：
+
+\begin{items}
+\item
+
+$ \ell_{1} $ 是巴拿赫空间。
+
+\item
+
+$ \ell_1 $ 是 $ \ell_\infty $ 的真子空间，且 $ \|\cdot\|_\infty \leq \|\cdot\|_1 $。
+
+\item
+
+由 $\ell_\infty$ 诱导到 $\ell_1$ 上的范数与 $\ell_1$-范数不等价。（提示：考虑序列 $(\xi_j)$，其中 $\xi_j := (x_{j,k})_{k \in \mathbb{N}}$，当 $k \leq j$ 时 $x_{j,k} = 1$，当 $k > j$ 时 $x_{j,k} = 0$）。）
+
+\end{items}
+
+\item
+
+设 $\sum x_n$、$\sum y_n$ 与 $\sum z_n$ 是 $(0, \infty)$ 中的级数，且 $\sum y_n < \infty$、$\sum z_n = \infty$。证明下列结论：
+
+\begin{items}
+\item
+
+如果存在某个 N，使得
+
+\[
+\frac{x_{n+1}}{x_{n}}\leq\frac{y_{n+1}}{y_{n}},\qquad n\geq N,
+\]
+
+则 $ \sum x_n $ 收敛。
+
+\item
+
+如果存在某个 N，使得
+
+\[
+\frac{x_{n+1}}{x_{n}}\geq\frac{z_{n+1}}{z_{n}},\qquad n\geq N,
+\]
+
+则 $ \sum x_{n} $ 发散。
+
+\end{items}
+
+\item
+
+判断下列级数是收敛还是发散：
+
+\[
+\sum\frac{(-1)^{n+1}}{3n+(-1)^{n}n}~,~~\sum\frac{(-1)^{n+1}}{3n+6(-1)^{n}}~.
+\]
+\item
+
+设 a, b > 0 且 a - b = 1。证明级数\footnote{注意级数 $a+\sum a^n$ 发散。}的柯西乘积
+
+\[
+a+\sum_{n\geq1}a^{n}\quad\text{且}\quad-b+\sum_{n\geq1}b^{n}
+\]
+
+绝对收敛。特别地，下列级数的柯西乘积
+
+\[
+2+2+2^{2}+2^{3}+\cdots\quad\text{且}\quad-1+1+1+\cdots
+\]
+
+绝对收敛。
+
+\item
+
+证明指数函数的下列性质：
+
+\begin{items}
+\item
+
+$ \exp(x) > 0 $，$ x \in \mathbb{R} $。
+
+\item
+
+$ \exp: \mathbb{R} \to \mathbb{R} $ 严格递增。
+
+\item
+
+对于每个 $ \varepsilon > 0 $，存在 x < 0 和 y > 0，使得
+
+\[
+\exp(x)<\varepsilon\quad\text{且}\quad\exp(y)>1/\varepsilon.
+\]
+
+（提示：考虑例 8.12(a) 与 (b)。）
+
+\end{items}
+
+\end{exercises}
+
+\section{幂级数}
+
+接下来我们研究形式幂级数在何种条件下可被视为良定义的函数。正如我们已在注 I.8.14(e) 中所见，对于不是多项式的幂级数，这是一个关于级数收敛的问题。
+
+设
+
+\begin{equation}
+a:=\sum a_{k}X^{k}:=\sum_{k}a_{k}X^{k}
+\end{equation}
+
+是以  $ \mathbb{K} $ 中元素为系数的关于一个未定元的（形式）幂级数。则对每个  $ x \in \mathbb{K} $， $ \sum a_k x^k $ 是  $ \mathbb{K} $ 中的级数。当此级数收敛时，我们用  $ \underline{a}(x) $ 表示它的值，即（形式）幂级数 (9.1) 在  $ x $ 处的值。令
+
+\[
+\operatorname{dom}(\underline{a}):=\left\{x\in\mathbb{K}\;;\;\sum a_{k} x^{k}\right. \text{ 在 }\mathbb{K}\text{ 中收敛}\enspace.
+\]
+
+则  $ \underline{a} $: dom $ (\underline{a}) $  $ \rightarrow $  $ \mathbb{K} $ 是良定义的函数：
+
+\begin{equation}
+\underline{a}(x):=\sum_{k=0}^{\infty}a_{k}x^{k},\qquad x\in\operatorname{dom}(\underline{a}).
+\end{equation}
+
+注意到  $ 0 \in \operatorname{dom}(\underline{a}) $ 对任意  $ a \in \mathbb{K}[\![X]\!] $ 都成立。下面的例子表明，下列每种情形
+
+\[
+\mathrm{dom}(\underline{a})=\mathbb{K},\quad\{0\}\subset\mathrm{dom}(\underline{a})\subset\mathbb{K},\quad\mathrm{dom}(\underline{a})=\{0\}
+\]
+
+都是可能的。
+
+\begin{example}
+
+\begin{items}
+\item
+
+设  $ a \in \mathbb{K}[X] \subseteq \mathbb{K}[\![X]\!] $，即  $ a_k = 0 $ 对几乎所有  $ k \in \mathbb{N} $ 成立。则  $ \text{dom}(\underline{a}) = \mathbb{K} $，且  $ \underline{a} $ 与 I.8 节中引入的多项式函数一致。
+
+\item
+
+指数级数  $ \sum x^k / k! $ 对每个  $ x \in \mathbb{C} $ 都绝对收敛。因此，对于幂级数
+
+\[
+a:=\sum\frac{1}{k!}X^{k}\in\mathbb{C}[\![X]\!]~,
+\]
+
+我们有  $ \mathrm{dom}(\underline{a}) = \mathbb{C} $ 且  $ \underline{a} = \exp $。
+
+\item
+
+由例 7.4，几何级数  $ \sum_k x^k $ 绝对收敛到值  $ 1/(1-x) $，对每个  $ x \in \mathbb{B}_{\mathbb{K}} $，且若  $ x $ 不在  $ \mathbb{B}_{\mathbb{K}} $ 中则发散。因此对于几何级数
+
+\[
+a:=\sum X^{k}\in\mathbb{K}[\![X]\!]
+\]
+
+我们有  $ \mathrm{dom}(\underline{a}) = \mathbb{B}_{\mathbb{K}} $ 且  $ \underline{a}(x) = 1/(1 - x) $ 对所有  $ x \in \mathrm{dom}(\underline{a}) $ 成立。
+
+\item
+
+级数  $ \sum_k k! x^k $ 对所有  $ x \in \mathbb{K}^\times $ 都发散。因此，函数  $ \underline{a} $（由幂级数  $ a := \sum k! X^k $ 表示）的定义域是  $ \{0\} $。
+
+\proofhead
+对所有  $ x \in \mathbb{K}^\times $ 与  $ k \in \mathbb{N} $，令  $ x_k := k! x^k $。
+\[
+\frac{\left|x_{k+1}\right|}{\left|x_{k}\right|}=\left(k+1\right)\left|x\right|\rightarrow\infty\ \left(k\rightarrow\infty\right).
+\]
+
+因此由比值判别法，级数  $ \sum x_k = \sum k! x^k $ 发散。■
+
+\end{items}
+
+\end{example}
+
+\subsection*{收敛半径}
+
+对于幂级数，上一节的收敛判别法可以写成一种特别有用的形式。
+
+\qyxffntextdef{1}{当然，在 (9.3) 中我们对扩充实数轴 $\bar{\mathbb R}$ 使用了第 I.10 节的约定。}
+\begin{theorem}
+
+对于幂级数  $ a = \sum a_k X^k $，其系数在  $ \mathbb{K} $ 中，存在唯一的  $ \rho := \rho_a \in [0, \infty] $ 具有下列性质：
+
+\begin{subitems}
+\item
+
+级数  $ \sum a_k x^k $ 在  $ |x| < \rho $ 时绝对收敛，在  $ |x| > \rho $ 时发散。
+
+\item
+
+阿达马公式成立：
+
+\begin{equation}
+\rho_{a}=\frac{1}{\varlimsup\limits_{k\to\infty}\sqrt[k]{|a_{k}|}}.
+\end{equation}
+
+数\qyxffnmark{1} $ \rho_a \in [0, \infty] $ 称为  $ a $ 的收敛半径，且
+
+\[
+\rho_{a}\mathbb{B}_{\mathbb{K}}=\left\{x\in\mathbb{K};\ |x|<\rho_{a}\right\}
+\]
+
+是 a 的收敛圆盘。
+
+\proofhead
+由 (9.3) 定义  $ \rho_a $。则  $ \rho_a \in [0, \infty] $ 且
+\[
+\varlimsup_{k\to\infty}\sqrt[k]{\vert a_{k} x^{k}\vert}=\vert x\vert\varlimsup_{k\to\infty}\sqrt[k]{\vert a_{k}\vert}=\vert x\vert/\rho_{a}.
+\]
+
+于是所有断言均由根值判别法得出。■
+
+\end{subitems}
+
+\end{theorem}
+
+\qyxffntextdef{1}{在注 9.6 中我们将看到，$\rho_a\mathbb B_{\mathbb K}$ 一般是 $\mathrm{dom}(\underline{a})$ 的真子集。}
+\begin{corollary}
+
+对于  $ a = \sum a_k X^k \in \mathbb{K}[\![X]\!] $，我们有  $ \rho_a \mathbb{B}_{\mathbb{K}} \subseteq \text{dom}(\underline{a}) \subseteq \rho_a \bar{\mathbb{B}}_{\mathbb{K}} $。特别地，幂级数  $ a $ 在其收敛圆盘上表示函数  $ \underline{a} $。\qyxffnmark{1}
+
+对某些幂级数，比值判别法也可用来确定收敛半径。
+
+\end{corollary}
+
+\begin{proposition}
+
+设  $ a = \sum a_k X^k $ 是使  $ \lim |a_k / a_{k+1}| $ 在  $ \bar{\mathbb{R}} $ 中存在的幂级数。则  $ a $ 的收敛半径由公式给出
+
+\[
+\rho_{a}=\lim_{k\to\infty}\left|\frac{a_{k}}{a_{k+1}}\right|.
+\]
+
+\proofhead
+由于  $ \alpha := \lim |a_k/a_{k+1}| $ 在  $ \bar{\mathbb{R}} $ 中存在，我们有
+\begin{equation}
+\left|\frac{a_{k+1}x^{k+1}}{a_{k}x^{k}}\right|=\left|\frac{a_{k+1}}{a_{k}}\right|\left|x\right|\rightarrow\frac{\left|x\right|}{\alpha}\left(k\rightarrow\infty\right).
+\end{equation}
+
+现在若 $x, y \in \mathbb{K}$ 满足 $|x| < \alpha$ 与 $|y| > \alpha$，则 (9.4) 与比值判别法推出级数 $\sum a_k x^k$ 绝对收敛，级数 $\sum a_k y^k$ 发散。因此，由定理 9.2，我们有 $\alpha = \rho_a$。
+
+\end{proposition}
+
+\begin{example}
+
+\begin{items}
+\item
+
+指数级数  $ \sum(1/k!)X^k $ 的收敛半径是  $ \infty $。
+
+\proofhead
+由于
+\[
+\left|\frac{a_{k}}{a_{k+1}}\right|=\left|\frac{1/k!}{1/(k+1)!}\right|=k+1\to\infty\quad(k\to\infty),
+\]
+
+该断言由命题 9.4 得出。■
+
+\item
+
+设  $ m \in \mathbb{Q} $。则\footnote{这里（以及在类似情形下）我们约定：除非另有说明，幂级数 $a$ 的第零个系数 $a_0$ 取值为 0。} $ \sum k^m X^k \in \mathbb{K}[\![X]\!] $ 的收敛半径是 1。
+
+\proofhead
+由命题 2.4 与 2.6 我们得到
+\[
+\left|\frac{a_{k}}{a_{k+1}}\right|=\left(\frac{k}{k+1}\right)^{m}\to1\quad(k\to\infty).
+\]
+
+于是该断言由命题 9.4 得出。■
+
+\item
+
+设  $ a \in \mathbb{K}[\![X]\!] $ 由下式定义
+
+\[
+a=\sum\frac{1}{k!}X^{k^{2}}=1+X+\frac{1}{2!}X^{4}+\frac{1}{3!}X^{9}+\cdots
+\]
+
+则  $ \rho_{a}=1 $。
+证明\footnote{注意，这里不能使用命题 9.4。为什么？} a 的系数  $ a_{k} $ 满足
+
+\begin{equation*}
+a_{k}=\left\{\begin{array}{c l}{1/j!~,}&{\quad k=j^{2}~,\quad j\in\mathbb{N}~,}\\ {0}&{\quad\text{其他情形}.}\end{array}\right.
+\end{equation*}
+
+由  $ 1 \leq j! \leq j^j $、注 I.10.10(c) 与习题 I.10.3 我们得到不等式
+
+\[
+1\leq\sqrt[j^{2}]{j!}\leq\sqrt[j^{2}]{j^{j}}=\left(j^{j}\right)^{1/j^{2}}=j^{1/j}=\sqrt[j]{j}\,.
+\]
+
+由于  $ \lim_{j} \sqrt[j]{j} = 1 $（见例 4.2(d)），我们断定  $ \rho_a = \varlimsup_{k} \sqrt[k]{|a_k|} = 1 $。■
+
+\end{items}
+
+\end{example}
+
+\begin{remark}
+
+对幂级数在其收敛圆盘的“边界”  $ \{x \in \mathbb{K} ; |x| = \rho\} $ 上的收敛性，不能作出一般的断言。我们用例 9.5(b) 中令  $ m = 0, -1, -2 $ 所得的幂级数来演示这一点：
+
+\[
+\sum X^{k},
+\]
+\[
+\sum\frac{1}{k}x^{k},
+\]
+\[
+\sum\frac{1}{k^{2}}X^{k}.
+\]
+
+这些级数的收敛半径是  $ \rho = 1 $。在收敛圆盘的边界上，它们具有如下表现：
+
+\begin{subitems}
+\item
+
+由例 7.4，几何级数  $ \sum x^k $ 对每个  $ x \in \mathbb{K} $（满足  $ |x| = 1 $）都发散。因此，is 在这种情况下，$ \text{dom}(\underline{a}) = \mathbb{B}_{\mathbb{K}} $。
+
+\item
+
+由定理 7.8 的莱布尼茨准则，级数  $ \sum(-1)^k/k $ 在  $ \mathbb{R} $ 中条件收敛。另一方面，在例 7.3 中我们看到调和级数  $ \sum 1/k $ 发散。因此我们有  $ -1 \in \text{dom}(\underline{a}) $ 且  $ 1 \notin \text{dom}(\underline{a}) $。
+
+\item
+
+设  $ x \in \mathbb{K} $ 满足  $ |x| = 1 $。则定理 8.3 的优级数准则与例 7.1(b) 保证  $ \sum k^{-2}x^k $ 绝对收敛。因此  $ \mathrm{dom}(a) = \bar{\mathbb{B}}_{\mathbb{K}} $。■
+
+\end{subitems}
+
+\end{remark}
+
+\subsection*{幂级数的加法与乘法}
+
+由 I.8 节我们知道，当加法按“逐项”定义、乘法按卷积定义时，  $ \mathbb{K}[\![X]\!] $ 是一个环。下面的命题表明，这些运算与相应函数的加法和乘法是相容的。
+
+\begin{proposition}
+
+设  $ a = \sum a_k X^k $ 与  $ b = \sum b_k X^k $ 是收敛半径分别为  $ \rho_a $ 与  $ \rho_b $ 的幂级数。令  $ \rho := \min(\rho_a, \rho_b) $。则对所有  $ x \in \mathbb{K} $（满足  $ |x| < \rho $），我们有
+
+\[
+\sum_{k=0}^{\infty}a_{k}x^{k}+\sum_{k=0}^{\infty}b_{k}x^{k}=\sum_{k=0}^{\infty}(a_{k}+b_{k})x^{k},
+\]
+\[
+\Bigl[\sum_{k=0}^{\infty}a_{k}x^{k}\Bigr]\Bigl[\sum_{k=0}^{\infty}b_{k}x^{k}\Bigr]=\sum_{k=0}^{\infty}\Bigl(\sum_{j=0}^{k}a_{j}b_{k-j}\Bigr)x^{k}.
+\]
+
+特别地，幂级数  $ a+b $ 与  $ a\cdot b $ 的收敛半径  $ \rho_{a+b} $ 与  $ \rho_{a\cdot b} $ 满足  $ \rho_{a+b} \geq \rho $ 与  $ \rho_{a\cdot b} \geq \rho $。
+
+\proofhead
+由于定理 9.2，所有断言都直接由命题 7.5 与定理 8.11 得出。
+\end{proposition}
+
+\subsection*{幂级数表示的唯一性}
+
+设 $p \in \mathbb{K}[X]$。在注 I.8.19(c) 中我们证明了：若 $p$ 至少有 $\deg(p) + 1$ 个零点，则 $p$ 是零多项式。下面的定理把这一结果推广到幂级数。
+
+\begin{theorem}
+
+设  $ \sum a_k X^k $ 是收敛半径  $ \rho_a $ 为正的幂级数。若存在零序列  $ (y_j) $ 使得  $ 0 < |y_j| < \rho_a $ 且
+
+\begin{equation}
+\underline{a}(y_{j})=\sum_{k=0}^{\infty}a_{k}y_{j}^{k}=0,\qquad j\in\mathbb{N},
+\end{equation}
+
+则  $ a_k = 0 $ 对所有  $ k \in \mathbb{N} $ 成立，即  $ a = 0 \in \mathbb{K}[\![X]\!] $。
+
+证明
+
+\begin{subitems}
+\item
+
+对任意的  $ n \in \mathbb{N} $，我们导出  $ \sum_{k \geq n} a_k x^k $ 的一个估计。取  $ r \in (0, \rho_a) $ 与  $ x \in r\bar{\mathbb{B}}_K $。 $ a $ 在  $ \rho_a\mathbb{B}_K $ 上的绝对收敛推出
+
+\[
+\left|\sum_{k=n}^{\infty}a_{k}x^{k}\right|\leq\sum_{k=n}^{\infty}\left|a_{k}\right|\left|x\right|^{k}=\left|x\right|^{n}\sum_{k=n}^{\infty}\left|a_{k}\right|\left|x\right|^{k-n}\leq\left|x\right|^{n}\sum_{j=0}^{\infty}\left|a_{j+n}\right|r^{j}.
+\]
+
+因此，对每个  $ r \in (0, \rho_a) $ 与  $ n \in \mathbb{N} $，存在某个
+
+\[
+C:=C(r,n):=\sum_{j=0}^{\infty}|a_{j+n}|r^{j}\in[0,\infty)
+\]
+
+使得
+
+\begin{equation}
+\left|\sum_{k=n}^{\infty}a_{k}x^{k}\right|\leq C\left|x\right|^{n},\qquad x\in\bar{\mathbb{B}}_{\mathbb{K}}(0,r).
+\end{equation}
+\item
+
+由于 $(y_j)$ 是零序列，存在某个 $r \in (0, \rho_a)$ 使得所有 $y_j$ 都在 $r\bar{\mathbb{B}}_K$ 中。假设存在某个 $n \in \mathbb{N}$ 使得 $a_n \neq 0$。则由良序原理，存在最小的 $n_0 \in \mathbb{N}$ 使得 $a_{n_0} \neq 0$。由 (9.6) 我们有不等式
+
+\[
+|\underline{{a}}(x)-a_{n_{0}}x^{n_{0}}|\leq C\left|x\right|^{n_{0}+1},\qquad x\in\bar{\mathbb{B}}_{\mathbb{K}}(0,r),
+\]
+
+于是 (9.5) 推出  $ |a_{n_0}| \leq C|y_j| $ 对所有  $ j \in \mathbb{N} $ 成立。但  $ y_j \to 0 $，因此由推论 I.10.7，我们得到矛盾  $ a_{n_0} = 0 $。
+
+\end{subitems}
+
+\end{theorem}
+
+\begin{corollary}
+
+（幂级数的恒等定理）设
+
+\[
+a=\sum a_{k}X^{k}\quad\text{且}\quad b=\sum b_{k}X^{k}
+\]
+
+是收敛半径  $ \rho_a $ 与  $ \rho_b $ 分别为正的幂级数。若存在零序列  $ (y_j) $ 使得  $ 0 < |y_j| < \min(\rho_a, \rho_b) $ 且  $ \underline{a}(y_j) = \underline{b}(y_j) $ 对所有  $ j \in \mathbb{N} $ 成立，则  $ a = b $（在  $ \mathbb{K}[\![X]\!] $ 中），即  $ a_k = b_k $ 对所有  $ k \in \mathbb{N} $ 成立。
+
+\proofhead
+这直接由命题 9.7 与定理 9.8 得出。
+\end{corollary}
+
+\begin{remark}
+
+\begin{items}
+\item
+
+若幂级数  $ a = \sum a_k X^k $ 的收敛半径为正，则由推论 9.9，系数  $ a_k $（幂级数  $ a $ 的）在收敛圆盘上由  $ \underline{a} $ 唯一确定。换言之，若函数  $ f: \text{dom}(f) \subseteq \mathbb{K} \to \mathbb{K} $ 能在原点附近的某个圆盘上由幂级数表示，则此幂级数是唯一的。
+
+\item
+
+函数  $ \underline{a} $（由  $ a = \sum a_k X^k $ 在  $ \rho_a \mathbb{B}_{\mathbb{K}} $ 上表示）在任何闭球  $ r \mathbb{B}_{\mathbb{K}} $（ $ r \in (0, \rho_a) $）上有界。更确切地说，
+
+\[
+\sup_{|x|\leq r}\left|\underline{a}(x)\right|\leq\sum_{k=0}^{\infty}\left|a_{k}\right|r^{k}.
+\]
+
+\proofhead
+这直接由 n = 0 的 (9.6) 得出。
+\item
+
+在 III.6 节我们将研究具有无穷多个零点的非零幂级数。因此，定理 9.8 中零点序列收敛这一假设不能省略。
+
+\item
+
+设  $ a = \sum a_k X^k $ 是实幂级数，即  $ \mathbb{R}[\![X]\!] $ 中的元素。由于  $ \mathbb{R}[\![X]\!] \subseteq \mathbb{C}[\![X]\!] $， $ a $ 也可视为复幂级数。若我们用  $ a_{\mathbb{C}} $ 表示由  $ a \in \mathbb{C}[\![X]\!] $ 所表示的函数，则  $ a_{\mathbb{C}} \supseteq \underline{a} $，即  $ a_{\mathbb{C}} $ 是  $ \underline{a} $ 的扩张。鉴于定理 9.2，收敛半径  $ \rho_a $ 与  $ a $ 被视为实幂级数还是复幂级数无关。因此
+
+\[
+(-\rho_{a},\rho_{a})=\operatorname{d o m}(\underline{{a}})\cap\rho_{a}\mathbb{B}_{\mathbb{C}}\subseteq\rho_{a}\mathbb{B}_{\mathbb{C}}\subseteq\operatorname{d o m}(a_{\mathbb{C}}).
+\]
+
+因此，事实上只需考虑复幂级数。若一个收敛级数具有实系数，则相应函数在实自变量上取实值。
+
+\end{items}
+
+\end{remark}
+
+\exerciseshead
+
+\begin{exercises}
+\item
+
+确定幂级数  $ \sum a_k X^k $ 的收敛半径，其中  $ a_k $ 由下列各式给出：
+
+\[
+\mathrm{(a)}\frac{\sqrt{k2^{k}}}{(k+1)^{6}},\quad\mathrm{(b)}\left(-1\right)^{k}\frac{k!}{k^{k}},\quad\mathrm{(c)}\frac{1}{\sqrt{1+k^{2}}},\quad\mathrm{(d)}\frac{1}{\sqrt{k!}},\quad\mathrm{(e)}\frac{1}{k^{k}},\quad\mathrm{(f)}\left(1+\frac{1}{k^{2}}\right)^{k}.
+\]
+\item
+
+证明幂级数  $ a = \sum(1 + k)X^k $ 的收敛半径是 1，且  $ \underline{a}(z) = (1 - z)^{-2} $ 对所有  $ |z| < 1 $ 成立。
+
+\item
+
+设幂级数  $ \sum a_k X^k $ 的收敛半径是  $ \rho > 0 $。证明级数  $ \sum(k+1)a_{k+1}X^k $ 具有相同的收敛半径  $ \rho $。
+
+\item
+
+设  $ \sum a_k $ 是  $ (0, \infty) $ 中的发散级数，且  $ \sum a_k X^k $ 的收敛半径是 1。定义
+
+\[
+f_{n}:=\sum_{k=0}^{\infty}a_{k}\Big(1-\frac{1}{n}\Big)^{k},\qquad n\in\mathbb{N}^{\times}.
+\]
+
+证明序列  $ (f_n) $ 收敛到  $ \infty $。（提示：用伯努利不等式得到形如  $ 1 - (1 - 1/n)^m $ 的项的一个上界。）
+
+\item
+
+设序列  $ (a_{k}) $（在  $ \mathbb{K} $ 中）满足
+
+\[
+0<\varliminf\left|a_{k}\right|\leq\varlimsup\left|a_{k}\right|<\infty.
+\]
+
+确定  $ \sum a_k X^k $ 的收敛半径。
+
+\item
+
+证明：幂级数  $ \sum a_k X^k $（其中  $ a_k \neq 0 $ 对所有  $ k \in \mathbb{N} $ 成立）的收敛半径  $ \rho $ 满足
+
+\[
+\underline{\lim}\Big|\frac{a_{k}}{a_{k+1}}\Big|\leq\rho\leq\overline{\lim}\Big|\frac{a_{k}}{a_{k+1}}\Big|.
+\]
+\item
+
+向量空间的子集 $D$ 称为关于 $0$ $\text{对称的}$，如果对所有 $x$，$x \in D$ 蕴含 $-x \in D$。若 $D$ 是对称的，且 $f: D \to E$ 是到向量空间 $E$ 的函数，则 $f$ 称为 $\text{偶}$（或 $\text{奇}$）的，如果对所有 $x \in D$，$f(x) = f(-x)$（或 $f(x) = -f(-x)$）。现在设 $f: \mathbb{K} \to \mathbb{K}$ 是能在以 0 为中心的某个适当圆盘上由幂级数表示的函数。此幂级数的系数满足什么条件时，能确定 $f$ 是偶的还是奇的？
+
+\item
+
+设 $a$ 与 $b$ 是收敛半径分别为 $\rho_a$ 与 $\rho_b$ 的幂级数。通过例子证明 $\rho_{a+b} > \max(\rho_a, \rho_b)$ 与 $\rho_{ab} > \max(\rho_a, \rho_b)$ 都可能出现。
+
+\item
+
+设  $ a = \sum a_k X^k \in \mathbb{C}[\![X]\!] $ 且  $ a_0 = 1 $。
+
+\begin{items}
+\item
+
+证明存在某个  $ b = \sum b_k X^k \in \mathbb{C}[\![X]\!] $ 使得  $ ab = 1 \in \mathbb{C}[\![X]\!] $。给出计算系数  $ b_k $ 的递归算法。
+
+\item
+
+证明若 a 的收敛半径为正，则 b 的收敛半径  $ \rho_{b} $ 为正。
+
+\end{items}
+
+\item
+
+设  $ b = \sum b_k X^k \in \mathbb{C}[\![X]\!] $ 满足  $ (1 - X - X^2)b = 1 \in \mathbb{C}[\![X]\!] $。
+
+\begin{items}
+\item
+
+证明系数  $ b_{k} $ 满足
+
+\[
+b_{0}=1~,\quad b_{1}=1~,\quad b_{k+1}=b_{k}+b_{k-1}~,\qquad k\in\mathbb{N}^{\times}~,\nonumber
+\]
+
+即  $ (b_{k}) $ 是斐波那契数列（见习题 4.9）。
+
+\item
+
+b 的收敛半径是多少？
+
+\end{items}
+
+\end{exercises}

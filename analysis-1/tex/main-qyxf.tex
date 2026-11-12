@@ -1,0 +1,50 @@
+% =====================================================================
+%  Analysis I（Herbert Amann / Joachim Escher）中文译本
+%  main-qyxf.tex —— 只负责「装订」：导言区 + 逐章 \input
+%
+%  【新一版】正文按章分文件放在 qyxf/ 下，一章一个 .tex，由本文件的 \input 导入。
+%  所有排版定义（定理类环境、证明、列表、公式、编号）都在 qyxf-book.cls 里，
+%  正文不含任何手写的环境定义。
+%
+%  与旧版（chapters/*.tex + main.tex）的区别只在「分点列举」的产出方式：
+%      · 环境起头行内联的首项 (a) 会拆成独立列举项；
+%      · 习题条目内部的 (a)(b)(c) 变成嵌套的 items 环境；
+%      · 标记行之间有没有空行都能正确归组。
+%  旧版完整保留，可随时对照。
+%
+%  编译：xelatex main-qyxf.tex  （跑两遍，交叉引用与目录才正确）
+%
+%  【注意】TeX Live 内另有一份同名的 qyxf-book.cls，优先级高于当前目录。
+%  要让仓库里这份生效，编译时必须把仓库根目录放在 TEXINPUTS 最前：
+%      $env:TEXINPUTS = (Get-Location).Path + ';'
+%  在本目录下执行 xelatex 编译即可。
+% =====================================================================
+\documentclass[colorscheme=black,a4paper]{qyxf-book}
+
+\input{preamble/_unicode-map}
+\input{preamble/preamble}
+
+\begin{document}
+
+\pagenumbering{roman}
+\maketitle
+
+\input{qyxf/00-front-matter}
+
+\tableofcontents
+
+\pagenumbering{arabic}
+
+\input{qyxf/01-chapter-01}
+
+\input{qyxf/02-chapter-02}
+
+\input{qyxf/03-chapter-03}
+
+\input{qyxf/04-chapter-04}
+
+\input{qyxf/05-chapter-05}
+
+\input{qyxf/06-appendix}
+
+\end{document}

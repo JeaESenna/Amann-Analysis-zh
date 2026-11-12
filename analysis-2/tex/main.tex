@@ -1,0 +1,42 @@
+% =====================================================================
+%  Analysis II（Herbert Amann / Joachim Escher）中文译本
+%  main.tex —— 只负责「装订」：导言区 + 前置页 + 逐章 \input
+%
+%  正文按章分文件放在 qyxf/ 下，一章一个 .tex，由本文件的 \input 导入。
+%  所有排版定义（定理类环境、证明、列表、公式、编号）都在 qyxf-book.cls 里。
+%
+%  编译：xelatex main.tex  （跑三遍，交叉引用与目录才正确）
+%
+%  【注意】TeX Live 内另有一份同名的 qyxf-book.cls，编译时必须把仓库根目录
+%  放在 TEXINPUTS 最前（在本目录执行 xelatex 即可）。
+% =====================================================================
+\documentclass[colorscheme=black,a4paper]{qyxf-book}
+
+\input{preamble/_unicode-map}
+\input{preamble/preamble}
+
+\begin{document}
+
+\pagenumbering{roman}
+\maketitle
+
+\input{qyxf/00-front-matter}
+
+\clearpage
+\tableofcontents
+
+\clearpage
+\pagenumbering{arabic}
+
+% Analysis II 从第 VI 章开始（原书第 I–V 章属 Analysis I 译本）
+\setcounter{chapter}{5}
+
+\input{qyxf/01-chapter-06}
+
+\input{qyxf/02-chapter-07}
+
+\input{qyxf/03-chapter-08}
+
+\input{qyxf/04-references}
+
+\end{document}

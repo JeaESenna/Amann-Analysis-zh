@@ -1,0 +1,15 @@
+# LaTeX 编译产物
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.xdv
+
+# 编译生成的 PDF（仓库只存源文件；如需提交成品可强制 add）
+main.pdf
+main-qyxf.pdf
